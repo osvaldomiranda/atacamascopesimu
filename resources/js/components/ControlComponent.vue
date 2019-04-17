@@ -16,44 +16,73 @@
 
 		 <v-container fluid>
 		    <v-layout align-center row>
-				<v-flex xs4>
-			    	<v-card>
-			      		<v-img
-			      	  		src="https://cdn.vuetifyjs.com/images/cards/desert.jpg"
-			      	  		aspect-ratio="1"
-			      		></v-img>
-			    	</v-card> 
+				<v-flex xs2>
+					<v-layout align-center row>
+						<v-flex xs12>	
+					    	<v-card>
+					      		<v-img
+					      	  		src="https://cdn.vuetifyjs.com/images/cards/desert.jpg"
+					      	  		aspect-ratio="1"
+					      		></v-img>
+					    	</v-card> 
+					    </v-flex>
+					</v-layout>   
+					<v-layout align-center row>
+						<v-flex xs12>
+							<p>Iso: 1200, Exp: 2min, Objeto: M87</p> 	
+						</v-flex>
+					</v-layout>	
 		      	</v-flex>
 
-				<v-flex xs2>
+				<v-flex xs1>
 				</v-flex>
 
-				<v-flex style="overflow: auto" xs8>
+				<v-flex xs8 style="overflow: auto">
 
 					  <v-card>
 					    <v-card-title>
-					      Nutrition
-					      <v-spacer></v-spacer>
-					      <v-text-field
-					        v-model="search"
-					        append-icon="search"
-					        label="Search"
-					        single-line
-					        hide-details
-					      ></v-text-field>
+					        <v-select
+							    v-model="Catalog"
+							    :items="Catalogs"
+							    @input= "filter"
+							    label="Catalogo"
+							    single-line
+						        hide-details
+							    ></v-select>
+					        <v-spacer></v-spacer>
+						    <v-select
+							    v-model="Constellation"
+							    :items="Constellations"
+							    label="Constelación"
+							    single-line
+						        hide-details
+							    ></v-select>
+							<v-spacer></v-spacer>    	
+						      <v-text-field
+						        v-model="search"
+						        append-icon="search"
+						        label="Buscar"
+						        single-line
+						        hide-details
+						      ></v-text-field>
 					    </v-card-title>
 					    <v-data-table
 					      :headers="headers"
-					      :items="desserts"
+					      :items="FilteredObjects"
 					      :search="search"
+					      v-model="selected"
+					      :rows-per-page-items="rowsPerPageItems"
+    					  :pagination.sync="pagination"
 					    >
 					      <template v-slot:items="props">
-					        <td>{{ props.item.name }}</td>
-					        <td class="text-xs-right">{{ props.item.calories }}</td>
-					        <td class="text-xs-right">{{ props.item.fat }}</td>
-					        <td class="text-xs-right">{{ props.item.carbs }}</td>
-					        <td class="text-xs-right">{{ props.item.protein }}</td>
-					        <td class="text-xs-right">{{ props.item.iron }}</td>
+					      	<tr @click="showAlert(props.item)">
+						        <td class="text-xs-right">{{ props.item.name }}</td>
+						        <td class="text-xs-right">{{ props.item.catalog }}</td>
+						        <td class="text-xs-right">{{ props.item.type_object }}</td>
+						        <td class="text-xs-right">{{ props.item.constellation }}</td>
+						        <td class="text-xs-right">{{ props.item.ra }}</td>
+						        <td class="text-xs-right">{{ props.item.dec }}</td>
+					    	</tr>
 					      </template>
 					      <v-alert v-slot:no-results :value="true" color="error" icon="warning">
 					        Your search for "{{ search }}" found no results.
@@ -63,35 +92,262 @@
 		      	</v-flex>
 		    </v-layout>
 		</v-container>    
+		<v-container fluid>
+		    <v-layout align-center row>
+				<v-flex xs12>
+					<v-card>
+						<v-container  fluid>
+				            <v-layout >
+				              	<v-flex xs4 align-end flexbox>
+				                	<span class="headline"> Objeto:{{ object }}</span>
+				              	</v-flex>
+				              	<v-flex xs4 align-end flexbox>
+				                	<span class="headline"> Estado:{{ state }}</span>
+				              	</v-flex>
+				              	<v-flex xs4 align-end flexbox>
+				              		<v-btn  small color="warning" @click="saveImage" >Guardar Imagen</v-btn>
+				          		</v-flex>
+				            </v-layout>
+				        </v-container>
+				    </v-card>
+				</v-flex>
+			</v-layout>
+		</v-container>		        
 
+		<v-container fluid>
+		    <v-layout align-center row>
+				<v-flex xs4>
+					<v-card>
+						<v-container fill-height fluid>
+				            <v-layout fill-height>
+				              <v-flex xs12 align-end flexbox>
+				                <span class="headline">Montura</span>
+				              </v-flex>
+				            </v-layout>
+				        </v-container>
+						<v-layout align-center row>
+							<v-flex align-center xs4>
+								<v-text-field
+								    v-model="Ar"
+								        label="Asención Recta"
+								    ></v-text-field>
+		          			</v-flex>
+							<v-flex align-center xs4>
+								<v-text-field
+								    v-model="Dec"
+								        label="Declinación"
+								    ></v-text-field>
+		          			</v-flex>
+		          		</v-layout>	
+
+		          		<v-btn color="warning" @click="move()">Mover</v-btn>
+
+ 
+			    	</v-card> 
+				</v-flex>
+				<v-flex xs4>
+					<v-card>
+						<v-container fill-height fluid>
+				            <v-layout fill-height>
+				              <v-flex xs12 align-end flexbox>
+				                <span class="headline">Camara</span>
+				              </v-flex>
+				            </v-layout>
+				        </v-container>
+
+						<v-layout align-center row>
+							<v-flex align-center xs4>
+							
+							    <v-select
+							      v-model="Iso"
+							      :items="Isos"
+							      :rules="[v => !!v || 'Obligatorio']"
+							      label="Sencibilidad"
+							      required
+							    ></v-select>
+
+		          			</v-flex>
+
+
+							<v-flex align-center xs4>
+
+
+							    <v-select
+							      v-model="Exp"
+							      :items="Exps"
+							      :rules="[v => !!v || 'Obligatorio']"
+							      label="Tiempo Exposición"
+							      required
+							    ></v-select>
+
+
+		          			</v-flex>
+		          		</v-layout>	
+		          		<v-btn color="warning" @click="shoot">Disparar</v-btn>
+			    	</v-card> 
+				</v-flex>
+
+				<v-flex xs4>
+					<v-card>
+						<v-container fill-height fluid>
+				            <v-layout fill-height>
+				              <v-flex xs12 align-end flexbox>
+				                <span class="headline">Enfocador</span>
+				              </v-flex>
+				            </v-layout>
+				        </v-container>
+
+						<v-layout align-center row>
+							<v-flex align-center xs4>
+							
+							    <v-select
+							      v-model="Paso"
+							      :items="Pasos"
+							      :rules="[v => !!v || 'Obligatorio']"
+							      label="Pasos"
+							      required
+							    ></v-select>
+
+		          			</v-flex>
+
+
+							<v-flex align-center xs4>
+
+
+							    <v-select
+							      v-model="Dir"
+							      :items="Dirs"
+							      :rules="[v => !!v || 'Obligatorio']"
+							      label="Dirección"
+							      required
+							    ></v-select>
+
+
+		          			</v-flex>
+		          		</v-layout>	
+		          		<v-btn color="warning" @click="focus">Enfocar</v-btn>
+			    	</v-card> 
+				</v-flex>
+
+			</v-layout>
+		</v-container>	
+
+
+
+		 <v-container fluid>
+		    <v-layout align-center row>
+				<v-flex xs8 style="overflow: auto">
+
+					  <v-card>
+					    <v-card-title>
+					      Mis fotos
+					      <v-spacer></v-spacer>
+					    </v-card-title>
+					    <v-data-table
+					      :headers="headers"
+					      :items="desserts"
+					      :search="search"
+					    >
+					      <template v-slot:items="props">
+					        <td>
+					        	<v-img
+			      	  				src="https://cdn.vuetifyjs.com/images/cards/desert.jpg"
+			      	  				aspect-ratio="1"
+			      				></v-img>
+					        </td>
+
+					        <td class="text-xs-right">{{ props.item.calories }}</td>
+	
+					      </template>
+					    </v-data-table>
+					  </v-card>	
+		      	</v-flex>
+
+		    </v-layout>
+		</v-container>
 
 
       </v-card>
+
+
     </v-dialog>
   </v-layout>
 </template>
 
 <script>
+  import { mapState } from 'vuex';
   export default {
+  	computed: mapState(['astronomc_objects']),
     data () {
       return {
         dialog: false,
-        notifications: false,
-        sound: true,
-        widgets: false,
+        astronomic_objects:[],
+        selected:[],
         search: '',
+
+        Catalog:'Todos',
+        Catalogs: ['Todos','SolarSistem','Messier','NGC', 'IC'],
+
+        Constellation:'',
+        Constellation: [],
+
+        Ar: 1.92837,
+        Dec: 1.92837,
+        Iso: '100',
+        Exp: '1s',
+        rowsPerPageItems: [3, 5, 10, 20],
+		pagination: {
+    		rowsPerPage: 3
+		},	
+
+		object:'Seleccione Objeto',
+		state:'En espera',
+		Paso:'100',
+		Dir:'Adentro',
+	    Pasos: [
+	        '100',
+	        '200',
+	        '400',
+	        '600',
+	        '800',
+	        '1000',
+	        '2000',
+	        '3000',
+	    ],
+
+	    Dirs: [
+	        'Adentro',
+	        'Afuera',
+	    ],
+
+	    Isos: [
+	        '100',
+	        '200',
+	        '400',
+	        '600',
+	        '800',
+	        '1000',
+	        '2000',
+	        '3000',
+	    ],
+	    Exps: [
+	        '1s',
+	        '2s',
+	        '4s',
+	        '6s',
+	        '8s',
+	        '1m',
+	        '2m',
+	        '3m',
+	    ],
+
         headers: [
-          {
-            text: 'Dessert (100g serving)',
-            align: 'left',
-            sortable: false,
-            value: 'name'
-          },
-          { text: 'Calories', value: 'calories' },
-          { text: 'Fat (g)', value: 'fat' },
-          { text: 'Carbs (g)', value: 'carbs' },
-          { text: 'Protein (g)', value: 'protein' },
-          { text: 'Iron (%)', value: 'iron' }
+          { text: 'Nombre', value: 'name' },
+          { text: 'Catalogo', value: 'catalog' },
+          { text: 'Tipo', value: 'type_object' },
+          { text: 'Constelación', value: 'constellation' },
+          { text: 'AR', value: 'ra' },
+          { text: 'DEC', value: 'dec' }
         ],
         desserts: [
           {
@@ -110,73 +366,83 @@
             protein: 4.3,
             iron: '1%'
           },
-          {
-            name: 'Eclair',
-            calories: 262,
-            fat: 16.0,
-            carbs: 23,
-            protein: 6.0,
-            iron: '7%'
-          },
-          {
-            name: 'Cupcake',
-            calories: 305,
-            fat: 3.7,
-            carbs: 67,
-            protein: 4.3,
-            iron: '8%'
-          },
-          {
-            name: 'Gingerbread',
-            calories: 356,
-            fat: 16.0,
-            carbs: 49,
-            protein: 3.9,
-            iron: '16%'
-          },
-          {
-            name: 'Jelly bean',
-            calories: 375,
-            fat: 0.0,
-            carbs: 94,
-            protein: 0.0,
-            iron: '0%'
-          },
-          {
-            name: 'Lollipop',
-            calories: 392,
-            fat: 0.2,
-            carbs: 98,
-            protein: 0,
-            iron: '2%'
-          },
-          {
-            name: 'Honeycomb',
-            calories: 408,
-            fat: 3.2,
-            carbs: 87,
-            protein: 6.5,
-            iron: '45%'
-          },
-          {
-            name: 'Donut',
-            calories: 452,
-            fat: 25.0,
-            carbs: 51,
-            protein: 4.9,
-            iron: '22%'
-          },
-          {
-            name: 'KitKat',
-            calories: 518,
-            fat: 26.0,
-            carbs: 65,
-            protein: 7,
-            iron: '6%'
-          }
         ]
       }
-    }
+    },
+    created () {
+      	this.initialize();
+    },
+    methods: {
+    	showAlert(a){
+      	//	if (event.target.classList.contains('btn__content')) return;
+      		this.Ar = a.coord_ar;
+      		this.Dec = a.coord_dec;
+      		this.object = a.name;
+    	},
+      	initialize () {
+         	var app = this;
+         	// app.astronomic_objects = this.$store.getters.astronomic_objects;
+
+          axios.get('/api/astronomic_objects')
+            .then(function (resp) {
+              app.astronomic_objects = resp.data;
+              app.filter('Todos');
+              app.$store.commit('changeAstronomicObjects', app.astronomic_objects);
+            })
+            .catch(function (resp) {
+                console.log(resp);
+                alert("Error astronomic_objects :" + resp);
+            });
+        },
+
+        filter(a){
+        	if(a=="Todos"){
+        		this.FilteredObjects = this.astronomic_objects
+        	} else {
+        		this.FilteredObjects = this.astronomic_objects.filter(it => it.catalog==a );	
+        	}
+        	
+        },
+        move(){
+
+        	var $command = {'command': 'MONTURA', 'type': 'MONTURA', 'status': 'PENDIENTE',
+        	                'ar': this.Ar, 'dec': this.Dec, 'user_id': 1, 'equipment_id': 1};
+
+        	alert(JSON.stringify($command));
+        	axios.post('/api/command/move', $command)
+            .then(function (resp) {
+                
+            })
+            .catch(function (resp) {
+                console.log(resp);
+                alert("Error move :" + resp);
+            });
+        },
+        shoot(){
+        	axios.post('/api/source_update', this.editedItem)
+            .then(function (resp) {
+                Object.assign(app.sources[app.editedIndex], app.editedItem) 
+            })
+            .catch(function (resp) {
+                console.log(resp);
+                alert("Error shoot :" + resp);
+            });
+        },
+        focus(){
+        	axios.post('/api/source_update', this.editedItem)
+            .then(function (resp) {
+                Object.assign(app.sources[app.editedIndex], app.editedItem) 
+            })
+            .catch(function (resp) {
+                console.log(resp);
+                alert("Error focus :" + resp);
+            });
+        },
+        saveImage(){
+
+        }
+
+    },
   }
 </script>
 

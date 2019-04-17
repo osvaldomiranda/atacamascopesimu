@@ -18,3 +18,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::post('/upload', 'ImageController@upload');
+Route::get('/astronomic_objects', 'AstronomicObjectController@index');
+
+Route::post('/command/move', 'CommandController@move');
+Route::post('/command/shoot', 'CommandController@shoot');
+Route::post('/command/focus', 'CommandController@focus');

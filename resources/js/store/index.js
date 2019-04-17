@@ -8,13 +8,17 @@ export default new Vuex.Store(
 {
 	state: {
 	  user: '',
+	  astronomic_objects:[],
 	},
 	mutations: {
 		changeUser(state, user) {
 		  	state.user = user
 		},
+		changeAstronomicObjects(state, astronomic_objects) {
+		  	state.astronomic_objects = astronomic_objects;
+		},
 	},
 	getters: {
-		user: state => state.user,
+		astronimic_objects: state => state.astronomic_objects,
 	}
 });

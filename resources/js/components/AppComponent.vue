@@ -119,7 +119,7 @@
       dialog: false,
       drawer: null,
       step:"",
-      establishment: null,
+      astronomic_objects: null,
       naturalStates:[],
       items: [
         { icon: 'contacts', text: 'Datos del Establecimiento', link: '/dasboard' },
@@ -137,8 +137,9 @@
     },
     methods: {
       initialize () {
-        var app = this;
-  
+         var app = this;
+        
+
       },
     }
   }
