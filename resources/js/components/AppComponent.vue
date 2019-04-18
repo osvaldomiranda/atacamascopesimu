@@ -123,7 +123,7 @@
       naturalStates:[],
       items: [
         { icon: 'contacts', text: 'Datos del Establecimiento', link: '/dasboard' },
-        { icon: 'settings', text: 'Registro de Fuentes y Procesos', link: '/' },
+        { icon: 'settings', text: 'Registro de Fuentes y Procesos', link: '/chat' },
         { icon: 'wrap_text', text: 'Diagramas de Descarga', link: '/'}, 
         { icon: 'wrap_text', text: 'Listado de Envíos', link: '/'}, 
         { icon: 'wrap_text', text: 'Listado de Fuentes', link: '/'},     

@@ -393,7 +393,33 @@
                 console.log(resp);
                 alert("Error astronomic_objects :" + resp);
             });
+
+            app.openChat();
         },
+
+	    openChat () {
+	        let app = this
+
+	          // Start pusher listener
+	        Pusher.logToConsole = true
+
+	        var pusher = new Pusher('e6e9d9fd854d385c5f5b', {
+	            cluster: 'us2',
+	            forceTLS: true
+	        })
+
+	        var channel = pusher.subscribe('newMessage-' + 1 + '-' + 2) // newMessage-[chatting-with-who]-[my-id]
+
+	        channel.bind('App\\Events\\MessageSent', function (data) {
+	            
+	              app.state = data.message['message'];
+	            
+	        })
+	          // End pusher listener
+
+	        
+	     },
+
 
         filter(a){
         	if(a=="Todos"){

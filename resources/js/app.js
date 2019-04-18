@@ -12,14 +12,8 @@ import VueRouter from 'vue-router'
 import store from './store';
 import router from './routes'
 
-
-
-
 import AppComponent         from './components/AppComponent'
 import ControlComponent         from './components/ControlComponent'
-
-
-
 
 Vue.use(Vuex)
 Vue.use(VueRouter)
@@ -33,7 +27,10 @@ axios.defaults.headers.common = {
 };
 Vue.prototype.$http = window.axios
 
-
+window._ = require('lodash')
+window.Popper = require('popper.js').default
+// Pusher
+window.Pusher = require('pusher-js')
 
 
 Vue.use(Vuetify, {
@@ -60,5 +57,13 @@ const app = new Vue({
     render: h => h(AppComponent),
     store,
     router: router,
-    
+    data: {
+        userID: null
+    },
+    mounted () {
+        // Assign the ID from meta tag for future use in application
+//        this.userID = document.head.querySelector('meta[name="userID"]').content
+        this.userID = 1;
+
+    }
 });

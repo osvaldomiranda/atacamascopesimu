@@ -25,3 +25,8 @@ Route::post('/command/shoot', 'CommandController@shoot');
 Route::post('/command/focus', 'CommandController@focus');
 
 Route::get('/command/{type}', 'CommandController@command');
+
+
+Route::get('users', 'Api\V1\UsersController@index');
+Route::post('messages', 'Api\V1\MessagesController@index');
+Route::post('messages/send', 'Api\V1\MessagesController@store');

@@ -3,6 +3,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router'
 
 import DashboardView   from './views/DashboardView'
+import ChatComponent   from './components/ChatComponent'
 
 
 
@@ -21,6 +22,11 @@ const router = new VueRouter({
             path: '/dasboard',
             name: 'dasboard',
             component: DashboardView,
+        },
+        {
+            path: '/chat',
+            name: 'chat',
+            component: ChatComponent,
         },
     ],
 });
