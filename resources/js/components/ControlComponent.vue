@@ -405,7 +405,7 @@
         },
         move(){
 
-        	var $command = {'command': 'MONTURA', 'type': 'MONTURA', 'status': 'PENDIENTE',
+        	var $command = {'command': 'MONTURA', 'type': 'montura', 'status': 'PENDIENTE',
         	                'ar': this.Ar, 'dec': this.Dec, 'user_id': 1, 'equipment_id': 1};
 
         	alert(JSON.stringify($command));

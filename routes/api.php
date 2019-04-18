@@ -23,3 +23,5 @@ Route::get('/astronomic_objects', 'AstronomicObjectController@index');
 Route::post('/command/move', 'CommandController@move');
 Route::post('/command/shoot', 'CommandController@shoot');
 Route::post('/command/focus', 'CommandController@focus');
+
+Route::get('/command/{type}', 'CommandController@command');

@@ -2296,7 +2296,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     move: function move() {
       var $command = {
         'command': 'MONTURA',
-        'type': 'MONTURA',
+        'type': 'montura',
         'status': 'PENDIENTE',
         'ar': this.Ar,
         'dec': this.Dec,

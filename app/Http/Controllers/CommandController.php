@@ -3,17 +3,81 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Command;
 
 class CommandController extends Controller
 {
     public function move(request $request){
-    	Info($request);
+	    $this->validate($request, [
+	        'type' => 'required',
+	        'status' => 'required',
+	        'ar' => 'required',
+	        'dec' => 'required',
+	        'user_id' => 'required',
+	        'equipment_id' => 'required',
+	    ]);
 
+	    $command = new Command();
+	    $command->command		= $request->input('command');
+	    $command->type			= $request->input('type');
+        $command->status		= $request->input('status');
+        $command->ar  			= $request->input('ar');
+        $command->dec 			= $request->input('dec');	
+        $command->user_id		= $request->input('user_id');
+        $command->equipment_id	= $request->input('equipment_id');
+        $command->save();
     }
     public function shoot(request $request){
-    	Info($request);
+    	$this->validate($request, [
+	        'type' => 'required',
+	        'status' => 'required',
+	        'exptime' => 'required',
+	        'iso' => 'required',
+	        'user_id' => 'required',
+	        'equipment_id' => 'required',
+	    ]);
+
+	    $command = new Command();
+	    $command->command		= $request->input('command');
+	    $command->type			= $request->input('type');
+        $command->status		= $request->input('status');
+        $command->exptime  		= $request->input('exptime');
+        $command->iso 			= $request->input('iso');	
+        $command->user_id		= $request->input('user_id');
+        $command->equipment_id	= $request->input('equipment_id');
+        $command->save();
     }
     public function focus(request $request){
-    	Info($request);
+    	$this->validate($request, [
+	        'type' => 'required',
+	        'status' => 'required',
+	        'ar' => 'required',
+	        'dec' => 'required',
+	        'user_id' => 'required',
+	        'equipment_id' => 'required',
+	    ]);
+
+	    $command = new Command();
+	    $command->command		= $request->input('command');
+	    $command->type			= $request->input('type');
+        $command->status		= $request->input('status');
+        $command->step  		= $request->input('step');
+        $command->direction 	= $request->input('direction');	
+        $command->user_id		= $request->input('user_id');
+        $command->equipment_id	= $request->input('equipment_id');
+        $command->save();
+    }
+
+    public function command($request){
+    	$command = Command::where('type',$request)->where('status','PENDIENTE')->get()->last();    	
+	    if($command){
+	    	$command->status = 'ENVIADO';
+	    	$command->save();
+
+	    	return response()->json($command);    		
+    	}else {
+    		$command = ['command'=>'SIN_COMANDO'];
+    		return response()->json($command);
+    	}
     }
 }
