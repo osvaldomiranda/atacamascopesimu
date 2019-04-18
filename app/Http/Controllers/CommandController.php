@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Command;
+use App\Events\MessageSent;
+use App\Message;
 
 class CommandController extends Controller
 {
@@ -69,10 +71,24 @@ class CommandController extends Controller
     }
 
     public function command($request){
-    	$command = Command::where('type',$request)->where('status','PENDIENTE')->get()->last();    	
+    	if($request=='mountcamera'){
+    		$type = ['mount','shoot'];
+    	} else {
+    		$type = ['focuser'];
+    	}
+    	
+    	$command = Command::whereIn('type',$type)->where('status','PENDIENTE')->get()->last();    	
 	    if($command){
 	    	$command->status = 'ENVIADO';
 	    	$command->save();
+
+	        $message = Message::create([
+	            'sender_id'   => 1,
+	            'receiver_id' => 2,
+	            'message'     => 'Comando Enviado',
+	        ]);
+
+	        broadcast(new MessageSent($message));
 
 	    	return response()->json($command);    		
     	}else {

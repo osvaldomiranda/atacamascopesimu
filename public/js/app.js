@@ -2376,7 +2376,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       Catalog: 'Todos',
       Catalogs: ['Todos', 'SolarSistem', 'Messier', 'NGC', 'IC'],
       Constellation: ''
-    }, _defineProperty(_ref, "Constellation", []), _defineProperty(_ref, "Ar", 1.92837), _defineProperty(_ref, "Dec", 1.92837), _defineProperty(_ref, "Iso", '100'), _defineProperty(_ref, "Exp", '1s'), _defineProperty(_ref, "rowsPerPageItems", [3, 5, 10, 20]), _defineProperty(_ref, "pagination", {
+    }, _defineProperty(_ref, "Constellation", []), _defineProperty(_ref, "Ar", 1.92837), _defineProperty(_ref, "Dec", 1.92837), _defineProperty(_ref, "Iso", '100'), _defineProperty(_ref, "Exp", '1'), _defineProperty(_ref, "rowsPerPageItems", [3, 5, 10, 20]), _defineProperty(_ref, "pagination", {
       rowsPerPage: 3
     }), _defineProperty(_ref, "object", 'Seleccione Objeto'), _defineProperty(_ref, "state", 'En espera'), _defineProperty(_ref, "Paso", '100'), _defineProperty(_ref, "Dir", 'Adentro'), _defineProperty(_ref, "Pasos", ['100', '200', '400', '600', '800', '1000', '2000', '3000']), _defineProperty(_ref, "Dirs", ['Adentro', 'Afuera']), _defineProperty(_ref, "Isos", ['100', '200', '400', '600', '800', '1000', '2000', '3000']), _defineProperty(_ref, "Exps", ['1s', '2s', '4s', '6s', '8s', '1m', '2m', '3m']), _defineProperty(_ref, "headers", [{
       text: 'Nombre',
@@ -2461,7 +2461,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     move: function move() {
       var $command = {
         'command': 'MONTURA',
-        'type': 'montura',
+        'type': 'mount',
         'status': 'PENDIENTE',
         'ar': this.Ar,
         'dec': this.Dec,
@@ -2475,17 +2475,33 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       });
     },
     shoot: function shoot() {
-      axios.post('/api/source_update', this.editedItem).then(function (resp) {
-        Object.assign(app.sources[app.editedIndex], app.editedItem);
-      })["catch"](function (resp) {
+      var $command = {
+        'command': 'CAMARA',
+        'type': 'shoot',
+        'status': 'PENDIENTE',
+        'exptime': this.Exp,
+        'iso': this.Iso,
+        'user_id': 1,
+        'equipment_id': 1
+      };
+      alert(JSON.stringify($command));
+      axios.post('/api/command/shoot', $command).then(function (resp) {})["catch"](function (resp) {
         console.log(resp);
         alert("Error shoot :" + resp);
       });
     },
     focus: function focus() {
-      axios.post('/api/source_update', this.editedItem).then(function (resp) {
-        Object.assign(app.sources[app.editedIndex], app.editedItem);
-      })["catch"](function (resp) {
+      var $command = {
+        'command': 'ENFOCADOR',
+        'type': 'focuser',
+        'status': 'PENDIENTE',
+        'ar': this.Ar,
+        'dec': this.Dec,
+        'user_id': 1,
+        'equipment_id': 1
+      };
+      alert(JSON.stringify($command));
+      axios.post('/api/command/focus', $command).then(function (resp) {})["catch"](function (resp) {
         console.log(resp);
         alert("Error focus :" + resp);
       });
@@ -32811,7 +32827,11 @@ var render = function() {
                                 "v-btn",
                                 {
                                   attrs: { color: "warning" },
-                                  on: { click: _vm.shoot }
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.shoot()
+                                    }
+                                  }
                                 },
                                 [_vm._v("Disparar")]
                               )

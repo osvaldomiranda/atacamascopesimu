@@ -183,7 +183,7 @@
 
 		          			</v-flex>
 		          		</v-layout>	
-		          		<v-btn color="warning" @click="shoot">Disparar</v-btn>
+		          		<v-btn color="warning" @click="shoot()">Disparar</v-btn>
 			    	</v-card> 
 				</v-flex>
 
@@ -294,7 +294,7 @@
         Ar: 1.92837,
         Dec: 1.92837,
         Iso: '100',
-        Exp: '1s',
+        Exp: '1',
         rowsPerPageItems: [3, 5, 10, 20],
 		pagination: {
     		rowsPerPage: 3
@@ -431,7 +431,7 @@
         },
         move(){
 
-        	var $command = {'command': 'MONTURA', 'type': 'montura', 'status': 'PENDIENTE',
+        	var $command = {'command': 'MONTURA', 'type': 'mount', 'status': 'PENDIENTE',
         	                'ar': this.Ar, 'dec': this.Dec, 'user_id': 1, 'equipment_id': 1};
 
         	alert(JSON.stringify($command));
@@ -445,9 +445,14 @@
             });
         },
         shoot(){
-        	axios.post('/api/source_update', this.editedItem)
+        	var $command = {'command': 'CAMARA', 'type': 'shoot', 'status': 'PENDIENTE',
+        	                'exptime': this.Exp, 'iso': this.Iso, 'user_id': 1, 'equipment_id': 1};
+
+        	alert(JSON.stringify($command));
+
+        	axios.post('/api/command/shoot', $command)
             .then(function (resp) {
-                Object.assign(app.sources[app.editedIndex], app.editedItem) 
+                
             })
             .catch(function (resp) {
                 console.log(resp);
@@ -455,9 +460,14 @@
             });
         },
         focus(){
-        	axios.post('/api/source_update', this.editedItem)
+        	var $command = {'command': 'ENFOCADOR', 'type': 'focuser', 'status': 'PENDIENTE',
+        	                'ar': this.Ar, 'dec': this.Dec, 'user_id': 1, 'equipment_id': 1};
+
+        	alert(JSON.stringify($command));
+
+        	axios.post('/api/command/focus', $command)
             .then(function (resp) {
-                Object.assign(app.sources[app.editedIndex], app.editedItem) 
+                
             })
             .catch(function (resp) {
                 console.log(resp);
