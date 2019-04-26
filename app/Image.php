@@ -2,6 +2,7 @@
 
 namespace App;
 use File;
+use App\Command;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -19,7 +20,7 @@ class Image extends Model
 	        return '';
 	    }
 
-	    $path = 'http://10.200.112.215/storage/' . $filename;
+	    $path = 'http://10.200.112.245/storage/' . $filename;
  
 	    return $path;  	
     }

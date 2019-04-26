@@ -4,6 +4,7 @@ import VueRouter from 'vue-router'
 
 import DashboardView   from './views/DashboardView'
 import ChatComponent   from './components/ChatComponent'
+import AppComponent   from './components/AppComponent'
 
 
 
@@ -16,7 +17,7 @@ const router = new VueRouter({
         {
             path: '/app',
             name: 'app',
-            component: App,
+            component: AppComponent,
         },
         {
             path: '/dasboard',

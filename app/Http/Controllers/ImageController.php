@@ -8,22 +8,30 @@ use Storage;
 use App\Image;
 use App\Events\MessageSent;
 use App\Message;
+use App\Command;
 
 
 class ImageController extends Controller
 {
-    public function upload(request $request)
+    public function upload($command_id, request $request)
     {
+        $command = Command::where('id', $command_id)->get()->first();
     	
     	if($request->hasFile('photo')){
     		$path = $request->photo->store('public');
 
             $filename = substr($path,7,100);
-            $path = 'http://10.200.112.215/storage/' . $filename;
+            $path = 'http://10.200.112.245/storage/' . $filename;
 
     		$image = new Image;
     		$image->name = 'Hola.jpg';
     		$image->path = $path;
+
+            $image->ar      = $command->ar;
+            $image->dec     = $command->dec;
+            $image->exptime = $command->exptime;
+            $image->iso     = $command->iso;
+
     		$image->user_id = 1;
     		$image->equipment_id = 1;
     		$image->save();

@@ -1799,118 +1799,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       dialog: false,
       drawer: null,
       step: "",
-      astronomic_objects: null,
-      naturalStates: [],
-      items: [{
-        icon: 'contacts',
-        text: 'Datos del Establecimiento',
-        link: '/dasboard'
-      }, {
-        icon: 'settings',
-        text: 'Registro de Fuentes y Procesos',
-        link: '/chat'
-      }, {
-        icon: 'wrap_text',
-        text: 'Diagramas de Descarga',
-        link: '/'
-      }, {
-        icon: 'wrap_text',
-        text: 'Listado de Envíos',
-        link: '/'
-      }, {
-        icon: 'wrap_text',
-        text: 'Listado de Fuentes',
-        link: '/'
-      }]
+      astronomic_objects: null
     };
   },
   props: {
     source: String
+  },
+  computed: {
+    token: function token() {
+      var token = document.head.querySelector('meta[name="csrf-token"]');
+      return token.content;
+    }
   },
   created: function created() {
     this.initialize();
@@ -2084,6 +1989,35 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2416,7 +2350,29 @@ __webpack_require__.r(__webpack_exports__);
         text: 'DEC',
         value: 'dec'
       }],
-      myImages: []
+      myImages: [],
+      myImagesHeaders: [{
+        text: 'Foto',
+        value: 'img'
+      }, {
+        text: 'Nombre',
+        value: 'name'
+      }, {
+        text: 'ISO',
+        value: 'iso'
+      }, {
+        text: 'TiempoExp',
+        value: 'exptime'
+      }, {
+        text: 'Coord AR',
+        value: 'ar'
+      }, {
+        text: 'Coord DEC',
+        value: 'dec'
+      }, {
+        text: 'Fecha',
+        value: 'created_at'
+      }]
     };
   },
   created: function created() {
@@ -2448,12 +2404,18 @@ __webpack_require__.r(__webpack_exports__);
         app.astronomic_objects = resp.data;
         app.filter('Todos');
         app.$store.commit('changeAstronomicObjects', app.astronomic_objects);
+
+        var distinctConst = _toConsumableArray(new Set(app.astronomic_objects.map(function (x) {
+          return x.constellation;
+        })));
+
+        app.Constellations = distinctConst.sort();
       })["catch"](function (resp) {
         console.log(resp);
         alert("Error astronomic_objects :" + resp);
       });
       app.openChat();
-      app.getMyImages();
+      app.getMyImages(); // Constellations
     },
     openChat: function openChat() {
       var app = this; // Start pusher listener
@@ -2482,6 +2444,15 @@ __webpack_require__.r(__webpack_exports__);
         });
       }
     },
+    filterConstellation: function filterConstellation(a) {
+      if (a == "Todos") {
+        this.FilteredObjects = this.astronomic_objects;
+      } else {
+        this.FilteredObjects = this.astronomic_objects.filter(function (it) {
+          return it.constellation == a;
+        });
+      }
+    },
     move: function move() {
       var $command = {
         'command': 'MONTURA',
@@ -2506,6 +2477,8 @@ __webpack_require__.r(__webpack_exports__);
         'status': 'PENDIENTE',
         'exptime': this.Exp,
         'iso': this.Iso,
+        'ar': this.Ar_act,
+        'dec': this.Dec_act,
         'user_id': 1,
         'equipment_id': 1
       };
@@ -31767,173 +31740,6 @@ var render = function() {
     { attrs: { id: "inspire" } },
     [
       _c(
-        "v-navigation-drawer",
-        {
-          attrs: {
-            clipped: _vm.$vuetify.breakpoint.lgAndUp,
-            fixed: "",
-            app: ""
-          },
-          model: {
-            value: _vm.drawer,
-            callback: function($$v) {
-              _vm.drawer = $$v
-            },
-            expression: "drawer"
-          }
-        },
-        [
-          _c(
-            "v-list",
-            { attrs: { dense: "" } },
-            [
-              _vm._l(_vm.items, function(item) {
-                return [
-                  item.heading
-                    ? _c(
-                        "v-layout",
-                        {
-                          key: item.heading,
-                          attrs: { to: item.link, row: "", "align-center": "" }
-                        },
-                        [
-                          _c(
-                            "v-flex",
-                            { attrs: { xs6: "" } },
-                            [
-                              item.heading
-                                ? _c("v-subheader", [
-                                    _vm._v(
-                                      "\n                " +
-                                        _vm._s(item.heading) +
-                                        "\n              "
-                                    )
-                                  ])
-                                : _vm._e()
-                            ],
-                            1
-                          )
-                        ],
-                        1
-                      )
-                    : item.children
-                    ? _c(
-                        "v-list-group",
-                        {
-                          key: item.text,
-                          attrs: {
-                            "prepend-icon": item.model
-                              ? item.icon
-                              : item["icon-alt"],
-                            "append-icon": ""
-                          },
-                          model: {
-                            value: item.model,
-                            callback: function($$v) {
-                              _vm.$set(item, "model", $$v)
-                            },
-                            expression: "item.model"
-                          }
-                        },
-                        [
-                          _c(
-                            "v-list-tile",
-                            { attrs: { slot: "activator" }, slot: "activator" },
-                            [
-                              _c(
-                                "v-list-tile-content",
-                                [
-                                  _c("v-list-tile-title", [
-                                    _vm._v(
-                                      "\n                  " +
-                                        _vm._s(item.text) +
-                                        "\n                "
-                                    )
-                                  ])
-                                ],
-                                1
-                              )
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _vm._l(item.children, function(child, i) {
-                            return _c(
-                              "v-list-tile",
-                              { key: i, on: { click: function($event) {} } },
-                              [
-                                child.icon
-                                  ? _c(
-                                      "v-list-tile-action",
-                                      [
-                                        _c("v-icon", [
-                                          _vm._v(_vm._s(child.icon))
-                                        ])
-                                      ],
-                                      1
-                                    )
-                                  : _vm._e(),
-                                _vm._v(" "),
-                                _c(
-                                  "v-list-tile-content",
-                                  [
-                                    _c("v-list-tile-title", [
-                                      _vm._v(
-                                        "\n                  " +
-                                          _vm._s(child.text) +
-                                          "\n                "
-                                      )
-                                    ])
-                                  ],
-                                  1
-                                )
-                              ],
-                              1
-                            )
-                          })
-                        ],
-                        2
-                      )
-                    : _c(
-                        "v-list-tile",
-                        {
-                          key: item.text,
-                          attrs: { to: item.link },
-                          on: { click: function($event) {} }
-                        },
-                        [
-                          _c(
-                            "v-list-tile-action",
-                            [_c("v-icon", [_vm._v(_vm._s(item.icon))])],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "v-list-tile-content",
-                            [
-                              _c("v-list-tile-title", [
-                                _vm._v(
-                                  "\n                " +
-                                    _vm._s(item.text) +
-                                    "\n              "
-                                )
-                              ])
-                            ],
-                            1
-                          )
-                        ],
-                        1
-                      )
-                ]
-              })
-            ],
-            2
-          )
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
         "v-toolbar",
         {
           attrs: {
@@ -31947,15 +31753,6 @@ var render = function() {
             "v-toolbar-title",
             { staticClass: "ml-0 pl-3", staticStyle: { width: "600px" } },
             [
-              _c("v-toolbar-side-icon", {
-                on: {
-                  click: function($event) {
-                    $event.stopPropagation()
-                    _vm.drawer = !_vm.drawer
-                  }
-                }
-              }),
-              _vm._v(" "),
               _c("span", { staticClass: "hidden-md-and-down" }, [
                 _vm._v("Registro de Fuentes y Procesos")
               ]),
@@ -31968,19 +31765,14 @@ var render = function() {
           _c("v-spacer"),
           _vm._v(" "),
           _c(
-            "v-btn",
-            { attrs: { icon: "" } },
-            [_c("v-icon", [_vm._v("notifications")])],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "v-btn",
-            { attrs: { icon: "", large: "" } },
+            "v-toolbar-items",
+            { staticClass: "hidden-sm-and-down" },
             [
-              _c("v-avatar", { attrs: { size: "32px", tile: "" } }, [
-                _c("img", { attrs: { src: "/images/logo.jpg", alt: "MMA" } })
-              ])
+              _c("v-btn", { attrs: { to: "/dasboard", flat: "" } }, [
+                _vm._v("Login")
+              ]),
+              _vm._v(" "),
+              _c("v-btn", { attrs: { flat: "" } }, [_vm._v("Register")])
             ],
             1
           )
@@ -32378,6 +32170,7 @@ var render = function() {
                                       "single-line": "",
                                       "hide-details": ""
                                     },
+                                    on: { input: _vm.filterConstellation },
                                     model: {
                                       value: _vm.Constellation,
                                       callback: function($$v) {
@@ -32714,6 +32507,10 @@ var render = function() {
                                 "v-layout",
                                 { attrs: { "align-center": "", row: "" } },
                                 [
+                                  _c("v-flex", {
+                                    attrs: { "align-center": "", xs1: "" }
+                                  }),
+                                  _vm._v(" "),
                                   _c(
                                     "v-flex",
                                     { attrs: { "align-center": "", xs4: "" } },
@@ -32732,6 +32529,10 @@ var render = function() {
                                     1
                                   ),
                                   _vm._v(" "),
+                                  _c("v-flex", {
+                                    attrs: { "align-center": "", xs1: "" }
+                                  }),
+                                  _vm._v(" "),
                                   _c(
                                     "v-flex",
                                     { attrs: { "align-center": "", xs4: "" } },
@@ -32748,7 +32549,11 @@ var render = function() {
                                       })
                                     ],
                                     1
-                                  )
+                                  ),
+                                  _vm._v(" "),
+                                  _c("v-flex", {
+                                    attrs: { "align-center": "", xs1: "" }
+                                  })
                                 ],
                                 1
                               ),
@@ -32815,6 +32620,10 @@ var render = function() {
                                 "v-layout",
                                 { attrs: { "align-center": "", row: "" } },
                                 [
+                                  _c("v-flex", {
+                                    attrs: { "align-center": "", xs1: "" }
+                                  }),
+                                  _vm._v(" "),
                                   _c(
                                     "v-flex",
                                     { attrs: { "align-center": "", xs4: "" } },
@@ -32842,6 +32651,10 @@ var render = function() {
                                     1
                                   ),
                                   _vm._v(" "),
+                                  _c("v-flex", {
+                                    attrs: { "align-center": "", xs1: "" }
+                                  }),
+                                  _vm._v(" "),
                                   _c(
                                     "v-flex",
                                     { attrs: { "align-center": "", xs4: "" } },
@@ -32867,7 +32680,11 @@ var render = function() {
                                       })
                                     ],
                                     1
-                                  )
+                                  ),
+                                  _vm._v(" "),
+                                  _c("v-flex", {
+                                    attrs: { "align-center": "", xs1: "" }
+                                  })
                                 ],
                                 1
                               ),
@@ -32934,6 +32751,10 @@ var render = function() {
                                 "v-layout",
                                 { attrs: { "align-center": "", row: "" } },
                                 [
+                                  _c("v-flex", {
+                                    attrs: { "align-center": "", xs1: "" }
+                                  }),
+                                  _vm._v(" "),
                                   _c(
                                     "v-flex",
                                     { attrs: { "align-center": "", xs4: "" } },
@@ -32961,6 +32782,10 @@ var render = function() {
                                     1
                                   ),
                                   _vm._v(" "),
+                                  _c("v-flex", {
+                                    attrs: { "align-center": "", xs1: "" }
+                                  }),
+                                  _vm._v(" "),
                                   _c(
                                     "v-flex",
                                     { attrs: { "align-center": "", xs4: "" } },
@@ -32986,7 +32811,11 @@ var render = function() {
                                       })
                                     ],
                                     1
-                                  )
+                                  ),
+                                  _vm._v(" "),
+                                  _c("v-flex", {
+                                    attrs: { "align-center": "", xs1: "" }
+                                  })
                                 ],
                                 1
                               ),
@@ -33024,7 +32853,7 @@ var render = function() {
                         "v-flex",
                         {
                           staticStyle: { overflow: "auto" },
-                          attrs: { xs8: "" }
+                          attrs: { xs12: "" }
                         },
                         [
                           _c(
@@ -33033,9 +32862,10 @@ var render = function() {
                               _c(
                                 "v-card-title",
                                 [
-                                  _vm._v(
-                                    "\n\t\t\t\t\t      Mis fotos\n\t\t\t\t\t      "
-                                  ),
+                                  _c("span", { staticClass: "headline" }, [
+                                    _vm._v("Mis fotos")
+                                  ]),
+                                  _vm._v(" "),
                                   _c("v-spacer")
                                 ],
                                 1
@@ -33043,7 +32873,7 @@ var render = function() {
                               _vm._v(" "),
                               _c("v-data-table", {
                                 attrs: {
-                                  headers: _vm.headers,
+                                  headers: _vm.myImagesHeaders,
                                   items: _vm.myImages,
                                   search: _vm.search
                                 },
@@ -33069,6 +32899,40 @@ var render = function() {
                                           "td",
                                           { staticClass: "text-xs-right" },
                                           [_vm._v(_vm._s(props.item.name))]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "td",
+                                          { staticClass: "text-xs-right" },
+                                          [_vm._v(_vm._s(props.item.iso))]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "td",
+                                          { staticClass: "text-xs-right" },
+                                          [_vm._v(_vm._s(props.item.exptime))]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "td",
+                                          { staticClass: "text-xs-right" },
+                                          [_vm._v(_vm._s(props.item.ar))]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "td",
+                                          { staticClass: "text-xs-right" },
+                                          [_vm._v(_vm._s(props.item.dec))]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "td",
+                                          { staticClass: "text-xs-right" },
+                                          [
+                                            _vm._v(
+                                              _vm._s(props.item.created_at)
+                                            )
+                                          ]
                                         )
                                       ]
                                     }
@@ -75046,7 +74910,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_2__
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_3__["default"]);
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 axios.defaults.headers.common = {
-  // 'X-CSRF-TOKEN': window.Laravel.csrfToken,
+  //'X-CSRF-TOKEN': window.Laravel.csrfToken,
   'Content-Type': 'application/json',
   'X-Requested-With': 'XMLHttpRequest'
 };
@@ -75067,7 +74931,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuetify__WEBPACK_IMPORTED_MODULE_
   }
 });
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('app', __webpack_require__(/*! ./views/App.vue */ "./resources/js/views/App.vue"));
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('control-component', _components_ControlComponent__WEBPACK_IMPORTED_MODULE_7__["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('control-component', _components_ControlComponent__WEBPACK_IMPORTED_MODULE_7__["default"]); //AppComponent
+
 var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   el: '#App',
   render: function render(h) {
@@ -75309,6 +75174,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
 /* harmony import */ var _views_DashboardView__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./views/DashboardView */ "./resources/js/views/DashboardView.vue");
 /* harmony import */ var _components_ChatComponent__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/ChatComponent */ "./resources/js/components/ChatComponent.vue");
+/* harmony import */ var _components_AppComponent__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/AppComponent */ "./resources/js/components/AppComponent.vue");
+
 
 
 
@@ -75320,7 +75187,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_2__["default"]({
   routes: [{
     path: '/app',
     name: 'app',
-    component: _views_App__WEBPACK_IMPORTED_MODULE_0__["default"]
+    component: _components_AppComponent__WEBPACK_IMPORTED_MODULE_5__["default"]
   }, {
     path: '/dasboard',
     name: 'dasboard',

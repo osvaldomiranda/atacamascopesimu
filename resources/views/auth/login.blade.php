@@ -1,10 +1,19 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<!-- <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
+            <div class="card"> -->
+
+         <v-container fluid>
+            <v-layout align-center row>
+                <v-flex xs2>
+                    <v-layout align-center row>
+                        <v-flex xs12>   
+                            <v-card>
+
+
                 <div class="card-header">{{ __('Login') }}</div>
 
                 <div class="card-body">
@@ -66,8 +75,17 @@
                         </div>
                     </form>
                 </div>
-            </div>
+
+                
+            </v-card>
+        </v-flex>
+    </v-layout>
+  </v-flex>
+  </v-layout>
+  </v-container>              
+
+            <<!-- /div>
         </div>
     </div>
-</div>
+</div> -->
 @endsection

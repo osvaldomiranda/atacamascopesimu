@@ -45,6 +45,8 @@ class CommandController extends Controller
         $command->status		= $request->input('status');
         $command->exptime  		= $request->input('exptime');
         $command->iso 			= $request->input('iso');	
+        $command->ar  			= $request->input('ar');
+        $command->dec 			= $request->input('dec');	
         $command->user_id		= $request->input('user_id');
         $command->equipment_id	= $request->input('equipment_id');
         $command->save();

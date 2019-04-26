@@ -58,25 +58,34 @@ class AstronomicObjectController extends Controller
             $dec = $object->dec;
             $name = $object->name;
 
+
+            //************************
+            //************************
+            // nombre catalogo
+
             $cat = substr($name,0,1);
 
-            if($cat == 'I'){
-            	$object->catalog = 'IC';
-            }
-            if($cat == 'N'){
-            	$object->catalog = 'NGC';
-            }
-            if($cat == 'M'){
-            	$object->catalog = 'Messier';
-            }
-            if($cat == 'S'){
-            	$object->catalog = 'SolarSistem';
-            }
+            // if($cat == 'I'){
+            // 	$object->catalog = 'IC';
+            // }
+            // if($cat == 'N'){
+            // 	$object->catalog = 'NGC';
+            // }
+            // if($cat == 'M'){
+            // 	$object->catalog = 'Messier';
+            // }
+            // if($cat == 'S'){
+            // 	$object->catalog = 'SolarSistem';
+            // }
 
-            $object->save();
+            // $object->save();
 
-            Info($object);
+            // Info($object);
 
+
+            //***************************
+            //***************************
+            // Coordenadas no mesier
 
          //    if($ra){
          //    	Info($ra);
@@ -114,6 +123,45 @@ class AstronomicObjectController extends Controller
 
 	        //     Info($object);
         	// }
+
+            //***************************
+            //***************************
+            // Coordenadas Messier
+            if($ra){
+            	if($cat == 'M'){
+	            	Info($ra);
+	            	Info($dec);
+
+
+		            $h_ra = (float) substr(preg_split("/ /",$ra)[0],0, strpos(preg_split("/ /",$ra)[0],'h'));  
+		            $m_ra = (float) substr(preg_split("/ /",$ra)[0],0, strpos(preg_split("/ /",$ra)[1],'m')); 
+		           
+
+		            $h_dec = (float)substr(preg_split("/ /",$dec)[0],0,3);
+		            $m_dec = (float)substr(preg_split("/ /",$dec)[1],0,2);
+
+
+
+		            if($h_dec < 0.0){
+		                $sign = '-';
+		                $h_dec = $h_dec * -1;
+		            } else {
+		                $sign = '+';  
+		            }
+
+		            $ac_selected  = ($h_ra + ($m_ra/60) );
+		            $dec_selected = ($h_dec + ($m_dec/60) );
+
+		            $object->coord_ar = $ac_selected;
+		            $object->coord_dec = $dec_selected;
+		            $object->sign_dec = $sign;
+		            $object->save();
+
+		            Info($object);
+		        }   
+        	}
+
+
         }
 
         return response()->json('OK');

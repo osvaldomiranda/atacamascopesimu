@@ -13,7 +13,8 @@ import store from './store';
 import router from './routes'
 
 import AppComponent         from './components/AppComponent'
-import ControlComponent         from './components/ControlComponent'
+import ControlComponent     from './components/ControlComponent'
+
 
 Vue.use(Vuex)
 Vue.use(VueRouter)
@@ -21,7 +22,7 @@ Vue.use(VueRouter)
 
 window.axios = require('axios');
 axios.defaults.headers.common = {
-    // 'X-CSRF-TOKEN': window.Laravel.csrfToken,
+    //'X-CSRF-TOKEN': window.Laravel.csrfToken,
     'Content-Type': 'application/json',
     'X-Requested-With': 'XMLHttpRequest'
 };
@@ -50,7 +51,7 @@ Vue.use(Vuetify, {
 Vue.component('app', require('./views/App.vue'));
 Vue.component('control-component', ControlComponent);
 
-
+//AppComponent
 
 const app = new Vue({
     el: '#App',

@@ -17,7 +17,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/upload', 'ImageController@upload');
+Route::post('/upload/{command_id}', 'ImageController@upload');
 Route::get('/astronomic_objects', 'AstronomicObjectController@index');
 Route::get('/astronomic_objects/coords', 'AstronomicObjectController@coords');
 

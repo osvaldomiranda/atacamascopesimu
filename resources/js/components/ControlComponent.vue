@@ -54,6 +54,7 @@
 							    v-model="Constellation"
 							    :items="Constellations"
 							    label="Constelación"
+							    @input= "filterConstellation"
 							    single-line
 						        hide-details
 							    ></v-select>
@@ -126,18 +127,24 @@
 				            </v-layout>
 				        </v-container>
 						<v-layout align-center row>
+							<v-flex align-center xs1>
+							</v-flex>	
 							<v-flex align-center xs4>
 								<v-text-field
 								    v-model="Ar"
 								        label="Asención Recta"
 								    ></v-text-field>
 		          			</v-flex>
+							<v-flex align-center xs1>
+							</v-flex>
 							<v-flex align-center xs4>
 								<v-text-field
 								    v-model="Dec"
 								        label="Declinación"
 								    ></v-text-field>
 		          			</v-flex>
+							<v-flex align-center xs1>
+							</v-flex>		          			
 		          		</v-layout>	
 
 		          		<v-btn color="warning" @click="move()">Mover</v-btn>
@@ -156,6 +163,8 @@
 				        </v-container>
 
 						<v-layout align-center row>
+							<v-flex align-center xs1>
+							</v-flex>	
 							<v-flex align-center xs4>
 							
 							    <v-select
@@ -167,7 +176,8 @@
 							    ></v-select>
 
 		          			</v-flex>
-
+							<v-flex align-center xs1>
+							</v-flex>	
 
 							<v-flex align-center xs4>
 
@@ -182,6 +192,8 @@
 
 
 		          			</v-flex>
+							<v-flex align-center xs1>
+							</v-flex>	
 		          		</v-layout>	
 		          		<v-btn color="warning" @click="shoot()">Disparar</v-btn>
 			    	</v-card> 
@@ -198,6 +210,8 @@
 				        </v-container>
 
 						<v-layout align-center row>
+							<v-flex align-center xs1>
+							</v-flex>	
 							<v-flex align-center xs4>
 							
 							    <v-select
@@ -209,7 +223,8 @@
 							    ></v-select>
 
 		          			</v-flex>
-
+							<v-flex align-center xs1>
+							</v-flex>	
 
 							<v-flex align-center xs4>
 
@@ -224,6 +239,8 @@
 
 
 		          			</v-flex>
+							<v-flex align-center xs1>
+							</v-flex>	
 		          		</v-layout>	
 		          		<v-btn color="warning" @click="focus">Enfocar</v-btn>
 			    	</v-card> 
@@ -236,15 +253,15 @@
 
 		 <v-container fluid>
 		    <v-layout align-center row>
-				<v-flex xs8 style="overflow: auto">
+				<v-flex xs12 style="overflow: auto">
 
 					  <v-card>
 					    <v-card-title>
-					      Mis fotos
+					      <span class="headline">Mis fotos</span>
 					      <v-spacer></v-spacer>
 					    </v-card-title>
 					    <v-data-table
-					      :headers="headers"
+					      :headers="myImagesHeaders"
 					      :items="myImages"
 					      :search="search"
 					    >
@@ -257,7 +274,11 @@
 					        </td>
 
 					        <td class="text-xs-right">{{ props.item.name }}</td>
-	
+					        <td class="text-xs-right">{{ props.item.iso }}</td>
+					        <td class="text-xs-right">{{ props.item.exptime }}</td>
+					        <td class="text-xs-right">{{ props.item.ar }}</td>
+					        <td class="text-xs-right">{{ props.item.dec }}</td>
+					        <td class="text-xs-right">{{ props.item.created_at }}</td>
 					      </template>
 					    </v-data-table>
 					  </v-card>	
@@ -360,6 +381,15 @@
           { text: 'DEC', value: 'dec' }
         ],
         myImages: [],
+        myImagesHeaders: [
+          { text: 'Foto', value: 'img' },
+          { text: 'Nombre', value: 'name' },
+          { text: 'ISO', value: 'iso' },
+          { text: 'TiempoExp', value: 'exptime' },
+          { text: 'Coord AR', value: 'ar' },
+          { text: 'Coord DEC', value: 'dec' },
+          { text: 'Fecha', value: 'created_at' }
+        ],
       }
     },
     created () {
@@ -373,7 +403,6 @@
       		this.Dec = a.coord_dec;
       		this.object = a.name;
       		if(a.catalog=='SolarSistem'){
-
 	      		axios.get('/api/astronomic_objects/solarsistem?object=' + a.name)
 	            .then(function (resp) {    
 	            	//alert(JSON.stringify(resp.data));
@@ -392,9 +421,12 @@
 
           axios.get('/api/astronomic_objects')
             .then(function (resp) {
-              app.astronomic_objects = resp.data;
-              app.filter('Todos');
-              app.$store.commit('changeAstronomicObjects', app.astronomic_objects);
+              	app.astronomic_objects = resp.data;
+              	app.filter('Todos');
+              	app.$store.commit('changeAstronomicObjects', app.astronomic_objects);
+            	const distinctConst=[...new Set(app.astronomic_objects.map(x => x.constellation))];
+            	app.Constellations = distinctConst.sort();
+
             })
             .catch(function (resp) {
                 console.log(resp);
@@ -403,6 +435,10 @@
 
             app.openChat();
             app.getMyImages();
+
+            // Constellations
+
+
         },
 
 	    openChat () {
@@ -440,7 +476,13 @@
         	} else {
         		this.FilteredObjects = this.astronomic_objects.filter(it => it.catalog==a );	
         	}
-        	
+        },
+        filterConstellation(a){
+        	if(a=="Todos"){
+        		this.FilteredObjects = this.astronomic_objects
+        	} else {
+        		this.FilteredObjects = this.astronomic_objects.filter(it => it.constellation==a );	
+        	}
         },
         move(){
         	var $command = {'command': 'MONTURA', 'type': 'mount', 'status': 'PENDIENTE',
@@ -460,7 +502,7 @@
         },
         shoot(){
         	var $command = {'command': 'CAMARA', 'type': 'shoot', 'status': 'PENDIENTE',
-        	                'exptime': this.Exp, 'iso': this.Iso, 'user_id': 1, 'equipment_id': 1};
+        	                'exptime': this.Exp, 'iso': this.Iso, 'ar': this.Ar_act, 'dec': this.Dec_act, 'user_id': 1, 'equipment_id': 1};
 
         	this.imageUrl = '';
         	axios.post('/api/command/shoot', $command)
