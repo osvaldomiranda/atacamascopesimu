@@ -21,7 +21,7 @@
 						<v-flex xs12>	
 					    	<v-card>
 					      		<v-img
-					      	  		src="https://cdn.vuetifyjs.com/images/cards/desert.jpg"
+					      	  		v-bind:src="imageUrl"
 					      	  		aspect-ratio="1"
 					      		></v-img>
 					    	</v-card> 
@@ -29,7 +29,7 @@
 					</v-layout>   
 					<v-layout align-center row>
 						<v-flex xs12>
-							<p>Iso: 1200, Exp: 2min, Objeto: M87</p> 	
+							<p>{{current_shot}}</p> 	
 						</v-flex>
 					</v-layout>	
 		      	</v-flex>
@@ -105,7 +105,7 @@
 				                	<span class="headline"> Estado:{{ state }}</span>
 				              	</v-flex>
 				              	<v-flex xs4 align-end flexbox>
-				              		<v-btn  small color="warning" @click="saveImage" >Guardar Imagen</v-btn>
+				              		<p>Actual: {{current}}</p>
 				          		</v-flex>
 				            </v-layout>
 				        </v-container>
@@ -245,18 +245,18 @@
 					    </v-card-title>
 					    <v-data-table
 					      :headers="headers"
-					      :items="desserts"
+					      :items="myImages"
 					      :search="search"
 					    >
 					      <template v-slot:items="props">
 					        <td>
 					        	<v-img
-			      	  				src="https://cdn.vuetifyjs.com/images/cards/desert.jpg"
+			      	  				v-bind:src="props.item.path"
 			      	  				aspect-ratio="1"
 			      				></v-img>
 					        </td>
 
-					        <td class="text-xs-right">{{ props.item.calories }}</td>
+					        <td class="text-xs-right">{{ props.item.name }}</td>
 	
 					      </template>
 					    </v-data-table>
@@ -284,17 +284,27 @@
         astronomic_objects:[],
         selected:[],
         search: '',
+        imageUrl: '',
 
         Catalog:'Todos',
         Catalogs: ['Todos','SolarSistem','Messier','NGC', 'IC'],
 
         Constellation:'',
-        Constellation: [],
+        Constellations: [],
+        FilteredObjects: [],
 
         Ar: 1.92837,
         Dec: 1.92837,
         Iso: '100',
         Exp: '1',
+
+        Ar_act:0,
+        Dec_act:0,
+        Iso_act:0,
+        Exp_act:0,
+        current:'',
+        current_shot:'',	
+
         rowsPerPageItems: [3, 5, 10, 20],
 		pagination: {
     		rowsPerPage: 3
@@ -331,14 +341,14 @@
 	        '3000',
 	    ],
 	    Exps: [
-	        '1s',
-	        '2s',
-	        '4s',
-	        '6s',
-	        '8s',
-	        '1m',
-	        '2m',
-	        '3m',
+	        '1',
+	        '2',
+	        '4',
+	        '6',
+	        '8',
+	        '1',
+	        '2',
+	        '3',
 	    ],
 
         headers: [
@@ -349,24 +359,7 @@
           { text: 'AR', value: 'ra' },
           { text: 'DEC', value: 'dec' }
         ],
-        desserts: [
-          {
-            name: 'Frozen Yogurt',
-            calories: 159,
-            fat: 6.0,
-            carbs: 24,
-            protein: 4.0,
-            iron: '1%'
-          },
-          {
-            name: 'Ice cream sandwich',
-            calories: 237,
-            fat: 9.0,
-            carbs: 37,
-            protein: 4.3,
-            iron: '1%'
-          },
-        ]
+        myImages: [],
       }
     },
     created () {
@@ -375,9 +368,23 @@
     methods: {
     	showAlert(a){
       	//	if (event.target.classList.contains('btn__content')) return;
+      		var app = this;
       		this.Ar = a.coord_ar;
       		this.Dec = a.coord_dec;
       		this.object = a.name;
+      		if(a.catalog=='SolarSistem'){
+
+	      		axios.get('/api/astronomic_objects/solarsistem?object=' + a.name)
+	            .then(function (resp) {    
+	            	//alert(JSON.stringify(resp.data));
+	            	app.Ar = resp.data["ar"];
+	            	app.Dec = resp.data["dec"];
+	            })
+	            .catch(function (resp) {
+	                console.log(resp);
+	                alert("Error shoot :" + resp);
+	            });
+      		}      		
     	},
       	initialize () {
          	var app = this;
@@ -395,6 +402,7 @@
             });
 
             app.openChat();
+            app.getMyImages();
         },
 
 	    openChat () {
@@ -412,7 +420,12 @@
 
 	        channel.bind('App\\Events\\MessageSent', function (data) {
 	            
-	              app.state = data.message['message'];
+	            app.state = data.message['message'];
+
+	            if (app.state=="Imagen Recibida"){
+
+	            	app.imageRefresh();
+	            }
 	            
 	        })
 	          // End pusher listener
@@ -430,7 +443,6 @@
         	
         },
         move(){
-
         	var $command = {'command': 'MONTURA', 'type': 'mount', 'status': 'PENDIENTE',
         	                'ar': this.Ar, 'dec': this.Dec, 'user_id': 1, 'equipment_id': 1};
 
@@ -443,21 +455,33 @@
                 console.log(resp);
                 alert("Error move :" + resp);
             });
+
+            this.currentRefresh();
         },
         shoot(){
         	var $command = {'command': 'CAMARA', 'type': 'shoot', 'status': 'PENDIENTE',
         	                'exptime': this.Exp, 'iso': this.Iso, 'user_id': 1, 'equipment_id': 1};
 
-        	alert(JSON.stringify($command));
-
+        	this.imageUrl = '';
         	axios.post('/api/command/shoot', $command)
-            .then(function (resp) {
-                
+            .then(function (resp) {    
             })
             .catch(function (resp) {
                 console.log(resp);
                 alert("Error shoot :" + resp);
             });
+
+            this.currentRefresh();
+            this.current_shot=this.current;
+        },
+        currentRefresh(){
+        
+        	this.Ar_act = this.Ar;
+        	this.Dec_act= this.Dec;
+        	this.Iso_act= this.Iso;
+        	this.Exp_act= this.Exp;
+
+        	this.current = "Ar:" + this.Ar_act + ", Dec:"+ this.Dec_act + ", Iso:"+this.Iso_act+", Exp:"+this.Exp_act;
         },
         focus(){
         	var $command = {'command': 'ENFOCADOR', 'type': 'focuser', 'status': 'PENDIENTE',
@@ -476,6 +500,33 @@
         },
         saveImage(){
 
+        },
+
+        imageRefresh(){
+        	let app = this;
+        	var $command = {'user_id':1}
+        	axios.get('/api/image/last', $command)
+            .then(function (resp) {
+            	app.imageUrl = resp.data;                
+            })
+            .catch(function (resp) {
+                console.log(resp);
+                alert("Error shoot :" + resp);
+            });
+            app.getMyImages();
+        },
+
+        getMyImages(){
+        	let app = this;
+        	var $command = {'user_id':1}
+        	axios.get('/api/images', $command)
+            .then(function (resp) {
+            	app.myImages = resp.data;               
+            })
+            .catch(function (resp) {
+                console.log(resp);
+                alert("Error shoot :" + resp);
+            });
         }
 
     },

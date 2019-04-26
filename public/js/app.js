@@ -2084,8 +2084,6 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 //
 //
 //
@@ -2366,51 +2364,60 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 /* harmony default export */ __webpack_exports__["default"] = ({
   computed: Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['astronomc_objects']),
   data: function data() {
-    var _ref;
-
-    return _ref = {
+    return {
       dialog: false,
       astronomic_objects: [],
       selected: [],
       search: '',
+      imageUrl: '',
       Catalog: 'Todos',
       Catalogs: ['Todos', 'SolarSistem', 'Messier', 'NGC', 'IC'],
-      Constellation: ''
-    }, _defineProperty(_ref, "Constellation", []), _defineProperty(_ref, "Ar", 1.92837), _defineProperty(_ref, "Dec", 1.92837), _defineProperty(_ref, "Iso", '100'), _defineProperty(_ref, "Exp", '1'), _defineProperty(_ref, "rowsPerPageItems", [3, 5, 10, 20]), _defineProperty(_ref, "pagination", {
-      rowsPerPage: 3
-    }), _defineProperty(_ref, "object", 'Seleccione Objeto'), _defineProperty(_ref, "state", 'En espera'), _defineProperty(_ref, "Paso", '100'), _defineProperty(_ref, "Dir", 'Adentro'), _defineProperty(_ref, "Pasos", ['100', '200', '400', '600', '800', '1000', '2000', '3000']), _defineProperty(_ref, "Dirs", ['Adentro', 'Afuera']), _defineProperty(_ref, "Isos", ['100', '200', '400', '600', '800', '1000', '2000', '3000']), _defineProperty(_ref, "Exps", ['1s', '2s', '4s', '6s', '8s', '1m', '2m', '3m']), _defineProperty(_ref, "headers", [{
-      text: 'Nombre',
-      value: 'name'
-    }, {
-      text: 'Catalogo',
-      value: 'catalog'
-    }, {
-      text: 'Tipo',
-      value: 'type_object'
-    }, {
-      text: 'Constelación',
-      value: 'constellation'
-    }, {
-      text: 'AR',
-      value: 'ra'
-    }, {
-      text: 'DEC',
-      value: 'dec'
-    }]), _defineProperty(_ref, "desserts", [{
-      name: 'Frozen Yogurt',
-      calories: 159,
-      fat: 6.0,
-      carbs: 24,
-      protein: 4.0,
-      iron: '1%'
-    }, {
-      name: 'Ice cream sandwich',
-      calories: 237,
-      fat: 9.0,
-      carbs: 37,
-      protein: 4.3,
-      iron: '1%'
-    }]), _ref;
+      Constellation: '',
+      Constellations: [],
+      FilteredObjects: [],
+      Ar: 1.92837,
+      Dec: 1.92837,
+      Iso: '100',
+      Exp: '1',
+      Ar_act: 0,
+      Dec_act: 0,
+      Iso_act: 0,
+      Exp_act: 0,
+      current: '',
+      current_shot: '',
+      rowsPerPageItems: [3, 5, 10, 20],
+      pagination: {
+        rowsPerPage: 3
+      },
+      object: 'Seleccione Objeto',
+      state: 'En espera',
+      Paso: '100',
+      Dir: 'Adentro',
+      Pasos: ['100', '200', '400', '600', '800', '1000', '2000', '3000'],
+      Dirs: ['Adentro', 'Afuera'],
+      Isos: ['100', '200', '400', '600', '800', '1000', '2000', '3000'],
+      Exps: ['1', '2', '4', '6', '8', '1', '2', '3'],
+      headers: [{
+        text: 'Nombre',
+        value: 'name'
+      }, {
+        text: 'Catalogo',
+        value: 'catalog'
+      }, {
+        text: 'Tipo',
+        value: 'type_object'
+      }, {
+        text: 'Constelación',
+        value: 'constellation'
+      }, {
+        text: 'AR',
+        value: 'ra'
+      }, {
+        text: 'DEC',
+        value: 'dec'
+      }],
+      myImages: []
+    };
   },
   created: function created() {
     this.initialize();
@@ -2418,9 +2425,21 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   methods: {
     showAlert: function showAlert(a) {
       //	if (event.target.classList.contains('btn__content')) return;
+      var app = this;
       this.Ar = a.coord_ar;
       this.Dec = a.coord_dec;
       this.object = a.name;
+
+      if (a.catalog == 'SolarSistem') {
+        axios.get('/api/astronomic_objects/solarsistem?object=' + a.name).then(function (resp) {
+          //alert(JSON.stringify(resp.data));
+          app.Ar = resp.data["ar"];
+          app.Dec = resp.data["dec"];
+        })["catch"](function (resp) {
+          console.log(resp);
+          alert("Error shoot :" + resp);
+        });
+      }
     },
     initialize: function initialize() {
       var app = this; // app.astronomic_objects = this.$store.getters.astronomic_objects;
@@ -2434,6 +2453,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         alert("Error astronomic_objects :" + resp);
       });
       app.openChat();
+      app.getMyImages();
     },
     openChat: function openChat() {
       var app = this; // Start pusher listener
@@ -2447,6 +2467,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       channel.bind('App\\Events\\MessageSent', function (data) {
         app.state = data.message['message'];
+
+        if (app.state == "Imagen Recibida") {
+          app.imageRefresh();
+        }
       }); // End pusher listener
     },
     filter: function filter(a) {
@@ -2473,6 +2497,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         console.log(resp);
         alert("Error move :" + resp);
       });
+      this.currentRefresh();
     },
     shoot: function shoot() {
       var $command = {
@@ -2484,11 +2509,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         'user_id': 1,
         'equipment_id': 1
       };
-      alert(JSON.stringify($command));
+      this.imageUrl = '';
       axios.post('/api/command/shoot', $command).then(function (resp) {})["catch"](function (resp) {
         console.log(resp);
         alert("Error shoot :" + resp);
       });
+      this.currentRefresh();
+      this.current_shot = this.current;
+    },
+    currentRefresh: function currentRefresh() {
+      this.Ar_act = this.Ar;
+      this.Dec_act = this.Dec;
+      this.Iso_act = this.Iso;
+      this.Exp_act = this.Exp;
+      this.current = "Ar:" + this.Ar_act + ", Dec:" + this.Dec_act + ", Iso:" + this.Iso_act + ", Exp:" + this.Exp_act;
     },
     focus: function focus() {
       var $command = {
@@ -2506,7 +2540,32 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         alert("Error focus :" + resp);
       });
     },
-    saveImage: function saveImage() {}
+    saveImage: function saveImage() {},
+    imageRefresh: function imageRefresh() {
+      var app = this;
+      var $command = {
+        'user_id': 1
+      };
+      axios.get('/api/image/last', $command).then(function (resp) {
+        app.imageUrl = resp.data;
+      })["catch"](function (resp) {
+        console.log(resp);
+        alert("Error shoot :" + resp);
+      });
+      app.getMyImages();
+    },
+    getMyImages: function getMyImages() {
+      var app = this;
+      var $command = {
+        'user_id': 1
+      };
+      axios.get('/api/images', $command).then(function (resp) {
+        app.myImages = resp.data;
+      })["catch"](function (resp) {
+        console.log(resp);
+        alert("Error shoot :" + resp);
+      });
+    }
   }
 });
 
@@ -32250,8 +32309,7 @@ var render = function() {
                                     [
                                       _c("v-img", {
                                         attrs: {
-                                          src:
-                                            "https://cdn.vuetifyjs.com/images/cards/desert.jpg",
+                                          src: _vm.imageUrl,
                                           "aspect-ratio": "1"
                                         }
                                       })
@@ -32270,9 +32328,7 @@ var render = function() {
                             { attrs: { "align-center": "", row: "" } },
                             [
                               _c("v-flex", { attrs: { xs12: "" } }, [
-                                _c("p", [
-                                  _vm._v("Iso: 1200, Exp: 2min, Objeto: M87")
-                                ])
+                                _c("p", [_vm._v(_vm._s(_vm.current_shot))])
                               ])
                             ],
                             1
@@ -32581,19 +32637,12 @@ var render = function() {
                                           }
                                         },
                                         [
-                                          _c(
-                                            "v-btn",
-                                            {
-                                              attrs: {
-                                                small: "",
-                                                color: "warning"
-                                              },
-                                              on: { click: _vm.saveImage }
-                                            },
-                                            [_vm._v("Guardar Imagen")]
-                                          )
-                                        ],
-                                        1
+                                          _c("p", [
+                                            _vm._v(
+                                              "Actual: " + _vm._s(_vm.current)
+                                            )
+                                          ])
+                                        ]
                                       )
                                     ],
                                     1
@@ -32995,7 +33044,7 @@ var render = function() {
                               _c("v-data-table", {
                                 attrs: {
                                   headers: _vm.headers,
-                                  items: _vm.desserts,
+                                  items: _vm.myImages,
                                   search: _vm.search
                                 },
                                 scopedSlots: _vm._u([
@@ -33008,8 +33057,7 @@ var render = function() {
                                           [
                                             _c("v-img", {
                                               attrs: {
-                                                src:
-                                                  "https://cdn.vuetifyjs.com/images/cards/desert.jpg",
+                                                src: props.item.path,
                                                 "aspect-ratio": "1"
                                               }
                                             })
@@ -33020,7 +33068,7 @@ var render = function() {
                                         _c(
                                           "td",
                                           { staticClass: "text-xs-right" },
-                                          [_vm._v(_vm._s(props.item.calories))]
+                                          [_vm._v(_vm._s(props.item.name))]
                                         )
                                       ]
                                     }

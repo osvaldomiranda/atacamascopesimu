@@ -1,6 +1,7 @@
 <?php
 
 namespace App;
+use File;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -8,8 +9,19 @@ class Image extends Model
 {
     protected $fillable = ['path'];
 
-    public function urlPath(){
-    	return \Storage::url($this->path); 
+    public function url(){
+    	
+    	$filename = substr($this->path,7,100);
+
+	    $path = storage_path('app/public/' . $filename);
+
+	    if (!File::exists($path)) {
+	        return '';
+	    }
+
+	    $path = 'http://10.200.112.215/storage/' . $filename;
+ 
+	    return $path;  	
     }
     public function user()
 	{
