@@ -1,8 +1,8 @@
 <template>
-  <v-layout row justify-center>
+  <v-layout>
     <v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition">
       <template v-slot:activator="{ on }">
-        <v-btn color="primary" dark v-on="on">Interfaz de Control</v-btn>
+        <v-btn color="warning" dark v-on="on">Interfaz de Control</v-btn>
       </template>
       <v-card>
         <v-toolbar dark color="primary">
@@ -15,7 +15,10 @@
 
 
 		 <v-container fluid>
+
 		    <v-layout align-center row>
+		    	<v-flex xs1>
+				</v-flex>
 				<v-flex xs2>
 					<v-layout align-center row>
 						<v-flex xs12>	
@@ -37,7 +40,7 @@
 				<v-flex xs1>
 				</v-flex>
 
-				<v-flex xs8 style="overflow: auto">
+				<v-flex xs7 style="overflow: auto">
 
 					  <v-card>
 					    <v-card-title>
@@ -90,7 +93,9 @@
 					      </v-alert>
 					    </v-data-table>
 					  </v-card>	
-		      	</v-flex>
+
+				</v-flex>
+		      			
 		    </v-layout>
 		</v-container>    
 		<v-container fluid>

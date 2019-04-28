@@ -20,8 +20,8 @@ const router = new VueRouter({
             component: AppComponent,
         },
         {
-            path: '/dasboard',
-            name: 'dasboard',
+            path: '/dashboard',
+            name: 'dashboard',
             component: DashboardView,
         },
         {

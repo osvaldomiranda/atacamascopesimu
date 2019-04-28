@@ -6,16 +6,14 @@
       fixed
     >
       <v-toolbar-title style="width: 600px" class="ml-0 pl-3">
-        <!-- <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon> -->
-        <span class="hidden-md-and-down">Registro de Fuentes y Procesos</span>
+        <span class="hidden-md-and-down">AtacamaScaope</span>
            <v-spacer></v-spacer>
       </v-toolbar-title>
 
-        <!-- <p>Empresa: {{$store.getters.company.name}}</p> -->
       <v-spacer></v-spacer>
       <v-toolbar-items class="hidden-sm-and-down">
-        <v-btn :to="'/dasboard'" flat>Login</v-btn>
-        <v-btn flat>Register</v-btn>
+        <!-- <v-btn :to="'/dasboard'" flat>dashboard</v-btn> -->
+        <v-btn flat @click="logout">logout</v-btn>
       </v-toolbar-items>        
     </v-toolbar>
 
@@ -56,8 +54,20 @@
     },
     methods: {
       initialize () {
-         var app = this;
+         
+         this.$router.push('/dashboard');
+
       },
+      logout(){
+            axios.post('/logout')
+            .then(function (resp) {
+                document.location.href = "/";
+            })
+            .catch(function (resp) {
+                console.log(resp);
+                alert("Error focus :" + resp);
+            });
+      }
     }
   }
 </script>

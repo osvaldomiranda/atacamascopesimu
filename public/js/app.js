@@ -1797,8 +1797,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1822,7 +1820,15 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     initialize: function initialize() {
-      var app = this;
+      this.$router.push('/dashboard');
+    },
+    logout: function logout() {
+      axios.post('/logout').then(function (resp) {
+        document.location.href = "/";
+      })["catch"](function (resp) {
+        console.log(resp);
+        alert("Error focus :" + resp);
+      });
     }
   }
 });
@@ -1997,6 +2003,11 @@ function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.
 
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
 
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2581,6 +2592,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 //
 //
 //
@@ -2594,9 +2606,320 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+  computed: Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['astronomc_objects']),
   data: function data() {
-    return {};
+    return {
+      search: '',
+      points: 500,
+      current_user: '',
+      rowsPerPageItems: [3, 5, 10, 20],
+      pagination: {
+        rowsPerPage: 3
+      },
+      headers: [{
+        text: 'Equipo',
+        value: 'equipment_image'
+      }, {
+        text: 'Nombre',
+        value: 'equipment_name'
+      }, {
+        text: 'Fecha',
+        value: 'reservation_date'
+      }, {
+        text: 'Hora',
+        value: 'reservation_hour'
+      }, {
+        text: 'Tiempo Reservado',
+        value: 'reservation_time'
+      }, {
+        text: '',
+        value: ''
+      }],
+      myImages: [],
+      mySessionsHeaders: [{
+        text: 'Foto',
+        value: 'img'
+      }, {
+        text: 'Fecha',
+        value: 'session_date'
+      }, {
+        text: 'Hora',
+        value: 'session_hour'
+      }, {
+        text: 'cantidad de fotos',
+        value: 'img_count'
+      }, {
+        text: 'Equipo',
+        value: 'equipment_name'
+      }],
+      reservations: [{
+        equipment_image: '',
+        equipment_name: 'Equipo Principal',
+        reservation_date: '01/05/2019',
+        reservation_hour: '22:00',
+        reservation_time: '2 Hours'
+      }],
+      sessions: [{
+        img: '',
+        session_date: '26/04/2019',
+        session_hour: '22:00',
+        img_count: 10,
+        equipment_name: 'Equipo Principal'
+      }]
+    };
+  },
+  created: function created() {
+    this.initialize();
+  },
+  methods: {
+    showAlert: function showAlert(a) {
+      //  if (event.target.classList.contains('btn__content')) return;
+      var app = this;
+      this.Ar = a.coord_ar;
+      this.Dec = a.coord_dec;
+      this.object = a.name;
+    },
+    initialize: function initialize() {
+      var app = this; // app.astronomic_objects = this.$store.getters.astronomic_objects;
+    },
+    openChat: function openChat() {
+      var app = this; // Start pusher listener
+
+      Pusher.logToConsole = true;
+      var pusher = new Pusher('e6e9d9fd854d385c5f5b', {
+        cluster: 'us2',
+        forceTLS: true
+      });
+      var channel = pusher.subscribe('newMessage-' + 1 + '-' + 2); // newMessage-[chatting-with-who]-[my-id]
+
+      channel.bind('App\\Events\\MessageSent', function (data) {
+        app.state = data.message['message'];
+
+        if (app.state == "Imagen Recibida") {
+          app.imageRefresh();
+        }
+      }); // End pusher listener
+    },
+    filter: function filter(a) {
+      if (a == "Todos") {
+        this.FilteredObjects = this.astronomic_objects;
+      } else {
+        this.FilteredObjects = this.astronomic_objects.filter(function (it) {
+          return it.catalog == a;
+        });
+      }
+    },
+    filterConstellation: function filterConstellation(a) {
+      if (a == "Todos") {
+        this.FilteredObjects = this.astronomic_objects;
+      } else {
+        this.FilteredObjects = this.astronomic_objects.filter(function (it) {
+          return it.constellation == a;
+        });
+      }
+    },
+    move: function move() {
+      var $command = {
+        'command': 'MONTURA',
+        'type': 'mount',
+        'status': 'PENDIENTE',
+        'ar': this.Ar,
+        'dec': this.Dec,
+        'user_id': 1,
+        'equipment_id': 1
+      };
+      alert(JSON.stringify($command));
+      axios.post('/api/command/move', $command).then(function (resp) {})["catch"](function (resp) {
+        console.log(resp);
+        alert("Error move :" + resp);
+      });
+      this.currentRefresh();
+    },
+    shoot: function shoot() {
+      var $command = {
+        'command': 'CAMARA',
+        'type': 'shoot',
+        'status': 'PENDIENTE',
+        'exptime': this.Exp,
+        'iso': this.Iso,
+        'ar': this.Ar_act,
+        'dec': this.Dec_act,
+        'user_id': 1,
+        'equipment_id': 1
+      };
+      this.imageUrl = '';
+      axios.post('/api/command/shoot', $command).then(function (resp) {})["catch"](function (resp) {
+        console.log(resp);
+        alert("Error shoot :" + resp);
+      });
+      this.currentRefresh();
+      this.current_shot = this.current;
+    },
+    currentRefresh: function currentRefresh() {
+      this.Ar_act = this.Ar;
+      this.Dec_act = this.Dec;
+      this.Iso_act = this.Iso;
+      this.Exp_act = this.Exp;
+      this.current = "Ar:" + this.Ar_act + ", Dec:" + this.Dec_act + ", Iso:" + this.Iso_act + ", Exp:" + this.Exp_act;
+    },
+    focus: function focus() {
+      var $command = {
+        'command': 'ENFOCADOR',
+        'type': 'focuser',
+        'status': 'PENDIENTE',
+        'ar': this.Ar,
+        'dec': this.Dec,
+        'user_id': 1,
+        'equipment_id': 1
+      };
+      alert(JSON.stringify($command));
+      axios.post('/api/command/focus', $command).then(function (resp) {})["catch"](function (resp) {
+        console.log(resp);
+        alert("Error focus :" + resp);
+      });
+    },
+    saveImage: function saveImage() {},
+    imageRefresh: function imageRefresh() {
+      var app = this;
+      var $command = {
+        'user_id': 1
+      };
+      axios.get('/api/image/last', $command).then(function (resp) {
+        app.imageUrl = resp.data;
+      })["catch"](function (resp) {
+        console.log(resp);
+        alert("Error shoot :" + resp);
+      });
+      app.getMyImages();
+    },
+    getMyImages: function getMyImages() {
+      var app = this;
+      var $command = {
+        'user_id': 1
+      };
+      axios.get('/api/images', $command).then(function (resp) {
+        app.myImages = resp.data;
+      })["catch"](function (resp) {
+        console.log(resp);
+        alert("Error shoot :" + resp);
+      });
+    }
   }
 });
 
@@ -31754,7 +32077,7 @@ var render = function() {
             { staticClass: "ml-0 pl-3", staticStyle: { width: "600px" } },
             [
               _c("span", { staticClass: "hidden-md-and-down" }, [
-                _vm._v("Registro de Fuentes y Procesos")
+                _vm._v("AtacamaScaope")
               ]),
               _vm._v(" "),
               _c("v-spacer")
@@ -31768,11 +32091,9 @@ var render = function() {
             "v-toolbar-items",
             { staticClass: "hidden-sm-and-down" },
             [
-              _c("v-btn", { attrs: { to: "/dasboard", flat: "" } }, [
-                _vm._v("Login")
-              ]),
-              _vm._v(" "),
-              _c("v-btn", { attrs: { flat: "" } }, [_vm._v("Register")])
+              _c("v-btn", { attrs: { flat: "" }, on: { click: _vm.logout } }, [
+                _vm._v("logout")
+              ])
             ],
             1
           )
@@ -32013,7 +32334,6 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "v-layout",
-    { attrs: { row: "", "justify-center": "" } },
     [
       _c(
         "v-dialog",
@@ -32031,7 +32351,7 @@ var render = function() {
                 return [
                   _c(
                     "v-btn",
-                    _vm._g({ attrs: { color: "primary", dark: "" } }, on),
+                    _vm._g({ attrs: { color: "warning", dark: "" } }, on),
                     [_vm._v("Interfaz de Control")]
                   )
                 ]
@@ -32084,6 +32404,8 @@ var render = function() {
                     "v-layout",
                     { attrs: { "align-center": "", row: "" } },
                     [
+                      _c("v-flex", { attrs: { xs1: "" } }),
+                      _vm._v(" "),
                       _c(
                         "v-flex",
                         { attrs: { xs2: "" } },
@@ -32135,7 +32457,7 @@ var render = function() {
                         "v-flex",
                         {
                           staticStyle: { overflow: "auto" },
-                          attrs: { xs8: "" }
+                          attrs: { xs7: "" }
                         },
                         [
                           _c(
@@ -33029,17 +33351,413 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "v-layout",
+    { attrs: { row: "", "justify-center": "" } },
     [
       _c(
         "v-flex",
-        { attrs: { xs12: "", sm6: "", "offset-sm3": "" } },
+        { attrs: { xs12: "" } },
         [
           _c(
             "v-card",
             [
-              _c("p", [_vm._v("Dasboard")]),
+              _c(
+                "v-container",
+                { attrs: { fluid: "" } },
+                [
+                  _c(
+                    "v-layout",
+                    { attrs: { "align-center": "", row: "" } },
+                    [
+                      _c(
+                        "v-flex",
+                        { attrs: { xs12: "" } },
+                        [
+                          _c(
+                            "v-container",
+                            { attrs: { fluid: "" } },
+                            [
+                              _c(
+                                "v-layout",
+                                [
+                                  _c(
+                                    "v-flex",
+                                    {
+                                      attrs: {
+                                        xs4: "",
+                                        "align-end": "",
+                                        flexbox: ""
+                                      }
+                                    },
+                                    [
+                                      _c("span", { staticClass: "headline" }, [
+                                        _vm._v(
+                                          " Puntos Disponibles:" +
+                                            _vm._s(_vm.points)
+                                        )
+                                      ])
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-flex",
+                                    {
+                                      attrs: {
+                                        xs8: "",
+                                        "align-end": "",
+                                        flexbox: ""
+                                      }
+                                    },
+                                    [
+                                      _c(
+                                        "div",
+                                        [
+                                          _c(
+                                            "v-btn",
+                                            { attrs: { color: "warning" } },
+                                            [_vm._v("Comprar Puntos")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "v-btn",
+                                            { attrs: { color: "warning" } },
+                                            [_vm._v("Reservar")]
+                                          )
+                                        ],
+                                        1
+                                      )
+                                    ]
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
               _vm._v(" "),
-              _c("control-component")
+              _c(
+                "v-container",
+                { attrs: { fluid: "" } },
+                [
+                  _c(
+                    "v-layout",
+                    { attrs: { "align-center": "", row: "" } },
+                    [
+                      _c("v-flex", { attrs: { xs1: "" } }),
+                      _vm._v(" "),
+                      _c(
+                        "v-flex",
+                        {
+                          staticStyle: { overflow: "auto" },
+                          attrs: { xs10: "" }
+                        },
+                        [
+                          _c(
+                            "v-card",
+                            [
+                              _c(
+                                "v-card-title",
+                                [
+                                  _c("span", { staticClass: "headline" }, [
+                                    _vm._v("Mis Reservas")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("v-spacer"),
+                                  _vm._v(" "),
+                                  _c("v-text-field", {
+                                    attrs: {
+                                      "append-icon": "search",
+                                      label: "Buscar",
+                                      "single-line": "",
+                                      "hide-details": ""
+                                    },
+                                    model: {
+                                      value: _vm.search,
+                                      callback: function($$v) {
+                                        _vm.search = $$v
+                                      },
+                                      expression: "search"
+                                    }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-data-table",
+                                {
+                                  attrs: {
+                                    headers: _vm.headers,
+                                    items: _vm.reservations,
+                                    search: _vm.search,
+                                    "rows-per-page-items": _vm.rowsPerPageItems,
+                                    pagination: _vm.pagination
+                                  },
+                                  on: {
+                                    "update:pagination": function($event) {
+                                      _vm.pagination = $event
+                                    }
+                                  },
+                                  scopedSlots: _vm._u([
+                                    {
+                                      key: "items",
+                                      fn: function(props) {
+                                        return [
+                                          _c(
+                                            "tr",
+                                            {
+                                              on: {
+                                                click: function($event) {
+                                                  return _vm.showAlert(
+                                                    props.item
+                                                  )
+                                                }
+                                              }
+                                            },
+                                            [
+                                              _c(
+                                                "td",
+                                                { staticClass: "text-xs-left" },
+                                                [
+                                                  _vm._v(
+                                                    _vm._s(
+                                                      props.item.equipment_image
+                                                    )
+                                                  )
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "td",
+                                                { staticClass: "text-xs-left" },
+                                                [
+                                                  _vm._v(
+                                                    _vm._s(
+                                                      props.item.equipment_name
+                                                    )
+                                                  )
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "td",
+                                                { staticClass: "text-xs-left" },
+                                                [
+                                                  _vm._v(
+                                                    _vm._s(
+                                                      props.item
+                                                        .reservation_date
+                                                    )
+                                                  )
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "td",
+                                                { staticClass: "text-xs-left" },
+                                                [
+                                                  _vm._v(
+                                                    _vm._s(
+                                                      props.item
+                                                        .reservation_hour
+                                                    )
+                                                  )
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "td",
+                                                { staticClass: "text-xs-left" },
+                                                [
+                                                  _vm._v(
+                                                    _vm._s(
+                                                      props.item
+                                                        .reservation_time
+                                                    )
+                                                  )
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "td",
+                                                { staticClass: "text-xs-left" },
+                                                [_c("control-component")],
+                                                1
+                                              )
+                                            ]
+                                          )
+                                        ]
+                                      }
+                                    }
+                                  ]),
+                                  model: {
+                                    value: _vm.selected,
+                                    callback: function($$v) {
+                                      _vm.selected = $$v
+                                    },
+                                    expression: "selected"
+                                  }
+                                },
+                                [
+                                  _vm._v(" "),
+                                  _c("v-alert", {
+                                    attrs: {
+                                      value: true,
+                                      color: "error",
+                                      icon: "warning"
+                                    },
+                                    scopedSlots: _vm._u([
+                                      {
+                                        key: "no-results",
+                                        fn: function() {
+                                          return [
+                                            _vm._v(
+                                              '\n                Your search for "' +
+                                                _vm._s(_vm.search) +
+                                                '" found no results.\n              '
+                                            )
+                                          ]
+                                        },
+                                        proxy: true
+                                      }
+                                    ])
+                                  })
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("v-flex", { attrs: { xs1: "" } })
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-container",
+                { attrs: { fluid: "" } },
+                [
+                  _c(
+                    "v-layout",
+                    { attrs: { "align-center": "", row: "" } },
+                    [
+                      _c(
+                        "v-flex",
+                        {
+                          staticStyle: { overflow: "auto" },
+                          attrs: { xs12: "" }
+                        },
+                        [
+                          _c(
+                            "v-card",
+                            [
+                              _c(
+                                "v-card-title",
+                                [
+                                  _c("span", { staticClass: "headline" }, [
+                                    _vm._v("Mis Sesiones")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("v-spacer")
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c("v-data-table", {
+                                attrs: {
+                                  headers: _vm.mySessionsHeaders,
+                                  items: _vm.sessions,
+                                  search: _vm.search
+                                },
+                                scopedSlots: _vm._u([
+                                  {
+                                    key: "items",
+                                    fn: function(props) {
+                                      return [
+                                        _c(
+                                          "td",
+                                          [
+                                            _c("v-img", {
+                                              attrs: {
+                                                src: props.item.img,
+                                                "aspect-ratio": "1"
+                                              }
+                                            })
+                                          ],
+                                          1
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "td",
+                                          { staticClass: "text-xs-left" },
+                                          [
+                                            _vm._v(
+                                              _vm._s(props.item.session_date)
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "td",
+                                          { staticClass: "text-xs-left" },
+                                          [
+                                            _vm._v(
+                                              _vm._s(props.item.session_hour)
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "td",
+                                          { staticClass: "text-xs-left" },
+                                          [_vm._v(_vm._s(props.item.img_count))]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "td",
+                                          { staticClass: "text-xs-left" },
+                                          [
+                                            _vm._v(
+                                              _vm._s(props.item.equipment_name)
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c("td", {
+                                          staticClass: "text-xs-left"
+                                        })
+                                      ]
+                                    }
+                                  }
+                                ])
+                              })
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
             ],
             1
           )
@@ -75189,8 +75907,8 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_2__["default"]({
     name: 'app',
     component: _components_AppComponent__WEBPACK_IMPORTED_MODULE_5__["default"]
   }, {
-    path: '/dasboard',
-    name: 'dasboard',
+    path: '/dashboard',
+    name: 'dashboard',
     component: _views_DashboardView__WEBPACK_IMPORTED_MODULE_3__["default"]
   }, {
     path: '/chat',
