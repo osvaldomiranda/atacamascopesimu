@@ -14,6 +14,8 @@ import router from './routes'
 
 import AppComponent         from './components/AppComponent'
 import ControlComponent     from './components/ControlComponent'
+import PointsComponent      from './components/PointsComponent'
+import ReservationComponent      from './components/ReservationComponent'
 
 
 Vue.use(Vuex)
@@ -50,6 +52,8 @@ Vue.use(Vuetify, {
 
 Vue.component('app', require('./views/App.vue'));
 Vue.component('control-component', ControlComponent);
+Vue.component('points-component', PointsComponent);
+Vue.component('reservation-component', ReservationComponent);
 
 //AppComponent
 

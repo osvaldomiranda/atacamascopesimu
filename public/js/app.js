@@ -2413,7 +2413,7 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
       axios.get('/api/astronomic_objects').then(function (resp) {
         app.astronomic_objects = resp.data;
-        app.filter('Todos');
+        app.filter('SolarSistem');
         app.$store.commit('changeAstronomicObjects', app.astronomic_objects);
 
         var distinctConst = _toConsumableArray(new Set(app.astronomic_objects.map(function (x) {
@@ -2427,6 +2427,759 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
       });
       app.openChat();
       app.getMyImages(); // Constellations
+    },
+    openChat: function openChat() {
+      var app = this; // Start pusher listener
+
+      Pusher.logToConsole = true;
+      var pusher = new Pusher('e6e9d9fd854d385c5f5b', {
+        cluster: 'us2',
+        forceTLS: true
+      });
+      var channel = pusher.subscribe('newMessage-' + 1 + '-' + 2); // newMessage-[chatting-with-who]-[my-id]
+
+      channel.bind('App\\Events\\MessageSent', function (data) {
+        app.state = data.message['message'];
+
+        if (app.state == "Imagen Recibida") {
+          app.imageRefresh();
+        }
+      }); // End pusher listener
+    },
+    filter: function filter(a) {
+      if (a == "Todos") {
+        this.FilteredObjects = this.astronomic_objects;
+      } else {
+        this.FilteredObjects = this.astronomic_objects.filter(function (it) {
+          return it.catalog == a;
+        });
+      }
+    },
+    filterConstellation: function filterConstellation(a) {
+      if (a == "Todos") {
+        this.FilteredObjects = this.astronomic_objects;
+      } else {
+        this.FilteredObjects = this.astronomic_objects.filter(function (it) {
+          return it.constellation == a;
+        });
+      }
+    },
+    move: function move() {
+      var $command = {
+        'command': 'MONTURA',
+        'type': 'mount',
+        'status': 'PENDIENTE',
+        'ar': this.Ar,
+        'dec': this.Dec,
+        'user_id': 1,
+        'equipment_id': 1
+      };
+      alert(JSON.stringify($command));
+      axios.post('/api/command/move', $command).then(function (resp) {})["catch"](function (resp) {
+        console.log(resp);
+        alert("Error move :" + resp);
+      });
+      this.currentRefresh();
+    },
+    shoot: function shoot() {
+      var $command = {
+        'command': 'CAMARA',
+        'type': 'shoot',
+        'status': 'PENDIENTE',
+        'exptime': this.Exp,
+        'iso': this.Iso,
+        'ar': this.Ar_act,
+        'dec': this.Dec_act,
+        'user_id': 1,
+        'equipment_id': 1
+      };
+      this.imageUrl = '';
+      axios.post('/api/command/shoot', $command).then(function (resp) {})["catch"](function (resp) {
+        console.log(resp);
+        alert("Error shoot :" + resp);
+      });
+      this.currentRefresh();
+      this.current_shot = this.current;
+    },
+    currentRefresh: function currentRefresh() {
+      this.Ar_act = this.Ar;
+      this.Dec_act = this.Dec;
+      this.Iso_act = this.Iso;
+      this.Exp_act = this.Exp;
+      this.current = "Ar:" + this.Ar_act + ", Dec:" + this.Dec_act + ", Iso:" + this.Iso_act + ", Exp:" + this.Exp_act;
+    },
+    focus: function focus() {
+      var $command = {
+        'command': 'ENFOCADOR',
+        'type': 'focuser',
+        'status': 'PENDIENTE',
+        'ar': this.Ar,
+        'dec': this.Dec,
+        'user_id': 1,
+        'equipment_id': 1
+      };
+      alert(JSON.stringify($command));
+      axios.post('/api/command/focus', $command).then(function (resp) {})["catch"](function (resp) {
+        console.log(resp);
+        alert("Error focus :" + resp);
+      });
+    },
+    saveImage: function saveImage() {},
+    imageRefresh: function imageRefresh() {
+      var app = this;
+      var $command = {
+        'user_id': 1
+      };
+      axios.get('/api/image/last', $command).then(function (resp) {
+        app.imageUrl = resp.data;
+      })["catch"](function (resp) {
+        console.log(resp);
+        alert("Error shoot :" + resp);
+      });
+      app.getMyImages();
+    },
+    getMyImages: function getMyImages() {
+      var app = this;
+      var $command = {
+        'user_id': 1
+      };
+      axios.get('/api/images', $command).then(function (resp) {
+        app.myImages = resp.data;
+      })["catch"](function (resp) {
+        console.log(resp);
+        alert("Error shoot :" + resp);
+      });
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/PointsComponent.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/PointsComponent.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  computed: Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['astronomc_objects']),
+  data: function data() {
+    return {
+      dialog: false,
+      astronomic_objects: [],
+      selected: [],
+      search: '',
+      imageUrl: '',
+      Catalog: 'Todos',
+      Catalogs: ['Todos', 'SolarSistem', 'Messier', 'NGC', 'IC'],
+      Constellation: '',
+      Constellations: [],
+      FilteredObjects: [],
+      Ar: 1.92837,
+      Dec: 1.92837,
+      Iso: '100',
+      Exp: '1',
+      Ar_act: 0,
+      Dec_act: 0,
+      Iso_act: 0,
+      Exp_act: 0,
+      current: '',
+      current_shot: '',
+      rowsPerPageItems: [3, 5, 10, 20],
+      pagination: {
+        rowsPerPage: 3
+      },
+      object: 'Seleccione Objeto',
+      state: 'En espera',
+      Paso: '100',
+      Dir: 'Adentro',
+      Pasos: ['100', '200', '400', '600', '800', '1000', '2000', '3000'],
+      Dirs: ['Adentro', 'Afuera'],
+      Isos: ['100', '200', '400', '600', '800', '1000', '2000', '3000'],
+      Exps: ['1', '2', '4', '6', '8', '1', '2', '3'],
+      headers: [{
+        text: 'Nombre',
+        value: 'name'
+      }, {
+        text: 'Catalogo',
+        value: 'catalog'
+      }, {
+        text: 'Tipo',
+        value: 'type_object'
+      }, {
+        text: 'Constelación',
+        value: 'constellation'
+      }, {
+        text: 'AR',
+        value: 'ra'
+      }, {
+        text: 'DEC',
+        value: 'dec'
+      }],
+      myImages: [],
+      myImagesHeaders: [{
+        text: 'Foto',
+        value: 'img'
+      }, {
+        text: 'Nombre',
+        value: 'name'
+      }, {
+        text: 'ISO',
+        value: 'iso'
+      }, {
+        text: 'TiempoExp',
+        value: 'exptime'
+      }, {
+        text: 'Coord AR',
+        value: 'ar'
+      }, {
+        text: 'Coord DEC',
+        value: 'dec'
+      }, {
+        text: 'Fecha',
+        value: 'created_at'
+      }]
+    };
+  },
+  created: function created() {
+    this.initialize();
+  },
+  methods: {
+    showAlert: function showAlert(a) {
+      //	if (event.target.classList.contains('btn__content')) return;
+      var app = this;
+      this.Ar = a.coord_ar;
+      this.Dec = a.coord_dec;
+      this.object = a.name;
+
+      if (a.catalog == 'SolarSistem') {
+        axios.get('/api/astronomic_objects/solarsistem?object=' + a.name).then(function (resp) {
+          //alert(JSON.stringify(resp.data));
+          app.Ar = resp.data["ar"];
+          app.Dec = resp.data["dec"];
+        })["catch"](function (resp) {
+          console.log(resp);
+          alert("Error shoot :" + resp);
+        });
+      }
+    },
+    initialize: function initialize() {
+      var app = this; // app.astronomic_objects = this.$store.getters.astronomic_objects;
+    },
+    openChat: function openChat() {
+      var app = this; // Start pusher listener
+
+      Pusher.logToConsole = true;
+      var pusher = new Pusher('e6e9d9fd854d385c5f5b', {
+        cluster: 'us2',
+        forceTLS: true
+      });
+      var channel = pusher.subscribe('newMessage-' + 1 + '-' + 2); // newMessage-[chatting-with-who]-[my-id]
+
+      channel.bind('App\\Events\\MessageSent', function (data) {
+        app.state = data.message['message'];
+
+        if (app.state == "Imagen Recibida") {
+          app.imageRefresh();
+        }
+      }); // End pusher listener
+    },
+    filter: function filter(a) {
+      if (a == "Todos") {
+        this.FilteredObjects = this.astronomic_objects;
+      } else {
+        this.FilteredObjects = this.astronomic_objects.filter(function (it) {
+          return it.catalog == a;
+        });
+      }
+    },
+    filterConstellation: function filterConstellation(a) {
+      if (a == "Todos") {
+        this.FilteredObjects = this.astronomic_objects;
+      } else {
+        this.FilteredObjects = this.astronomic_objects.filter(function (it) {
+          return it.constellation == a;
+        });
+      }
+    },
+    move: function move() {
+      var $command = {
+        'command': 'MONTURA',
+        'type': 'mount',
+        'status': 'PENDIENTE',
+        'ar': this.Ar,
+        'dec': this.Dec,
+        'user_id': 1,
+        'equipment_id': 1
+      };
+      alert(JSON.stringify($command));
+      axios.post('/api/command/move', $command).then(function (resp) {})["catch"](function (resp) {
+        console.log(resp);
+        alert("Error move :" + resp);
+      });
+      this.currentRefresh();
+    },
+    shoot: function shoot() {
+      var $command = {
+        'command': 'CAMARA',
+        'type': 'shoot',
+        'status': 'PENDIENTE',
+        'exptime': this.Exp,
+        'iso': this.Iso,
+        'ar': this.Ar_act,
+        'dec': this.Dec_act,
+        'user_id': 1,
+        'equipment_id': 1
+      };
+      this.imageUrl = '';
+      axios.post('/api/command/shoot', $command).then(function (resp) {})["catch"](function (resp) {
+        console.log(resp);
+        alert("Error shoot :" + resp);
+      });
+      this.currentRefresh();
+      this.current_shot = this.current;
+    },
+    currentRefresh: function currentRefresh() {
+      this.Ar_act = this.Ar;
+      this.Dec_act = this.Dec;
+      this.Iso_act = this.Iso;
+      this.Exp_act = this.Exp;
+      this.current = "Ar:" + this.Ar_act + ", Dec:" + this.Dec_act + ", Iso:" + this.Iso_act + ", Exp:" + this.Exp_act;
+    },
+    focus: function focus() {
+      var $command = {
+        'command': 'ENFOCADOR',
+        'type': 'focuser',
+        'status': 'PENDIENTE',
+        'ar': this.Ar,
+        'dec': this.Dec,
+        'user_id': 1,
+        'equipment_id': 1
+      };
+      alert(JSON.stringify($command));
+      axios.post('/api/command/focus', $command).then(function (resp) {})["catch"](function (resp) {
+        console.log(resp);
+        alert("Error focus :" + resp);
+      });
+    },
+    saveImage: function saveImage() {},
+    imageRefresh: function imageRefresh() {
+      var app = this;
+      var $command = {
+        'user_id': 1
+      };
+      axios.get('/api/image/last', $command).then(function (resp) {
+        app.imageUrl = resp.data;
+      })["catch"](function (resp) {
+        console.log(resp);
+        alert("Error shoot :" + resp);
+      });
+      app.getMyImages();
+    },
+    getMyImages: function getMyImages() {
+      var app = this;
+      var $command = {
+        'user_id': 1
+      };
+      axios.get('/api/images', $command).then(function (resp) {
+        app.myImages = resp.data;
+      })["catch"](function (resp) {
+        console.log(resp);
+        alert("Error shoot :" + resp);
+      });
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ReservationComponent.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ReservationComponent.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  computed: {// convert the list of events into a map of lists keyed by date
+    // eventsMap () {
+    //   const map = {}
+    //   this.events.forEach(e => (map[e.date] = map[e.date] || []).push(e))
+    //   return map
+    // }
+  },
+  data: function data() {
+    return {
+      today: '2019-01-08',
+      type: 'month',
+      start: '2019-01-01',
+      end: '2019-01-06',
+      typeOptions: [{
+        text: 'Day',
+        value: 'day'
+      }, {
+        text: '4 Day',
+        value: '4day'
+      }, {
+        text: 'Week',
+        value: 'week'
+      }, {
+        text: 'Month',
+        value: 'month'
+      }, {
+        text: 'Custom Daily',
+        value: 'custom-daily'
+      }, {
+        text: 'Custom Weekly',
+        value: 'custom-weekly'
+      }],
+      // 	events: [
+      //   {
+      //     title: 'Vacation',
+      //     details: 'Going to the beach!',
+      //     date: '2018-12-30',
+      //     open: false
+      //   },
+      //   {
+      //     title: 'Vacation',
+      //     details: 'Going to the beach!',
+      //     date: '2018-12-31',
+      //     open: false
+      //   },
+      //   {
+      //     title: 'Vacation',
+      //     details: 'Going to the beach!',
+      //     date: '2019-01-01',
+      //     open: false
+      //   },
+      //   {
+      //     title: 'Meeting',
+      //     details: 'Spending time on how we do not have enough time',
+      //     date: '2019-01-07',
+      //     open: false
+      //   },
+      //   {
+      //     title: '30th Birthday',
+      //     details: 'Celebrate responsibly',
+      //     date: '2019-01-03',
+      //     open: false
+      //   },
+      //   {
+      //     title: 'New Year',
+      //     details: 'Eat chocolate until you pass out',
+      //     date: '2019-01-01',
+      //     open: false
+      //   },
+      //   {
+      //     title: 'Conference',
+      //     details: 'Mute myself the whole time and wonder why I am on this call',
+      //     date: '2019-01-21',
+      //     open: false
+      //   },
+      //   {
+      //     title: 'Hackathon',
+      //     details: 'Code like there is no tommorrow',
+      //     date: '2019-02-01',
+      //     open: false
+      //   }
+      // ],
+      dialog: false,
+      astronomic_objects: [],
+      selected: [],
+      search: '',
+      imageUrl: '',
+      Catalog: 'Todos',
+      Catalogs: ['Todos', 'SolarSistem', 'Messier', 'NGC', 'IC'],
+      Constellation: '',
+      Constellations: [],
+      FilteredObjects: [],
+      Ar: 1.92837,
+      Dec: 1.92837,
+      Iso: '100',
+      Exp: '1',
+      Ar_act: 0,
+      Dec_act: 0,
+      Iso_act: 0,
+      Exp_act: 0,
+      current: '',
+      current_shot: '',
+      rowsPerPageItems: [3, 5, 10, 20],
+      pagination: {
+        rowsPerPage: 3
+      },
+      object: 'Seleccione Objeto',
+      state: 'En espera',
+      Paso: '100',
+      Dir: 'Adentro',
+      Pasos: ['100', '200', '400', '600', '800', '1000', '2000', '3000'],
+      Dirs: ['Adentro', 'Afuera'],
+      Isos: ['100', '200', '400', '600', '800', '1000', '2000', '3000'],
+      Exps: ['1', '2', '4', '6', '8', '1', '2', '3'],
+      headers: [{
+        text: 'Nombre',
+        value: 'name'
+      }, {
+        text: 'Catalogo',
+        value: 'catalog'
+      }, {
+        text: 'Tipo',
+        value: 'type_object'
+      }, {
+        text: 'Constelación',
+        value: 'constellation'
+      }, {
+        text: 'AR',
+        value: 'ra'
+      }, {
+        text: 'DEC',
+        value: 'dec'
+      }],
+      myImages: [],
+      myImagesHeaders: [{
+        text: 'Foto',
+        value: 'img'
+      }, {
+        text: 'Nombre',
+        value: 'name'
+      }, {
+        text: 'ISO',
+        value: 'iso'
+      }, {
+        text: 'TiempoExp',
+        value: 'exptime'
+      }, {
+        text: 'Coord AR',
+        value: 'ar'
+      }, {
+        text: 'Coord DEC',
+        value: 'dec'
+      }, {
+        text: 'Fecha',
+        value: 'created_at'
+      }]
+    };
+  },
+  created: function created() {
+    this.initialize();
+  },
+  methods: {
+    open: function open(event) {
+      alert(event.title);
+    },
+    showAlert: function showAlert(a) {
+      //	if (event.target.classList.contains('btn__content')) return;
+      var app = this;
+      this.Ar = a.coord_ar;
+      this.Dec = a.coord_dec;
+      this.object = a.name;
+
+      if (a.catalog == 'SolarSistem') {
+        axios.get('/api/astronomic_objects/solarsistem?object=' + a.name).then(function (resp) {
+          //alert(JSON.stringify(resp.data));
+          app.Ar = resp.data["ar"];
+          app.Dec = resp.data["dec"];
+        })["catch"](function (resp) {
+          console.log(resp);
+          alert("Error shoot :" + resp);
+        });
+      }
+    },
+    initialize: function initialize() {
+      var app = this; // app.astronomic_objects = this.$store.getters.astronomic_objects;
     },
     openChat: function openChat() {
       var app = this; // Start pusher listener
@@ -33290,6 +34043,613 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/PointsComponent.vue?vue&type=template&id=aa070282&":
+/*!******************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/PointsComponent.vue?vue&type=template&id=aa070282& ***!
+  \******************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "v-layout",
+    [
+      _c(
+        "v-dialog",
+        {
+          attrs: {
+            fullscreen: "",
+            "hide-overlay": "",
+            transition: "dialog-bottom-transition"
+          },
+          scopedSlots: _vm._u([
+            {
+              key: "activator",
+              fn: function(ref) {
+                var on = ref.on
+                return [
+                  _c(
+                    "v-btn",
+                    _vm._g({ attrs: { color: "warning", dark: "" } }, on),
+                    [_vm._v("Comprar Puntos")]
+                  )
+                ]
+              }
+            }
+          ]),
+          model: {
+            value: _vm.dialog,
+            callback: function($$v) {
+              _vm.dialog = $$v
+            },
+            expression: "dialog"
+          }
+        },
+        [
+          _vm._v(" "),
+          _c(
+            "v-card",
+            [
+              _c(
+                "v-toolbar",
+                { attrs: { dark: "", color: "primary" } },
+                [
+                  _c(
+                    "v-btn",
+                    {
+                      attrs: { icon: "", dark: "" },
+                      on: {
+                        click: function($event) {
+                          _vm.dialog = false
+                        }
+                      }
+                    },
+                    [_c("v-icon", [_vm._v("close")])],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c("v-toolbar-title", [_vm._v("Puntos")]),
+                  _vm._v(" "),
+                  _c("v-spacer")
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-container",
+                { attrs: { fluid: "" } },
+                [
+                  _c(
+                    "v-layout",
+                    { attrs: { "align-center": "", row: "" } },
+                    [
+                      _c(
+                        "v-flex",
+                        { attrs: { xs12: "" } },
+                        [
+                          _c(
+                            "v-card",
+                            [
+                              _c(
+                                "v-container",
+                                { attrs: { fluid: "" } },
+                                [
+                                  _c(
+                                    "v-layout",
+                                    [
+                                      _c(
+                                        "v-flex",
+                                        {
+                                          attrs: {
+                                            xs4: "",
+                                            "align-end": "",
+                                            flexbox: ""
+                                          }
+                                        },
+                                        [
+                                          _c(
+                                            "span",
+                                            { staticClass: "headline" },
+                                            [
+                                              _vm._v(
+                                                " Objeto:" + _vm._s(_vm.object)
+                                              )
+                                            ]
+                                          )
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-flex",
+                                        {
+                                          attrs: {
+                                            xs4: "",
+                                            "align-end": "",
+                                            flexbox: ""
+                                          }
+                                        },
+                                        [
+                                          _c(
+                                            "span",
+                                            { staticClass: "headline" },
+                                            [
+                                              _vm._v(
+                                                " Estado:" + _vm._s(_vm.state)
+                                              )
+                                            ]
+                                          )
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-flex",
+                                        {
+                                          attrs: {
+                                            xs4: "",
+                                            "align-end": "",
+                                            flexbox: ""
+                                          }
+                                        },
+                                        [
+                                          _c("p", [
+                                            _vm._v(
+                                              "Actual: " + _vm._s(_vm.current)
+                                            )
+                                          ])
+                                        ]
+                                      )
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-container",
+                { attrs: { fluid: "" } },
+                [
+                  _c(
+                    "v-layout",
+                    { attrs: { "align-center": "", row: "" } },
+                    [
+                      _c("v-flex", { attrs: { xs1: "" } }),
+                      _vm._v(" "),
+                      _c(
+                        "v-flex",
+                        {
+                          staticStyle: { overflow: "auto" },
+                          attrs: { xs7: "" }
+                        },
+                        [
+                          _c(
+                            "v-card",
+                            [
+                              _c(
+                                "v-card-title",
+                                [
+                                  _c("v-text-field", {
+                                    attrs: {
+                                      "append-icon": "search",
+                                      label: "Buscar",
+                                      "single-line": "",
+                                      "hide-details": ""
+                                    },
+                                    model: {
+                                      value: _vm.search,
+                                      callback: function($$v) {
+                                        _vm.search = $$v
+                                      },
+                                      expression: "search"
+                                    }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-data-table",
+                                {
+                                  attrs: {
+                                    headers: _vm.headers,
+                                    items: _vm.FilteredObjects,
+                                    search: _vm.search,
+                                    "rows-per-page-items": _vm.rowsPerPageItems,
+                                    pagination: _vm.pagination
+                                  },
+                                  on: {
+                                    "update:pagination": function($event) {
+                                      _vm.pagination = $event
+                                    }
+                                  },
+                                  scopedSlots: _vm._u([
+                                    {
+                                      key: "items",
+                                      fn: function(props) {
+                                        return [
+                                          _c(
+                                            "tr",
+                                            {
+                                              on: {
+                                                click: function($event) {
+                                                  return _vm.showAlert(
+                                                    props.item
+                                                  )
+                                                }
+                                              }
+                                            },
+                                            [
+                                              _c(
+                                                "td",
+                                                {
+                                                  staticClass: "text-xs-right"
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    _vm._s(props.item.name)
+                                                  )
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "td",
+                                                {
+                                                  staticClass: "text-xs-right"
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    _vm._s(props.item.catalog)
+                                                  )
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "td",
+                                                {
+                                                  staticClass: "text-xs-right"
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    _vm._s(
+                                                      props.item.type_object
+                                                    )
+                                                  )
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "td",
+                                                {
+                                                  staticClass: "text-xs-right"
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    _vm._s(
+                                                      props.item.constellation
+                                                    )
+                                                  )
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "td",
+                                                {
+                                                  staticClass: "text-xs-right"
+                                                },
+                                                [_vm._v(_vm._s(props.item.ra))]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "td",
+                                                {
+                                                  staticClass: "text-xs-right"
+                                                },
+                                                [_vm._v(_vm._s(props.item.dec))]
+                                              )
+                                            ]
+                                          )
+                                        ]
+                                      }
+                                    }
+                                  ]),
+                                  model: {
+                                    value: _vm.selected,
+                                    callback: function($$v) {
+                                      _vm.selected = $$v
+                                    },
+                                    expression: "selected"
+                                  }
+                                },
+                                [
+                                  _vm._v(" "),
+                                  _c("v-alert", {
+                                    attrs: {
+                                      value: true,
+                                      color: "error",
+                                      icon: "warning"
+                                    },
+                                    scopedSlots: _vm._u([
+                                      {
+                                        key: "no-results",
+                                        fn: function() {
+                                          return [
+                                            _vm._v(
+                                              '\n\t\t\t\t\t        Your search for "' +
+                                                _vm._s(_vm.search) +
+                                                '" found no results.\n\t\t\t\t\t      '
+                                            )
+                                          ]
+                                        },
+                                        proxy: true
+                                      }
+                                    ])
+                                  })
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ReservationComponent.vue?vue&type=template&id=75cc3efc&":
+/*!***********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ReservationComponent.vue?vue&type=template&id=75cc3efc& ***!
+  \***********************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "v-layout",
+    [
+      _c(
+        "v-dialog",
+        {
+          attrs: {
+            fullscreen: "",
+            "hide-overlay": "",
+            transition: "dialog-bottom-transition"
+          },
+          scopedSlots: _vm._u([
+            {
+              key: "activator",
+              fn: function(ref) {
+                var on = ref.on
+                return [
+                  _c(
+                    "v-btn",
+                    _vm._g({ attrs: { color: "warning", dark: "" } }, on),
+                    [_vm._v("Reservar")]
+                  )
+                ]
+              }
+            }
+          ]),
+          model: {
+            value: _vm.dialog,
+            callback: function($$v) {
+              _vm.dialog = $$v
+            },
+            expression: "dialog"
+          }
+        },
+        [
+          _vm._v(" "),
+          _c(
+            "v-card",
+            [
+              _c(
+                "v-toolbar",
+                { attrs: { dark: "", color: "primary" } },
+                [
+                  _c(
+                    "v-btn",
+                    {
+                      attrs: { icon: "", dark: "" },
+                      on: {
+                        click: function($event) {
+                          _vm.dialog = false
+                        }
+                      }
+                    },
+                    [_c("v-icon", [_vm._v("close")])],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c("v-toolbar-title", [_vm._v("Reservas")]),
+                  _vm._v(" "),
+                  _c("v-spacer")
+                ],
+                1
+              ),
+              _vm._v(" "),
+              [
+                _c(
+                  "v-layout",
+                  { attrs: { wrap: "" } },
+                  [
+                    _c(
+                      "v-flex",
+                      {
+                        staticClass: "text-sm-left text-xs-center",
+                        attrs: { sm4: "", xs12: "" }
+                      },
+                      [
+                        _c(
+                          "v-btn",
+                          {
+                            on: {
+                              click: function($event) {
+                                return _vm.$refs.calendar.prev()
+                              }
+                            }
+                          },
+                          [
+                            _c("v-icon", { attrs: { dark: "", left: "" } }, [
+                              _vm._v(
+                                "\n          keyboard_arrow_left\n        "
+                              )
+                            ]),
+                            _vm._v("\n        Prev\n      ")
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "v-flex",
+                      {
+                        staticClass: "text-xs-center",
+                        attrs: { sm4: "", xs12: "" }
+                      },
+                      [
+                        _c("v-select", {
+                          attrs: { items: _vm.typeOptions, label: "Type" },
+                          model: {
+                            value: _vm.type,
+                            callback: function($$v) {
+                              _vm.type = $$v
+                            },
+                            expression: "type"
+                          }
+                        })
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "v-flex",
+                      {
+                        staticClass: "text-sm-right text-xs-center",
+                        attrs: { sm4: "", xs12: "" }
+                      },
+                      [
+                        _c(
+                          "v-btn",
+                          {
+                            on: {
+                              click: function($event) {
+                                return _vm.$refs.calendar.next()
+                              }
+                            }
+                          },
+                          [
+                            _vm._v("\n        Next\n        "),
+                            _c("v-icon", { attrs: { right: "", dark: "" } }, [
+                              _vm._v(
+                                "\n          keyboard_arrow_right\n        "
+                              )
+                            ])
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "v-flex",
+                      { staticClass: "mb-3", attrs: { xs12: "" } },
+                      [
+                        _c(
+                          "v-sheet",
+                          { attrs: { height: "500" } },
+                          [
+                            _c("v-calendar", {
+                              ref: "calendar",
+                              attrs: {
+                                type: _vm.type,
+                                end: _vm.end,
+                                color: "primary"
+                              },
+                              model: {
+                                value: _vm.start,
+                                callback: function($$v) {
+                                  _vm.start = $$v
+                                },
+                                expression: "start"
+                              }
+                            })
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                )
+              ]
+            ],
+            2
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/App.vue?vue&type=template&id=91ac6b5c&":
 /*!*************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/App.vue?vue&type=template&id=91ac6b5c& ***!
@@ -33411,17 +34771,9 @@ var render = function() {
                                       _c(
                                         "div",
                                         [
-                                          _c(
-                                            "v-btn",
-                                            { attrs: { color: "warning" } },
-                                            [_vm._v("Comprar Puntos")]
-                                          ),
+                                          _c("points-component"),
                                           _vm._v(" "),
-                                          _c(
-                                            "v-btn",
-                                            { attrs: { color: "warning" } },
-                                            [_vm._v("Reservar")]
-                                          )
+                                          _c("reservation-component")
                                         ],
                                         1
                                       )
@@ -75611,11 +76963,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _routes__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./routes */ "./resources/js/routes.js");
 /* harmony import */ var _components_AppComponent__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/AppComponent */ "./resources/js/components/AppComponent.vue");
 /* harmony import */ var _components_ControlComponent__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/ControlComponent */ "./resources/js/components/ControlComponent.vue");
+/* harmony import */ var _components_PointsComponent__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/PointsComponent */ "./resources/js/components/PointsComponent.vue");
+/* harmony import */ var _components_ReservationComponent__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/ReservationComponent */ "./resources/js/components/ReservationComponent.vue");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
+
+
 
 
 
@@ -75649,7 +77005,9 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuetify__WEBPACK_IMPORTED_MODULE_
   }
 });
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('app', __webpack_require__(/*! ./views/App.vue */ "./resources/js/views/App.vue"));
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('control-component', _components_ControlComponent__WEBPACK_IMPORTED_MODULE_7__["default"]); //AppComponent
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('control-component', _components_ControlComponent__WEBPACK_IMPORTED_MODULE_7__["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('points-component', _components_PointsComponent__WEBPACK_IMPORTED_MODULE_8__["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('reservation-component', _components_ReservationComponent__WEBPACK_IMPORTED_MODULE_9__["default"]); //AppComponent
 
 var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   el: '#App',
@@ -75872,6 +77230,144 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ControlComponent_vue_vue_type_template_id_4d31128b___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ControlComponent_vue_vue_type_template_id_4d31128b___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/PointsComponent.vue":
+/*!*****************************************************!*\
+  !*** ./resources/js/components/PointsComponent.vue ***!
+  \*****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _PointsComponent_vue_vue_type_template_id_aa070282___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PointsComponent.vue?vue&type=template&id=aa070282& */ "./resources/js/components/PointsComponent.vue?vue&type=template&id=aa070282&");
+/* harmony import */ var _PointsComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PointsComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/PointsComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _PointsComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _PointsComponent_vue_vue_type_template_id_aa070282___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _PointsComponent_vue_vue_type_template_id_aa070282___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/PointsComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/PointsComponent.vue?vue&type=script&lang=js&":
+/*!******************************************************************************!*\
+  !*** ./resources/js/components/PointsComponent.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PointsComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./PointsComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/PointsComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PointsComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/PointsComponent.vue?vue&type=template&id=aa070282&":
+/*!************************************************************************************!*\
+  !*** ./resources/js/components/PointsComponent.vue?vue&type=template&id=aa070282& ***!
+  \************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PointsComponent_vue_vue_type_template_id_aa070282___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./PointsComponent.vue?vue&type=template&id=aa070282& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/PointsComponent.vue?vue&type=template&id=aa070282&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PointsComponent_vue_vue_type_template_id_aa070282___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PointsComponent_vue_vue_type_template_id_aa070282___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/ReservationComponent.vue":
+/*!**********************************************************!*\
+  !*** ./resources/js/components/ReservationComponent.vue ***!
+  \**********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ReservationComponent_vue_vue_type_template_id_75cc3efc___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ReservationComponent.vue?vue&type=template&id=75cc3efc& */ "./resources/js/components/ReservationComponent.vue?vue&type=template&id=75cc3efc&");
+/* harmony import */ var _ReservationComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ReservationComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/ReservationComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _ReservationComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ReservationComponent_vue_vue_type_template_id_75cc3efc___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ReservationComponent_vue_vue_type_template_id_75cc3efc___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/ReservationComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/ReservationComponent.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************!*\
+  !*** ./resources/js/components/ReservationComponent.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ReservationComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./ReservationComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ReservationComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ReservationComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/ReservationComponent.vue?vue&type=template&id=75cc3efc&":
+/*!*****************************************************************************************!*\
+  !*** ./resources/js/components/ReservationComponent.vue?vue&type=template&id=75cc3efc& ***!
+  \*****************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ReservationComponent_vue_vue_type_template_id_75cc3efc___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./ReservationComponent.vue?vue&type=template&id=75cc3efc& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ReservationComponent.vue?vue&type=template&id=75cc3efc&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ReservationComponent_vue_vue_type_template_id_75cc3efc___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ReservationComponent_vue_vue_type_template_id_75cc3efc___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

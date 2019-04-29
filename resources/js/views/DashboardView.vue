@@ -14,8 +14,8 @@
                         </v-flex>
                         <v-flex xs8 align-end flexbox>
                             <div>
-                                <v-btn color="warning">Comprar Puntos</v-btn>
-                                <v-btn color="warning">Reservar</v-btn>
+                                <points-component></points-component>
+                                <reservation-component></reservation-component>
                                 
                             </div>
                         </v-flex>

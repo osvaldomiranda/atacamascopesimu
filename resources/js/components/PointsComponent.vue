@@ -2,40 +2,42 @@
   <v-layout>
     <v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition">
       <template v-slot:activator="{ on }">
-        <v-btn color="warning" dark v-on="on">Interfaz de Control</v-btn>
+        <v-btn color="warning" dark v-on="on">Comprar Puntos</v-btn>
       </template>
       <v-card>
         <v-toolbar dark color="primary">
           <v-btn icon dark @click="dialog = false">
             <v-icon>close</v-icon>
           </v-btn>
-          <v-toolbar-title>Interfaz de Control</v-toolbar-title>
+          <v-toolbar-title>Puntos</v-toolbar-title>
           <v-spacer></v-spacer>
         </v-toolbar>
 
+		<v-container fluid>
+		    <v-layout align-center row>
+				<v-flex xs12>
+					<v-card>
+						<v-container  fluid>
+				            <v-layout >
+				              	<v-flex xs4 align-end flexbox>
+				                	<span class="headline"> Objeto:{{ object }}</span>
+				              	</v-flex>
+				              	<v-flex xs4 align-end flexbox>
+				                	<span class="headline"> Estado:{{ state }}</span>
+				              	</v-flex>
+				              	<v-flex xs4 align-end flexbox>
+				              		<p>Actual: {{current}}</p>
+				          		</v-flex>
+				            </v-layout>
+				        </v-container>
+				    </v-card>
+				</v-flex>
+			</v-layout>
+		</v-container>	
 
 		 <v-container fluid>
 
 		    <v-layout align-center row>
-		    	<v-flex xs1>
-				</v-flex>
-				<v-flex xs2>
-					<v-layout align-center row>
-						<v-flex xs12>	
-					    	<v-card>
-					      		<v-img
-					      	  		v-bind:src="imageUrl"
-					      	  		aspect-ratio="1"
-					      		></v-img>
-					    	</v-card> 
-					    </v-flex>
-					</v-layout>   
-					<v-layout align-center row>
-						<v-flex xs12>
-							<p>{{current_shot}}</p> 	
-						</v-flex>
-					</v-layout>	
-		      	</v-flex>
 
 				<v-flex xs1>
 				</v-flex>
@@ -44,24 +46,6 @@
 
 					  <v-card>
 					    <v-card-title>
-					        <v-select
-							    v-model="Catalog"
-							    :items="Catalogs"
-							    @input= "filter"
-							    label="Catalogo"
-							    single-line
-						        hide-details
-							    ></v-select>
-					        <v-spacer></v-spacer>
-						    <v-select
-							    v-model="Constellation"
-							    :items="Constellations"
-							    label="Constelación"
-							    @input= "filterConstellation"
-							    single-line
-						        hide-details
-							    ></v-select>
-							<v-spacer></v-spacer>    	
 						      <v-text-field
 						        v-model="search"
 						        append-icon="search"
@@ -98,199 +82,7 @@
 		      			
 		    </v-layout>
 		</v-container>    
-		<v-container fluid>
-		    <v-layout align-center row>
-				<v-flex xs12>
-					<v-card>
-						<v-container  fluid>
-				            <v-layout >
-				              	<v-flex xs4 align-end flexbox>
-				                	<span class="headline"> Objeto:{{ object }}</span>
-				              	</v-flex>
-				              	<v-flex xs4 align-end flexbox>
-				                	<span class="headline"> Estado:{{ state }}</span>
-				              	</v-flex>
-				              	<v-flex xs4 align-end flexbox>
-				              		<p>Actual: {{current}}</p>
-				          		</v-flex>
-				            </v-layout>
-				        </v-container>
-				    </v-card>
-				</v-flex>
-			</v-layout>
-		</v-container>		        
-
-		<v-container fluid>
-		    <v-layout align-center row>
-				<v-flex xs4>
-					<v-card>
-						<v-container fill-height fluid>
-				            <v-layout fill-height>
-				              <v-flex xs12 align-end flexbox>
-				                <span class="headline">Montura</span>
-				              </v-flex>
-				            </v-layout>
-				        </v-container>
-						<v-layout align-center row>
-							<v-flex align-center xs1>
-							</v-flex>	
-							<v-flex align-center xs4>
-								<v-text-field
-								    v-model="Ar"
-								        label="Asención Recta"
-								    ></v-text-field>
-		          			</v-flex>
-							<v-flex align-center xs1>
-							</v-flex>
-							<v-flex align-center xs4>
-								<v-text-field
-								    v-model="Dec"
-								        label="Declinación"
-								    ></v-text-field>
-		          			</v-flex>
-							<v-flex align-center xs1>
-							</v-flex>		          			
-		          		</v-layout>	
-
-		          		<v-btn color="warning" @click="move()">Mover</v-btn>
-
- 
-			    	</v-card> 
-				</v-flex>
-				<v-flex xs4>
-					<v-card>
-						<v-container fill-height fluid>
-				            <v-layout fill-height>
-				              <v-flex xs12 align-end flexbox>
-				                <span class="headline">Camara</span>
-				              </v-flex>
-				            </v-layout>
-				        </v-container>
-
-						<v-layout align-center row>
-							<v-flex align-center xs1>
-							</v-flex>	
-							<v-flex align-center xs4>
-							
-							    <v-select
-							      v-model="Iso"
-							      :items="Isos"
-							      :rules="[v => !!v || 'Obligatorio']"
-							      label="Sencibilidad"
-							      required
-							    ></v-select>
-
-		          			</v-flex>
-							<v-flex align-center xs1>
-							</v-flex>	
-
-							<v-flex align-center xs4>
-
-
-							    <v-select
-							      v-model="Exp"
-							      :items="Exps"
-							      :rules="[v => !!v || 'Obligatorio']"
-							      label="Tiempo Exposición"
-							      required
-							    ></v-select>
-
-
-		          			</v-flex>
-							<v-flex align-center xs1>
-							</v-flex>	
-		          		</v-layout>	
-		          		<v-btn color="warning" @click="shoot()">Disparar</v-btn>
-			    	</v-card> 
-				</v-flex>
-
-				<v-flex xs4>
-					<v-card>
-						<v-container fill-height fluid>
-				            <v-layout fill-height>
-				              <v-flex xs12 align-end flexbox>
-				                <span class="headline">Enfocador</span>
-				              </v-flex>
-				            </v-layout>
-				        </v-container>
-
-						<v-layout align-center row>
-							<v-flex align-center xs1>
-							</v-flex>	
-							<v-flex align-center xs4>
-							
-							    <v-select
-							      v-model="Paso"
-							      :items="Pasos"
-							      :rules="[v => !!v || 'Obligatorio']"
-							      label="Pasos"
-							      required
-							    ></v-select>
-
-		          			</v-flex>
-							<v-flex align-center xs1>
-							</v-flex>	
-
-							<v-flex align-center xs4>
-
-
-							    <v-select
-							      v-model="Dir"
-							      :items="Dirs"
-							      :rules="[v => !!v || 'Obligatorio']"
-							      label="Dirección"
-							      required
-							    ></v-select>
-
-
-		          			</v-flex>
-							<v-flex align-center xs1>
-							</v-flex>	
-		          		</v-layout>	
-		          		<v-btn color="warning" @click="focus">Enfocar</v-btn>
-			    	</v-card> 
-				</v-flex>
-
-			</v-layout>
-		</v-container>	
-
-
-
-		 <v-container fluid>
-		    <v-layout align-center row>
-				<v-flex xs12 style="overflow: auto">
-
-					  <v-card>
-					    <v-card-title>
-					      <span class="headline">Mis fotos</span>
-					      <v-spacer></v-spacer>
-					    </v-card-title>
-					    <v-data-table
-					      :headers="myImagesHeaders"
-					      :items="myImages"
-					      :search="search"
-					    >
-					      <template v-slot:items="props">
-					        <td>
-					        	<v-img
-			      	  				v-bind:src="props.item.path"
-			      	  				aspect-ratio="1"
-			      				></v-img>
-					        </td>
-
-					        <td class="text-xs-right">{{ props.item.name }}</td>
-					        <td class="text-xs-right">{{ props.item.iso }}</td>
-					        <td class="text-xs-right">{{ props.item.exptime }}</td>
-					        <td class="text-xs-right">{{ props.item.ar }}</td>
-					        <td class="text-xs-right">{{ props.item.dec }}</td>
-					        <td class="text-xs-right">{{ props.item.created_at }}</td>
-					      </template>
-					    </v-data-table>
-					  </v-card>	
-		      	</v-flex>
-
-		    </v-layout>
-		</v-container>
+	        
 
 
       </v-card>
@@ -423,25 +215,6 @@
       	initialize () {
          	var app = this;
          	// app.astronomic_objects = this.$store.getters.astronomic_objects;
-
-          axios.get('/api/astronomic_objects')
-            .then(function (resp) {
-              	app.astronomic_objects = resp.data;
-              	app.filter('SolarSistem');
-              	app.$store.commit('changeAstronomicObjects', app.astronomic_objects);
-            	const distinctConst=[...new Set(app.astronomic_objects.map(x => x.constellation))];
-            	app.Constellations = distinctConst.sort();
-
-            })
-            .catch(function (resp) {
-                console.log(resp);
-                alert("Error astronomic_objects :" + resp);
-            });
-
-            app.openChat();
-            app.getMyImages();
-
-            // Constellations
 
 
         },
@@ -579,5 +352,3 @@
     },
   }
 </script>
-
-
