@@ -2564,7 +2564,6 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 //
 //
 //
@@ -2659,84 +2658,61 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  computed: Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['astronomc_objects']),
   data: function data() {
     return {
       dialog: false,
-      astronomic_objects: [],
-      selected: [],
-      search: '',
-      imageUrl: '',
-      Catalog: 'Todos',
-      Catalogs: ['Todos', 'SolarSistem', 'Messier', 'NGC', 'IC'],
-      Constellation: '',
-      Constellations: [],
-      FilteredObjects: [],
-      Ar: 1.92837,
-      Dec: 1.92837,
-      Iso: '100',
-      Exp: '1',
-      Ar_act: 0,
-      Dec_act: 0,
-      Iso_act: 0,
-      Exp_act: 0,
-      current: '',
-      current_shot: '',
+      points: 230,
       rowsPerPageItems: [3, 5, 10, 20],
       pagination: {
         rowsPerPage: 3
       },
-      object: 'Seleccione Objeto',
-      state: 'En espera',
-      Paso: '100',
-      Dir: 'Adentro',
-      Pasos: ['100', '200', '400', '600', '800', '1000', '2000', '3000'],
-      Dirs: ['Adentro', 'Afuera'],
-      Isos: ['100', '200', '400', '600', '800', '1000', '2000', '3000'],
-      Exps: ['1', '2', '4', '6', '8', '1', '2', '3'],
+      points_items: ['100', '200', '400', '600', '800', '1000', '2000', '3000'],
       headers: [{
-        text: 'Nombre',
-        value: 'name'
-      }, {
-        text: 'Catalogo',
-        value: 'catalog'
-      }, {
-        text: 'Tipo',
-        value: 'type_object'
-      }, {
-        text: 'Constelación',
-        value: 'constellation'
-      }, {
-        text: 'AR',
-        value: 'ra'
-      }, {
-        text: 'DEC',
-        value: 'dec'
-      }],
-      myImages: [],
-      myImagesHeaders: [{
-        text: 'Foto',
-        value: 'img'
-      }, {
-        text: 'Nombre',
-        value: 'name'
-      }, {
-        text: 'ISO',
-        value: 'iso'
-      }, {
-        text: 'TiempoExp',
-        value: 'exptime'
-      }, {
-        text: 'Coord AR',
-        value: 'ar'
-      }, {
-        text: 'Coord DEC',
-        value: 'dec'
-      }, {
         text: 'Fecha',
         value: 'created_at'
+      }, {
+        text: 'Puntos Comprados',
+        value: 'points'
+      }, {
+        text: 'Nro.Transacción',
+        value: 'transaction_id'
+      }],
+      purchases: [{
+        created_at: '01/01/2019 22:12:22',
+        points: '300',
+        transaction_id: '9846165792'
+      }, {
+        created_at: '01/01/2019 22:12:22',
+        points: '300',
+        transaction_id: '9846165792'
+      }, {
+        created_at: '01/01/2019 22:12:22',
+        points: '300',
+        transaction_id: '9846165792'
       }]
     };
   },
@@ -2745,7 +2721,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     showAlert: function showAlert(a) {
-      //	if (event.target.classList.contains('btn__content')) return;
+      //  if (event.target.classList.contains('btn__content')) return;
       var app = this;
       this.Ar = a.coord_ar;
       this.Dec = a.coord_dec;
@@ -34143,67 +34119,96 @@ var render = function() {
                                 [
                                   _c(
                                     "v-layout",
+                                    { attrs: { row: "" } },
                                     [
-                                      _c(
-                                        "v-flex",
-                                        {
-                                          attrs: {
-                                            xs4: "",
-                                            "align-end": "",
-                                            flexbox: ""
-                                          }
-                                        },
-                                        [
-                                          _c(
-                                            "span",
-                                            { staticClass: "headline" },
-                                            [
-                                              _vm._v(
-                                                " Objeto:" + _vm._s(_vm.object)
-                                              )
-                                            ]
-                                          )
-                                        ]
-                                      ),
+                                      _c("v-flex", { attrs: { xs1: "" } }),
                                       _vm._v(" "),
-                                      _c(
-                                        "v-flex",
-                                        {
-                                          attrs: {
-                                            xs4: "",
-                                            "align-end": "",
-                                            flexbox: ""
-                                          }
-                                        },
-                                        [
-                                          _c(
-                                            "span",
-                                            { staticClass: "headline" },
-                                            [
-                                              _vm._v(
-                                                " Estado:" + _vm._s(_vm.state)
-                                              )
-                                            ]
-                                          )
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "v-flex",
-                                        {
-                                          attrs: {
-                                            xs4: "",
-                                            "align-end": "",
-                                            flexbox: ""
-                                          }
-                                        },
-                                        [
-                                          _c("p", [
+                                      _c("v-flex", { attrs: { xs4: "" } }, [
+                                        _c(
+                                          "span",
+                                          { staticClass: "headline" },
+                                          [
                                             _vm._v(
-                                              "Actual: " + _vm._s(_vm.current)
+                                              " Puntos Disponibles:" +
+                                                _vm._s(_vm.points)
                                             )
-                                          ])
+                                          ]
+                                        )
+                                      ])
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c("br"),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-layout",
+                                    { attrs: { row: "" } },
+                                    [
+                                      _c("v-flex", { attrs: { xs1: "" } }),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-flex",
+                                        {
+                                          attrs: {
+                                            xs3: "",
+                                            "align-end": "",
+                                            flexbox: ""
+                                          }
+                                        },
+                                        [
+                                          _c("v-select", {
+                                            attrs: {
+                                              items: _vm.points_items,
+                                              label: "Puntos",
+                                              outline: ""
+                                            }
+                                          })
+                                        ],
+                                        1
+                                      ),
+                                      _vm._v(" "),
+                                      _c("v-flex", { attrs: { xs1: "" } }),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-flex",
+                                        {
+                                          attrs: {
+                                            xs3: "",
+                                            "align-end": "",
+                                            flexbox: ""
+                                          }
+                                        },
+                                        [
+                                          _c(
+                                            "span",
+                                            { staticClass: "headline" },
+                                            [
+                                              _vm._v(
+                                                " US$:" + _vm._s(_vm.price)
+                                              )
+                                            ]
+                                          )
                                         ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-flex",
+                                        {
+                                          attrs: {
+                                            xs3: "",
+                                            "align-end": "",
+                                            flexbox: ""
+                                          }
+                                        },
+                                        [
+                                          _c(
+                                            "v-btn",
+                                            { attrs: { color: "success" } },
+                                            [_vm._v("Proceso de Pago")]
+                                          )
+                                        ],
+                                        1
                                       )
                                     ],
                                     1
@@ -34228,6 +34233,21 @@ var render = function() {
                 "v-container",
                 { attrs: { fluid: "" } },
                 [
+                  _c(
+                    "v-layout",
+                    { attrs: { row: "" } },
+                    [
+                      _c("v-flex", { attrs: { xs1: "" } }),
+                      _vm._v(" "),
+                      _c("v-flex", { attrs: { xs4: "" } }, [
+                        _c("span", { staticClass: "headline" }, [
+                          _vm._v(" Historial de compras")
+                        ])
+                      ])
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
                   _c(
                     "v-layout",
                     { attrs: { "align-center": "", row: "" } },
@@ -34271,7 +34291,7 @@ var render = function() {
                                 {
                                   attrs: {
                                     headers: _vm.headers,
-                                    items: _vm.FilteredObjects,
+                                    items: _vm.purchases,
                                     search: _vm.search,
                                     "rows-per-page-items": _vm.rowsPerPageItems,
                                     pagination: _vm.pagination
@@ -34305,32 +34325,8 @@ var render = function() {
                                                 },
                                                 [
                                                   _vm._v(
-                                                    _vm._s(props.item.name)
-                                                  )
-                                                ]
-                                              ),
-                                              _vm._v(" "),
-                                              _c(
-                                                "td",
-                                                {
-                                                  staticClass: "text-xs-right"
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    _vm._s(props.item.catalog)
-                                                  )
-                                                ]
-                                              ),
-                                              _vm._v(" "),
-                                              _c(
-                                                "td",
-                                                {
-                                                  staticClass: "text-xs-right"
-                                                },
-                                                [
-                                                  _vm._v(
                                                     _vm._s(
-                                                      props.item.type_object
+                                                      props.item.created_at
                                                     )
                                                   )
                                                 ]
@@ -34343,9 +34339,7 @@ var render = function() {
                                                 },
                                                 [
                                                   _vm._v(
-                                                    _vm._s(
-                                                      props.item.constellation
-                                                    )
+                                                    _vm._s(props.item.points)
                                                   )
                                                 ]
                                               ),
@@ -34355,15 +34349,13 @@ var render = function() {
                                                 {
                                                   staticClass: "text-xs-right"
                                                 },
-                                                [_vm._v(_vm._s(props.item.ra))]
-                                              ),
-                                              _vm._v(" "),
-                                              _c(
-                                                "td",
-                                                {
-                                                  staticClass: "text-xs-right"
-                                                },
-                                                [_vm._v(_vm._s(props.item.dec))]
+                                                [
+                                                  _vm._v(
+                                                    _vm._s(
+                                                      props.item.transaction_id
+                                                    )
+                                                  )
+                                                ]
                                               )
                                             ]
                                           )
@@ -34393,9 +34385,9 @@ var render = function() {
                                         fn: function() {
                                           return [
                                             _vm._v(
-                                              '\n\t\t\t\t\t        Your search for "' +
+                                              '\n                          Your search for "' +
                                                 _vm._s(_vm.search) +
-                                                '" found no results.\n\t\t\t\t\t      '
+                                                '" found no results.\n                        '
                                             )
                                           ]
                                         },
