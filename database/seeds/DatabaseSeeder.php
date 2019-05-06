@@ -12,6 +12,10 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // $this->call(UsersTableSeeder::class]);
+		App\User::truncate();	
+		App\User::create(['name'=>'sender', 'email'=>'sender@gmail.com', 'password'=>'sender1234']);
+		App\User::create(['name'=>'receiver', 'email'=>'receiver@gmail.com', 'password'=>'receiver1234']);
+
     	App\TypeObject::truncate();	
 		App\TypeObject::create(['type_name' =>'Oc', 'name' =>  'Open Cluster']);
 		App\TypeObject::create(['type_name' =>'Sp', 'name' =>  'Spiral Galaxy']);

@@ -36,3 +36,6 @@ Route::post('messages/send', 'Api\V1\MessagesController@store');
 
 Route::get('image/last', 'ImageController@last');
 Route::get('images', 'ImageController@index');
+
+Route::get('points', 'PointsController@index');
+Route::post('points/pay', 'PointsController@pay');

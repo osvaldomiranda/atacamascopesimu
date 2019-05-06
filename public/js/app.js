@@ -2473,8 +2473,8 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
         'dec': this.Dec,
         'user_id': 1,
         'equipment_id': 1
-      };
-      alert(JSON.stringify($command));
+      }; //alert(JSON.stringify($command));
+
       axios.post('/api/command/move', $command).then(function (resp) {})["catch"](function (resp) {
         console.log(resp);
         alert("Error move :" + resp);
@@ -2513,8 +2513,8 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
         'command': 'ENFOCADOR',
         'type': 'focuser',
         'status': 'PENDIENTE',
-        'ar': this.Ar,
-        'dec': this.Dec,
+        'steps': this.Paso,
+        'direction': 1,
         'user_id': 1,
         'equipment_id': 1
       };
@@ -2681,38 +2681,41 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       dialog: false,
-      points: 230,
+      current_points: 0,
+      points: 0,
+      price: 0,
       rowsPerPageItems: [3, 5, 10, 20],
       pagination: {
         rowsPerPage: 3
       },
+      purchases: [],
       points_items: ['100', '200', '400', '600', '800', '1000', '2000', '3000'],
       headers: [{
         text: 'Fecha',
         value: 'created_at'
       }, {
         text: 'Puntos Comprados',
-        value: 'points'
+        value: 'in'
+      }, {
+        text: 'Puntos usados',
+        value: 'out'
+      }, {
+        text: 'Puntos disponibles',
+        value: 'current_points'
       }, {
         text: 'Nro.Transacción',
         value: 'transaction_id'
-      }],
-      purchases: [{
-        created_at: '01/01/2019 22:12:22',
-        points: '300',
-        transaction_id: '9846165792'
       }, {
-        created_at: '01/01/2019 22:12:22',
-        points: '300',
-        transaction_id: '9846165792'
-      }, {
-        created_at: '01/01/2019 22:12:22',
-        points: '300',
-        transaction_id: '9846165792'
+        text: 'Nro.Reserva',
+        value: 'reservation_id'
       }]
     };
   },
@@ -2723,145 +2726,62 @@ __webpack_require__.r(__webpack_exports__);
     showAlert: function showAlert(a) {
       //  if (event.target.classList.contains('btn__content')) return;
       var app = this;
-      this.Ar = a.coord_ar;
-      this.Dec = a.coord_dec;
-      this.object = a.name;
-
-      if (a.catalog == 'SolarSistem') {
-        axios.get('/api/astronomic_objects/solarsistem?object=' + a.name).then(function (resp) {
-          //alert(JSON.stringify(resp.data));
-          app.Ar = resp.data["ar"];
-          app.Dec = resp.data["dec"];
-        })["catch"](function (resp) {
-          console.log(resp);
-          alert("Error shoot :" + resp);
-        });
-      }
     },
     initialize: function initialize() {
-      var app = this; // app.astronomic_objects = this.$store.getters.astronomic_objects;
-    },
-    openChat: function openChat() {
-      var app = this; // Start pusher listener
-
-      Pusher.logToConsole = true;
-      var pusher = new Pusher('e6e9d9fd854d385c5f5b', {
-        cluster: 'us2',
-        forceTLS: true
-      });
-      var channel = pusher.subscribe('newMessage-' + 1 + '-' + 2); // newMessage-[chatting-with-who]-[my-id]
-
-      channel.bind('App\\Events\\MessageSent', function (data) {
-        app.state = data.message['message'];
-
-        if (app.state == "Imagen Recibida") {
-          app.imageRefresh();
-        }
-      }); // End pusher listener
-    },
-    filter: function filter(a) {
-      if (a == "Todos") {
-        this.FilteredObjects = this.astronomic_objects;
-      } else {
-        this.FilteredObjects = this.astronomic_objects.filter(function (it) {
-          return it.catalog == a;
-        });
-      }
-    },
-    filterConstellation: function filterConstellation(a) {
-      if (a == "Todos") {
-        this.FilteredObjects = this.astronomic_objects;
-      } else {
-        this.FilteredObjects = this.astronomic_objects.filter(function (it) {
-          return it.constellation == a;
-        });
-      }
-    },
-    move: function move() {
-      var $command = {
-        'command': 'MONTURA',
-        'type': 'mount',
-        'status': 'PENDIENTE',
-        'ar': this.Ar,
-        'dec': this.Dec,
-        'user_id': 1,
-        'equipment_id': 1
-      };
-      alert(JSON.stringify($command));
-      axios.post('/api/command/move', $command).then(function (resp) {})["catch"](function (resp) {
-        console.log(resp);
-        alert("Error move :" + resp);
-      });
-      this.currentRefresh();
-    },
-    shoot: function shoot() {
-      var $command = {
-        'command': 'CAMARA',
-        'type': 'shoot',
-        'status': 'PENDIENTE',
-        'exptime': this.Exp,
-        'iso': this.Iso,
-        'ar': this.Ar_act,
-        'dec': this.Dec_act,
-        'user_id': 1,
-        'equipment_id': 1
-      };
-      this.imageUrl = '';
-      axios.post('/api/command/shoot', $command).then(function (resp) {})["catch"](function (resp) {
-        console.log(resp);
-        alert("Error shoot :" + resp);
-      });
-      this.currentRefresh();
-      this.current_shot = this.current;
-    },
-    currentRefresh: function currentRefresh() {
-      this.Ar_act = this.Ar;
-      this.Dec_act = this.Dec;
-      this.Iso_act = this.Iso;
-      this.Exp_act = this.Exp;
-      this.current = "Ar:" + this.Ar_act + ", Dec:" + this.Dec_act + ", Iso:" + this.Iso_act + ", Exp:" + this.Exp_act;
-    },
-    focus: function focus() {
-      var $command = {
-        'command': 'ENFOCADOR',
-        'type': 'focuser',
-        'status': 'PENDIENTE',
-        'ar': this.Ar,
-        'dec': this.Dec,
-        'user_id': 1,
-        'equipment_id': 1
-      };
-      alert(JSON.stringify($command));
-      axios.post('/api/command/focus', $command).then(function (resp) {})["catch"](function (resp) {
-        console.log(resp);
-        alert("Error focus :" + resp);
-      });
-    },
-    saveImage: function saveImage() {},
-    imageRefresh: function imageRefresh() {
       var app = this;
-      var $command = {
-        'user_id': 1
-      };
-      axios.get('/api/image/last', $command).then(function (resp) {
-        app.imageUrl = resp.data;
+      axios.get('/api/points').then(function (resp) {//alert(JSON.stringify(resp.data));
+        // app.purchases = resp.data;
       })["catch"](function (resp) {
         console.log(resp);
-        alert("Error shoot :" + resp);
+        alert("Error Points :" + resp);
       });
-      app.getMyImages();
     },
-    getMyImages: function getMyImages() {
+    // openChat () {
+    //     let app = this
+    //       // Start pusher listener
+    //     Pusher.logToConsole = true
+    //     var pusher = new Pusher('e6e9d9fd854d385c5f5b', {
+    //         cluster: 'us2',
+    //         forceTLS: true
+    //     })
+    //     var channel = pusher.subscribe('newMessage-' + 1 + '-' + 2) // newMessage-[chatting-with-who]-[my-id]
+    //     channel.bind('App\\Events\\MessageSent', function (data) {
+    //         app.state = data.message['message'];
+    //         if (app.state=="Imagen Recibida"){
+    //             app.imageRefresh();
+    //         }
+    //     })
+    //       // End pusher listener
+    //  },
+    pay: function pay() {
       var app = this;
-      var $command = {
-        'user_id': 1
+      var fecha = this.GetFormattedDate();
+      var pay_points = {
+        'created_at': fecha,
+        'in': this.points,
+        'out': 0,
+        'current_points': parseInt(this.current_points) + parseInt(this.points),
+        'reservation_id': '',
+        'transaction_id': '876238746'
       };
-      axios.get('/api/images', $command).then(function (resp) {
-        app.myImages = resp.data;
-      })["catch"](function (resp) {
+      this.purchases.push(pay_points);
+      this.current_points = parseInt(this.current_points) + parseInt(this.points);
+      axios.post('/api/points/addpoints', pay_points).then(function (resp) {})["catch"](function (resp) {
         console.log(resp);
-        alert("Error shoot :" + resp);
+        alert("Error AddPoints :" + resp);
       });
+    },
+    cost: function cost(a) {
+      //alert(a);
+      this.price = a;
+      this.points = a;
+    },
+    GetFormattedDate: function GetFormattedDate() {
+      var todayTime = new Date();
+      var month = todayTime.getMonth() + 1;
+      var day = todayTime.getDate();
+      var year = todayTime.getFullYear();
+      return day + "/" + month + "/" + year;
     }
   }
 });
@@ -34130,7 +34050,7 @@ var render = function() {
                                           [
                                             _vm._v(
                                               " Puntos Disponibles:" +
-                                                _vm._s(_vm.points)
+                                                _vm._s(_vm.current_points)
                                             )
                                           ]
                                         )
@@ -34162,7 +34082,8 @@ var render = function() {
                                               items: _vm.points_items,
                                               label: "Puntos",
                                               outline: ""
-                                            }
+                                            },
+                                            on: { input: _vm.cost }
                                           })
                                         ],
                                         1
@@ -34204,7 +34125,14 @@ var render = function() {
                                         [
                                           _c(
                                             "v-btn",
-                                            { attrs: { color: "success" } },
+                                            {
+                                              attrs: { color: "success" },
+                                              on: {
+                                                click: function($event) {
+                                                  return _vm.pay()
+                                                }
+                                              }
+                                            },
                                             [_vm._v("Proceso de Pago")]
                                           )
                                         ],
@@ -34337,9 +34265,27 @@ var render = function() {
                                                 {
                                                   staticClass: "text-xs-right"
                                                 },
+                                                [_vm._v(_vm._s(props.item.in))]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "td",
+                                                {
+                                                  staticClass: "text-xs-right"
+                                                },
+                                                [_vm._v(_vm._s(props.item.out))]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "td",
+                                                {
+                                                  staticClass: "text-xs-right"
+                                                },
                                                 [
                                                   _vm._v(
-                                                    _vm._s(props.item.points)
+                                                    _vm._s(
+                                                      props.item.current_points
+                                                    )
                                                   )
                                                 ]
                                               ),
@@ -34353,6 +34299,20 @@ var render = function() {
                                                   _vm._v(
                                                     _vm._s(
                                                       props.item.transaction_id
+                                                    )
+                                                  )
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "td",
+                                                {
+                                                  staticClass: "text-xs-right"
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    _vm._s(
+                                                      props.item.reservation_id
                                                     )
                                                   )
                                                 ]

@@ -21,7 +21,7 @@ class ImageController extends Controller
     		$path = $request->photo->store('public');
 
             $filename = substr($path,7,100);
-            $path = 'http://10.200.112.245/storage/' . $filename;
+            $path = 'http://18.236.139.196/storage/' . $filename;
 
     		$image = new Image;
     		$image->name = 'Hola.jpg';

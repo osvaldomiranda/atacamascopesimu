@@ -54,7 +54,6 @@
     },
     methods: {
       initialize () {
-         
          this.$router.push('/dashboard');
 
       },

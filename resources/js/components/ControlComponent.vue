@@ -493,7 +493,7 @@
         	var $command = {'command': 'MONTURA', 'type': 'mount', 'status': 'PENDIENTE',
         	                'ar': this.Ar, 'dec': this.Dec, 'user_id': 1, 'equipment_id': 1};
 
-        	alert(JSON.stringify($command));
+        	//alert(JSON.stringify($command));
         	axios.post('/api/command/move', $command)
             .then(function (resp) {
                 
@@ -532,7 +532,7 @@
         },
         focus(){
         	var $command = {'command': 'ENFOCADOR', 'type': 'focuser', 'status': 'PENDIENTE',
-        	                'ar': this.Ar, 'dec': this.Dec, 'user_id': 1, 'equipment_id': 1};
+        	                'steps': this.Paso, 'direction': 1, 'user_id': 1, 'equipment_id': 1};
 
         	alert(JSON.stringify($command));
 

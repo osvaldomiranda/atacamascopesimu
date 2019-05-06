@@ -18,11 +18,12 @@ class AstronomicObjectController extends Controller
     	$date = date("Y/m/d");
     	$time = date("H:i:s");
 
-
-
-    	$coord= exec("python planeta.py -o " . $object . " -d " . $date . "t" . $time);
+    	$coord= shell_exec("python planeta.py -o " . $object . " -d " . $date . "t" . $time);    	
     	
-    	
+        $coord = str_replace("(","",$coord);
+        $coord = str_replace(")","",$coord);
+        $coord = str_replace(",","",$coord);
+
     	$ra = preg_split("/ /",$coord)[0];
       	$dec = preg_split("/ /",$coord)[1];
 

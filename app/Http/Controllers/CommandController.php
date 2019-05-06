@@ -52,11 +52,13 @@ class CommandController extends Controller
         $command->save();
     }
     public function focus(request $request){
+
+
     	$this->validate($request, [
 	        'type' => 'required',
 	        'status' => 'required',
-	        'ar' => 'required',
-	        'dec' => 'required',
+	        'steps' => 'required',
+	        'direction' => 'required',
 	        'user_id' => 'required',
 	        'equipment_id' => 'required',
 	    ]);
@@ -65,7 +67,7 @@ class CommandController extends Controller
 	    $command->command		= $request->input('command');
 	    $command->type			= $request->input('type');
         $command->status		= $request->input('status');
-        $command->step  		= $request->input('step');
+        $command->steps  		= $request->input('steps');
         $command->direction 	= $request->input('direction');	
         $command->user_id		= $request->input('user_id');
         $command->equipment_id	= $request->input('equipment_id');
@@ -98,4 +100,5 @@ class CommandController extends Controller
     		return response()->json($command);
     	}
     }
+
 }
