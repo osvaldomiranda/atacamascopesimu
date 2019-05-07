@@ -2889,6 +2889,47 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   computed: {// convert the list of events into a map of lists keyed by date
@@ -2901,78 +2942,9 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       today: '2019-01-08',
-      type: 'month',
-      start: '2019-01-01',
-      end: '2019-01-06',
-      typeOptions: [{
-        text: 'Day',
-        value: 'day'
-      }, {
-        text: '4 Day',
-        value: '4day'
-      }, {
-        text: 'Week',
-        value: 'week'
-      }, {
-        text: 'Month',
-        value: 'month'
-      }, {
-        text: 'Custom Daily',
-        value: 'custom-daily'
-      }, {
-        text: 'Custom Weekly',
-        value: 'custom-weekly'
-      }],
-      // 	events: [
-      //   {
-      //     title: 'Vacation',
-      //     details: 'Going to the beach!',
-      //     date: '2018-12-30',
-      //     open: false
-      //   },
-      //   {
-      //     title: 'Vacation',
-      //     details: 'Going to the beach!',
-      //     date: '2018-12-31',
-      //     open: false
-      //   },
-      //   {
-      //     title: 'Vacation',
-      //     details: 'Going to the beach!',
-      //     date: '2019-01-01',
-      //     open: false
-      //   },
-      //   {
-      //     title: 'Meeting',
-      //     details: 'Spending time on how we do not have enough time',
-      //     date: '2019-01-07',
-      //     open: false
-      //   },
-      //   {
-      //     title: '30th Birthday',
-      //     details: 'Celebrate responsibly',
-      //     date: '2019-01-03',
-      //     open: false
-      //   },
-      //   {
-      //     title: 'New Year',
-      //     details: 'Eat chocolate until you pass out',
-      //     date: '2019-01-01',
-      //     open: false
-      //   },
-      //   {
-      //     title: 'Conference',
-      //     details: 'Mute myself the whole time and wonder why I am on this call',
-      //     date: '2019-01-21',
-      //     open: false
-      //   },
-      //   {
-      //     title: 'Hackathon',
-      //     details: 'Code like there is no tommorrow',
-      //     date: '2019-02-01',
-      //     open: false
-      //   }
-      // ],
+      current_points: 200,
+      reservations: [1, 22, 23],
+      items: ['Telescopio Principal', 'Telescopio Secundario'],
       dialog: false,
       astronomic_objects: [],
       selected: [],
@@ -3057,7 +3029,7 @@ __webpack_require__.r(__webpack_exports__);
       alert(event.title);
     },
     showAlert: function showAlert(a) {
-      //	if (event.target.classList.contains('btn__content')) return;
+      //  if (event.target.classList.contains('btn__content')) return;
       var app = this;
       this.Ar = a.coord_ar;
       this.Dec = a.coord_dec;
@@ -34466,127 +34438,294 @@ var render = function() {
                 1
               ),
               _vm._v(" "),
-              [
-                _c(
-                  "v-layout",
-                  { attrs: { wrap: "" } },
-                  [
-                    _c(
-                      "v-flex",
-                      {
-                        staticClass: "text-sm-left text-xs-center",
-                        attrs: { sm4: "", xs12: "" }
-                      },
-                      [
-                        _c(
-                          "v-btn",
-                          {
-                            on: {
-                              click: function($event) {
-                                return _vm.$refs.calendar.prev()
-                              }
-                            }
-                          },
-                          [
-                            _c("v-icon", { attrs: { dark: "", left: "" } }, [
-                              _vm._v(
-                                "\n          keyboard_arrow_left\n        "
+              _c(
+                "v-container",
+                { attrs: { fluid: "" } },
+                [
+                  _c(
+                    "v-card",
+                    [
+                      _c(
+                        "v-layout",
+                        { attrs: { "align-center": "", row: "" } },
+                        [
+                          _c("v-flex", { attrs: { xs1: "" } }),
+                          _vm._v(" "),
+                          _c(
+                            "v-flex",
+                            { attrs: { xs2: "" } },
+                            [
+                              _c(
+                                "v-menu",
+                                {
+                                  ref: "menu",
+                                  attrs: {
+                                    "close-on-content-click": false,
+                                    "nudge-right": 40,
+                                    "return-value": _vm.date,
+                                    lazy: "",
+                                    transition: "scale-transition",
+                                    "offset-y": "",
+                                    "full-width": "",
+                                    "min-width": "290px"
+                                  },
+                                  on: {
+                                    "update:returnValue": function($event) {
+                                      _vm.date = $event
+                                    },
+                                    "update:return-value": function($event) {
+                                      _vm.date = $event
+                                    }
+                                  },
+                                  scopedSlots: _vm._u([
+                                    {
+                                      key: "activator",
+                                      fn: function(ref) {
+                                        var on = ref.on
+                                        return [
+                                          _c(
+                                            "v-text-field",
+                                            _vm._g(
+                                              {
+                                                attrs: {
+                                                  label: "Picker in menu",
+                                                  "prepend-icon": "event",
+                                                  readonly: ""
+                                                },
+                                                model: {
+                                                  value: _vm.date,
+                                                  callback: function($$v) {
+                                                    _vm.date = $$v
+                                                  },
+                                                  expression: "date"
+                                                }
+                                              },
+                                              on
+                                            )
+                                          )
+                                        ]
+                                      }
+                                    }
+                                  ]),
+                                  model: {
+                                    value: _vm.menu,
+                                    callback: function($$v) {
+                                      _vm.menu = $$v
+                                    },
+                                    expression: "menu"
+                                  }
+                                },
+                                [
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-date-picker",
+                                    {
+                                      attrs: { "no-title": "", scrollable: "" },
+                                      model: {
+                                        value: _vm.date,
+                                        callback: function($$v) {
+                                          _vm.date = $$v
+                                        },
+                                        expression: "date"
+                                      }
+                                    },
+                                    [
+                                      _c("v-spacer"),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-btn",
+                                        {
+                                          attrs: { flat: "", color: "primary" },
+                                          on: {
+                                            click: function($event) {
+                                              _vm.menu = false
+                                            }
+                                          }
+                                        },
+                                        [_vm._v("Cancel")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-btn",
+                                        {
+                                          attrs: { flat: "", color: "primary" },
+                                          on: {
+                                            click: function($event) {
+                                              return _vm.$refs.menu.save(
+                                                _vm.date
+                                              )
+                                            }
+                                          }
+                                        },
+                                        [_vm._v("OK")]
+                                      )
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
                               )
-                            ]),
-                            _vm._v("\n        Prev\n      ")
-                          ],
-                          1
-                        )
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "v-flex",
-                      {
-                        staticClass: "text-xs-center",
-                        attrs: { sm4: "", xs12: "" }
-                      },
-                      [
-                        _c("v-select", {
-                          attrs: { items: _vm.typeOptions, label: "Type" },
-                          model: {
-                            value: _vm.type,
-                            callback: function($$v) {
-                              _vm.type = $$v
-                            },
-                            expression: "type"
-                          }
-                        })
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "v-flex",
-                      {
-                        staticClass: "text-sm-right text-xs-center",
-                        attrs: { sm4: "", xs12: "" }
-                      },
-                      [
-                        _c(
-                          "v-btn",
-                          {
-                            on: {
-                              click: function($event) {
-                                return _vm.$refs.calendar.next()
-                              }
-                            }
-                          },
-                          [
-                            _vm._v("\n        Next\n        "),
-                            _c("v-icon", { attrs: { right: "", dark: "" } }, [
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("v-flex", { attrs: { xs1: "" } }),
+                          _vm._v(" "),
+                          _c(
+                            "v-flex",
+                            { attrs: { xs2: "" } },
+                            [
+                              _c("v-select", {
+                                attrs: { items: _vm.items, label: "Telescopio" }
+                              })
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("v-flex", { attrs: { xs1: "" } }),
+                          _vm._v(" "),
+                          _c("v-flex", { attrs: { xs4: "" } }, [
+                            _c("span", { staticClass: "headline" }, [
                               _vm._v(
-                                "\n          keyboard_arrow_right\n        "
+                                " Puntos Disponibles:" +
+                                  _vm._s(_vm.current_points)
                               )
                             ])
-                          ],
-                          1
-                        )
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "v-flex",
-                      { staticClass: "mb-3", attrs: { xs12: "" } },
-                      [
-                        _c(
-                          "v-sheet",
-                          { attrs: { height: "500" } },
+                          ])
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-container",
+                { attrs: { fluid: "" } },
+                [
+                  _c(
+                    "v-layout",
+                    { attrs: { "align-center": "", row: "" } },
+                    [
+                      _c("v-flex", { attrs: { xs1: "" } }),
+                      _vm._v(" "),
+                      _c(
+                        "v-flex",
+                        { attrs: { xs4: "" } },
+                        [
                           [
-                            _c("v-calendar", {
-                              ref: "calendar",
-                              attrs: {
-                                type: _vm.type,
-                                end: _vm.end,
-                                color: "primary"
-                              },
-                              model: {
-                                value: _vm.start,
-                                callback: function($$v) {
-                                  _vm.start = $$v
-                                },
-                                expression: "start"
-                              }
-                            })
-                          ],
-                          1
-                        )
-                      ],
-                      1
-                    )
-                  ],
-                  1
-                )
-              ]
+                            _c(
+                              "v-layout",
+                              [
+                                _c(
+                                  "v-flex",
+                                  [
+                                    _c(
+                                      "v-sheet",
+                                      { attrs: { height: "300" } },
+                                      [
+                                        _c("v-calendar", {
+                                          attrs: {
+                                            color: "primary",
+                                            type: "day"
+                                          },
+                                          scopedSlots: _vm._u([
+                                            {
+                                              key: "dayHeader",
+                                              fn: function(ref) {
+                                                var present = ref.present
+                                                return [
+                                                  present
+                                                    ? [
+                                                        _vm._v(
+                                                          "\n                      Today\n                    "
+                                                        )
+                                                      ]
+                                                    : _vm._e()
+                                                ]
+                                              }
+                                            },
+                                            {
+                                              key: "interval",
+                                              fn: function(ref) {
+                                                var hour = ref.hour
+                                                return [
+                                                  _c(
+                                                    "div",
+                                                    {
+                                                      staticClass:
+                                                        "text-xs-center"
+                                                    },
+                                                    [
+                                                      _vm.reservations.indexOf(
+                                                        hour
+                                                      ) > -1
+                                                        ? _c(
+                                                            "v-btn",
+                                                            {
+                                                              attrs: {
+                                                                small: "",
+                                                                color: "error"
+                                                              }
+                                                            },
+                                                            [
+                                                              _vm._v(
+                                                                "Reservado"
+                                                              )
+                                                            ]
+                                                          )
+                                                        : _vm._e(),
+                                                      _vm._v(" "),
+                                                      _vm.reservations.indexOf(
+                                                        hour
+                                                      ) <= -1
+                                                        ? _c(
+                                                            "v-btn",
+                                                            {
+                                                              attrs: {
+                                                                small: "",
+                                                                color: "success"
+                                                              }
+                                                            },
+                                                            [
+                                                              _vm._v(
+                                                                "Disponible"
+                                                              )
+                                                            ]
+                                                          )
+                                                        : _vm._e()
+                                                    ],
+                                                    1
+                                                  )
+                                                ]
+                                              }
+                                            }
+                                          ])
+                                        })
+                                      ],
+                                      1
+                                    )
+                                  ],
+                                  1
+                                )
+                              ],
+                              1
+                            )
+                          ]
+                        ],
+                        2
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
             ],
-            2
+            1
           )
         ],
         1
