@@ -9,6 +9,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     @auth
         <meta name="userID" content="{{ auth()->user()->id }}">
+    @else
+        <meta name="userID" content="0">
     @endauth
 
 

@@ -50,6 +50,25 @@ class AstronomicObjectController extends Controller
 	    return response()->json($coord);	
     }
 
+    public function moon(Request $request){
+
+        Info($request->header());
+        $date_param = $request->header('moondate');
+        Info("date parap" . $date_param);
+
+        $date = str_replace("-","/",$date_param);
+
+        $time = "00:00:00";
+
+        Info($date . "t" . $time);
+
+        $coord= shell_exec("python moon.py -d " . $date . "t" . $time); 
+
+        Info($coord);
+
+        return response()->json($coord);
+    }
+
     public function coords()
     {        
         $objects = AstronomicObject::all();
@@ -66,70 +85,71 @@ class AstronomicObjectController extends Controller
 
             $cat = substr($name,0,1);
 
-            // if($cat == 'I'){
-            // 	$object->catalog = 'IC';
-            // }
-            // if($cat == 'N'){
-            // 	$object->catalog = 'NGC';
-            // }
-            // if($cat == 'M'){
-            // 	$object->catalog = 'Messier';
-            // }
-            // if($cat == 'S'){
-            // 	$object->catalog = 'SolarSistem';
-            // }
+            if($cat == 'I'){
+            	$object->catalog = 'IC';
+            }
+            if($cat == 'N'){
+            	$object->catalog = 'NGC';
+            }
+            if($cat == 'M'){
+            	$object->catalog = 'Messier';
+            }
+  
 
-            // $object->save();
+            $object->save();
 
-            // Info($object);
+            Info($object);
 
 
             //***************************
             //***************************
             // Coordenadas no mesier
 
-         //    if($ra){
-         //    	Info($ra);
-         //    	Info($dec);
+            if($ra){
+            	Info($ra);
+            	Info($dec);
+
+                if($cat != 'M'){
+
+	            $h_ra = (float)preg_split("/:/",$ra)[0];   
+	            $m_ra = (float)preg_split("/:/",$ra)[1]; 
+	            $s_ra = (float)preg_split("/:/",$ra)[2]; 
+
+	            $h_dec = (float)preg_split("/:/",$dec)[0];
+	            $m_dec = (float)preg_split("/:/",$dec)[1];
+
+	            if( count(preg_split("/:/",$dec)) > 2 ){
+	            	$s_dec = (float)preg_split("/:/",$dec)[2];
+	        	} else {
+	        		$s_dec = 0;
+	        	}
 
 
-	        //     $h_ra = (float)preg_split("/:/",$ra)[0];   
-	        //     $m_ra = (float)preg_split("/:/",$ra)[1]; 
-	        //     $s_ra = (float)preg_split("/:/",$ra)[2]; 
+	            if($h_dec < 0.0){
+	                $sign = '-';
+	                $h_dec = $h_dec * -1;
+	            } else {
+	                $sign = '+';  
+	            }
 
-	        //     $h_dec = (float)preg_split("/:/",$dec)[0];
-	        //     $m_dec = (float)preg_split("/:/",$dec)[1];
+	            $ac_selected  = ($h_ra + ($m_ra/60) + ($s_ra/3600));
+	            $dec_selected = ($h_dec + ($m_dec/60) + ($s_dec/3600));
 
-	        //     if( count(preg_split("/:/",$dec)) > 2 ){
-	        //     	$s_dec = (float)preg_split("/:/",$dec)[2];
-	        // 	} else {
-	        // 		$s_dec = 0;
-	        // 	}
+	            $object->coord_ar = $ac_selected;
+	            $object->coord_dec = $dec_selected;
+	            $object->sign_dec = $sign;
+	            $object->save();
 
+                }
 
-	        //     if($h_dec < 0.0){
-	        //         $sign = '-';
-	        //         $h_dec = $h_dec * -1;
-	        //     } else {
-	        //         $sign = '+';  
-	        //     }
-
-	        //     $ac_selected  = ($h_ra + ($m_ra/60) + ($s_ra/3600));
-	        //     $dec_selected = ($h_dec + ($m_dec/60) + ($s_dec/3600));
-
-	        //     $object->coord_ar = $ac_selected;
-	        //     $object->coord_dec = $dec_selected;
-	        //     $object->sign_dec = $sign;
-	        //     $object->save();
-
-	        //     Info($object);
-        	// }
+	            Info($object);
+        	}
 
             //***************************
             //***************************
             // Coordenadas Messier
             if($ra){
-            	if($cat == 'M'){
+            	if($cat == 'M' ){
 	            	Info($ra);
 	            	Info($dec);
 

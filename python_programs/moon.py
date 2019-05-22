@@ -19,6 +19,8 @@ def main(argv):
       datetime = arg
 
 
+
+
   # print(datetime)    
   year = int(datetime[:-15])
   month = int(datetime[5:-12])
@@ -32,10 +34,10 @@ def main(argv):
   mi=pylunar.MoonInfo((33, 00, 00), (-70, 33, 26))
   mi.update((year, month, day, hh, mm, ss))
   phase_name = mi.phase_name()
-  percent = mi.fractional_phase() * 100
+  percent = mi.fractional_phase()
   age = mi.age()
 
-  print("Phase Name: "+str(phase_name) + ", Percent:" + str('{0:.4g}'.format(percent)) +"% , Age:"+ str('{0:.4g}'.format(age)))
+  print("Phase Name: "+str(phase_name) + " Percent:" + str(percent) +" Age:"+ str(age))
 
 if __name__ == "__main__":
   main(sys.argv[1:])

@@ -20,6 +20,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('/upload/{command_id}', 'ImageController@upload');
 Route::get('/astronomic_objects', 'AstronomicObjectController@index');
 Route::get('/astronomic_objects/coords', 'AstronomicObjectController@coords');
+Route::get('/moon_state', 'AstronomicObjectController@moon');
+
 
 Route::get('/astronomic_objects/solarsistem', 'AstronomicObjectController@solarSistem');
 
@@ -39,3 +41,10 @@ Route::get('images', 'ImageController@index');
 
 Route::get('points', 'PointsController@index');
 Route::post('points/pay', 'PointsController@pay');
+
+Route::post('/equipments', 'EquipmentController@index');
+Route::post('/reservations', 'ReservationController@index');
+Route::post('/my_reservations', 'ReservationController@myReservations');
+
+Route::post('/my_images', 'ImageController@myImages');
+

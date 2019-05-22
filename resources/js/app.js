@@ -16,19 +16,14 @@ import AppComponent         from './components/AppComponent'
 import ControlComponent     from './components/ControlComponent'
 import PointsComponent      from './components/PointsComponent'
 import ReservationComponent      from './components/ReservationComponent'
+import MyReservationsComponent   from './components/MyReservationsComponent'
 
 
-Vue.use(Vuex)
-Vue.use(VueRouter)
+Vue.use(Vuex);
+Vue.use(VueRouter);
 
 
 window.axios = require('axios');
-axios.defaults.headers.common = {
-    //'X-CSRF-TOKEN': window.Laravel.csrfToken,
-    'Content-Type': 'application/json',
-    'X-Requested-With': 'XMLHttpRequest'
-};
-Vue.prototype.$http = window.axios
 
 window._ = require('lodash')
 window.Popper = require('popper.js').default
@@ -50,25 +45,20 @@ Vue.use(Vuetify, {
 });
 
 
+
 Vue.component('app', require('./views/App.vue'));
 Vue.component('control-component', ControlComponent);
 Vue.component('points-component', PointsComponent);
 Vue.component('reservation-component', ReservationComponent);
+Vue.component('my-reservation-component', MyReservationComponent);
+
 
 //AppComponent
+
 
 const app = new Vue({
     el: '#App',
     render: h => h(AppComponent),
     store,
     router: router,
-    data: {
-        userID: null
-    },
-    mounted () {
-        // Assign the ID from meta tag for future use in application
-//        this.userID = document.head.querySelector('meta[name="userID"]').content
-        this.userID = 1;
-
-    }
 });

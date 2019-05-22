@@ -69,7 +69,7 @@
                 <v-flex xs1>
                 </v-flex>
 
-                <v-flex xs7 style="overflow: auto">
+                <v-flex xs10 style="overflow: auto">
 
                       <v-card>
                         <v-card-title>
@@ -120,15 +120,19 @@
 </template>
 
 <script>
-
+  import store from '../store/index';
   export default {
     data () {
       return {
         dialog: false,
 
         current_points: 0,
+        points_out:0,
+        points_in:0,
         points: 0,
         price: 0,
+        userId: 0,
+        selected: '100',
        
         rowsPerPageItems: [3, 5, 10, 20],
         pagination: {
@@ -164,17 +168,21 @@
     },
     methods: {
         showAlert(a){
-        //  if (event.target.classList.contains('btn__content')) return;
-            var app = this;
-          
         },
         initialize () {
             var app = this;
-
-            axios.get('/api/points')
+            let userId = document.head.querySelector('meta[name="userID"]');
+            axios.get('/api/points',{
+                headers: { 
+                    'user': userId.content,
+                }
+            })
             .then(function (resp) {    
-                //alert(JSON.stringify(resp.data));
-               // app.purchases = resp.data;
+                for(var i in resp.data){
+                     app.points_in += parseInt(resp.data[i].in,10);
+                     app.points_out += parseInt(resp.data[i].out,10);
+                 }
+                 app.current_points = app.points_in - app.points_out;
             })
             .catch(function (resp) {
                 console.log(resp);
@@ -183,48 +191,24 @@
 
         },
 
-        // openChat () {
-        //     let app = this
 
-        //       // Start pusher listener
-        //     Pusher.logToConsole = true
-
-        //     var pusher = new Pusher('e6e9d9fd854d385c5f5b', {
-        //         cluster: 'us2',
-        //         forceTLS: true
-        //     })
-
-        //     var channel = pusher.subscribe('newMessage-' + 1 + '-' + 2) // newMessage-[chatting-with-who]-[my-id]
-
-        //     channel.bind('App\\Events\\MessageSent', function (data) {
-                
-        //         app.state = data.message['message'];
-
-        //         if (app.state=="Imagen Recibida"){
-
-        //             app.imageRefresh();
-        //         }
-                
-        //     })
-        //       // End pusher listener
-
-            
-        //  },
 
         pay(){
 
             let app = this;
-
             let fecha = this.GetFormattedDate();
 
-            var pay_points = {'created_at':fecha,'in': this.points, 'out': 0, 'current_points': parseInt(this.current_points) + parseInt(this.points), 'reservation_id': '', 'transaction_id': '876238746'};
+            var pay_points = {'created_at':fecha,'in': this.points, 'out': 0, 'current_points': parseInt(this.current_points) + parseInt(this.points), 'reservation_id': '', 'transaction_id': '876238746', 'a': this.$store.getters.user};
 
-            this.purchases.push(pay_points);
-
-            this.current_points = parseInt(this.current_points) + parseInt(this.points);
-            axios.post('/api/points/addpoints', pay_points)
+            let userId = document.head.querySelector('meta[name="userID"]');
+            axios.post('/api/points/pay', pay_points,{
+                headers: { 
+                    'user': userId.content,
+                }
+            })
             .then(function (resp) {
-               
+                app.purchases.push(pay_points);
+                app.current_points = parseInt(app.current_points) + parseInt(app.points);
             })
             .catch(function (resp) {
                 console.log(resp);

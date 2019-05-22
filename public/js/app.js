@@ -1803,24 +1803,34 @@ __webpack_require__.r(__webpack_exports__);
       dialog: false,
       drawer: null,
       step: "",
+      userId: 0,
       astronomic_objects: null
     };
   },
   props: {
     source: String
   },
-  computed: {
-    token: function token() {
-      var token = document.head.querySelector('meta[name="csrf-token"]');
-      return token.content;
-    }
-  },
-  created: function created() {
+  computed: {},
+  created: function created() {},
+  mounted: function mounted() {
     this.initialize();
   },
   methods: {
     initialize: function initialize() {
-      this.$router.push('/dashboard');
+      axios.get('/api/equipments').then(function (resp) {
+        //alert(JSON.stringify(resp.data));
+        app.$store.commit('changeEquipments', resp.data);
+      })["catch"](function (resp) {
+        console.log(resp);
+        alert("Error equipments :" + resp);
+      });
+      axios.get('/api/reservations').then(function (resp) {
+        //alert(JSON.stringify(resp.data));
+        app.$store.commit('changeReservations', resp.data);
+      })["catch"](function (resp) {
+        console.log(resp);
+        alert("Error reservations :" + resp);
+      });
     },
     logout: function logout() {
       axios.post('/logout').then(function (resp) {
@@ -2003,6 +2013,8 @@ function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.
 
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
 
+//
+//
 //
 //
 //
@@ -2555,6 +2567,68 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/MyReservationsComponent.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/MyReservationsComponent.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/PointsComponent.vue?vue&type=script&lang=js&":
 /*!**************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/PointsComponent.vue?vue&type=script&lang=js& ***!
@@ -2564,6 +2638,7 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _store_index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../store/index */ "./resources/js/store/index.js");
 //
 //
 //
@@ -2685,13 +2760,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       dialog: false,
       current_points: 0,
+      points_out: 0,
+      points_in: 0,
       points: 0,
       price: 0,
+      userId: 0,
+      selected: '100',
       rowsPerPageItems: [3, 5, 10, 20],
       pagination: {
         rowsPerPage: 3
@@ -2723,36 +2803,26 @@ __webpack_require__.r(__webpack_exports__);
     this.initialize();
   },
   methods: {
-    showAlert: function showAlert(a) {
-      //  if (event.target.classList.contains('btn__content')) return;
-      var app = this;
-    },
+    showAlert: function showAlert(a) {},
     initialize: function initialize() {
       var app = this;
-      axios.get('/api/points').then(function (resp) {//alert(JSON.stringify(resp.data));
-        // app.purchases = resp.data;
+      var userId = document.head.querySelector('meta[name="userID"]');
+      axios.get('/api/points', {
+        headers: {
+          'user': userId.content
+        }
+      }).then(function (resp) {
+        for (var i in resp.data) {
+          app.points_in += parseInt(resp.data[i]["in"], 10);
+          app.points_out += parseInt(resp.data[i].out, 10);
+        }
+
+        app.current_points = app.points_in - app.points_out;
       })["catch"](function (resp) {
         console.log(resp);
         alert("Error Points :" + resp);
       });
     },
-    // openChat () {
-    //     let app = this
-    //       // Start pusher listener
-    //     Pusher.logToConsole = true
-    //     var pusher = new Pusher('e6e9d9fd854d385c5f5b', {
-    //         cluster: 'us2',
-    //         forceTLS: true
-    //     })
-    //     var channel = pusher.subscribe('newMessage-' + 1 + '-' + 2) // newMessage-[chatting-with-who]-[my-id]
-    //     channel.bind('App\\Events\\MessageSent', function (data) {
-    //         app.state = data.message['message'];
-    //         if (app.state=="Imagen Recibida"){
-    //             app.imageRefresh();
-    //         }
-    //     })
-    //       // End pusher listener
-    //  },
     pay: function pay() {
       var app = this;
       var fecha = this.GetFormattedDate();
@@ -2762,11 +2832,18 @@ __webpack_require__.r(__webpack_exports__);
         'out': 0,
         'current_points': parseInt(this.current_points) + parseInt(this.points),
         'reservation_id': '',
-        'transaction_id': '876238746'
+        'transaction_id': '876238746',
+        'a': this.$store.getters.user
       };
-      this.purchases.push(pay_points);
-      this.current_points = parseInt(this.current_points) + parseInt(this.points);
-      axios.post('/api/points/addpoints', pay_points).then(function (resp) {})["catch"](function (resp) {
+      var userId = document.head.querySelector('meta[name="userID"]');
+      axios.post('/api/points/pay', pay_points, {
+        headers: {
+          'user': userId.content
+        }
+      }).then(function (resp) {
+        app.purchases.push(pay_points);
+        app.current_points = parseInt(app.current_points) + parseInt(app.points);
+      })["catch"](function (resp) {
         console.log(resp);
         alert("Error AddPoints :" + resp);
       });
@@ -2930,6 +3007,33 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   computed: {// convert the list of events into a map of lists keyed by date
@@ -2941,42 +3045,23 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      today: '2019-01-08',
-      current_points: 200,
+      today: '2019-05-08',
+      date: '2019-05-08',
+      moon_state: "",
+      current_points: 0,
+      points_in: 0,
+      points_out: 0,
+      hourToReserv: '',
       reservations: [1, 22, 23],
-      items: ['Telescopio Principal', 'Telescopio Secundario'],
+      equipment: 'Telescopio Principal',
+      equipments: ['Telescopio Principal', 'Telescopio Secundario'],
       dialog: false,
-      astronomic_objects: [],
-      selected: [],
+      dialog2: false,
       search: '',
-      imageUrl: '',
-      Catalog: 'Todos',
-      Catalogs: ['Todos', 'SolarSistem', 'Messier', 'NGC', 'IC'],
-      Constellation: '',
-      Constellations: [],
-      FilteredObjects: [],
-      Ar: 1.92837,
-      Dec: 1.92837,
-      Iso: '100',
-      Exp: '1',
-      Ar_act: 0,
-      Dec_act: 0,
-      Iso_act: 0,
-      Exp_act: 0,
-      current: '',
-      current_shot: '',
       rowsPerPageItems: [3, 5, 10, 20],
       pagination: {
         rowsPerPage: 3
       },
-      object: 'Seleccione Objeto',
-      state: 'En espera',
-      Paso: '100',
-      Dir: 'Adentro',
-      Pasos: ['100', '200', '400', '600', '800', '1000', '2000', '3000'],
-      Dirs: ['Adentro', 'Afuera'],
-      Isos: ['100', '200', '400', '600', '800', '1000', '2000', '3000'],
-      Exps: ['1', '2', '4', '6', '8', '1', '2', '3'],
       headers: [{
         text: 'Nombre',
         value: 'name'
@@ -2996,28 +3081,15 @@ __webpack_require__.r(__webpack_exports__);
         text: 'DEC',
         value: 'dec'
       }],
-      myImages: [],
-      myImagesHeaders: [{
-        text: 'Foto',
-        value: 'img'
+      type: 'day',
+      start: '2019-05-17',
+      end: '2019-05-20',
+      typeOptions: [{
+        text: 'Day',
+        value: 'day'
       }, {
-        text: 'Nombre',
-        value: 'name'
-      }, {
-        text: 'ISO',
-        value: 'iso'
-      }, {
-        text: 'TiempoExp',
-        value: 'exptime'
-      }, {
-        text: 'Coord AR',
-        value: 'ar'
-      }, {
-        text: 'Coord DEC',
-        value: 'dec'
-      }, {
-        text: 'Fecha',
-        value: 'created_at'
+        text: 'Week',
+        value: 'week'
       }]
     };
   },
@@ -3028,149 +3100,53 @@ __webpack_require__.r(__webpack_exports__);
     open: function open(event) {
       alert(event.title);
     },
-    showAlert: function showAlert(a) {
-      //  if (event.target.classList.contains('btn__content')) return;
-      var app = this;
-      this.Ar = a.coord_ar;
-      this.Dec = a.coord_dec;
-      this.object = a.name;
-
-      if (a.catalog == 'SolarSistem') {
-        axios.get('/api/astronomic_objects/solarsistem?object=' + a.name).then(function (resp) {
-          //alert(JSON.stringify(resp.data));
-          app.Ar = resp.data["ar"];
-          app.Dec = resp.data["dec"];
-        })["catch"](function (resp) {
-          console.log(resp);
-          alert("Error shoot :" + resp);
-        });
-      }
+    change_date: function change_date(a) {
+      this.start = a;
+      this.end = a;
+      this.moon(); // leer las reservas de ese día para mostrarlas al usuario
     },
     initialize: function initialize() {
-      var app = this; // app.astronomic_objects = this.$store.getters.astronomic_objects;
-    },
-    openChat: function openChat() {
-      var app = this; // Start pusher listener
-
-      Pusher.logToConsole = true;
-      var pusher = new Pusher('e6e9d9fd854d385c5f5b', {
-        cluster: 'us2',
-        forceTLS: true
-      });
-      var channel = pusher.subscribe('newMessage-' + 1 + '-' + 2); // newMessage-[chatting-with-who]-[my-id]
-
-      channel.bind('App\\Events\\MessageSent', function (data) {
-        app.state = data.message['message'];
-
-        if (app.state == "Imagen Recibida") {
-          app.imageRefresh();
+      var app = this;
+      var todayTime = new Date();
+      var month = (todayTime.getMonth() + 1).toString();
+      app.today = todayTime.getFullYear() + '-' + month.padStart(2, '00') + '-' + todayTime.getDate();
+      app.start = app.today;
+      this.moon();
+      var userId = document.head.querySelector('meta[name="userID"]');
+      axios.get('/api/points', {
+        headers: {
+          'user': userId.content
         }
-      }); // End pusher listener
-    },
-    filter: function filter(a) {
-      if (a == "Todos") {
-        this.FilteredObjects = this.astronomic_objects;
-      } else {
-        this.FilteredObjects = this.astronomic_objects.filter(function (it) {
-          return it.catalog == a;
-        });
-      }
-    },
-    filterConstellation: function filterConstellation(a) {
-      if (a == "Todos") {
-        this.FilteredObjects = this.astronomic_objects;
-      } else {
-        this.FilteredObjects = this.astronomic_objects.filter(function (it) {
-          return it.constellation == a;
-        });
-      }
-    },
-    move: function move() {
-      var $command = {
-        'command': 'MONTURA',
-        'type': 'mount',
-        'status': 'PENDIENTE',
-        'ar': this.Ar,
-        'dec': this.Dec,
-        'user_id': 1,
-        'equipment_id': 1
-      };
-      alert(JSON.stringify($command));
-      axios.post('/api/command/move', $command).then(function (resp) {})["catch"](function (resp) {
-        console.log(resp);
-        alert("Error move :" + resp);
-      });
-      this.currentRefresh();
-    },
-    shoot: function shoot() {
-      var $command = {
-        'command': 'CAMARA',
-        'type': 'shoot',
-        'status': 'PENDIENTE',
-        'exptime': this.Exp,
-        'iso': this.Iso,
-        'ar': this.Ar_act,
-        'dec': this.Dec_act,
-        'user_id': 1,
-        'equipment_id': 1
-      };
-      this.imageUrl = '';
-      axios.post('/api/command/shoot', $command).then(function (resp) {})["catch"](function (resp) {
-        console.log(resp);
-        alert("Error shoot :" + resp);
-      });
-      this.currentRefresh();
-      this.current_shot = this.current;
-    },
-    currentRefresh: function currentRefresh() {
-      this.Ar_act = this.Ar;
-      this.Dec_act = this.Dec;
-      this.Iso_act = this.Iso;
-      this.Exp_act = this.Exp;
-      this.current = "Ar:" + this.Ar_act + ", Dec:" + this.Dec_act + ", Iso:" + this.Iso_act + ", Exp:" + this.Exp_act;
-    },
-    focus: function focus() {
-      var $command = {
-        'command': 'ENFOCADOR',
-        'type': 'focuser',
-        'status': 'PENDIENTE',
-        'ar': this.Ar,
-        'dec': this.Dec,
-        'user_id': 1,
-        'equipment_id': 1
-      };
-      alert(JSON.stringify($command));
-      axios.post('/api/command/focus', $command).then(function (resp) {})["catch"](function (resp) {
-        console.log(resp);
-        alert("Error focus :" + resp);
-      });
-    },
-    saveImage: function saveImage() {},
-    imageRefresh: function imageRefresh() {
-      var app = this;
-      var $command = {
-        'user_id': 1
-      };
-      axios.get('/api/image/last', $command).then(function (resp) {
-        app.imageUrl = resp.data;
+      }).then(function (resp) {
+        for (var i in resp.data) {
+          app.points_in += parseInt(resp.data[i]["in"], 10);
+          app.points_out += parseInt(resp.data[i].out, 10);
+        }
+
+        app.current_points = app.points_in - app.points_out;
       })["catch"](function (resp) {
         console.log(resp);
-        alert("Error shoot :" + resp);
+        alert("Error Points :" + resp);
       });
-      app.getMyImages();
     },
-    getMyImages: function getMyImages() {
+    moon: function moon() {
       var app = this;
-      var $command = {
-        'user_id': 1
-      };
-      axios.get('/api/images', $command).then(function (resp) {
-        app.myImages = resp.data;
+      axios.get('/api/moon_state', {
+        headers: {
+          'moondate': app.start
+        }
+      }).then(function (resp) {
+        app.moon_state = resp.data;
       })["catch"](function (resp) {
         console.log(resp);
-        alert("Error shoot :" + resp);
+        alert("Error moon :" + resp);
       });
-    }
+    },
+    confirmReserv: function confirmReserv(hour) {
+      this.hourToReserv = hour;
+      this.dialog2 = true;
+    },
+    reserv: function reserv() {}
   }
 });
 
@@ -3214,6 +3190,11 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+//
+//
+//
+//
+//
 //
 //
 //
@@ -3416,9 +3397,7 @@ __webpack_require__.r(__webpack_exports__);
       this.Dec = a.coord_dec;
       this.object = a.name;
     },
-    initialize: function initialize() {
-      var app = this; // app.astronomic_objects = this.$store.getters.astronomic_objects;
-    },
+    initialize: function initialize() {},
     openChat: function openChat() {
       var app = this; // Start pusher listener
 
@@ -33825,18 +33804,23 @@ var render = function() {
                                     key: "items",
                                     fn: function(props) {
                                       return [
-                                        _c(
-                                          "td",
-                                          [
-                                            _c("v-img", {
-                                              attrs: {
-                                                src: props.item.path,
-                                                "aspect-ratio": "1"
-                                              }
-                                            })
-                                          ],
-                                          1
-                                        ),
+                                        _c("td", [
+                                          _c(
+                                            "a",
+                                            {
+                                              attrs: { href: "props.item.path" }
+                                            },
+                                            [
+                                              _c("v-img", {
+                                                attrs: {
+                                                  src: props.item.path,
+                                                  "aspect-ratio": "1"
+                                                }
+                                              })
+                                            ],
+                                            1
+                                          )
+                                        ]),
                                         _vm._v(" "),
                                         _c(
                                           "td",
@@ -33894,6 +33878,181 @@ var render = function() {
                 ],
                 1
               )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/MyReservationsComponent.vue?vue&type=template&id=3ebe82af&":
+/*!**************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/MyReservationsComponent.vue?vue&type=template&id=3ebe82af& ***!
+  \**************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "v-container",
+    { attrs: { fluid: "" } },
+    [
+      _c(
+        "v-layout",
+        { attrs: { "align-center": "", row: "" } },
+        [
+          _c("v-flex", { attrs: { xs1: "" } }),
+          _vm._v(" "),
+          _c(
+            "v-flex",
+            { staticStyle: { overflow: "auto" }, attrs: { xs10: "" } },
+            [
+              _c(
+                "v-card",
+                [
+                  _c(
+                    "v-card-title",
+                    [
+                      _c("span", { staticClass: "headline" }, [
+                        _vm._v("Mis Reservas")
+                      ]),
+                      _vm._v(" "),
+                      _c("v-spacer"),
+                      _vm._v(" "),
+                      _c("v-text-field", {
+                        attrs: {
+                          "append-icon": "search",
+                          label: "Buscar",
+                          "single-line": "",
+                          "hide-details": ""
+                        },
+                        model: {
+                          value: _vm.search,
+                          callback: function($$v) {
+                            _vm.search = $$v
+                          },
+                          expression: "search"
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-data-table",
+                    {
+                      attrs: {
+                        headers: _vm.headers,
+                        items: _vm.reservations,
+                        search: _vm.search,
+                        "rows-per-page-items": _vm.rowsPerPageItems,
+                        pagination: _vm.pagination
+                      },
+                      on: {
+                        "update:pagination": function($event) {
+                          _vm.pagination = $event
+                        }
+                      },
+                      scopedSlots: _vm._u([
+                        {
+                          key: "items",
+                          fn: function(props) {
+                            return [
+                              _c(
+                                "tr",
+                                {
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.showAlert(props.item)
+                                    }
+                                  }
+                                },
+                                [
+                                  _c("td", { staticClass: "text-xs-left" }, [
+                                    _vm._v(_vm._s(props.item.equipment_image))
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "text-xs-left" }, [
+                                    _vm._v(_vm._s(props.item.equipment_name))
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "text-xs-left" }, [
+                                    _vm._v(_vm._s(props.item.reservation_date))
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "text-xs-left" }, [
+                                    _vm._v(_vm._s(props.item.reservation_hour))
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "text-xs-left" }, [
+                                    _vm._v(_vm._s(props.item.reservation_time))
+                                  ]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "td",
+                                    { staticClass: "text-xs-left" },
+                                    [_c("control-component")],
+                                    1
+                                  )
+                                ]
+                              )
+                            ]
+                          }
+                        }
+                      ]),
+                      model: {
+                        value: _vm.selected,
+                        callback: function($$v) {
+                          _vm.selected = $$v
+                        },
+                        expression: "selected"
+                      }
+                    },
+                    [
+                      _vm._v(" "),
+                      _c("v-alert", {
+                        attrs: { value: true, color: "error", icon: "warning" },
+                        scopedSlots: _vm._u([
+                          {
+                            key: "no-results",
+                            fn: function() {
+                              return [
+                                _vm._v(
+                                  '\n              Your search for "' +
+                                    _vm._s(_vm.search) +
+                                    '" found no results.\n            '
+                                )
+                              ]
+                            },
+                            proxy: true
+                          }
+                        ])
+                      })
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("v-flex", { attrs: { xs1: "" } })
             ],
             1
           )
@@ -34158,7 +34317,7 @@ var render = function() {
                         "v-flex",
                         {
                           staticStyle: { overflow: "auto" },
-                          attrs: { xs7: "" }
+                          attrs: { xs10: "" }
                         },
                         [
                           _c(
@@ -34488,16 +34647,17 @@ var render = function() {
                                             _vm._g(
                                               {
                                                 attrs: {
-                                                  label: "Picker in menu",
+                                                  label: "Fecha",
                                                   "prepend-icon": "event",
-                                                  readonly: ""
+                                                  readonly: "",
+                                                  v: ""
                                                 },
                                                 model: {
-                                                  value: _vm.date,
+                                                  value: _vm.today,
                                                   callback: function($$v) {
-                                                    _vm.date = $$v
+                                                    _vm.today = $$v
                                                   },
-                                                  expression: "date"
+                                                  expression: "today"
                                                 }
                                               },
                                               on
@@ -34521,12 +34681,13 @@ var render = function() {
                                     "v-date-picker",
                                     {
                                       attrs: { "no-title": "", scrollable: "" },
+                                      on: { input: _vm.change_date },
                                       model: {
-                                        value: _vm.date,
+                                        value: _vm.today,
                                         callback: function($$v) {
-                                          _vm.date = $$v
+                                          _vm.today = $$v
                                         },
-                                        expression: "date"
+                                        expression: "today"
                                       }
                                     },
                                     [
@@ -34576,7 +34737,17 @@ var render = function() {
                             { attrs: { xs2: "" } },
                             [
                               _c("v-select", {
-                                attrs: { items: _vm.items, label: "Telescopio" }
+                                attrs: {
+                                  items: _vm.equipments,
+                                  label: "Telescopio"
+                                },
+                                model: {
+                                  value: _vm.equipment,
+                                  callback: function($$v) {
+                                    _vm.equipment = $$v
+                                  },
+                                  expression: "equipment"
+                                }
                               })
                             ],
                             1
@@ -34591,6 +34762,19 @@ var render = function() {
                                   _vm._s(_vm.current_points)
                               )
                             ])
+                          ])
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-layout",
+                        { attrs: { "align-center": "", row: "" } },
+                        [
+                          _c("v-flex", { attrs: { xs8: "" } }),
+                          _vm._v(" "),
+                          _c("v-flex", { attrs: { xs4: "" } }, [
+                            _c("span", [_vm._v(_vm._s(_vm.moon_state))])
                           ])
                         ],
                         1
@@ -34619,35 +34803,24 @@ var render = function() {
                           [
                             _c(
                               "v-layout",
+                              { attrs: { wrap: "" } },
                               [
                                 _c(
                                   "v-flex",
+                                  { staticClass: "mb-3", attrs: { xs12: "" } },
                                   [
                                     _c(
                                       "v-sheet",
-                                      { attrs: { height: "300" } },
+                                      { attrs: { height: "500" } },
                                       [
                                         _c("v-calendar", {
+                                          ref: "calendar",
                                           attrs: {
-                                            color: "primary",
-                                            type: "day"
+                                            type: _vm.type,
+                                            end: _vm.end,
+                                            color: "primary"
                                           },
                                           scopedSlots: _vm._u([
-                                            {
-                                              key: "dayHeader",
-                                              fn: function(ref) {
-                                                var present = ref.present
-                                                return [
-                                                  present
-                                                    ? [
-                                                        _vm._v(
-                                                          "\n                      Today\n                    "
-                                                        )
-                                                      ]
-                                                    : _vm._e()
-                                                ]
-                                              }
-                                            },
                                             {
                                               key: "interval",
                                               fn: function(ref) {
@@ -34688,6 +34861,15 @@ var render = function() {
                                                               attrs: {
                                                                 small: "",
                                                                 color: "success"
+                                                              },
+                                                              on: {
+                                                                click: function(
+                                                                  $event
+                                                                ) {
+                                                                  return _vm.reserv(
+                                                                    hour
+                                                                  )
+                                                                }
                                                               }
                                                             },
                                                             [
@@ -34703,7 +34885,14 @@ var render = function() {
                                                 ]
                                               }
                                             }
-                                          ])
+                                          ]),
+                                          model: {
+                                            value: _vm.start,
+                                            callback: function($$v) {
+                                              _vm.start = $$v
+                                            },
+                                            expression: "start"
+                                          }
                                         })
                                       ],
                                       1
@@ -34726,9 +34915,62 @@ var render = function() {
               )
             ],
             1
-          )
+          ),
+          _vm._v(" "),
+          [
+            _c(
+              "v-dialog",
+              {
+                attrs: { "max-width": "500px" },
+                model: {
+                  value: _vm.dialog2,
+                  callback: function($$v) {
+                    _vm.dialog2 = $$v
+                  },
+                  expression: "dialog2"
+                }
+              },
+              [
+                _c(
+                  "v-card",
+                  [
+                    _c("v-card-title", [
+                      _vm._v(
+                        "\n          " +
+                          _vm._s(this.hourToReserv) +
+                          "\n        "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("v-card-text"),
+                    _vm._v(" "),
+                    _c(
+                      "v-card-actions",
+                      [
+                        _c(
+                          "v-btn",
+                          {
+                            attrs: { color: "primary", flat: "" },
+                            on: {
+                              click: function($event) {
+                                _vm.dialog2 = false
+                              }
+                            }
+                          },
+                          [_vm._v("Close")]
+                        )
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                )
+              ],
+              1
+            )
+          ]
         ],
-        1
+        2
       )
     ],
     1
@@ -34815,6 +35057,8 @@ var render = function() {
                 "v-container",
                 { attrs: { fluid: "" } },
                 [
+                  _c("v-layout", { attrs: { "align-center": "", row: "" } }),
+                  _vm._v(" "),
                   _c(
                     "v-layout",
                     { attrs: { "align-center": "", row: "" } },
@@ -35063,9 +35307,9 @@ var render = function() {
                                         fn: function() {
                                           return [
                                             _vm._v(
-                                              '\n                Your search for "' +
+                                              '\n                  Your search for "' +
                                                 _vm._s(_vm.search) +
-                                                '" found no results.\n              '
+                                                '" found no results.\n                '
                                             )
                                           ]
                                         },
@@ -77056,6 +77300,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_ControlComponent__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/ControlComponent */ "./resources/js/components/ControlComponent.vue");
 /* harmony import */ var _components_PointsComponent__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/PointsComponent */ "./resources/js/components/PointsComponent.vue");
 /* harmony import */ var _components_ReservationComponent__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/ReservationComponent */ "./resources/js/components/ReservationComponent.vue");
+/* harmony import */ var _components_MyReservationsComponent__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/MyReservationsComponent */ "./resources/js/components/MyReservationsComponent.vue");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -77071,15 +77316,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_2__["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_3__["default"]);
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-axios.defaults.headers.common = {
-  //'X-CSRF-TOKEN': window.Laravel.csrfToken,
-  'Content-Type': 'application/json',
-  'X-Requested-With': 'XMLHttpRequest'
-};
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.prototype.$http = window.axios;
 window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 window.Popper = __webpack_require__(/*! popper.js */ "./node_modules/popper.js/dist/esm/popper.js")["default"]; // Pusher
 
@@ -77098,7 +77338,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuetify__WEBPACK_IMPORTED_MODULE_
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('app', __webpack_require__(/*! ./views/App.vue */ "./resources/js/views/App.vue"));
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('control-component', _components_ControlComponent__WEBPACK_IMPORTED_MODULE_7__["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('points-component', _components_PointsComponent__WEBPACK_IMPORTED_MODULE_8__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('reservation-component', _components_ReservationComponent__WEBPACK_IMPORTED_MODULE_9__["default"]); //AppComponent
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('reservation-component', _components_ReservationComponent__WEBPACK_IMPORTED_MODULE_9__["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('my-reservation-component', MyReservationComponent); //AppComponent
 
 var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   el: '#App',
@@ -77106,15 +77347,7 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
     return h(_components_AppComponent__WEBPACK_IMPORTED_MODULE_6__["default"]);
   },
   store: _store__WEBPACK_IMPORTED_MODULE_4__["default"],
-  router: _routes__WEBPACK_IMPORTED_MODULE_5__["default"],
-  data: {
-    userID: null
-  },
-  mounted: function mounted() {
-    // Assign the ID from meta tag for future use in application
-    //        this.userID = document.head.querySelector('meta[name="userID"]').content
-    this.userID = 1;
-  }
+  router: _routes__WEBPACK_IMPORTED_MODULE_5__["default"]
 });
 
 /***/ }),
@@ -77326,6 +77559,78 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/MyReservationsComponent.vue":
+/*!*************************************************************!*\
+  !*** ./resources/js/components/MyReservationsComponent.vue ***!
+  \*************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _MyReservationsComponent_vue_vue_type_template_id_3ebe82af___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./MyReservationsComponent.vue?vue&type=template&id=3ebe82af& */ "./resources/js/components/MyReservationsComponent.vue?vue&type=template&id=3ebe82af&");
+/* harmony import */ var _MyReservationsComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./MyReservationsComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/MyReservationsComponent.vue?vue&type=script&lang=js&");
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _MyReservationsComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _MyReservationsComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _MyReservationsComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _MyReservationsComponent_vue_vue_type_template_id_3ebe82af___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _MyReservationsComponent_vue_vue_type_template_id_3ebe82af___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/MyReservationsComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/MyReservationsComponent.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************!*\
+  !*** ./resources/js/components/MyReservationsComponent.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_MyReservationsComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./MyReservationsComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/MyReservationsComponent.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_MyReservationsComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_MyReservationsComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_MyReservationsComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_MyReservationsComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_MyReservationsComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./resources/js/components/MyReservationsComponent.vue?vue&type=template&id=3ebe82af&":
+/*!********************************************************************************************!*\
+  !*** ./resources/js/components/MyReservationsComponent.vue?vue&type=template&id=3ebe82af& ***!
+  \********************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MyReservationsComponent_vue_vue_type_template_id_3ebe82af___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./MyReservationsComponent.vue?vue&type=template&id=3ebe82af& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/MyReservationsComponent.vue?vue&type=template&id=3ebe82af&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MyReservationsComponent_vue_vue_type_template_id_3ebe82af___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MyReservationsComponent_vue_vue_type_template_id_3ebe82af___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/PointsComponent.vue":
 /*!*****************************************************!*\
   !*** ./resources/js/components/PointsComponent.vue ***!
@@ -77525,11 +77830,23 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 /* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
   state: {
     user: '',
-    astronomic_objects: []
+    astronomic_objects: [],
+    equipments: [],
+    reservations: [],
+    myReservations: []
   },
   mutations: {
     changeUser: function changeUser(state, user) {
       state.user = user;
+    },
+    changeEquipments: function changeEquipments(state, equipments) {
+      state.equipments = equipments;
+    },
+    changeReservations: function changeReservations(state, reservations) {
+      state.reservations = reservations;
+    },
+    changeMyReservations: function changeMyReservations(state, reservations) {
+      state.reservations = reservations;
     },
     changeAstronomicObjects: function changeAstronomicObjects(state, astronomic_objects) {
       state.astronomic_objects = astronomic_objects;
@@ -77538,6 +77855,18 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
   getters: {
     astronimic_objects: function astronimic_objects(state) {
       return state.astronomic_objects;
+    },
+    user: function user(state) {
+      return state.user;
+    },
+    equipments: function equipments(state) {
+      return state.equipments;
+    },
+    reservations: function reservations(state) {
+      return state.reservations;
+    },
+    myReservations: function myReservations(state) {
+      return state.myReservations;
     }
   }
 }));

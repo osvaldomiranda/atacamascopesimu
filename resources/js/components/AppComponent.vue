@@ -38,25 +38,50 @@
       dialog: false,
       drawer: null,
       step:"",
+      userId:0,
       astronomic_objects: null,      
     }),
     props: {
       source: String
     },
     computed: {
-      token() {
-        let token = document.head.querySelector('meta[name="csrf-token"]');
-        return token.content
-      }
+      
+
     },
     created () {
+      
+    },
+    mounted(){
       this.initialize()
     },
     methods: {
       initialize () {
-         this.$router.push('/dashboard');
+        axios.get('/api/equipments')
+            .then(function (resp) {    
+                //alert(JSON.stringify(resp.data));
+                app.$store.commit('changeEquipments',resp.data);
+            })
+            .catch(function (resp) {
+                console.log(resp);
+                alert("Error equipments :" + resp);
+            });
+
+        axios.get('/api/reservations')
+            .then(function (resp) {    
+                //alert(JSON.stringify(resp.data));
+                app.$store.commit('changeReservations',resp.data);
+            })
+            .catch(function (resp) {
+                console.log(resp);
+                alert("Error reservations :" + resp);
+            });
+
+
+
+
 
       },
+
       logout(){
             axios.post('/logout')
             .then(function (resp) {

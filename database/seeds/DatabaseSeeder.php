@@ -14025,10 +14025,15 @@ App\AstronomicObject::create(['name' => 'M38',  'equivalence' => 'NGC1912', 'typ
 App\AstronomicObject::create(['name' => 'M39',  'equivalence' => 'NGC7092', 'type_object' => 'Oc',  'bmag' =>4.6, 'ra' =>'21h 32.2m', 'dec' => '+48° 26′', 'constellation' =>  'Cyg', 'colloquial_name' => '']);
 App\AstronomicObject::create(['name' => 'M40',  'equivalence' => '', 'type_object' => 'Ds',  'bmag' =>8.4, 'ra' =>'12h 22.4m', 'dec' => '+58° 05′', 'constellation' =>  'UMa', 'colloquial_name' => 'Winnecke 4']);
 App\AstronomicObject::create(['name' => 'M41',  'equivalence' => 'NGC2287', 'type_object' => 'Oc',  'bmag' =>4.6, 'ra' =>'6h 47m', 'dec' => '-20° 44′', 'constellation' =>  'CMa', 'colloquial_name' => '']);
+
 App\AstronomicObject::create(['name' => 'M42',  'equivalence' => 'NGC1976', 'type_object' => 'Di',  'bmag' =>4, 'ra' =>'5h 35.4m', 'dec' => '-05° 27′', 'constellation' =>  'Ori', 'colloquial_name' => 'Great Nebula in Orion']);
+
+
 App\AstronomicObject::create(['name' => 'M43',  'equivalence' => 'NGC1982', 'type_object' => 'Di',  'bmag' =>9, 'ra' =>'5h 35.6m', 'dec' => '-05° 16′', 'constellation' =>  'Ori', 'colloquial_name' => 'De Mairans Nebula']);
+
 App\AstronomicObject::create(['name' => 'M44',  'equivalence' => 'NGC2632', 'type_object' => 'Oc',  'bmag' =>3.7, 'ra' =>'8h 40.1m', 'dec' => '+19° 59′', 'constellation' =>  'Cnc', 'colloquial_name' => 'Beehive Cluster']);
 App\AstronomicObject::create(['name' => 'M45',  'equivalence' => '', 'type_object' => 'Oc',  'bmag' =>1.6, 'ra' =>'3h 47m', 'dec' => '+24° 07′', 'constellation' =>  'Tau', 'colloquial_name' => 'Pleiades']);
+
 App\AstronomicObject::create(['name' => 'M46',  'equivalence' => 'NGC2437', 'type_object' => 'Oc',  'bmag' =>6, 'ra' =>'7h 41.8m', 'dec' => '-14° 49′', 'constellation' =>  'Pup', 'colloquial_name' => '']);
 App\AstronomicObject::create(['name' => 'M47',  'equivalence' => 'NGC2422', 'type_object' => 'Oc',  'bmag' =>5.2, 'ra' =>'7h 36.6m', 'dec' => '-14° 30′', 'constellation' =>  'Pup', 'colloquial_name' => '']);
 App\AstronomicObject::create(['name' => 'M48',  'equivalence' => 'NGC2548', 'type_object' => 'Oc',  'bmag' =>5.5, 'ra' =>'8h 13.8m', 'dec' => '-05° 48′', 'constellation' =>  'Hya', 'colloquial_name' => '']);

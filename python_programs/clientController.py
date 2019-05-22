@@ -12,11 +12,11 @@ if(response.ok):
 
     jData = json.loads(response.content)
 
-    print( jData['command'])
+    print( jData)
 
     if(jData['type']=='mount'):
-        ar = str(['ar'])
-        dec= str(['dec'])
+        ar = str(jData['ar'])
+        dec= str(jData['dec'])
 
         url = 'http://'+ip+'/api/messages/send?sender_id=1&receiver_id=2&message=Comando Montura recibido'
         data = '{}'
@@ -48,3 +48,6 @@ if(response.ok):
             call(["gphoto2","--set-config","eosremoterelease=2", "--wait-event="+str(exptime)+"s","--set-config", "eosremoterelease=4","--wait-event-and-download=5s"])
         except subprocess.CalledProcessError as e:
             raise RuntimeError("command '{}' return with error (code {}): {}".format(e.cmd, e.returncode, e.output))
+
+
+            

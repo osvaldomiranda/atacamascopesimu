@@ -5,6 +5,11 @@
     <v-card>
 
     <v-container fluid>
+      <v-layout align-center row>
+<!-- <passport-clients></passport-clients>
+<passport-authorized-clients></passport-authorized-clients>
+<passport-personal-access-tokens></passport-personal-access-tokens> -->
+        </v-layout>
         <v-layout align-center row>
         <v-flex xs12>
             <v-container  fluid>
@@ -191,11 +196,6 @@
         
       },
         initialize () {
-          var app = this;
-          // app.astronomic_objects = this.$store.getters.astronomic_objects;
-
-
-
 
         },
 

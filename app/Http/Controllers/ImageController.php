@@ -55,4 +55,11 @@ class ImageController extends Controller
         $images = Image::all();
         return response()->json($images);
     }
+
+    public function myImages(request $request){
+        $user_id = $request->header('user');
+        $images = Image::where('user_id',$user_id)->get();
+        return response()->json($images);
+    }
+
 }

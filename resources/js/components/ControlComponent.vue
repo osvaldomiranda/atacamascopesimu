@@ -272,10 +272,12 @@
 					    >
 					      <template v-slot:items="props">
 					        <td>
-					        	<v-img
-			      	  				v-bind:src="props.item.path"
-			      	  				aspect-ratio="1"
-			      				></v-img>
+					        	<a href="props.item.path">
+						        	<v-img
+				      	  				v-bind:src="props.item.path"
+				      	  				aspect-ratio="1"
+				      				></v-img>
+			      				</a>
 					        </td>
 
 					        <td class="text-xs-right">{{ props.item.name }}</td>

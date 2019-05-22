@@ -18,8 +18,6 @@
         <v-container fluid>
 
             <v-card>
-              
-            
             <v-layout align-center row>
                
                    <v-flex xs1>
@@ -39,14 +37,15 @@
                       >
                         <template v-slot:activator="{ on }">
                           <v-text-field
-                            v-model="date"
-                            label="Picker in menu"
+                            v-model="today"
+                            label="Fecha"
                             prepend-icon="event"
                             readonly
                             v-on="on"
+                            v
                           ></v-text-field>
                         </template>
-                        <v-date-picker v-model="date" no-title scrollable>
+                        <v-date-picker v-model="today" no-title @input="change_date" scrollable>
                           <v-spacer></v-spacer>
                           <v-btn flat color="primary" @click="menu = false">Cancel</v-btn>
                           <v-btn flat color="primary" @click="$refs.menu.save(date)">OK</v-btn>
@@ -58,7 +57,8 @@
                     
                     <v-flex xs2>
                         <v-select
-                          :items="items"
+                          v-model="equipment"
+                          :items="equipments"
                           label="Telescopio"
                         ></v-select>
                     </v-flex>
@@ -68,66 +68,93 @@
                     <v-flex xs4>
                         <span class="headline"> Puntos Disponibles:{{ current_points }}</span>
                     </v-flex>
+            </v-layout> 
 
-            </v-layout>    
+            <v-layout align-center row>
+               
+                   <v-flex xs8>
+                   </v-flex>
+                   <v-flex xs4>
+                        <span>{{ moon_state }}</span>
 
+                   </v-flex>
+               </v-layout>
             </v-card>
-            
-              
             </v-container>
-            <v-container fluid>
 
+
+
+
+            <v-container fluid>
             <v-layout align-center row>
                 <v-flex xs1>
                 </v-flex>
                 <v-flex xs4>
                 
-
-        <template>
-          <v-layout>
-            <v-flex>
-              <v-sheet height="300">
-                <v-calendar
-                  color="primary"
-                  type="day"
-                >
-                  <template v-slot:dayHeader="{ present }">
-                    <template
-                      v-if="present"
-                      class="text-xs-center"
+                <template>
+                  <v-layout wrap>
+                    <v-flex
+                      xs12
+                      class="mb-3"
                     >
-                      Today
-                    </template>
-                  </template>
+                      <v-sheet height="500">
+                        <v-calendar
+                          ref="calendar"
+                          v-model="start"
+                          :type="type"
+                          :end="end"
+                          color="primary"
+                        >
+                                  <template v-slot:interval="{ hour }">
+                                    <div
+                                      class="text-xs-center"
+                                    >
+                                        <v-btn small v-if="reservations.indexOf(hour)>-1" color="error">Reservado</v-btn>
+                                        <v-btn small v-if="reservations.indexOf(hour)<=-1" color="success" @click="reserv(hour)">Disponible</v-btn>
 
-                  <template v-slot:interval="{ hour }">
-                    <div
-                      class="text-xs-center"
-                    >
-                      <!-- {{ hour }} o'clock -->
+                                    </div>
+                                  </template>            
+                        </v-calendar>
+                      </v-sheet>
+                    </v-flex>
 
-                      <v-btn small v-if="reservations.indexOf(hour)>-1" color="error">Reservado</v-btn>
-                      <v-btn small v-if="reservations.indexOf(hour)<=-1" color="success">Disponible</v-btn>
+                  </v-layout>
+                </template>
 
-                    </div>
-                  </template>
-                </v-calendar>
-              </v-sheet>
-            </v-flex>
-          </v-layout>
-        </template>
+
 
         </v-flex>
     </v-layout>
 
 
-</v-container>
+    </v-container>
 
       </v-card>
 
 
+    <template>
+      <v-dialog v-model="dialog2" max-width="500px">
+        <v-card>
+          <v-card-title>
+            {{ this.hourToReserv }}
+          </v-card-title>
+          <v-card-text>
+            
+
+          </v-card-text>
+          <v-card-actions>
+            <v-btn color="primary" flat @click="dialog2=false">Close</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+    </template>
+
+
+
     </v-dialog>
   </v-layout>
+
+
 </template>
 
 <script>
@@ -147,88 +174,33 @@
 
     data () {
       return {
-        today: '2019-01-08',
-        current_points:200,
+        today: '2019-05-08',
+        date: '2019-05-08',
+        moon_state:"",
+        current_points:0,
+        points_in:0,
+        points_out:0,
+        hourToReserv:'',
 
         reservations:[1,22,23],
-
-        items: [ 
+        equipment:'Telescopio Principal',
+        equipments: [ 
             'Telescopio Principal',
             'Telescopio Secundario',
         ],
 
 
         dialog: false,
-        astronomic_objects:[],
-        selected:[],
+        dialog2: false,
+   
         search: '',
-        imageUrl: '',
-
-        Catalog:'Todos',
-        Catalogs: ['Todos','SolarSistem','Messier','NGC', 'IC'],
-
-        Constellation:'',
-        Constellations: [],
-        FilteredObjects: [],
-
-        Ar: 1.92837,
-        Dec: 1.92837,
-        Iso: '100',
-        Exp: '1',
-
-        Ar_act:0,
-        Dec_act:0,
-        Iso_act:0,
-        Exp_act:0,
-        current:'',
-        current_shot:'',    
-
+   
         rowsPerPageItems: [3, 5, 10, 20],
         pagination: {
             rowsPerPage: 3
         },  
 
-        object:'Seleccione Objeto',
-        state:'En espera',
-        Paso:'100',
-        Dir:'Adentro',
-        Pasos: [
-            '100',
-            '200',
-            '400',
-            '600',
-            '800',
-            '1000',
-            '2000',
-            '3000',
-        ],
-
-        Dirs: [
-            'Adentro',
-            'Afuera',
-        ],
-
-        Isos: [
-            '100',
-            '200',
-            '400',
-            '600',
-            '800',
-            '1000',
-            '2000',
-            '3000',
-        ],
-        Exps: [
-            '1',
-            '2',
-            '4',
-            '6',
-            '8',
-            '1',
-            '2',
-            '3',
-        ],
-
+   
         headers: [
           { text: 'Nombre', value: 'name' },
           { text: 'Catalogo', value: 'catalog' },
@@ -237,16 +209,17 @@
           { text: 'AR', value: 'ra' },
           { text: 'DEC', value: 'dec' }
         ],
-        myImages: [],
-        myImagesHeaders: [
-          { text: 'Foto', value: 'img' },
-          { text: 'Nombre', value: 'name' },
-          { text: 'ISO', value: 'iso' },
-          { text: 'TiempoExp', value: 'exptime' },
-          { text: 'Coord AR', value: 'ar' },
-          { text: 'Coord DEC', value: 'dec' },
-          { text: 'Fecha', value: 'created_at' }
-        ],
+
+        type: 'day',
+        start: '2019-05-17',
+        end: '2019-05-20',
+        typeOptions: [
+            { text: 'Day', value: 'day' },
+            { text: 'Week', value: 'week' },
+        ]
+    
+
+
       }
     },
 
@@ -258,161 +231,75 @@
         open (event) {
             alert(event.title)
         },
-        showAlert(a){
-        //  if (event.target.classList.contains('btn__content')) return;
-            var app = this;
-            this.Ar = a.coord_ar;
-            this.Dec = a.coord_dec;
-            this.object = a.name;
-            if(a.catalog=='SolarSistem'){
-                axios.get('/api/astronomic_objects/solarsistem?object=' + a.name)
-                .then(function (resp) {    
-                    //alert(JSON.stringify(resp.data));
-                    app.Ar = resp.data["ar"];
-                    app.Dec = resp.data["dec"];
-                })
-                .catch(function (resp) {
-                    console.log(resp);
-                    alert("Error shoot :" + resp);
-                });
-            }           
+        change_date(a){
+            this.start=a;
+            this.end = a;
+            this.moon();
+            // leer las reservas de ese día para mostrarlas al usuario
         },
+
+
         initialize () {
             var app = this;
-            // app.astronomic_objects = this.$store.getters.astronomic_objects;
+            var todayTime = new Date();
+            var month = (todayTime.getMonth() + 1).toString();
+            app.today = todayTime.getFullYear() + '-' + month.padStart(2,'00') + '-' + todayTime.getDate() ;
+            app.start = app.today; 
 
+            this.moon();
 
-        },
-
-        openChat () {
-            let app = this
-
-              // Start pusher listener
-            Pusher.logToConsole = true
-
-            var pusher = new Pusher('e6e9d9fd854d385c5f5b', {
-                cluster: 'us2',
-                forceTLS: true
-            })
-
-            var channel = pusher.subscribe('newMessage-' + 1 + '-' + 2) // newMessage-[chatting-with-who]-[my-id]
-
-            channel.bind('App\\Events\\MessageSent', function (data) {
-                
-                app.state = data.message['message'];
-
-                if (app.state=="Imagen Recibida"){
-
-                    app.imageRefresh();
+            let userId = document.head.querySelector('meta[name="userID"]');
+            axios.get('/api/points',{
+                headers: { 
+                    'user': userId.content,
                 }
-                
             })
-              // End pusher listener
-
-            
-         },
-
-
-        filter(a){
-            if(a=="Todos"){
-                this.FilteredObjects = this.astronomic_objects
-            } else {
-                this.FilteredObjects = this.astronomic_objects.filter(it => it.catalog==a );    
-            }
-        },
-        filterConstellation(a){
-            if(a=="Todos"){
-                this.FilteredObjects = this.astronomic_objects
-            } else {
-                this.FilteredObjects = this.astronomic_objects.filter(it => it.constellation==a );  
-            }
-        },
-        move(){
-            var $command = {'command': 'MONTURA', 'type': 'mount', 'status': 'PENDIENTE',
-                            'ar': this.Ar, 'dec': this.Dec, 'user_id': 1, 'equipment_id': 1};
-
-            alert(JSON.stringify($command));
-            axios.post('/api/command/move', $command)
-            .then(function (resp) {
-                
-            })
-            .catch(function (resp) {
-                console.log(resp);
-                alert("Error move :" + resp);
-            });
-
-            this.currentRefresh();
-        },
-        shoot(){
-            var $command = {'command': 'CAMARA', 'type': 'shoot', 'status': 'PENDIENTE',
-                            'exptime': this.Exp, 'iso': this.Iso, 'ar': this.Ar_act, 'dec': this.Dec_act, 'user_id': 1, 'equipment_id': 1};
-
-            this.imageUrl = '';
-            axios.post('/api/command/shoot', $command)
             .then(function (resp) {    
+                for(var i in resp.data){
+                     app.points_in += parseInt(resp.data[i].in,10);
+                     app.points_out += parseInt(resp.data[i].out,10);
+                 }
+                 app.current_points = app.points_in - app.points_out;
             })
             .catch(function (resp) {
                 console.log(resp);
-                alert("Error shoot :" + resp);
+                alert("Error Points :" + resp);
             });
 
-            this.currentRefresh();
-            this.current_shot=this.current;
+
         },
-        currentRefresh(){
-        
-            this.Ar_act = this.Ar;
-            this.Dec_act= this.Dec;
-            this.Iso_act= this.Iso;
-            this.Exp_act= this.Exp;
 
-            this.current = "Ar:" + this.Ar_act + ", Dec:"+ this.Dec_act + ", Iso:"+this.Iso_act+", Exp:"+this.Exp_act;
-        },
-        focus(){
-            var $command = {'command': 'ENFOCADOR', 'type': 'focuser', 'status': 'PENDIENTE',
-                            'ar': this.Ar, 'dec': this.Dec, 'user_id': 1, 'equipment_id': 1};
 
-            alert(JSON.stringify($command));
+        moon (){
+            
+            var app = this;
+            axios.get('/api/moon_state',{
+                headers: { 
+                    'moondate': app.start,
+                }
+            })
+            .then(function (resp) { 
 
-            axios.post('/api/command/focus', $command)
-            .then(function (resp) {
-                
+                 app.moon_state = resp.data;
             })
             .catch(function (resp) {
                 console.log(resp);
-                alert("Error focus :" + resp);
+                alert("Error moon :" + resp);
             });
-        },
-        saveImage(){
 
         },
 
-        imageRefresh(){
-            let app = this;
-            var $command = {'user_id':1}
-            axios.get('/api/image/last', $command)
-            .then(function (resp) {
-                app.imageUrl = resp.data;                
-            })
-            .catch(function (resp) {
-                console.log(resp);
-                alert("Error shoot :" + resp);
-            });
-            app.getMyImages();
+        confirmReserv (hour){
+            this.hourToReserv = hour;
+            this.dialog2 = true;
         },
-
-        getMyImages(){
-            let app = this;
-            var $command = {'user_id':1}
-            axios.get('/api/images', $command)
-            .then(function (resp) {
-                app.myImages = resp.data;               
-            })
-            .catch(function (resp) {
-                console.log(resp);
-                alert("Error shoot :" + resp);
-            });
+        reserv (){
+            
         }
+
+
+
+
 
     },
   }
