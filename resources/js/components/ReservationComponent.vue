@@ -59,7 +59,14 @@
                         <v-select
                           v-model="equipment"
                           :items="equipments"
+                          item-text="name"
                           label="Telescopio"
+                          v-validate="'required'"
+                          return-object
+                          :rules="blankRules"
+                          required
+                          @input= "changeTelescope"
+
                         ></v-select>
                     </v-flex>
                     <v-flex xs1>
@@ -109,8 +116,8 @@
                                     <div
                                       class="text-xs-center"
                                     >
-                                        <v-btn small v-if="reservations.indexOf(hour)>-1" color="error">Reservado</v-btn>
-                                        <v-btn small v-if="reservations.indexOf(hour)<=-1" color="success" @click="reserv(hour)">Disponible</v-btn>
+                                        <v-btn small v-if="reservationsArray.indexOf(hour)>-1" color="error">Reservado</v-btn>
+                                        <v-btn small v-if="reservationsArray.indexOf(hour)<=-1" color="success" @click="confirmReserv(hour)">Disponible</v-btn>
 
                                     </div>
                                   </template>            
@@ -120,29 +127,31 @@
 
                   </v-layout>
                 </template>
-
-
-
+        </v-flex>
+        <v-flex xs7>
+            <my-reservations></my-reservations>  
         </v-flex>
     </v-layout>
 
-
     </v-container>
-
-      </v-card>
+    </v-card>
 
 
     <template>
       <v-dialog v-model="dialog2" max-width="500px">
         <v-card>
           <v-card-title>
-            {{ this.hourToReserv }}
+            Confirmar Reserva
           </v-card-title>
           <v-card-text>
-            
+            {{ this.equipment }}
+            {{ this.points_out }}
+            {{ this.today }}
+            {{ this.hourToReserv }}
 
           </v-card-text>
           <v-card-actions>
+            <v-btn color="primary" flat @click="reserv">Reservar</v-btn>
             <v-btn color="primary" flat @click="dialog2=false">Close</v-btn>
           </v-card-actions>
         </v-card>
@@ -160,20 +169,16 @@
 <script>
   import { mapState } from 'vuex';
   export default {
-    
-    computed: {
-      
-      // convert the list of events into a map of lists keyed by date
-      // eventsMap () {
-      //   const map = {}
-      //   this.events.forEach(e => (map[e.date] = map[e.date] || []).push(e))
-      //   return map
-      // }
-    },
+    computed: mapState({
+        equipments: state => state.equipments,
+        reservations: state => state.reservations,
+    }),
+
 
 
     data () {
       return {
+        blankRules: [v => !!v || 'Campo requerido'],
         today: '2019-05-08',
         date: '2019-05-08',
         moon_state:"",
@@ -182,13 +187,9 @@
         points_out:0,
         hourToReserv:'',
 
-        reservations:[1,22,23],
-        equipment:'Telescopio Principal',
-        equipments: [ 
-            'Telescopio Principal',
-            'Telescopio Secundario',
-        ],
-
+        reservationsArray:[1,22,23],
+        reservations:[],
+        equipment_id: 1,
 
         dialog: false,
         dialog2: false,
@@ -231,15 +232,11 @@
         open (event) {
             alert(event.title)
         },
-        change_date(a){
-            this.start=a;
-            this.end = a;
-            this.moon();
-            // leer las reservas de ese día para mostrarlas al usuario
-        },
+
 
 
         initialize () {
+
             var app = this;
             var todayTime = new Date();
             var month = (todayTime.getMonth() + 1).toString();
@@ -265,13 +262,12 @@
                 console.log(resp);
                 alert("Error Points :" + resp);
             });
-
-
+           
+            this.reservatios_day();
         },
 
 
         moon (){
-            
             var app = this;
             axios.get('/api/moon_state',{
                 headers: { 
@@ -279,7 +275,6 @@
                 }
             })
             .then(function (resp) { 
-
                  app.moon_state = resp.data;
             })
             .catch(function (resp) {
@@ -293,13 +288,45 @@
             this.hourToReserv = hour;
             this.dialog2 = true;
         },
+
+        changeTelescope (a){
+            this.equipment = a.name;
+            this.equipment_id = a.id;
+            this.points_out = a.points;
+            this.reservatios_day();
+        },
+
+        change_date(a){
+            this.start=a;
+            this.end = a;
+            this.moon();
+            this.reservatios_day();
+        },
+
+
+        reservatios_day () {
+            var app = this;
+            axios.get('/api/reservations?equipment_id='+app.equipment_id+'&date='+app.start)
+            .then(function (resp) {  
+                app.reservationsArray=[];
+                for(var i in resp.data){
+                    app.reservationsArray.push(resp.data[i].hour);   
+                }
+            })
+            .catch(function (resp) {
+                console.log(resp);
+                alert("Error reservations :" + resp);
+            }); 
+        },
+
         reserv (){
+
             
-        }
 
-
-
-
+            this.reservatios_day();
+            this.dialog2=false;
+            
+        },
 
     },
   }

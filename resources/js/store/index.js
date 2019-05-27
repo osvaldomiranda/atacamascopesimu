@@ -11,7 +11,7 @@ export default new Vuex.Store(
 	  astronomic_objects:[],
 	  equipments:[],
 	  reservations:[],
-	  myReservations:[],
+	  my_reservations:[],
 	},
 	mutations: {
 		changeUser(state, user) {
@@ -23,11 +23,12 @@ export default new Vuex.Store(
 		changeReservations(state, reservations) {
 		  	state.reservations = reservations;
 		},
-		changeMyReservations(state, reservations) {
-		  	state.reservations = reservations;
-		},
+
 		changeAstronomicObjects(state, astronomic_objects) {
 		  	state.astronomic_objects = astronomic_objects;
+		},
+		changeMyReservations(state, my_reservations) {
+		  	state.my_reservatiosn = my_reservations;
 		},
 	},
 	getters: {
@@ -35,7 +36,7 @@ export default new Vuex.Store(
 		user: state=> state.user,
 		equipments: state=> state.equipments,
 		reservations: state=> state.reservations,
-		myReservations: state=> state.myReservations,
+		my_reservations: state=> state.my_reservations,
 
 	}
 });

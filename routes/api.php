@@ -42,9 +42,9 @@ Route::get('images', 'ImageController@index');
 Route::get('points', 'PointsController@index');
 Route::post('points/pay', 'PointsController@pay');
 
-Route::post('/equipments', 'EquipmentController@index');
-Route::post('/reservations', 'ReservationController@index');
-Route::post('/my_reservations', 'ReservationController@myReservations');
+Route::get('/equipments', 'EquipmentController@index');
+Route::get('/reservations', 'ReservationController@reservations');
+Route::get('/my_reservations', 'ReservationController@myReservations');
 
 Route::post('/my_images', 'ImageController@myImages');
 

@@ -56,6 +56,8 @@
     },
     methods: {
       initialize () {
+
+        var app = this;
         axios.get('/api/equipments')
             .then(function (resp) {    
                 //alert(JSON.stringify(resp.data));
@@ -69,7 +71,7 @@
         axios.get('/api/reservations')
             .then(function (resp) {    
                 //alert(JSON.stringify(resp.data));
-                app.$store.commit('changeReservations',resp.data);
+               app.$store.commit('changeReservations',resp.data);
             })
             .catch(function (resp) {
                 console.log(resp);
@@ -77,6 +79,7 @@
             });
 
 
+            this.$router.push('/dashboard');
 
 
 

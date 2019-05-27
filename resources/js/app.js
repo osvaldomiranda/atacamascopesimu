@@ -16,7 +16,8 @@ import AppComponent         from './components/AppComponent'
 import ControlComponent     from './components/ControlComponent'
 import PointsComponent      from './components/PointsComponent'
 import ReservationComponent      from './components/ReservationComponent'
-import MyReservationsComponent   from './components/MyReservationsComponent'
+import MyReservationsComponent      from './components/MyReservationsComponent'
+
 
 
 Vue.use(Vuex);
@@ -50,7 +51,8 @@ Vue.component('app', require('./views/App.vue'));
 Vue.component('control-component', ControlComponent);
 Vue.component('points-component', PointsComponent);
 Vue.component('reservation-component', ReservationComponent);
-Vue.component('my-reservation-component', MyReservationComponent);
+Vue.component('my-reservations', MyReservationsComponent);
+
 
 
 //AppComponent

@@ -21,7 +21,7 @@
               </v-card-title>
               <v-data-table
                 :headers="headers"
-                :items="reservations"
+                :items="my_reservations"
                 :search="search"
                 v-model="selected"
                 :rows-per-page-items="rowsPerPageItems"
@@ -29,11 +29,10 @@
               >
                 <template v-slot:items="props">
                   <tr @click="showAlert(props.item)">
-                  <td class="text-xs-left">{{ props.item.equipment_image }}</td>
-                  <td class="text-xs-left">{{ props.item.equipment_name }}</td>
-                  <td class="text-xs-left">{{ props.item.reservation_date }}</td>
-                  <td class="text-xs-left">{{ props.item.reservation_hour }}</td>
-                  <td class="text-xs-left">{{ props.item.reservation_time }}</td>
+                  <td class="text-xs-left">{{ props.item.equipment.name }}</td>
+                  <td class="text-xs-left">{{ props.item.date }}</td>
+                  <td class="text-xs-left">{{ props.item.hour }}</td>
+                  <td class="text-xs-left">{{ props.item.points }}</td>
                   <td class="text-xs-left"> <control-component></control-component> </td>
                 </tr>
                 </template>
@@ -50,8 +49,42 @@
     </v-container>    
 
 </template>
+
 <script>
-  	export default {
-    	data () {
-    	}
+
+    export default {
+  
+    data: () => ({
+        my_reservations:[],
+        headers: [
+          { text: 'Equipo', value: '' },
+          { text: 'Fecha', value: '' },
+          { text: 'Hora', value: '' },
+        ],
+    }),
+    mounted(){
+      this.initialize()
+    },
+    methods: {
+      initialize () {
+        var app = this;
+        let userId = document.head.querySelector('meta[name="userID"]');
+        axios.get('/api/my_reservations',{
+                headers: { 
+                    'user': userId.content,
+                }
+            })
+            .then(function (resp) {    
+                app.my_reservations = resp.data;
+                //alert(JSON.stringify(app.my_reservations));
+            })
+            .catch(function (resp) {
+                console.log(resp);
+                alert("Error my_reservations :" + resp);
+            });
+
+
+      },
+    }
 }
+</script>

@@ -52,9 +52,9 @@ class AstronomicObjectController extends Controller
 
     public function moon(Request $request){
 
-        Info($request->header());
+       // Info($request->header());
         $date_param = $request->header('moondate');
-        Info("date parap" . $date_param);
+       // Info("date parap" . $date_param);
 
         $date = str_replace("-","/",$date_param);
 

@@ -1817,6 +1817,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     initialize: function initialize() {
+      var app = this;
       axios.get('/api/equipments').then(function (resp) {
         //alert(JSON.stringify(resp.data));
         app.$store.commit('changeEquipments', resp.data);
@@ -1831,6 +1832,7 @@ __webpack_require__.r(__webpack_exports__);
         console.log(resp);
         alert("Error reservations :" + resp);
       });
+      this.$router.push('/dashboard');
     },
     logout: function logout() {
       axios.post('/logout').then(function (resp) {
@@ -2571,9 +2573,11 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 /*!**********************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/MyReservationsComponent.vue?vue&type=script&lang=js& ***!
   \**********************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+__webpack_require__.r(__webpack_exports__);
 //
 //
 //
@@ -2626,6 +2630,42 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 //
 //
 //
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      my_reservations: [],
+      headers: [{
+        text: 'Equipo',
+        value: ''
+      }, {
+        text: 'Fecha',
+        value: ''
+      }, {
+        text: 'Hora',
+        value: ''
+      }]
+    };
+  },
+  mounted: function mounted() {
+    this.initialize();
+  },
+  methods: {
+    initialize: function initialize() {
+      var app = this;
+      var userId = document.head.querySelector('meta[name="userID"]');
+      axios.get('/api/my_reservations', {
+        headers: {
+          'user': userId.content
+        }
+      }).then(function (resp) {
+        app.my_reservations = resp.data; //alert(JSON.stringify(app.my_reservations));
+      })["catch"](function (resp) {
+        console.log(resp);
+        alert("Error my_reservations :" + resp);
+      });
+    }
+  }
+});
 
 /***/ }),
 
@@ -3034,17 +3074,30 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  computed: {// convert the list of events into a map of lists keyed by date
-    // eventsMap () {
-    //   const map = {}
-    //   this.events.forEach(e => (map[e.date] = map[e.date] || []).push(e))
-    //   return map
-    // }
-  },
+  computed: Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])({
+    equipments: function equipments(state) {
+      return state.equipments;
+    },
+    reservations: function reservations(state) {
+      return state.reservations;
+    }
+  }),
   data: function data() {
     return {
+      blankRules: [function (v) {
+        return !!v || 'Campo requerido';
+      }],
       today: '2019-05-08',
       date: '2019-05-08',
       moon_state: "",
@@ -3052,9 +3105,9 @@ __webpack_require__.r(__webpack_exports__);
       points_in: 0,
       points_out: 0,
       hourToReserv: '',
-      reservations: [1, 22, 23],
-      equipment: 'Telescopio Principal',
-      equipments: ['Telescopio Principal', 'Telescopio Secundario'],
+      reservationsArray: [1, 22, 23],
+      reservations: [],
+      equipment_id: 1,
       dialog: false,
       dialog2: false,
       search: '',
@@ -3100,11 +3153,6 @@ __webpack_require__.r(__webpack_exports__);
     open: function open(event) {
       alert(event.title);
     },
-    change_date: function change_date(a) {
-      this.start = a;
-      this.end = a;
-      this.moon(); // leer las reservas de ese día para mostrarlas al usuario
-    },
     initialize: function initialize() {
       var app = this;
       var todayTime = new Date();
@@ -3128,6 +3176,7 @@ __webpack_require__.r(__webpack_exports__);
         console.log(resp);
         alert("Error Points :" + resp);
       });
+      this.reservatios_day();
     },
     moon: function moon() {
       var app = this;
@@ -3146,7 +3195,35 @@ __webpack_require__.r(__webpack_exports__);
       this.hourToReserv = hour;
       this.dialog2 = true;
     },
-    reserv: function reserv() {}
+    changeTelescope: function changeTelescope(a) {
+      this.equipment = a.name;
+      this.equipment_id = a.id;
+      this.points_out = a.points;
+      this.reservatios_day();
+    },
+    change_date: function change_date(a) {
+      this.start = a;
+      this.end = a;
+      this.moon();
+      this.reservatios_day();
+    },
+    reservatios_day: function reservatios_day() {
+      var app = this;
+      axios.get('/api/reservations?equipment_id=' + app.equipment_id + '&date=' + app.start).then(function (resp) {
+        app.reservationsArray = [];
+
+        for (var i in resp.data) {
+          app.reservationsArray.push(resp.data[i].hour);
+        }
+      })["catch"](function (resp) {
+        console.log(resp);
+        alert("Error reservations :" + resp);
+      });
+    },
+    reserv: function reserv() {
+      this.reservatios_day();
+      this.dialog2 = false;
+    }
   }
 });
 
@@ -3190,49 +3267,6 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -33960,7 +33994,7 @@ var render = function() {
                     {
                       attrs: {
                         headers: _vm.headers,
-                        items: _vm.reservations,
+                        items: _vm.my_reservations,
                         search: _vm.search,
                         "rows-per-page-items": _vm.rowsPerPageItems,
                         pagination: _vm.pagination
@@ -33986,23 +34020,19 @@ var render = function() {
                                 },
                                 [
                                   _c("td", { staticClass: "text-xs-left" }, [
-                                    _vm._v(_vm._s(props.item.equipment_image))
+                                    _vm._v(_vm._s(props.item.equipment.name))
                                   ]),
                                   _vm._v(" "),
                                   _c("td", { staticClass: "text-xs-left" }, [
-                                    _vm._v(_vm._s(props.item.equipment_name))
+                                    _vm._v(_vm._s(props.item.date))
                                   ]),
                                   _vm._v(" "),
                                   _c("td", { staticClass: "text-xs-left" }, [
-                                    _vm._v(_vm._s(props.item.reservation_date))
+                                    _vm._v(_vm._s(props.item.hour))
                                   ]),
                                   _vm._v(" "),
                                   _c("td", { staticClass: "text-xs-left" }, [
-                                    _vm._v(_vm._s(props.item.reservation_hour))
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("td", { staticClass: "text-xs-left" }, [
-                                    _vm._v(_vm._s(props.item.reservation_time))
+                                    _vm._v(_vm._s(props.item.points))
                                   ]),
                                   _vm._v(" "),
                                   _c(
@@ -34737,10 +34767,23 @@ var render = function() {
                             { attrs: { xs2: "" } },
                             [
                               _c("v-select", {
+                                directives: [
+                                  {
+                                    name: "validate",
+                                    rawName: "v-validate",
+                                    value: "required",
+                                    expression: "'required'"
+                                  }
+                                ],
                                 attrs: {
                                   items: _vm.equipments,
-                                  label: "Telescopio"
+                                  "item-text": "name",
+                                  label: "Telescopio",
+                                  "return-object": "",
+                                  rules: _vm.blankRules,
+                                  required: ""
                                 },
+                                on: { input: _vm.changeTelescope },
                                 model: {
                                   value: _vm.equipment,
                                   callback: function($$v) {
@@ -34833,7 +34876,7 @@ var render = function() {
                                                         "text-xs-center"
                                                     },
                                                     [
-                                                      _vm.reservations.indexOf(
+                                                      _vm.reservationsArray.indexOf(
                                                         hour
                                                       ) > -1
                                                         ? _c(
@@ -34852,7 +34895,7 @@ var render = function() {
                                                           )
                                                         : _vm._e(),
                                                       _vm._v(" "),
-                                                      _vm.reservations.indexOf(
+                                                      _vm.reservationsArray.indexOf(
                                                         hour
                                                       ) <= -1
                                                         ? _c(
@@ -34866,7 +34909,7 @@ var render = function() {
                                                                 click: function(
                                                                   $event
                                                                 ) {
-                                                                  return _vm.reserv(
+                                                                  return _vm.confirmReserv(
                                                                     hour
                                                                   )
                                                                 }
@@ -34906,6 +34949,13 @@ var render = function() {
                           ]
                         ],
                         2
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-flex",
+                        { attrs: { xs7: "" } },
+                        [_c("my-reservations")],
+                        1
                       )
                     ],
                     1
@@ -34935,18 +34985,35 @@ var render = function() {
                   "v-card",
                   [
                     _c("v-card-title", [
-                      _vm._v(
-                        "\n          " +
-                          _vm._s(this.hourToReserv) +
-                          "\n        "
-                      )
+                      _vm._v("\n          Confirmar Reserva\n        ")
                     ]),
                     _vm._v(" "),
-                    _c("v-card-text"),
+                    _c("v-card-text", [
+                      _vm._v(
+                        "\n          " +
+                          _vm._s(this.equipment) +
+                          "\n          " +
+                          _vm._s(this.points_out) +
+                          "\n          " +
+                          _vm._s(this.today) +
+                          "\n          " +
+                          _vm._s(this.hourToReserv) +
+                          "\n\n        "
+                      )
+                    ]),
                     _vm._v(" "),
                     _c(
                       "v-card-actions",
                       [
+                        _c(
+                          "v-btn",
+                          {
+                            attrs: { color: "primary", flat: "" },
+                            on: { click: _vm.reserv }
+                          },
+                          [_vm._v("Reservar")]
+                        ),
+                        _vm._v(" "),
                         _c(
                           "v-btn",
                           {
@@ -35137,198 +35204,7 @@ var render = function() {
                   _c(
                     "v-layout",
                     { attrs: { "align-center": "", row: "" } },
-                    [
-                      _c("v-flex", { attrs: { xs1: "" } }),
-                      _vm._v(" "),
-                      _c(
-                        "v-flex",
-                        {
-                          staticStyle: { overflow: "auto" },
-                          attrs: { xs10: "" }
-                        },
-                        [
-                          _c(
-                            "v-card",
-                            [
-                              _c(
-                                "v-card-title",
-                                [
-                                  _c("span", { staticClass: "headline" }, [
-                                    _vm._v("Mis Reservas")
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("v-spacer"),
-                                  _vm._v(" "),
-                                  _c("v-text-field", {
-                                    attrs: {
-                                      "append-icon": "search",
-                                      label: "Buscar",
-                                      "single-line": "",
-                                      "hide-details": ""
-                                    },
-                                    model: {
-                                      value: _vm.search,
-                                      callback: function($$v) {
-                                        _vm.search = $$v
-                                      },
-                                      expression: "search"
-                                    }
-                                  })
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "v-data-table",
-                                {
-                                  attrs: {
-                                    headers: _vm.headers,
-                                    items: _vm.reservations,
-                                    search: _vm.search,
-                                    "rows-per-page-items": _vm.rowsPerPageItems,
-                                    pagination: _vm.pagination
-                                  },
-                                  on: {
-                                    "update:pagination": function($event) {
-                                      _vm.pagination = $event
-                                    }
-                                  },
-                                  scopedSlots: _vm._u([
-                                    {
-                                      key: "items",
-                                      fn: function(props) {
-                                        return [
-                                          _c(
-                                            "tr",
-                                            {
-                                              on: {
-                                                click: function($event) {
-                                                  return _vm.showAlert(
-                                                    props.item
-                                                  )
-                                                }
-                                              }
-                                            },
-                                            [
-                                              _c(
-                                                "td",
-                                                { staticClass: "text-xs-left" },
-                                                [
-                                                  _vm._v(
-                                                    _vm._s(
-                                                      props.item.equipment_image
-                                                    )
-                                                  )
-                                                ]
-                                              ),
-                                              _vm._v(" "),
-                                              _c(
-                                                "td",
-                                                { staticClass: "text-xs-left" },
-                                                [
-                                                  _vm._v(
-                                                    _vm._s(
-                                                      props.item.equipment_name
-                                                    )
-                                                  )
-                                                ]
-                                              ),
-                                              _vm._v(" "),
-                                              _c(
-                                                "td",
-                                                { staticClass: "text-xs-left" },
-                                                [
-                                                  _vm._v(
-                                                    _vm._s(
-                                                      props.item
-                                                        .reservation_date
-                                                    )
-                                                  )
-                                                ]
-                                              ),
-                                              _vm._v(" "),
-                                              _c(
-                                                "td",
-                                                { staticClass: "text-xs-left" },
-                                                [
-                                                  _vm._v(
-                                                    _vm._s(
-                                                      props.item
-                                                        .reservation_hour
-                                                    )
-                                                  )
-                                                ]
-                                              ),
-                                              _vm._v(" "),
-                                              _c(
-                                                "td",
-                                                { staticClass: "text-xs-left" },
-                                                [
-                                                  _vm._v(
-                                                    _vm._s(
-                                                      props.item
-                                                        .reservation_time
-                                                    )
-                                                  )
-                                                ]
-                                              ),
-                                              _vm._v(" "),
-                                              _c(
-                                                "td",
-                                                { staticClass: "text-xs-left" },
-                                                [_c("control-component")],
-                                                1
-                                              )
-                                            ]
-                                          )
-                                        ]
-                                      }
-                                    }
-                                  ]),
-                                  model: {
-                                    value: _vm.selected,
-                                    callback: function($$v) {
-                                      _vm.selected = $$v
-                                    },
-                                    expression: "selected"
-                                  }
-                                },
-                                [
-                                  _vm._v(" "),
-                                  _c("v-alert", {
-                                    attrs: {
-                                      value: true,
-                                      color: "error",
-                                      icon: "warning"
-                                    },
-                                    scopedSlots: _vm._u([
-                                      {
-                                        key: "no-results",
-                                        fn: function() {
-                                          return [
-                                            _vm._v(
-                                              '\n                  Your search for "' +
-                                                _vm._s(_vm.search) +
-                                                '" found no results.\n                '
-                                            )
-                                          ]
-                                        },
-                                        proxy: true
-                                      }
-                                    ])
-                                  })
-                                ],
-                                1
-                              )
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c("v-flex", { attrs: { xs1: "" } })
-                        ],
-                        1
-                      )
-                    ],
+                    [_c("my-reservations")],
                     1
                   )
                 ],
@@ -77339,7 +77215,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('app', __webpack_require__(
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('control-component', _components_ControlComponent__WEBPACK_IMPORTED_MODULE_7__["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('points-component', _components_PointsComponent__WEBPACK_IMPORTED_MODULE_8__["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('reservation-component', _components_ReservationComponent__WEBPACK_IMPORTED_MODULE_9__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('my-reservation-component', MyReservationComponent); //AppComponent
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('my-reservations', _components_MyReservationsComponent__WEBPACK_IMPORTED_MODULE_10__["default"]); //AppComponent
 
 var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   el: '#App',
@@ -77607,9 +77483,7 @@ component.options.__file = "resources/js/components/MyReservationsComponent.vue"
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_MyReservationsComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./MyReservationsComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/MyReservationsComponent.vue?vue&type=script&lang=js&");
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_MyReservationsComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_MyReservationsComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_MyReservationsComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_MyReservationsComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
- /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_MyReservationsComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default.a); 
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_MyReservationsComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
@@ -77833,7 +77707,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     astronomic_objects: [],
     equipments: [],
     reservations: [],
-    myReservations: []
+    my_reservations: []
   },
   mutations: {
     changeUser: function changeUser(state, user) {
@@ -77845,11 +77719,11 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     changeReservations: function changeReservations(state, reservations) {
       state.reservations = reservations;
     },
-    changeMyReservations: function changeMyReservations(state, reservations) {
-      state.reservations = reservations;
-    },
     changeAstronomicObjects: function changeAstronomicObjects(state, astronomic_objects) {
       state.astronomic_objects = astronomic_objects;
+    },
+    changeMyReservations: function changeMyReservations(state, my_reservations) {
+      state.my_reservatiosn = my_reservations;
     }
   },
   getters: {
@@ -77865,8 +77739,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     reservations: function reservations(state) {
       return state.reservations;
     },
-    myReservations: function myReservations(state) {
-      return state.myReservations;
+    my_reservations: function my_reservations(state) {
+      return state.my_reservations;
     }
   }
 }));
