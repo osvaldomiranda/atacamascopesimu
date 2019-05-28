@@ -2510,7 +2510,7 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
       this.imageUrl = '';
       axios.post('/api/command/shoot', $command).then(function (resp) {})["catch"](function (resp) {
         console.log(resp);
-        alert("Error shoot :" + resp);
+        alert("Error create reservation :" + resp);
       });
       this.currentRefresh();
       this.current_shot = this.current;
@@ -2578,6 +2578,7 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 //
 //
 //
@@ -2630,10 +2631,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+  computed: Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])({
+    my_reservations: function my_reservations(state) {
+      return state.my_reservations;
+    }
+  }),
   data: function data() {
     return {
-      my_reservations: [],
+      // my_reservations:[],
       headers: [{
         text: 'Equipo',
         value: ''
@@ -2658,7 +2667,7 @@ __webpack_require__.r(__webpack_exports__);
           'user': userId.content
         }
       }).then(function (resp) {
-        app.my_reservations = resp.data; //alert(JSON.stringify(app.my_reservations));
+        app.$store.commit('changeMyReservations', resp.data);
       })["catch"](function (resp) {
         console.log(resp);
         alert("Error my_reservations :" + resp);
@@ -2858,6 +2867,7 @@ __webpack_require__.r(__webpack_exports__);
         }
 
         app.current_points = app.points_in - app.points_out;
+        app.$store.commit('changeCurrentPoints', app.current_points);
       })["catch"](function (resp) {
         console.log(resp);
         alert("Error Points :" + resp);
@@ -2883,6 +2893,7 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (resp) {
         app.purchases.push(pay_points);
         app.current_points = parseInt(app.current_points) + parseInt(app.points);
+        app.$store.commit('changeCurrentPoints', app.current_points);
       })["catch"](function (resp) {
         console.log(resp);
         alert("Error AddPoints :" + resp);
@@ -3105,6 +3116,7 @@ __webpack_require__.r(__webpack_exports__);
       points_in: 0,
       points_out: 0,
       hourToReserv: '',
+      equipment: 'Equipo Principal',
       reservationsArray: [1, 22, 23],
       reservations: [],
       equipment_id: 1,
@@ -3160,22 +3172,7 @@ __webpack_require__.r(__webpack_exports__);
       app.today = todayTime.getFullYear() + '-' + month.padStart(2, '00') + '-' + todayTime.getDate();
       app.start = app.today;
       this.moon();
-      var userId = document.head.querySelector('meta[name="userID"]');
-      axios.get('/api/points', {
-        headers: {
-          'user': userId.content
-        }
-      }).then(function (resp) {
-        for (var i in resp.data) {
-          app.points_in += parseInt(resp.data[i]["in"], 10);
-          app.points_out += parseInt(resp.data[i].out, 10);
-        }
-
-        app.current_points = app.points_in - app.points_out;
-      })["catch"](function (resp) {
-        console.log(resp);
-        alert("Error Points :" + resp);
-      });
+      this.points();
       this.reservatios_day();
     },
     moon: function moon() {
@@ -3221,8 +3218,58 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     reserv: function reserv() {
-      this.reservatios_day();
-      this.dialog2 = false;
+      var app = this;
+      var userId = document.head.querySelector('meta[name="userID"]');
+      var reserv = {
+        'user_id': userId.content,
+        'equipment_id': this.equipment_id,
+        'date': this.start,
+        'hour': this.hourToReserv,
+        'points_out': this.points_out,
+        'current_points': this.current_points - this.points_out
+      };
+      axios.post('/api/reservation/create', reserv).then(function (resp) {
+        app.reservatios_day();
+        app.points();
+        app.my_reservations();
+      })["catch"](function (resp) {
+        console.log(resp);
+        alert("Error reservation create :" + resp);
+      });
+      app.dialog2 = false;
+    },
+    points: function points() {
+      var userId = document.head.querySelector('meta[name="userID"]');
+      axios.get('/api/points', {
+        headers: {
+          'user': userId.content
+        }
+      }).then(function (resp) {
+        for (var i in resp.data) {
+          app.points_in += parseInt(resp.data[i]["in"], 10);
+          app.points_out += parseInt(resp.data[i].out, 10);
+        }
+
+        app.current_points = app.points_in - app.points_out;
+        alert(app.current_points);
+        app.$store.commit('changeCurrentPoints', app.current_points);
+      })["catch"](function (resp) {
+        console.log(resp);
+        alert("Error Points Reserv :" + resp);
+      });
+    },
+    my_reservations: function my_reservations() {
+      var userId = document.head.querySelector('meta[name="userID"]');
+      axios.get('/api/my_reservations', {
+        headers: {
+          'user': userId.content
+        }
+      }).then(function (resp) {
+        app.$store.commit('changeMyReservations', resp.data);
+      })["catch"](function (resp) {
+        console.log(resp);
+        alert("Error my_reservations :" + resp);
+      });
     }
   }
 });
@@ -3358,7 +3405,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  computed: Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['astronomc_objects']),
+  computed: Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['astronomc_objects', 'current_points']),
   data: function data() {
     return {
       search: '',
@@ -34802,7 +34849,7 @@ var render = function() {
                             _c("span", { staticClass: "headline" }, [
                               _vm._v(
                                 " Puntos Disponibles:" +
-                                  _vm._s(_vm.current_points)
+                                  _vm._s(_vm.$store.getters.current_points)
                               )
                             ])
                           ])
@@ -35154,7 +35201,9 @@ var render = function() {
                                       _c("span", { staticClass: "headline" }, [
                                         _vm._v(
                                           " Puntos Disponibles:" +
-                                            _vm._s(_vm.points)
+                                            _vm._s(
+                                              _vm.$store.getters.current_points
+                                            )
                                         )
                                       ])
                                     ]
@@ -77439,15 +77488,14 @@ __webpack_require__.r(__webpack_exports__);
 /*!*************************************************************!*\
   !*** ./resources/js/components/MyReservationsComponent.vue ***!
   \*************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _MyReservationsComponent_vue_vue_type_template_id_3ebe82af___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./MyReservationsComponent.vue?vue&type=template&id=3ebe82af& */ "./resources/js/components/MyReservationsComponent.vue?vue&type=template&id=3ebe82af&");
 /* harmony import */ var _MyReservationsComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./MyReservationsComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/MyReservationsComponent.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _MyReservationsComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _MyReservationsComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -77477,7 +77525,7 @@ component.options.__file = "resources/js/components/MyReservationsComponent.vue"
 /*!**************************************************************************************!*\
   !*** ./resources/js/components/MyReservationsComponent.vue?vue&type=script&lang=js& ***!
   \**************************************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -77707,7 +77755,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     astronomic_objects: [],
     equipments: [],
     reservations: [],
-    my_reservations: []
+    my_reservations: [],
+    current_points: 0
   },
   mutations: {
     changeUser: function changeUser(state, user) {
@@ -77723,7 +77772,10 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
       state.astronomic_objects = astronomic_objects;
     },
     changeMyReservations: function changeMyReservations(state, my_reservations) {
-      state.my_reservatiosn = my_reservations;
+      state.my_reservations = my_reservations;
+    },
+    changeCurrentPoints: function changeCurrentPoints(state, current_points) {
+      state.current_points = current_points;
     }
   },
   getters: {
@@ -77741,6 +77793,9 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     },
     my_reservations: function my_reservations(state) {
       return state.my_reservations;
+    },
+    current_points: function current_points(state) {
+      return state.current_points;
     }
   }
 }));

@@ -517,7 +517,7 @@
             })
             .catch(function (resp) {
                 console.log(resp);
-                alert("Error shoot :" + resp);
+                alert("Error create reservation :" + resp);
             });
 
             this.currentRefresh();

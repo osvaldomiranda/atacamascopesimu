@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Reservation;
+use App\points;
 
 
 class ReservationController extends Controller
@@ -27,5 +28,35 @@ class ReservationController extends Controller
 
         $reservations = Reservation::whereDate('date','=',$date)->where('equipment_id',$equipment_id)-> get();
         return response()->json($reservations);
+    }
+
+    public function create(Request $request){
+
+        $this->validate($request, [
+            'user_id' => 'required',
+            'equipment_id' => 'required',
+            'date' => 'required',
+            'hour' => 'required',
+            'points_out' => 'required',
+            'current_points' => 'required',
+        ]);
+
+        $reservation = new Reservation();
+        $reservation->user_id       = $request->input('user_id');
+        $reservation->equipment_id  = $request->input('equipment_id');
+        $reservation->date          = $request->input('date');
+        $reservation->hour          = $request->input('hour');
+        $reservation->points_out    = $request->input('points_out');
+        $reservation->state         = 'CREADA';
+        $reservation->save();
+
+        $points = new Points();
+        $points->user_id        = $request->input('user_id');
+        $points->reservation_id = $reservation->id;
+        $points->in             = 0;
+        $points->out            = $reservation->points_out;
+        $points->current_points = $request->input('current_points');
+        $points->save();
+
     }
 }

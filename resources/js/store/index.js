@@ -12,6 +12,7 @@ export default new Vuex.Store(
 	  equipments:[],
 	  reservations:[],
 	  my_reservations:[],
+	  current_points:0,
 	},
 	mutations: {
 		changeUser(state, user) {
@@ -28,7 +29,10 @@ export default new Vuex.Store(
 		  	state.astronomic_objects = astronomic_objects;
 		},
 		changeMyReservations(state, my_reservations) {
-		  	state.my_reservatiosn = my_reservations;
+		  	state.my_reservations = my_reservations;
+		},
+		changeCurrentPoints(state, current_points) {
+		  	state.current_points = current_points;
 		},
 	},
 	getters: {
@@ -37,6 +41,7 @@ export default new Vuex.Store(
 		equipments: state=> state.equipments,
 		reservations: state=> state.reservations,
 		my_reservations: state=> state.my_reservations,
+		current_points: state=> state.current_points,
 
 	}
 });

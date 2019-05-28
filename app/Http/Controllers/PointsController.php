@@ -24,8 +24,6 @@ class PointsController extends Controller
     }
 
 
-
-
     public function pay(request $request){    	
 	    $this->validate($request, [
 	        'in' => 'required',
@@ -42,6 +40,5 @@ class PointsController extends Controller
         $points->user_id		= $request->header('user');
         $points->save();
     }
-
 
 }

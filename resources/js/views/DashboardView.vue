@@ -15,7 +15,7 @@
             <v-container  fluid>
                     <v-layout >
                         <v-flex xs4 align-end flexbox>
-                          <span class="headline"> Puntos Disponibles:{{ points }}</span>
+                          <span class="headline"> Puntos Disponibles:{{ $store.getters.current_points }}</span>
                         </v-flex>
                         <v-flex xs8 align-end flexbox>
                             <div>
@@ -90,7 +90,7 @@
 <script>
   import { mapState } from 'vuex';
   export default {
-    computed: mapState(['astronomc_objects']),
+    computed: mapState(['astronomc_objects', 'current_points']),
     data () {
       return {
         search: '',

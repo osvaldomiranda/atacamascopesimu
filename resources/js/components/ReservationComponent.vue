@@ -73,7 +73,7 @@
                    </v-flex>
 
                     <v-flex xs4>
-                        <span class="headline"> Puntos Disponibles:{{ current_points }}</span>
+                        <span class="headline"> Puntos Disponibles:{{ $store.getters.current_points }}</span>
                     </v-flex>
             </v-layout> 
 
@@ -174,8 +174,6 @@
         reservations: state => state.reservations,
     }),
 
-
-
     data () {
       return {
         blankRules: [v => !!v || 'Campo requerido'],
@@ -186,6 +184,7 @@
         points_in:0,
         points_out:0,
         hourToReserv:'',
+        equipment: 'Equipo Principal',
 
         reservationsArray:[1,22,23],
         reservations:[],
@@ -245,23 +244,7 @@
 
             this.moon();
 
-            let userId = document.head.querySelector('meta[name="userID"]');
-            axios.get('/api/points',{
-                headers: { 
-                    'user': userId.content,
-                }
-            })
-            .then(function (resp) {    
-                for(var i in resp.data){
-                     app.points_in += parseInt(resp.data[i].in,10);
-                     app.points_out += parseInt(resp.data[i].out,10);
-                 }
-                 app.current_points = app.points_in - app.points_out;
-            })
-            .catch(function (resp) {
-                console.log(resp);
-                alert("Error Points :" + resp);
-            });
+            this.points();
            
             this.reservatios_day();
         },
@@ -320,14 +303,63 @@
         },
 
         reserv (){
+            var app = this
+            let userId = document.head.querySelector('meta[name="userID"]');
+            var reserv = {'user_id':userId.content, 'equipment_id': this.equipment_id, 'date': this.start, 'hour': this.hourToReserv , 'points_out': this.points_out, 'current_points': this.current_points - this.points_out };
 
-            
+            axios.post('/api/reservation/create', reserv)
+            .then(function (resp) {  
+                app.reservatios_day(); 
+                app.points(); 
+                app.my_reservations();
+            })
+            .catch(function (resp) {
+                console.log(resp);
+                alert("Error reservation create :" + resp);
+            });
 
-            this.reservatios_day();
-            this.dialog2=false;
-            
+            app.dialog2=false;  
         },
+        points (){
+            let userId = document.head.querySelector('meta[name="userID"]');
+            axios.get('/api/points',{
+                headers: { 
+                    'user': userId.content,
+                }
+            })
+            .then(function (resp) {    
+                for(var i in resp.data){
+                     app.points_in += parseInt(resp.data[i].in,10);
+                     app.points_out += parseInt(resp.data[i].out,10);
+                 }
 
+                 
+                 app.current_points = app.points_in - app.points_out;
+                 alert(app.current_points);
+
+                 app.$store.commit('changeCurrentPoints',app.current_points );
+            })
+            .catch(function (resp) {
+                console.log(resp);
+                alert("Error Points Reserv :" + resp);
+            });
+        },
+        my_reservations (){
+            let userId = document.head.querySelector('meta[name="userID"]');
+            axios.get('/api/my_reservations',{
+                    headers: { 
+                        'user': userId.content,
+                    }
+                })
+                .then(function (resp) {    
+                    app.$store.commit('changeMyReservations',resp.data );
+      
+                })
+                .catch(function (resp) {
+                    console.log(resp);
+                    alert("Error my_reservations :" + resp);
+                });
+        }
     },
   }
 </script>

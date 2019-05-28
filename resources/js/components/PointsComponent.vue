@@ -183,6 +183,7 @@
                      app.points_out += parseInt(resp.data[i].out,10);
                  }
                  app.current_points = app.points_in - app.points_out;
+                 app.$store.commit('changeCurrentPoints',app.current_points );
             })
             .catch(function (resp) {
                 console.log(resp);
@@ -209,6 +210,7 @@
             .then(function (resp) {
                 app.purchases.push(pay_points);
                 app.current_points = parseInt(app.current_points) + parseInt(app.points);
+                app.$store.commit('changeCurrentPoints',app.current_points );
             })
             .catch(function (resp) {
                 console.log(resp);

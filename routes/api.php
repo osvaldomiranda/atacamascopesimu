@@ -46,5 +46,7 @@ Route::get('/equipments', 'EquipmentController@index');
 Route::get('/reservations', 'ReservationController@reservations');
 Route::get('/my_reservations', 'ReservationController@myReservations');
 
+Route::post('/reservation/create', 'ReservationController@create');
+
 Route::post('/my_images', 'ImageController@myImages');
 

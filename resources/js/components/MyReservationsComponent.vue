@@ -50,12 +50,17 @@
 
 </template>
 
-<script>
 
-    export default {
-  
+
+<script>
+  import { mapState } from 'vuex';
+  export default {
+    computed: mapState({
+        my_reservations: state => state.my_reservations,
+    }),
+
     data: () => ({
-        my_reservations:[],
+        // my_reservations:[],
         headers: [
           { text: 'Equipo', value: '' },
           { text: 'Fecha', value: '' },
@@ -75,15 +80,15 @@
                 }
             })
             .then(function (resp) {    
-                app.my_reservations = resp.data;
-                //alert(JSON.stringify(app.my_reservations));
+                app.$store.commit('changeMyReservations',resp.data );
+
+              
+  
             })
             .catch(function (resp) {
                 console.log(resp);
                 alert("Error my_reservations :" + resp);
             });
-
-
       },
     }
 }
