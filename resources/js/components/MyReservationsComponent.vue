@@ -61,6 +61,13 @@
 
     data: () => ({
         // my_reservations:[],
+        search:'',
+        selected:3,
+        rowsPerPageItems: [3, 5, 10, 20],
+        pagination: {
+            rowsPerPage: 3
+        }, 
+
         headers: [
           { text: 'Equipo', value: '' },
           { text: 'Fecha', value: '' },
@@ -81,8 +88,6 @@
             })
             .then(function (resp) {    
                 app.$store.commit('changeMyReservations',resp.data );
-
-              
   
             })
             .catch(function (resp) {

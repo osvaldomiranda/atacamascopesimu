@@ -45,10 +45,10 @@
 					  <v-card>
 					    <v-card-title>
 					        <v-select
-							    v-model="Catalog"
-							    :items="Catalogs"
-							    @input= "filter"
-							    label="Catalogo"
+							    v-model="type"
+							    :items="types"
+							    @input= "filterType"
+							    label="Tipo"
 							    single-line
 						        hide-details
 							    ></v-select>
@@ -313,10 +313,36 @@
         selected:[],
         search: '',
         imageUrl: '',
+        h_ra:0,
+        m_ra:0,
+        s_ra:0,
 
-        Catalog:'Todos',
-        Catalogs: ['Todos','SolarSistem','Messier','NGC', 'IC'],
+        h_dec:0,
+        m_dec:0,
+        s_dec:0,
 
+        catalog:'SolarSistem',
+        catalogs: ['SolarSistem','Messier','NGC', 'IC'],
+        type:'Planet',
+        types:[	'Planet',
+        		'Asterismo o Cúmulo Abierto',
+				'Cúmulo abierto',
+				'Cúmulo Globular',
+				'Estrella',
+				'Estrella doble',
+				'Galaxia',
+				'Galaxias en Interacción',
+				'Nebulosa',
+				'Nebulosa de emisión Hidrógeno',
+				'Nebulosa de Reflexión',
+				'Nebulosa Extragaláctica',
+				'Nebulosa Planetaria',
+				'Nebulosa y Cúmulo',
+				'Nova',
+				'Otro',
+				'Par de Galaxias',
+				'Remanente de Supernova',
+				'Trío de Galaxias',],
         Constellation:'',
         Constellations: [],
         FilteredObjects: [],
@@ -400,15 +426,18 @@
       }
     },
     created () {
-      	this.initialize();
+      	
+    },
+    mounted (){
+    	this.initialize();
     },
     methods: {
     	showAlert(a){
       	//	if (event.target.classList.contains('btn__content')) return;
       		var app = this;
-      		this.Ar = a.coord_ar;
-      		this.Dec = a.coord_dec;
+ 
       		this.object = a.name;
+
       		if(a.catalog=='SolarSistem'){
 	      		axios.get('/api/astronomic_objects/solarsistem?object=' + a.name)
 	            .then(function (resp) {    
@@ -420,32 +449,30 @@
 	                console.log(resp);
 	                alert("Error shoot :" + resp);
 	            });
-      		}      		
+      		}     
+
+      		this.coords(a.ra, a.dec); 		
     	},
       	initialize () {
-         	var app = this;
-         	// app.astronomic_objects = this.$store.getters.astronomic_objects;
+            this.openChat();
+            this.getMyImages();
+            this.getAstrnomicObject();
 
-          axios.get('/api/astronomic_objects')
+        },
+
+        getAstrnomicObject(){
+        	var app=this;
+        	axios.get('/api/astronomic_objects?constellation=' + app.contellation +'&catalog='+app.catalog+'&type='+app.type)
             .then(function (resp) {
-              	app.astronomic_objects = resp.data;
-              	app.filter('SolarSistem');
-              	app.$store.commit('changeAstronomicObjects', app.astronomic_objects);
-            	const distinctConst=[...new Set(app.astronomic_objects.map(x => x.constellation))];
-            	app.Constellations = distinctConst.sort();
-
+              	app.FilteredObjects = resp.data;
+            	// const distinctConst=[...new Set(app.astronomic_objects.map(x => x.constellation))];
+            	// app.Constellations = distinctConst.sort();
+            	// alert(JSON.stringify(app.FilteredObjects));
             })
             .catch(function (resp) {
-                console.log(resp);
+                //console.log(resp);
                 alert("Error astronomic_objects :" + resp);
             });
-
-            app.openChat();
-            app.getMyImages();
-
-            // Constellations
-
-
         },
 
 	    openChat () {
@@ -472,25 +499,26 @@
 	            
 	        })
 	          // End pusher listener
-
-	        
 	     },
 
 
         filter(a){
-        	if(a=="Todos"){
-        		this.FilteredObjects = this.astronomic_objects
-        	} else {
-        		this.FilteredObjects = this.astronomic_objects.filter(it => it.catalog==a );	
-        	}
+        	this.catalog = a;
+        	this.getAstrnomicObject();
+        },
+        filterType(a){
+        	this.type = a;
+        	this.getAstrnomicObject();	
+        	
         },
         filterConstellation(a){
-        	if(a=="Todos"){
+        	if(a=="Todas"){
         		this.FilteredObjects = this.astronomic_objects
         	} else {
-        		this.FilteredObjects = this.astronomic_objects.filter(it => it.constellation==a );	
+        		this.FilteredObjects = this.FilteredObjects.filter(it => it.constellation==a );	
         	}
         },
+
         move(){
         	var $command = {'command': 'MONTURA', 'type': 'mount', 'status': 'PENDIENTE',
         	                'ar': this.Ar, 'dec': this.Dec, 'user_id': 1, 'equipment_id': 1};
@@ -536,7 +564,7 @@
         	var $command = {'command': 'ENFOCADOR', 'type': 'focuser', 'status': 'PENDIENTE',
         	                'steps': this.Paso, 'direction': 1, 'user_id': 1, 'equipment_id': 1};
 
-        	alert(JSON.stringify($command));
+        	//alert(JSON.stringify($command));
 
         	axios.post('/api/command/focus', $command)
             .then(function (resp) {
@@ -576,6 +604,36 @@
                 console.log(resp);
                 alert("Error shoot :" + resp);
             });
+        },
+
+        coords (ra, dec){
+        
+        	var res = ra.replace(/h/g, " ")
+        	res = res.replace(/m/g, " ")
+        	res = res.replace(/s/g, " ")
+        	this.h_ra = parseFloat(res.split(" ")[0]);
+       		this.m_ra = parseFloat(res.split(" ")[1]); 
+       		this.s_ra = parseFloat(res.split(" ")[2]);
+	    	var ra_selected  = (this.h_ra + (this.m_ra/60) + (this.s_ra/3600));
+        	this.Ar = ra_selected;
+
+
+        	res = dec.replace(/°/g, " ")
+        	res = res.replace(/m/g, " ")
+        	res = res.replace(/s/g, " ")
+        	this.h_dec = parseFloat(res.split(" ")[0]);
+       		this.m_dec = parseFloat(res.split(" ")[1]); 
+       		this.s_dec = parseFloat(res.split(" ")[2]);
+       		var dec_selected  = 0;
+       		if(this.h_dec<0){
+       			this.h_dec = this.h_dec * -1;
+       			dec_selected  = -(this.h_dec + (this.m_dec/60) + (this.s_dec/3600));
+       		} else{
+       			dec_selected  = (this.h_dec + (this.m_dec/60) + (this.s_dec/3600));
+       		}
+       		
+      		this.Dec = dec_selected;
+      		
         }
 
     },

@@ -61,7 +61,7 @@
                           :items="equipments"
                           item-text="name"
                           label="Telescopio"
-                          v-validate="'required'"
+                          
                           return-object
                           :rules="blankRules"
                           required
@@ -180,6 +180,7 @@
         today: '2019-05-08',
         date: '2019-05-08',
         moon_state:"",
+        menu:false,
         current_points:0,
         points_in:0,
         points_out:0,
@@ -187,7 +188,6 @@
         equipment: 'Equipo Principal',
 
         reservationsArray:[1,22,23],
-        reservations:[],
         equipment_id: 1,
 
         dialog: false,
@@ -321,6 +321,7 @@
             app.dialog2=false;  
         },
         points (){
+            var app = this;
             let userId = document.head.querySelector('meta[name="userID"]');
             axios.get('/api/points',{
                 headers: { 
@@ -334,8 +335,8 @@
                  }
 
                  
-                 app.current_points = app.points_in - app.points_out;
-                 alert(app.current_points);
+                 app.current_points = (app.points_in || 0) - (app.points_out || 0);
+                 //alert(app.current_points);
 
                  app.$store.commit('changeCurrentPoints',app.current_points );
             })
@@ -345,6 +346,7 @@
             });
         },
         my_reservations (){
+            var app = this;
             let userId = document.head.querySelector('meta[name="userID"]');
             axios.get('/api/my_reservations',{
                     headers: { 
@@ -357,7 +359,7 @@
                 })
                 .catch(function (resp) {
                     console.log(resp);
-                    alert("Error my_reservations :" + resp);
+                    alert("Error reservation my_reservations :" + resp);
                 });
         }
     },

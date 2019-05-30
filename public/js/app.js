@@ -2007,14 +2007,6 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
-
-function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
-
 //
 //
 //
@@ -2329,8 +2321,16 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
       selected: [],
       search: '',
       imageUrl: '',
-      Catalog: 'Todos',
-      Catalogs: ['Todos', 'SolarSistem', 'Messier', 'NGC', 'IC'],
+      h_ra: 0,
+      m_ra: 0,
+      s_ra: 0,
+      h_dec: 0,
+      m_dec: 0,
+      s_dec: 0,
+      catalog: 'SolarSistem',
+      catalogs: ['SolarSistem', 'Messier', 'NGC', 'IC'],
+      type: 'Planet',
+      types: ['Planet', 'Asterismo o Cúmulo Abierto', 'Cúmulo abierto', 'Cúmulo Globular', 'Estrella', 'Estrella doble', 'Galaxia', 'Galaxias en Interacción', 'Nebulosa', 'Nebulosa de emisión Hidrógeno', 'Nebulosa de Reflexión', 'Nebulosa Extragaláctica', 'Nebulosa Planetaria', 'Nebulosa y Cúmulo', 'Nova', 'Otro', 'Par de Galaxias', 'Remanente de Supernova', 'Trío de Galaxias'],
       Constellation: '',
       Constellations: [],
       FilteredObjects: [],
@@ -2400,15 +2400,14 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
       }]
     };
   },
-  created: function created() {
+  created: function created() {},
+  mounted: function mounted() {
     this.initialize();
   },
   methods: {
     showAlert: function showAlert(a) {
       //	if (event.target.classList.contains('btn__content')) return;
       var app = this;
-      this.Ar = a.coord_ar;
-      this.Dec = a.coord_dec;
       this.object = a.name;
 
       if (a.catalog == 'SolarSistem') {
@@ -2421,26 +2420,24 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
           alert("Error shoot :" + resp);
         });
       }
+
+      this.coords(a.ra, a.dec);
     },
     initialize: function initialize() {
-      var app = this; // app.astronomic_objects = this.$store.getters.astronomic_objects;
-
-      axios.get('/api/astronomic_objects').then(function (resp) {
-        app.astronomic_objects = resp.data;
-        app.filter('SolarSistem');
-        app.$store.commit('changeAstronomicObjects', app.astronomic_objects);
-
-        var distinctConst = _toConsumableArray(new Set(app.astronomic_objects.map(function (x) {
-          return x.constellation;
-        })));
-
-        app.Constellations = distinctConst.sort();
+      this.openChat();
+      this.getMyImages();
+      this.getAstrnomicObject();
+    },
+    getAstrnomicObject: function getAstrnomicObject() {
+      var app = this;
+      axios.get('/api/astronomic_objects?constellation=' + app.contellation + '&catalog=' + app.catalog + '&type=' + app.type).then(function (resp) {
+        app.FilteredObjects = resp.data; // const distinctConst=[...new Set(app.astronomic_objects.map(x => x.constellation))];
+        // app.Constellations = distinctConst.sort();
+        // alert(JSON.stringify(app.FilteredObjects));
       })["catch"](function (resp) {
-        console.log(resp);
+        //console.log(resp);
         alert("Error astronomic_objects :" + resp);
       });
-      app.openChat();
-      app.getMyImages(); // Constellations
     },
     openChat: function openChat() {
       var app = this; // Start pusher listener
@@ -2461,19 +2458,18 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
       }); // End pusher listener
     },
     filter: function filter(a) {
-      if (a == "Todos") {
-        this.FilteredObjects = this.astronomic_objects;
-      } else {
-        this.FilteredObjects = this.astronomic_objects.filter(function (it) {
-          return it.catalog == a;
-        });
-      }
+      this.catalog = a;
+      this.getAstrnomicObject();
+    },
+    filterType: function filterType(a) {
+      this.type = a;
+      this.getAstrnomicObject();
     },
     filterConstellation: function filterConstellation(a) {
-      if (a == "Todos") {
+      if (a == "Todas") {
         this.FilteredObjects = this.astronomic_objects;
       } else {
-        this.FilteredObjects = this.astronomic_objects.filter(function (it) {
+        this.FilteredObjects = this.FilteredObjects.filter(function (it) {
           return it.constellation == a;
         });
       }
@@ -2531,8 +2527,8 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
         'direction': 1,
         'user_id': 1,
         'equipment_id': 1
-      };
-      alert(JSON.stringify($command));
+      }; //alert(JSON.stringify($command));
+
       axios.post('/api/command/focus', $command).then(function (resp) {})["catch"](function (resp) {
         console.log(resp);
         alert("Error focus :" + resp);
@@ -2563,6 +2559,32 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
         console.log(resp);
         alert("Error shoot :" + resp);
       });
+    },
+    coords: function coords(ra, dec) {
+      var res = ra.replace(/h/g, " ");
+      res = res.replace(/m/g, " ");
+      res = res.replace(/s/g, " ");
+      this.h_ra = parseFloat(res.split(" ")[0]);
+      this.m_ra = parseFloat(res.split(" ")[1]);
+      this.s_ra = parseFloat(res.split(" ")[2]);
+      var ra_selected = this.h_ra + this.m_ra / 60 + this.s_ra / 3600;
+      this.Ar = ra_selected;
+      res = dec.replace(/°/g, " ");
+      res = res.replace(/m/g, " ");
+      res = res.replace(/s/g, " ");
+      this.h_dec = parseFloat(res.split(" ")[0]);
+      this.m_dec = parseFloat(res.split(" ")[1]);
+      this.s_dec = parseFloat(res.split(" ")[2]);
+      var dec_selected = 0;
+
+      if (this.h_dec < 0) {
+        this.h_dec = this.h_dec * -1;
+        dec_selected = -(this.h_dec + this.m_dec / 60 + this.s_dec / 3600);
+      } else {
+        dec_selected = this.h_dec + this.m_dec / 60 + this.s_dec / 3600;
+      }
+
+      this.Dec = dec_selected;
     }
   }
 });
@@ -2643,6 +2665,12 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       // my_reservations:[],
+      search: '',
+      selected: 3,
+      rowsPerPageItems: [3, 5, 10, 20],
+      pagination: {
+        rowsPerPage: 3
+      },
       headers: [{
         text: 'Equipo',
         value: ''
@@ -2687,7 +2715,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _store_index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../store/index */ "./resources/js/store/index.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 //
 //
 //
@@ -2811,14 +2839,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  computed: Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])({
+    current_points: function current_points(state) {
+      return state.current_points;
+    }
+  }),
   data: function data() {
     return {
       dialog: false,
-      current_points: 0,
       points_out: 0,
       points_in: 0,
       points: 0,
       price: 0,
+      search: '',
       userId: 0,
       selected: '100',
       rowsPerPageItems: [3, 5, 10, 20],
@@ -2861,12 +2894,14 @@ __webpack_require__.r(__webpack_exports__);
           'user': userId.content
         }
       }).then(function (resp) {
+        app.purchases = resp.data;
+
         for (var i in resp.data) {
           app.points_in += parseInt(resp.data[i]["in"], 10);
           app.points_out += parseInt(resp.data[i].out, 10);
         }
 
-        app.current_points = app.points_in - app.points_out;
+        var current_points = (app.points_in || 0) - (app.points_out || 0);
         app.$store.commit('changeCurrentPoints', app.current_points);
       })["catch"](function (resp) {
         console.log(resp);
@@ -2893,7 +2928,7 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (resp) {
         app.purchases.push(pay_points);
         app.current_points = parseInt(app.current_points) + parseInt(app.points);
-        app.$store.commit('changeCurrentPoints', app.current_points);
+        app.$store.commit('changeCurrentPoints', app.current_points || 0);
       })["catch"](function (resp) {
         console.log(resp);
         alert("Error AddPoints :" + resp);
@@ -3112,13 +3147,13 @@ __webpack_require__.r(__webpack_exports__);
       today: '2019-05-08',
       date: '2019-05-08',
       moon_state: "",
+      menu: false,
       current_points: 0,
       points_in: 0,
       points_out: 0,
       hourToReserv: '',
       equipment: 'Equipo Principal',
       reservationsArray: [1, 22, 23],
-      reservations: [],
       equipment_id: 1,
       dialog: false,
       dialog2: false,
@@ -3239,6 +3274,7 @@ __webpack_require__.r(__webpack_exports__);
       app.dialog2 = false;
     },
     points: function points() {
+      var app = this;
       var userId = document.head.querySelector('meta[name="userID"]');
       axios.get('/api/points', {
         headers: {
@@ -3250,8 +3286,8 @@ __webpack_require__.r(__webpack_exports__);
           app.points_out += parseInt(resp.data[i].out, 10);
         }
 
-        app.current_points = app.points_in - app.points_out;
-        alert(app.current_points);
+        app.current_points = (app.points_in || 0) - (app.points_out || 0); //alert(app.current_points);
+
         app.$store.commit('changeCurrentPoints', app.current_points);
       })["catch"](function (resp) {
         console.log(resp);
@@ -3259,6 +3295,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     my_reservations: function my_reservations() {
+      var app = this;
       var userId = document.head.querySelector('meta[name="userID"]');
       axios.get('/api/my_reservations', {
         headers: {
@@ -3268,7 +3305,7 @@ __webpack_require__.r(__webpack_exports__);
         app.$store.commit('changeMyReservations', resp.data);
       })["catch"](function (resp) {
         console.log(resp);
-        alert("Error my_reservations :" + resp);
+        alert("Error reservation my_reservations :" + resp);
       });
     }
   }
@@ -3478,129 +3515,7 @@ __webpack_require__.r(__webpack_exports__);
       this.Dec = a.coord_dec;
       this.object = a.name;
     },
-    initialize: function initialize() {},
-    openChat: function openChat() {
-      var app = this; // Start pusher listener
-
-      Pusher.logToConsole = true;
-      var pusher = new Pusher('e6e9d9fd854d385c5f5b', {
-        cluster: 'us2',
-        forceTLS: true
-      });
-      var channel = pusher.subscribe('newMessage-' + 1 + '-' + 2); // newMessage-[chatting-with-who]-[my-id]
-
-      channel.bind('App\\Events\\MessageSent', function (data) {
-        app.state = data.message['message'];
-
-        if (app.state == "Imagen Recibida") {
-          app.imageRefresh();
-        }
-      }); // End pusher listener
-    },
-    filter: function filter(a) {
-      if (a == "Todos") {
-        this.FilteredObjects = this.astronomic_objects;
-      } else {
-        this.FilteredObjects = this.astronomic_objects.filter(function (it) {
-          return it.catalog == a;
-        });
-      }
-    },
-    filterConstellation: function filterConstellation(a) {
-      if (a == "Todos") {
-        this.FilteredObjects = this.astronomic_objects;
-      } else {
-        this.FilteredObjects = this.astronomic_objects.filter(function (it) {
-          return it.constellation == a;
-        });
-      }
-    },
-    move: function move() {
-      var $command = {
-        'command': 'MONTURA',
-        'type': 'mount',
-        'status': 'PENDIENTE',
-        'ar': this.Ar,
-        'dec': this.Dec,
-        'user_id': 1,
-        'equipment_id': 1
-      };
-      alert(JSON.stringify($command));
-      axios.post('/api/command/move', $command).then(function (resp) {})["catch"](function (resp) {
-        console.log(resp);
-        alert("Error move :" + resp);
-      });
-      this.currentRefresh();
-    },
-    shoot: function shoot() {
-      var $command = {
-        'command': 'CAMARA',
-        'type': 'shoot',
-        'status': 'PENDIENTE',
-        'exptime': this.Exp,
-        'iso': this.Iso,
-        'ar': this.Ar_act,
-        'dec': this.Dec_act,
-        'user_id': 1,
-        'equipment_id': 1
-      };
-      this.imageUrl = '';
-      axios.post('/api/command/shoot', $command).then(function (resp) {})["catch"](function (resp) {
-        console.log(resp);
-        alert("Error shoot :" + resp);
-      });
-      this.currentRefresh();
-      this.current_shot = this.current;
-    },
-    currentRefresh: function currentRefresh() {
-      this.Ar_act = this.Ar;
-      this.Dec_act = this.Dec;
-      this.Iso_act = this.Iso;
-      this.Exp_act = this.Exp;
-      this.current = "Ar:" + this.Ar_act + ", Dec:" + this.Dec_act + ", Iso:" + this.Iso_act + ", Exp:" + this.Exp_act;
-    },
-    focus: function focus() {
-      var $command = {
-        'command': 'ENFOCADOR',
-        'type': 'focuser',
-        'status': 'PENDIENTE',
-        'ar': this.Ar,
-        'dec': this.Dec,
-        'user_id': 1,
-        'equipment_id': 1
-      };
-      alert(JSON.stringify($command));
-      axios.post('/api/command/focus', $command).then(function (resp) {})["catch"](function (resp) {
-        console.log(resp);
-        alert("Error focus :" + resp);
-      });
-    },
-    saveImage: function saveImage() {},
-    imageRefresh: function imageRefresh() {
-      var app = this;
-      var $command = {
-        'user_id': 1
-      };
-      axios.get('/api/image/last', $command).then(function (resp) {
-        app.imageUrl = resp.data;
-      })["catch"](function (resp) {
-        console.log(resp);
-        alert("Error shoot :" + resp);
-      });
-      app.getMyImages();
-    },
-    getMyImages: function getMyImages() {
-      var app = this;
-      var $command = {
-        'user_id': 1
-      };
-      axios.get('/api/images', $command).then(function (resp) {
-        app.myImages = resp.data;
-      })["catch"](function (resp) {
-        console.log(resp);
-        alert("Error shoot :" + resp);
-      });
-    }
+    initialize: function initialize() {}
   }
 });
 
@@ -33149,18 +33064,18 @@ var render = function() {
                                 [
                                   _c("v-select", {
                                     attrs: {
-                                      items: _vm.Catalogs,
-                                      label: "Catalogo",
+                                      items: _vm.types,
+                                      label: "Tipo",
                                       "single-line": "",
                                       "hide-details": ""
                                     },
-                                    on: { input: _vm.filter },
+                                    on: { input: _vm.filterType },
                                     model: {
-                                      value: _vm.Catalog,
+                                      value: _vm.type,
                                       callback: function($$v) {
-                                        _vm.Catalog = $$v
+                                        _vm.type = $$v
                                       },
-                                      expression: "Catalog"
+                                      expression: "type"
                                     }
                                   }),
                                   _vm._v(" "),
@@ -34814,14 +34729,6 @@ var render = function() {
                             { attrs: { xs2: "" } },
                             [
                               _c("v-select", {
-                                directives: [
-                                  {
-                                    name: "validate",
-                                    rawName: "v-validate",
-                                    value: "required",
-                                    expression: "'required'"
-                                  }
-                                ],
                                 attrs: {
                                   items: _vm.equipments,
                                   "item-text": "name",
@@ -77752,7 +77659,6 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 /* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
   state: {
     user: '',
-    astronomic_objects: [],
     equipments: [],
     reservations: [],
     my_reservations: [],
@@ -77768,9 +77674,6 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     changeReservations: function changeReservations(state, reservations) {
       state.reservations = reservations;
     },
-    changeAstronomicObjects: function changeAstronomicObjects(state, astronomic_objects) {
-      state.astronomic_objects = astronomic_objects;
-    },
     changeMyReservations: function changeMyReservations(state, my_reservations) {
       state.my_reservations = my_reservations;
     },
@@ -77779,9 +77682,6 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     }
   },
   getters: {
-    astronimic_objects: function astronimic_objects(state) {
-      return state.astronomic_objects;
-    },
     user: function user(state) {
       return state.user;
     },

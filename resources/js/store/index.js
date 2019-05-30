@@ -8,7 +8,6 @@ export default new Vuex.Store(
 {
 	state: {
 	  user: '',
-	  astronomic_objects:[],
 	  equipments:[],
 	  reservations:[],
 	  my_reservations:[],
@@ -25,9 +24,7 @@ export default new Vuex.Store(
 		  	state.reservations = reservations;
 		},
 
-		changeAstronomicObjects(state, astronomic_objects) {
-		  	state.astronomic_objects = astronomic_objects;
-		},
+
 		changeMyReservations(state, my_reservations) {
 		  	state.my_reservations = my_reservations;
 		},
@@ -36,7 +33,6 @@ export default new Vuex.Store(
 		},
 	},
 	getters: {
-		astronimic_objects: state => state.astronomic_objects,
 		user: state=> state.user,
 		equipments: state=> state.equipments,
 		reservations: state=> state.reservations,

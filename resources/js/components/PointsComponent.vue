@@ -120,17 +120,20 @@
 </template>
 
 <script>
-  import store from '../store/index';
+  import { mapState } from 'vuex';
   export default {
+    computed: mapState({
+        current_points: state => state.current_points,
+    }),
     data () {
       return {
         dialog: false,
 
-        current_points: 0,
         points_out:0,
         points_in:0,
         points: 0,
         price: 0,
+        search:'',
         userId: 0,
         selected: '100',
        
@@ -177,12 +180,13 @@
                     'user': userId.content,
                 }
             })
-            .then(function (resp) {    
+            .then(function (resp) {   
+                app.purchases = resp.data; 
                 for(var i in resp.data){
                      app.points_in += parseInt(resp.data[i].in,10);
                      app.points_out += parseInt(resp.data[i].out,10);
                  }
-                 app.current_points = app.points_in - app.points_out;
+                 let current_points = (app.points_in || 0) - (app.points_out || 0);
                  app.$store.commit('changeCurrentPoints',app.current_points );
             })
             .catch(function (resp) {
@@ -210,7 +214,7 @@
             .then(function (resp) {
                 app.purchases.push(pay_points);
                 app.current_points = parseInt(app.current_points) + parseInt(app.points);
-                app.$store.commit('changeCurrentPoints',app.current_points );
+                app.$store.commit('changeCurrentPoints',(app.current_points || 0) );
             })
             .catch(function (resp) {
                 console.log(resp);
