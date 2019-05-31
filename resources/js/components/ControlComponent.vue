@@ -131,12 +131,13 @@
 				              </v-flex>
 				            </v-layout>
 				        </v-container>
+
 						<v-layout align-center row>
 							<v-flex align-center xs1>
 							</v-flex>	
 							<v-flex align-center xs4>
 								<v-text-field
-								    v-model="Ar"
+								    v-model="Ar_screen"
 								        label="Asención Recta"
 								    ></v-text-field>
 		          			</v-flex>
@@ -144,7 +145,7 @@
 							</v-flex>
 							<v-flex align-center xs4>
 								<v-text-field
-								    v-model="Dec"
+								    v-model="Dec_screen"
 								        label="Declinación"
 								    ></v-text-field>
 		          			</v-flex>
@@ -152,8 +153,200 @@
 							</v-flex>		          			
 		          		</v-layout>	
 
-		          		<v-btn color="warning" @click="move()">Mover</v-btn>
 
+
+		          		<v-btn color="warning" @click="move()">Mover</v-btn>
+<template>
+
+
+
+    <v-dialog v-model="dialog2" persistent max-width="800px">
+      <template v-slot:activator="{ on }">
+        <v-btn color="warning" dark v-on="on">Mov.Fino</v-btn>
+      </template>
+      <v-card>
+        <v-card-title>
+          <span class="headline">Movimiento Fino</span>
+        </v-card-title>
+        <v-card-text>
+          <v-container grid-list-md>
+          				<v-layout align-center row>
+          					<span class="title">Ascención Recta</span>
+          				</v-layout>
+						<v-layout align-center row>
+							<v-flex align-center xs1>
+							</v-flex>	
+							<v-flex align-center xs3>
+								<v-text-field
+								    v-model="h_ra"
+								        label="AR Horas"
+								    ></v-text-field>
+		          			</v-flex>
+							<v-flex align-center xs1>
+							</v-flex>
+							<v-flex align-center xs3>
+								<v-text-field 
+									v-model="m_ra" 
+									type="number" 
+									label="AR Minutos" 
+									append-outer-icon="add" @click:append-outer="inc_m_ra" 
+									prepend-icon="remove" @click:prepend="dec_m_ra">
+								</v-text-field>
+		          			</v-flex>
+							<v-flex align-center xs1>
+							</v-flex>	
+							<v-flex align-center xs3>
+
+								<v-text-field 
+									v-model="s_ra" 
+									type="number" 
+									label="AR Segundos" 
+									append-outer-icon="add" @click:append-outer="inc_s_ra" 
+									prepend-icon="remove" @click:prepend="dec_s_ra">
+								</v-text-field>
+		          			</v-flex>
+							<v-flex align-center xs1>
+							</v-flex>		          			
+		          		</v-layout>	
+          				<v-layout align-center row>
+          					<span class="title">Declinación</span>
+          				</v-layout>
+
+						<v-layout align-center row>
+
+							<v-flex align-center xs1>
+							</v-flex>	
+							<v-flex align-center xs3>
+								<v-text-field
+								    v-model="h_dec"
+								        label="DEC Grados"
+								    ></v-text-field>
+		          			</v-flex>
+							<v-flex align-center xs1>
+							</v-flex>
+							<v-flex align-center xs3>
+								<v-text-field 
+									v-model="m_dec" 
+									type="number" 
+									label="DEC Minutos" 
+									append-outer-icon="add" @click:append-outer="inc_m_dec" 
+									prepend-icon="remove" @click:prepend="dec_m_dec">
+								</v-text-field>
+		          			</v-flex>
+							<v-flex align-center xs1>
+							</v-flex>	
+							<v-flex align-center xs3>
+								<v-text-field 
+									v-model="s_dec" 
+									type="number" 
+									label="DEC Segundos" 
+									append-outer-icon="add" @click:append-outer="inc_s_dec" 
+									prepend-icon="remove" @click:prepend="dec_s_dec">
+								</v-text-field>
+		          			</v-flex>
+							<v-flex align-center xs1>
+							</v-flex>		          			
+		          		</v-layout>	
+          </v-container>
+         
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="blue darken-1" flat @click="dialog2 = false">Cerrar</v-btn>
+          <v-btn color="blue darken-1" flat @click="savefine">Guardar</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+
+</template>
+
+<template>
+
+    <v-dialog v-model="dialog3" persistent max-width="600px">
+      <template v-slot:activator="{ on }">
+        <v-btn color="warning" dark v-on="on">Mis Coords.</v-btn>
+      </template>
+      <v-card>
+        <v-card-title>
+          <span class="headline">Coordenadas especificas</span>
+        </v-card-title>
+        <v-card-text>
+          <v-container grid-list-md>
+          	          	<v-layout align-center row>
+          				<span class="title">Ascención Recta</span>
+          				</v-layout>
+						<v-layout align-center row>
+							<v-flex align-center xs1>
+							</v-flex>	
+							<v-flex align-center xs3>
+								<v-text-field
+								    v-model="h_ra"
+								    min:0
+								    max:60
+								    label="AR Horas"
+								    ></v-text-field>
+		          			</v-flex>
+							<v-flex align-center xs1>
+							</v-flex>
+							<v-flex align-center xs3>
+								<v-text-field
+								    v-model="m_ra"
+								        label="AR Minutos"
+								    ></v-text-field>
+		          			</v-flex>
+							<v-flex align-center xs1>
+							</v-flex>	
+							<v-flex align-center xs3>
+								<v-text-field
+								    v-model="s_ra"
+								        label="AR Segundos"
+								    ></v-text-field>
+		          			</v-flex>
+							<v-flex align-center xs1>
+							</v-flex>		          			
+		          		</v-layout>	
+		          		<v-layout align-center row>
+          					<span class="title">Declinación</span>
+          				</v-layout>
+						<v-layout align-center row>
+							<v-flex align-center xs1>
+							</v-flex>	
+							<v-flex align-center xs3>
+								<v-text-field
+								    v-model="h_dec"
+								        label="DEC Grados"
+								    ></v-text-field>
+		          			</v-flex>
+							<v-flex align-center xs1>
+							</v-flex>
+							<v-flex align-center xs3>
+								<v-text-field
+								    v-model="m_dec"
+								        label="DEC Minutos"
+								    ></v-text-field>
+		          			</v-flex>
+							<v-flex align-center xs1>
+							</v-flex>	
+							<v-flex align-center xs3>
+								<v-text-field
+								    v-model="s_dec"
+								        label="DEC Segundos"
+								    ></v-text-field>
+		          			</v-flex>
+							<v-flex align-center xs1>
+							</v-flex>		          			
+		          		</v-layout>	
+          </v-container>
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="blue darken-1" flat @click="dialog3 = false">Cerrar</v-btn>
+          <v-btn color="blue darken-1" flat @click="savecoords">Guardar</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+
+</template>
  
 			    	</v-card> 
 				</v-flex>
@@ -309,6 +502,8 @@
     data () {
       return {
         dialog: false,
+        dialog2: false,
+        dialog3: false,
         astronomic_objects:[],
         selected:[],
         search: '',
@@ -347,8 +542,10 @@
         Constellations: [],
         FilteredObjects: [],
 
-        Ar: 1.92837,
-        Dec: 1.92837,
+        Ar: 0,
+        Dec: 0,
+        Ar_screen:'',
+        Dec_screen:'',
         Iso: '100',
         Exp: '1',
 
@@ -437,6 +634,9 @@
       		var app = this;
  
       		this.object = a.name;
+      		this.Ar_screen = a.ra;
+      		this.Dec_screen = a.dec;
+
 
       		if(a.catalog=='SolarSistem'){
 	      		axios.get('/api/astronomic_objects/solarsistem?object=' + a.name)
@@ -444,6 +644,8 @@
 	            	//alert(JSON.stringify(resp.data));
 	            	app.Ar = resp.data["ar"];
 	            	app.Dec = resp.data["dec"];
+	            	app.Ar_screen = resp.data["ar"];
+	            	app.Dec_screen = resp.data["dec"];
 	            })
 	            .catch(function (resp) {
 	                console.log(resp);
@@ -457,7 +659,6 @@
             this.openChat();
             this.getMyImages();
             this.getAstrnomicObject();
-
         },
 
         getAstrnomicObject(){
@@ -625,16 +826,80 @@
        		this.m_dec = parseFloat(res.split(" ")[1]); 
        		this.s_dec = parseFloat(res.split(" ")[2]);
        		var dec_selected  = 0;
-       		if(this.h_dec<0){
-       			this.h_dec = this.h_dec * -1;
-       			dec_selected  = -(this.h_dec + (this.m_dec/60) + (this.s_dec/3600));
+       		var h_dec_loc = this.h_dec;
+       		if(h_dec_loc<0){
+       			h_dec_loc = h_dec_loc * -1;
+       			dec_selected  = -(h_dec_loc + (this.m_dec/60) + (this.s_dec/3600));
        		} else{
-       			dec_selected  = (this.h_dec + (this.m_dec/60) + (this.s_dec/3600));
+       			dec_selected  = (h_dec_loc + (this.m_dec/60) + (this.s_dec/3600));
        		}
        		
       		this.Dec = dec_selected;
       		
-        }
+        },
+
+        inc_s_ra () {
+      		if(this.s_ra<60){
+      			this.s_ra = parseInt(this.s_ra,10) + 1
+      		}
+    	},
+    	dec_s_ra () {
+      		
+      		if(this.s_ra>0){
+      			this.s_ra = parseInt(this.s_ra,10) - 1
+      		}
+    	},
+        inc_m_ra () {
+      		if(this.m_ra<60){
+      			this.m_ra = parseInt(this.m_ra,10) + 1
+      		}
+    	},
+    	dec_m_ra () {
+      		
+      		if(this.m_ra>0){
+      			this.m_ra = parseInt(this.m_ra,10) - 1
+      		}
+    	},
+
+        inc_s_dec () {
+      		if(this.s_dec<60){
+      			this.s_dec = parseInt(this.s_dec,10) + 1
+      		}
+    	},
+    	dec_s_dec () {
+      		
+      		if(this.s_dec>0){
+      			this.s_dec = parseInt(this.s_dec,10) - 1
+      		}
+    	},
+        inc_m_dec () {
+      		if(this.m_dec<60){
+      			this.m_dec = parseInt(this.m_dec,10) + 1
+      		}
+    	},
+    	dec_m_dec () {
+      		
+      		if(this.m_dec>0){
+      			this.m_dec = parseInt(this.m_dec,10) - 1
+      		}
+    	},
+
+    	savefine (){
+    		this.Ar_screen = this.h_ra+'h'+this.m_ra+'m'+this.s_ra+'s'
+    		this.Dec_screen = this.h_dec+'h'+this.m_dec+'m'+this.s_dec+'s'
+
+    		this.coords(this.Ar_screen, this.Dec_screen);
+    		this.dialog2 = false;
+
+    	},
+    	savecoords (){
+    		this.Ar_screen = this.h_ra+'h'+this.m_ra+'m'+this.s_ra+'s'
+    		this.Dec_screen = this.h_dec+'°'+this.m_dec+'m'+this.s_dec+'s'
+
+    		this.coords(this.Ar_screen, this.Dec_screen);
+    		this.dialog3 = false;
+
+    	}
 
     },
   }
