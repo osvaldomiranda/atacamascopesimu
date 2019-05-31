@@ -39,6 +39,7 @@
                           <v-text-field
                             v-model="today"
                             label="Fecha"
+                            :rules='generalRuleDate'
                             prepend-icon="event"
                             readonly
                             v-on="on"
@@ -167,6 +168,7 @@
 </template>
 
 <script>
+  var actualDate = new Date().toISOString().substr(0, 10)
   import { mapState } from 'vuex';
   export default {
     computed: mapState({
@@ -176,6 +178,10 @@
 
     data () {
       return {
+        generalRuleDate: [v => !!v || 'Campo requerido',
+            v=> v >= actualDate || 'Debe ser fecha mayor a la actual',
+        ],
+
         blankRules: [v => !!v || 'Campo requerido'],
         today: '2019-05-08',
         date: '2019-05-08',
@@ -280,10 +286,13 @@
         },
 
         change_date(a){
-            this.start=a;
-            this.end = a;
-            this.moon();
-            this.reservatios_day();
+
+            if(a>=actualDate){
+                this.start=a;
+                this.end = a;
+                this.moon();
+                this.reservatios_day();
+            }   
         },
 
 

@@ -3383,6 +3383,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+var actualDate = new Date().toISOString().substr(0, 10);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   computed: Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])({
@@ -3395,6 +3397,11 @@ __webpack_require__.r(__webpack_exports__);
   }),
   data: function data() {
     return {
+      generalRuleDate: [function (v) {
+        return !!v || 'Campo requerido';
+      }, function (v) {
+        return v >= actualDate || 'Debe ser fecha mayor a la actual';
+      }],
       blankRules: [function (v) {
         return !!v || 'Campo requerido';
       }],
@@ -3488,10 +3495,12 @@ __webpack_require__.r(__webpack_exports__);
       this.reservatios_day();
     },
     change_date: function change_date(a) {
-      this.start = a;
-      this.end = a;
-      this.moon();
-      this.reservatios_day();
+      if (a >= actualDate) {
+        this.start = a;
+        this.end = a;
+        this.moon();
+        this.reservatios_day();
+      }
     },
     reservatios_day: function reservatios_day() {
       var app = this;
@@ -35720,6 +35729,7 @@ var render = function() {
                                               {
                                                 attrs: {
                                                   label: "Fecha",
+                                                  rules: _vm.generalRuleDate,
                                                   "prepend-icon": "event",
                                                   readonly: "",
                                                   v: ""
