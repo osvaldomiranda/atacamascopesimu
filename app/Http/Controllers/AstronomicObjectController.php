@@ -58,15 +58,9 @@ class AstronomicObjectController extends Controller
        	$m_dec = (float)preg_split("/:/",$dec)[1];
        	$s_dec = (float)preg_split("/:/",$dec)[2];
 
-	    if($h_dec < 0.0){
-	    	$sign = '-';
-	    	$h_dec = $h_dec * -1;
-	    } else {
-	    	$sign = '+';  
-	    }
 
-	    $ac_selected  = ($h_ra + ($m_ra/60) + ($s_ra/3600));
-	    $dec_selected = ($sign . ($h_dec + ($m_dec/60) + ($s_dec/3600)));
+	    $ac_selected  = $h_ra . 'h' . $m_ra . 'm' . $s_ra . 's';
+	    $dec_selected = $h_dec . '°' . $m_dec . 'm' . $s_dec . 's' ;
 
 	    $coord = ['ar'=>(string)$ac_selected, 'dec'=>$dec_selected];
 

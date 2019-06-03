@@ -1803,6 +1803,8 @@ __webpack_require__.r(__webpack_exports__);
       dialog: false,
       drawer: null,
       step: "",
+      points_in: 0,
+      points_out: 0,
       userId: 0,
       astronomic_objects: null
     };
@@ -1831,6 +1833,23 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (resp) {
         console.log(resp);
         alert("Error reservations :" + resp);
+      });
+      var userId = document.head.querySelector('meta[name="userID"]');
+      axios.get('/api/points', {
+        headers: {
+          'user': userId.content
+        }
+      }).then(function (resp) {
+        for (var i in resp.data) {
+          app.points_in += parseInt(resp.data[i]["in"], 10);
+          app.points_out += parseInt(resp.data[i].out, 10);
+        }
+
+        var c_points = (app.points_in || 0) - (app.points_out || 0);
+        app.$store.commit('changeCurrentPoints', c_points);
+      })["catch"](function (resp) {
+        console.log(resp);
+        alert("Error Points :" + resp);
       });
       this.$router.push('/dashboard');
     },
@@ -2504,12 +2523,80 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   computed: Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['astronomc_objects']),
   data: function data() {
     return {
-      dialog: false,
+      ninetyRule: [function (v) {
+        return !!v || 'Campo requerido';
+      }, function (v) {
+        return v <= 90 || 'Debe ser  menor o igual a 90';
+      }, function (v) {
+        return v >= -90 || 'Debe ser mayor o igual a -90';
+      }],
+      sixtyRule: [function (v) {
+        return !!v || 'Campo requerido';
+      }, function (v) {
+        return v <= 59 || 'Debe ser menor a 60';
+      }, function (v) {
+        return v >= 0 || 'Debe ser mayor a o igual 0';
+      }],
+      twentythreeRule: [function (v) {
+        return !!v || 'Campo requerido';
+      }, function (v) {
+        return v <= 23 || 'Debe ser menor o igual a 23';
+      }, function (v) {
+        return v >= 0 || 'Debe ser mayor a o igual 0';
+      }],
+      blankRules: [function (v) {
+        return !!v || 'Campo requerido';
+      }],
+      dialog: true,
       dialog2: false,
       dialog3: false,
       astronomic_objects: [],
@@ -2606,23 +2693,22 @@ __webpack_require__.r(__webpack_exports__);
       //	if (event.target.classList.contains('btn__content')) return;
       var app = this;
       this.object = a.name;
-      this.Ar_screen = a.ra;
-      this.Dec_screen = a.dec;
 
       if (a.catalog == 'SolarSistem') {
         axios.get('/api/astronomic_objects/solarsistem?object=' + a.name).then(function (resp) {
           //alert(JSON.stringify(resp.data));
-          app.Ar = resp.data["ar"];
-          app.Dec = resp.data["dec"];
           app.Ar_screen = resp.data["ar"];
           app.Dec_screen = resp.data["dec"];
+          app.coords(app.Ar_screen, app.Dec_screen);
         })["catch"](function (resp) {
           console.log(resp);
           alert("Error shoot :" + resp);
         });
+      } else {
+        this.Ar_screen = a.ra;
+        this.Dec_screen = a.dec;
+        this.coords(app.Ar_screen, app.Dec_screen);
       }
-
-      this.coords(a.ra, a.dec);
     },
     initialize: function initialize() {
       this.openChat();
@@ -2676,21 +2762,23 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     move: function move() {
-      var $command = {
-        'command': 'MONTURA',
-        'type': 'mount',
-        'status': 'PENDIENTE',
-        'ar': this.Ar,
-        'dec': this.Dec,
-        'user_id': 1,
-        'equipment_id': 1
-      }; //alert(JSON.stringify($command));
+      if (this.Ar_screen) {
+        var $command = {
+          'command': 'MONTURA',
+          'type': 'mount',
+          'status': 'PENDIENTE',
+          'ar': this.Ar,
+          'dec': this.Dec,
+          'user_id': 1,
+          'equipment_id': 1
+        }; //alert(JSON.stringify($command));
 
-      axios.post('/api/command/move', $command).then(function (resp) {})["catch"](function (resp) {
-        console.log(resp);
-        alert("Error move :" + resp);
-      });
-      this.currentRefresh();
+        axios.post('/api/command/move', $command).then(function (resp) {})["catch"](function (resp) {
+          console.log(resp);
+          alert("Error move :" + resp);
+        });
+        this.currentRefresh();
+      }
     },
     shoot: function shoot() {
       var $command = {
@@ -2830,7 +2918,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     savefine: function savefine() {
       this.Ar_screen = this.h_ra + 'h' + this.m_ra + 'm' + this.s_ra + 's';
-      this.Dec_screen = this.h_dec + 'h' + this.m_dec + 'm' + this.s_dec + 's';
+      this.Dec_screen = this.h_dec + '°' + this.m_dec + 'm' + this.s_dec + 's';
       this.coords(this.Ar_screen, this.Dec_screen);
       this.dialog2 = false;
     },
@@ -2854,7 +2942,18 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _ControlComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ControlComponent */ "./resources/js/components/ControlComponent.vue");
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2910,8 +3009,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  computed: Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])({
+  computed: Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])({
     my_reservations: function my_reservations(state) {
       return state.my_reservations;
     }
@@ -2954,6 +3055,14 @@ __webpack_require__.r(__webpack_exports__);
         console.log(resp);
         alert("Error my_reservations :" + resp);
       });
+    },
+    onClick: function onClick() {
+      var ComponentClass = vue__WEBPACK_IMPORTED_MODULE_0___default.a.extend(_ControlComponent__WEBPACK_IMPORTED_MODULE_2__["default"]);
+      var instance = new ComponentClass(); // instance.$slots.default = ['Click me!']
+
+      instance.$mount(); // pass nothing
+
+      this.$refs.container.appendChild(instance.$el);
     }
   }
 });
@@ -3093,14 +3202,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  computed: Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])({
-    current_points: function current_points(state) {
-      return state.current_points;
-    }
-  }),
+  computed: Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['current_points']),
   data: function data() {
     return {
-      dialog: false,
+      dialog: true,
       points_out: 0,
       points_in: 0,
       points: 0,
@@ -3149,14 +3254,6 @@ __webpack_require__.r(__webpack_exports__);
         }
       }).then(function (resp) {
         app.purchases = resp.data;
-
-        for (var i in resp.data) {
-          app.points_in += parseInt(resp.data[i]["in"], 10);
-          app.points_out += parseInt(resp.data[i].out, 10);
-        }
-
-        var current_points = (app.points_in || 0) - (app.points_out || 0);
-        app.$store.commit('changeCurrentPoints', app.current_points);
       })["catch"](function (resp) {
         console.log(resp);
         alert("Error Points :" + resp);
@@ -3169,7 +3266,7 @@ __webpack_require__.r(__webpack_exports__);
         'created_at': fecha,
         'in': this.points,
         'out': 0,
-        'current_points': parseInt(this.current_points) + parseInt(this.points),
+        'current_points': this.$store.getters.current_points + parseInt(this.points),
         'reservation_id': '',
         'transaction_id': '876238746',
         'a': this.$store.getters.user
@@ -3181,8 +3278,8 @@ __webpack_require__.r(__webpack_exports__);
         }
       }).then(function (resp) {
         app.purchases.push(pay_points);
-        app.current_points = parseInt(app.current_points) + parseInt(app.points);
-        app.$store.commit('changeCurrentPoints', app.current_points || 0);
+        var c_points = app.$store.getters.current_points + parseInt(app.points);
+        app.$store.commit('changeCurrentPoints', c_points);
       })["catch"](function (resp) {
         console.log(resp);
         alert("Error AddPoints :" + resp);
@@ -3214,7 +3311,9 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var suncalc__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! suncalc */ "./node_modules/suncalc/suncalc.js");
+/* harmony import */ var suncalc__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(suncalc__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 //
 //
 //
@@ -3384,10 +3483,43 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-var actualDate = new Date().toISOString().substr(0, 10);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
+
+var actualDate = new Date().toISOString().substr(0, 10);
 /* harmony default export */ __webpack_exports__["default"] = ({
-  computed: Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])({
+  computed: Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])({
     equipments: function equipments(state) {
       return state.equipments;
     },
@@ -3408,7 +3540,12 @@ var actualDate = new Date().toISOString().substr(0, 10);
       today: '2019-05-08',
       date: '2019-05-08',
       moon_state: "",
+      moon_times: "",
+      moonset: "",
+      moonrise: "",
+      moonUrl: '',
       menu: false,
+      telescope_points: 200,
       current_points: 0,
       points_in: 0,
       points_out: 0,
@@ -3416,7 +3553,7 @@ var actualDate = new Date().toISOString().substr(0, 10);
       equipment: 'Equipo Principal',
       reservationsArray: [1, 22, 23],
       equipment_id: 1,
-      dialog: false,
+      dialog: true,
       dialog2: false,
       search: '',
       rowsPerPageItems: [3, 5, 10, 20],
@@ -3466,9 +3603,17 @@ var actualDate = new Date().toISOString().substr(0, 10);
       var todayTime = new Date();
       var month = (todayTime.getMonth() + 1).toString();
       app.today = todayTime.getFullYear() + '-' + month.padStart(2, '00') + '-' + todayTime.getDate();
-      app.start = app.today;
+      app.start = app.today; //var times = SunCalc.getTimes(new Date(), 51.5, -0.1);
+      // format sunrise time from the Date object
+      //var sunriseStr = times.sunrise.getHours() + ':' + times.sunrise.getMinutes();
+      // get position of the sun (azimuth and altitude) at today's sunrise
+      //var sunrisePos = SunCalc.getPosition(times.sunrise, 51.5, -0.1);
+
+      app.moon_times = suncalc__WEBPACK_IMPORTED_MODULE_0___default.a.getMoonTimes(new Date(), 33.0000, -70.3326); // alert(JSON.stringify(app.moon_times));
+
+      app.moonset = app.moon_times["set"];
+      app.moonrise = app.moon_times["rise"];
       this.moon();
-      this.points();
       this.reservatios_day();
     },
     moon: function moon() {
@@ -3479,6 +3624,7 @@ var actualDate = new Date().toISOString().substr(0, 10);
         }
       }).then(function (resp) {
         app.moon_state = resp.data;
+        app.moonImage();
       })["catch"](function (resp) {
         console.log(resp);
         alert("Error moon :" + resp);
@@ -3491,16 +3637,18 @@ var actualDate = new Date().toISOString().substr(0, 10);
     changeTelescope: function changeTelescope(a) {
       this.equipment = a.name;
       this.equipment_id = a.id;
-      this.points_out = a.points;
+      this.telescope_points = a.points;
       this.reservatios_day();
     },
     change_date: function change_date(a) {
-      if (a >= actualDate) {
-        this.start = a;
-        this.end = a;
-        this.moon();
-        this.reservatios_day();
-      }
+      alert(a);
+      this.start = a;
+      this.end = a;
+      this.moon_times = suncalc__WEBPACK_IMPORTED_MODULE_0___default.a.getMoonTimes(new Date(a), 33.0000, -70.3326);
+      this.moonset = this.moon_times["set"];
+      this.moonrise = this.moon_times["rise"];
+      this.moon();
+      this.reservatios_day();
     },
     reservatios_day: function reservatios_day() {
       var app = this;
@@ -3523,8 +3671,8 @@ var actualDate = new Date().toISOString().substr(0, 10);
         'equipment_id': this.equipment_id,
         'date': this.start,
         'hour': this.hourToReserv,
-        'points_out': this.points_out,
-        'current_points': this.current_points - this.points_out
+        'points_out': this.telescope_points,
+        'current_points': this.$store.getters.current_points - this.telescope_points
       };
       axios.post('/api/reservation/create', reserv).then(function (resp) {
         app.reservatios_day();
@@ -3537,25 +3685,8 @@ var actualDate = new Date().toISOString().substr(0, 10);
       app.dialog2 = false;
     },
     points: function points() {
-      var app = this;
-      var userId = document.head.querySelector('meta[name="userID"]');
-      axios.get('/api/points', {
-        headers: {
-          'user': userId.content
-        }
-      }).then(function (resp) {
-        for (var i in resp.data) {
-          app.points_in += parseInt(resp.data[i]["in"], 10);
-          app.points_out += parseInt(resp.data[i].out, 10);
-        }
-
-        app.current_points = (app.points_in || 0) - (app.points_out || 0); //alert(app.current_points);
-
-        app.$store.commit('changeCurrentPoints', app.current_points);
-      })["catch"](function (resp) {
-        console.log(resp);
-        alert("Error Points Reserv :" + resp);
-      });
+      var c_points = this.$store.getters.current_points - this.telescope_points;
+      this.$store.commit('changeCurrentPoints', c_points);
     },
     my_reservations: function my_reservations() {
       var app = this;
@@ -3570,6 +3701,130 @@ var actualDate = new Date().toISOString().substr(0, 10);
         console.log(resp);
         alert("Error reservation my_reservations :" + resp);
       });
+    },
+    moonImage: function moonImage() {
+      var app = this;
+      var splitted = app.moon_state.split(':');
+      var age = parseInt(splitted[3]);
+
+      switch (age) {
+        case 1:
+          app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna01.jpg */ "./resources/assets/images/Luna01.jpg");
+          break;
+
+        case 2:
+          app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna02.jpg */ "./resources/assets/images/Luna02.jpg");
+          break;
+
+        case 3:
+          app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna03.jpg */ "./resources/assets/images/Luna03.jpg");
+          break;
+
+        case 4:
+          app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna04.jpg */ "./resources/assets/images/Luna04.jpg");
+          break;
+
+        case 5:
+          app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna05.jpg */ "./resources/assets/images/Luna05.jpg");
+          break;
+
+        case 6:
+          app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna06.jpg */ "./resources/assets/images/Luna06.jpg");
+          break;
+
+        case 7:
+          app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna07.jpg */ "./resources/assets/images/Luna07.jpg");
+          break;
+
+        case 8:
+          app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna08.jpg */ "./resources/assets/images/Luna08.jpg");
+          break;
+
+        case 9:
+          app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna09.jpg */ "./resources/assets/images/Luna09.jpg");
+          break;
+
+        case 10:
+          app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna10.jpg */ "./resources/assets/images/Luna10.jpg");
+          break;
+
+        case 11:
+          app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna11.jpg */ "./resources/assets/images/Luna11.jpg");
+          break;
+
+        case 12:
+          app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna12.jpg */ "./resources/assets/images/Luna12.jpg");
+          break;
+
+        case 13:
+          app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna13.jpg */ "./resources/assets/images/Luna13.jpg");
+          break;
+
+        case 14:
+          app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna14.jpg */ "./resources/assets/images/Luna14.jpg");
+          break;
+
+        case 15:
+          app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna15.jpg */ "./resources/assets/images/Luna15.jpg");
+          break;
+
+        case 16:
+          app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna16.jpg */ "./resources/assets/images/Luna16.jpg");
+          break;
+
+        case 17:
+          app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna17.jpg */ "./resources/assets/images/Luna17.jpg");
+          break;
+
+        case 18:
+          app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna18.jpg */ "./resources/assets/images/Luna18.jpg");
+          break;
+
+        case 19:
+          app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna19.jpg */ "./resources/assets/images/Luna19.jpg");
+          break;
+
+        case 20:
+          app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna20.jpg */ "./resources/assets/images/Luna20.jpg");
+          break;
+
+        case 21:
+          app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna21.jpg */ "./resources/assets/images/Luna21.jpg");
+          break;
+
+        case 22:
+          app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna22.jpg */ "./resources/assets/images/Luna22.jpg");
+          break;
+
+        case 23:
+          app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna23.jpg */ "./resources/assets/images/Luna23.jpg");
+          break;
+
+        case 24:
+          app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna24.jpg */ "./resources/assets/images/Luna24.jpg");
+          break;
+
+        case 25:
+          app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna25.jpg */ "./resources/assets/images/Luna25.jpg");
+          break;
+
+        case 26:
+          app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna26.jpg */ "./resources/assets/images/Luna26.jpg");
+          break;
+
+        case 27:
+          app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna27.jpg */ "./resources/assets/images/Luna27.jpg");
+          break;
+
+        case 28:
+          app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna28.jpg */ "./resources/assets/images/Luna28.jpg");
+          break;
+
+        case 29:
+          app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna29.jpg */ "./resources/assets/images/Luna29.jpg");
+          break;
+      } //alert(app.moonUrl);
+
     }
   }
 });
@@ -3614,6 +3869,10 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _components_PointsComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../components/PointsComponent */ "./resources/js/components/PointsComponent.vue");
+/* harmony import */ var _components_ReservationComponent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./../components/ReservationComponent */ "./resources/js/components/ReservationComponent.vue");
 //
 //
 //
@@ -3703,6 +3962,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+
+
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   computed: Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['astronomc_objects', 'current_points']),
@@ -3778,7 +4043,23 @@ __webpack_require__.r(__webpack_exports__);
       this.Dec = a.coord_dec;
       this.object = a.name;
     },
-    initialize: function initialize() {}
+    initialize: function initialize() {},
+    pointsClick: function pointsClick() {
+      var ComponentPoints = vue__WEBPACK_IMPORTED_MODULE_1___default.a.extend(_components_PointsComponent__WEBPACK_IMPORTED_MODULE_2__["default"]);
+      var instance = new ComponentPoints({
+        store: this.$store
+      });
+      instance.$mount();
+      this.$refs.container.appendChild(instance.$el);
+    },
+    reservClick: function reservClick() {
+      var ComponentReserv = vue__WEBPACK_IMPORTED_MODULE_1___default.a.extend(_components_ReservationComponent__WEBPACK_IMPORTED_MODULE_3__["default"]);
+      var instance = new ComponentReserv({
+        store: this.$store
+      });
+      instance.$mount();
+      this.$refs.container.appendChild(instance.$el);
+    }
   }
 });
 
@@ -32827,6 +33108,326 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ }),
 
+/***/ "./node_modules/suncalc/suncalc.js":
+/*!*****************************************!*\
+  !*** ./node_modules/suncalc/suncalc.js ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/*
+ (c) 2011-2015, Vladimir Agafonkin
+ SunCalc is a JavaScript library for calculating sun/moon position and light phases.
+ https://github.com/mourner/suncalc
+*/
+
+(function () { 'use strict';
+
+// shortcuts for easier to read formulas
+
+var PI   = Math.PI,
+    sin  = Math.sin,
+    cos  = Math.cos,
+    tan  = Math.tan,
+    asin = Math.asin,
+    atan = Math.atan2,
+    acos = Math.acos,
+    rad  = PI / 180;
+
+// sun calculations are based on http://aa.quae.nl/en/reken/zonpositie.html formulas
+
+
+// date/time constants and conversions
+
+var dayMs = 1000 * 60 * 60 * 24,
+    J1970 = 2440588,
+    J2000 = 2451545;
+
+function toJulian(date) { return date.valueOf() / dayMs - 0.5 + J1970; }
+function fromJulian(j)  { return new Date((j + 0.5 - J1970) * dayMs); }
+function toDays(date)   { return toJulian(date) - J2000; }
+
+
+// general calculations for position
+
+var e = rad * 23.4397; // obliquity of the Earth
+
+function rightAscension(l, b) { return atan(sin(l) * cos(e) - tan(b) * sin(e), cos(l)); }
+function declination(l, b)    { return asin(sin(b) * cos(e) + cos(b) * sin(e) * sin(l)); }
+
+function azimuth(H, phi, dec)  { return atan(sin(H), cos(H) * sin(phi) - tan(dec) * cos(phi)); }
+function altitude(H, phi, dec) { return asin(sin(phi) * sin(dec) + cos(phi) * cos(dec) * cos(H)); }
+
+function siderealTime(d, lw) { return rad * (280.16 + 360.9856235 * d) - lw; }
+
+function astroRefraction(h) {
+    if (h < 0) // the following formula works for positive altitudes only.
+        h = 0; // if h = -0.08901179 a div/0 would occur.
+
+    // formula 16.4 of "Astronomical Algorithms" 2nd edition by Jean Meeus (Willmann-Bell, Richmond) 1998.
+    // 1.02 / tan(h + 10.26 / (h + 5.10)) h in degrees, result in arc minutes -> converted to rad:
+    return 0.0002967 / Math.tan(h + 0.00312536 / (h + 0.08901179));
+}
+
+// general sun calculations
+
+function solarMeanAnomaly(d) { return rad * (357.5291 + 0.98560028 * d); }
+
+function eclipticLongitude(M) {
+
+    var C = rad * (1.9148 * sin(M) + 0.02 * sin(2 * M) + 0.0003 * sin(3 * M)), // equation of center
+        P = rad * 102.9372; // perihelion of the Earth
+
+    return M + C + P + PI;
+}
+
+function sunCoords(d) {
+
+    var M = solarMeanAnomaly(d),
+        L = eclipticLongitude(M);
+
+    return {
+        dec: declination(L, 0),
+        ra: rightAscension(L, 0)
+    };
+}
+
+
+var SunCalc = {};
+
+
+// calculates sun position for a given date and latitude/longitude
+
+SunCalc.getPosition = function (date, lat, lng) {
+
+    var lw  = rad * -lng,
+        phi = rad * lat,
+        d   = toDays(date),
+
+        c  = sunCoords(d),
+        H  = siderealTime(d, lw) - c.ra;
+
+    return {
+        azimuth: azimuth(H, phi, c.dec),
+        altitude: altitude(H, phi, c.dec)
+    };
+};
+
+
+// sun times configuration (angle, morning name, evening name)
+
+var times = SunCalc.times = [
+    [-0.833, 'sunrise',       'sunset'      ],
+    [  -0.3, 'sunriseEnd',    'sunsetStart' ],
+    [    -6, 'dawn',          'dusk'        ],
+    [   -12, 'nauticalDawn',  'nauticalDusk'],
+    [   -18, 'nightEnd',      'night'       ],
+    [     6, 'goldenHourEnd', 'goldenHour'  ]
+];
+
+// adds a custom time to the times config
+
+SunCalc.addTime = function (angle, riseName, setName) {
+    times.push([angle, riseName, setName]);
+};
+
+
+// calculations for sun times
+
+var J0 = 0.0009;
+
+function julianCycle(d, lw) { return Math.round(d - J0 - lw / (2 * PI)); }
+
+function approxTransit(Ht, lw, n) { return J0 + (Ht + lw) / (2 * PI) + n; }
+function solarTransitJ(ds, M, L)  { return J2000 + ds + 0.0053 * sin(M) - 0.0069 * sin(2 * L); }
+
+function hourAngle(h, phi, d) { return acos((sin(h) - sin(phi) * sin(d)) / (cos(phi) * cos(d))); }
+
+// returns set time for the given sun altitude
+function getSetJ(h, lw, phi, dec, n, M, L) {
+
+    var w = hourAngle(h, phi, dec),
+        a = approxTransit(w, lw, n);
+    return solarTransitJ(a, M, L);
+}
+
+
+// calculates sun times for a given date and latitude/longitude
+
+SunCalc.getTimes = function (date, lat, lng) {
+
+    var lw = rad * -lng,
+        phi = rad * lat,
+
+        d = toDays(date),
+        n = julianCycle(d, lw),
+        ds = approxTransit(0, lw, n),
+
+        M = solarMeanAnomaly(ds),
+        L = eclipticLongitude(M),
+        dec = declination(L, 0),
+
+        Jnoon = solarTransitJ(ds, M, L),
+
+        i, len, time, Jset, Jrise;
+
+
+    var result = {
+        solarNoon: fromJulian(Jnoon),
+        nadir: fromJulian(Jnoon - 0.5)
+    };
+
+    for (i = 0, len = times.length; i < len; i += 1) {
+        time = times[i];
+
+        Jset = getSetJ(time[0] * rad, lw, phi, dec, n, M, L);
+        Jrise = Jnoon - (Jset - Jnoon);
+
+        result[time[1]] = fromJulian(Jrise);
+        result[time[2]] = fromJulian(Jset);
+    }
+
+    return result;
+};
+
+
+// moon calculations, based on http://aa.quae.nl/en/reken/hemelpositie.html formulas
+
+function moonCoords(d) { // geocentric ecliptic coordinates of the moon
+
+    var L = rad * (218.316 + 13.176396 * d), // ecliptic longitude
+        M = rad * (134.963 + 13.064993 * d), // mean anomaly
+        F = rad * (93.272 + 13.229350 * d),  // mean distance
+
+        l  = L + rad * 6.289 * sin(M), // longitude
+        b  = rad * 5.128 * sin(F),     // latitude
+        dt = 385001 - 20905 * cos(M);  // distance to the moon in km
+
+    return {
+        ra: rightAscension(l, b),
+        dec: declination(l, b),
+        dist: dt
+    };
+}
+
+SunCalc.getMoonPosition = function (date, lat, lng) {
+
+    var lw  = rad * -lng,
+        phi = rad * lat,
+        d   = toDays(date),
+
+        c = moonCoords(d),
+        H = siderealTime(d, lw) - c.ra,
+        h = altitude(H, phi, c.dec),
+        // formula 14.1 of "Astronomical Algorithms" 2nd edition by Jean Meeus (Willmann-Bell, Richmond) 1998.
+        pa = atan(sin(H), tan(phi) * cos(c.dec) - sin(c.dec) * cos(H));
+
+    h = h + astroRefraction(h); // altitude correction for refraction
+
+    return {
+        azimuth: azimuth(H, phi, c.dec),
+        altitude: h,
+        distance: c.dist,
+        parallacticAngle: pa
+    };
+};
+
+
+// calculations for illumination parameters of the moon,
+// based on http://idlastro.gsfc.nasa.gov/ftp/pro/astro/mphase.pro formulas and
+// Chapter 48 of "Astronomical Algorithms" 2nd edition by Jean Meeus (Willmann-Bell, Richmond) 1998.
+
+SunCalc.getMoonIllumination = function (date) {
+
+    var d = toDays(date || new Date()),
+        s = sunCoords(d),
+        m = moonCoords(d),
+
+        sdist = 149598000, // distance from Earth to Sun in km
+
+        phi = acos(sin(s.dec) * sin(m.dec) + cos(s.dec) * cos(m.dec) * cos(s.ra - m.ra)),
+        inc = atan(sdist * sin(phi), m.dist - sdist * cos(phi)),
+        angle = atan(cos(s.dec) * sin(s.ra - m.ra), sin(s.dec) * cos(m.dec) -
+                cos(s.dec) * sin(m.dec) * cos(s.ra - m.ra));
+
+    return {
+        fraction: (1 + cos(inc)) / 2,
+        phase: 0.5 + 0.5 * inc * (angle < 0 ? -1 : 1) / Math.PI,
+        angle: angle
+    };
+};
+
+
+function hoursLater(date, h) {
+    return new Date(date.valueOf() + h * dayMs / 24);
+}
+
+// calculations for moon rise/set times are based on http://www.stargazing.net/kepler/moonrise.html article
+
+SunCalc.getMoonTimes = function (date, lat, lng, inUTC) {
+    var t = new Date(date);
+    if (inUTC) t.setUTCHours(0, 0, 0, 0);
+    else t.setHours(0, 0, 0, 0);
+
+    var hc = 0.133 * rad,
+        h0 = SunCalc.getMoonPosition(t, lat, lng).altitude - hc,
+        h1, h2, rise, set, a, b, xe, ye, d, roots, x1, x2, dx;
+
+    // go in 2-hour chunks, each time seeing if a 3-point quadratic curve crosses zero (which means rise or set)
+    for (var i = 1; i <= 24; i += 2) {
+        h1 = SunCalc.getMoonPosition(hoursLater(t, i), lat, lng).altitude - hc;
+        h2 = SunCalc.getMoonPosition(hoursLater(t, i + 1), lat, lng).altitude - hc;
+
+        a = (h0 + h2) / 2 - h1;
+        b = (h2 - h0) / 2;
+        xe = -b / (2 * a);
+        ye = (a * xe + b) * xe + h1;
+        d = b * b - 4 * a * h1;
+        roots = 0;
+
+        if (d >= 0) {
+            dx = Math.sqrt(d) / (Math.abs(a) * 2);
+            x1 = xe - dx;
+            x2 = xe + dx;
+            if (Math.abs(x1) <= 1) roots++;
+            if (Math.abs(x2) <= 1) roots++;
+            if (x1 < -1) x1 = x2;
+        }
+
+        if (roots === 1) {
+            if (h0 < 0) rise = i + x1;
+            else set = i + x1;
+
+        } else if (roots === 2) {
+            rise = i + (ye < 0 ? x2 : x1);
+            set = i + (ye < 0 ? x1 : x2);
+        }
+
+        if (rise && set) break;
+
+        h0 = h2;
+    }
+
+    var result = {};
+
+    if (rise) result.rise = hoursLater(t, rise);
+    if (set) result.set = hoursLater(t, set);
+
+    if (!rise && !set) result[ye > 0 ? 'alwaysUp' : 'alwaysDown'] = true;
+
+    return result;
+};
+
+
+// export as Node module / AMD module / browser variable
+if (true) module.exports = SunCalc;
+else {}
+
+}());
+
+
+/***/ }),
+
 /***/ "./node_modules/timers-browserify/main.js":
 /*!************************************************!*\
   !*** ./node_modules/timers-browserify/main.js ***!
@@ -33202,21 +33803,6 @@ var render = function() {
             "hide-overlay": "",
             transition: "dialog-bottom-transition"
           },
-          scopedSlots: _vm._u([
-            {
-              key: "activator",
-              fn: function(ref) {
-                var on = ref.on
-                return [
-                  _c(
-                    "v-btn",
-                    _vm._g({ attrs: { color: "warning", dark: "" } }, on),
-                    [_vm._v("Interfaz de Control")]
-                  )
-                ]
-              }
-            }
-          ]),
           model: {
             value: _vm.dialog,
             callback: function($$v) {
@@ -33226,7 +33812,6 @@ var render = function() {
           }
         },
         [
-          _vm._v(" "),
           _c(
             "v-card",
             [
@@ -33569,12 +34154,8 @@ var render = function() {
                                         [
                                           _c(
                                             "span",
-                                            { staticClass: "headline" },
-                                            [
-                                              _vm._v(
-                                                " Objeto:" + _vm._s(_vm.object)
-                                              )
-                                            ]
+                                            { staticClass: "display-1" },
+                                            [_vm._v(" " + _vm._s(_vm.object))]
                                           )
                                         ]
                                       ),
@@ -33697,7 +34278,10 @@ var render = function() {
                                     { attrs: { "align-center": "", xs4: "" } },
                                     [
                                       _c("v-text-field", {
-                                        attrs: { label: "Asención Recta" },
+                                        attrs: {
+                                          label: "Asención Recta",
+                                          readonly: "true"
+                                        },
                                         model: {
                                           value: _vm.Ar_screen,
                                           callback: function($$v) {
@@ -33719,7 +34303,10 @@ var render = function() {
                                     { attrs: { "align-center": "", xs4: "" } },
                                     [
                                       _c("v-text-field", {
-                                        attrs: { label: "Declinación" },
+                                        attrs: {
+                                          label: "Declinación",
+                                          readonly: "true"
+                                        },
                                         model: {
                                           value: _vm.Dec_screen,
                                           callback: function($$v) {
@@ -33859,6 +34446,11 @@ var render = function() {
                                                       [
                                                         _c("v-text-field", {
                                                           attrs: {
+                                                            type: "number",
+                                                            "min:0": "",
+                                                            "max:23": "",
+                                                            rules:
+                                                              _vm.twentythreeRule,
                                                             label: "AR Horas"
                                                           },
                                                           model: {
@@ -33893,12 +34485,16 @@ var render = function() {
                                                       [
                                                         _c("v-text-field", {
                                                           attrs: {
+                                                            "min:0": "",
+                                                            "max:59": "",
                                                             type: "number",
+                                                            rules:
+                                                              _vm.sixtyRule,
                                                             label: "AR Minutos",
                                                             "append-outer-icon":
-                                                              "add",
+                                                              "add_circle_outline",
                                                             "prepend-icon":
-                                                              "remove"
+                                                              "remove_circle_outline"
                                                           },
                                                           on: {
                                                             "click:append-outer":
@@ -33941,10 +34537,14 @@ var render = function() {
                                                             type: "number",
                                                             label:
                                                               "AR Segundos",
+                                                            "min:0": "",
+                                                            "max:59": "",
+                                                            rules:
+                                                              _vm.sixtyRule,
                                                             "append-outer-icon":
-                                                              "add",
+                                                              "add_circle_outline",
                                                             "prepend-icon":
-                                                              "remove"
+                                                              "remove_circle_outline"
                                                           },
                                                           on: {
                                                             "click:append-outer":
@@ -34020,7 +34620,12 @@ var render = function() {
                                                       [
                                                         _c("v-text-field", {
                                                           attrs: {
-                                                            label: "DEC Grados"
+                                                            type: "number",
+                                                            label: "DEC Grados",
+                                                            "min:-90": "",
+                                                            "max:90": "",
+                                                            rules:
+                                                              _vm.ninetyRule
                                                           },
                                                           model: {
                                                             value: _vm.h_dec,
@@ -34054,13 +34659,17 @@ var render = function() {
                                                       [
                                                         _c("v-text-field", {
                                                           attrs: {
+                                                            "min:0": "",
+                                                            "max:59": "",
                                                             type: "number",
                                                             label:
                                                               "DEC Minutos",
+                                                            rules:
+                                                              _vm.sixtyRule,
                                                             "append-outer-icon":
-                                                              "add",
+                                                              "add_circle_outline",
                                                             "prepend-icon":
-                                                              "remove"
+                                                              "remove_circle_outline"
                                                           },
                                                           on: {
                                                             "click:append-outer":
@@ -34103,10 +34712,14 @@ var render = function() {
                                                             type: "number",
                                                             label:
                                                               "DEC Segundos",
+                                                            rules:
+                                                              _vm.sixtyRule,
+                                                            "min:0": "",
+                                                            "max:59": "",
                                                             "append-outer-icon":
-                                                              "add",
+                                                              "add_circle_outline",
                                                             "prepend-icon":
-                                                              "remove"
+                                                              "remove_circle_outline"
                                                           },
                                                           on: {
                                                             "click:append-outer":
@@ -34295,7 +34908,10 @@ var render = function() {
                                                         _c("v-text-field", {
                                                           attrs: {
                                                             "min:0": "",
-                                                            "max:60": "",
+                                                            "max:23": "",
+                                                            rules:
+                                                              _vm.twentythreeRule,
+                                                            type: "number",
                                                             label: "AR Horas"
                                                           },
                                                           model: {
@@ -34330,6 +34946,11 @@ var render = function() {
                                                       [
                                                         _c("v-text-field", {
                                                           attrs: {
+                                                            "min:0": "",
+                                                            "max:59": "",
+                                                            rules:
+                                                              _vm.sixtyRule,
+                                                            type: "number",
                                                             label: "AR Minutos"
                                                           },
                                                           model: {
@@ -34364,7 +34985,13 @@ var render = function() {
                                                       [
                                                         _c("v-text-field", {
                                                           attrs: {
-                                                            label: "AR Segundos"
+                                                            "min:0": "",
+                                                            "max:59": "",
+                                                            rules:
+                                                              _vm.sixtyRule,
+                                                            label:
+                                                              "AR Segundos",
+                                                            type: "number"
                                                           },
                                                           model: {
                                                             value: _vm.s_ra,
@@ -34434,7 +35061,12 @@ var render = function() {
                                                       [
                                                         _c("v-text-field", {
                                                           attrs: {
-                                                            label: "DEC Grados"
+                                                            "min:-90": "",
+                                                            "max:90": "",
+                                                            rules:
+                                                              _vm.ninetyRule,
+                                                            label: "DEC Grados",
+                                                            type: "number"
                                                           },
                                                           model: {
                                                             value: _vm.h_dec,
@@ -34468,7 +35100,13 @@ var render = function() {
                                                       [
                                                         _c("v-text-field", {
                                                           attrs: {
-                                                            label: "DEC Minutos"
+                                                            label:
+                                                              "DEC Minutos",
+                                                            "min:0": "",
+                                                            "max:59": "",
+                                                            rules:
+                                                              _vm.sixtyRule,
+                                                            type: "number"
                                                           },
                                                           model: {
                                                             value: _vm.m_dec,
@@ -34502,8 +35140,13 @@ var render = function() {
                                                       [
                                                         _c("v-text-field", {
                                                           attrs: {
+                                                            "min:0": "",
+                                                            "max:59": "",
+                                                            rules:
+                                                              _vm.sixtyRule,
                                                             label:
-                                                              "DEC Segundos"
+                                                              "DEC Segundos",
+                                                            type: "number"
                                                           },
                                                           model: {
                                                             value: _vm.s_dec,
@@ -35089,7 +35732,16 @@ var render = function() {
                                   _c(
                                     "td",
                                     { staticClass: "text-xs-left" },
-                                    [_c("control-component")],
+                                    [
+                                      _c(
+                                        "v-btn",
+                                        {
+                                          attrs: { color: "warning", dark: "" },
+                                          on: { click: _vm.onClick }
+                                        },
+                                        [_vm._v("Interfaz de Control")]
+                                      )
+                                    ],
                                     1
                                   )
                                 ]
@@ -35139,7 +35791,9 @@ var render = function() {
           )
         ],
         1
-      )
+      ),
+      _vm._v(" "),
+      _c("div", { ref: "container" })
     ],
     1
   )
@@ -35177,21 +35831,6 @@ var render = function() {
             "hide-overlay": "",
             transition: "dialog-bottom-transition"
           },
-          scopedSlots: _vm._u([
-            {
-              key: "activator",
-              fn: function(ref) {
-                var on = ref.on
-                return [
-                  _c(
-                    "v-btn",
-                    _vm._g({ attrs: { color: "warning", dark: "" } }, on),
-                    [_vm._v("Comprar Puntos")]
-                  )
-                ]
-              }
-            }
-          ]),
           model: {
             value: _vm.dialog,
             callback: function($$v) {
@@ -35201,7 +35840,6 @@ var render = function() {
           }
         },
         [
-          _vm._v(" "),
           _c(
             "v-card",
             [
@@ -35262,7 +35900,10 @@ var render = function() {
                                           [
                                             _vm._v(
                                               " Puntos Disponibles:" +
-                                                _vm._s(_vm.current_points)
+                                                _vm._s(
+                                                  this.$store.getters
+                                                    .current_points
+                                                )
                                             )
                                           ]
                                         )
@@ -35557,9 +36198,9 @@ var render = function() {
                                         fn: function() {
                                           return [
                                             _vm._v(
-                                              '\n                          Your search for "' +
+                                              '\n                            Your search for "' +
                                                 _vm._s(_vm.search) +
-                                                '" found no results.\n                        '
+                                                '" found no results.\n                          '
                                             )
                                           ]
                                         },
@@ -35625,21 +36266,6 @@ var render = function() {
             "hide-overlay": "",
             transition: "dialog-bottom-transition"
           },
-          scopedSlots: _vm._u([
-            {
-              key: "activator",
-              fn: function(ref) {
-                var on = ref.on
-                return [
-                  _c(
-                    "v-btn",
-                    _vm._g({ attrs: { color: "warning", dark: "" } }, on),
-                    [_vm._v("Reservar")]
-                  )
-                ]
-              }
-            }
-          ]),
           model: {
             value: _vm.dialog,
             callback: function($$v) {
@@ -35649,7 +36275,6 @@ var render = function() {
           }
         },
         [
-          _vm._v(" "),
           _c(
             "v-card",
             [
@@ -35858,7 +36483,80 @@ var render = function() {
                         "v-layout",
                         { attrs: { "align-center": "", row: "" } },
                         [
-                          _c("v-flex", { attrs: { xs8: "" } }),
+                          _c("v-flex", { attrs: { xs1: "" } }),
+                          _vm._v(" "),
+                          _c(
+                            "v-flex",
+                            { attrs: { xs2: "" } },
+                            [
+                              _c(
+                                "v-layout",
+                                { attrs: { "align-center": "", row: "" } },
+                                [
+                                  _c(
+                                    "v-flex",
+                                    { attrs: { xs12: "" } },
+                                    [
+                                      _c(
+                                        "v-card",
+                                        [
+                                          _c("v-img", {
+                                            attrs: {
+                                              src: _vm.moonUrl,
+                                              "aspect-ratio": "1"
+                                            }
+                                          })
+                                        ],
+                                        1
+                                      )
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-layout",
+                        { attrs: { "align-center": "", row: "" } },
+                        [
+                          _c("v-flex", { attrs: { xs1: "" } }),
+                          _vm._v(" "),
+                          _c("v-flex", { attrs: { xs4: "" } }, [
+                            _c("span", [
+                              _vm._v("MoonSet: " + _vm._s(_vm.moonset))
+                            ])
+                          ])
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-layout",
+                        { attrs: { "align-center": "", row: "" } },
+                        [
+                          _c("v-flex", { attrs: { xs1: "" } }),
+                          _vm._v(" "),
+                          _c("v-flex", { attrs: { xs4: "" } }, [
+                            _c("span", [
+                              _vm._v("MoonRise: " + _vm._s(_vm.moonrise))
+                            ])
+                          ])
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-layout",
+                        { attrs: { "align-center": "", row: "" } },
+                        [
+                          _c("v-flex", { attrs: { xs1: "" } }),
                           _vm._v(" "),
                           _c("v-flex", { attrs: { xs4: "" } }, [
                             _c("span", [_vm._v(_vm._s(_vm.moon_state))])
@@ -36029,20 +36727,20 @@ var render = function() {
                   "v-card",
                   [
                     _c("v-card-title", [
-                      _vm._v("\n          Confirmar Reserva\n        ")
+                      _vm._v("\n            Confirmar Reserva\n          ")
                     ]),
                     _vm._v(" "),
                     _c("v-card-text", [
                       _vm._v(
-                        "\n          " +
+                        "\n            " +
                           _vm._s(this.equipment) +
-                          "\n          " +
-                          _vm._s(this.points_out) +
-                          "\n          " +
+                          "\n            " +
+                          _vm._s(this.telescope_points) +
+                          "\n            " +
                           _vm._s(this.today) +
-                          "\n          " +
+                          "\n            " +
                           _vm._s(this.hourToReserv) +
-                          "\n\n        "
+                          "\n\n          "
                       )
                     ]),
                     _vm._v(" "),
@@ -36219,9 +36917,29 @@ var render = function() {
                                       _c(
                                         "div",
                                         [
-                                          _c("points-component"),
+                                          _c(
+                                            "v-btn",
+                                            {
+                                              attrs: {
+                                                color: "warning",
+                                                dark: ""
+                                              },
+                                              on: { click: _vm.pointsClick }
+                                            },
+                                            [_vm._v("Comprar Puntos")]
+                                          ),
                                           _vm._v(" "),
-                                          _c("reservation-component")
+                                          _c(
+                                            "v-btn",
+                                            {
+                                              attrs: {
+                                                color: "warning",
+                                                dark: ""
+                                              },
+                                              on: { click: _vm.reservClick }
+                                            },
+                                            [_vm._v("Reservar")]
+                                          )
                                         ],
                                         1
                                       )
@@ -36372,7 +37090,9 @@ var render = function() {
           )
         ],
         1
-      )
+      ),
+      _vm._v(" "),
+      _c("div", { ref: "container" })
     ],
     1
   )
@@ -78201,6 +78921,325 @@ module.exports = function(module) {
 
 /***/ }),
 
+/***/ "./resources/assets/images/Luna01.jpg":
+/*!********************************************!*\
+  !*** ./resources/assets/images/Luna01.jpg ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/Luna01.jpg?6ec5b8df029298d15d62877554e9d722";
+
+/***/ }),
+
+/***/ "./resources/assets/images/Luna02.jpg":
+/*!********************************************!*\
+  !*** ./resources/assets/images/Luna02.jpg ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/Luna02.jpg?7734303c50d7564b9e69a9a2978df1b5";
+
+/***/ }),
+
+/***/ "./resources/assets/images/Luna03.jpg":
+/*!********************************************!*\
+  !*** ./resources/assets/images/Luna03.jpg ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/Luna03.jpg?372b4cc5b67f487a7299554a4f3e7317";
+
+/***/ }),
+
+/***/ "./resources/assets/images/Luna04.jpg":
+/*!********************************************!*\
+  !*** ./resources/assets/images/Luna04.jpg ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/Luna04.jpg?d5995ca2e4fb8ddc0b3526392f0951ba";
+
+/***/ }),
+
+/***/ "./resources/assets/images/Luna05.jpg":
+/*!********************************************!*\
+  !*** ./resources/assets/images/Luna05.jpg ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/Luna05.jpg?ae24c851ad33524f5d6b26bfd27fa457";
+
+/***/ }),
+
+/***/ "./resources/assets/images/Luna06.jpg":
+/*!********************************************!*\
+  !*** ./resources/assets/images/Luna06.jpg ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/Luna06.jpg?23e3592910fd96cb9257781d7bdfd956";
+
+/***/ }),
+
+/***/ "./resources/assets/images/Luna07.jpg":
+/*!********************************************!*\
+  !*** ./resources/assets/images/Luna07.jpg ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/Luna07.jpg?9d502f915159c5e0b286b0260f3ec35a";
+
+/***/ }),
+
+/***/ "./resources/assets/images/Luna08.jpg":
+/*!********************************************!*\
+  !*** ./resources/assets/images/Luna08.jpg ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/Luna08.jpg?6e6183f495bc710e61a295047c380f27";
+
+/***/ }),
+
+/***/ "./resources/assets/images/Luna09.jpg":
+/*!********************************************!*\
+  !*** ./resources/assets/images/Luna09.jpg ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/Luna09.jpg?9392faed5ab6d0f872902be4b75535fa";
+
+/***/ }),
+
+/***/ "./resources/assets/images/Luna10.jpg":
+/*!********************************************!*\
+  !*** ./resources/assets/images/Luna10.jpg ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/Luna10.jpg?ea6ba0fa4343a57757de7c2e72d44682";
+
+/***/ }),
+
+/***/ "./resources/assets/images/Luna11.jpg":
+/*!********************************************!*\
+  !*** ./resources/assets/images/Luna11.jpg ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/Luna11.jpg?bf62b15fc0445bb6494798211ef021f5";
+
+/***/ }),
+
+/***/ "./resources/assets/images/Luna12.jpg":
+/*!********************************************!*\
+  !*** ./resources/assets/images/Luna12.jpg ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/Luna12.jpg?904375d0f271e7408bddf015490dd9e6";
+
+/***/ }),
+
+/***/ "./resources/assets/images/Luna13.jpg":
+/*!********************************************!*\
+  !*** ./resources/assets/images/Luna13.jpg ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/Luna13.jpg?f603a5b5bc5b7f92f203d05ea60c61d1";
+
+/***/ }),
+
+/***/ "./resources/assets/images/Luna14.jpg":
+/*!********************************************!*\
+  !*** ./resources/assets/images/Luna14.jpg ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/Luna14.jpg?ed81cc4dcf39dd30c96f518e2b6f31e7";
+
+/***/ }),
+
+/***/ "./resources/assets/images/Luna15.jpg":
+/*!********************************************!*\
+  !*** ./resources/assets/images/Luna15.jpg ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/Luna15.jpg?6280174c82e29582b28d12cab70ca575";
+
+/***/ }),
+
+/***/ "./resources/assets/images/Luna16.jpg":
+/*!********************************************!*\
+  !*** ./resources/assets/images/Luna16.jpg ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/Luna16.jpg?c150d91ef96814a037b8bf04a5892225";
+
+/***/ }),
+
+/***/ "./resources/assets/images/Luna17.jpg":
+/*!********************************************!*\
+  !*** ./resources/assets/images/Luna17.jpg ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/Luna17.jpg?b09b169230c91e69d2fddeb93d440ab7";
+
+/***/ }),
+
+/***/ "./resources/assets/images/Luna18.jpg":
+/*!********************************************!*\
+  !*** ./resources/assets/images/Luna18.jpg ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/Luna18.jpg?f99c48e5a44977e894f73d423533e724";
+
+/***/ }),
+
+/***/ "./resources/assets/images/Luna19.jpg":
+/*!********************************************!*\
+  !*** ./resources/assets/images/Luna19.jpg ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/Luna19.jpg?9472d4c0aaa04a6f489009ea9b2176c7";
+
+/***/ }),
+
+/***/ "./resources/assets/images/Luna20.jpg":
+/*!********************************************!*\
+  !*** ./resources/assets/images/Luna20.jpg ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/Luna20.jpg?9d8e6439461c273acb9e63a09c1384c3";
+
+/***/ }),
+
+/***/ "./resources/assets/images/Luna21.jpg":
+/*!********************************************!*\
+  !*** ./resources/assets/images/Luna21.jpg ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/Luna21.jpg?47b952260e932904ab7ad842ae89bbc2";
+
+/***/ }),
+
+/***/ "./resources/assets/images/Luna22.jpg":
+/*!********************************************!*\
+  !*** ./resources/assets/images/Luna22.jpg ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/Luna22.jpg?1eedede8a999e093254794b3f8346da9";
+
+/***/ }),
+
+/***/ "./resources/assets/images/Luna23.jpg":
+/*!********************************************!*\
+  !*** ./resources/assets/images/Luna23.jpg ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/Luna23.jpg?0728af58a9f0031f86a56bde6c2c98c6";
+
+/***/ }),
+
+/***/ "./resources/assets/images/Luna24.jpg":
+/*!********************************************!*\
+  !*** ./resources/assets/images/Luna24.jpg ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/Luna24.jpg?33577c4b1a39c45a592c1b2bd5cdad96";
+
+/***/ }),
+
+/***/ "./resources/assets/images/Luna25.jpg":
+/*!********************************************!*\
+  !*** ./resources/assets/images/Luna25.jpg ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/Luna25.jpg?9962d775da6f175f15be9a0e7ebd6a49";
+
+/***/ }),
+
+/***/ "./resources/assets/images/Luna26.jpg":
+/*!********************************************!*\
+  !*** ./resources/assets/images/Luna26.jpg ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/Luna26.jpg?8e8756bed6cb21d3c8d1ae8a3856edcb";
+
+/***/ }),
+
+/***/ "./resources/assets/images/Luna27.jpg":
+/*!********************************************!*\
+  !*** ./resources/assets/images/Luna27.jpg ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/Luna27.jpg?0d522ba10f772d7b3614c039bffdef19";
+
+/***/ }),
+
+/***/ "./resources/assets/images/Luna28.jpg":
+/*!********************************************!*\
+  !*** ./resources/assets/images/Luna28.jpg ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/Luna28.jpg?017a46ef20501dd65df0a1c09f608819";
+
+/***/ }),
+
+/***/ "./resources/assets/images/Luna29.jpg":
+/*!********************************************!*\
+  !*** ./resources/assets/images/Luna29.jpg ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/Luna29.jpg?1eb6c1f057dcffe1321bee3c29ef7563";
+
+/***/ }),
+
 /***/ "./resources/js/app.js":
 /*!*****************************!*\
   !*** ./resources/js/app.js ***!
@@ -78219,10 +79258,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./store */ "./resources/js/store/index.js");
 /* harmony import */ var _routes__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./routes */ "./resources/js/routes.js");
 /* harmony import */ var _components_AppComponent__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/AppComponent */ "./resources/js/components/AppComponent.vue");
-/* harmony import */ var _components_ControlComponent__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/ControlComponent */ "./resources/js/components/ControlComponent.vue");
-/* harmony import */ var _components_PointsComponent__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/PointsComponent */ "./resources/js/components/PointsComponent.vue");
-/* harmony import */ var _components_ReservationComponent__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/ReservationComponent */ "./resources/js/components/ReservationComponent.vue");
-/* harmony import */ var _components_MyReservationsComponent__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/MyReservationsComponent */ "./resources/js/components/MyReservationsComponent.vue");
+/* harmony import */ var _components_MyReservationsComponent__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/MyReservationsComponent */ "./resources/js/components/MyReservationsComponent.vue");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -78234,9 +79270,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-
-
+ // import ControlComponent     from './components/ControlComponent'
+// import PointsComponent      from './components/PointsComponent'
+// import ReservationComponent      from './components/ReservationComponent'
 
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_2__["default"]);
@@ -78257,11 +79293,11 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuetify__WEBPACK_IMPORTED_MODULE_
     warning: '#FFC107'
   }
 });
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('app', __webpack_require__(/*! ./views/App.vue */ "./resources/js/views/App.vue"));
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('control-component', _components_ControlComponent__WEBPACK_IMPORTED_MODULE_7__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('points-component', _components_PointsComponent__WEBPACK_IMPORTED_MODULE_8__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('reservation-component', _components_ReservationComponent__WEBPACK_IMPORTED_MODULE_9__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('my-reservations', _components_MyReservationsComponent__WEBPACK_IMPORTED_MODULE_10__["default"]); //AppComponent
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('app', __webpack_require__(/*! ./views/App.vue */ "./resources/js/views/App.vue")); // Vue.component('control-component', ControlComponent);
+// Vue.component('points-component', PointsComponent);
+// Vue.component('reservation-component', ReservationComponent);
+
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('my-reservations', _components_MyReservationsComponent__WEBPACK_IMPORTED_MODULE_7__["default"]); //AppComponent
 
 var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   el: '#App',

@@ -38,6 +38,8 @@
       dialog: false,
       drawer: null,
       step:"",
+      points_in:0,
+      points_out:0,
       userId:0,
       astronomic_objects: null,      
     }),
@@ -76,6 +78,25 @@
             .catch(function (resp) {
                 console.log(resp);
                 alert("Error reservations :" + resp);
+            });
+
+            let userId = document.head.querySelector('meta[name="userID"]');
+            axios.get('/api/points',{
+                headers: { 
+                    'user': userId.content,
+                }
+            })
+            .then(function (resp) {   
+                for(var i in resp.data){
+                     app.points_in += parseInt(resp.data[i].in,10);
+                     app.points_out += parseInt(resp.data[i].out,10);
+                 }
+                 let c_points = (app.points_in || 0) - (app.points_out || 0);
+                 app.$store.commit('changeCurrentPoints',c_points );
+            })
+            .catch(function (resp) {
+                console.log(resp);
+                alert("Error Points :" + resp);
             });
 
 

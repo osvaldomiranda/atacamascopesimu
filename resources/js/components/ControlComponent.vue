@@ -1,9 +1,9 @@
 <template>
   <v-layout>
     <v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition">
-      <template v-slot:activator="{ on }">
+<!--       <template v-slot:activator="{ on }">
         <v-btn color="warning" dark v-on="on">Interfaz de Control</v-btn>
-      </template>
+      </template> -->
       <v-card>
         <v-toolbar dark color="primary">
           <v-btn icon dark @click="dialog = false">
@@ -105,7 +105,7 @@
 						<v-container  fluid>
 				            <v-layout >
 				              	<v-flex xs4 align-end flexbox>
-				                	<span class="headline"> Objeto:{{ object }}</span>
+				                	<span class="display-1"> {{ object }}</span>
 				              	</v-flex>
 				              	<v-flex xs4 align-end flexbox>
 				                	<span class="headline"> Estado:{{ state }}</span>
@@ -138,7 +138,8 @@
 							<v-flex align-center xs4>
 								<v-text-field
 								    v-model="Ar_screen"
-								        label="Asención Recta"
+								    label="Asención Recta"
+								    readonly=true
 								    ></v-text-field>
 		          			</v-flex>
 							<v-flex align-center xs1>
@@ -146,7 +147,8 @@
 							<v-flex align-center xs4>
 								<v-text-field
 								    v-model="Dec_screen"
-								        label="Declinación"
+								    label="Declinación"
+								    readonly=true
 								    ></v-text-field>
 		          			</v-flex>
 							<v-flex align-center xs1>
@@ -179,7 +181,11 @@
 							<v-flex align-center xs3>
 								<v-text-field
 								    v-model="h_ra"
-								        label="AR Horas"
+								    type="number" 
+								    min:0
+								    max:23
+								    :rules='twentythreeRule'
+								    label="AR Horas"
 								    ></v-text-field>
 		          			</v-flex>
 							<v-flex align-center xs1>
@@ -187,10 +193,13 @@
 							<v-flex align-center xs3>
 								<v-text-field 
 									v-model="m_ra" 
+								    min:0
+								    max:59
 									type="number" 
+									:rules='sixtyRule'
 									label="AR Minutos" 
-									append-outer-icon="add" @click:append-outer="inc_m_ra" 
-									prepend-icon="remove" @click:prepend="dec_m_ra">
+									append-outer-icon="add_circle_outline" @click:append-outer="inc_m_ra" 
+									prepend-icon="remove_circle_outline" @click:prepend="dec_m_ra">
 								</v-text-field>
 		          			</v-flex>
 							<v-flex align-center xs1>
@@ -201,8 +210,11 @@
 									v-model="s_ra" 
 									type="number" 
 									label="AR Segundos" 
-									append-outer-icon="add" @click:append-outer="inc_s_ra" 
-									prepend-icon="remove" @click:prepend="dec_s_ra">
+								    min:0
+								    max:59
+									:rules='sixtyRule'
+									append-outer-icon="add_circle_outline" @click:append-outer="inc_s_ra" 
+									prepend-icon="remove_circle_outline" @click:prepend="dec_s_ra">
 								</v-text-field>
 		          			</v-flex>
 							<v-flex align-center xs1>
@@ -219,18 +231,25 @@
 							<v-flex align-center xs3>
 								<v-text-field
 								    v-model="h_dec"
-								        label="DEC Grados"
-								    ></v-text-field>
+								    type="number" 
+								    label="DEC Grados"
+								    min:-90
+								    max:90								        
+								    :rules='ninetyRule'
+								></v-text-field>
 		          			</v-flex>
 							<v-flex align-center xs1>
 							</v-flex>
 							<v-flex align-center xs3>
 								<v-text-field 
 									v-model="m_dec" 
+								    min:0
+								    max:59	
 									type="number" 
 									label="DEC Minutos" 
-									append-outer-icon="add" @click:append-outer="inc_m_dec" 
-									prepend-icon="remove" @click:prepend="dec_m_dec">
+									:rules='sixtyRule'
+									append-outer-icon="add_circle_outline" @click:append-outer="inc_m_dec" 
+									prepend-icon="remove_circle_outline" @click:prepend="dec_m_dec">
 								</v-text-field>
 		          			</v-flex>
 							<v-flex align-center xs1>
@@ -240,8 +259,11 @@
 									v-model="s_dec" 
 									type="number" 
 									label="DEC Segundos" 
-									append-outer-icon="add" @click:append-outer="inc_s_dec" 
-									prepend-icon="remove" @click:prepend="dec_s_dec">
+									:rules='sixtyRule'
+								    min:0
+								    max:59	
+									append-outer-icon="add_circle_outline" @click:append-outer="inc_s_dec" 
+									prepend-icon="remove_circle_outline" @click:prepend="dec_s_dec">
 								</v-text-field>
 		          			</v-flex>
 							<v-flex align-center xs1>
@@ -282,7 +304,9 @@
 								<v-text-field
 								    v-model="h_ra"
 								    min:0
-								    max:60
+								    max:23
+								    :rules='twentythreeRule'
+								    type="number" 	
 								    label="AR Horas"
 								    ></v-text-field>
 		          			</v-flex>
@@ -290,8 +314,12 @@
 							</v-flex>
 							<v-flex align-center xs3>
 								<v-text-field
+								    min:0
+								    max:59
+								    :rules='sixtyRule'
 								    v-model="m_ra"
-								        label="AR Minutos"
+								    type="number" 
+								    label="AR Minutos"
 								    ></v-text-field>
 		          			</v-flex>
 							<v-flex align-center xs1>
@@ -299,7 +327,11 @@
 							<v-flex align-center xs3>
 								<v-text-field
 								    v-model="s_ra"
-								        label="AR Segundos"
+								    min:0
+								    max:59
+								    :rules='sixtyRule'
+								    label="AR Segundos"
+								    type="number" 
 								    ></v-text-field>
 		          			</v-flex>
 							<v-flex align-center xs1>
@@ -314,7 +346,11 @@
 							<v-flex align-center xs3>
 								<v-text-field
 								    v-model="h_dec"
-								        label="DEC Grados"
+								    min:-90
+								    max:90
+								    :rules='ninetyRule'
+								    label="DEC Grados"
+								    type="number" 
 								    ></v-text-field>
 		          			</v-flex>
 							<v-flex align-center xs1>
@@ -322,7 +358,11 @@
 							<v-flex align-center xs3>
 								<v-text-field
 								    v-model="m_dec"
-								        label="DEC Minutos"
+								    label="DEC Minutos"
+								    min:0
+								    max:59
+								    :rules='sixtyRule'
+								    type="number" 
 								    ></v-text-field>
 		          			</v-flex>
 							<v-flex align-center xs1>
@@ -330,7 +370,11 @@
 							<v-flex align-center xs3>
 								<v-text-field
 								    v-model="s_dec"
-								        label="DEC Segundos"
+								    min:0
+								    max:59
+								    :rules='sixtyRule'
+								    label="DEC Segundos"
+								    type="number" 
 								    ></v-text-field>
 		          			</v-flex>
 							<v-flex align-center xs1>
@@ -501,7 +545,27 @@
   	computed: mapState(['astronomc_objects']),
     data () {
       return {
-        dialog: false,
+
+        ninetyRule: [v => !!v || 'Campo requerido',
+            v=> v <= 90 || 'Debe ser  menor o igual a 90',
+            v=> v >= -90 || 'Debe ser mayor o igual a -90',
+        ],
+
+        sixtyRule: [v => !!v || 'Campo requerido',
+            v=> v <= 59 || 'Debe ser menor a 60',
+            v=> v >= 0 || 'Debe ser mayor a o igual 0',
+        ],
+
+        twentythreeRule: [v => !!v || 'Campo requerido',
+            v=> v <= 23 || 'Debe ser menor o igual a 23',
+            v=> v >= 0 || 'Debe ser mayor a o igual 0',
+        ],
+
+
+
+        blankRules: [v => !!v || 'Campo requerido'],
+
+        dialog: true,
         dialog2: false,
         dialog3: false,
         astronomic_objects:[],
@@ -633,27 +697,29 @@
       	//	if (event.target.classList.contains('btn__content')) return;
       		var app = this;
  
-      		this.object = a.name;
-      		this.Ar_screen = a.ra;
-      		this.Dec_screen = a.dec;
 
+      		this.object = a.name;
 
       		if(a.catalog=='SolarSistem'){
 	      		axios.get('/api/astronomic_objects/solarsistem?object=' + a.name)
 	            .then(function (resp) {    
 	            	//alert(JSON.stringify(resp.data));
-	            	app.Ar = resp.data["ar"];
-	            	app.Dec = resp.data["dec"];
 	            	app.Ar_screen = resp.data["ar"];
 	            	app.Dec_screen = resp.data["dec"];
+	            	app.coords(app.Ar_screen, app.Dec_screen); 
 	            })
 	            .catch(function (resp) {
 	                console.log(resp);
 	                alert("Error shoot :" + resp);
 	            });
-      		}     
+      		} else {
 
-      		this.coords(a.ra, a.dec); 		
+      			this.Ar_screen = a.ra;
+      			this.Dec_screen = a.dec;
+      			this.coords(app.Ar_screen, app.Dec_screen); 
+      		}    
+
+      				
     	},
       	initialize () {
             this.openChat();
@@ -721,20 +787,22 @@
         },
 
         move(){
-        	var $command = {'command': 'MONTURA', 'type': 'mount', 'status': 'PENDIENTE',
-        	                'ar': this.Ar, 'dec': this.Dec, 'user_id': 1, 'equipment_id': 1};
+        	if(this.Ar_screen){
+	        	var $command = {'command': 'MONTURA', 'type': 'mount', 'status': 'PENDIENTE',
+	        	                'ar': this.Ar, 'dec': this.Dec, 'user_id': 1, 'equipment_id': 1};
 
-        	//alert(JSON.stringify($command));
-        	axios.post('/api/command/move', $command)
-            .then(function (resp) {
-                
-            })
-            .catch(function (resp) {
-                console.log(resp);
-                alert("Error move :" + resp);
-            });
+	        	//alert(JSON.stringify($command));
+	        	axios.post('/api/command/move', $command)
+	            .then(function (resp) {
+	                
+	            })
+	            .catch(function (resp) {
+	                console.log(resp);
+	                alert("Error move :" + resp);
+	            });
 
-            this.currentRefresh();
+	            this.currentRefresh();
+        	}
         },
         shoot(){
         	var $command = {'command': 'CAMARA', 'type': 'shoot', 'status': 'PENDIENTE',
@@ -885,16 +953,16 @@
     	},
 
     	savefine (){
-    		this.Ar_screen = this.h_ra+'h'+this.m_ra+'m'+this.s_ra+'s'
-    		this.Dec_screen = this.h_dec+'h'+this.m_dec+'m'+this.s_dec+'s'
+    		this.Ar_screen = this.h_ra+'h'+this.m_ra+'m'+this.s_ra+'s';
+    		this.Dec_screen = this.h_dec+'°'+this.m_dec+'m'+this.s_dec+'s';
 
     		this.coords(this.Ar_screen, this.Dec_screen);
     		this.dialog2 = false;
 
     	},
     	savecoords (){
-    		this.Ar_screen = this.h_ra+'h'+this.m_ra+'m'+this.s_ra+'s'
-    		this.Dec_screen = this.h_dec+'°'+this.m_dec+'m'+this.s_dec+'s'
+    		this.Ar_screen = this.h_ra+'h'+this.m_ra+'m'+this.s_ra+'s';
+    		this.Dec_screen = this.h_dec+'°'+this.m_dec+'m'+this.s_dec+'s';
 
     		this.coords(this.Ar_screen, this.Dec_screen);
     		this.dialog3 = false;

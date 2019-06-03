@@ -1,9 +1,9 @@
 <template>
   <v-layout>
     <v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition">
-      <template v-slot:activator="{ on }">
+<!--       <template v-slot:activator="{ on }">
         <v-btn color="warning" dark v-on="on">Comprar Puntos</v-btn>
-      </template>
+      </template> -->
       <v-card>
         <v-toolbar dark color="primary">
           <v-btn icon dark @click="dialog = false">
@@ -23,7 +23,7 @@
                                 <v-flex xs1>
                                 </v-flex>
                                 <v-flex xs4>
-                                    <span class="headline"> Puntos Disponibles:{{ current_points }}</span>
+                                    <span class="headline"> Puntos Disponibles:{{ this.$store.getters.current_points }}</span>
                                 </v-flex>
                                 
                             </v-layout>
@@ -122,13 +122,10 @@
 <script>
   import { mapState } from 'vuex';
   export default {
-    computed: mapState({
-        current_points: state => state.current_points,
-    }),
+    computed: mapState(['current_points']),
     data () {
       return {
-        dialog: false,
-
+        dialog: true,
         points_out:0,
         points_in:0,
         points: 0,
@@ -182,28 +179,19 @@
             })
             .then(function (resp) {   
                 app.purchases = resp.data; 
-                for(var i in resp.data){
-                     app.points_in += parseInt(resp.data[i].in,10);
-                     app.points_out += parseInt(resp.data[i].out,10);
-                 }
-                 let current_points = (app.points_in || 0) - (app.points_out || 0);
-                 app.$store.commit('changeCurrentPoints',app.current_points );
             })
             .catch(function (resp) {
                 console.log(resp);
                 alert("Error Points :" + resp);
             });
-
         },
-
-
 
         pay(){
 
             let app = this;
             let fecha = this.GetFormattedDate();
 
-            var pay_points = {'created_at':fecha,'in': this.points, 'out': 0, 'current_points': parseInt(this.current_points) + parseInt(this.points), 'reservation_id': '', 'transaction_id': '876238746', 'a': this.$store.getters.user};
+            var pay_points = {'created_at':fecha,'in': this.points, 'out': 0, 'current_points': this.$store.getters.current_points + parseInt(this.points), 'reservation_id': '', 'transaction_id': '876238746', 'a': this.$store.getters.user};
 
             let userId = document.head.querySelector('meta[name="userID"]');
             axios.post('/api/points/pay', pay_points,{
@@ -213,8 +201,8 @@
             })
             .then(function (resp) {
                 app.purchases.push(pay_points);
-                app.current_points = parseInt(app.current_points) + parseInt(app.points);
-                app.$store.commit('changeCurrentPoints',(app.current_points || 0) );
+                let c_points=app.$store.getters.current_points + parseInt(app.points);
+                app.$store.commit('changeCurrentPoints',c_points );
             })
             .catch(function (resp) {
                 console.log(resp);

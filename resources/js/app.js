@@ -13,9 +13,9 @@ import store from './store';
 import router from './routes'
 
 import AppComponent         from './components/AppComponent'
-import ControlComponent     from './components/ControlComponent'
-import PointsComponent      from './components/PointsComponent'
-import ReservationComponent      from './components/ReservationComponent'
+// import ControlComponent     from './components/ControlComponent'
+// import PointsComponent      from './components/PointsComponent'
+// import ReservationComponent      from './components/ReservationComponent'
 import MyReservationsComponent      from './components/MyReservationsComponent'
 
 
@@ -47,9 +47,9 @@ Vue.use(Vuetify, {
 
 
 Vue.component('app', require('./views/App.vue'));
-Vue.component('control-component', ControlComponent);
-Vue.component('points-component', PointsComponent);
-Vue.component('reservation-component', ReservationComponent);
+// Vue.component('control-component', ControlComponent);
+// Vue.component('points-component', PointsComponent);
+// Vue.component('reservation-component', ReservationComponent);
 Vue.component('my-reservations', MyReservationsComponent);
 
 
@@ -62,4 +62,5 @@ const app = new Vue({
     render: h => h(AppComponent),
     store,
     router: router,
+
 });

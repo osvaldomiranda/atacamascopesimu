@@ -19,8 +19,10 @@
                         </v-flex>
                         <v-flex xs8 align-end flexbox>
                             <div>
-                                <points-component></points-component>
-                                <reservation-component></reservation-component>
+                                <!-- <points-component></points-component> -->
+                                <v-btn color="warning" dark @click="pointsClick" >Comprar Puntos</v-btn> 
+                               <!--  <reservation-component></reservation-component> -->
+                                <v-btn color="warning" dark @click="reservClick" >Reservar</v-btn>
                                 
                             </div>
                         </v-flex>
@@ -83,12 +85,17 @@
 
       </v-card>
     </v-flex>  
-
+    <div ref="container">
+    </div>
   </v-layout>
 </template>
 
 <script>
-  import { mapState } from 'vuex';
+  import { mapState } from 'vuex';  
+  import Vue from 'vue';  
+  import PointsComponent      from './../components/PointsComponent';
+  import ReservationComponent from './../components/ReservationComponent';
+
   export default {
     computed: mapState(['astronomc_objects', 'current_points']),
     data () {
@@ -144,17 +151,29 @@
         this.initialize();
     },
     methods: {
-      showAlert(a){
-        //  if (event.target.classList.contains('btn__content')) return;
-          var app = this;
-          this.Ar = a.coord_ar;
-          this.Dec = a.coord_dec;
-          this.object = a.name;
-        
-      },
+        showAlert(a){
+            //  if (event.target.classList.contains('btn__content')) return;
+            var app = this;
+            this.Ar = a.coord_ar;
+            this.Dec = a.coord_dec;
+            this.object = a.name;
+            
+        },
         initialize () {
 
         },
+        pointsClick (){
+            var ComponentPoints = Vue.extend(PointsComponent)
+            var instance = new ComponentPoints({store: this.$store});
+            instance.$mount();
+            this.$refs.container.appendChild(instance.$el);
+        },
+        reservClick (){
+            var ComponentReserv = Vue.extend(ReservationComponent)
+            var instance = new ComponentReserv({store: this.$store});
+            instance.$mount();
+            this.$refs.container.appendChild(instance.$el);
+        }
 
     },
   }

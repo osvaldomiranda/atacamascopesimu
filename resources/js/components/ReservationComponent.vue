@@ -1,9 +1,9 @@
 <template>
   <v-layout>
     <v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition">
-      <template v-slot:activator="{ on }">
+<!--       <template v-slot:activator="{ on }">
         <v-btn color="warning" dark v-on="on">Reservar</v-btn>
-      </template>
+      </template> -->
       <v-card>
         <v-toolbar dark color="primary">
           <v-btn icon dark @click="dialog = false">
@@ -78,15 +78,47 @@
                     </v-flex>
             </v-layout> 
 
+
+        <v-layout align-center row>
+          <v-flex xs1>
+        </v-flex>
+        <v-flex xs2>
+          <v-layout align-center row>
+            <v-flex xs12> 
+                <v-card>
+                    <v-img
+                        v-bind:src= "moonUrl" 
+                        aspect-ratio="1"
+                    ></v-img>
+                </v-card> 
+              </v-flex>
+          </v-layout>   
+          
+          </v-flex>
+        </v-layout>
+
+            <!-- {{ url('images/Luna1.jpg') }} -->
             <v-layout align-center row>
-               
-                   <v-flex xs8>
+                   <v-flex xs1>
+                   </v-flex> 
+                   <v-flex xs4>
+                        <span>MoonSet: {{ moonset }}</span>
                    </v-flex>
+            </v-layout>       
+            <v-layout align-center row>
+                    <v-flex xs1>
+                   </v-flex> 
+                   <v-flex xs4>
+                        <span>MoonRise: {{ moonrise }}</span>
+                   </v-flex>
+            </v-layout>   
+            <v-layout align-center row>
+                    <v-flex xs1>
+                   </v-flex>     
                    <v-flex xs4>
                         <span>{{ moon_state }}</span>
-
                    </v-flex>
-               </v-layout>
+            </v-layout>
             </v-card>
             </v-container>
 
@@ -146,7 +178,7 @@
           </v-card-title>
           <v-card-text>
             {{ this.equipment }}
-            {{ this.points_out }}
+            {{ this.telescope_points }}
             {{ this.today }}
             {{ this.hourToReserv }}
 
@@ -168,8 +200,11 @@
 </template>
 
 <script>
-  var actualDate = new Date().toISOString().substr(0, 10)
+  import SunCalc from 'suncalc';  
   import { mapState } from 'vuex';
+
+  var actualDate = new Date().toISOString().substr(0, 10)
+
   export default {
     computed: mapState({
         equipments: state => state.equipments,
@@ -186,7 +221,12 @@
         today: '2019-05-08',
         date: '2019-05-08',
         moon_state:"",
+        moon_times:"",
+        moonset:"",
+        moonrise:"",
+        moonUrl:'',
         menu:false,
+        telescope_points:200,
         current_points:0,
         points_in:0,
         points_out:0,
@@ -196,7 +236,7 @@
         reservationsArray:[1,22,23],
         equipment_id: 1,
 
-        dialog: false,
+        dialog: true,
         dialog2: false,
    
         search: '',
@@ -248,10 +288,22 @@
             app.today = todayTime.getFullYear() + '-' + month.padStart(2,'00') + '-' + todayTime.getDate() ;
             app.start = app.today; 
 
-            this.moon();
+            
+            //var times = SunCalc.getTimes(new Date(), 51.5, -0.1);
+            // format sunrise time from the Date object
+            //var sunriseStr = times.sunrise.getHours() + ':' + times.sunrise.getMinutes();
 
-            this.points();
-           
+            // get position of the sun (azimuth and altitude) at today's sunrise
+            //var sunrisePos = SunCalc.getPosition(times.sunrise, 51.5, -0.1);
+            
+
+            app.moon_times = SunCalc.getMoonTimes(new Date(), 33.0000, -70.3326);
+           // alert(JSON.stringify(app.moon_times));
+            app.moonset = app.moon_times["set"];
+            app.moonrise = app.moon_times["rise"];
+
+            this.moon();
+            
             this.reservatios_day();
         },
 
@@ -265,12 +317,12 @@
             })
             .then(function (resp) { 
                  app.moon_state = resp.data;
+                 app.moonImage();
             })
             .catch(function (resp) {
                 console.log(resp);
                 alert("Error moon :" + resp);
             });
-
         },
 
         confirmReserv (hour){
@@ -281,18 +333,19 @@
         changeTelescope (a){
             this.equipment = a.name;
             this.equipment_id = a.id;
-            this.points_out = a.points;
+            this.telescope_points = a.points;
             this.reservatios_day();
         },
 
         change_date(a){
-
-            if(a>=actualDate){
-                this.start=a;
-                this.end = a;
-                this.moon();
-                this.reservatios_day();
-            }   
+            alert(a);
+            this.start=a;
+            this.end = a;
+            this.moon_times = SunCalc.getMoonTimes(new Date(a), 33.0000, -70.3326);
+            this.moonset = this.moon_times["set"];
+            this.moonrise = this.moon_times["rise"];
+            this.moon();
+            this.reservatios_day();
         },
 
 
@@ -314,7 +367,8 @@
         reserv (){
             var app = this
             let userId = document.head.querySelector('meta[name="userID"]');
-            var reserv = {'user_id':userId.content, 'equipment_id': this.equipment_id, 'date': this.start, 'hour': this.hourToReserv , 'points_out': this.points_out, 'current_points': this.current_points - this.points_out };
+            var reserv = {'user_id':userId.content, 'equipment_id': this.equipment_id, 'date': this.start, 'hour': this.hourToReserv , 'points_out': this.telescope_points, 'current_points': this.$store.getters.current_points - this.telescope_points };
+
 
             axios.post('/api/reservation/create', reserv)
             .then(function (resp) {  
@@ -330,29 +384,8 @@
             app.dialog2=false;  
         },
         points (){
-            var app = this;
-            let userId = document.head.querySelector('meta[name="userID"]');
-            axios.get('/api/points',{
-                headers: { 
-                    'user': userId.content,
-                }
-            })
-            .then(function (resp) {    
-                for(var i in resp.data){
-                     app.points_in += parseInt(resp.data[i].in,10);
-                     app.points_out += parseInt(resp.data[i].out,10);
-                 }
-
-                 
-                 app.current_points = (app.points_in || 0) - (app.points_out || 0);
-                 //alert(app.current_points);
-
-                 app.$store.commit('changeCurrentPoints',app.current_points );
-            })
-            .catch(function (resp) {
-                console.log(resp);
-                alert("Error Points Reserv :" + resp);
-            });
+            let c_points = this.$store.getters.current_points - this.telescope_points;
+            this.$store.commit('changeCurrentPoints',c_points );
         },
         my_reservations (){
             var app = this;
@@ -370,6 +403,107 @@
                     console.log(resp);
                     alert("Error reservation my_reservations :" + resp);
                 });
+        },
+
+        moonImage (){
+
+
+
+          var app = this;
+          var splitted = app.moon_state.split(':');
+          var age = parseInt(splitted[3]); 
+          switch (age) {
+            case 1:
+              app.moonUrl = require('./../../assets/images/Luna01.jpg');
+              break;
+            case 2:
+              app.moonUrl = require('./../../assets/images/Luna02.jpg');
+              break;
+            case 3:
+              app.moonUrl = require('./../../assets/images/Luna03.jpg');
+              break;
+            case 4:
+              app.moonUrl = require('./../../assets/images/Luna04.jpg');
+              break;
+            case 5:
+              app.moonUrl = require('./../../assets/images/Luna05.jpg');
+              break;
+            case 6:
+              app.moonUrl = require('./../../assets/images/Luna06.jpg');
+              break;
+            case 7:
+              app.moonUrl = require('./../../assets/images/Luna07.jpg');
+              break;
+            case 8:
+              app.moonUrl = require('./../../assets/images/Luna08.jpg');
+              break;
+            case 9:
+              app.moonUrl = require('./../../assets/images/Luna09.jpg');
+              break;
+            case 10:
+              app.moonUrl = require('./../../assets/images/Luna10.jpg');
+              break;
+            case 11:
+              app.moonUrl = require('./../../assets/images/Luna11.jpg');
+              break;
+            case 12:
+              app.moonUrl = require('./../../assets/images/Luna12.jpg');
+              break;
+            case 13:
+              app.moonUrl = require('./../../assets/images/Luna13.jpg');
+              break;
+            case 14:
+              app.moonUrl = require('./../../assets/images/Luna14.jpg');
+              break;
+            case 15:
+              app.moonUrl = require('./../../assets/images/Luna15.jpg');
+              break;
+            case 16:
+              app.moonUrl = require('./../../assets/images/Luna16.jpg');
+              break;
+            case 17:
+              app.moonUrl = require('./../../assets/images/Luna17.jpg');
+              break;
+            case 18:
+              app.moonUrl = require('./../../assets/images/Luna18.jpg');
+              break;
+            case 19:
+              app.moonUrl = require('./../../assets/images/Luna19.jpg');
+              break;
+            case 20:
+              app.moonUrl = require('./../../assets/images/Luna20.jpg');
+              break;
+            case 21:
+              app.moonUrl = require('./../../assets/images/Luna21.jpg');
+              break;
+            case 22:
+              app.moonUrl = require('./../../assets/images/Luna22.jpg');
+              break;
+            case 23:
+              app.moonUrl = require('./../../assets/images/Luna23.jpg');
+              break;
+            case 24:
+              app.moonUrl = require('./../../assets/images/Luna24.jpg');
+              break;
+            case 25:
+              app.moonUrl = require('./../../assets/images/Luna25.jpg');
+              break;
+            case 26:
+              app.moonUrl = require('./../../assets/images/Luna26.jpg');
+              break;
+            case 27:
+              app.moonUrl = require('./../../assets/images/Luna27.jpg');
+              break;
+            case 28:
+              app.moonUrl = require('./../../assets/images/Luna28.jpg');
+              break;
+            case 29:
+              app.moonUrl = require('./../../assets/images/Luna29.jpg');
+              break;
+          }
+
+          //alert(app.moonUrl);
+          
         }
     },
   }

@@ -10,6 +10,9 @@
             <v-card>
               <v-card-title>
                  <span class="headline">Mis Reservas</span>
+
+
+
               <v-spacer></v-spacer>     
                   <v-text-field
                     v-model="search"
@@ -33,7 +36,9 @@
                   <td class="text-xs-left">{{ props.item.date }}</td>
                   <td class="text-xs-left">{{ props.item.hour }}</td>
                   <td class="text-xs-left">{{ props.item.points }}</td>
-                  <td class="text-xs-left"> <control-component></control-component> </td>
+                  <td class="text-xs-left"> 
+                    <v-btn color="warning" dark @click="onClick" >Interfaz de Control</v-btn> 
+                  </td>
                 </tr>
                 </template>
                 <v-alert v-slot:no-results :value="true" color="error" icon="warning">
@@ -46,6 +51,9 @@
         </v-flex>
                 
         </v-layout>
+        <div ref="container">
+
+        </div>
     </v-container>    
 
 </template>
@@ -53,7 +61,10 @@
 
 
 <script>
+  import Vue from 'vue';
   import { mapState } from 'vuex';
+  import ControlComponent     from './ControlComponent';
+  
   export default {
     computed: mapState({
         my_reservations: state => state.my_reservations,
@@ -78,23 +89,31 @@
       this.initialize()
     },
     methods: {
-      initialize () {
-        var app = this;
-        let userId = document.head.querySelector('meta[name="userID"]');
-        axios.get('/api/my_reservations',{
-                headers: { 
-                    'user': userId.content,
-                }
-            })
-            .then(function (resp) {    
-                app.$store.commit('changeMyReservations',resp.data );
-  
-            })
-            .catch(function (resp) {
-                console.log(resp);
-                alert("Error my_reservations :" + resp);
-            });
-      },
+        initialize () {
+            var app = this;
+            let userId = document.head.querySelector('meta[name="userID"]');
+            axios.get('/api/my_reservations',{
+                    headers: { 
+                        'user': userId.content,
+                    }
+                })
+                .then(function (resp) {    
+                    app.$store.commit('changeMyReservations',resp.data );
+      
+                })
+                .catch(function (resp) {
+                    console.log(resp);
+                    alert("Error my_reservations :" + resp);
+                });
+        },
+        onClick (){
+            var ComponentClass = Vue.extend(ControlComponent)
+            var instance = new ComponentClass();
+            // instance.$slots.default = ['Click me!']
+            instance.$mount() // pass nothing
+            this.$refs.container.appendChild(instance.$el)
+
+        }
     }
 }
 </script>
