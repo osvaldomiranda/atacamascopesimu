@@ -80,9 +80,9 @@
 
 
         <v-layout align-center row>
-          <v-flex xs1>
+        <v-flex xs1>
         </v-flex>
-        <v-flex xs2>
+        <v-flex xs1>
           <v-layout align-center row>
             <v-flex xs12> 
                 <v-card>
@@ -93,32 +93,43 @@
                 </v-card> 
               </v-flex>
           </v-layout>   
-          
           </v-flex>
-        </v-layout>
-
-            <!-- {{ url('images/Luna1.jpg') }} -->
-            <v-layout align-center row>
+        <v-flex xs1>
+        </v-flex>  
+        <v-flex xs8>
+          <v-layout align-center row>
                    <v-flex xs1>
                    </v-flex> 
-                   <v-flex xs4>
-                        <span>MoonSet: {{ moonset }}</span>
+                   <v-flex xs12>
+                      <div class="title font-weight-light">{{ moon_state }}</div>
+
                    </v-flex>
             </v-layout>       
             <v-layout align-center row>
                     <v-flex xs1>
                    </v-flex> 
-                   <v-flex xs4>
-                        <span>MoonRise: {{ moonrise }}</span>
+                   <v-flex xs12>
+                        <div class="title font-weight-light">MoonSet: {{ moonset }}</div>
                    </v-flex>
             </v-layout>   
             <v-layout align-center row>
                     <v-flex xs1>
                    </v-flex>     
-                   <v-flex xs4>
-                        <span>{{ moon_state }}</span>
+                   <v-flex xs12>
+                      <div class="title font-weight-light">MoonRise: {{ moonrise }}</div>
                    </v-flex>
             </v-layout>
+        </v-flex>  
+        
+
+        </v-layout>
+          <v-layout align-center row>
+        <v-flex xs1>
+          <br>
+        </v-flex>
+      </v-layout>
+            <!-- {{ url('images/Luna1.jpg') }} -->
+            
             </v-card>
             </v-container>
 
@@ -173,15 +184,37 @@
     <template>
       <v-dialog v-model="dialog2" max-width="500px">
         <v-card>
-          <v-card-title>
+      
+          <v-card-title
+            class="headline grey lighten-2"
+            primary-title
+          >
             Confirmar Reserva
           </v-card-title>
           <v-card-text>
-            {{ this.equipment }}
-            {{ this.telescope_points }}
-            {{ this.today }}
-            {{ this.hourToReserv }}
-
+            <v-container grid-list-md>
+            <v-layout wrap row>
+              <v-flex xs12>
+                <div class="title font-weight-light">Equipo: {{ this.equipment }}</div>
+              </v-flex>
+            </v-layout>
+            <v-layout wrap row>
+              <v-flex xs12>
+                <div class="title font-weight-light">Puntos de esta reserva: {{ this.telescope_points }}</div>
+              </v-flex>
+            </v-layout>  
+            <v-layout wrap row>
+              <v-flex xs12>
+                <div class="title font-weight-light">Fecha:  {{ this.today }}</div>
+              </v-flex>
+            </v-layout>
+            <v-layout wrap row>
+              <v-flex xs12>
+                <div class="title font-weight-light">A las: {{ this.hourToReserv }} Horas</div>
+              </v-flex>
+            </v-layout>
+            
+          </v-container>
           </v-card-text>
           <v-card-actions>
             <v-btn color="primary" flat @click="reserv">Reservar</v-btn>

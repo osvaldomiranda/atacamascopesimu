@@ -3515,6 +3515,39 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 var actualDate = new Date().toISOString().substr(0, 10);
@@ -36487,7 +36520,7 @@ var render = function() {
                           _vm._v(" "),
                           _c(
                             "v-flex",
-                            { attrs: { xs2: "" } },
+                            { attrs: { xs1: "" } },
                             [
                               _c(
                                 "v-layout",
@@ -36517,6 +36550,80 @@ var render = function() {
                               )
                             ],
                             1
+                          ),
+                          _vm._v(" "),
+                          _c("v-flex", { attrs: { xs1: "" } }),
+                          _vm._v(" "),
+                          _c(
+                            "v-flex",
+                            { attrs: { xs8: "" } },
+                            [
+                              _c(
+                                "v-layout",
+                                { attrs: { "align-center": "", row: "" } },
+                                [
+                                  _c("v-flex", { attrs: { xs1: "" } }),
+                                  _vm._v(" "),
+                                  _c("v-flex", { attrs: { xs12: "" } }, [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass: "title font-weight-light"
+                                      },
+                                      [_vm._v(_vm._s(_vm.moon_state))]
+                                    )
+                                  ])
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-layout",
+                                { attrs: { "align-center": "", row: "" } },
+                                [
+                                  _c("v-flex", { attrs: { xs1: "" } }),
+                                  _vm._v(" "),
+                                  _c("v-flex", { attrs: { xs12: "" } }, [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass: "title font-weight-light"
+                                      },
+                                      [
+                                        _vm._v(
+                                          "MoonSet: " + _vm._s(_vm.moonset)
+                                        )
+                                      ]
+                                    )
+                                  ])
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-layout",
+                                { attrs: { "align-center": "", row: "" } },
+                                [
+                                  _c("v-flex", { attrs: { xs1: "" } }),
+                                  _vm._v(" "),
+                                  _c("v-flex", { attrs: { xs12: "" } }, [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass: "title font-weight-light"
+                                      },
+                                      [
+                                        _vm._v(
+                                          "MoonRise: " + _vm._s(_vm.moonrise)
+                                        )
+                                      ]
+                                    )
+                                  ])
+                                ],
+                                1
+                              )
+                            ],
+                            1
                           )
                         ],
                         1
@@ -36525,43 +36632,7 @@ var render = function() {
                       _c(
                         "v-layout",
                         { attrs: { "align-center": "", row: "" } },
-                        [
-                          _c("v-flex", { attrs: { xs1: "" } }),
-                          _vm._v(" "),
-                          _c("v-flex", { attrs: { xs4: "" } }, [
-                            _c("span", [
-                              _vm._v("MoonSet: " + _vm._s(_vm.moonset))
-                            ])
-                          ])
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "v-layout",
-                        { attrs: { "align-center": "", row: "" } },
-                        [
-                          _c("v-flex", { attrs: { xs1: "" } }),
-                          _vm._v(" "),
-                          _c("v-flex", { attrs: { xs4: "" } }, [
-                            _c("span", [
-                              _vm._v("MoonRise: " + _vm._s(_vm.moonrise))
-                            ])
-                          ])
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "v-layout",
-                        { attrs: { "align-center": "", row: "" } },
-                        [
-                          _c("v-flex", { attrs: { xs1: "" } }),
-                          _vm._v(" "),
-                          _c("v-flex", { attrs: { xs4: "" } }, [
-                            _c("span", [_vm._v(_vm._s(_vm.moon_state))])
-                          ])
-                        ],
+                        [_c("v-flex", { attrs: { xs1: "" } }, [_c("br")])],
                         1
                       )
                     ],
@@ -36726,23 +36797,102 @@ var render = function() {
                 _c(
                   "v-card",
                   [
-                    _c("v-card-title", [
-                      _vm._v("\n            Confirmar Reserva\n          ")
-                    ]),
+                    _c(
+                      "v-card-title",
+                      {
+                        staticClass: "headline grey lighten-2",
+                        attrs: { "primary-title": "" }
+                      },
+                      [_vm._v("\n            Confirmar Reserva\n          ")]
+                    ),
                     _vm._v(" "),
-                    _c("v-card-text", [
-                      _vm._v(
-                        "\n            " +
-                          _vm._s(this.equipment) +
-                          "\n            " +
-                          _vm._s(this.telescope_points) +
-                          "\n            " +
-                          _vm._s(this.today) +
-                          "\n            " +
-                          _vm._s(this.hourToReserv) +
-                          "\n\n          "
-                      )
-                    ]),
+                    _c(
+                      "v-card-text",
+                      [
+                        _c(
+                          "v-container",
+                          { attrs: { "grid-list-md": "" } },
+                          [
+                            _c(
+                              "v-layout",
+                              { attrs: { wrap: "", row: "" } },
+                              [
+                                _c("v-flex", { attrs: { xs12: "" } }, [
+                                  _c(
+                                    "div",
+                                    { staticClass: "title font-weight-light" },
+                                    [
+                                      _vm._v(
+                                        "Equipo: " + _vm._s(this.equipment)
+                                      )
+                                    ]
+                                  )
+                                ])
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "v-layout",
+                              { attrs: { wrap: "", row: "" } },
+                              [
+                                _c("v-flex", { attrs: { xs12: "" } }, [
+                                  _c(
+                                    "div",
+                                    { staticClass: "title font-weight-light" },
+                                    [
+                                      _vm._v(
+                                        "Puntos de esta reserva: " +
+                                          _vm._s(this.telescope_points)
+                                      )
+                                    ]
+                                  )
+                                ])
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "v-layout",
+                              { attrs: { wrap: "", row: "" } },
+                              [
+                                _c("v-flex", { attrs: { xs12: "" } }, [
+                                  _c(
+                                    "div",
+                                    { staticClass: "title font-weight-light" },
+                                    [_vm._v("Fecha:  " + _vm._s(this.today))]
+                                  )
+                                ])
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "v-layout",
+                              { attrs: { wrap: "", row: "" } },
+                              [
+                                _c("v-flex", { attrs: { xs12: "" } }, [
+                                  _c(
+                                    "div",
+                                    { staticClass: "title font-weight-light" },
+                                    [
+                                      _vm._v(
+                                        "A las: " +
+                                          _vm._s(this.hourToReserv) +
+                                          " Horas"
+                                      )
+                                    ]
+                                  )
+                                ])
+                              ],
+                              1
+                            )
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    ),
                     _vm._v(" "),
                     _c(
                       "v-card-actions",
