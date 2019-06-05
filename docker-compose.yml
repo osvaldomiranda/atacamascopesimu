@@ -4,7 +4,7 @@ services:
     build: .
     image: atacama_scope
     ports:
-      - "8082:80"
+      - "80:80"
     networks:
       - reporte_gei
     volumes:
