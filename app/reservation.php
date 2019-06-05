@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 use App\Equipment;
 
-class reservation extends Model
+class Reservation extends Model
 {
     public function equipment()
 	{
