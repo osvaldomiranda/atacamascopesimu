@@ -119,6 +119,20 @@
                       <div class="title font-weight-light">MoonRise: {{ moonrise }}</div>
                    </v-flex>
             </v-layout>
+            <v-layout align-center row>
+                    <v-flex xs1>
+                   </v-flex>     
+                   <v-flex xs12>
+                      <div class="title font-weight-light">SunRise: {{ sunrise }}</div>
+                   </v-flex>
+            </v-layout>
+            <v-layout align-center row>
+                    <v-flex xs1>
+                   </v-flex>     
+                   <v-flex xs12>
+                      <div class="title font-weight-light">SunSet: {{ sunset }}</div>
+                   </v-flex>
+            </v-layout>
         </v-flex>  
         
 
@@ -257,6 +271,9 @@
         moon_times:"",
         moonset:"",
         moonrise:"",
+        suntimes:"",
+        sunrise:"",
+        sunset:"",
         moonUrl:'',
         menu:false,
         telescope_points:200,
@@ -316,18 +333,15 @@
         initialize () {
 
             var app = this;
-            var todayTime = new Date();
-            var month = (todayTime.getMonth() + 1).toString();
-            app.today = todayTime.getFullYear() + '-' + month.padStart(2,'00') + '-' + todayTime.getDate() ;
+            app.today = actualDate;
             app.start = app.today; 
 
             
-            //var times = SunCalc.getTimes(new Date(), 51.5, -0.1);
+            app.suntimes = SunCalc.getTimes(new Date(), 33.0000, -70.3326);
             // format sunrise time from the Date object
-            //var sunriseStr = times.sunrise.getHours() + ':' + times.sunrise.getMinutes();
+            app.sunset = app.suntimes.sunset;
+            app.sunrise = app.suntimes.sunrise;
 
-            // get position of the sun (azimuth and altitude) at today's sunrise
-            //var sunrisePos = SunCalc.getPosition(times.sunrise, 51.5, -0.1);
             
 
             app.moon_times = SunCalc.getMoonTimes(new Date(), 33.0000, -70.3326);

@@ -3548,6 +3548,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 var actualDate = new Date().toISOString().substr(0, 10);
@@ -3576,6 +3590,9 @@ var actualDate = new Date().toISOString().substr(0, 10);
       moon_times: "",
       moonset: "",
       moonrise: "",
+      suntimes: "",
+      sunrise: "",
+      sunset: "",
       moonUrl: '',
       menu: false,
       telescope_points: 200,
@@ -3633,15 +3650,12 @@ var actualDate = new Date().toISOString().substr(0, 10);
     },
     initialize: function initialize() {
       var app = this;
-      var todayTime = new Date();
-      var month = (todayTime.getMonth() + 1).toString();
-      app.today = todayTime.getFullYear() + '-' + month.padStart(2, '00') + '-' + todayTime.getDate();
-      app.start = app.today; //var times = SunCalc.getTimes(new Date(), 51.5, -0.1);
-      // format sunrise time from the Date object
-      //var sunriseStr = times.sunrise.getHours() + ':' + times.sunrise.getMinutes();
-      // get position of the sun (azimuth and altitude) at today's sunrise
-      //var sunrisePos = SunCalc.getPosition(times.sunrise, 51.5, -0.1);
+      app.today = actualDate;
+      app.start = app.today;
+      app.suntimes = suncalc__WEBPACK_IMPORTED_MODULE_0___default.a.getTimes(new Date(), 33.0000, -70.3326); // format sunrise time from the Date object
 
+      app.sunset = app.suntimes.sunset;
+      app.sunrise = app.suntimes.sunrise;
       app.moon_times = suncalc__WEBPACK_IMPORTED_MODULE_0___default.a.getMoonTimes(new Date(), 33.0000, -70.3326); // alert(JSON.stringify(app.moon_times));
 
       app.moonset = app.moon_times["set"];
@@ -36617,6 +36631,48 @@ var render = function() {
                                           "MoonRise: " + _vm._s(_vm.moonrise)
                                         )
                                       ]
+                                    )
+                                  ])
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-layout",
+                                { attrs: { "align-center": "", row: "" } },
+                                [
+                                  _c("v-flex", { attrs: { xs1: "" } }),
+                                  _vm._v(" "),
+                                  _c("v-flex", { attrs: { xs12: "" } }, [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass: "title font-weight-light"
+                                      },
+                                      [
+                                        _vm._v(
+                                          "SunRise: " + _vm._s(_vm.sunrise)
+                                        )
+                                      ]
+                                    )
+                                  ])
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-layout",
+                                { attrs: { "align-center": "", row: "" } },
+                                [
+                                  _c("v-flex", { attrs: { xs1: "" } }),
+                                  _vm._v(" "),
+                                  _c("v-flex", { attrs: { xs12: "" } }, [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass: "title font-weight-light"
+                                      },
+                                      [_vm._v("SunSet: " + _vm._s(_vm.sunset))]
                                     )
                                   ])
                                 ],
