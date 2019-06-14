@@ -11,8 +11,6 @@
               <v-card-title>
                  <span class="headline">Mis Reservas</span>
 
-
-
               <v-spacer></v-spacer>     
                   <v-text-field
                     v-model="search"
@@ -37,7 +35,10 @@
                   <td class="text-xs-left">{{ props.item.hour }}</td>
                   <td class="text-xs-left">{{ props.item.points }}</td>
                   <td class="text-xs-left"> 
-                    <v-btn color="warning" dark @click="onClick" >Interfaz de Control</v-btn> 
+                    <v-btn color="warning" dark @click="control" >Interfaz de Control</v-btn> 
+                  </td>
+                  <td class="text-xs-left"> 
+                    <v-btn color="warning" dark @click="control_avanzado" >Interfaz de Control Avanzado</v-btn> 
                   </td>
                 </tr>
                 </template>
@@ -64,6 +65,7 @@
   import Vue from 'vue';
   import { mapState } from 'vuex';
   import ControlComponent     from './ControlComponent';
+  import PointandshootComponent     from './PointandshootComponent';
   
   export default {
     computed: mapState({
@@ -106,8 +108,16 @@
                     alert("Error my_reservations :" + resp);
                 });
         },
-        onClick (){
+        control_avanzado (){
             var ComponentClass = Vue.extend(ControlComponent)
+            var instance = new ComponentClass();
+            // instance.$slots.default = ['Click me!']
+            instance.$mount() // pass nothing
+            this.$refs.container.appendChild(instance.$el)
+
+        },
+        control (){
+            var ComponentClass = Vue.extend(PointandshootComponent)
             var instance = new ComponentClass();
             // instance.$slots.default = ['Click me!']
             instance.$mount() // pass nothing

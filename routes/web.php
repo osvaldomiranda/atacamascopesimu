@@ -15,6 +15,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/en','LocaleController@en');
+Route::get('/es','LocaleController@es');
 
 Auth::routes();
 

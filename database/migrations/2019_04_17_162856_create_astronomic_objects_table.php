@@ -27,7 +27,9 @@ class CreateAstronomicObjectsTable extends Migration
             $table->double('coord_dec',20,12)->nullable();
             $table->string('sign_dec')->nullable();
             $table->string('colloquial_name')->nullable();
+            $table->string('nombre_coloquial')->nullable();
             $table->string('equivalence')->nullable();
+
             $table->timestamps();
         });
     }

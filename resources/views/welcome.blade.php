@@ -230,16 +230,20 @@
                     <div class="img1 col-md-5">                      
                     </div>  
                     <div class="englishPhpotos">
-                    <img src= "http://127.0.0.1:8000/images/english.png" class="english " type= "button" href= "#">
+                        <a href="/en">
+                            <img src= "http://127.0.0.1:8000/images/english.png" class="english ">
+                        </a>    
                     </div>
                     <div class="spanishPhoto">
-                      <img src="http://127.0.0.1:8000/images/spanish.png" class="spanish " type= "button" href= "#">
+                        <a href="/es">
+                            <img src="http://127.0.0.1:8000/images/spanish.png" class="spanish ">
+                        </a>    
                     </div>  
                           <div class="collapse navbar-collapse" id="navbarNav">
                           <ul class="navbar-nav">
                             
                             <li class="nav-item">
-                              <a class="nav-link" style="color:white" href="#">Equipamiento</a>
+                              <a class="nav-link" style="color:white" href="#">{{ __('landing.equipment') }}</a>
                             </li>
                             <li class="nav-item">
                               <a class="nav-link" style="color:white" href="#">Eventos astronomicos</a>
@@ -273,7 +277,7 @@
         <div class="atacamascope container">
             <h1>AtacamaScope</h1>
          
-                 <h2 class="text-left">OPERA UN TELESCOPIO VIA WEB Y DISFRUTA LOS CIELOS DEL DESIERTO DE ATACAMA.</h2>
+                 <h2 class="text-left">{{ __('landing.title') }}</h2>
                   <h3 class="text-left">Unos cuantos clicks y ya estarás observando el universo de san pedro de atacama</h3>
                     
                   <div class="buttonInitial">

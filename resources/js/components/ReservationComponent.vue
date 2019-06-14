@@ -283,7 +283,7 @@
         hourToReserv:'',
         equipment: 'Equipo Principal',
 
-        reservationsArray:[1,22,23],
+        reservationsArray:[],
         equipment_id: 1,
 
         dialog: true,

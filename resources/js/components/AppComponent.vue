@@ -80,8 +80,8 @@
                 alert("Error reservations :" + resp);
             });
 
-            let userId = document.head.querySelector('meta[name="userID"]');
-            axios.get('/api/points',{
+        let userId = document.head.querySelector('meta[name="userID"]');
+        axios.get('/api/points',{
                 headers: { 
                     'user': userId.content,
                 }

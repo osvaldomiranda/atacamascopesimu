@@ -32,8 +32,13 @@
         </v-flex>
       </v-layout>
     </v-container>  
+    
+    <v-container fluid>
+        <v-layout align-center row>
+        </v-layout>
+    </v-container>  
 
-     <v-container fluid>
+    <v-container fluid>
 
         <v-layout align-center row>
 
