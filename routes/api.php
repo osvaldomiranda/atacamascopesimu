@@ -27,6 +27,7 @@ Route::get('/astronomic_objects/solarsistem', 'AstronomicObjectController@solarS
 
 Route::post('/command/move', 'CommandController@move');
 Route::post('/command/shoot', 'CommandController@shoot');
+Route::post('/command/pointandshoot', 'CommandController@pointandshoot');
 Route::post('/command/focus', 'CommandController@focus');
 
 Route::get('/command/{type}', 'CommandController@command');

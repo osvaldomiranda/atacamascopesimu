@@ -442,35 +442,18 @@
         	}
         },
 
-        move(){
-        	if(this.Ar_screen){
-	        	var $command = {'command': 'MONTURA', 'type': 'mount', 'status': 'PENDIENTE',
-	        	                'ar': this.Ar, 'dec': this.Dec, 'user_id': 1, 'equipment_id': 1};
 
-	        	//alert(JSON.stringify($command));
-	        	axios.post('/api/command/move', $command)
-	            .then(function (resp) {
-	                
-	            })
-	            .catch(function (resp) {
-	                console.log(resp);
-	                alert("Error move :" + resp);
-	            });
-
-	            this.currentRefresh();
-        	}
-        },
         shoot(){
-        	var $command = {'command': 'CAMARA', 'type': 'shoot', 'status': 'PENDIENTE',
+        	var $command = {'command': 'CAMARA', 'type': 'pointandshoot', 'status': 'PENDIENTE',
         	                'exptime': this.Exp, 'iso': this.Iso, 'ar': this.Ar_act, 'dec': this.Dec_act, 'user_id': 1, 'equipment_id': 1};
 
         	this.imageUrl = '';
-        	axios.post('/api/command/shoot', $command)
+        	axios.post('/api/command/pointandshoot', $command)
             .then(function (resp) {    
             })
             .catch(function (resp) {
                 console.log(resp);
-                alert("Error create reservation :" + resp);
+                alert("Error create command pont and shoot :" + resp);
             });
 
             this.currentRefresh();

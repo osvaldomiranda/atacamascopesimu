@@ -74,6 +74,33 @@ class CommandController extends Controller
         $command->save();
     }
 
+    public function pointandshot(request $request){
+	    $this->validate($request, [
+	        'type' => 'required',
+	        'status' => 'required',
+	        'ar' => 'required',
+	        'dec' => 'required',
+	        'iso' => 'required',
+	        'exptime' => 'required',
+	        'user_id' => 'required',
+	        'equipment_id' => 'required',
+	    ]);
+	    
+	    $command = new Command();
+	    $command->command		= $request->input('command');
+	    $command->type			= $request->input('type');
+        $command->status		= $request->input('status');
+        $command->exptime  		= $request->input('exptime');
+        $command->iso 			= $request->input('iso');	
+        $command->ar  			= $request->input('ar');
+        $command->dec 			= $request->input('dec');	
+        $command->user_id		= $request->input('user_id');
+        $command->equipment_id	= $request->input('equipment_id');
+        $command->save();
+    }
+
+
+
     public function command($request){
     	if($request=='mountcamera'){
     		$type = ['mount','shoot'];
