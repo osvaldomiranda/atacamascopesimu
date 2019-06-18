@@ -2563,6 +2563,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   computed: Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['astronomc_objects']),
@@ -2707,6 +2709,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     initialize: function initialize() {
+      this.imageRefresh();
       this.openChat();
       this.getMyImages();
       this.getAstrnomicObject();
@@ -2765,7 +2768,7 @@ __webpack_require__.r(__webpack_exports__);
           'status': 'PENDIENTE',
           'ar': this.Ar,
           'dec': this.Dec,
-          'user_id': 1,
+          'user_id': 3,
           'equipment_id': 1
         }; //alert(JSON.stringify($command));
 
@@ -2785,7 +2788,7 @@ __webpack_require__.r(__webpack_exports__);
         'iso': this.Iso,
         'ar': this.Ar_act,
         'dec': this.Dec_act,
-        'user_id': 1,
+        'user_id': 3,
         'equipment_id': 1
       };
       this.imageUrl = '';
@@ -2810,7 +2813,7 @@ __webpack_require__.r(__webpack_exports__);
         'status': 'PENDIENTE',
         'steps': this.Paso,
         'direction': 1,
-        'user_id': 1,
+        'user_id': 3,
         'equipment_id': 1
       }; //alert(JSON.stringify($command));
 
@@ -34443,18 +34446,21 @@ var render = function() {
                                 "v-flex",
                                 { attrs: { xs12: "" } },
                                 [
-                                  _c(
-                                    "v-card",
-                                    [
-                                      _c("v-img", {
-                                        attrs: {
-                                          src: _vm.imageUrl,
-                                          "aspect-ratio": "1"
-                                        }
-                                      })
-                                    ],
-                                    1
-                                  )
+                                  _c("v-card", [
+                                    _c(
+                                      "a",
+                                      { attrs: { href: _vm.imageUrl } },
+                                      [
+                                        _c("v-img", {
+                                          attrs: {
+                                            src: _vm.imageUrl,
+                                            "aspect-ratio": "1"
+                                          }
+                                        })
+                                      ],
+                                      1
+                                    )
+                                  ])
                                 ],
                                 1
                               )
@@ -36118,7 +36124,7 @@ var render = function() {
                                           _c(
                                             "a",
                                             {
-                                              attrs: { href: "props.item.path" }
+                                              attrs: { href: props.item.path }
                                             },
                                             [
                                               _c("v-img", {

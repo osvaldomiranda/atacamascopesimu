@@ -23,10 +23,12 @@
 					<v-layout align-center row>
 						<v-flex xs12>	
 					    	<v-card>
+					    		<a  :href="imageUrl">
 					      		<v-img
 					      	  		v-bind:src="imageUrl"
 					      	  		aspect-ratio="1"
 					      		></v-img>
+					      		</a>
 					    	</v-card> 
 					    </v-flex>
 					</v-layout>   
@@ -510,7 +512,7 @@
 					    >
 					      <template v-slot:items="props">
 					        <td>
-					        	<a href="props.item.path">
+					        	<a :href="props.item.path">
 						        	<v-img
 				      	  				v-bind:src="props.item.path"
 				      	  				aspect-ratio="1"
@@ -723,6 +725,7 @@
       				
     	},
       	initialize () {
+      		this.imageRefresh();
             this.openChat();
             this.getMyImages();
             this.getAstrnomicObject();
@@ -790,7 +793,7 @@
         move(){
         	if(this.Ar_screen){
 	        	var $command = {'command': 'MONTURA', 'type': 'mount', 'status': 'PENDIENTE',
-	        	                'ar': this.Ar, 'dec': this.Dec, 'user_id': 1, 'equipment_id': 1};
+	        	                'ar': this.Ar, 'dec': this.Dec, 'user_id': 3, 'equipment_id': 1};
 
 	        	//alert(JSON.stringify($command));
 	        	axios.post('/api/command/move', $command)
@@ -807,7 +810,7 @@
         },
         shoot(){
         	var $command = {'command': 'CAMARA', 'type': 'shoot', 'status': 'PENDIENTE',
-        	                'exptime': this.Exp, 'iso': this.Iso, 'ar': this.Ar_act, 'dec': this.Dec_act, 'user_id': 1, 'equipment_id': 1};
+        	                'exptime': this.Exp, 'iso': this.Iso, 'ar': this.Ar_act, 'dec': this.Dec_act, 'user_id': 3, 'equipment_id': 1};
 
         	this.imageUrl = '';
         	axios.post('/api/command/shoot', $command)
@@ -832,7 +835,7 @@
         },
         focus(){
         	var $command = {'command': 'ENFOCADOR', 'type': 'focuser', 'status': 'PENDIENTE',
-        	                'steps': this.Paso, 'direction': 1, 'user_id': 1, 'equipment_id': 1};
+        	                'steps': this.Paso, 'direction': 1, 'user_id': 3, 'equipment_id': 1};
 
         	//alert(JSON.stringify($command));
 

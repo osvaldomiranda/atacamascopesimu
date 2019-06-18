@@ -18,11 +18,13 @@ class ImageController extends Controller
     {
         $command = Command::where('id', $command_id)->get()->first();
     	
+        Info($command);
+
     	if($request->hasFile('photo')){
     		$path = $request->photo->store('public');
 
             $filename = substr($path,7,100);
-            $path = 'http://18.236.139.196/storage/' . $filename;
+            $path = 'http://54.70.235.195/storage/' . $filename;
 
     		$image = new Image;
     		$image->name = 'Hola.jpg';
@@ -33,7 +35,7 @@ class ImageController extends Controller
             $image->exptime = $command->exptime;
             $image->iso     = $command->iso;
 
-    		$image->user_id = 1;
+    		$image->user_id = $command->user_id;
     		$image->equipment_id = 1;
     		$image->save();
 
@@ -48,7 +50,7 @@ class ImageController extends Controller
     }
 
     public function last(request $request){
-        $image = Image::where('user_id',Auth::id())->last();
+        $image = Image::where('user_id',Auth::id())->get()->last();
         return response()->json($image->path);
     }
 
