@@ -171,12 +171,7 @@
         },
         initialize () {
             var app = this;
-            let userId = document.head.querySelector('meta[name="userID"]');
-            axios.get('/api/points',{
-                headers: { 
-                    'user': userId.content,
-                }
-            })
+            axios.get('/api/points')
             .then(function (resp) {   
                 app.purchases = resp.data; 
             })
@@ -193,12 +188,7 @@
 
             var pay_points = {'created_at':fecha,'in': this.points, 'out': 0, 'current_points': this.$store.getters.current_points + parseInt(this.points), 'reservation_id': '', 'transaction_id': '876238746', 'a': this.$store.getters.user};
 
-            let userId = document.head.querySelector('meta[name="userID"]');
-            axios.post('/api/points/pay', pay_points,{
-                headers: { 
-                    'user': userId.content,
-                }
-            })
+            axios.post('/api/points/pay', pay_points)
             .then(function (resp) {
                 app.purchases.push(pay_points);
                 let c_points=app.$store.getters.current_points + parseInt(app.points);

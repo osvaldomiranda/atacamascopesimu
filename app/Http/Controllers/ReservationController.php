@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Reservation;
 use App\points;
 
@@ -17,8 +18,7 @@ class ReservationController extends Controller
     }
 
     public function myReservations(Request $request){
-        $user_id = $request->header('user');
-        $reservations = Reservation::with('equipment')->whereDate('date','>=',Carbon::now())->where('user_id',$user_id)-> get();
+        $reservations = Reservation::with('equipment')->whereDate('date','>=',Carbon::now())->where('user_id', Auth::id())-> get();
         return response()->json($reservations);
     }
     public function reservations(Request $request){
@@ -42,7 +42,7 @@ class ReservationController extends Controller
         ]);
 
         $reservation = new Reservation();
-        $reservation->user_id       = $request->input('user_id');
+        $reservation->user_id       = Auth::id();
         $reservation->equipment_id  = $request->input('equipment_id');
         $reservation->date          = $request->input('date');
         $reservation->hour          = $request->input('hour');
@@ -51,7 +51,7 @@ class ReservationController extends Controller
         $reservation->save();
 
         $points = new Points();
-        $points->user_id        = $request->input('user_id');
+        $points->user_id        = Auth::id();
         $points->reservation_id = $reservation->id;
         $points->in             = 0;
         $points->out            = $reservation->points_out;

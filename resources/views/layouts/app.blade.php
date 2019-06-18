@@ -9,6 +9,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     @auth
         <meta name="userID" content="{{ auth()->user()->id }}">
+        <meta name="token" content="{{ auth()->user()->createToken('AtacamaScope')->accessToken }}">
     @else
         <meta name="userID" content="0">
     @endauth
@@ -17,7 +18,7 @@
     <title>{{ config('app.name', 'AtacamaScope') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <!-- <script src="{{ asset('js/app.js') }}" defer></script> -->
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">

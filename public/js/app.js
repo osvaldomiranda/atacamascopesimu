@@ -1834,12 +1834,7 @@ __webpack_require__.r(__webpack_exports__);
         console.log(resp);
         alert("Error reservations :" + resp);
       });
-      var userId = document.head.querySelector('meta[name="userID"]');
-      axios.get('/api/points', {
-        headers: {
-          'user': userId.content
-        }
-      }).then(function (resp) {
+      axios.get('/api/points').then(function (resp) {
         for (var i in resp.data) {
           app.points_in += parseInt(resp.data[i]["in"], 10);
           app.points_out += parseInt(resp.data[i].out, 10);
@@ -2827,10 +2822,7 @@ __webpack_require__.r(__webpack_exports__);
     saveImage: function saveImage() {},
     imageRefresh: function imageRefresh() {
       var app = this;
-      var $command = {
-        'user_id': 1
-      };
-      axios.get('/api/image/last', $command).then(function (resp) {
+      axios.get('/api/image/last').then(function (resp) {
         app.imageUrl = resp.data;
       })["catch"](function (resp) {
         console.log(resp);
@@ -2840,10 +2832,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     getMyImages: function getMyImages() {
       var app = this;
-      var $command = {
-        'user_id': 1
-      };
-      axios.get('/api/images', $command).then(function (resp) {
+      axios.get('/api/images').then(function (resp) {
         app.myImages = resp.data;
       })["catch"](function (resp) {
         console.log(resp);
@@ -3011,8 +3000,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 
 
@@ -3050,12 +3037,7 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     initialize: function initialize() {
       var app = this;
-      var userId = document.head.querySelector('meta[name="userID"]');
-      axios.get('/api/my_reservations', {
-        headers: {
-          'user': userId.content
-        }
-      }).then(function (resp) {
+      axios.get('/api/my_reservations').then(function (resp) {
         app.$store.commit('changeMyReservations', resp.data);
       })["catch"](function (resp) {
         console.log(resp);
@@ -3484,29 +3466,10 @@ __webpack_require__.r(__webpack_exports__);
         });
       }
     },
-    move: function move() {
-      if (this.Ar_screen) {
-        var $command = {
-          'command': 'MONTURA',
-          'type': 'mount',
-          'status': 'PENDIENTE',
-          'ar': this.Ar,
-          'dec': this.Dec,
-          'user_id': 1,
-          'equipment_id': 1
-        }; //alert(JSON.stringify($command));
-
-        axios.post('/api/command/move', $command).then(function (resp) {})["catch"](function (resp) {
-          console.log(resp);
-          alert("Error move :" + resp);
-        });
-        this.currentRefresh();
-      }
-    },
     shoot: function shoot() {
       var $command = {
         'command': 'CAMARA',
-        'type': 'shoot',
+        'type': 'pointandshoot',
         'status': 'PENDIENTE',
         'exptime': this.Exp,
         'iso': this.Iso,
@@ -3516,9 +3479,9 @@ __webpack_require__.r(__webpack_exports__);
         'equipment_id': 1
       };
       this.imageUrl = '';
-      axios.post('/api/command/shoot', $command).then(function (resp) {})["catch"](function (resp) {
+      axios.post('/api/command/pointandshoot', $command).then(function (resp) {})["catch"](function (resp) {
         console.log(resp);
-        alert("Error create reservation :" + resp);
+        alert("Error create command pont and shoot :" + resp);
       });
       this.currentRefresh();
       this.current_shot = this.current;
@@ -3549,10 +3512,7 @@ __webpack_require__.r(__webpack_exports__);
     saveImage: function saveImage() {},
     imageRefresh: function imageRefresh() {
       var app = this;
-      var $command = {
-        'user_id': 1
-      };
-      axios.get('/api/image/last', $command).then(function (resp) {
+      axios.get('/api/image/last').then(function (resp) {
         app.imageUrl = resp.data;
       })["catch"](function (resp) {
         console.log(resp);
@@ -3562,10 +3522,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     getMyImages: function getMyImages() {
       var app = this;
-      var $command = {
-        'user_id': 1
-      };
-      axios.get('/api/images', $command).then(function (resp) {
+      axios.get('/api/images').then(function (resp) {
         app.myImages = resp.data;
       })["catch"](function (resp) {
         console.log(resp);
@@ -3834,12 +3791,7 @@ __webpack_require__.r(__webpack_exports__);
     showAlert: function showAlert(a) {},
     initialize: function initialize() {
       var app = this;
-      var userId = document.head.querySelector('meta[name="userID"]');
-      axios.get('/api/points', {
-        headers: {
-          'user': userId.content
-        }
-      }).then(function (resp) {
+      axios.get('/api/points').then(function (resp) {
         app.purchases = resp.data;
       })["catch"](function (resp) {
         console.log(resp);
@@ -3858,12 +3810,7 @@ __webpack_require__.r(__webpack_exports__);
         'transaction_id': '876238746',
         'a': this.$store.getters.user
       };
-      var userId = document.head.querySelector('meta[name="userID"]');
-      axios.post('/api/points/pay', pay_points, {
-        headers: {
-          'user': userId.content
-        }
-      }).then(function (resp) {
+      axios.post('/api/points/pay', pay_points).then(function (resp) {
         app.purchases.push(pay_points);
         var c_points = app.$store.getters.current_points + parseInt(app.points);
         app.$store.commit('changeCurrentPoints', c_points);
@@ -4324,12 +4271,7 @@ var actualDate = new Date().toISOString().substr(0, 10);
     },
     my_reservations: function my_reservations() {
       var app = this;
-      var userId = document.head.querySelector('meta[name="userID"]');
-      axios.get('/api/my_reservations', {
-        headers: {
-          'user': userId.content
-        }
-      }).then(function (resp) {
+      axios.get('/api/my_reservations').then(function (resp) {
         app.$store.commit('changeMyReservations', resp.data);
       })["catch"](function (resp) {
         console.log(resp);
@@ -80809,7 +80751,22 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
     return h(_components_AppComponent__WEBPACK_IMPORTED_MODULE_6__["default"]);
   },
   store: _store__WEBPACK_IMPORTED_MODULE_4__["default"],
-  router: _routes__WEBPACK_IMPORTED_MODULE_5__["default"]
+  router: _routes__WEBPACK_IMPORTED_MODULE_5__["default"],
+  created: function created() {
+    this.initialize();
+  },
+  methods: {
+    initialize: function initialize() {
+      var token_vu = document.head.querySelector('meta[name="token"]');
+
+      if (token_vu.content) {
+        window.axios.defaults.headers.common['Authorization'] = 'Bearer ' + token_vu.content;
+        this.$store.commit('changeToken', token_vu.content);
+      } else {
+        window.axios.defaults.headers.common['Authorization'] = 'Bearer ' + this.$store.getters.token;
+      }
+    }
+  }
 });
 
 /***/ }),

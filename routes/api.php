@@ -37,17 +37,17 @@ Route::get('users', 'Api\V1\UsersController@index');
 Route::post('messages', 'Api\V1\MessagesController@index');
 Route::post('messages/send', 'Api\V1\MessagesController@store');
 
-Route::get('image/last', 'ImageController@last');
-Route::get('images', 'ImageController@index');
+Route::get('image/last', 'ImageController@last')->middleware('auth:api');
+Route::get('images', 'ImageController@index')->middleware('auth:api');
 
-Route::get('points', 'PointsController@index');
-Route::post('points/pay', 'PointsController@pay');
+Route::get('points', 'PointsController@index')->middleware('auth:api');
+Route::post('points/pay', 'PointsController@pay')->middleware('auth:api');
 
 Route::get('/equipments', 'EquipmentController@index');
 Route::get('/reservations', 'ReservationController@reservations');
-Route::get('/my_reservations', 'ReservationController@myReservations');
+Route::get('/my_reservations', 'ReservationController@myReservations')->middleware('auth:api');
 
-Route::post('/reservation/create', 'ReservationController@create');
+Route::post('/reservation/create', 'ReservationController@create')->middleware('auth:api');
 
-Route::post('/my_images', 'ImageController@myImages');
+Route::post('/my_images', 'ImageController@myImages')->middleware('auth:api');
 

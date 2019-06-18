@@ -93,12 +93,8 @@
     methods: {
         initialize () {
             var app = this;
-            let userId = document.head.querySelector('meta[name="userID"]');
-            axios.get('/api/my_reservations',{
-                    headers: { 
-                        'user': userId.content,
-                    }
-                })
+
+            axios.get('/api/my_reservations')
                 .then(function (resp) {    
                     app.$store.commit('changeMyReservations',resp.data );
       

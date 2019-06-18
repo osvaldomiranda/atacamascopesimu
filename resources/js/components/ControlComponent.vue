@@ -851,8 +851,7 @@
 
         imageRefresh(){
         	let app = this;
-        	var $command = {'user_id':1}
-        	axios.get('/api/image/last', $command)
+        	axios.get('/api/image/last')
             .then(function (resp) {
             	app.imageUrl = resp.data;                
             })
@@ -865,8 +864,7 @@
 
         getMyImages(){
         	let app = this;
-        	var $command = {'user_id':1}
-        	axios.get('/api/images', $command)
+        	axios.get('/api/images')
             .then(function (resp) {
             	app.myImages = resp.data;               
             })

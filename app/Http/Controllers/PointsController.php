@@ -17,9 +17,9 @@ class PointsController extends Controller
 
     public function index(Request $request)
     {
-        $user_id = $request->header('user');
+        Info($request->headers->all());
 
-        $points = Points::where('user_id',$user_id)->get();
+        $points = Points::where('user_id',Auth::id())->get();
         return response()->json($points);
     }
 
@@ -37,7 +37,7 @@ class PointsController extends Controller
         $points->out			= $request->input('out');
         $points->transaction_id = $request->input('transaction_id');
         $points->reservation_id = $request->input('reservation_id');	
-        $points->user_id		= $request->header('user');
+        $points->user_id		= Auth::id();
         $points->save();
     }
 

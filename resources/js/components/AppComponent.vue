@@ -80,12 +80,8 @@
                 alert("Error reservations :" + resp);
             });
 
-        let userId = document.head.querySelector('meta[name="userID"]');
-        axios.get('/api/points',{
-                headers: { 
-                    'user': userId.content,
-                }
-            })
+
+        axios.get('/api/points')
             .then(function (resp) {   
                 for(var i in resp.data){
                      app.points_in += parseInt(resp.data[i].in,10);
@@ -98,7 +94,6 @@
                 console.log(resp);
                 alert("Error Points :" + resp);
             });
-
 
             this.$router.push('/dashboard');
 

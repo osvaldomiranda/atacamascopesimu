@@ -62,5 +62,20 @@ const app = new Vue({
     render: h => h(AppComponent),
     store,
     router: router,
+   created () {
+        this.initialize()
+    },
+    methods: {
+        initialize () {
+            let token_vu = document.head.querySelector('meta[name="token"]');
+            
+            if (token_vu.content){
+                window.axios.defaults.headers.common['Authorization'] = 'Bearer '+token_vu.content;
+                this.$store.commit('changeToken',token_vu.content)
+            }else{
+                window.axios.defaults.headers.common['Authorization'] = 'Bearer '+ this.$store.getters.token;
+            }
+        }
+    }
 
 });

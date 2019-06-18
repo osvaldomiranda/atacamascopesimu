@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Auth;
 use Storage;
 use App\Image;
 use App\Events\MessageSent;
@@ -47,18 +48,18 @@ class ImageController extends Controller
     }
 
     public function last(request $request){
-        $image = Image::all()->last();
+        $image = Image::where('user_id',Auth::id())->last();
         return response()->json($image->path);
     }
 
     public function index(request $request){
-        $images = Image::all();
+        $images = Image::where('user_id',Auth::id())->get();
         return response()->json($images);
     }
 
     public function myImages(request $request){
-        $user_id = $request->header('user');
-        $images = Image::where('user_id',$user_id)->get();
+        
+        $images = Image::where('user_id',Auth::id())->get();
         return response()->json($images);
     }
 
