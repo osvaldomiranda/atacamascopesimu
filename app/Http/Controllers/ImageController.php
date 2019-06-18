@@ -50,8 +50,16 @@ class ImageController extends Controller
     }
 
     public function last(request $request){
-        $image = Image::where('user_id',Auth::id())->get()->last();
-        return response()->json($image->path);
+        $image = Image::where('user_id',Auth::id())->get();
+
+
+        if($image){
+            $path =  $image->path;
+        } else {
+            $path = url('images/sanpeter2.jpg');
+        }
+
+        return response()->json($path);
     }
 
     public function index(request $request){
