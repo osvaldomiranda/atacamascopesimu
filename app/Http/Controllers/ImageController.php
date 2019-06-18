@@ -52,8 +52,7 @@ class ImageController extends Controller
     public function last(request $request){
         $image = Image::where('user_id',Auth::id())->get();
 
-
-        if($image){
+        if($image->count()>0){
             $path =  $image->path;
         } else {
             $path = url('images/sanpeter2.jpg');
