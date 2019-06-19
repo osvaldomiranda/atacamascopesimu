@@ -60,6 +60,17 @@
       initialize () {
 
         var app = this;
+
+        // axios.get('/api/currentuser')
+        //     .then(function (resp) {    
+        //         //alert(JSON.stringify(resp.data));
+        //         app.$store.commit('changeUser',resp.data);
+        //     })
+        //     .catch(function (resp) {
+        //         console.log(resp);
+        //         alert("Error user :" + resp);
+        //     });
+
         axios.get('/api/equipments')
             .then(function (resp) {    
                 //alert(JSON.stringify(resp.data));

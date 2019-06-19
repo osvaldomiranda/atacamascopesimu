@@ -793,7 +793,7 @@
         move(){
         	if(this.Ar_screen){
 	        	var $command = {'command': 'MONTURA', 'type': 'mount', 'status': 'PENDIENTE',
-	        	                'ar': this.Ar, 'dec': this.Dec, 'user_id': 3, 'equipment_id': 1};
+	        	                'ar': this.Ar, 'dec': this.Dec, 'user_id': 4, 'equipment_id': 1};
 
 	        	//alert(JSON.stringify($command));
 	        	axios.post('/api/command/move', $command)
@@ -810,7 +810,7 @@
         },
         shoot(){
         	var $command = {'command': 'CAMARA', 'type': 'shoot', 'status': 'PENDIENTE',
-        	                'exptime': this.Exp, 'iso': this.Iso, 'ar': this.Ar_act, 'dec': this.Dec_act, 'user_id': 3, 'equipment_id': 1};
+        	                'exptime': this.Exp, 'iso': this.Iso, 'ar': this.Ar_act, 'dec': this.Dec_act, 'user_id': 4, 'equipment_id': 1};
 
         	this.imageUrl = '';
         	axios.post('/api/command/shoot', $command)
@@ -835,7 +835,7 @@
         },
         focus(){
         	var $command = {'command': 'ENFOCADOR', 'type': 'focuser', 'status': 'PENDIENTE',
-        	                'steps': this.Paso, 'direction': 1, 'user_id': 3, 'equipment_id': 1};
+        	                'steps': this.Paso, 'direction': 1, 'user_id': 4, 'equipment_id': 1};
 
         	//alert(JSON.stringify($command));
 

@@ -1819,7 +1819,16 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     initialize: function initialize() {
-      var app = this;
+      var app = this; // axios.get('/api/currentuser')
+      //     .then(function (resp) {    
+      //         //alert(JSON.stringify(resp.data));
+      //         app.$store.commit('changeUser',resp.data);
+      //     })
+      //     .catch(function (resp) {
+      //         console.log(resp);
+      //         alert("Error user :" + resp);
+      //     });
+
       axios.get('/api/equipments').then(function (resp) {
         //alert(JSON.stringify(resp.data));
         app.$store.commit('changeEquipments', resp.data);
@@ -2768,7 +2777,7 @@ __webpack_require__.r(__webpack_exports__);
           'status': 'PENDIENTE',
           'ar': this.Ar,
           'dec': this.Dec,
-          'user_id': 3,
+          'user_id': 4,
           'equipment_id': 1
         }; //alert(JSON.stringify($command));
 
@@ -2788,7 +2797,7 @@ __webpack_require__.r(__webpack_exports__);
         'iso': this.Iso,
         'ar': this.Ar_act,
         'dec': this.Dec_act,
-        'user_id': 3,
+        'user_id': 4,
         'equipment_id': 1
       };
       this.imageUrl = '';
@@ -2813,7 +2822,7 @@ __webpack_require__.r(__webpack_exports__);
         'status': 'PENDIENTE',
         'steps': this.Paso,
         'direction': 1,
-        'user_id': 3,
+        'user_id': 4,
         'equipment_id': 1
       }; //alert(JSON.stringify($command));
 
