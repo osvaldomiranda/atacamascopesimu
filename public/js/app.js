@@ -4260,7 +4260,7 @@ var actualDate = new Date().toISOString().substr(0, 10);
       var app = this;
       var userId = document.head.querySelector('meta[name="userID"]');
       var reserv = {
-        'user_id': userId.content,
+        'user_id': 4,
         'equipment_id': this.equipment_id,
         'date': this.start,
         'hour': this.hourToReserv,

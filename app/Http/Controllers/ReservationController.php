@@ -18,7 +18,7 @@ class ReservationController extends Controller
     }
 
     public function myReservations(Request $request){
-        $reservations = Reservation::with('equipment')->whereDate('date','>=',Carbon::now())->where('user_id', Auth::id())-> get();
+        $reservations = Reservation::with('equipment')->whereDate('date','>=',Carbon::now())->where('user_id', 4)-> get();
         return response()->json($reservations);
     }
     public function reservations(Request $request){

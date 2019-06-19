@@ -414,7 +414,7 @@
         reserv (){
             var app = this
             let userId = document.head.querySelector('meta[name="userID"]');
-            var reserv = {'user_id':userId.content, 'equipment_id': this.equipment_id, 'date': this.start, 'hour': this.hourToReserv , 'points_out': this.telescope_points, 'current_points': this.$store.getters.current_points - this.telescope_points };
+            var reserv = {'user_id':4, 'equipment_id': this.equipment_id, 'date': this.start, 'hour': this.hourToReserv , 'points_out': this.telescope_points, 'current_points': this.$store.getters.current_points - this.telescope_points };
 
 
             axios.post('/api/reservation/create', reserv)
