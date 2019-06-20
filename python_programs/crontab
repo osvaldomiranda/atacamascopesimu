@@ -8,8 +8,8 @@
 # For more information see the manual pages of crontab(5) and cron(8)
 # 
 # m h  dom mon dow   command
-*/1 * * * * /usr/bin/python /home/deployer/atacamascope/simuController.py 
-*/1 * * * * sleep 10 && /usr/bin/python /home/deployer/atacamascope/simuController.py 
-*/1 * * * * sleep 20 && /usr/bin/python /home/deployer/atacamascope/simuController.py 
-*/1 * * * * sleep 30 && /usr/bin/python /home/deployer/atacamascope/simuController.py 
-*/1 * * * * sleep 50 && /usr/bin/python /home/deployer/atacamascope/simuController.py 
+*/1 * * * * /usr/bin/python /home/deployer/atacamascope/clientController.py 
+*/1 * * * * sleep 10 && /usr/bin/python /home/deployer/atacamascope/clientController.py 
+*/1 * * * * sleep 20 && /usr/bin/python /home/deployer/atacamascope/clientController.py 
+*/1 * * * * sleep 30 && /usr/bin/python /home/deployer/atacamascope/clientController.py 
+*/1 * * * * sleep 50 && /usr/bin/python /home/deployer/atacamascope/clientController.py 

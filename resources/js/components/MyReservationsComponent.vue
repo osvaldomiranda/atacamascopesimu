@@ -10,15 +10,6 @@
             <v-card>
               <v-card-title>
                  <span class="headline">Mis Reservas</span>
-
-              <v-spacer></v-spacer>     
-                  <v-text-field
-                    v-model="search"
-                    append-icon="search"
-                    label="Buscar"
-                    single-line
-                    hide-details
-                  ></v-text-field>
               </v-card-title>
               <v-data-table
                 :headers="headers"
@@ -34,11 +25,11 @@
                   <td class="text-xs-left">{{ props.item.date }}</td>
                   <td class="text-xs-left">{{ props.item.hour }}</td>
                   <td class="text-xs-left">{{ props.item.points }}</td>
-                  <td class="text-xs-left"> 
+                 <!--  <td class="text-xs-left"> 
                     <v-btn color="warning" dark @click="control" >Interfaz de Control</v-btn> 
-                  </td>
+                  </td> -->
                   <td class="text-xs-left"> 
-                    <v-btn color="warning" dark @click="control_avanzado" >Interfaz de Control Avanzado</v-btn> 
+                    <v-btn color="warning" dark @click="control_avanzado" >Interfaz de Control</v-btn> 
                   </td>
                 </tr>
                 </template>
@@ -106,10 +97,12 @@
         },
         control_avanzado (){
             var ComponentClass = Vue.extend(ControlComponent)
-            var instance = new ComponentClass();
+            var instance = new ComponentClass({store: this.$store});
             // instance.$slots.default = ['Click me!']
             instance.$mount() // pass nothing
             this.$refs.container.appendChild(instance.$el)
+
+
 
         },
         control (){

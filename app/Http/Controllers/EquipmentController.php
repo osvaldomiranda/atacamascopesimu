@@ -9,7 +9,7 @@ class EquipmentController extends Controller
 {
 	public function index()
     {
-        $equipments = Equipment::all();
+        $equipments = Equipment::orderBy('name')->get();
         return response()->json($equipments);
     }
 }

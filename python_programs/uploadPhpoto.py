@@ -20,7 +20,7 @@ def main(argv):
 
   list_of_files = glob.glob('/home/deployer/atacamascope/*.jpg') # * means all if need specific format then *.csv
   latest_file = max(list_of_files, key=os.path.getctime)
-  ip='18.236.139.196'
+  ip='54.70.235.195'
   url = 'http://'+ip+'/api/upload/'+command_id
 
   file_ = {

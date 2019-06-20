@@ -6,7 +6,7 @@ import threading
 from subprocess import call
 
 
-ip = '18.236.139.196'
+ip = '54.70.235.195'
 url = 'http://'+ip+'/api/command/mountcamera'
 data = '{}'
 response = requests.get(url, data=data)
@@ -43,7 +43,7 @@ def wait(jdata):
     except subprocess.CalledProcessError as e:
         raise RuntimeError("command '{}' return with error (code {}): {}".format(e.cmd, e.returncode, e.output))
 
-    if ra>=p_ar and dec>=p_dec : 
+    if ra>=p_ar-1 and ra<=p_ar+1 and dec>=p_dec-1 and dec<=p_dec+1 : 
         t.cancel()
         time.sleep( 5 )
         comando = " --set-config eosremoterelease=2 --wait-event="+str(exptime)+"s --set-config eosremoterelease=4 --wait-event-and-download=2s"

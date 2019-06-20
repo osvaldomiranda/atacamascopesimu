@@ -33,7 +33,9 @@ Route::post('/command/focus', 'CommandController@focus');
 Route::get('/command/{type}', 'CommandController@command');
 
 
-Route::get('users', 'Api\V1\UsersController@index');
+Route::get('/users', 'Api\V1\UsersController@index');
+Route::get('/currentuser', 'Api\V1\UsersController@currentUser')->middleware('auth:api');
+
 Route::post('messages', 'Api\V1\MessagesController@index');
 Route::post('messages/send', 'Api\V1\MessagesController@store');
 
@@ -50,4 +52,7 @@ Route::get('/my_reservations', 'ReservationController@myReservations')->middlewa
 Route::post('/reservation/create', 'ReservationController@create')->middleware('auth:api');
 
 Route::post('/my_images', 'ImageController@myImages')->middleware('auth:api');
+
+Route::get('/publications', 'PublicationController@publications');
+Route::get('/offers', 'PublicationController@offers');
 

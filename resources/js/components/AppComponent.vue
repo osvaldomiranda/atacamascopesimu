@@ -12,7 +12,16 @@
 
       <v-spacer></v-spacer>
       <v-toolbar-items class="hidden-sm-and-down">
-        <!-- <v-btn :to="'/dasboard'" flat>dashboard</v-btn> -->
+        <v-btn :to="'/dashboard'" flat>DashBoard</v-btn> 
+        <v-btn :to="'/equipment'" flat>Equipos</v-btn> 
+        <v-btn :to="'/offers'" flat>Ofertas</v-btn> 
+        <v-btn :to="'/publications'" flat>Publicaciones</v-btn>
+
+
+
+        <v-btn v-if="$store.getters.user['role']==1" :to="'/statistics'" flat>Estadísticas</v-btn> 
+        <v-btn v-if="$store.getters.user['role']==1" :to="'/users'" flat>Usuarios</v-btn>  
+
         <v-btn flat @click="logout">logout</v-btn>
       </v-toolbar-items>        
     </v-toolbar>
@@ -41,7 +50,8 @@
       points_in:0,
       points_out:0,
       userId:0,
-      astronomic_objects: null,      
+      astronomic_objects: null, 
+     
     }),
     props: {
       source: String
@@ -61,15 +71,15 @@
 
         var app = this;
 
-        // axios.get('/api/currentuser')
-        //     .then(function (resp) {    
-        //         //alert(JSON.stringify(resp.data));
-        //         app.$store.commit('changeUser',resp.data);
-        //     })
-        //     .catch(function (resp) {
-        //         console.log(resp);
-        //         alert("Error user :" + resp);
-        //     });
+        axios.get('/api/currentuser')
+            .then(function (resp) {    
+                //alert(JSON.stringify(resp.data));
+                app.$store.commit('changeUser',resp.data);
+            })
+            .catch(function (resp) {
+                console.log(resp);
+                alert("Error user :" + resp);
+            });
 
         axios.get('/api/equipments')
             .then(function (resp) {    

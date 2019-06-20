@@ -24,7 +24,8 @@ class ImageController extends Controller
     		$path = $request->photo->store('public');
 
             $filename = substr($path,7,100);
-            $path = 'http://54.70.235.195/storage/' . $filename;
+            // $path = 'http://54.70.235.195/storage/' . $filename;
+            $path = 'http://192.168.43.208/storage/' . $filename;
 
     		$image = new Image;
     		$image->name = 'Hola.jpg';
@@ -53,7 +54,7 @@ class ImageController extends Controller
         $image = Image::where('user_id',Auth::id())->get();
 
         if($image->count()>0){
-            $path =  $image->path;
+            $path =  $image->last()->path;
         } else {
             $path = url('images/sanpeter2.jpg');
         }

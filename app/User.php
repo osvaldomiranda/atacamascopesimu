@@ -17,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','api_token'
+        'name', 'email', 'password','api_token','last_login_at','avatar','role','login_count',
     ];
 
     /**
@@ -41,5 +41,10 @@ class User extends Authenticatable
     public function messages()
     {
         return $this->hasMany(Message::class, 'receiver_id');
+    }
+
+    public function getAvatarAttribute()
+    {
+       return $this->avatar;
     }
 }

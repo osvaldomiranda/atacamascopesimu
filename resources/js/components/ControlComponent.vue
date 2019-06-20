@@ -58,8 +58,10 @@
 						    <v-select
 							    v-model="Constellation"
 							    :items="Constellations"
+							    item-text='latin'
 							    label="Constelación"
 							    @input= "filterConstellation"
+							    return-object
 							    single-line
 						        hide-details
 							    ></v-select>
@@ -86,6 +88,7 @@
 						        <td class="text-xs-right">{{ props.item.catalog }}</td>
 						        <td class="text-xs-right">{{ props.item.type_object }}</td>
 						        <td class="text-xs-right">{{ props.item.constellation }}</td>
+						        <td class="text-xs-right">{{ props.item.colloquial_name }}</td>
 						        <td class="text-xs-right">{{ props.item.ra }}</td>
 						        <td class="text-xs-right">{{ props.item.dec }}</td>
 					    	</tr>
@@ -606,7 +609,97 @@
 				'Remanente de Supernova',
 				'Trío de Galaxias',],
         Constellation:'',
-        Constellations: [],
+        Constellations: [
+            {name:'',latin:' '},
+        	{name:'And',latin:'Andromeda'},
+			{name:'Ant',latin:'Antlia'},
+			{name:'Aps',latin:'Apus'},
+			{name:'Aql',latin:'Aquila'},
+			{name:'Aqr',latin:'Aquarius'},
+			{name:'Ara',latin:'Ara'},
+			{name:'Ari',latin:'Aries'},
+			{name:'Aur',latin:'Auriga'},
+			{name:'Boo',latin:'Bootes'},
+			{name:'Cae',latin:'Caelum'},
+			{name:'Cam',latin:'Camelopardalis'},
+			{name:'Cap',latin:'Capricornus'},
+			{name:'Car',latin:'Carina'},
+			{name:'Cas',latin:'Cassiopeia'},
+			{name:'Cen',latin:'Centaurus'},
+			{name:'Cep',latin:'Cepheus'},
+			{name:'Cet',latin:'Cetus'},
+			{name:'Cha',latin:'Chamaleon'},
+			{name:'Cir',latin:'Circinus'},
+			{name:'CMa',latin:'Canis Major'},
+			{name:'CMi',latin:'Canis Minor'},
+			{name:'Cnc',latin:'Cancer'},
+			{name:'Col',latin:'Columba'},
+			{name:'Com',latin:'Coma Berenices'},
+			{name:'CrA',latin:'Corona Australis'},
+			{name:'CrB',latin:'Corona Borealis'},
+			{name:'Crt',latin:'Crater'},
+			{name:'Cru',latin:'Crux'},
+			{name:'Crv',latin:'Corvus'},
+			{name:'CVn',latin:'Canes Venatici'},
+			{name:'Cyg',latin:'Cygnus'},
+			{name:'Del',latin:'Delphinus'},
+			{name:'Dor',latin:'Dorado'},
+			{name:'Dra',latin:'Draco'},
+			{name:'Equ',latin:'Equuleus'},
+			{name:'Eri',latin:'Eridanus'},
+			{name:'For',latin:'Fornax'},
+			{name:'Gem',latin:'Gemini'},
+			{name:'Gru',latin:'Grus'},
+			{name:'Her',latin:'Hercules'},
+			{name:'Hor',latin:'Horologium'},
+			{name:'Hya',latin:'Hydra'},
+			{name:'Hyi',latin:'Hydrus'},
+			{name:'Ind',latin:'Indus'},
+			{name:'Lac',latin:'Lacerta'},
+			{name:'Leo',latin:'Leo'},
+			{name:'Lep',latin:'Lepus'},
+			{name:'Lib',latin:'Libra'},
+			{name:'LMi',latin:'Leo Minor'},
+			{name:'Lup',latin:'Lupus'},
+			{name:'Lyn',latin:'Lynx'},
+			{name:'Lyr',latin:'Lyra'},
+			{name:'Men',latin:'Mensa'},
+			{name:'Mic',latin:'Microscopium'},
+			{name:'Mon',latin:'Monoceros'},
+			{name:'Mus',latin:'Musca'},
+			{name:'Nor',latin:'Norma'},
+			{name:'Oct',latin:'Octans'},
+			{name:'Oph',latin:'Ophiuchus'},
+			{name:'Ori',latin:'Orion'},
+			{name:'Pav',latin:'Pavo'},
+			{name:'Peg',latin:'Pegasus'},
+			{name:'Per',latin:'Perseus'},
+			{name:'Phe',latin:'Phoenix'},
+			{name:'Pic',latin:'Pictor'},
+			{name:'PsA',latin:'Piscis Austrinus'},
+			{name:'Psc',latin:'Pisces'},
+			{name:'Pup',latin:'Puppis'},
+			{name:'Pyx',latin:'Pyxis'},
+			{name:'Ret',latin:'Reticulum'},
+			{name:'Scl',latin:'Sculptor'},
+			{name:'Sco',latin:'Scorpius'},
+			{name:'Sct',latin:'Scutum'},
+			{name:'Ser',latin:'Serpens'},
+			{name:'Sex',latin:'Sextans'},
+			{name:'Sge',latin:'Sagitta'},
+			{name:'Sgr',latin:'Sagittarius'},
+			{name:'Tau',latin:'Taurus'},
+			{name:'Tel',latin:'Telescopium'},
+			{name:'TrA',latin:'Triangulum Australe'},
+			{name:'Tri',latin:'Triangulum'},
+			{name:'Tuc',latin:'Tucana'},
+			{name:'UMa',latin:'Ursa Major'},
+			{name:'UMi',latin:'Ursa Minor'},
+			{name:'Vel',latin:'Vela'},
+			{name:'Vir',latin:'Virgo'},
+			{name:'Vol',latin:'Volans'},
+			{name:'Vul',latin:'Vulpecula'},
+        ],
         FilteredObjects: [],
 
         Ar: 0,
@@ -664,9 +757,10 @@
 	        '4',
 	        '6',
 	        '8',
-	        '1',
-	        '2',
-	        '3',
+	        '10',
+	        '20',
+	        '30',
+	        '60',
 	    ],
 
         headers: [
@@ -674,6 +768,7 @@
           { text: 'Catalogo', value: 'catalog' },
           { text: 'Tipo', value: 'type_object' },
           { text: 'Constelación', value: 'constellation' },
+          { text: 'Descripción', value: 'colloquial_name' },
           { text: 'AR', value: 'ra' },
           { text: 'DEC', value: 'dec' }
         ],
@@ -733,7 +828,7 @@
 
         getAstrnomicObject(){
         	var app=this;
-        	axios.get('/api/astronomic_objects?constellation=' + app.contellation +'&catalog='+app.catalog+'&type='+app.type)
+        	axios.get('/api/astronomic_objects?constellation=' + app.constellation +'&catalog='+app.catalog+'&type='+app.type)
             .then(function (resp) {
               	app.FilteredObjects = resp.data;
             	// const distinctConst=[...new Set(app.astronomic_objects.map(x => x.constellation))];
@@ -783,17 +878,17 @@
         	
         },
         filterConstellation(a){
-        	if(a=="Todas"){
-        		this.FilteredObjects = this.astronomic_objects
-        	} else {
-        		this.FilteredObjects = this.FilteredObjects.filter(it => it.constellation==a );	
-        	}
+        	// alert(JSON.stringify(a));
+        	// alert(a.name);
+        	this.constellation = a.name;
+        	this.getAstrnomicObject();
         },
 
         move(){
+
         	if(this.Ar_screen){
 	        	var $command = {'command': 'MONTURA', 'type': 'mount', 'status': 'PENDIENTE',
-	        	                'ar': this.Ar, 'dec': this.Dec, 'user_id': 4, 'equipment_id': 1};
+	        	                'ar': this.Ar, 'dec': this.Dec, 'user_id': this.$store.getters.user['id'], 'equipment_id': 1};
 
 	        	//alert(JSON.stringify($command));
 	        	axios.post('/api/command/move', $command)
@@ -810,7 +905,7 @@
         },
         shoot(){
         	var $command = {'command': 'CAMARA', 'type': 'shoot', 'status': 'PENDIENTE',
-        	                'exptime': this.Exp, 'iso': this.Iso, 'ar': this.Ar_act, 'dec': this.Dec_act, 'user_id': 4, 'equipment_id': 1};
+        	                'exptime': this.Exp, 'iso': this.Iso, 'ar': this.Ar_act, 'dec': this.Dec_act, 'user_id': this.$store.getters.user['id'], 'equipment_id': 1};
 
         	this.imageUrl = '';
         	axios.post('/api/command/shoot', $command)
@@ -835,7 +930,7 @@
         },
         focus(){
         	var $command = {'command': 'ENFOCADOR', 'type': 'focuser', 'status': 'PENDIENTE',
-        	                'steps': this.Paso, 'direction': 1, 'user_id': 4, 'equipment_id': 1};
+        	                'steps': this.Paso, 'direction': 1, 'user_id': this.$store.getters.user['id'], 'equipment_id': 1};
 
         	//alert(JSON.stringify($command));
 

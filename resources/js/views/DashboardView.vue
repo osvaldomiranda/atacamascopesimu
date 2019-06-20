@@ -6,47 +6,67 @@
 
     <v-container fluid>
       <v-layout align-center row>
-<!-- <passport-clients></passport-clients>
-<passport-authorized-clients></passport-authorized-clients>
-<passport-personal-access-tokens></passport-personal-access-tokens> -->
-        </v-layout>
-        <v-layout align-center row>
-        <v-flex xs12>
-            <v-container  fluid>
-                    <v-layout >
-                        <v-flex xs4 align-end flexbox>
-                          <span class="headline"> Puntos Disponibles:{{ $store.getters.current_points }}</span>
-                        </v-flex>
-                        <v-flex xs8 align-end flexbox>
-                            <div>
-                                <!-- <points-component></points-component> -->
-                                <v-btn color="warning" dark @click="pointsClick" >Comprar Puntos</v-btn> 
-                               <!--  <reservation-component></reservation-component> -->
-                                <v-btn color="warning" dark @click="reservClick" >Reservar</v-btn>
-                                
-                            </div>
-                        </v-flex>
 
-                    </v-layout>
-                </v-container>
-        </v-flex>
+            <v-flex xs4 align-end flexbox>
+              
+            </v-flex>
+            <v-flex xs4 align-end flexbox>
+              <span class="subheading"> Puntos Disponibles:{{ $store.getters.current_points }}</span>
+            </v-flex>
+
+            <v-flex xs4 align-end flexbox>
+                <div>
+                    <!-- <points-component></points-component> -->
+                    <v-btn color="warning" dark @click="pointsClick" >Comprar Puntos</v-btn> 
+                   <!--  <reservation-component></reservation-component> -->
+                    <v-btn color="warning" dark @click="reservClick" >Reservar</v-btn>       
+                </div>
+            </v-flex>
+
       </v-layout>
-    </v-container>  
-    
-    <v-container fluid>
+      
+
+
+      <v-layout align-center row>
+            <v-flex xs1>
+            </v-flex>
+
+
+        </v-layout>
         <v-layout align-center row>
+            <v-flex xs1>
+            </v-flex>    
+            <v-flex xs2 align-center  sm2 md1>
+                <v-layout align-center row>
+                    <v-flex align-center xs12>
+                        <v-avatar
+                            size="150px"
+                        >
+                            <img
+                              :src="images.avatar"
+                              alt="Avatar"
+                            >
+                        </v-avatar>
+                    </v-flex>
+                </v-layout>
+                <v-layout align-center row>
+                    <v-flex xs1>
+                    </v-flex> 
+                </v-layout>  
+                <v-layout align-center row>
+                    <v-flex align-center xs12>
+                        <span class="subheading">{{ $store.getters.user['email'] }}</span>
+                    </v-flex>
+                </v-layout>      
+            </v-flex>            
+            <v-flex xs1>
+            </v-flex> 
+
+            <v-flex xs8 align-center flexbox>
+                <my-reservations></my-reservations>  
+            </v-flex>
         </v-layout>
     </v-container>  
-
-    <v-container fluid>
-
-        <v-layout align-center row>
-
-          <my-reservations></my-reservations>  
-                  
-        </v-layout>
-    </v-container>    
-  
 
 
      <v-container fluid>
@@ -105,6 +125,9 @@
     computed: mapState(['astronomc_objects', 'current_points']),
     data () {
       return {
+        images: {
+            avatar: require('./../../assets/images/sanpeter2.jpg')
+        },
         search: '',
         points: 500,
         current_user:'',  
@@ -133,7 +156,7 @@
         ],
         reservations:[
             {
-                equipment_image:'',
+                equipment_image: require('./../../assets/images/sanpeter2.jpg'),
                 equipment_name:'Equipo Principal',
                 reservation_date:'01/05/2019',
                 reservation_hour:'22:00',
@@ -142,7 +165,7 @@
         ],
         sessions:[
             {
-                img: '',
+                img: "https://cdn.shopify.com/s/files/1/1935/4371/products/12046_Advanced_VX_9_25_SCT_1_570x380@2x.jpg?v=1554219678",
                 session_date: '26/04/2019',
                 session_hour: '22:00',
                 img_count: 10,

@@ -20,10 +20,16 @@ class AstronomicObjectController extends Controller
     	   // $astronomicObjects = AstronomicObject::where('catalog',$catalog)->get()->toArray();
         // }
 
-        $type = $request->input('type');
+        $constellation = $request->input('constellation');
 
+        Info($constellation);
+
+        Info($request);
+
+
+        $type = $request->input('type');
         if($type){
-           $astronomicObjects = AstronomicObject::where('type_object',$type)->get()->toArray();
+            $astronomicObjects = AstronomicObject::where('type_object',$type)->get()->toArray();
         }
 
     	return response()->json($astronomicObjects);
