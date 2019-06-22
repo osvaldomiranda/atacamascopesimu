@@ -43,8 +43,4 @@ class User extends Authenticatable
         return $this->hasMany(Message::class, 'receiver_id');
     }
 
-    public function getAvatarAttribute()
-    {
-       return $this->avatar;
-    }
 }

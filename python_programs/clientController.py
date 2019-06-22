@@ -1,61 +1,42 @@
-import requests
 import json
 import subprocess
+import requests
 import time
+import os
 import threading
 from subprocess import call
 
 
-ip = '54.70.235.195'
+comando = 'indi_getprop  "Celestron GPS.CONNECTION.CONNECT"'
+
+try:
+    b_conn = subprocess.check_output(comando, shell=True,stderr=subprocess.STDOUT)
+    c_conn = b_conn.decode("utf-8")
+    conn = c_conn.split('=',1)[1]
+    print(c_conn)
+    print("***"+conn+"***")
+except subprocess.CalledProcessError as e:
+    raise RuntimeError("command '{}' return with error (code {}): {}".format(e.cmd, e.returncode, e.output))
+
+
+if(conn.strip()=="Off"):
+    comando = '/usr/bin/indi_setprop  "Celestron GPS".CONNECTION.CONNECT=On'
+    print(comando)
+    print("comando enviado")
+    try:
+        b_conn = subprocess.check_output(comando, shell=True,stderr=subprocess.STDOUT)
+    except subprocess.CalledProcessError as e:
+        raise RuntimeError("command '{}' return with error (code {}): {}".format(e.cmd, e.returncode, e.output))
+
+
+ip = '192.168.0.102'
+cwd = os.getcwd()
 url = 'http://'+ip+'/api/command/mountcamera'
 data = '{}'
 response = requests.get(url, data=data)
 
 
-def wait(jdata):
-    p_ar = str(jData['ar'])
-    p_dec= str(jData['dec'])
-    iso = jData['iso']
-    exptime = jData['exptime']
-    
-    t = threading.Timer(1, wait)
-    t.start()
-    comando = 'indi_getprop "Celestron GPS.EQUATORIAL_EOD_COORD.RA"'
 
-
-    try:
-        b_ra = subprocess.check_output(comando, shell=True,stderr=subprocess.STDOUT)
-        c_ra = b_ra.decode("utf-8")
-        ra = round( float(c_ra.split('=',1)[1]),2)
-        print(ra)
-    except subprocess.CalledProcessError as e:
-        raise RuntimeError("command '{}' return with error (code {}): {}".format(e.cmd, e.returncode, e.output))
-
-    comando = 'indi_getprop "Celestron GPS.EQUATORIAL_EOD_COORD.DEC"'
-
-
-    try:
-        b_dec = subprocess.check_output(comando, shell=True,stderr=subprocess.STDOUT)
-        c_dec = b_dec.decode("utf-8")
-        dec = round( float(c_dec.split('=',1)[1]),2)
-        print(dec)
-
-    except subprocess.CalledProcessError as e:
-        raise RuntimeError("command '{}' return with error (code {}): {}".format(e.cmd, e.returncode, e.output))
-
-    if ra>=p_ar-1 and ra<=p_ar+1 and dec>=p_dec-1 and dec<=p_dec+1 : 
-        t.cancel()
-        time.sleep( 5 )
-        comando = " --set-config eosremoterelease=2 --wait-event="+str(exptime)+"s --set-config eosremoterelease=4 --wait-event-and-download=2s"
-        try:
-            url = 'http://'+ip+'/api/messages/send?sender_id=1&receiver_id=2&message=Obteniendo Imagen'
-            response = requests.post(url, data=data)
-
-            print(comando)
-            call(["gphoto2","--set-config","eosremoterelease=2", "--wait-event="+str(exptime)+"s","--set-config", "eosremoterelease=4","--wait-event-and-download=5s"])
-        except subprocess.CalledProcessError as e:
-            raise RuntimeError("command '{}' return with error (code {}): {}".format(e.cmd, e.returncode, e.output))
- 
 
 if(response.ok):
 
@@ -77,6 +58,7 @@ if(response.ok):
             data = '{}'
             response = requests.post(url, data=data)            
             subprocess.check_output(comando, shell=True,stderr=subprocess.STDOUT)
+            wait()
         except subprocess.CalledProcessError as e:
             raise RuntimeError("command '{}' return with error (code {}): {}".format(e.cmd, e.returncode, e.output))
 
@@ -88,7 +70,7 @@ if(response.ok):
         iso = jData['iso']
         exptime = jData['exptime']
 
-        comando = " --set-config eosremoterelease=2 --wait-event="+str(exptime)+"s --set-config eosremoterelease=4 --wait-event-and-download=2s"
+        comando = " --set-config eosremoterelease=2 --wait-event="+str(exptime)+"s --set-config eosremoterelease=4 --wait-event-and-download=7s"
         try:
             url = 'http://'+ip+'/api/messages/send?sender_id=1&receiver_id=2&message=Obteniendo Imagen'
             response = requests.post(url, data=data)
@@ -97,6 +79,12 @@ if(response.ok):
             call(["gphoto2","--set-config","eosremoterelease=2", "--wait-event="+str(exptime)+"s","--set-config", "eosremoterelease=4","--wait-event-and-download=5s"])
         except subprocess.CalledProcessError as e:
             raise RuntimeError("command '{}' return with error (code {}): {}".format(e.cmd, e.returncode, e.output))
+
+        url = 'http://'+ip+'/api/messages/send?sender_id=1&receiver_id=2&message=Subiendo Imagen'
+        time.sleep( 5 )
+        response = requests.post(url, data=data)
+        call(["/usr/bin/python", cwd + "/uploadPhoto.py", "-c", str(jData['id'])])
+
 
     if(jData['type']=='pointandshoot'): 
         ar = str(jData['ar'])
@@ -118,4 +106,4 @@ if(response.ok):
         except subprocess.CalledProcessError as e:
             raise RuntimeError("command '{}' return with error (code {}): {}".format(e.cmd, e.returncode, e.output))       
 
-            
+     

@@ -119,7 +119,7 @@ class CommandController extends Controller
 	            'message'     => 'Comando Enviado',
 	        ]);
 
-	        broadcast(new MessageSent($message));
+	        // broadcast(new MessageSent($message));
 
 	    	return response()->json($command);    		
     	}else {

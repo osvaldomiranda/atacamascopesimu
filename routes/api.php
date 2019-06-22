@@ -56,3 +56,6 @@ Route::post('/my_images', 'ImageController@myImages')->middleware('auth:api');
 Route::get('/publications', 'PublicationController@publications');
 Route::get('/offers', 'PublicationController@offers');
 
+ Route::get('avatar', 'Api\V1\UsersController@avatar');
+ Route::post('/save_avatar', 'Api\V1\UsersController@save_avatar')->middleware('auth:api');
+

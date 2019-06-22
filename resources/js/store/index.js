@@ -8,6 +8,7 @@ export default new Vuex.Store(
 {
 	state: {
 	  user: '',
+
 	  equipments:[],
 	  reservations:[],
 	  my_reservations:[],

@@ -418,8 +418,11 @@
 							    <v-select
 							      v-model="Iso"
 							      :items="Isos"
+							      item-text='iso'
+							      return-object
 							      :rules="[v => !!v || 'Obligatorio']"
 							      label="Sencibilidad"
+							      @input= "selectIso"
 							      required
 							    ></v-select>
 
@@ -461,15 +464,15 @@
 							<v-flex align-center xs1>
 							</v-flex>	
 							<v-flex align-center xs4>
-							
-							    <v-select
-							      v-model="Paso"
-							      :items="Pasos"
-							      :rules="[v => !!v || 'Obligatorio']"
-							      label="Pasos"
-							      required
-							    ></v-select>
-
+								<v-text-field
+								    v-model="paso"
+								    label="Ticts 0-15000"
+								    min:0
+								    max:15000
+								    :rules="[v => !!v || 'Obligatorio']"
+								    type="number" 
+								    >    	
+								</v-text-field>
 		          			</v-flex>
 							<v-flex align-center xs1>
 							</v-flex>	
@@ -742,15 +745,36 @@
 	    ],
 
 	    Isos: [
-	        '100',
-	        '200',
-	        '400',
-	        '600',
-	        '800',
-	        '1000',
-	        '2000',
-	        '3000',
-	    ],
+			{choice: 1, iso: 100},
+			{choice: 2, iso: 125},
+			{choice: 3, iso: 160},
+			{choice: 4, iso: 200},
+			{choice: 5, iso: 250},
+			{choice: 6, iso: 320},
+			{choice: 7, iso: 400},
+			{choice: 8, iso: 500},
+			{choice: 9, iso: 640},
+			{choice: 10, iso: 800},
+			{choice: 11, iso: 1000},
+			{choice: 12, iso: 1250},
+			{choice: 13, iso: 1600},
+			{choice: 14, iso: 2000},
+			{choice: 15, iso: 2500},
+			{choice: 16, iso: 3200},
+			{choice: 17, iso: 4000},
+			{choice: 18, iso: 5000},
+			{choice: 19, iso: 6400},
+			{choice: 20, iso: 8000},
+			{choice: 21, iso: 10000},
+			{choice: 22, iso: 12800},
+			{choice: 23, iso: 16000},
+			{choice: 24, iso: 20000},
+			{choice: 25, iso: 25600},
+			],
+
+
+
+
 	    Exps: [
 	        '1',
 	        '2',
@@ -1064,6 +1088,10 @@
     		this.coords(this.Ar_screen, this.Dec_screen);
     		this.dialog3 = false;
 
+    	},
+
+    	selectIso(a){
+    		this.Iso = a.choice;
     	}
 
     },

@@ -21,16 +21,30 @@ class AstronomicObjectController extends Controller
         // }
 
         $constellation = $request->input('constellation');
+        $type = $request->input('type');
+
+        if($constellation=='undefined'){
+            $constellation=null;
+        }
 
         Info($constellation);
+        Info($type);
 
-        Info($request);
-
-
-        $type = $request->input('type');
-        if($type){
+        if($type and !$constellation){
+            Info("tipo y ! const");
             $astronomicObjects = AstronomicObject::where('type_object',$type)->get()->toArray();
         }
+
+        if(!$type and $constellation){
+            Info("!tipo y const");
+            $astronomicObjects = AstronomicObject::where('constellation',$constellation)->get()->toArray();
+        }
+
+        if($type and $constellation){
+            Info("tipo y const");
+            $astronomicObjects = AstronomicObject::where('constellation',$constellation)->where('type_object',$type)->get()->toArray();
+        }
+
 
     	return response()->json($astronomicObjects);
     }

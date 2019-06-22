@@ -17,6 +17,7 @@ import AppComponent         from './components/AppComponent'
 // import PointsComponent      from './components/PointsComponent'
 // import ReservationComponent      from './components/ReservationComponent'
 import MyReservationsComponent      from './components/MyReservationsComponent'
+import UploadAvatar      from './components/UploadAvatarComponent'
 
 
 
@@ -51,6 +52,7 @@ Vue.component('app', require('./views/App.vue'));
 // Vue.component('points-component', PointsComponent);
 // Vue.component('reservation-component', ReservationComponent);
 Vue.component('my-reservations', MyReservationsComponent);
+Vue.component('upload-avatar', UploadAvatar);
 
 
 

@@ -12,6 +12,7 @@
             </v-flex>
             <v-flex xs4 align-end flexbox>
               <span class="subheading"> Puntos Disponibles:{{ $store.getters.current_points }}</span>
+
             </v-flex>
 
             <v-flex xs4 align-end flexbox>
@@ -43,7 +44,7 @@
                             size="150px"
                         >
                             <img
-                              :src="images.avatar"
+                              :src="$store.getters.user['avatar']"
                               alt="Avatar"
                             >
                         </v-avatar>
@@ -54,10 +55,15 @@
                     </v-flex> 
                 </v-layout>  
                 <v-layout align-center row>
-                    <v-flex align-center xs12>
-                        <span class="subheading">{{ $store.getters.user['email'] }}</span>
+                    <v-flex align-center xs1>
+                        <upload-avatar></upload-avatar>
+                    </v-flex>    
+                    <v-flex align-center xs1>
                     </v-flex>
-                </v-layout>      
+                    <v-flex align-center xs10>
+                        <span class="body-2">{{ $store.getters.user['email'] }}</span>
+                    </v-flex>  
+                </v-layout> 
             </v-flex>            
             <v-flex xs1>
             </v-flex> 
@@ -122,12 +128,9 @@
   import ReservationComponent from './../components/ReservationComponent';
 
   export default {
-    computed: mapState(['astronomc_objects', 'current_points']),
+    computed: mapState(['astronomc_objects', 'current_points', 'user']),
     data () {
       return {
-        images: {
-            avatar: require('./../../assets/images/sanpeter2.jpg')
-        },
         search: '',
         points: 500,
         current_user:'',  
@@ -184,10 +187,10 @@
             var app = this;
             this.Ar = a.coord_ar;
             this.Dec = a.coord_dec;
-            this.object = a.name;
-            
+            this.object = a.name;        
         },
         initialize () {
+          
 
         },
         pointsClick (){

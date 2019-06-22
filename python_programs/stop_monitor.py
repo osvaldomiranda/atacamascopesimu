@@ -34,4 +34,25 @@ def printit():
         t.cancel()
         print('listo')    
 
+def main(argv):
+  global p_ra
+  global p_dec
+  
+  try:
+    opts, args = getopt.getopt(argv,"hra:dec:",["ra=","dec="])
+  except getopt.GetoptError:
+    print('planeta.py -ra <2.343> -dec <-80.765>')
+    sys.exit(2)
+  for opt, arg in opts:
+    if opt == '-h':
+      print('planeta.py -o <object_solarsistem at format Mars> -d <datetime at 2018/07/05t23:59:59>')
+      sys.exit()
+    elif opt in ("-ra", "--object_solarsistem"):
+      object_solarsistem = arg
+    elif opt in ("-dec", "--datetime"):
+      datetime = arg
+  
 printit()
+
+if __name__ == "__main__":
+   main(sys.argv[1:])
