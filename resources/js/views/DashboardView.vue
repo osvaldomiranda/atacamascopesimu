@@ -8,11 +8,41 @@
       <v-layout align-center row>
 
             <v-flex xs4 align-end flexbox>
-              
+                <v-layout align-center row>
+                     <v-flex xs4 align-end flexbox>
+
+                        </v-flex>
+                    <v-flex xs4 align-end flexbox>
+                        <span class="subheading">Clima Actual</span>
+                    </v-flex>
+                </v-layout>     
+                  <v-layout align-center row>
+                        <v-flex xs4 align-end flexbox>
+
+                        </v-flex>
+                        <v-flex xs2 align-end flexbox>
+                            <v-img :src= "weather_image" ></v-img>
+                        </v-flex>
+                        <v-flex xs4 align-end flexbox>
+                          <span class="subheading"> {{ weather["WeatherText"] }} {{weather["Temperature"]["Metric"]["Value"]}} º{{weather["Temperature"]["Metric"]["Unit"]}}</span>
+                        </v-flex>
+                  </v-layout>
+                  <v-layout align-center row>
+                        <v-flex xs4 align-end flexbox>
+
+                        </v-flex>
+                        <v-flex xs4 align-end flexbox>
+                            <a href="https://www.accuweather.com/es/cl/san-pedro-de-atacama/57225/daily-weather-forecast/57225?day=6">
+                            Ver Pronóstico
+                            </a>
+                        </v-flex>
+
+
+
+                  </v-layout>
             </v-flex>
             <v-flex xs4 align-end flexbox>
               <span class="subheading"> Puntos Disponibles:{{ $store.getters.current_points }}</span>
-
             </v-flex>
 
             <v-flex xs4 align-end flexbox>
@@ -25,7 +55,8 @@
             </v-flex>
 
       </v-layout>
-      
+
+
 
 
       <v-layout align-center row>
@@ -133,7 +164,9 @@
       return {
         search: '',
         points: 500,
-        current_user:'',  
+        current_user:'', 
+        weather: '', 
+        weather_image: '', 
 
         rowsPerPageItems: [3, 5, 10, 20],
         pagination: {
@@ -190,7 +223,17 @@
             this.object = a.name;        
         },
         initialize () {
-          
+            var app= this;
+
+            axios.get('/api/weather')
+            .then(function (resp) {    
+                app.weather =  resp.data[0]; 
+                app.weather_image = "https://developer.accuweather.com/sites/default/files/0"+app.weather["WeatherIcon"]+"-s.png" ;              
+            })
+            .catch(function (resp) {
+                console.log(resp);
+                alert("Error accuweather :" + resp);
+            });
 
         },
         pointsClick (){

@@ -24,6 +24,7 @@ Route::get('/moon_state', 'AstronomicObjectController@moon');
 
 
 Route::get('/astronomic_objects/solarsistem', 'AstronomicObjectController@solarSistem');
+Route::get('/search_objects', 'AstronomicObjectController@search');
 
 Route::post('/command/move', 'CommandController@move');
 Route::post('/command/shoot', 'CommandController@shoot');
@@ -58,4 +59,8 @@ Route::get('/offers', 'PublicationController@offers');
 
  Route::get('avatar', 'Api\V1\UsersController@avatar');
  Route::post('/save_avatar', 'Api\V1\UsersController@save_avatar')->middleware('auth:api');
+
+ Route::get('weather', 'ExternalsController@weather');
+ Route::get('weather_new', 'ExternalsController@weatherNew');
+
 

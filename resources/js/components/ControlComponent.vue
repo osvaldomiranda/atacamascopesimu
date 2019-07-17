@@ -68,16 +68,19 @@
 							<v-spacer></v-spacer>    	
 						      <v-text-field
 						        v-model="search"
-						        append-icon="search"
 						        label="Buscar"
 						        single-line
 						        hide-details
 						      ></v-text-field>
+						      <v-spacer></v-spacer> 
+						      <v-btn @click='search_object' flat icon color="blue lighten-2">
+            					<v-icon>search</v-icon>
+        					  </v-btn>
+
 					    </v-card-title>
 					    <v-data-table
 					      :headers="headers"
 					      :items="FilteredObjects"
-					      :search="search"
 					      v-model="selected"
 					      :rows-per-page-items="rowsPerPageItems"
     					  :pagination.sync="pagination"
@@ -88,7 +91,7 @@
 						        <td class="text-xs-right">{{ props.item.catalog }}</td>
 						        <td class="text-xs-right">{{ props.item.type_object }}</td>
 						        <td class="text-xs-right">{{ props.item.constellation }}</td>
-						        <td class="text-xs-right">{{ props.item.colloquial_name }}</td>
+						        <td class="text-xs-right">{{ (props.item.colloquial_name || '') + ' ' + (props.item.nombre_coloquial || '')}}</td>
 						        <td class="text-xs-right">{{ props.item.ra }}</td>
 						        <td class="text-xs-right">{{ props.item.dec }}</td>
 					    	</tr>
@@ -460,40 +463,42 @@
 				            </v-layout>
 				        </v-container>
 
-						<v-layout align-center row>
+						<v-layout row>
 							<v-flex align-center xs1>
+							</v-flex>
+							<v-flex align-center xs1>
+								<p>Tics 0</p>
 							</v-flex>	
-							<v-flex align-center xs4>
-								<v-text-field
-								    v-model="paso"
-								    label="Ticts 0-15000"
-								    min:0
-								    max:15000
-								    :rules="[v => !!v || 'Obligatorio']"
-								    type="number" 
-								    >    	
-								</v-text-field>
-		          			</v-flex>
+						    <v-flex xs8>
+						        <v-slider
+						          v-model="slider"
+						          :max="15000"
+						          thumb-label="always"
+						        ></v-slider>
+						    </v-flex>
 							<v-flex align-center xs1>
-							</v-flex>	
-
-							<v-flex align-center xs4>
-
-
-							    <v-select
-							      v-model="Dir"
-							      :items="Dirs"
-							      :rules="[v => !!v || 'Obligatorio']"
-							      label="Dirección"
-							      required
-							    ></v-select>
-
-
-		          			</v-flex>
-							<v-flex align-center xs1>
+								<p>15000</p>
 							</v-flex>	
 		          		</v-layout>	
-		          		<v-btn color="warning" @click="focus">Enfocar</v-btn>
+		          		<v-layout row>
+		          		    <v-flex xs1>
+		          		    </v-flex>
+		          		    <v-flex xs4>
+		          		    	<v-text-field
+								    v-model="slider"
+								    min:0
+								    max:15000
+								    label="Tics"
+								    type="number" 
+								    ></v-text-field>
+		          		    </v-flex>
+		          		    <v-flex xs1>
+		          		    </v-flex>
+		          		    <v-flex xs4>
+		          		    	<v-btn color="warning" @click="focus">Enfocar</v-btn>	
+		          		    </v-flex>
+		          		</v-layout>
+		          		
 			    	</v-card> 
 				</v-flex>
 
@@ -570,13 +575,12 @@
             v=> v >= 0 || 'Debe ser mayor a o igual 0',
         ],
 
-
-
         blankRules: [v => !!v || 'Campo requerido'],
 
         dialog: true,
         dialog2: false,
         dialog3: false,
+        slider: 7500,
         astronomic_objects:[],
         selected:[],
         search: '',
@@ -848,6 +852,22 @@
             this.openChat();
             this.getMyImages();
             this.getAstrnomicObject();
+        },
+
+        search_object() {
+        	alert("Search");
+        	var app=this;
+        	axios.get('/api/search_objects?name=' + app.search )
+            .then(function (resp) {
+              	app.FilteredObjects = resp.data;
+            	// const distinctConst=[...new Set(app.astronomic_objects.map(x => x.constellation))];
+            	// app.Constellations = distinctConst.sort();
+            	// alert(JSON.stringify(app.FilteredObjects));
+            })
+            .catch(function (resp) {
+                //console.log(resp);
+                alert("Error astronomic_objects :" + resp);
+            });
         },
 
         getAstrnomicObject(){

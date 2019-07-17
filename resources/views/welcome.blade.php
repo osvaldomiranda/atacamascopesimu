@@ -24,7 +24,7 @@
         <title>AtacamaScope</title>
 
         <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nixie One:400,700" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:400,700Light" rel="stylesheet">
         <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css">
 
 <!-- font-family: 'Nixie One', sans-serif !important;
@@ -38,7 +38,7 @@
 
                 /*background-color: #fff;*/
                 /*color: #636b6f;*/
-                font-family: 'Nixie One', sans-serif;
+                font-family: 'Roboto', sans-serif;
                 font-weight: 200;
                 height: 100vh;
                 margin: 0;
@@ -92,28 +92,40 @@
 
             h1{
                 color: aliceblue;
-                font-family: 'Arvo', serif;
+                font-family: 'Roboto', serif;
                 text-align: center;
 
             }
             h2{
                 padding-top: 5%;
                 color: aliceblue;
-                font-family: 'Arvo', serif;
+                font-family: 'Roboto', serif;
                 text-align: center;
 
               }
 
             h3{
                 color: aliceblue;
-                font-family: 'Arvo', serif;
+                font-family: 'Roboto', serif;
                 text-align: center;
 
               }
-
+            h5{
+                padding-top: 10%; 
+                color: aliceblue;
+                font-family: 'Roboto', serif;
+                text-align: center;
+              }
+            h4{
+                padding-top: 2%; 
+                color: aliceblue;
+                font-family: 'Roboto', serif;
+                text-align: center;
+              }
             p{
                 padding-top: 5%; 
                 color: aliceblue;
+                font-family: 'Roboto', serif;
                 text-align: center;
               }
 
@@ -170,12 +182,12 @@
                 border-radius: 100px;
                 background-color: rgb(187, 148, 22);
                 border-color: aliceblue;
+                font-family: 'Roboto', serif;
+                font-size: 24px;
                 display: block;
                 margin-left: auto;
                 margin-right: auto;
                 margin-top: 10%;
-                
-                
             }
             .buttonInitial{
               padding-bottom:20%;
@@ -281,7 +293,7 @@
                   <h3 class="text-left">Unos cuantos clicks y ya estarás observando el universo de san pedro de atacama</h3>
                     
                   <div class="buttonInitial">
-                  <button type="button" class=" comenzar btn-lg  align-center">Comienza ahora</button>
+                  <button type="button" class="comenzar btn-lg align-center">Comienza ahora</button>
                 </div>
                   
         </div>
@@ -299,23 +311,23 @@
     <div class="row">
         <div class="telescope col-md">
             <img src="http://127.0.0.1:8000/images/telescope48.png" class="foto">
-            <p>ELIGE Y RESERVA TU TELESCOPIO: Podrás elegir tu telescopio y luego reservar el tiempo y fecha que tendrás el equipo a tu disposición.</p>
+            <h5>ELIGE Y RESERVA TU TELESCOPIO: Podrás elegir tu telescopio y luego reservar el tiempo y fecha que tendrás el equipo a tu disposición.</h5>
         </div>
         <div class="lupa col-md">
            <img src="http://127.0.0.1:8000/images/search48.png" class="foto">
-           <p>ELIJE UN OBJETO DEL UNIVERSO: Podrás elegir de nuestra base de datos galaxias, cúmulos, estrellas, entre otros objetos.  
+           <h5>ELIJE UN OBJETO DEL UNIVERSO: Podrás elegir de nuestra base de datos galaxias, cúmulos, estrellas, entre otros objetos.  
                 Si deseas buscar objetos por tu cuenta también podrás hacerlo!
-            </p>
+            </h5>
         </div>
         <div class="camera col-md">
            <img src="http://127.0.0.1:8000/images/camera48.png" class="foto">
-           <p>ELIJE LOS PARAMETROS DE TU IMAGEN: Podrás elegir los parámetros de tu foto , operar la sensibilidad de la cámara, tiempo de exposición y tamaño de tu foto.
+           <h5>ELIJE LOS PARAMETROS DE TU IMAGEN: Podrás elegir los parámetros de tu foto , operar la sensibilidad de la cámara, tiempo de exposición y tamaño de tu foto.
                 Si no sabes de estos parámetros, no te preocupes, nosotros automáticamente te los proporcionamos.
-              </p>
+              </h5>
         </div>
         <div class="cloud col-md">
             <img src="http://127.0.0.1:8000/images/cloud48.png" class="foto">
-            <p>DISPARA Y DISFRUTA TU PROPIA FOTO DEL UNIVERO.  Una vez que hayas configurado tus parámetros y estés Ok.  Haz un click, dispara, y disfruta tu bella foto del universo. </p>
+            <h5>DISPARA Y DISFRUTA TU PROPIA FOTO DEL UNIVERO.  Una vez que hayas configurado tus parámetros y estés Ok.  Haz un click, dispara, y disfruta tu bella foto del universo. </h5>
         </div>
     
     
@@ -331,31 +343,32 @@
     <div class="row">
             <div class="telescope col-md">
                 <img src="http://127.0.0.1:8000/images/clouds48.png" class="foto">
-                <p>Estamos en los cielos del desierto de atacama, uno de los mas limpios del planeta.</p>
+                <h4>Estamos en los cielos del desierto de atacama, uno de los mas limpios del planeta.</h4>
             </div>
             <div class="lupa col-md">
-               <img src="http://127.0.0.1:8000/images/telescope48.png" class="foto" >
-               <p>Puedes operarlo via internet desde cualquier parte del planeta.</p>
+               
+               <img src="http://127.0.0.1:8000/images/globe48.png" class="foto">
+               <h4>Puedes operarlo via internet desde cualquier parte del planeta.</h4>
             </div>
     </div>
     <div class="row">
             <div class="telescope col-md">
-                <img src="http://127.0.0.1:8000/images/globe48.png" class="foto">
-                <p>Sin comprar equipos de alto costo</p>
+                <img src="http://127.0.0.1:8000/images/telescope48.png" class="foto" >
+                <h4>Sin comprar equipos de alto costo</h4>
             </div>
             <div class="lupa col-md">
                <img src="http://127.0.0.1:8000/images/emoticon48.png" class="foto">
-               <p>Usa nuestros equipos de forma simple. Busca tus objetos en el universo, dispara, y descarga tu foto.</p>
+               <h4>Usa nuestros equipos de forma simple. Busca tus objetos en el universo, dispara, y descarga tu foto.</h4>
             </div>
     </div>
     <div class="row">
             <div class="telescope col-md">
                 <img src="http://127.0.0.1:8000/images/money48.png" class="foto">
-                <p>Desde tu escritorio, podrás disfrutar los cielos del desierto de atacama, sin gastos extras en viajes, estadía, etc.</p>
+                <h4>Desde tu escritorio, podrás disfrutar los cielos del desierto de atacama, sin gastos extras en viajes, estadía, etc.</h4>
             </div>
             <div class="lupa col-md">
                <img src="http://127.0.0.1:8000/images/moon48.png" class="foto">
-               <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Laudantium obcaecati .</p>
+               <h4>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Laudantium obcaecati .</h4>
             </div>
     </div>
 </div>

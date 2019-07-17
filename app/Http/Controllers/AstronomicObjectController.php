@@ -49,7 +49,22 @@ class AstronomicObjectController extends Controller
     	return response()->json($astronomicObjects);
     }
 
+    public function search(Request $request)
+    {
+        $name = $request->input('name');
+        $astronomicObjects = AstronomicObject::where('name', 'ILIKE', '%'.$name.'%')->get()->toArray();
 
+
+        if(! $astronomicObjects){
+            $astronomicObjects = AstronomicObject::where('colloquial_name','ILIKE', '%'.$name.'%')->get()->toArray();
+        }
+
+        if(! $astronomicObjects){
+            $astronomicObjects = AstronomicObject::where('nombre_coloquial','ILIKE', '%'.$name.'%')->get()->toArray();
+        }
+
+        return response()->json($astronomicObjects);
+    }
 
 
 

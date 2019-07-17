@@ -2587,6 +2587,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   computed: Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['astronomc_objects']),
@@ -2619,6 +2624,7 @@ __webpack_require__.r(__webpack_exports__);
       dialog: true,
       dialog2: false,
       dialog3: false,
+      slider: 7500,
       astronomic_objects: [],
       selected: [],
       search: '',
@@ -3080,6 +3086,18 @@ __webpack_require__.r(__webpack_exports__);
       this.openChat();
       this.getMyImages();
       this.getAstrnomicObject();
+    },
+    search_object: function search_object() {
+      alert("Search");
+      var app = this;
+      axios.get('/api/search_objects?name=' + app.search).then(function (resp) {
+        app.FilteredObjects = resp.data; // const distinctConst=[...new Set(app.astronomic_objects.map(x => x.constellation))];
+        // app.Constellations = distinctConst.sort();
+        // alert(JSON.stringify(app.FilteredObjects));
+      })["catch"](function (resp) {
+        //console.log(resp);
+        alert("Error astronomic_objects :" + resp);
+      });
     },
     getAstrnomicObject: function getAstrnomicObject() {
       var app = this;
@@ -4211,6 +4229,107 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var suncalc__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! suncalc */ "./node_modules/suncalc/suncalc.js");
 /* harmony import */ var suncalc__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(suncalc__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+var _computed$data$create;
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -4462,7 +4581,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var actualDate = new Date().toISOString().substr(0, 10);
-/* harmony default export */ __webpack_exports__["default"] = ({
+/* harmony default export */ __webpack_exports__["default"] = (_computed$data$create = {
   computed: Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])({
     equipments: function equipments(state) {
       return state.equipments;
@@ -4472,7 +4591,9 @@ var actualDate = new Date().toISOString().substr(0, 10);
     }
   }),
   data: function data() {
-    return {
+    var _ref;
+
+    return _ref = {
       generalRuleDate: [function (v) {
         return !!v || 'Campo requerido';
       }, function (v) {
@@ -4536,237 +4657,293 @@ var actualDate = new Date().toISOString().substr(0, 10);
         text: 'Week',
         value: 'week'
       }]
-    };
+    }, _defineProperty(_ref, "today", '2019-01-08'), _defineProperty(_ref, "events", [{
+      title: 'Vacation',
+      details: 'Going to the beach!',
+      date: '2018-12-30',
+      open: false
+    }, {
+      title: 'Vacation',
+      details: 'Going to the beach!',
+      date: '2018-12-31',
+      open: false
+    }, {
+      title: 'Vacation',
+      details: 'Going to the beach!',
+      date: '2019-01-01',
+      open: false
+    }, {
+      title: 'Meeting',
+      details: 'Spending time on how we do not have enough time',
+      date: '2019-01-07',
+      open: false
+    }, {
+      title: '30th Birthday',
+      details: 'Celebrate responsibly',
+      date: '2019-01-03',
+      open: false
+    }, {
+      title: 'New Year',
+      details: 'Eat chocolate until you pass out',
+      date: '2019-01-01',
+      open: false
+    }, {
+      title: 'Conference',
+      details: 'Mute myself the whole time and wonder why I am on this call',
+      date: '2019-01-21',
+      open: false
+    }, {
+      title: 'Hackathon',
+      details: 'Code like there is no tommorrow',
+      date: '2019-02-01',
+      open: false
+    }]), _ref;
   },
   created: function created() {
     this.initialize();
-  },
-  methods: {
-    open: function open(event) {
-      alert(event.title);
-    },
-    initialize: function initialize() {
-      var app = this;
-      app.today = actualDate;
-      app.start = app.today;
-      app.suntimes = suncalc__WEBPACK_IMPORTED_MODULE_0___default.a.getTimes(new Date(), 33.0000, -70.3326); // format sunrise time from the Date object
-
-      app.sunset = app.suntimes.sunset;
-      app.sunrise = app.suntimes.sunrise;
-      app.moon_times = suncalc__WEBPACK_IMPORTED_MODULE_0___default.a.getMoonTimes(new Date(), 33.0000, -70.3326); // alert(JSON.stringify(app.moon_times));
-
-      app.moonset = app.moon_times["set"];
-      app.moonrise = app.moon_times["rise"];
-      this.moon();
-      this.reservatios_day();
-    },
-    moon: function moon() {
-      var app = this;
-      axios.get('/api/moon_state', {
-        headers: {
-          'moondate': app.start
-        }
-      }).then(function (resp) {
-        app.moon_state = resp.data;
-        app.moonImage();
-      })["catch"](function (resp) {
-        console.log(resp);
-        alert("Error moon :" + resp);
-      });
-    },
-    confirmReserv: function confirmReserv(hour) {
-      this.hourToReserv = hour;
-      this.dialog2 = true;
-    },
-    changeTelescope: function changeTelescope(a) {
-      this.equipment = a.name;
-      this.equipment_id = a.id;
-      this.telescope_points = a.points;
-      this.reservatios_day();
-    },
-    change_date: function change_date(a) {
-      alert(a);
-      this.start = a;
-      this.end = a;
-      this.moon_times = suncalc__WEBPACK_IMPORTED_MODULE_0___default.a.getMoonTimes(new Date(a), 33.0000, -70.3326);
-      this.moonset = this.moon_times["set"];
-      this.moonrise = this.moon_times["rise"];
-      this.moon();
-      this.reservatios_day();
-    },
-    reservatios_day: function reservatios_day() {
-      var app = this;
-      axios.get('/api/reservations?equipment_id=' + app.equipment_id + '&date=' + app.start).then(function (resp) {
-        app.reservationsArray = [];
-
-        for (var i in resp.data) {
-          app.reservationsArray.push(resp.data[i].hour);
-        }
-      })["catch"](function (resp) {
-        console.log(resp);
-        alert("Error reservations :" + resp);
-      });
-    },
-    reserv: function reserv() {
-      var app = this;
-      var userId = document.head.querySelector('meta[name="userID"]');
-      var reserv = {
-        'user_id': 4,
-        'equipment_id': this.equipment_id,
-        'date': this.start,
-        'hour': this.hourToReserv,
-        'points_out': this.telescope_points,
-        'current_points': this.$store.getters.current_points - this.telescope_points
-      };
-      axios.post('/api/reservation/create', reserv).then(function (resp) {
-        app.reservatios_day();
-        app.points();
-        app.my_reservations();
-      })["catch"](function (resp) {
-        console.log(resp);
-        alert("Error reservation create :" + resp);
-      });
-      app.dialog2 = false;
-    },
-    points: function points() {
-      var c_points = this.$store.getters.current_points - this.telescope_points;
-      this.$store.commit('changeCurrentPoints', c_points);
-    },
-    my_reservations: function my_reservations() {
-      var app = this;
-      axios.get('/api/my_reservations').then(function (resp) {
-        app.$store.commit('changeMyReservations', resp.data);
-      })["catch"](function (resp) {
-        console.log(resp);
-        alert("Error reservation my_reservations :" + resp);
-      });
-    },
-    moonImage: function moonImage() {
-      var app = this;
-      var splitted = app.moon_state.split(':');
-      var age = parseInt(splitted[3]);
-
-      switch (age) {
-        case 1:
-          app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna01.jpg */ "./resources/assets/images/Luna01.jpg");
-          break;
-
-        case 2:
-          app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna02.jpg */ "./resources/assets/images/Luna02.jpg");
-          break;
-
-        case 3:
-          app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna03.jpg */ "./resources/assets/images/Luna03.jpg");
-          break;
-
-        case 4:
-          app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna04.jpg */ "./resources/assets/images/Luna04.jpg");
-          break;
-
-        case 5:
-          app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna05.jpg */ "./resources/assets/images/Luna05.jpg");
-          break;
-
-        case 6:
-          app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna06.jpg */ "./resources/assets/images/Luna06.jpg");
-          break;
-
-        case 7:
-          app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna07.jpg */ "./resources/assets/images/Luna07.jpg");
-          break;
-
-        case 8:
-          app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna08.jpg */ "./resources/assets/images/Luna08.jpg");
-          break;
-
-        case 9:
-          app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna09.jpg */ "./resources/assets/images/Luna09.jpg");
-          break;
-
-        case 10:
-          app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna10.jpg */ "./resources/assets/images/Luna10.jpg");
-          break;
-
-        case 11:
-          app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna11.jpg */ "./resources/assets/images/Luna11.jpg");
-          break;
-
-        case 12:
-          app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna12.jpg */ "./resources/assets/images/Luna12.jpg");
-          break;
-
-        case 13:
-          app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna13.jpg */ "./resources/assets/images/Luna13.jpg");
-          break;
-
-        case 14:
-          app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna14.jpg */ "./resources/assets/images/Luna14.jpg");
-          break;
-
-        case 15:
-          app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna15.jpg */ "./resources/assets/images/Luna15.jpg");
-          break;
-
-        case 16:
-          app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna16.jpg */ "./resources/assets/images/Luna16.jpg");
-          break;
-
-        case 17:
-          app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna17.jpg */ "./resources/assets/images/Luna17.jpg");
-          break;
-
-        case 18:
-          app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna18.jpg */ "./resources/assets/images/Luna18.jpg");
-          break;
-
-        case 19:
-          app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna19.jpg */ "./resources/assets/images/Luna19.jpg");
-          break;
-
-        case 20:
-          app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna20.jpg */ "./resources/assets/images/Luna20.jpg");
-          break;
-
-        case 21:
-          app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna21.jpg */ "./resources/assets/images/Luna21.jpg");
-          break;
-
-        case 22:
-          app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna22.jpg */ "./resources/assets/images/Luna22.jpg");
-          break;
-
-        case 23:
-          app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna23.jpg */ "./resources/assets/images/Luna23.jpg");
-          break;
-
-        case 24:
-          app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna24.jpg */ "./resources/assets/images/Luna24.jpg");
-          break;
-
-        case 25:
-          app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna25.jpg */ "./resources/assets/images/Luna25.jpg");
-          break;
-
-        case 26:
-          app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna26.jpg */ "./resources/assets/images/Luna26.jpg");
-          break;
-
-        case 27:
-          app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna27.jpg */ "./resources/assets/images/Luna27.jpg");
-          break;
-
-        case 28:
-          app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna28.jpg */ "./resources/assets/images/Luna28.jpg");
-          break;
-
-        case 29:
-          app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna29.jpg */ "./resources/assets/images/Luna29.jpg");
-          break;
-      } //alert(app.moonUrl);
-
-    }
   }
-});
+}, _defineProperty(_computed$data$create, "computed", {
+  // convert the list of events into a map of lists keyed by date
+  eventsMap: function eventsMap() {
+    var map = {};
+    this.events.forEach(function (e) {
+      return (map[e.date] = map[e.date] || []).push(e);
+    });
+    return map;
+  }
+}), _defineProperty(_computed$data$create, "methods", {
+  open: function open(event) {
+    alert(event.title);
+  },
+  initialize: function initialize() {
+    var app = this;
+    app.today = actualDate;
+    app.start = app.today;
+    app.suntimes = suncalc__WEBPACK_IMPORTED_MODULE_0___default.a.getTimes(new Date(), 33.0000, -70.3326); // format sunrise time from the Date object
+
+    app.sunset = app.suntimes.sunset;
+    app.sunrise = app.suntimes.sunrise;
+    app.moon_times = suncalc__WEBPACK_IMPORTED_MODULE_0___default.a.getMoonTimes(new Date(), 33.0000, -70.3326); // alert(JSON.stringify(app.moon_times));
+
+    app.moonset = app.moon_times["set"];
+    app.moonrise = app.moon_times["rise"];
+    this.moon();
+    this.reservatios_day();
+  },
+  moon: function moon() {
+    var app = this;
+    axios.get('/api/moon_state', {
+      headers: {
+        'moondate': app.start
+      }
+    }).then(function (resp) {
+      app.moon_state = resp.data;
+      app.moonImage();
+    })["catch"](function (resp) {
+      console.log(resp);
+      alert("Error moon :" + resp);
+    });
+  },
+  confirmReserv: function confirmReserv(hour) {
+    this.hourToReserv = hour;
+    this.dialog2 = true;
+  },
+  changeTelescope: function changeTelescope(a) {
+    this.equipment = a.name;
+    this.equipment_id = a.id;
+    this.telescope_points = a.points;
+    this.reservatios_day();
+  },
+  change_date: function change_date(a) {
+    alert(a);
+    this.start = a;
+    this.end = a;
+    this.moon_times = suncalc__WEBPACK_IMPORTED_MODULE_0___default.a.getMoonTimes(new Date(a), 33.0000, -70.3326);
+    this.moonset = this.moon_times["set"];
+    this.moonrise = this.moon_times["rise"];
+    this.moon();
+    this.reservatios_day();
+  },
+  reservatios_day: function reservatios_day() {
+    var app = this;
+    axios.get('/api/reservations?equipment_id=' + app.equipment_id + '&date=' + app.start).then(function (resp) {
+      app.reservationsArray = [];
+      app.events = [];
+
+      for (var i in resp.data) {
+        // alert(JSON.stringify(resp.data[i]));
+        app.reservationsArray.push(resp.data[i].hour);
+        app.events.push({
+          title: 'Reservado a las ' + resp.data[i].hour + 'Hrs',
+          details: 'Reservado',
+          date: resp.data[i].date,
+          open: false
+        });
+      }
+    })["catch"](function (resp) {
+      console.log(resp);
+      alert("Error reservations :" + resp);
+    });
+  },
+  reserv: function reserv() {
+    var app = this;
+    var userId = document.head.querySelector('meta[name="userID"]');
+    var reserv = {
+      'user_id': 4,
+      'equipment_id': this.equipment_id,
+      'date': this.start,
+      'hour': this.hourToReserv,
+      'points_out': this.telescope_points,
+      'current_points': this.$store.getters.current_points - this.telescope_points
+    };
+    axios.post('/api/reservation/create', reserv).then(function (resp) {
+      app.reservatios_day();
+      app.points();
+      app.my_reservations();
+    })["catch"](function (resp) {
+      console.log(resp);
+      alert("Error reservation create :" + resp);
+    });
+    app.dialog2 = false;
+  },
+  points: function points() {
+    var c_points = this.$store.getters.current_points - this.telescope_points;
+    this.$store.commit('changeCurrentPoints', c_points);
+  },
+  my_reservations: function my_reservations() {
+    var app = this;
+    axios.get('/api/my_reservations').then(function (resp) {
+      app.$store.commit('changeMyReservations', resp.data);
+    })["catch"](function (resp) {
+      console.log(resp);
+      alert("Error reservation my_reservations :" + resp);
+    });
+  },
+  moonImage: function moonImage() {
+    var app = this;
+    var splitted = app.moon_state.split(':');
+    var age = parseInt(splitted[3]);
+
+    switch (age) {
+      case 1:
+        app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna01.jpg */ "./resources/assets/images/Luna01.jpg");
+        break;
+
+      case 2:
+        app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna02.jpg */ "./resources/assets/images/Luna02.jpg");
+        break;
+
+      case 3:
+        app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna03.jpg */ "./resources/assets/images/Luna03.jpg");
+        break;
+
+      case 4:
+        app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna04.jpg */ "./resources/assets/images/Luna04.jpg");
+        break;
+
+      case 5:
+        app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna05.jpg */ "./resources/assets/images/Luna05.jpg");
+        break;
+
+      case 6:
+        app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna06.jpg */ "./resources/assets/images/Luna06.jpg");
+        break;
+
+      case 7:
+        app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna07.jpg */ "./resources/assets/images/Luna07.jpg");
+        break;
+
+      case 8:
+        app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna08.jpg */ "./resources/assets/images/Luna08.jpg");
+        break;
+
+      case 9:
+        app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna09.jpg */ "./resources/assets/images/Luna09.jpg");
+        break;
+
+      case 10:
+        app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna10.jpg */ "./resources/assets/images/Luna10.jpg");
+        break;
+
+      case 11:
+        app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna11.jpg */ "./resources/assets/images/Luna11.jpg");
+        break;
+
+      case 12:
+        app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna12.jpg */ "./resources/assets/images/Luna12.jpg");
+        break;
+
+      case 13:
+        app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna13.jpg */ "./resources/assets/images/Luna13.jpg");
+        break;
+
+      case 14:
+        app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna14.jpg */ "./resources/assets/images/Luna14.jpg");
+        break;
+
+      case 15:
+        app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna15.jpg */ "./resources/assets/images/Luna15.jpg");
+        break;
+
+      case 16:
+        app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna16.jpg */ "./resources/assets/images/Luna16.jpg");
+        break;
+
+      case 17:
+        app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna17.jpg */ "./resources/assets/images/Luna17.jpg");
+        break;
+
+      case 18:
+        app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna18.jpg */ "./resources/assets/images/Luna18.jpg");
+        break;
+
+      case 19:
+        app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna19.jpg */ "./resources/assets/images/Luna19.jpg");
+        break;
+
+      case 20:
+        app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna20.jpg */ "./resources/assets/images/Luna20.jpg");
+        break;
+
+      case 21:
+        app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna21.jpg */ "./resources/assets/images/Luna21.jpg");
+        break;
+
+      case 22:
+        app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna22.jpg */ "./resources/assets/images/Luna22.jpg");
+        break;
+
+      case 23:
+        app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna23.jpg */ "./resources/assets/images/Luna23.jpg");
+        break;
+
+      case 24:
+        app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna24.jpg */ "./resources/assets/images/Luna24.jpg");
+        break;
+
+      case 25:
+        app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna25.jpg */ "./resources/assets/images/Luna25.jpg");
+        break;
+
+      case 26:
+        app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna26.jpg */ "./resources/assets/images/Luna26.jpg");
+        break;
+
+      case 27:
+        app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna27.jpg */ "./resources/assets/images/Luna27.jpg");
+        break;
+
+      case 28:
+        app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna28.jpg */ "./resources/assets/images/Luna28.jpg");
+        break;
+
+      case 29:
+        app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna29.jpg */ "./resources/assets/images/Luna29.jpg");
+        break;
+    } //alert(app.moonUrl);
+
+  }
+}), _computed$data$create);
 
 /***/ }),
 
@@ -5047,6 +5224,37 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -5058,6 +5266,8 @@ __webpack_require__.r(__webpack_exports__);
       search: '',
       points: 500,
       current_user: '',
+      weather: '',
+      weather_image: '',
       rowsPerPageItems: [3, 5, 10, 20],
       pagination: {
         rowsPerPage: 3
@@ -5125,7 +5335,16 @@ __webpack_require__.r(__webpack_exports__);
       this.Dec = a.coord_dec;
       this.object = a.name;
     },
-    initialize: function initialize() {},
+    initialize: function initialize() {
+      var app = this;
+      axios.get('/api/weather').then(function (resp) {
+        app.weather = resp.data[0];
+        app.weather_image = "https://developer.accuweather.com/sites/default/files/0" + app.weather["WeatherIcon"] + "-s.png";
+      })["catch"](function (resp) {
+        console.log(resp);
+        alert("Error accuweather :" + resp);
+      });
+    },
     pointsClick: function pointsClick() {
       var ComponentPoints = vue__WEBPACK_IMPORTED_MODULE_1___default.a.extend(_components_PointsComponent__WEBPACK_IMPORTED_MODULE_2__["default"]);
       var instance = new ComponentPoints({
@@ -5206,14 +5425,122 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      equipments: []
+      equipments: [],
+      dialog: false,
+      headers: [{
+        text: 'Dessert (100g serving)',
+        align: 'left',
+        sortable: false,
+        value: 'name'
+      }, {
+        text: 'Calories',
+        value: 'calories'
+      }, {
+        text: 'Fat (g)',
+        value: 'fat'
+      }, {
+        text: 'Carbs (g)',
+        value: 'carbs'
+      }, {
+        text: 'Protein (g)',
+        value: 'protein'
+      }, {
+        text: 'Actions',
+        value: 'name',
+        sortable: false
+      }],
+      desserts: [],
+      editedIndex: -1,
+      editedItem: {
+        name: '',
+        calories: 0,
+        fat: 0,
+        carbs: 0,
+        protein: 0
+      },
+      defaultItem: {
+        name: '',
+        calories: 0,
+        fat: 0,
+        carbs: 0,
+        protein: 0
+      }
     };
   },
   created: function created() {
     this.initialize();
+  },
+  // methods: {
+  // 	initialize (){
+  // 		var app = this;
+  // 	axios.get('/api/equipments')
+  // 		.then(function (resp) {    
+  // 			// alert(JSON.stringify(resp.data));
+  // 			app.equipments=resp.data;
+  // 		})
+  // 		.catch(function (resp) {
+  // 			console.log(resp);
+  // 			alert("Error equipments :" + resp);
+  // 		});
+  // 	}
+  // }
+  computed: {
+    formTitle: function formTitle() {
+      return this.editedIndex === -1 ? 'New Item' : 'Edit Item';
+    }
+  },
+  watch: {
+    dialog: function dialog(val) {
+      val || this.close();
+    }
   },
   methods: {
     initialize: function initialize() {
@@ -5225,6 +5552,94 @@ __webpack_require__.r(__webpack_exports__);
         console.log(resp);
         alert("Error equipments :" + resp);
       });
+      this.desserts = [{
+        name: 'Frozen Yogurt',
+        calories: 159,
+        fat: 6.0,
+        carbs: 24,
+        protein: 4.0
+      }, {
+        name: 'Ice cream sandwich',
+        calories: 237,
+        fat: 9.0,
+        carbs: 37,
+        protein: 4.3
+      }, {
+        name: 'Eclair',
+        calories: 262,
+        fat: 16.0,
+        carbs: 23,
+        protein: 6.0
+      }, {
+        name: 'Cupcake',
+        calories: 305,
+        fat: 3.7,
+        carbs: 67,
+        protein: 4.3
+      }, {
+        name: 'Gingerbread',
+        calories: 356,
+        fat: 16.0,
+        carbs: 49,
+        protein: 3.9
+      }, {
+        name: 'Jelly bean',
+        calories: 375,
+        fat: 0.0,
+        carbs: 94,
+        protein: 0.0
+      }, {
+        name: 'Lollipop',
+        calories: 392,
+        fat: 0.2,
+        carbs: 98,
+        protein: 0
+      }, {
+        name: 'Honeycomb',
+        calories: 408,
+        fat: 3.2,
+        carbs: 87,
+        protein: 6.5
+      }, {
+        name: 'Donut',
+        calories: 452,
+        fat: 25.0,
+        carbs: 51,
+        protein: 4.9
+      }, {
+        name: 'KitKat',
+        calories: 518,
+        fat: 26.0,
+        carbs: 65,
+        protein: 7
+      }];
+    },
+    editItem: function editItem(item) {
+      this.editedIndex = this.desserts.indexOf(item);
+      this.editedItem = Object.assign({}, item);
+      this.dialog = true;
+    },
+    deleteItem: function deleteItem(item) {
+      var index = this.desserts.indexOf(item);
+      confirm('Are you sure you want to delete this item?') && this.desserts.splice(index, 1);
+    },
+    close: function close() {
+      var _this = this;
+
+      this.dialog = false;
+      setTimeout(function () {
+        _this.editedItem = Object.assign({}, _this.defaultItem);
+        _this.editedIndex = -1;
+      }, 300);
+    },
+    save: function save() {
+      if (this.editedIndex > -1) {
+        Object.assign(this.desserts[this.editedIndex], this.editedItem);
+      } else {
+        this.desserts.push(this.editedItem);
+      }
+
+      this.close();
     }
   }
 });
@@ -5753,6 +6168,112 @@ __webpack_require__.r(__webpack_exports__);
     }
   }
 });
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ReservationComponent.vue?vue&type=style&index=0&id=75cc3efc&scoped=true&lang=css&":
+/*!**************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ReservationComponent.vue?vue&type=style&index=0&id=75cc3efc&scoped=true&lang=css& ***!
+  \**************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.my-event[data-v-75cc3efc] {\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  border-radius: 2px;\n  background-color: #1867c0;\n  color: #ffffff;\n  border: 1px solid #1867c0;\n  width: 100%;\n  font-size: 12px;\n  padding: 3px;\n  cursor: pointer;\n  margin-bottom: 1px;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/lib/css-base.js":
+/*!*************************************************!*\
+  !*** ./node_modules/css-loader/lib/css-base.js ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/*
+	MIT License http://www.opensource.org/licenses/mit-license.php
+	Author Tobias Koppers @sokra
+*/
+// css base code, injected by the css-loader
+module.exports = function(useSourceMap) {
+	var list = [];
+
+	// return the list of modules as css string
+	list.toString = function toString() {
+		return this.map(function (item) {
+			var content = cssWithMappingToString(item, useSourceMap);
+			if(item[2]) {
+				return "@media " + item[2] + "{" + content + "}";
+			} else {
+				return content;
+			}
+		}).join("");
+	};
+
+	// import a list of modules into the list
+	list.i = function(modules, mediaQuery) {
+		if(typeof modules === "string")
+			modules = [[null, modules, ""]];
+		var alreadyImportedModules = {};
+		for(var i = 0; i < this.length; i++) {
+			var id = this[i][0];
+			if(typeof id === "number")
+				alreadyImportedModules[id] = true;
+		}
+		for(i = 0; i < modules.length; i++) {
+			var item = modules[i];
+			// skip already imported module
+			// this implementation is not 100% perfect for weird media query combinations
+			//  when a module is imported multiple times with different media queries.
+			//  I hope this will never occur (Hey this way we have smaller bundles)
+			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
+				if(mediaQuery && !item[2]) {
+					item[2] = mediaQuery;
+				} else if(mediaQuery) {
+					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
+				}
+				list.push(item);
+			}
+		}
+	};
+	return list;
+};
+
+function cssWithMappingToString(item, useSourceMap) {
+	var content = item[1] || '';
+	var cssMapping = item[3];
+	if (!cssMapping) {
+		return content;
+	}
+
+	if (useSourceMap && typeof btoa === 'function') {
+		var sourceMapping = toComment(cssMapping);
+		var sourceURLs = cssMapping.sources.map(function (source) {
+			return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */'
+		});
+
+		return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
+	}
+
+	return [content].join('\n');
+}
+
+// Adapted from convert-source-map (MIT)
+function toComment(sourceMap) {
+	// eslint-disable-next-line no-undef
+	var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
+	var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
+
+	return '/*# ' + data + ' */';
+}
+
 
 /***/ }),
 
@@ -34799,6 +35320,545 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ReservationComponent.vue?vue&type=style&index=0&id=75cc3efc&scoped=true&lang=css&":
+/*!******************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ReservationComponent.vue?vue&type=style&index=0&id=75cc3efc&scoped=true&lang=css& ***!
+  \******************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./ReservationComponent.vue?vue&type=style&index=0&id=75cc3efc&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ReservationComponent.vue?vue&type=style&index=0&id=75cc3efc&scoped=true&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
+/***/ "./node_modules/style-loader/lib/addStyles.js":
+/*!****************************************************!*\
+  !*** ./node_modules/style-loader/lib/addStyles.js ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/*
+	MIT License http://www.opensource.org/licenses/mit-license.php
+	Author Tobias Koppers @sokra
+*/
+
+var stylesInDom = {};
+
+var	memoize = function (fn) {
+	var memo;
+
+	return function () {
+		if (typeof memo === "undefined") memo = fn.apply(this, arguments);
+		return memo;
+	};
+};
+
+var isOldIE = memoize(function () {
+	// Test for IE <= 9 as proposed by Browserhacks
+	// @see http://browserhacks.com/#hack-e71d8692f65334173fee715c222cb805
+	// Tests for existence of standard globals is to allow style-loader
+	// to operate correctly into non-standard environments
+	// @see https://github.com/webpack-contrib/style-loader/issues/177
+	return window && document && document.all && !window.atob;
+});
+
+var getTarget = function (target, parent) {
+  if (parent){
+    return parent.querySelector(target);
+  }
+  return document.querySelector(target);
+};
+
+var getElement = (function (fn) {
+	var memo = {};
+
+	return function(target, parent) {
+                // If passing function in options, then use it for resolve "head" element.
+                // Useful for Shadow Root style i.e
+                // {
+                //   insertInto: function () { return document.querySelector("#foo").shadowRoot }
+                // }
+                if (typeof target === 'function') {
+                        return target();
+                }
+                if (typeof memo[target] === "undefined") {
+			var styleTarget = getTarget.call(this, target, parent);
+			// Special case to return head of iframe instead of iframe itself
+			if (window.HTMLIFrameElement && styleTarget instanceof window.HTMLIFrameElement) {
+				try {
+					// This will throw an exception if access to iframe is blocked
+					// due to cross-origin restrictions
+					styleTarget = styleTarget.contentDocument.head;
+				} catch(e) {
+					styleTarget = null;
+				}
+			}
+			memo[target] = styleTarget;
+		}
+		return memo[target]
+	};
+})();
+
+var singleton = null;
+var	singletonCounter = 0;
+var	stylesInsertedAtTop = [];
+
+var	fixUrls = __webpack_require__(/*! ./urls */ "./node_modules/style-loader/lib/urls.js");
+
+module.exports = function(list, options) {
+	if (typeof DEBUG !== "undefined" && DEBUG) {
+		if (typeof document !== "object") throw new Error("The style-loader cannot be used in a non-browser environment");
+	}
+
+	options = options || {};
+
+	options.attrs = typeof options.attrs === "object" ? options.attrs : {};
+
+	// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
+	// tags it will allow on a page
+	if (!options.singleton && typeof options.singleton !== "boolean") options.singleton = isOldIE();
+
+	// By default, add <style> tags to the <head> element
+        if (!options.insertInto) options.insertInto = "head";
+
+	// By default, add <style> tags to the bottom of the target
+	if (!options.insertAt) options.insertAt = "bottom";
+
+	var styles = listToStyles(list, options);
+
+	addStylesToDom(styles, options);
+
+	return function update (newList) {
+		var mayRemove = [];
+
+		for (var i = 0; i < styles.length; i++) {
+			var item = styles[i];
+			var domStyle = stylesInDom[item.id];
+
+			domStyle.refs--;
+			mayRemove.push(domStyle);
+		}
+
+		if(newList) {
+			var newStyles = listToStyles(newList, options);
+			addStylesToDom(newStyles, options);
+		}
+
+		for (var i = 0; i < mayRemove.length; i++) {
+			var domStyle = mayRemove[i];
+
+			if(domStyle.refs === 0) {
+				for (var j = 0; j < domStyle.parts.length; j++) domStyle.parts[j]();
+
+				delete stylesInDom[domStyle.id];
+			}
+		}
+	};
+};
+
+function addStylesToDom (styles, options) {
+	for (var i = 0; i < styles.length; i++) {
+		var item = styles[i];
+		var domStyle = stylesInDom[item.id];
+
+		if(domStyle) {
+			domStyle.refs++;
+
+			for(var j = 0; j < domStyle.parts.length; j++) {
+				domStyle.parts[j](item.parts[j]);
+			}
+
+			for(; j < item.parts.length; j++) {
+				domStyle.parts.push(addStyle(item.parts[j], options));
+			}
+		} else {
+			var parts = [];
+
+			for(var j = 0; j < item.parts.length; j++) {
+				parts.push(addStyle(item.parts[j], options));
+			}
+
+			stylesInDom[item.id] = {id: item.id, refs: 1, parts: parts};
+		}
+	}
+}
+
+function listToStyles (list, options) {
+	var styles = [];
+	var newStyles = {};
+
+	for (var i = 0; i < list.length; i++) {
+		var item = list[i];
+		var id = options.base ? item[0] + options.base : item[0];
+		var css = item[1];
+		var media = item[2];
+		var sourceMap = item[3];
+		var part = {css: css, media: media, sourceMap: sourceMap};
+
+		if(!newStyles[id]) styles.push(newStyles[id] = {id: id, parts: [part]});
+		else newStyles[id].parts.push(part);
+	}
+
+	return styles;
+}
+
+function insertStyleElement (options, style) {
+	var target = getElement(options.insertInto)
+
+	if (!target) {
+		throw new Error("Couldn't find a style target. This probably means that the value for the 'insertInto' parameter is invalid.");
+	}
+
+	var lastStyleElementInsertedAtTop = stylesInsertedAtTop[stylesInsertedAtTop.length - 1];
+
+	if (options.insertAt === "top") {
+		if (!lastStyleElementInsertedAtTop) {
+			target.insertBefore(style, target.firstChild);
+		} else if (lastStyleElementInsertedAtTop.nextSibling) {
+			target.insertBefore(style, lastStyleElementInsertedAtTop.nextSibling);
+		} else {
+			target.appendChild(style);
+		}
+		stylesInsertedAtTop.push(style);
+	} else if (options.insertAt === "bottom") {
+		target.appendChild(style);
+	} else if (typeof options.insertAt === "object" && options.insertAt.before) {
+		var nextSibling = getElement(options.insertAt.before, target);
+		target.insertBefore(style, nextSibling);
+	} else {
+		throw new Error("[Style Loader]\n\n Invalid value for parameter 'insertAt' ('options.insertAt') found.\n Must be 'top', 'bottom', or Object.\n (https://github.com/webpack-contrib/style-loader#insertat)\n");
+	}
+}
+
+function removeStyleElement (style) {
+	if (style.parentNode === null) return false;
+	style.parentNode.removeChild(style);
+
+	var idx = stylesInsertedAtTop.indexOf(style);
+	if(idx >= 0) {
+		stylesInsertedAtTop.splice(idx, 1);
+	}
+}
+
+function createStyleElement (options) {
+	var style = document.createElement("style");
+
+	if(options.attrs.type === undefined) {
+		options.attrs.type = "text/css";
+	}
+
+	if(options.attrs.nonce === undefined) {
+		var nonce = getNonce();
+		if (nonce) {
+			options.attrs.nonce = nonce;
+		}
+	}
+
+	addAttrs(style, options.attrs);
+	insertStyleElement(options, style);
+
+	return style;
+}
+
+function createLinkElement (options) {
+	var link = document.createElement("link");
+
+	if(options.attrs.type === undefined) {
+		options.attrs.type = "text/css";
+	}
+	options.attrs.rel = "stylesheet";
+
+	addAttrs(link, options.attrs);
+	insertStyleElement(options, link);
+
+	return link;
+}
+
+function addAttrs (el, attrs) {
+	Object.keys(attrs).forEach(function (key) {
+		el.setAttribute(key, attrs[key]);
+	});
+}
+
+function getNonce() {
+	if (false) {}
+
+	return __webpack_require__.nc;
+}
+
+function addStyle (obj, options) {
+	var style, update, remove, result;
+
+	// If a transform function was defined, run it on the css
+	if (options.transform && obj.css) {
+	    result = typeof options.transform === 'function'
+		 ? options.transform(obj.css) 
+		 : options.transform.default(obj.css);
+
+	    if (result) {
+	    	// If transform returns a value, use that instead of the original css.
+	    	// This allows running runtime transformations on the css.
+	    	obj.css = result;
+	    } else {
+	    	// If the transform function returns a falsy value, don't add this css.
+	    	// This allows conditional loading of css
+	    	return function() {
+	    		// noop
+	    	};
+	    }
+	}
+
+	if (options.singleton) {
+		var styleIndex = singletonCounter++;
+
+		style = singleton || (singleton = createStyleElement(options));
+
+		update = applyToSingletonTag.bind(null, style, styleIndex, false);
+		remove = applyToSingletonTag.bind(null, style, styleIndex, true);
+
+	} else if (
+		obj.sourceMap &&
+		typeof URL === "function" &&
+		typeof URL.createObjectURL === "function" &&
+		typeof URL.revokeObjectURL === "function" &&
+		typeof Blob === "function" &&
+		typeof btoa === "function"
+	) {
+		style = createLinkElement(options);
+		update = updateLink.bind(null, style, options);
+		remove = function () {
+			removeStyleElement(style);
+
+			if(style.href) URL.revokeObjectURL(style.href);
+		};
+	} else {
+		style = createStyleElement(options);
+		update = applyToTag.bind(null, style);
+		remove = function () {
+			removeStyleElement(style);
+		};
+	}
+
+	update(obj);
+
+	return function updateStyle (newObj) {
+		if (newObj) {
+			if (
+				newObj.css === obj.css &&
+				newObj.media === obj.media &&
+				newObj.sourceMap === obj.sourceMap
+			) {
+				return;
+			}
+
+			update(obj = newObj);
+		} else {
+			remove();
+		}
+	};
+}
+
+var replaceText = (function () {
+	var textStore = [];
+
+	return function (index, replacement) {
+		textStore[index] = replacement;
+
+		return textStore.filter(Boolean).join('\n');
+	};
+})();
+
+function applyToSingletonTag (style, index, remove, obj) {
+	var css = remove ? "" : obj.css;
+
+	if (style.styleSheet) {
+		style.styleSheet.cssText = replaceText(index, css);
+	} else {
+		var cssNode = document.createTextNode(css);
+		var childNodes = style.childNodes;
+
+		if (childNodes[index]) style.removeChild(childNodes[index]);
+
+		if (childNodes.length) {
+			style.insertBefore(cssNode, childNodes[index]);
+		} else {
+			style.appendChild(cssNode);
+		}
+	}
+}
+
+function applyToTag (style, obj) {
+	var css = obj.css;
+	var media = obj.media;
+
+	if(media) {
+		style.setAttribute("media", media)
+	}
+
+	if(style.styleSheet) {
+		style.styleSheet.cssText = css;
+	} else {
+		while(style.firstChild) {
+			style.removeChild(style.firstChild);
+		}
+
+		style.appendChild(document.createTextNode(css));
+	}
+}
+
+function updateLink (link, options, obj) {
+	var css = obj.css;
+	var sourceMap = obj.sourceMap;
+
+	/*
+		If convertToAbsoluteUrls isn't defined, but sourcemaps are enabled
+		and there is no publicPath defined then lets turn convertToAbsoluteUrls
+		on by default.  Otherwise default to the convertToAbsoluteUrls option
+		directly
+	*/
+	var autoFixUrls = options.convertToAbsoluteUrls === undefined && sourceMap;
+
+	if (options.convertToAbsoluteUrls || autoFixUrls) {
+		css = fixUrls(css);
+	}
+
+	if (sourceMap) {
+		// http://stackoverflow.com/a/26603875
+		css += "\n/*# sourceMappingURL=data:application/json;base64," + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + " */";
+	}
+
+	var blob = new Blob([css], { type: "text/css" });
+
+	var oldSrc = link.href;
+
+	link.href = URL.createObjectURL(blob);
+
+	if(oldSrc) URL.revokeObjectURL(oldSrc);
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/style-loader/lib/urls.js":
+/*!***********************************************!*\
+  !*** ./node_modules/style-loader/lib/urls.js ***!
+  \***********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+
+/**
+ * When source maps are enabled, `style-loader` uses a link element with a data-uri to
+ * embed the css on the page. This breaks all relative urls because now they are relative to a
+ * bundle instead of the current page.
+ *
+ * One solution is to only use full urls, but that may be impossible.
+ *
+ * Instead, this function "fixes" the relative urls to be absolute according to the current page location.
+ *
+ * A rudimentary test suite is located at `test/fixUrls.js` and can be run via the `npm test` command.
+ *
+ */
+
+module.exports = function (css) {
+  // get current location
+  var location = typeof window !== "undefined" && window.location;
+
+  if (!location) {
+    throw new Error("fixUrls requires window.location");
+  }
+
+	// blank or null?
+	if (!css || typeof css !== "string") {
+	  return css;
+  }
+
+  var baseUrl = location.protocol + "//" + location.host;
+  var currentDir = baseUrl + location.pathname.replace(/\/[^\/]*$/, "/");
+
+	// convert each url(...)
+	/*
+	This regular expression is just a way to recursively match brackets within
+	a string.
+
+	 /url\s*\(  = Match on the word "url" with any whitespace after it and then a parens
+	   (  = Start a capturing group
+	     (?:  = Start a non-capturing group
+	         [^)(]  = Match anything that isn't a parentheses
+	         |  = OR
+	         \(  = Match a start parentheses
+	             (?:  = Start another non-capturing groups
+	                 [^)(]+  = Match anything that isn't a parentheses
+	                 |  = OR
+	                 \(  = Match a start parentheses
+	                     [^)(]*  = Match anything that isn't a parentheses
+	                 \)  = Match a end parentheses
+	             )  = End Group
+              *\) = Match anything and then a close parens
+          )  = Close non-capturing group
+          *  = Match anything
+       )  = Close capturing group
+	 \)  = Match a close parens
+
+	 /gi  = Get all matches, not the first.  Be case insensitive.
+	 */
+	var fixedCss = css.replace(/url\s*\(((?:[^)(]|\((?:[^)(]+|\([^)(]*\))*\))*)\)/gi, function(fullMatch, origUrl) {
+		// strip quotes (if they exist)
+		var unquotedOrigUrl = origUrl
+			.trim()
+			.replace(/^"(.*)"$/, function(o, $1){ return $1; })
+			.replace(/^'(.*)'$/, function(o, $1){ return $1; });
+
+		// already a full url? no change
+		if (/^(#|data:|http:\/\/|https:\/\/|file:\/\/\/|\s*$)/i.test(unquotedOrigUrl)) {
+		  return fullMatch;
+		}
+
+		// convert the url to a full url
+		var newUrl;
+
+		if (unquotedOrigUrl.indexOf("//") === 0) {
+		  	//TODO: should we add protocol?
+			newUrl = unquotedOrigUrl;
+		} else if (unquotedOrigUrl.indexOf("/") === 0) {
+			// path should be relative to the base url
+			newUrl = baseUrl + unquotedOrigUrl; // already starts with '/'
+		} else {
+			// path should be relative to current directory
+			newUrl = currentDir + unquotedOrigUrl.replace(/^\.\//, ""); // Strip leading './'
+		}
+
+		// send back the fixed url(...)
+		return "url(" + JSON.stringify(newUrl) + ")";
+	});
+
+	// send back the fixed css
+	return fixedCss;
+};
+
+
+/***/ }),
+
 /***/ "./node_modules/suncalc/suncalc.js":
 /*!*****************************************!*\
   !*** ./node_modules/suncalc/suncalc.js ***!
@@ -35674,7 +36734,6 @@ var render = function() {
                                   _vm._v(" "),
                                   _c("v-text-field", {
                                     attrs: {
-                                      "append-icon": "search",
                                       label: "Buscar",
                                       "single-line": "",
                                       "hide-details": ""
@@ -35686,7 +36745,23 @@ var render = function() {
                                       },
                                       expression: "search"
                                     }
-                                  })
+                                  }),
+                                  _vm._v(" "),
+                                  _c("v-spacer"),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-btn",
+                                    {
+                                      attrs: {
+                                        flat: "",
+                                        icon: "",
+                                        color: "blue lighten-2"
+                                      },
+                                      on: { click: _vm.search_object }
+                                    },
+                                    [_c("v-icon", [_vm._v("search")])],
+                                    1
+                                  )
                                 ],
                                 1
                               ),
@@ -35697,7 +36772,6 @@ var render = function() {
                                   attrs: {
                                     headers: _vm.headers,
                                     items: _vm.FilteredObjects,
-                                    search: _vm.search,
                                     "rows-per-page-items": _vm.rowsPerPageItems,
                                     pagination: _vm.pagination
                                   },
@@ -35783,7 +36857,13 @@ var render = function() {
                                                 [
                                                   _vm._v(
                                                     _vm._s(
-                                                      props.item.colloquial_name
+                                                      (props.item
+                                                        .colloquial_name ||
+                                                        "") +
+                                                        " " +
+                                                        (props.item
+                                                          .nombre_coloquial ||
+                                                          "")
                                                     )
                                                   )
                                                 ]
@@ -37141,7 +38221,7 @@ var render = function() {
                               _vm._v(" "),
                               _c(
                                 "v-layout",
-                                { attrs: { "align-center": "", row: "" } },
+                                { attrs: { row: "" } },
                                 [
                                   _c("v-flex", {
                                     attrs: { "align-center": "", xs1: "" }
@@ -37149,77 +38229,88 @@ var render = function() {
                                   _vm._v(" "),
                                   _c(
                                     "v-flex",
-                                    { attrs: { "align-center": "", xs4: "" } },
-                                    [
-                                      _c("v-text-field", {
-                                        attrs: {
-                                          label: "Ticts 0-15000",
-                                          "min:0": "",
-                                          "max:15000": "",
-                                          rules: [
-                                            function(v) {
-                                              return !!v || "Obligatorio"
-                                            }
-                                          ],
-                                          type: "number"
-                                        },
-                                        model: {
-                                          value: _vm.paso,
-                                          callback: function($$v) {
-                                            _vm.paso = $$v
-                                          },
-                                          expression: "paso"
-                                        }
-                                      })
-                                    ],
-                                    1
+                                    { attrs: { "align-center": "", xs1: "" } },
+                                    [_c("p", [_vm._v("Tics 0")])]
                                   ),
-                                  _vm._v(" "),
-                                  _c("v-flex", {
-                                    attrs: { "align-center": "", xs1: "" }
-                                  }),
                                   _vm._v(" "),
                                   _c(
                                     "v-flex",
-                                    { attrs: { "align-center": "", xs4: "" } },
+                                    { attrs: { xs8: "" } },
                                     [
-                                      _c("v-select", {
+                                      _c("v-slider", {
                                         attrs: {
-                                          items: _vm.Dirs,
-                                          rules: [
-                                            function(v) {
-                                              return !!v || "Obligatorio"
-                                            }
-                                          ],
-                                          label: "Dirección",
-                                          required: ""
+                                          max: 15000,
+                                          "thumb-label": "always"
                                         },
                                         model: {
-                                          value: _vm.Dir,
+                                          value: _vm.slider,
                                           callback: function($$v) {
-                                            _vm.Dir = $$v
+                                            _vm.slider = $$v
                                           },
-                                          expression: "Dir"
+                                          expression: "slider"
                                         }
                                       })
                                     ],
                                     1
                                   ),
                                   _vm._v(" "),
-                                  _c("v-flex", {
-                                    attrs: { "align-center": "", xs1: "" }
-                                  })
+                                  _c(
+                                    "v-flex",
+                                    { attrs: { "align-center": "", xs1: "" } },
+                                    [_c("p", [_vm._v("15000")])]
+                                  )
                                 ],
                                 1
                               ),
                               _vm._v(" "),
                               _c(
-                                "v-btn",
-                                {
-                                  attrs: { color: "warning" },
-                                  on: { click: _vm.focus }
-                                },
-                                [_vm._v("Enfocar")]
+                                "v-layout",
+                                { attrs: { row: "" } },
+                                [
+                                  _c("v-flex", { attrs: { xs1: "" } }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-flex",
+                                    { attrs: { xs4: "" } },
+                                    [
+                                      _c("v-text-field", {
+                                        attrs: {
+                                          "min:0": "",
+                                          "max:15000": "",
+                                          label: "Tics",
+                                          type: "number"
+                                        },
+                                        model: {
+                                          value: _vm.slider,
+                                          callback: function($$v) {
+                                            _vm.slider = $$v
+                                          },
+                                          expression: "slider"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c("v-flex", { attrs: { xs1: "" } }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-flex",
+                                    { attrs: { xs4: "" } },
+                                    [
+                                      _c(
+                                        "v-btn",
+                                        {
+                                          attrs: { color: "warning" },
+                                          on: { click: _vm.focus }
+                                        },
+                                        [_vm._v("Enfocar")]
+                                      )
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
                               )
                             ],
                             1
@@ -38643,10 +39734,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ReservationComponent.vue?vue&type=template&id=75cc3efc&":
-/*!***********************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ReservationComponent.vue?vue&type=template&id=75cc3efc& ***!
-  \***********************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ReservationComponent.vue?vue&type=template&id=75cc3efc&scoped=true&":
+/*!***********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ReservationComponent.vue?vue&type=template&id=75cc3efc&scoped=true& ***!
+  \***********************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -38877,7 +39968,19 @@ var render = function() {
                                   _vm._s(_vm.$store.getters.current_points)
                               )
                             ])
-                          ])
+                          ]),
+                          _vm._v(" "),
+                          _c("v-flex", { attrs: { xs4: "" } }, [
+                            _c("span", { staticClass: "headline" }, [
+                              _vm._v(
+                                " Puntos Disponibles:" +
+                                  _vm._s(_vm.$store.getters.current_points)
+                              )
+                            ])
+                          ]),
+                          _vm._v(
+                            "\n\t\t\t\t\thttps://www.accuweather.com/es/cl/san-pedro-de-atacama/57225/weather-forecast/57225\n\t\t\t"
+                          )
                         ],
                         1
                       ),
@@ -39060,6 +40163,284 @@ var render = function() {
                 [
                   _c(
                     "v-layout",
+                    { attrs: { row: "", wrap: "" } },
+                    [
+                      _c(
+                        "v-flex",
+                        { attrs: { xs12: "" } },
+                        [
+                          [
+                            _c(
+                              "v-layout",
+                              [
+                                _c(
+                                  "v-flex",
+                                  [
+                                    _c(
+                                      "v-sheet",
+                                      { attrs: { height: "500" } },
+                                      [
+                                        _c("v-calendar", {
+                                          attrs: {
+                                            now: _vm.today,
+                                            value: _vm.today,
+                                            color: "primary"
+                                          },
+                                          scopedSlots: _vm._u([
+                                            {
+                                              key: "day",
+                                              fn: function(ref) {
+                                                var date = ref.date
+                                                return [
+                                                  _vm._l(
+                                                    _vm.eventsMap[date],
+                                                    function(event) {
+                                                      return [
+                                                        _c(
+                                                          "v-menu",
+                                                          {
+                                                            key: event.title,
+                                                            attrs: {
+                                                              "full-width": "",
+                                                              "offset-x": ""
+                                                            },
+                                                            scopedSlots: _vm._u(
+                                                              [
+                                                                {
+                                                                  key:
+                                                                    "activator",
+                                                                  fn: function(
+                                                                    ref
+                                                                  ) {
+                                                                    var on =
+                                                                      ref.on
+                                                                    return [
+                                                                      !event.time
+                                                                        ? _c(
+                                                                            "div",
+                                                                            _vm._g(
+                                                                              {
+                                                                                directives: [
+                                                                                  {
+                                                                                    name:
+                                                                                      "ripple",
+                                                                                    rawName:
+                                                                                      "v-ripple"
+                                                                                  }
+                                                                                ],
+                                                                                staticClass:
+                                                                                  "my-event",
+                                                                                domProps: {
+                                                                                  innerHTML: _vm._s(
+                                                                                    event.title
+                                                                                  )
+                                                                                }
+                                                                              },
+                                                                              on
+                                                                            )
+                                                                          )
+                                                                        : _vm._e()
+                                                                    ]
+                                                                  }
+                                                                }
+                                                              ],
+                                                              null,
+                                                              true
+                                                            ),
+                                                            model: {
+                                                              value: event.open,
+                                                              callback: function(
+                                                                $$v
+                                                              ) {
+                                                                _vm.$set(
+                                                                  event,
+                                                                  "open",
+                                                                  $$v
+                                                                )
+                                                              },
+                                                              expression:
+                                                                "event.open"
+                                                            }
+                                                          },
+                                                          [
+                                                            _vm._v(" "),
+                                                            _c(
+                                                              "v-card",
+                                                              {
+                                                                attrs: {
+                                                                  color:
+                                                                    "grey lighten-4",
+                                                                  "min-width":
+                                                                    "350px",
+                                                                  flat: ""
+                                                                }
+                                                              },
+                                                              [
+                                                                _c(
+                                                                  "v-toolbar",
+                                                                  {
+                                                                    attrs: {
+                                                                      color:
+                                                                        "primary",
+                                                                      dark: ""
+                                                                    }
+                                                                  },
+                                                                  [
+                                                                    _c(
+                                                                      "v-btn",
+                                                                      {
+                                                                        attrs: {
+                                                                          icon:
+                                                                            ""
+                                                                        }
+                                                                      },
+                                                                      [
+                                                                        _c(
+                                                                          "v-icon",
+                                                                          [
+                                                                            _vm._v(
+                                                                              "edit"
+                                                                            )
+                                                                          ]
+                                                                        )
+                                                                      ],
+                                                                      1
+                                                                    ),
+                                                                    _vm._v(" "),
+                                                                    _c(
+                                                                      "v-toolbar-title",
+                                                                      {
+                                                                        domProps: {
+                                                                          innerHTML: _vm._s(
+                                                                            event.title
+                                                                          )
+                                                                        }
+                                                                      }
+                                                                    ),
+                                                                    _vm._v(" "),
+                                                                    _c(
+                                                                      "v-spacer"
+                                                                    ),
+                                                                    _vm._v(" "),
+                                                                    _c(
+                                                                      "v-btn",
+                                                                      {
+                                                                        attrs: {
+                                                                          icon:
+                                                                            ""
+                                                                        }
+                                                                      },
+                                                                      [
+                                                                        _c(
+                                                                          "v-icon",
+                                                                          [
+                                                                            _vm._v(
+                                                                              "favorite"
+                                                                            )
+                                                                          ]
+                                                                        )
+                                                                      ],
+                                                                      1
+                                                                    ),
+                                                                    _vm._v(" "),
+                                                                    _c(
+                                                                      "v-btn",
+                                                                      {
+                                                                        attrs: {
+                                                                          icon:
+                                                                            ""
+                                                                        }
+                                                                      },
+                                                                      [
+                                                                        _c(
+                                                                          "v-icon",
+                                                                          [
+                                                                            _vm._v(
+                                                                              "more_vert"
+                                                                            )
+                                                                          ]
+                                                                        )
+                                                                      ],
+                                                                      1
+                                                                    )
+                                                                  ],
+                                                                  1
+                                                                ),
+                                                                _vm._v(" "),
+                                                                _c(
+                                                                  "v-card-title",
+                                                                  {
+                                                                    attrs: {
+                                                                      "primary-title":
+                                                                        ""
+                                                                    }
+                                                                  },
+                                                                  [
+                                                                    _c("span", {
+                                                                      domProps: {
+                                                                        innerHTML: _vm._s(
+                                                                          event.details
+                                                                        )
+                                                                      }
+                                                                    })
+                                                                  ]
+                                                                ),
+                                                                _vm._v(" "),
+                                                                _c(
+                                                                  "v-card-actions",
+                                                                  [
+                                                                    _c(
+                                                                      "v-btn",
+                                                                      {
+                                                                        attrs: {
+                                                                          flat:
+                                                                            "",
+                                                                          color:
+                                                                            "secondary"
+                                                                        }
+                                                                      },
+                                                                      [
+                                                                        _vm._v(
+                                                                          "\n                      Cancel\n                    "
+                                                                        )
+                                                                      ]
+                                                                    )
+                                                                  ],
+                                                                  1
+                                                                )
+                                                              ],
+                                                              1
+                                                            )
+                                                          ],
+                                                          1
+                                                        )
+                                                      ]
+                                                    }
+                                                  )
+                                                ]
+                                              }
+                                            }
+                                          ])
+                                        })
+                                      ],
+                                      1
+                                    )
+                                  ],
+                                  1
+                                )
+                              ],
+                              1
+                            )
+                          ]
+                        ],
+                        2
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-layout",
                     { attrs: { "align-center": "", row: "" } },
                     [
                       _c("v-flex", { attrs: { xs1: "" } }),
@@ -39215,7 +40596,7 @@ var render = function() {
                         staticClass: "headline grey lighten-2",
                         attrs: { "primary-title": "" }
                       },
-                      [_vm._v("\n            Confirmar Reserva\n          ")]
+                      [_vm._v("\n\t\t\tConfirmar Reserva\n\t\t  ")]
                     ),
                     _vm._v(" "),
                     _c(
@@ -39578,9 +40959,136 @@ var render = function() {
                     "v-layout",
                     { attrs: { "align-center": "", row: "" } },
                     [
-                      _c("v-flex", {
-                        attrs: { xs4: "", "align-end": "", flexbox: "" }
-                      }),
+                      _c(
+                        "v-flex",
+                        { attrs: { xs4: "", "align-end": "", flexbox: "" } },
+                        [
+                          _c(
+                            "v-layout",
+                            { attrs: { "align-center": "", row: "" } },
+                            [
+                              _c("v-flex", {
+                                attrs: { xs4: "", "align-end": "", flexbox: "" }
+                              }),
+                              _vm._v(" "),
+                              _c(
+                                "v-flex",
+                                {
+                                  attrs: {
+                                    xs4: "",
+                                    "align-end": "",
+                                    flexbox: ""
+                                  }
+                                },
+                                [
+                                  _c("span", { staticClass: "subheading" }, [
+                                    _vm._v("Clima Actual")
+                                  ])
+                                ]
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-layout",
+                            { attrs: { "align-center": "", row: "" } },
+                            [
+                              _c("v-flex", {
+                                attrs: { xs4: "", "align-end": "", flexbox: "" }
+                              }),
+                              _vm._v(" "),
+                              _c(
+                                "v-flex",
+                                {
+                                  attrs: {
+                                    xs2: "",
+                                    "align-end": "",
+                                    flexbox: ""
+                                  }
+                                },
+                                [
+                                  _c("v-img", {
+                                    attrs: { src: _vm.weather_image }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-flex",
+                                {
+                                  attrs: {
+                                    xs4: "",
+                                    "align-end": "",
+                                    flexbox: ""
+                                  }
+                                },
+                                [
+                                  _c("span", { staticClass: "subheading" }, [
+                                    _vm._v(
+                                      " " +
+                                        _vm._s(_vm.weather["WeatherText"]) +
+                                        " " +
+                                        _vm._s(
+                                          _vm.weather["Temperature"]["Metric"][
+                                            "Value"
+                                          ]
+                                        ) +
+                                        " º" +
+                                        _vm._s(
+                                          _vm.weather["Temperature"]["Metric"][
+                                            "Unit"
+                                          ]
+                                        )
+                                    )
+                                  ])
+                                ]
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-layout",
+                            { attrs: { "align-center": "", row: "" } },
+                            [
+                              _c("v-flex", {
+                                attrs: { xs4: "", "align-end": "", flexbox: "" }
+                              }),
+                              _vm._v(" "),
+                              _c(
+                                "v-flex",
+                                {
+                                  attrs: {
+                                    xs4: "",
+                                    "align-end": "",
+                                    flexbox: ""
+                                  }
+                                },
+                                [
+                                  _c(
+                                    "a",
+                                    {
+                                      attrs: {
+                                        href:
+                                          "https://www.accuweather.com/es/cl/san-pedro-de-atacama/57225/daily-weather-forecast/57225?day=6"
+                                      }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                          Ver Pronóstico\n                          "
+                                      )
+                                    ]
+                                  )
+                                ]
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      ),
                       _vm._v(" "),
                       _c(
                         "v-flex",
@@ -39879,6 +41387,186 @@ var render = function() {
     { attrs: { column: "", "justify-center": "" } },
     [
       _c("v-subheader", [_vm._v("Equipamiento")]),
+      _vm._v(" "),
+      _c(
+        "v-dialog",
+        {
+          attrs: { "max-width": "500px" },
+          scopedSlots: _vm._u([
+            {
+              key: "activator",
+              fn: function(ref) {
+                var on = ref.on
+                return [
+                  _c(
+                    "v-btn",
+                    _vm._g({ attrs: { color: "primary", dark: "" } }, on),
+                    [_vm._v("Nuevo Equipo")]
+                  )
+                ]
+              }
+            }
+          ]),
+          model: {
+            value: _vm.dialog,
+            callback: function($$v) {
+              _vm.dialog = $$v
+            },
+            expression: "dialog"
+          }
+        },
+        [
+          _vm._v(" "),
+          _c(
+            "v-card",
+            [
+              _c("v-card-title", [
+                _c("span", { staticClass: "headline" }, [
+                  _vm._v(_vm._s(_vm.formTitle))
+                ])
+              ]),
+              _vm._v(" "),
+              _c(
+                "v-card-text",
+                [
+                  _c(
+                    "v-container",
+                    { attrs: { "grid-list-md": "" } },
+                    [
+                      _c(
+                        "v-layout",
+                        { attrs: { wrap: "" } },
+                        [
+                          _c(
+                            "v-flex",
+                            { attrs: { xs12: "", sm6: "", md4: "" } },
+                            [
+                              _c("v-text-field", {
+                                attrs: { label: "Dessert name" },
+                                model: {
+                                  value: _vm.editedItem.name,
+                                  callback: function($$v) {
+                                    _vm.$set(_vm.editedItem, "name", $$v)
+                                  },
+                                  expression: "editedItem.name"
+                                }
+                              })
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-flex",
+                            { attrs: { xs12: "", sm6: "", md4: "" } },
+                            [
+                              _c("v-text-field", {
+                                attrs: { label: "Calories" },
+                                model: {
+                                  value: _vm.editedItem.calories,
+                                  callback: function($$v) {
+                                    _vm.$set(_vm.editedItem, "calories", $$v)
+                                  },
+                                  expression: "editedItem.calories"
+                                }
+                              })
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-flex",
+                            { attrs: { xs12: "", sm6: "", md4: "" } },
+                            [
+                              _c("v-text-field", {
+                                attrs: { label: "Fat (g)" },
+                                model: {
+                                  value: _vm.editedItem.fat,
+                                  callback: function($$v) {
+                                    _vm.$set(_vm.editedItem, "fat", $$v)
+                                  },
+                                  expression: "editedItem.fat"
+                                }
+                              })
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-flex",
+                            { attrs: { xs12: "", sm6: "", md4: "" } },
+                            [
+                              _c("v-text-field", {
+                                attrs: { label: "Carbs (g)" },
+                                model: {
+                                  value: _vm.editedItem.carbs,
+                                  callback: function($$v) {
+                                    _vm.$set(_vm.editedItem, "carbs", $$v)
+                                  },
+                                  expression: "editedItem.carbs"
+                                }
+                              })
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-flex",
+                            { attrs: { xs12: "", sm6: "", md4: "" } },
+                            [
+                              _c("v-text-field", {
+                                attrs: { label: "Protein (g)" },
+                                model: {
+                                  value: _vm.editedItem.protein,
+                                  callback: function($$v) {
+                                    _vm.$set(_vm.editedItem, "protein", $$v)
+                                  },
+                                  expression: "editedItem.protein"
+                                }
+                              })
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-card-actions",
+                [
+                  _c("v-spacer"),
+                  _vm._v(" "),
+                  _c(
+                    "v-btn",
+                    {
+                      attrs: { color: "blue darken-1", flat: "" },
+                      on: { click: _vm.close }
+                    },
+                    [_vm._v("Cancelar")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-btn",
+                    {
+                      attrs: { color: "blue darken-1", flat: "" },
+                      on: { click: _vm.save }
+                    },
+                    [_vm._v("Guardar")]
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      ),
       _vm._v(" "),
       _c(
         "v-expansion-panel",
@@ -83201,9 +84889,11 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _ReservationComponent_vue_vue_type_template_id_75cc3efc___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ReservationComponent.vue?vue&type=template&id=75cc3efc& */ "./resources/js/components/ReservationComponent.vue?vue&type=template&id=75cc3efc&");
+/* harmony import */ var _ReservationComponent_vue_vue_type_template_id_75cc3efc_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ReservationComponent.vue?vue&type=template&id=75cc3efc&scoped=true& */ "./resources/js/components/ReservationComponent.vue?vue&type=template&id=75cc3efc&scoped=true&");
 /* harmony import */ var _ReservationComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ReservationComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/ReservationComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _ReservationComponent_vue_vue_type_style_index_0_id_75cc3efc_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ReservationComponent.vue?vue&type=style&index=0&id=75cc3efc&scoped=true&lang=css& */ "./resources/js/components/ReservationComponent.vue?vue&type=style&index=0&id=75cc3efc&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
 
 
 
@@ -83211,13 +84901,13 @@ __webpack_require__.r(__webpack_exports__);
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
   _ReservationComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _ReservationComponent_vue_vue_type_template_id_75cc3efc___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _ReservationComponent_vue_vue_type_template_id_75cc3efc___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _ReservationComponent_vue_vue_type_template_id_75cc3efc_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ReservationComponent_vue_vue_type_template_id_75cc3efc_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
-  null,
+  "75cc3efc",
   null
   
 )
@@ -83243,19 +84933,35 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/ReservationComponent.vue?vue&type=template&id=75cc3efc&":
-/*!*****************************************************************************************!*\
-  !*** ./resources/js/components/ReservationComponent.vue?vue&type=template&id=75cc3efc& ***!
-  \*****************************************************************************************/
+/***/ "./resources/js/components/ReservationComponent.vue?vue&type=style&index=0&id=75cc3efc&scoped=true&lang=css&":
+/*!*******************************************************************************************************************!*\
+  !*** ./resources/js/components/ReservationComponent.vue?vue&type=style&index=0&id=75cc3efc&scoped=true&lang=css& ***!
+  \*******************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ReservationComponent_vue_vue_type_style_index_0_id_75cc3efc_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./ReservationComponent.vue?vue&type=style&index=0&id=75cc3efc&scoped=true&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ReservationComponent.vue?vue&type=style&index=0&id=75cc3efc&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ReservationComponent_vue_vue_type_style_index_0_id_75cc3efc_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ReservationComponent_vue_vue_type_style_index_0_id_75cc3efc_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ReservationComponent_vue_vue_type_style_index_0_id_75cc3efc_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ReservationComponent_vue_vue_type_style_index_0_id_75cc3efc_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ReservationComponent_vue_vue_type_style_index_0_id_75cc3efc_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./resources/js/components/ReservationComponent.vue?vue&type=template&id=75cc3efc&scoped=true&":
+/*!*****************************************************************************************************!*\
+  !*** ./resources/js/components/ReservationComponent.vue?vue&type=template&id=75cc3efc&scoped=true& ***!
+  \*****************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ReservationComponent_vue_vue_type_template_id_75cc3efc___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./ReservationComponent.vue?vue&type=template&id=75cc3efc& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ReservationComponent.vue?vue&type=template&id=75cc3efc&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ReservationComponent_vue_vue_type_template_id_75cc3efc___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ReservationComponent_vue_vue_type_template_id_75cc3efc_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./ReservationComponent.vue?vue&type=template&id=75cc3efc&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ReservationComponent.vue?vue&type=template&id=75cc3efc&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ReservationComponent_vue_vue_type_template_id_75cc3efc_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ReservationComponent_vue_vue_type_template_id_75cc3efc___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ReservationComponent_vue_vue_type_template_id_75cc3efc_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
