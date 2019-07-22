@@ -1,91 +1,93 @@
 <template>
   <v-layout
-	column
-	justify-center
+    column
+    justify-center
   >
-	<v-subheader>Equipamiento</v-subheader>
+    <v-subheader>Equipamiento</v-subheader>
 
-	  <v-dialog v-model="dialog" max-width="500px">
-		<template v-slot:activator="{ on }">
-		  <v-btn color="primary" dark v-on="on">Nuevo Equipo</v-btn>
-		</template>
-		<v-card>
-		  <v-card-title>
-			<span class="headline">{{ formTitle }}</span>
-		  </v-card-title>
+    <new-equipment></new-equipment>
 
-		  <v-card-text>
-			<v-container grid-list-md>
-			  <v-layout wrap>
-				<v-flex xs12 sm6 md4>
-				  <v-text-field v-model="editedItem.name" label="Dessert name"></v-text-field>
-				</v-flex>
-				<v-flex xs12 sm6 md4>
-				  <v-text-field v-model="editedItem.calories" label="Calories"></v-text-field>
-				</v-flex>
-				<v-flex xs12 sm6 md4>
-				  <v-text-field v-model="editedItem.fat" label="Fat (g)"></v-text-field>
-				</v-flex>
-				<v-flex xs12 sm6 md4>
-				  <v-text-field v-model="editedItem.carbs" label="Carbs (g)"></v-text-field>
-				</v-flex>
-				<v-flex xs12 sm6 md4>
-				  <v-text-field v-model="editedItem.protein" label="Protein (g)"></v-text-field>
-				</v-flex>
-			  </v-layout>
-			</v-container>
-		  </v-card-text>
+<!--      <v-dialog v-model="dialog" max-width="500px">
+        <template v-slot:activator="{ on }">
+          <v-btn color="primary" dark v-on="on">Nuevo Equipo</v-btn>
+        </template>
+        <v-card>
+          <v-card-title>
+            <span class="headline">{{ formTitle }}</span>
+          </v-card-title>
 
-		  <v-card-actions>
-			<v-spacer></v-spacer>
-			<v-btn color="blue darken-1" flat @click="close">Cancelar</v-btn>
-			<v-btn color="blue darken-1" flat @click="save">Guardar</v-btn>
-		  </v-card-actions>
-		</v-card>
-	  </v-dialog>
+          <v-card-text>
+            <v-container grid-list-md>
+              <v-layout wrap>
+                <v-flex xs12 sm6 md4>
+                  <v-text-field v-model="editedItem.name" label="Dessert name"></v-text-field>
+                </v-flex>
+                <v-flex xs12 sm6 md4>
+                  <v-text-field v-model="editedItem.calories" label="Calories"></v-text-field>
+                </v-flex>
+                <v-flex xs12 sm6 md4>
+                  <v-text-field v-model="editedItem.fat" label="Fat (g)"></v-text-field>
+                </v-flex>
+                <v-flex xs12 sm6 md4>
+                  <v-text-field v-model="editedItem.carbs" label="Carbs (g)"></v-text-field>
+                </v-flex>
+                <v-flex xs12 sm6 md4>
+                  <v-text-field v-model="editedItem.protein" label="Protein (g)"></v-text-field>
+                </v-flex>
+              </v-layout>
+            </v-container>
+          </v-card-text>
+
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn color="blue darken-1" flat @click="close">Cancelar</v-btn>
+            <v-btn color="blue darken-1" flat @click="save">Guardar</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog> -->
 
 
-	<v-expansion-panel popout>
-	  <v-expansion-panel-content
-		v-for="(equipment, i) in equipments"
-		:key="i"
-		hide-actions
-	  >
-		<template v-slot:header>
-		  <v-layout
-			row
-			spacer
-		  >
-			<v-flex xs2>
-				<v-card>
-					<v-img
-						v-bind:src="equipment.image"
-						aspect-ratio="1"
-					></v-img>
+    <v-expansion-panel popout>
+      <v-expansion-panel-content
+        v-for="(equipment, i) in equipments"
+        :key="i"
+        hide-actions
+      >
+        <template v-slot:header>
+          <v-layout
+            row
+            spacer
+          >
+            <v-flex xs2>
+                <v-card>
+                    <v-img
+                        v-bind:src="equipment.image"
+                        aspect-ratio="1"
+                    ></v-img>
 
-				</v-card> 
-			</v-flex>
-			<v-flex xs1>
-			</v-flex>
-			<v-flex xs6>
-				<span class="headline">{{ equipment.name }}</span>
+                </v-card> 
+            </v-flex>
+            <v-flex xs1>
+            </v-flex>
+            <v-flex xs6>
+                <span class="headline">{{ equipment.name }}</span>
 
-			</v-flex>
+            </v-flex>
 
-			<v-flex xs2 v-if="equipments.points" >
-					<v-chip color="green" text-color="white">Puntos por hora: {{ equipment.points }}</v-chip>                
-			</v-flex>
+            <v-flex xs2 v-if="equipments.points" >
+                    <v-chip color="green" text-color="white">Puntos por hora: {{ equipment.points }}</v-chip>                
+            </v-flex>
 
-		   
-		  </v-layout>
-		</template>
+           
+          </v-layout>
+        </template>
 
-		<v-card>
-		  <v-divider></v-divider>
-		  <v-card-text v-text="equipment.description"></v-card-text>
-		</v-card>
-	  </v-expansion-panel-content>
-	</v-expansion-panel>
+        <v-card>
+          <v-divider></v-divider>
+          <v-card-text v-text="equipment.description"></v-card-text>
+        </v-card>
+      </v-expansion-panel-content>
+    </v-expansion-panel>
   </v-layout>
 
 
@@ -95,8 +97,8 @@
 </template>
 <script>
   export default {
-	data: () => ({
-	  equipments: [],
+    data: () => ({
+      equipments: [],
 
       dialog: false,
       headers: [
@@ -130,26 +132,26 @@
       }
 
 
-	}),
-	created () {
-		this.initialize();
-	},
-	// methods: {
-	// 	initialize (){
-	// 		var app = this;
+    }),
+    created () {
+        this.initialize();
+    },
+    // methods: {
+    //  initialize (){
+    //      var app = this;
 
 
-	// 	axios.get('/api/equipments')
-	// 		.then(function (resp) {    
-	// 			// alert(JSON.stringify(resp.data));
-	// 			app.equipments=resp.data;
-	// 		})
-	// 		.catch(function (resp) {
-	// 			console.log(resp);
-	// 			alert("Error equipments :" + resp);
-	// 		});
-	// 	}
-	// }
+    //  axios.get('/api/equipments')
+    //      .then(function (resp) {    
+    //          // alert(JSON.stringify(resp.data));
+    //          app.equipments=resp.data;
+    //      })
+    //      .catch(function (resp) {
+    //          console.log(resp);
+    //          alert("Error equipments :" + resp);
+    //      });
+    //  }
+    // }
 
     computed: {
       formTitle () {
@@ -166,18 +168,18 @@
 
     methods: {
       initialize () {
-		var app = this;
+        var app = this;
 
-		axios.get('/api/equipments')
-			.then(function (resp) {    
-				// alert(JSON.stringify(resp.data));
-				app.equipments=resp.data;
-			})
-			.catch(function (resp) {
-				console.log(resp);
-				alert("Error equipments :" + resp);
-			});
-		
+        axios.get('/api/equipments')
+            .then(function (resp) {    
+                // alert(JSON.stringify(resp.data));
+                app.equipments=resp.data;
+            })
+            .catch(function (resp) {
+                console.log(resp);
+                alert("Error equipments :" + resp);
+            });
+        
 
         this.desserts = [
           {

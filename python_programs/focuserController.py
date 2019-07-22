@@ -26,7 +26,6 @@ if(response.ok):
 
         comando = "/usr/bin/indi_setprop 'Pegasus DMFC.ABS_FOCUS_POSITION.FOCUS_ABSOLUTE_POSITION="+steps+"'"
 
-
         try:
             url = 'http://'+ip+'/api/messages/send?sender_id=1&receiver_id=2&message=Comenzando Enfoque'
             data = '{}'
@@ -34,7 +33,3 @@ if(response.ok):
             subprocess.check_output(comando, shell=True,stderr=subprocess.STDOUT)
         except subprocess.CalledProcessError as e:
             raise RuntimeError("command '{}' return with error (code {}): {}".format(e.cmd, e.returncode, e.output))
-        wait(jdata)    
-
-
-

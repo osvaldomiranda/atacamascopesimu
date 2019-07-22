@@ -12,12 +12,15 @@ import VueRouter from 'vue-router'
 import store from './store';
 import router from './routes'
 
-import AppComponent         from './components/AppComponent'
+import AppComponent            from './components/AppComponent'
 // import ControlComponent     from './components/ControlComponent'
 // import PointsComponent      from './components/PointsComponent'
-// import ReservationComponent      from './components/ReservationComponent'
-import MyReservationsComponent      from './components/MyReservationsComponent'
-import UploadAvatar      from './components/UploadAvatarComponent'
+// import ReservationComponent from './components/ReservationComponent'
+import MyReservationsComponent from './components/MyReservationsComponent'
+import UploadAvatar            from './components/UploadAvatarComponent'
+
+import NewEquipment            from './components/NewEquipment'
+
 
 
 
@@ -53,6 +56,7 @@ Vue.component('app', require('./views/App.vue'));
 // Vue.component('reservation-component', ReservationComponent);
 Vue.component('my-reservations', MyReservationsComponent);
 Vue.component('upload-avatar', UploadAvatar);
+Vue.component('new-equipment', NewEquipment);
 
 
 

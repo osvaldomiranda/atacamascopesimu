@@ -56,7 +56,8 @@ if(response.ok):
         try:
             url = 'http://'+ip+'/api/messages/send?sender_id=1&receiver_id=2&message=Posicionando Montura'
             data = '{}'
-            response = requests.post(url, data=data)            
+            response = requests.post(url, data=data)  
+                      
             subprocess.check_output(comando, shell=True,stderr=subprocess.STDOUT)
             wait()
         except subprocess.CalledProcessError as e:

@@ -467,17 +467,23 @@
 							<v-flex align-center xs1>
 							</v-flex>
 							<v-flex align-center xs1>
-								<p>Tics 0</p>
+								<p>Tics -7500</p>
 							</v-flex>	
 						    <v-flex xs8>
-						        <v-slider
-						          v-model="slider"
-						          :max="15000"
-						          thumb-label="always"
-						        ></v-slider>
+
+
+							    <v-slider
+							        v-model="slider"
+							        thumb-label="always"
+							        min="-7500"
+							        max="7500"
+							    >
+							    </v-slider>
+
+
 						    </v-flex>
 							<v-flex align-center xs1>
-								<p>15000</p>
+								<p>7500</p>
 							</v-flex>	
 		          		</v-layout>	
 		          		<v-layout row>
@@ -580,7 +586,7 @@
         dialog: true,
         dialog2: false,
         dialog3: false,
-        slider: 7500,
+        slider: 0,
         astronomic_objects:[],
         selected:[],
         search: '',
@@ -974,9 +980,11 @@
         },
         focus(){
         	var $command = {'command': 'ENFOCADOR', 'type': 'focuser', 'status': 'PENDIENTE',
-        	                'steps': this.Paso, 'direction': 1, 'user_id': this.$store.getters.user['id'], 'equipment_id': 1};
+        	                'steps': this.slider, 'direction': 1, 'user_id': this.$store.getters.user['id'], 'equipment_id': 1};
 
-        	//alert(JSON.stringify($command));
+        	alert(JSON.stringify($command));
+
+
 
         	axios.post('/api/command/focus', $command)
             .then(function (resp) {
