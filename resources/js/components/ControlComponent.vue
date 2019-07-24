@@ -467,7 +467,7 @@
 							<v-flex align-center xs1>
 							</v-flex>
 							<v-flex align-center xs1>
-								<p>Tics -7500</p>
+								<p>Tics 0</p>
 							</v-flex>	
 						    <v-flex xs8>
 
@@ -475,15 +475,15 @@
 							    <v-slider
 							        v-model="slider"
 							        thumb-label="always"
-							        min="-7500"
-							        max="7500"
+							        min="0"
+							        max="30000"
 							    >
 							    </v-slider>
 
 
 						    </v-flex>
 							<v-flex align-center xs1>
-								<p>7500</p>
+								<p>30000</p>
 							</v-flex>	
 		          		</v-layout>	
 		          		<v-layout row>
@@ -493,7 +493,7 @@
 		          		    	<v-text-field
 								    v-model="slider"
 								    min:0
-								    max:15000
+								    max:30000
 								    label="Tics"
 								    type="number" 
 								    ></v-text-field>

@@ -6,7 +6,7 @@
       <template v-slot:activator="{ on }">
 
         <v-btn v-on="on" flat icon color="red lighten-2">
-            <v-icon>account_circle</v-icon>
+            <v-icon>add_a_photo</v-icon>
         </v-btn>
         <!-- <v-btn color="primary" dark v-on="on">Upload</v-btn> -->
       </template>
@@ -37,9 +37,6 @@
 
 
 </template>  
-
-
-
 
 
 <script>
@@ -82,7 +79,7 @@ export default {
             let formData = new FormData();
             formData.append('avatar', this.imageFile);
 
-            axios.post( 'api/save_avatar',
+            axios.post( 'api/save_equipment_image',
                 formData,
                 {
                 headers: {

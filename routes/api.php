@@ -63,4 +63,7 @@ Route::get('/offers', 'PublicationController@offers');
  Route::get('weather', 'ExternalsController@weather');
  Route::get('weather_new', 'ExternalsController@weatherNew');
 
+ Route::post('/equipment/save_image', 'EquipmentController@save_image');
+ Route::post('/equipment/new', 'EquipmentController@new');
+
 

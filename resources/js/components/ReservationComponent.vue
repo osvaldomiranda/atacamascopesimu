@@ -158,8 +158,8 @@
 
 
 			<v-container fluid>
-			<v-layout row wrap>
-				<v-flex xs12>
+			<!-- <v-layout row wrap> -->
+<!-- 				<v-flex xs12>
 					<template>
   <v-layout>
     <v-flex>
@@ -228,7 +228,7 @@
   </v-layout>
 </template>
 				</v-flex>
-			</v-layout>  
+			</v-layout>   -->
 
 			<v-layout align-center row>
 				<v-flex xs1>
@@ -351,7 +351,7 @@
 
   export default {
 	computed: mapState({
-		equipments: state => state.equipments,
+	//	equipments: state => state.equipments,
 		reservations: state => state.reservations,
 	}),
 
@@ -413,59 +413,8 @@
 
 
 
-      today: '2019-01-08',
-      events: [
-        {
-          title: 'Vacation',
-          details: 'Going to the beach!',
-          date: '2018-12-30',
-          open: false
-        },
-        {
-          title: 'Vacation',
-          details: 'Going to the beach!',
-          date: '2018-12-31',
-          open: false
-        },
-        {
-          title: 'Vacation',
-          details: 'Going to the beach!',
-          date: '2019-01-01',
-          open: false
-        },
-        {
-          title: 'Meeting',
-          details: 'Spending time on how we do not have enough time',
-          date: '2019-01-07',
-          open: false
-        },
-        {
-          title: '30th Birthday',
-          details: 'Celebrate responsibly',
-          date: '2019-01-03',
-          open: false
-        },
-        {
-          title: 'New Year',
-          details: 'Eat chocolate until you pass out',
-          date: '2019-01-01',
-          open: false
-        },
-        {
-          title: 'Conference',
-          details: 'Mute myself the whole time and wonder why I am on this call',
-          date: '2019-01-21',
-          open: false
-        },
-        {
-          title: 'Hackathon',
-          details: 'Code like there is no tommorrow',
-          date: '2019-02-01',
-          open: false
-        }
-      ]
-	
-
+        today: '2019-01-08',
+   
 
 	  }
 	},
@@ -510,6 +459,21 @@
 		   // alert(JSON.stringify(app.moon_times));
 			app.moonset = app.moon_times["set"];
 			app.moonrise = app.moon_times["rise"];
+
+
+        axios.get('/api/equipments')
+            .then(function (resp) {    
+                //alert(JSON.stringify(resp.data));
+                //app.$store.commit('changeEquipments',resp.data);
+                app.equipments = resp.data;
+            })
+            .catch(function (resp) {
+                console.log(resp);
+                alert("Error equipments :" + resp);
+            });
+
+
+
 
 			this.moon();
 			

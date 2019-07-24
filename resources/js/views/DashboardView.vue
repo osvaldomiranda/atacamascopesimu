@@ -156,7 +156,9 @@
   import { mapState } from 'vuex';  
   import Vue from 'vue';  
   import PointsComponent      from './../components/PointsComponent';
-  import ReservationComponent from './../components/ReservationComponent';
+  //import ReservationComponent from './../components/ReservationComponent';
+  import ReservationComponent from './../components/ReservationWizard';
+
 
   export default {
     computed: mapState(['astronomc_objects', 'current_points', 'user']),

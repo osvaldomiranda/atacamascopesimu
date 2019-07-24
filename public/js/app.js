@@ -3620,12 +3620,123 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 // Import the basic building blocks
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    EditorContent: tiptap__WEBPACK_IMPORTED_MODULE_0__["EditorContent"]
+    EditorContent: tiptap__WEBPACK_IMPORTED_MODULE_0__["EditorContent"],
+    EditorMenuBar: tiptap__WEBPACK_IMPORTED_MODULE_0__["EditorMenuBar"]
   },
   data: function data() {
     return {
@@ -3633,7 +3744,10 @@ __webpack_require__.r(__webpack_exports__);
       // Create an `Editor` instance with some default content. The editor is 
       // then passed to the `EditorContent` component as a `prop`
       editor: new tiptap__WEBPACK_IMPORTED_MODULE_0__["Editor"]({
-        content: '<p>This is just a boring paragraph</p>'
+        extensions: [new tiptap_extensions__WEBPACK_IMPORTED_MODULE_1__["Blockquote"](), new tiptap_extensions__WEBPACK_IMPORTED_MODULE_1__["CodeBlock"](), new tiptap_extensions__WEBPACK_IMPORTED_MODULE_1__["HardBreak"](), new tiptap_extensions__WEBPACK_IMPORTED_MODULE_1__["Heading"]({
+          levels: [1, 2, 3]
+        }), new tiptap_extensions__WEBPACK_IMPORTED_MODULE_1__["BulletList"](), new tiptap_extensions__WEBPACK_IMPORTED_MODULE_1__["OrderedList"](), new tiptap_extensions__WEBPACK_IMPORTED_MODULE_1__["ListItem"](), new tiptap_extensions__WEBPACK_IMPORTED_MODULE_1__["TodoItem"](), new tiptap_extensions__WEBPACK_IMPORTED_MODULE_1__["TodoList"](), new tiptap_extensions__WEBPACK_IMPORTED_MODULE_1__["Bold"](), new tiptap_extensions__WEBPACK_IMPORTED_MODULE_1__["Code"](), new tiptap_extensions__WEBPACK_IMPORTED_MODULE_1__["Italic"](), new tiptap_extensions__WEBPACK_IMPORTED_MODULE_1__["Link"](), new tiptap_extensions__WEBPACK_IMPORTED_MODULE_1__["Strike"](), new tiptap_extensions__WEBPACK_IMPORTED_MODULE_1__["Underline"](), new tiptap_extensions__WEBPACK_IMPORTED_MODULE_1__["History"]()],
+        content: "\n          <h3>Descripci\xF3n</h1>\n          \n        "
       })
     };
   },
@@ -4416,10 +4530,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ReservationComponent.vue?vue&type=script&lang=js&":
-/*!*******************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ReservationComponent.vue?vue&type=script&lang=js& ***!
-  \*******************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ReservationWizard.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ReservationWizard.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -4428,7 +4542,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var suncalc__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! suncalc */ "./node_modules/suncalc/suncalc.js");
 /* harmony import */ var suncalc__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(suncalc__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-var _computed$data$create;
+var _computed$computed$da;
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
@@ -4713,195 +4827,135 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 var actualDate = new Date().toISOString().substr(0, 10);
-/* harmony default export */ __webpack_exports__["default"] = (_computed$data$create = {
+/* harmony default export */ __webpack_exports__["default"] = (_computed$computed$da = {
   computed: Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])({
-    equipments: function equipments(state) {
-      return state.equipments;
-    },
+    //equipments: state => state.equipments,
     reservations: function reservations(state) {
       return state.reservations;
     }
-  }),
-  data: function data() {
-    var _ref;
+  })
+}, _defineProperty(_computed$computed$da, "computed", {
+  title: function title() {
+    var start = this.start,
+        end = this.end;
 
-    return _ref = {
-      generalRuleDate: [function (v) {
-        return !!v || 'Campo requerido';
-      }, function (v) {
-        return v >= actualDate || 'Debe ser fecha mayor a la actual';
-      }],
-      blankRules: [function (v) {
-        return !!v || 'Campo requerido';
-      }],
-      today: '2019-05-08',
-      date: '2019-05-08',
-      moon_state: "",
-      moon_times: "",
-      moonset: "",
-      moonrise: "",
-      suntimes: "",
-      sunrise: "",
-      sunset: "",
-      moonUrl: '',
-      menu: false,
-      telescope_points: 200,
-      current_points: 0,
-      points_in: 0,
-      points_out: 0,
-      hourToReserv: '',
-      equipment: 'Equipo Principal',
-      reservationsArray: [],
-      equipment_id: 1,
-      dialog: true,
-      dialog2: false,
-      search: '',
-      rowsPerPageItems: [3, 5, 10, 20],
-      pagination: {
-        rowsPerPage: 3
-      },
-      headers: [{
-        text: 'Nombre',
-        value: 'name'
-      }, {
-        text: 'Catalogo',
-        value: 'catalog'
-      }, {
-        text: 'Tipo',
-        value: 'type_object'
-      }, {
-        text: 'Constelación',
-        value: 'constellation'
-      }, {
-        text: 'AR',
-        value: 'ra'
-      }, {
-        text: 'DEC',
-        value: 'dec'
-      }],
-      type: 'day',
-      start: '2019-05-17',
-      end: '2019-05-20',
-      typeOptions: [{
-        text: 'Day',
-        value: 'day'
-      }, {
-        text: 'Week',
-        value: 'week'
-      }]
-    }, _defineProperty(_ref, "today", '2019-01-08'), _defineProperty(_ref, "events", [{
-      title: 'Vacation',
-      details: 'Going to the beach!',
-      date: '2018-12-30',
-      open: false
-    }, {
-      title: 'Vacation',
-      details: 'Going to the beach!',
-      date: '2018-12-31',
-      open: false
-    }, {
-      title: 'Vacation',
-      details: 'Going to the beach!',
-      date: '2019-01-01',
-      open: false
-    }, {
-      title: 'Meeting',
-      details: 'Spending time on how we do not have enough time',
-      date: '2019-01-07',
-      open: false
-    }, {
-      title: '30th Birthday',
-      details: 'Celebrate responsibly',
-      date: '2019-01-03',
-      open: false
-    }, {
-      title: 'New Year',
-      details: 'Eat chocolate until you pass out',
-      date: '2019-01-01',
-      open: false
-    }, {
-      title: 'Conference',
-      details: 'Mute myself the whole time and wonder why I am on this call',
-      date: '2019-01-21',
-      open: false
-    }, {
-      title: 'Hackathon',
-      details: 'Code like there is no tommorrow',
-      date: '2019-02-01',
-      open: false
-    }]), _ref;
+    if (!start || !end) {
+      return '';
+    }
+
+    var startMonth = this.monthFormatter(start);
+    var endMonth = this.monthFormatter(end);
+    var suffixMonth = startMonth === endMonth ? '' : endMonth;
+    var startYear = start.year;
+    var endYear = end.year;
+    var suffixYear = startYear === endYear ? '' : endYear;
+    var startDay = start.day + this.nth(start.day);
+    var endDay = end.day + this.nth(end.day);
+
+    switch (this.type) {
+      case 'month':
+        return "".concat(startMonth, " ").concat(startYear);
+
+      case 'week':
+      case '4day':
+        return "".concat(startMonth, " ").concat(startDay, " ").concat(startYear, " - ").concat(suffixMonth, " ").concat(endDay, " ").concat(suffixYear);
+
+      case 'day':
+        return "".concat(startMonth, " ").concat(startDay, " ").concat(startYear);
+    }
+
+    return '';
   },
-  created: function created() {
-    this.initialize();
+  monthFormatter: function monthFormatter() {
+    return this.$refs.calendar.getFormatter({
+      timeZone: 'UTC',
+      month: 'long'
+    });
   }
-}, _defineProperty(_computed$data$create, "computed", {
+}), _defineProperty(_computed$computed$da, "data", function data() {
+  return {
+    e1: 0,
+    generalRuleDate: [function (v) {
+      return !!v || 'Campo requerido';
+    }, function (v) {
+      return v >= actualDate || 'Debe ser fecha mayor a la actual';
+    }],
+    blankRules: [function (v) {
+      return !!v || 'Campo requerido';
+    }],
+    today: '2019-05-08',
+    date: '2019-05-08',
+    moon_state: "",
+    moon_times: "",
+    moonset: "",
+    moonrise: "",
+    suntimes: "",
+    sunrise: "",
+    sunset: "",
+    moonUrl: '',
+    menu: false,
+    telescope_points: 200,
+    current_points: 0,
+    points_in: 0,
+    points_out: 0,
+    hourToReserv: '',
+    equipment: 'Equipo Principal',
+    equipment_desc: '',
+    equipment_image: '',
+    reservationsArray: [],
+    equipment_id: 1,
+    dialog: true,
+    dialog2: false,
+    search: '',
+    rowsPerPageItems: [3, 5, 10, 20],
+    pagination: {
+      rowsPerPage: 3
+    },
+    headers: [{
+      text: 'Nombre',
+      value: 'name'
+    }, {
+      text: 'Catalogo',
+      value: 'catalog'
+    }, {
+      text: 'Tipo',
+      value: 'type_object'
+    }, {
+      text: 'Constelación',
+      value: 'constellation'
+    }, {
+      text: 'AR',
+      value: 'ra'
+    }, {
+      text: 'DEC',
+      value: 'dec'
+    }],
+    focus: '2019-01-08',
+    type: 'month',
+    typeToLabel: {
+      month: 'Month',
+      week: 'Week',
+      day: 'Day',
+      '4day': '4 Days'
+    },
+    start: null,
+    end: null,
+    selectedEvent: {},
+    selectedElement: null,
+    selectedOpen: false,
+    events: [{
+      name: 'event 7',
+      start: '2019-07-07 9:00',
+      end: '2019-07-07 10:00',
+      color: '#4285F4'
+    }]
+  };
+}), _defineProperty(_computed$computed$da, "created", function created() {
+  this.initialize();
+}), _defineProperty(_computed$computed$da, "computed", {
   // convert the list of events into a map of lists keyed by date
   eventsMap: function eventsMap() {
     var map = {};
@@ -4910,7 +4964,7 @@ var actualDate = new Date().toISOString().substr(0, 10);
     });
     return map;
   }
-}), _defineProperty(_computed$data$create, "methods", {
+}), _defineProperty(_computed$computed$da, "methods", {
   open: function open(event) {
     alert(event.title);
   },
@@ -4926,6 +4980,14 @@ var actualDate = new Date().toISOString().substr(0, 10);
 
     app.moonset = app.moon_times["set"];
     app.moonrise = app.moon_times["rise"];
+    axios.get('/api/equipments').then(function (resp) {
+      //alert(JSON.stringify(resp.data));
+      //app.$store.commit('changeEquipments',resp.data);
+      app.equipments = resp.data;
+    })["catch"](function (resp) {
+      console.log(resp);
+      alert("Error equipments :" + resp);
+    });
     this.moon();
     this.reservatios_day();
   },
@@ -4950,6 +5012,8 @@ var actualDate = new Date().toISOString().substr(0, 10);
   changeTelescope: function changeTelescope(a) {
     this.equipment = a.name;
     this.equipment_id = a.id;
+    this.equipment_desc = a.description;
+    this.equipment_image = a.image;
     this.telescope_points = a.points;
     this.reservatios_day();
   },
@@ -5141,8 +5205,58 @@ var actualDate = new Date().toISOString().substr(0, 10);
         break;
     } //alert(app.moonUrl);
 
+  },
+  viewDay: function viewDay(_ref) {
+    var date = _ref.date;
+    this.focus = date;
+    this.type = 'day';
+  },
+  getEventColor: function getEventColor(event) {
+    return event.color;
+  },
+  setToday: function setToday() {
+    this.focus = this.today;
+  },
+  prev: function prev() {
+    this.$refs.calendar.prev();
+  },
+  next: function next() {
+    this.$refs.calendar.next();
+  },
+  showEvent: function showEvent(_ref2) {
+    var _this = this;
+
+    var nativeEvent = _ref2.nativeEvent,
+        event = _ref2.event;
+
+    var open = function open() {
+      _this.selectedEvent = event;
+      _this.selectedElement = nativeEvent.target;
+      setTimeout(function () {
+        return _this.selectedOpen = true;
+      }, 10);
+    };
+
+    if (this.selectedOpen) {
+      this.selectedOpen = false;
+      setTimeout(open, 10);
+    } else {
+      open();
+    }
+
+    nativeEvent.stopPropagation();
+  },
+  updateRange: function updateRange(_ref3) {
+    var start = _ref3.start,
+        end = _ref3.end;
+    // You could load events from an outside source (like database) now that we have the start and end dates on the calendar
+    this.start = start;
+    this.end = end;
+  },
+  nth: function nth(d) {
+    return d > 3 && d < 21 ? 'th' : ['th', 'st', 'nd', 'rd', 'th', 'th', 'th', 'th', 'th', 'th'][d % 10];
   }
-}), _computed$data$create);
+}), _computed$computed$da);
 
 /***/ }),
 
@@ -5258,6 +5372,115 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/UploadEquipmentImage.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/UploadEquipmentImage.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      title: "Image Upload",
+      dialog: false,
+      imageName: '',
+      imageUrl: '',
+      imageFile: ''
+    };
+  },
+  methods: {
+    pickFile: function pickFile() {
+      this.$refs.image.click();
+    },
+    onFilePicked: function onFilePicked(e) {
+      var _this = this;
+
+      var files = e.target.files;
+
+      if (files[0] !== undefined) {
+        this.imageName = files[0].name;
+
+        if (this.imageName.lastIndexOf('.') <= 0) {
+          return;
+        }
+
+        var fr = new FileReader();
+        fr.readAsDataURL(files[0]);
+        fr.addEventListener('load', function () {
+          _this.imageUrl = fr.result;
+          _this.imageFile = files[0]; // this is an image file that can be sent to server...
+        });
+      } else {
+        this.imageName = '';
+        this.imageFile = '';
+        this.imageUrl = '';
+      }
+    },
+    submitFile: function submitFile() {
+      var app = this;
+      var formData = new FormData();
+      formData.append('avatar', this.imageFile);
+      axios.post('api/save_equipment_image', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      }).then(function (resp) {
+        //alert(JSON.stringify(resp.data));
+        app.$store.commit('changeUser', resp.data);
+      })["catch"](function () {
+        console.log('FAILURE!!');
+      });
+      this.dialog = false;
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/App.vue?vue&type=script&lang=js&":
 /*!*********************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/App.vue?vue&type=script&lang=js& ***!
@@ -5299,7 +5522,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _components_PointsComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../components/PointsComponent */ "./resources/js/components/PointsComponent.vue");
-/* harmony import */ var _components_ReservationComponent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./../components/ReservationComponent */ "./resources/js/components/ReservationComponent.vue");
+/* harmony import */ var _components_ReservationWizard__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./../components/ReservationWizard */ "./resources/js/components/ReservationWizard.vue");
 //
 //
 //
@@ -5456,6 +5679,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 
 
+ //import ReservationComponent from './../components/ReservationComponent';
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -5553,7 +5777,7 @@ __webpack_require__.r(__webpack_exports__);
       this.$refs.container.appendChild(instance.$el);
     },
     reservClick: function reservClick() {
-      var ComponentReserv = vue__WEBPACK_IMPORTED_MODULE_1___default.a.extend(_components_ReservationComponent__WEBPACK_IMPORTED_MODULE_3__["default"]);
+      var ComponentReserv = vue__WEBPACK_IMPORTED_MODULE_1___default.a.extend(_components_ReservationWizard__WEBPACK_IMPORTED_MODULE_3__["default"]);
       var instance = new ComponentReserv({
         store: this.$store
       });
@@ -5574,45 +5798,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -6369,112 +6554,6 @@ __webpack_require__.r(__webpack_exports__);
     }
   }
 });
-
-/***/ }),
-
-/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ReservationComponent.vue?vue&type=style&index=0&id=75cc3efc&scoped=true&lang=css&":
-/*!**************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ReservationComponent.vue?vue&type=style&index=0&id=75cc3efc&scoped=true&lang=css& ***!
-  \**************************************************************************************************************************************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, "\n.my-event[data-v-75cc3efc] {\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  border-radius: 2px;\n  background-color: #1867c0;\n  color: #ffffff;\n  border: 1px solid #1867c0;\n  width: 100%;\n  font-size: 12px;\n  padding: 3px;\n  cursor: pointer;\n  margin-bottom: 1px;\n}\n", ""]);
-
-// exports
-
-
-/***/ }),
-
-/***/ "./node_modules/css-loader/lib/css-base.js":
-/*!*************************************************!*\
-  !*** ./node_modules/css-loader/lib/css-base.js ***!
-  \*************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-/*
-	MIT License http://www.opensource.org/licenses/mit-license.php
-	Author Tobias Koppers @sokra
-*/
-// css base code, injected by the css-loader
-module.exports = function(useSourceMap) {
-	var list = [];
-
-	// return the list of modules as css string
-	list.toString = function toString() {
-		return this.map(function (item) {
-			var content = cssWithMappingToString(item, useSourceMap);
-			if(item[2]) {
-				return "@media " + item[2] + "{" + content + "}";
-			} else {
-				return content;
-			}
-		}).join("");
-	};
-
-	// import a list of modules into the list
-	list.i = function(modules, mediaQuery) {
-		if(typeof modules === "string")
-			modules = [[null, modules, ""]];
-		var alreadyImportedModules = {};
-		for(var i = 0; i < this.length; i++) {
-			var id = this[i][0];
-			if(typeof id === "number")
-				alreadyImportedModules[id] = true;
-		}
-		for(i = 0; i < modules.length; i++) {
-			var item = modules[i];
-			// skip already imported module
-			// this implementation is not 100% perfect for weird media query combinations
-			//  when a module is imported multiple times with different media queries.
-			//  I hope this will never occur (Hey this way we have smaller bundles)
-			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
-				if(mediaQuery && !item[2]) {
-					item[2] = mediaQuery;
-				} else if(mediaQuery) {
-					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
-				}
-				list.push(item);
-			}
-		}
-	};
-	return list;
-};
-
-function cssWithMappingToString(item, useSourceMap) {
-	var content = item[1] || '';
-	var cssMapping = item[3];
-	if (!cssMapping) {
-		return content;
-	}
-
-	if (useSourceMap && typeof btoa === 'function') {
-		var sourceMapping = toComment(cssMapping);
-		var sourceURLs = cssMapping.sources.map(function (source) {
-			return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */'
-		});
-
-		return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
-	}
-
-	return [content].join('\n');
-}
-
-// Adapted from convert-source-map (MIT)
-function toComment(sourceMap) {
-	// eslint-disable-next-line no-undef
-	var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
-	var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
-
-	return '/*# ' + data + ' */';
-}
-
 
 /***/ }),
 
@@ -35212,6 +35291,2214 @@ exports.PluginKey = PluginKey;
 
 /***/ }),
 
+/***/ "./node_modules/prosemirror-tables/dist/index.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/prosemirror-tables/dist/index.js ***!
+  \*******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, '__esModule', { value: true });
+
+var prosemirrorState = __webpack_require__(/*! prosemirror-state */ "./node_modules/prosemirror-state/dist/index.js");
+var prosemirrorView = __webpack_require__(/*! prosemirror-view */ "./node_modules/prosemirror-view/dist/index.js");
+var prosemirrorModel = __webpack_require__(/*! prosemirror-model */ "./node_modules/prosemirror-model/dist/index.js");
+var prosemirrorTransform = __webpack_require__(/*! prosemirror-transform */ "./node_modules/prosemirror-transform/dist/index.js");
+var prosemirrorKeymap = __webpack_require__(/*! prosemirror-keymap */ "./node_modules/prosemirror-keymap/dist/keymap.js");
+
+// Because working with row and column-spanning cells is not quite
+// trivial, this code builds up a descriptive structure for a given
+// table node. The structures are cached with the (persistent) table
+// nodes as key, so that they only have to be recomputed when the
+// content of the table changes.
+//
+// This does mean that they have to store table-relative, not
+// document-relative positions. So code that uses them will typically
+// compute the start position of the table and offset positions passed
+// to or gotten from this structure by that amount.
+
+var readFromCache, addToCache;
+// Prefer using a weak map to cache table maps. Fall back on a
+// fixed-size cache if that's not supported.
+if (typeof WeakMap != "undefined") {
+  var cache = new WeakMap;
+  readFromCache = function (key) { return cache.get(key); };
+  addToCache = function (key, value) {
+    cache.set(key, value);
+    return value
+  };
+} else {
+  var cache$1 = [], cacheSize = 10, cachePos = 0;
+  readFromCache = function (key) {
+    for (var i = 0; i < cache$1.length; i += 2)
+      { if (cache$1[i] == key) { return cache$1[i + 1] } }
+  };
+  addToCache = function (key, value) {
+    if (cachePos == cacheSize) { cachePos = 0; }
+    cache$1[cachePos++] = key;
+    return cache$1[cachePos++] = value
+  };
+}
+
+var Rect = function Rect(left, top, right, bottom) {
+  this.left = left; this.top = top; this.right = right; this.bottom = bottom;
+};
+
+// ::- A table map describes the structore of a given table. To avoid
+// recomputing them all the time, they are cached per table node. To
+// be able to do that, positions saved in the map are relative to the
+// start of the table, rather than the start of the document.
+var TableMap = function TableMap(width, height, map, problems) {
+  // :: number The width of the table
+  this.width = width;
+  // :: number The table's height
+  this.height = height;
+  // :: [number] A width * height array with the start position of
+  // the cell covering that part of the table in each slot
+  this.map = map;
+  // An optional array of problems (cell overlap or non-rectangular
+  // shape) for the table, used by the table normalizer.
+  this.problems = problems;
+};
+
+// :: (number) → Rect
+// Find the dimensions of the cell at the given position.
+TableMap.prototype.findCell = function findCell (pos) {
+  for (var i = 0; i < this.map.length; i++) {
+    var curPos = this.map[i];
+    if (curPos != pos) { continue }
+    var left = i % this.width, top = (i / this.width) | 0;
+    var right = left + 1, bottom = top + 1;
+    for (var j = 1; right < this.width && this.map[i + j] == curPos; j++) { right++; }
+    for (var j$1 = 1; bottom < this.height && this.map[i + (this.width * j$1)] == curPos; j$1++) { bottom++; }
+    return new Rect(left, top, right, bottom)
+  }
+  throw new RangeError("No cell with offset " + pos + " found")
+};
+
+// :: (number) → number
+// Find the left side of the cell at the given position.
+TableMap.prototype.colCount = function colCount (pos) {
+  for (var i = 0; i < this.map.length; i++)
+    { if (this.map[i] == pos) { return i % this.width } }
+  throw new RangeError("No cell with offset " + pos + " found")
+};
+
+// :: (number, string, number) → ?number
+// Find the next cell in the given direction, starting from the cell
+// at `pos`, if any.
+TableMap.prototype.nextCell = function nextCell (pos, axis, dir) {
+  var ref = this.findCell(pos);
+    var left = ref.left;
+    var right = ref.right;
+    var top = ref.top;
+    var bottom = ref.bottom;
+  if (axis == "horiz") {
+    if (dir < 0 ? left == 0 : right == this.width) { return null }
+    return this.map[top * this.width + (dir < 0 ? left - 1 : right)]
+  } else {
+    if (dir < 0 ? top == 0 : bottom == this.height) { return null }
+    return this.map[left + this.width * (dir < 0 ? top - 1 : bottom)]
+  }
+};
+
+// :: (number, number) → Rect
+// Get the rectangle spanning the two given cells.
+TableMap.prototype.rectBetween = function rectBetween (a, b) {
+  var ref = this.findCell(a);
+    var leftA = ref.left;
+    var rightA = ref.right;
+    var topA = ref.top;
+    var bottomA = ref.bottom;
+  var ref$1 = this.findCell(b);
+    var leftB = ref$1.left;
+    var rightB = ref$1.right;
+    var topB = ref$1.top;
+    var bottomB = ref$1.bottom;
+  return new Rect(Math.min(leftA, leftB), Math.min(topA, topB),
+                  Math.max(rightA, rightB), Math.max(bottomA, bottomB))
+};
+
+// :: (Rect) → [number]
+// Return the position of all cells that have the top left corner in
+// the given rectangle.
+TableMap.prototype.cellsInRect = function cellsInRect (rect) {
+  var result = [], seen = {};
+  for (var row = rect.top; row < rect.bottom; row++) {
+    for (var col = rect.left; col < rect.right; col++) {
+      var index = row * this.width + col, pos = this.map[index];
+      if (seen[pos]) { continue }
+      seen[pos] = true;
+      if ((col != rect.left || !col || this.map[index - 1] != pos) &&
+          (row != rect.top || !row || this.map[index - this.width] != pos))
+        { result.push(pos); }
+    }
+  }
+  return result
+};
+
+// :: (number, number, Node) → number
+// Return the position at which the cell at the given row and column
+// starts, or would start, if a cell started there.
+TableMap.prototype.positionAt = function positionAt (row, col, table) {
+  for (var i = 0, rowStart = 0;; i++) {
+    var rowEnd = rowStart + table.child(i).nodeSize;
+    if (i == row) {
+      var index = col + row * this.width, rowEndIndex = (row + 1) * this.width;
+      // Skip past cells from previous rows (via rowspan)
+      while (index < rowEndIndex && this.map[index] < rowStart) { index++; }
+      return index == rowEndIndex ? rowEnd - 1 : this.map[index]
+    }
+    rowStart = rowEnd;
+  }
+};
+
+// :: (Node) → TableMap
+// Find the table map for the given table node.
+TableMap.get = function get (table) {
+  return readFromCache(table) || addToCache(table, computeMap(table))
+};
+
+// Compute a table map.
+function computeMap(table) {
+  if (table.type.spec.tableRole != "table") { throw new RangeError("Not a table node: " + table.type.name) }
+  var width = findWidth(table), height = table.childCount;
+  var map = [], mapPos = 0, problems = null, colWidths = [];
+  for (var i = 0, e = width * height; i < e; i++) { map[i] = 0; }
+
+  for (var row = 0, pos = 0; row < height; row++) {
+    var rowNode = table.child(row);
+    pos++;
+    for (var i$1 = 0;; i$1++) {
+      while (mapPos < map.length && map[mapPos] != 0) { mapPos++; }
+      if (i$1 == rowNode.childCount) { break }
+      var cellNode = rowNode.child(i$1);
+      var ref = cellNode.attrs;
+      var colspan = ref.colspan;
+      var rowspan = ref.rowspan;
+      var colwidth = ref.colwidth;
+      for (var h = 0; h < rowspan; h++) {
+        if (h + row >= height) {
+          (problems || (problems = [])).push({type: "overlong_rowspan", pos: pos, n: rowspan - h});
+          break
+        }
+        var start = mapPos + (h * width);
+        for (var w = 0; w < colspan; w++) {
+          if (map[start + w] == 0)
+            { map[start + w] = pos; }
+          else
+            { (problems || (problems = [])).push({type: "collision", row: row, pos: pos, n: colspan - w}); }
+          var colW = colwidth && colwidth[w];
+          if (colW) {
+            var widthIndex = ((start + w) % width) * 2, prev = colWidths[widthIndex];
+            if (prev == null || (prev != colW && colWidths[widthIndex + 1] == 1)) {
+              colWidths[widthIndex] = colW;
+              colWidths[widthIndex + 1] = 1;
+            } else if (prev == colW) {
+              colWidths[widthIndex + 1]++;
+            }
+          }
+        }
+      }
+      mapPos += colspan;
+      pos += cellNode.nodeSize;
+    }
+    var expectedPos = (row + 1) * width, missing = 0;
+    while (mapPos < expectedPos) { if (map[mapPos++] == 0) { missing++; } }
+    if (missing) { (problems || (problems = [])).push({type: "missing", row: row, n: missing}); }
+    pos++;
+  }
+
+  var tableMap = new TableMap(width, height, map, problems), badWidths = false;
+
+  // For columns that have defined widths, but whose widths disagree
+  // between rows, fix up the cells whose width doesn't match the
+  // computed one.
+  for (var i$2 = 0; !badWidths && i$2 < colWidths.length; i$2 += 2)
+    { if (colWidths[i$2] != null && colWidths[i$2 + 1] < height) { badWidths = true; } }
+  if (badWidths) { findBadColWidths(tableMap, colWidths, table); }
+
+  return tableMap
+}
+
+function findWidth(table) {
+  var width = -1, hasRowSpan = false;
+  for (var row = 0; row < table.childCount; row++) {
+    var rowNode = table.child(row), rowWidth = 0;
+    if (hasRowSpan) { for (var j = 0; j < row; j++) {
+      var prevRow = table.child(j);
+      for (var i = 0; i < prevRow.childCount; i++) {
+        var cell = prevRow.child(i);
+        if (j + cell.attrs.rowspan > row) { rowWidth += cell.attrs.colspan; }
+      }
+    } }
+    for (var i$1 = 0; i$1 < rowNode.childCount; i$1++) {
+      var cell$1 = rowNode.child(i$1);
+      rowWidth += cell$1.attrs.colspan;
+      if (cell$1.attrs.rowspan > 1) { hasRowSpan = true; }
+    }
+    if (width == -1)
+      { width = rowWidth; }
+    else if (width != rowWidth)
+      { width = Math.max(width, rowWidth); }
+  }
+  return width
+}
+
+function findBadColWidths(map, colWidths, table) {
+  if (!map.problems) { map.problems = []; }
+  for (var i = 0, seen = {}; i < map.map.length; i++) {
+    var pos = map.map[i];
+    if (seen[pos]) { continue }
+    seen[pos] = true;
+    var node = table.nodeAt(pos), updated = null;
+    for (var j = 0; j < node.attrs.colspan; j++) {
+      var col = (i + j) % map.width, colWidth = colWidths[col * 2];
+      if (colWidth != null && (!node.attrs.colwidth || node.attrs.colwidth[j] != colWidth))
+        { (updated || (updated = freshColWidth(node.attrs)))[j] = colWidth; }
+    }
+    if (updated) { map.problems.unshift({type: "colwidth mismatch", pos: pos, colwidth: updated}); }
+  }
+}
+
+function freshColWidth(attrs) {
+  if (attrs.colwidth) { return attrs.colwidth.slice() }
+  var result = [];
+  for (var i = 0; i < attrs.colspan; i++) { result.push(0); }
+  return result
+}
+
+// Various helper function for working with tables
+
+var key = new prosemirrorState.PluginKey("selectingCells");
+
+function cellAround($pos) {
+  for (var d = $pos.depth - 1; d > 0; d--)
+    { if ($pos.node(d).type.spec.tableRole == "row") { return $pos.node(0).resolve($pos.before(d + 1)) } }
+  return null
+}
+
+function cellWrapping($pos) {
+  for (var d = $pos.depth - 1; d > 0; d--) {
+    var role = $pos.node(d).type.spec.tableRole;
+    if (role === "cell" || role === 'header_cell') { return $pos.node(d) }
+  }
+  return null
+}
+
+function isInTable(state) {
+  var $head = state.selection.$head;
+  for (var d = $head.depth; d > 0; d--) { if ($head.node(d).type.spec.tableRole == "row") { return true } }
+  return false
+}
+
+function selectionCell(state) {
+  var sel = state.selection;
+  if (sel.$anchorCell) {
+    return sel.$anchorCell.pos > sel.$headCell.pos ? sel.$anchorCell : sel.$headCell;
+  } else if (sel.node && sel.node.type.spec.tableRole == "cell") {
+    return sel.$anchor
+  }
+  return cellAround(sel.$head) || cellNear(sel.$head)
+}
+
+function cellNear($pos) {
+  for (var after = $pos.nodeAfter, pos = $pos.pos; after; after = after.firstChild, pos++) {
+    var role = after.type.spec.tableRole;
+    if (role == "cell" || role == "header_cell") { return $pos.doc.resolve(pos) }
+  }
+  for (var before = $pos.nodeBefore, pos$1 = $pos.pos; before; before = before.lastChild, pos$1--) {
+    var role$1 = before.type.spec.tableRole;
+    if (role$1 == "cell" || role$1 == "header_cell") { return $pos.doc.resolve(pos$1 - before.nodeSize) }
+  }
+}
+
+function pointsAtCell($pos) {
+  return $pos.parent.type.spec.tableRole == "row" && $pos.nodeAfter
+}
+
+function moveCellForward($pos) {
+  return $pos.node(0).resolve($pos.pos + $pos.nodeAfter.nodeSize)
+}
+
+function inSameTable($a, $b) {
+  return $a.depth == $b.depth && $a.pos >= $b.start(-1) && $a.pos <= $b.end(-1)
+}
+
+function findCell($pos) {
+  return TableMap.get($pos.node(-1)).findCell($pos.pos - $pos.start(-1))
+}
+
+function colCount($pos) {
+  return TableMap.get($pos.node(-1)).colCount($pos.pos - $pos.start(-1))
+}
+
+function nextCell($pos, axis, dir) {
+  var start = $pos.start(-1), map = TableMap.get($pos.node(-1));
+  var moved = map.nextCell($pos.pos - start, axis, dir);
+  return moved == null ? null : $pos.node(0).resolve(start + moved)
+}
+
+function setAttr(attrs, name, value) {
+  var result = {};
+  for (var prop in attrs) { result[prop] = attrs[prop]; }
+  result[name] = value;
+  return result
+}
+
+function rmColSpan(attrs, pos, n) {
+  if ( n === void 0 ) n=1;
+
+  var result = setAttr(attrs, "colspan", attrs.colspan - n);
+  if (result.colwidth) {
+    result.colwidth = result.colwidth.slice();
+    result.colwidth.splice(pos, n);
+    if (!result.colwidth.some(function (w) { return w > 0; })) { result.colwidth = null; }
+  }
+  return result
+}
+
+function addColSpan(attrs, pos, n) {
+  if ( n === void 0 ) n=1;
+
+  var result = setAttr(attrs, "colspan", attrs.colspan + n);
+  if (result.colwidth) {
+    result.colwidth = result.colwidth.slice();
+    for (var i = 0; i < n; i++) { result.colwidth.splice(pos, 0, 0); }
+  }
+  return result
+}
+
+// This file defines a ProseMirror selection subclass that models
+
+// ::- A [`Selection`](http://prosemirror.net/docs/ref/#state.Selection)
+// subclass that represents a cell selection spanning part of a table.
+// With the plugin enabled, these will be created when the user
+// selects across cells, and will be drawn by giving selected cells a
+// `selectedCell` CSS class.
+var CellSelection = /*@__PURE__*/(function (Selection) {
+  function CellSelection($anchorCell, $headCell) {
+    if ( $headCell === void 0 ) $headCell = $anchorCell;
+
+    var table = $anchorCell.node(-1), map = TableMap.get(table), start = $anchorCell.start(-1);
+    var rect = map.rectBetween($anchorCell.pos - start, $headCell.pos - start);
+    var doc = $anchorCell.node(0);
+    var cells = map.cellsInRect(rect).filter(function (p) { return p != $headCell.pos - start; });
+    // Make the head cell the first range, so that it counts as the
+    // primary part of the selection
+    cells.unshift($headCell.pos - start);
+    var ranges = cells.map(function (pos) {
+      var cell = table.nodeAt(pos), from = pos + start + 1;
+      return new prosemirrorState.SelectionRange(doc.resolve(from), doc.resolve(from + cell.content.size))
+    });
+    Selection.call(this, ranges[0].$from, ranges[0].$to, ranges);
+    // :: ResolvedPos
+    // A resolved position pointing _in front of_ the anchor cell (the one
+    // that doesn't move when extending the selection).
+    this.$anchorCell = $anchorCell;
+    // :: ResolvedPos
+    // A resolved position pointing in front of the head cell (the one
+    // moves when extending the selection).
+    this.$headCell = $headCell;
+  }
+
+  if ( Selection ) CellSelection.__proto__ = Selection;
+  CellSelection.prototype = Object.create( Selection && Selection.prototype );
+  CellSelection.prototype.constructor = CellSelection;
+
+  CellSelection.prototype.map = function map (doc, mapping) {
+    var $anchorCell = doc.resolve(mapping.map(this.$anchorCell.pos));
+    var $headCell = doc.resolve(mapping.map(this.$headCell.pos));
+    if (pointsAtCell($anchorCell) && pointsAtCell($headCell) && inSameTable($anchorCell, $headCell)) {
+      var tableChanged = this.$anchorCell.node(-1) != $anchorCell.node(-1);
+      if (tableChanged && this.isRowSelection())
+        { return CellSelection.rowSelection($anchorCell, $headCell) }
+      else if (tableChanged && this.isColSelection())
+        { return CellSelection.colSelection($anchorCell, $headCell) }
+      else
+        { return new CellSelection($anchorCell, $headCell) }
+    }
+    return prosemirrorState.TextSelection.between($anchorCell, $headCell)
+  };
+
+  // :: () → Slice
+  // Returns a rectangular slice of table rows containing the selected
+  // cells.
+  CellSelection.prototype.content = function content () {
+    var table = this.$anchorCell.node(-1), map = TableMap.get(table), start = this.$anchorCell.start(-1);
+    var rect = map.rectBetween(this.$anchorCell.pos - start, this.$headCell.pos - start);
+    var seen = {}, rows = [];
+    for (var row = rect.top; row < rect.bottom; row++) {
+      var rowContent = [];
+      for (var index = row * map.width + rect.left, col = rect.left; col < rect.right; col++, index++) {
+        var pos = map.map[index];
+        if (!seen[pos]) {
+          seen[pos] = true;
+          var cellRect = map.findCell(pos), cell = table.nodeAt(pos);
+          var extraLeft = rect.left - cellRect.left, extraRight = cellRect.right - rect.right;
+          if (extraLeft > 0 || extraRight > 0) {
+            var attrs = cell.attrs;
+            if (extraLeft > 0) { attrs = rmColSpan(attrs, 0, extraLeft); }
+            if (extraRight > 0) { attrs = rmColSpan(attrs, attrs.colspan - extraRight, extraRight); }
+            if (cellRect.left < rect.left) { cell = cell.type.createAndFill(attrs); }
+            else { cell = cell.type.create(attrs, cell.content); }
+          }
+          if (cellRect.top < rect.top || cellRect.bottom > rect.bottom) {
+            var attrs$1 = setAttr(cell.attrs, "rowspan", Math.min(cellRect.bottom, rect.bottom) - Math.max(cellRect.top, rect.top));
+            if (cellRect.top < rect.top) { cell = cell.type.createAndFill(attrs$1); }
+            else { cell = cell.type.create(attrs$1, cell.content); }
+          }
+          rowContent.push(cell);
+        }
+      }
+      rows.push(table.child(row).copy(prosemirrorModel.Fragment.from(rowContent)));
+    }
+
+    var fragment = this.isColSelection() && this.isRowSelection() ? table : rows;
+    return new prosemirrorModel.Slice(prosemirrorModel.Fragment.from(fragment), 1, 1)
+  };
+
+  CellSelection.prototype.replace = function replace (tr, content) {
+    if ( content === void 0 ) content = prosemirrorModel.Slice.empty;
+
+    var mapFrom = tr.steps.length, ranges = this.ranges;
+    for (var i = 0; i < ranges.length; i++) {
+      var ref = ranges[i];
+      var $from = ref.$from;
+      var $to = ref.$to;
+      var mapping = tr.mapping.slice(mapFrom);
+      tr.replace(mapping.map($from.pos), mapping.map($to.pos), i ? prosemirrorModel.Slice.empty : content);
+    }
+    var sel = Selection.findFrom(tr.doc.resolve(tr.mapping.slice(mapFrom).map(this.to)), -1);
+    if (sel) { tr.setSelection(sel); }
+  };
+
+  CellSelection.prototype.replaceWith = function replaceWith (tr, node) {
+    this.replace(tr, new prosemirrorModel.Slice(prosemirrorModel.Fragment.from(node), 0, 0));
+  };
+
+  CellSelection.prototype.forEachCell = function forEachCell (f) {
+    var table = this.$anchorCell.node(-1), map = TableMap.get(table), start = this.$anchorCell.start(-1);
+    var cells = map.cellsInRect(map.rectBetween(this.$anchorCell.pos - start, this.$headCell.pos - start));
+    for (var i = 0; i < cells.length; i++)
+      { f(table.nodeAt(cells[i]), start + cells[i]); }
+  };
+
+  // :: () → bool
+  // True if this selection goes all the way from the top to the
+  // bottom of the table.
+  CellSelection.prototype.isColSelection = function isColSelection () {
+    var anchorTop = this.$anchorCell.index(-1), headTop = this.$headCell.index(-1);
+    if (Math.min(anchorTop, headTop) > 0) { return false }
+    var anchorBot = anchorTop + this.$anchorCell.nodeAfter.attrs.rowspan,
+        headBot = headTop + this.$headCell.nodeAfter.attrs.rowspan;
+    return Math.max(anchorBot, headBot) == this.$headCell.node(-1).childCount
+  };
+
+  // :: (ResolvedPos, ?ResolvedPos) → CellSelection
+  // Returns the smallest column selection that covers the given anchor
+  // and head cell.
+  CellSelection.colSelection = function colSelection ($anchorCell, $headCell) {
+    if ( $headCell === void 0 ) $headCell = $anchorCell;
+
+    var map = TableMap.get($anchorCell.node(-1)), start = $anchorCell.start(-1);
+    var anchorRect = map.findCell($anchorCell.pos - start), headRect = map.findCell($headCell.pos - start);
+    var doc = $anchorCell.node(0);
+    if (anchorRect.top <= headRect.top) {
+      if (anchorRect.top > 0)
+        { $anchorCell = doc.resolve(start + map.map[anchorRect.left]); }
+      if (headRect.bottom < map.height)
+        { $headCell = doc.resolve(start + map.map[map.width * (map.height - 1) + headRect.right - 1]); }
+    } else {
+      if (headRect.top > 0)
+        { $headCell = doc.resolve(start + map.map[headRect.left]); }
+      if (anchorRect.bottom < map.height)
+        { $anchorCell = doc.resolve(start + map.map[map.width * (map.height - 1) + anchorRect.right - 1]); }
+    }
+    return new CellSelection($anchorCell, $headCell)
+  };
+
+  // :: () → bool
+  // True if this selection goes all the way from the left to the
+  // right of the table.
+  CellSelection.prototype.isRowSelection = function isRowSelection () {
+    var map = TableMap.get(this.$anchorCell.node(-1)), start = this.$anchorCell.start(-1);
+    var anchorLeft = map.colCount(this.$anchorCell.pos - start),
+        headLeft = map.colCount(this.$headCell.pos - start);
+    if (Math.min(anchorLeft, headLeft) > 0) { return false }
+    var anchorRight = anchorLeft + this.$anchorCell.nodeAfter.attrs.colspan,
+        headRight = headLeft + this.$headCell.nodeAfter.attrs.colspan;
+    return Math.max(anchorRight, headRight) == map.width
+  };
+
+  CellSelection.prototype.eq = function eq (other) {
+    return other instanceof CellSelection && other.$anchorCell.pos == this.$anchorCell.pos &&
+      other.$headCell.pos == this.$headCell.pos
+  };
+
+  // :: (ResolvedPos, ?ResolvedPos) → CellSelection
+  // Returns the smallest row selection that covers the given anchor
+  // and head cell.
+  CellSelection.rowSelection = function rowSelection ($anchorCell, $headCell) {
+    if ( $headCell === void 0 ) $headCell = $anchorCell;
+
+    var map = TableMap.get($anchorCell.node(-1)), start = $anchorCell.start(-1);
+    var anchorRect = map.findCell($anchorCell.pos - start), headRect = map.findCell($headCell.pos - start);
+    var doc = $anchorCell.node(0);
+    if (anchorRect.left <= headRect.left) {
+      if (anchorRect.left > 0)
+        { $anchorCell = doc.resolve(start + map.map[anchorRect.top * map.width]); }
+      if (headRect.right < map.width)
+        { $headCell = doc.resolve(start + map.map[map.width * (headRect.top + 1) - 1]); }
+    } else {
+      if (headRect.left > 0)
+        { $headCell = doc.resolve(start + map.map[headRect.top * map.width]); }
+      if (anchorRect.right < map.width)
+        { $anchorCell = doc.resolve(start + map.map[map.width * (anchorRect.top + 1) - 1]); }
+    }
+    return new CellSelection($anchorCell, $headCell)
+  };
+
+  CellSelection.prototype.toJSON = function toJSON () {
+    return {type: "cell", anchor: this.$anchorCell.pos, head: this.$headCell.pos}
+  };
+
+  CellSelection.fromJSON = function fromJSON (doc, json) {
+    return new CellSelection(doc.resolve(json.anchor), doc.resolve(json.head))
+  };
+
+  // :: (Node, number, ?number) → CellSelection
+  CellSelection.create = function create (doc, anchorCell, headCell) {
+    if ( headCell === void 0 ) headCell = anchorCell;
+
+    return new CellSelection(doc.resolve(anchorCell), doc.resolve(headCell))
+  };
+
+  CellSelection.prototype.getBookmark = function getBookmark () { return new CellBookmark(this.$anchorCell.pos, this.$headCell.pos) };
+
+  return CellSelection;
+}(prosemirrorState.Selection));
+
+CellSelection.prototype.visible = false;
+
+prosemirrorState.Selection.jsonID("cell", CellSelection);
+
+var CellBookmark = function CellBookmark(anchor, head) {
+  this.anchor = anchor;
+  this.head = head;
+};
+CellBookmark.prototype.map = function map (mapping) {
+  return new CellBookmark(mapping.map(this.anchor), mapping.map(this.head))
+};
+CellBookmark.prototype.resolve = function resolve (doc) {
+  var $anchorCell = doc.resolve(this.anchor), $headCell = doc.resolve(this.head);
+  if ($anchorCell.parent.type.spec.tableRole == "row" &&
+      $headCell.parent.type.spec.tableRole == "row" &&
+      $anchorCell.index() < $anchorCell.parent.childCount &&
+      $headCell.index() < $headCell.parent.childCount &&
+      inSameTable($anchorCell, $headCell))
+    { return new CellSelection($anchorCell, $headCell) }
+  else
+    { return prosemirrorState.Selection.near($headCell, 1) }
+};
+
+function drawCellSelection(state) {
+  if (!(state.selection instanceof CellSelection)) { return null }
+  var cells = [];
+  state.selection.forEachCell(function (node, pos) {
+    cells.push(prosemirrorView.Decoration.node(pos, pos + node.nodeSize, {class: "selectedCell"}));
+  });
+  return prosemirrorView.DecorationSet.create(state.doc, cells)
+}
+
+function isCellBoundarySelection(ref) {
+  var $from = ref.$from;
+  var $to = ref.$to;
+
+  if ($from.pos == $to.pos || $from.pos < $from.pos - 6) { return false } // Cheap elimination
+  var afterFrom = $from.pos, beforeTo = $to.pos, depth = $from.depth;
+  for (; depth >= 0; depth--, afterFrom++)
+    { if ($from.after(depth + 1) < $from.end(depth)) { break } }
+  for (var d = $to.depth; d >= 0; d--, beforeTo--)
+    { if ($to.before(d + 1) > $to.start(d)) { break } }
+  return afterFrom == beforeTo && /row|table/.test($from.node(depth).type.spec.tableRole)
+}
+
+function isTextSelectionAcrossCells(ref) {
+  var $from = ref.$from;
+  var $to = ref.$to;
+
+  var fromCellBoundaryNode;
+  var toCellBoundaryNode;
+
+  for (var i = $from.depth; i > 0; i--) {
+    var node = $from.node(i);
+    if (node.type.spec.tableRole === 'cell' || node.type.spec.tableRole === 'header_cell') {
+      fromCellBoundaryNode = node;
+      break;
+    }
+  }
+
+  for (var i$1 = $to.depth; i$1 > 0; i$1--) {
+    var node$1 = $to.node(i$1);
+    if (node$1.type.spec.tableRole === 'cell' || node$1.type.spec.tableRole === 'header_cell') {
+      toCellBoundaryNode = node$1;
+      break;
+    }
+  }
+
+  return fromCellBoundaryNode !== toCellBoundaryNode && $to.parentOffset === 0
+}
+
+function normalizeSelection(state, tr, allowTableNodeSelection) {
+  var sel = (tr || state).selection, doc = (tr || state).doc, normalize, role;
+  if (sel instanceof prosemirrorState.NodeSelection && (role = sel.node.type.spec.tableRole)) {
+    if (role == "cell" || role == "header_cell") {
+      normalize = CellSelection.create(doc, sel.from);
+    } else if (role == "row") {
+      var $cell = doc.resolve(sel.from + 1);
+      normalize = CellSelection.rowSelection($cell, $cell);
+    } else if (!allowTableNodeSelection) {
+      var map = TableMap.get(sel.node), start = sel.from + 1;
+      var lastCell = start + map.map[map.width * map.height - 1];
+      normalize = CellSelection.create(doc, start + 1, lastCell);
+    }
+  } else if (sel instanceof prosemirrorState.TextSelection && isCellBoundarySelection(sel)) {
+    normalize = prosemirrorState.TextSelection.create(doc, sel.from);
+  } else if (sel instanceof prosemirrorState.TextSelection && isTextSelectionAcrossCells(sel)) {
+    normalize = prosemirrorState.TextSelection.create(doc, sel.$from.start(), sel.$from.end());
+  }
+  if (normalize)
+    { (tr || (tr = state.tr)).setSelection(normalize); }
+  return tr
+}
+
+// Helper for creating a schema that supports tables.
+
+function getCellAttrs(dom, extraAttrs) {
+  var widthAttr = dom.getAttribute("data-colwidth");
+  var widths = widthAttr && /^\d+(,\d+)*$/.test(widthAttr) ? widthAttr.split(",").map(function (s) { return Number(s); }) : null;
+  var colspan = Number(dom.getAttribute("colspan") || 1);
+  var result = {
+    colspan: colspan,
+    rowspan: Number(dom.getAttribute("rowspan") || 1),
+    colwidth: widths && widths.length == colspan ? widths : null
+  };
+  for (var prop in extraAttrs) {
+    var getter = extraAttrs[prop].getFromDOM;
+    var value = getter && getter(dom);
+    if (value != null) { result[prop] = value; }
+  }
+  return result
+}
+
+function setCellAttrs(node, extraAttrs) {
+  var attrs = {};
+  if (node.attrs.colspan != 1) { attrs.colspan = node.attrs.colspan; }
+  if (node.attrs.rowspan != 1) { attrs.rowspan = node.attrs.rowspan; }
+  if (node.attrs.colwidth)
+    { attrs["data-colwidth"] = node.attrs.colwidth.join(","); }
+  for (var prop in extraAttrs) {
+    var setter = extraAttrs[prop].setDOMAttr;
+    if (setter) { setter(node.attrs[prop], attrs); }
+  }
+  return attrs
+}
+
+// :: (Object) → Object
+//
+// This function creates a set of [node
+// specs](http://prosemirror.net/docs/ref/#model.SchemaSpec.nodes) for
+// `table`, `table_row`, and `table_cell` nodes types as used by this
+// module. The result can then be added to the set of nodes when
+// creating a a schema.
+//
+//   options::- The following options are understood:
+//
+//     tableGroup:: ?string
+//     A group name (something like `"block"`) to add to the table
+//     node type.
+//
+//     cellContent:: string
+//     The content expression for table cells.
+//
+//     cellAttributes:: ?Object
+//     Additional attributes to add to cells. Maps attribute names to
+//     objects with the following properties:
+//
+//       default:: any
+//       The attribute's default value.
+//
+//       getFromDOM:: ?(dom.Node) → any
+//       A function to read the attribute's value from a DOM node.
+//
+//       setDOMAttr:: ?(value: any, attrs: Object)
+//       A function to add the attribute's value to an attribute
+//       object that's used to render the cell's DOM.
+function tableNodes(options) {
+  var extraAttrs = options.cellAttributes || {};
+  var cellAttrs = {
+    colspan: {default: 1},
+    rowspan: {default: 1},
+    colwidth: {default: null}
+  };
+  for (var prop in extraAttrs)
+    { cellAttrs[prop] = {default: extraAttrs[prop].default}; }
+
+  return {
+    table: {
+      content: "table_row+",
+      tableRole: "table",
+      isolating: true,
+      group: options.tableGroup,
+      parseDOM: [{tag: "table"}],
+      toDOM: function toDOM() { return ["table", ["tbody", 0]] }
+    },
+    table_row: {
+      content: "(table_cell | table_header)*",
+      tableRole: "row",
+      parseDOM: [{tag: "tr"}],
+      toDOM: function toDOM() { return ["tr", 0] }
+    },
+    table_cell: {
+      content: options.cellContent,
+      attrs: cellAttrs,
+      tableRole: "cell",
+      isolating: true,
+      parseDOM: [{tag: "td", getAttrs: function (dom) { return getCellAttrs(dom, extraAttrs); }}],
+      toDOM: function toDOM(node) { return ["td", setCellAttrs(node, extraAttrs), 0] }
+    },
+    table_header: {
+      content: options.cellContent,
+      attrs: cellAttrs,
+      tableRole: "header_cell",
+      isolating: true,
+      parseDOM: [{tag: "th", getAttrs: function (dom) { return getCellAttrs(dom, extraAttrs); }}],
+      toDOM: function toDOM(node) { return ["th", setCellAttrs(node, extraAttrs), 0] }
+    }
+  }
+}
+
+function tableNodeTypes(schema) {
+  var result = schema.cached.tableNodeTypes;
+  if (!result) {
+    result = schema.cached.tableNodeTypes = {};
+    for (var name in schema.nodes) {
+      var type = schema.nodes[name], role = type.spec.tableRole;
+      if (role) { result[role] = type; }
+    }
+  }
+  return result
+}
+
+// Utilities used for copy/paste handling.
+
+// Utilities to help with copying and pasting table cells
+
+// : (Slice) → ?{width: number, height: number, rows: [Fragment]}
+// Get a rectangular area of cells from a slice, or null if the outer
+// nodes of the slice aren't table cells or rows.
+function pastedCells(slice) {
+  if (!slice.size) { return null }
+  var content = slice.content;
+  var openStart = slice.openStart;
+  var openEnd = slice.openEnd;
+  while (content.childCount == 1 && (openStart > 0 && openEnd > 0 || content.firstChild.type.spec.tableRole == "table")) {
+    openStart--;
+    openEnd--;
+    content = content.firstChild.content;
+  }
+  var first = content.firstChild, role = first.type.spec.tableRole;
+  var schema = first.type.schema, rows = [];
+  if (role == "row") {
+    for (var i = 0; i < content.childCount; i++) {
+      var cells = content.child(i).content;
+      var left = i ? 0 : Math.max(0, openStart - 1);
+      var right = i < content.childCount - 1 ? 0 : Math.max(0, openEnd - 1);
+      if (left || right) { cells = fitSlice(tableNodeTypes(schema).row, new prosemirrorModel.Slice(cells, left, right)).content; }
+      rows.push(cells);
+    }
+  } else if (role == "cell" || role == "header_cell") {
+    rows.push(openStart || openEnd ? fitSlice(tableNodeTypes(schema).row, new prosemirrorModel.Slice(content, openStart, openEnd)).content : content);
+  } else {
+    return null
+  }
+  return ensureRectangular(schema, rows)
+}
+
+// : (Schema, [Fragment]) → {width: number, height: number, rows: [Fragment]}
+// Compute the width and height of a set of cells, and make sure each
+// row has the same number of cells.
+function ensureRectangular(schema, rows) {
+  var widths = [];
+  for (var i = 0; i < rows.length; i++) {
+    var row = rows[i];
+    for (var j = row.childCount - 1; j >= 0; j--) {
+      var ref = row.child(j).attrs;
+      var rowspan = ref.rowspan;
+      var colspan = ref.colspan;
+      for (var r = i; r < i + rowspan; r++)
+        { widths[r] = (widths[r] || 0) + colspan; }
+    }
+  }
+  var width = 0;
+  for (var r$1 = 0; r$1 < widths.length; r$1++) { width = Math.max(width, widths[r$1]); }
+  for (var r$2 = 0; r$2 < widths.length; r$2++) {
+    if (r$2 >= rows.length) { rows.push(prosemirrorModel.Fragment.empty); }
+    if (widths[r$2] < width) {
+      var empty = tableNodeTypes(schema).cell.createAndFill(), cells = [];
+      for (var i$1 = widths[r$2]; i$1 < width; i$1++) { cells.push(empty); }
+      rows[r$2] = rows[r$2].append(prosemirrorModel.Fragment.from(cells));
+    }
+  }
+  return {height: rows.length, width: width, rows: rows}
+}
+
+function fitSlice(nodeType, slice) {
+  var node = nodeType.createAndFill();
+  var tr = new prosemirrorTransform.Transform(node).replace(0, node.content.size, slice);
+  return tr.doc
+}
+
+// : ({width: number, height: number, rows: [Fragment]}, number, number) → {width: number, height: number, rows: [Fragment]}
+// Clip or extend (repeat) the given set of cells to cover the given
+// width and height. Will clip rowspan/colspan cells at the edges when
+// they stick out.
+function clipCells(ref, newWidth, newHeight) {
+  var width = ref.width;
+  var height = ref.height;
+  var rows = ref.rows;
+
+  if (width != newWidth) {
+    var added = [], newRows = [];
+    for (var row = 0; row < rows.length; row++) {
+      var frag = rows[row], cells = [];
+      for (var col = added[row] || 0, i = 0; col < newWidth; i++) {
+        var cell = frag.child(i % frag.childCount);
+        if (col + cell.attrs.colspan > newWidth)
+          { cell = cell.type.create(rmColSpan(cell.attrs, cell.attrs.colspan, col + cell.attrs.colspan - newWidth), cell.content); }
+        cells.push(cell);
+        col += cell.attrs.colspan;
+        for (var j = 1; j < cell.attrs.rowspan; j++)
+          { added[row + j] = (added[row + j] || 0) + cell.attrs.colspan; }
+      }
+      newRows.push(prosemirrorModel.Fragment.from(cells));
+    }
+    rows = newRows;
+    width = newWidth;
+  }
+
+  if (height != newHeight) {
+    var newRows$1 = [];
+    for (var row$1 = 0, i$1 = 0; row$1 < newHeight; row$1++, i$1++) {
+      var cells$1 = [], source = rows[i$1 % height];
+      for (var j$1 = 0; j$1 < source.childCount; j$1++) {
+        var cell$1 = source.child(j$1);
+        if (row$1 + cell$1.attrs.rowspan > newHeight)
+          { cell$1 = cell$1.type.create(setAttr(cell$1.attrs, "rowspan", newHeight - cell$1.attrs.rowspan), cell$1.content); }
+        cells$1.push(cell$1);
+      }
+      newRows$1.push(prosemirrorModel.Fragment.from(cells$1));
+    }
+    rows = newRows$1;
+    height = newHeight;
+  }
+
+  return {width: width, height: height, rows: rows}
+}
+
+// Make sure a table has at least the given width and height. Return
+// true if something was changed.
+function growTable(tr, map, table, start, width, height, mapFrom) {
+  var schema = tr.doc.type.schema, types = tableNodeTypes(schema), empty, emptyHead;
+  if (width > map.width) {
+    for (var row = 0, rowEnd = 0; row < map.height; row++) {
+      var rowNode = table.child(row);
+      rowEnd += rowNode.nodeSize;
+      var cells = [], add = (void 0);
+      if (rowNode.lastChild == null || rowNode.lastChild.type == types.cell)
+        { add = empty || (empty = types.cell.createAndFill()); }
+      else
+        { add = emptyHead || (emptyHead = types.header_cell.createAndFill()); }
+      for (var i = map.width; i < width; i++) { cells.push(add); }
+      tr.insert(tr.mapping.slice(mapFrom).map(rowEnd - 1 + start), cells);
+    }
+  }
+  if (height > map.height) {
+    var cells$1 = [];
+    for (var i$1 = 0, start$1 = (map.height - 1) * map.width; i$1 < Math.max(map.width, width); i$1++) {
+      var header = i$1 >= map.width ? false :
+          table.nodeAt(map.map[start$1 + i$1]).type == types.header_cell;
+      cells$1.push(header
+                 ? (emptyHead || (emptyHead = types.header_cell.createAndFill()))
+                 : (empty || (empty = types.cell.createAndFill())));
+    }
+
+    var emptyRow = types.row.create(null, prosemirrorModel.Fragment.from(cells$1)), rows = [];
+    for (var i$2 = map.height; i$2 < height; i$2++) { rows.push(emptyRow); }
+    tr.insert(tr.mapping.slice(mapFrom).map(start + table.nodeSize - 2), rows);
+  }
+  return !!(empty || emptyHead)
+}
+
+// Make sure the given line (left, top) to (right, top) doesn't cross
+// any rowspan cells by splitting cells that cross it. Return true if
+// something changed.
+function isolateHorizontal(tr, map, table, start, left, right, top, mapFrom) {
+  if (top == 0 || top == map.height) { return false }
+  var found = false;
+  for (var col = left; col < right; col++) {
+    var index = top * map.width + col, pos = map.map[index];
+    if (map.map[index - map.width] == pos) {
+      found = true;
+      var cell = table.nodeAt(pos);
+      var ref = map.findCell(pos);
+      var cellTop = ref.top;
+      var cellLeft = ref.left;
+      tr.setNodeMarkup(tr.mapping.slice(mapFrom).map(pos + start), null, setAttr(cell.attrs, "rowspan", top - cellTop));
+      tr.insert(tr.mapping.slice(mapFrom).map(map.positionAt(top, cellLeft, table)),
+                cell.type.createAndFill(setAttr(cell.attrs, "rowspan", (cellTop + cell.attrs.rowspan) - top)));
+      col += cell.attrs.colspan - 1;
+    }
+  }
+  return found
+}
+
+// Make sure the given line (left, top) to (left, bottom) doesn't
+// cross any colspan cells by splitting cells that cross it. Return
+// true if something changed.
+function isolateVertical(tr, map, table, start, top, bottom, left, mapFrom) {
+  if (left == 0 || left == map.width) { return false }
+  var found = false;
+  for (var row = top; row < bottom; row++) {
+    var index = row * map.width + left, pos = map.map[index];
+    if (map.map[index - 1] == pos) {
+      found = true;
+      var cell = table.nodeAt(pos), cellLeft = map.colCount(pos);
+      var updatePos = tr.mapping.slice(mapFrom).map(pos + start);
+      tr.setNodeMarkup(updatePos, null, rmColSpan(cell.attrs, left - cellLeft, cell.attrs.colspan - (left - cellLeft)));
+      tr.insert(updatePos + cell.nodeSize, cell.type.createAndFill(rmColSpan(cell.attrs, 0, left - cellLeft)));
+      row += cell.attrs.rowspan - 1;
+    }
+  }
+  return found
+}
+
+// Insert the given set of cells (as returned by `pastedCells`) into a
+// table, at the position pointed at by rect.
+function insertCells(state, dispatch, tableStart, rect, cells) {
+  var table = tableStart ? state.doc.nodeAt(tableStart - 1) : state.doc, map = TableMap.get(table);
+  var top = rect.top;
+  var left = rect.left;
+  var right = left + cells.width, bottom = top + cells.height;
+  var tr = state.tr, mapFrom = 0;
+  function recomp() {
+    table = tableStart ? tr.doc.nodeAt(tableStart - 1) : tr.doc;
+    map = TableMap.get(table);
+    mapFrom = tr.mapping.maps.length;
+  }
+  // Prepare the table to be large enough and not have any cells
+  // crossing the boundaries of the rectangle that we want to
+  // insert into. If anything about it changes, recompute the table
+  // map so that subsequent operations can see the current shape.
+  if (growTable(tr, map, table, tableStart, right, bottom, mapFrom)) { recomp(); }
+  if (isolateHorizontal(tr, map, table, tableStart, left, right, top, mapFrom)) { recomp(); }
+  if (isolateHorizontal(tr, map, table, tableStart, left, right, bottom, mapFrom)) { recomp(); }
+  if (isolateVertical(tr, map, table, tableStart, top, bottom, left, mapFrom)) { recomp(); }
+  if (isolateVertical(tr, map, table, tableStart, top, bottom, right, mapFrom)) { recomp(); }
+
+  for (var row = top; row < bottom; row++) {
+    var from = map.positionAt(row, left, table), to = map.positionAt(row, right, table);
+    tr.replace(tr.mapping.slice(mapFrom).map(from + tableStart), tr.mapping.slice(mapFrom).map(to + tableStart),
+               new prosemirrorModel.Slice(cells.rows[row - top], 0, 0));
+  }
+  recomp();
+  tr.setSelection(new CellSelection(tr.doc.resolve(tableStart + map.positionAt(top, left, table)),
+                                    tr.doc.resolve(tableStart + map.positionAt(bottom - 1, right - 1, table))));
+  dispatch(tr);
+}
+
+// This file defines a number of helpers for wiring up user input to
+
+var handleKeyDown = prosemirrorKeymap.keydownHandler({
+  "ArrowLeft": arrow("horiz", -1),
+  "ArrowRight": arrow("horiz", 1),
+  "ArrowUp": arrow("vert", -1),
+  "ArrowDown": arrow("vert", 1),
+
+  "Shift-ArrowLeft": shiftArrow("horiz", -1),
+  "Shift-ArrowRight": shiftArrow("horiz", 1),
+  "Shift-ArrowUp": shiftArrow("vert", -1),
+  "Shift-ArrowDown": shiftArrow("vert", 1),
+
+  "Backspace": deleteCellSelection,
+  "Mod-Backspace": deleteCellSelection,
+  "Delete": deleteCellSelection,
+  "Mod-Delete": deleteCellSelection
+});
+
+function maybeSetSelection(state, dispatch, selection) {
+  if (selection.eq(state.selection)) { return false }
+  if (dispatch) { dispatch(state.tr.setSelection(selection).scrollIntoView()); }
+  return true
+}
+
+function arrow(axis, dir) {
+  return function (state, dispatch, view) {
+    var sel = state.selection;
+    if (sel instanceof CellSelection) {
+      return maybeSetSelection(state, dispatch, prosemirrorState.Selection.near(sel.$headCell, dir))
+    }
+    if (axis != "horiz" && !sel.empty) { return false }
+    var end = atEndOfCell(view, axis, dir);
+    if (end == null) { return false }
+    if (axis == "horiz") {
+      return maybeSetSelection(state, dispatch, prosemirrorState.Selection.near(state.doc.resolve(sel.head + dir), dir))
+    } else {
+      var $cell = state.doc.resolve(end), $next = nextCell($cell, axis, dir), newSel;
+      if ($next) { newSel = prosemirrorState.Selection.near($next, 1); }
+      else if (dir < 0) { newSel = prosemirrorState.Selection.near(state.doc.resolve($cell.before(-1)), -1); }
+      else { newSel = prosemirrorState.Selection.near(state.doc.resolve($cell.after(-1)), 1); }
+      return maybeSetSelection(state, dispatch, newSel)
+    }
+  }
+}
+
+function shiftArrow(axis, dir) {
+  return function (state, dispatch, view) {
+    var sel = state.selection;
+    if (!(sel instanceof CellSelection)) {
+      var end = atEndOfCell(view, axis, dir);
+      if (end == null) { return false }
+      sel = new CellSelection(state.doc.resolve(end));
+    }
+    var $head = nextCell(sel.$headCell, axis, dir);
+    if (!$head) { return false }
+    return maybeSetSelection(state, dispatch, new CellSelection(sel.$anchorCell, $head))
+  }
+}
+
+function deleteCellSelection(state, dispatch) {
+  var sel = state.selection;
+  if (!(sel instanceof CellSelection)) { return false }
+  if (dispatch) {
+    var tr = state.tr, baseContent = tableNodeTypes(state.schema).cell.createAndFill().content;
+    sel.forEachCell(function (cell, pos) {
+      if (!cell.content.eq(baseContent))
+        { tr.replace(tr.mapping.map(pos + 1), tr.mapping.map(pos + cell.nodeSize - 1),
+                   new prosemirrorModel.Slice(baseContent, 0, 0)); }
+    });
+    if (tr.docChanged) { dispatch(tr); }
+  }
+  return true
+}
+
+function handleTripleClick(view, pos) {
+  var doc = view.state.doc, $cell = cellAround(doc.resolve(pos));
+  if (!$cell) { return false }
+  view.dispatch(view.state.tr.setSelection(new CellSelection($cell)));
+  return true
+}
+
+function handlePaste(view, _, slice) {
+  if (!isInTable(view.state)) { return false }
+  var cells = pastedCells(slice), sel = view.state.selection;
+  if (sel instanceof CellSelection) {
+    if (!cells) { cells = {width: 1, height: 1, rows: [prosemirrorModel.Fragment.from(fitSlice(tableNodeTypes(view.state.schema).cell, slice))]}; }
+    var table = sel.$anchorCell.node(-1), start = sel.$anchorCell.start(-1);
+    var rect = TableMap.get(table).rectBetween(sel.$anchorCell.pos - start, sel.$headCell.pos - start);
+    cells = clipCells(cells, rect.right - rect.left, rect.bottom - rect.top);
+    insertCells(view.state, view.dispatch, start, rect, cells);
+    return true
+  } else if (cells) {
+    var $cell = selectionCell(view.state), start$1 = $cell.start(-1);
+    insertCells(view.state, view.dispatch, start$1, TableMap.get($cell.node(-1)).findCell($cell.pos - start$1), cells);
+    return true
+  } else {
+    return false
+  }
+}
+
+function handleMouseDown(view, startEvent) {
+  if (startEvent.ctrlKey || startEvent.metaKey) { return }
+
+  var startDOMCell = domInCell(view, startEvent.target), $anchor;
+  if (startEvent.shiftKey && (view.state.selection instanceof CellSelection)) {
+    // Adding to an existing cell selection
+    setCellSelection(view.state.selection.$anchorCell, startEvent);
+    startEvent.preventDefault();
+  } else if (startEvent.shiftKey && startDOMCell &&
+             ($anchor = cellAround(view.state.selection.$anchor)) != null &&
+             cellUnderMouse(view, startEvent).pos != $anchor.pos) {
+    // Adding to a selection that starts in another cell (causing a
+    // cell selection to be created).
+    setCellSelection($anchor, startEvent);
+    startEvent.preventDefault();
+  } else if (!startDOMCell) {
+    // Not in a cell, let the default behavior happen.
+    return
+  }
+
+  // Create and dispatch a cell selection between the given anchor and
+  // the position under the mouse.
+  function setCellSelection($anchor, event) {
+    var $head = cellUnderMouse(view, event);
+    var starting = key.getState(view.state) == null;
+    if (!$head || !inSameTable($anchor, $head)) {
+      if (starting) { $head = $anchor; }
+      else { return }
+    }
+    var selection = new CellSelection($anchor, $head);
+    if (starting || !view.state.selection.eq(selection)) {
+      var tr = view.state.tr.setSelection(selection);
+      if (starting) { tr.setMeta(key, $anchor.pos); }
+      view.dispatch(tr);
+    }
+  }
+
+  // Stop listening to mouse motion events.
+  function stop() {
+    view.root.removeEventListener("mouseup", stop);
+    view.root.removeEventListener("dragstart", stop);
+    view.root.removeEventListener("mousemove", move);
+    if (key.getState(view.state) != null) { view.dispatch(view.state.tr.setMeta(key, -1)); }
+  }
+
+  function move(event) {
+    var anchor = key.getState(view.state), $anchor;
+    if (anchor != null) {
+      // Continuing an existing cross-cell selection
+      $anchor = view.state.doc.resolve(anchor);
+    } else if (domInCell(view, event.target) != startDOMCell) {
+      // Moving out of the initial cell -- start a new cell selection
+      $anchor = cellUnderMouse(view, startEvent);
+      if (!$anchor) { return stop() }
+    }
+    if ($anchor) { setCellSelection($anchor, event); }
+  }
+  view.root.addEventListener("mouseup", stop);
+  view.root.addEventListener("dragstart", stop);
+  view.root.addEventListener("mousemove", move);
+}
+
+// Check whether the cursor is at the end of a cell (so that further
+// motion would move out of the cell)
+function atEndOfCell(view, axis, dir) {
+  if (!(view.state.selection instanceof prosemirrorState.TextSelection)) { return null }
+  var ref = view.state.selection;
+  var $head = ref.$head;
+  for (var d = $head.depth - 1; d >= 0; d--) {
+    var parent = $head.node(d), index = dir < 0 ? $head.index(d) : $head.indexAfter(d);
+    if (index != (dir < 0 ? 0 : parent.childCount)) { return null }
+    if (parent.type.spec.tableRole == "cell" || parent.type.spec.tableRole == "header_cell") {
+      var cellPos = $head.before(d);
+      var dirStr = axis == "vert" ? (dir > 0 ? "down" : "up") : (dir > 0 ? "right" : "left");
+      return view.endOfTextblock(dirStr) ? cellPos : null
+    }
+  }
+  return null
+}
+
+function domInCell(view, dom) {
+  for (; dom && dom != view.dom; dom = dom.parentNode)
+    { if (dom.nodeName == "TD" || dom.nodeName == "TH") { return dom } }
+}
+
+function cellUnderMouse(view, event) {
+  var mousePos = view.posAtCoords({left: event.clientX, top: event.clientY});
+  if (!mousePos) { return null }
+  return mousePos ? cellAround(view.state.doc.resolve(mousePos.pos)) : null
+}
+
+// This file defines helpers for normalizing tables, making sure no
+
+// Helper for iterating through the nodes in a document that changed
+// compared to the given previous document. Useful for avoiding
+// duplicate work on each transaction.
+function changedDescendants(old, cur, offset, f) {
+  var oldSize = old.childCount, curSize = cur.childCount;
+  outer: for (var i = 0, j = 0; i < curSize; i++) {
+    var child = cur.child(i);
+    for (var scan = j, e = Math.min(oldSize, i + 3); scan < e; scan++) {
+      if (old.child(scan) == child) {
+        j = scan + 1;
+        offset += child.nodeSize;
+        continue outer
+      }
+    }
+    f(child, offset);
+    if (j < oldSize && old.child(j).sameMarkup(child))
+      { changedDescendants(old.child(j), child, offset + 1, f); }
+    else
+      { child.nodesBetween(0, child.content.size, f, offset + 1); }
+    offset += child.nodeSize;
+  }
+}
+
+// :: (EditorState, ?EditorState) → ?Transaction
+// Inspect all tables in the given state's document and return a
+// transaction that fixes them, if necessary. If `oldState` was
+// provided, that is assumed to hold a previous, known-good state,
+// which will be used to avoid re-scanning unchanged parts of the
+// document.
+function fixTables(state, oldState) {
+  var tr, check = function (node, pos) {
+    if (node.type.spec.tableRole == "table") { tr = fixTable(state, node, pos, tr); }
+  };
+  if (!oldState) { state.doc.descendants(check); }
+  else if (oldState.doc != state.doc) { changedDescendants(oldState.doc, state.doc, 0, check); }
+  return tr
+}
+
+// : (EditorState, Node, number, ?Transaction) → ?Transaction
+// Fix the given table, if necessary. Will append to the transaction
+// it was given, if non-null, or create a new one if necessary.
+function fixTable(state, table, tablePos, tr) {
+  var map = TableMap.get(table);
+  if (!map.problems) { return tr }
+  if (!tr) { tr = state.tr; }
+
+  // Track which rows we must add cells to, so that we can adjust that
+  // when fixing collisions.
+  var mustAdd = [];
+  for (var i = 0; i < map.height; i++) { mustAdd.push(0); }
+  for (var i$1 = 0; i$1 < map.problems.length; i$1++) {
+    var prob = map.problems[i$1];
+    if (prob.type == "collision") {
+      var cell = table.nodeAt(prob.pos);
+      for (var j = 0; j < cell.attrs.rowspan; j++) { mustAdd[prob.row + j] += prob.n; }
+      tr.setNodeMarkup(tr.mapping.map(tablePos + 1 + prob.pos), null, rmColSpan(cell.attrs, cell.attrs.colspan - prob.n, prob.n));
+    } else if (prob.type == "missing") {
+      mustAdd[prob.row] += prob.n;
+    } else if (prob.type == "overlong_rowspan") {
+      var cell$1 = table.nodeAt(prob.pos);
+      tr.setNodeMarkup(tr.mapping.map(tablePos + 1 + prob.pos), null, setAttr(cell$1.attrs, "rowspan", cell$1.attrs.rowspan - prob.n));
+    } else if (prob.type == "colwidth mismatch") {
+      var cell$2 = table.nodeAt(prob.pos);
+      tr.setNodeMarkup(tr.mapping.map(tablePos + 1 + prob.pos), null, setAttr(cell$2.attrs, "colwidth", prob.colwidth));
+    }
+  }
+  var first, last;
+  for (var i$2 = 0; i$2 < mustAdd.length; i$2++) { if (mustAdd[i$2]) {
+    if (first == null) { first = i$2; }
+    last = i$2;
+  } }
+  // Add the necessary cells, using a heuristic for whether to add the
+  // cells at the start or end of the rows (if it looks like a 'bite'
+  // was taken out of the table, add cells at the start of the row
+  // after the bite. Otherwise add them at the end).
+  for (var i$3 = 0, pos = tablePos + 1; i$3 < map.height; i$3++) {
+    var row = table.child(i$3);
+    var end = pos + row.nodeSize;
+    var add = mustAdd[i$3];
+    if (add > 0) {
+      var tableNodeType = 'cell';
+      if (row.firstChild) {
+        tableNodeType = row.firstChild.type.spec.tableRole;
+      }
+      var nodes = [];
+      for (var j$1 = 0; j$1 < add; j$1++)
+        { nodes.push(tableNodeTypes(state.schema)[tableNodeType].createAndFill()); }
+      var side = (i$3 == 0 || first == i$3 - 1) && last == i$3 ? pos + 1 : end - 1;
+      tr.insert(tr.mapping.map(side), nodes);
+    }
+    pos = end;
+  }
+  return tr
+}
+
+// This file defines a number of table-related commands.
+
+// Helper to get the selected rectangle in a table, if any. Adds table
+// map, table node, and table start offset to the object for
+// convenience.
+function selectedRect(state) {
+  var sel = state.selection, $pos = selectionCell(state);
+  var table = $pos.node(-1), tableStart = $pos.start(-1), map = TableMap.get(table);
+  var rect;
+  if (sel instanceof CellSelection)
+    { rect = map.rectBetween(sel.$anchorCell.pos - tableStart, sel.$headCell.pos - tableStart); }
+  else
+    { rect = map.findCell($pos.pos - tableStart); }
+  rect.tableStart = tableStart;
+  rect.map = map;
+  rect.table = table;
+  return rect
+}
+
+function columnIsHeader(map, table, col) {
+  var headerCell = tableNodeTypes(table.type.schema).header_cell;
+  for (var row = 0; row < map.height; row++)
+    { if (table.nodeAt(map.map[col + row * map.width]).type != headerCell)
+      { return false } }
+  return true
+}
+
+// Add a column at the given position in a table.
+function addColumn(tr, ref, col) {
+  var map = ref.map;
+  var tableStart = ref.tableStart;
+  var table = ref.table;
+
+  var refColumn = col > 0 ? -1 : 0;
+  if (columnIsHeader(map, table, col + refColumn))
+    { refColumn = col == 0 || col == map.width ? null : 0; }
+
+  for (var row = 0; row < map.height; row++) {
+    var index = row * map.width + col;
+    // If this position falls inside a col-spanning cell
+    if (col > 0 && col < map.width && map.map[index - 1] == map.map[index]) {
+      var pos = map.map[index], cell = table.nodeAt(pos);
+      tr.setNodeMarkup(tr.mapping.map(tableStart + pos), null,
+                       addColSpan(cell.attrs, col - map.colCount(pos)));
+      // Skip ahead if rowspan > 1
+      row += cell.attrs.rowspan - 1;
+    } else {
+      var type = refColumn == null ? tableNodeTypes(table.type.schema).cell
+          : table.nodeAt(map.map[index + refColumn]).type;
+      var pos$1 = map.positionAt(row, col, table);
+      tr.insert(tr.mapping.map(tableStart + pos$1), type.createAndFill());
+    }
+  }
+  return tr
+}
+
+// :: (EditorState, dispatch: ?(tr: Transaction)) → bool
+// Command to add a column before the column with the selection.
+function addColumnBefore(state, dispatch) {
+  if (!isInTable(state)) { return false }
+  if (dispatch) {
+    var rect = selectedRect(state);
+    dispatch(addColumn(state.tr, rect, rect.left));
+  }
+  return true
+}
+
+// :: (EditorState, dispatch: ?(tr: Transaction)) → bool
+// Command to add a column after the column with the selection.
+function addColumnAfter(state, dispatch) {
+  if (!isInTable(state)) { return false }
+  if (dispatch) {
+    var rect = selectedRect(state);
+    dispatch(addColumn(state.tr, rect, rect.right));
+  }
+  return true
+}
+
+function removeColumn(tr, ref, col) {
+  var map = ref.map;
+  var table = ref.table;
+  var tableStart = ref.tableStart;
+
+  var mapStart = tr.mapping.maps.length;
+  for (var row = 0; row < map.height;) {
+    var index = row * map.width + col, pos = map.map[index], cell = table.nodeAt(pos);
+    // If this is part of a col-spanning cell
+    if ((col > 0 && map.map[index - 1] == pos) || (col < map.width - 1 && map.map[index + 1] == pos)) {
+      tr.setNodeMarkup(tr.mapping.slice(mapStart).map(tableStart + pos), null,
+                       rmColSpan(cell.attrs, col - map.colCount(pos)));
+    } else {
+      var start = tr.mapping.slice(mapStart).map(tableStart + pos);
+      tr.delete(start, start + cell.nodeSize);
+    }
+    row += cell.attrs.rowspan;
+  }
+}
+
+// :: (EditorState, dispatch: ?(tr: Transaction)) → bool
+// Command function that removes the selected columns from a table.
+function deleteColumn(state, dispatch) {
+  if (!isInTable(state)) { return false }
+  if (dispatch) {
+    var rect = selectedRect(state), tr = state.tr;
+    if (rect.left == 0 && rect.right == rect.map.width) { return false }
+    for (var i = rect.right - 1;; i--) {
+      removeColumn(tr, rect, i);
+      if (i == rect.left) { break }
+      rect.table = rect.tableStart ? tr.doc.nodeAt(rect.tableStart - 1) : tr.doc;
+      rect.map = TableMap.get(rect.table);
+    }
+    dispatch(tr);
+  }
+  return true
+}
+
+function rowIsHeader(map, table, row) {
+  var headerCell = tableNodeTypes(table.type.schema).header_cell;
+  for (var col = 0; col < map.width; col++)
+    { if (table.nodeAt(map.map[col + row * map.width]).type != headerCell)
+      { return false } }
+  return true
+}
+
+function addRow(tr, ref, row) {
+  var map = ref.map;
+  var tableStart = ref.tableStart;
+  var table = ref.table;
+
+  var rowPos = tableStart;
+  for (var i = 0; i < row; i++) { rowPos += table.child(i).nodeSize; }
+  var cells = [], refRow = row > 0 ? -1 : 0;
+  if (rowIsHeader(map, table, row + refRow))
+    { refRow = row == 0 || row == map.height ? null : 0; }
+  for (var col = 0, index = map.width * row; col < map.width; col++, index++) {
+    // Covered by a rowspan cell
+    if (row > 0 && row < map.height && map.map[index] == map.map[index - map.width]) {
+      var pos = map.map[index], attrs = table.nodeAt(pos).attrs;
+      tr.setNodeMarkup(tableStart + pos, null, setAttr(attrs, "rowspan", attrs.rowspan + 1));
+      col += attrs.colspan - 1;
+    } else {
+      var type = refRow == null ? tableNodeTypes(table.type.schema).cell
+          : table.nodeAt(map.map[index + refRow * map.width]).type;
+      cells.push(type.createAndFill());
+    }
+  }
+  tr.insert(rowPos, tableNodeTypes(table.type.schema).row.create(null, cells));
+  return tr
+}
+
+// :: (EditorState, dispatch: ?(tr: Transaction)) → bool
+// Add a table row before the selection.
+function addRowBefore(state, dispatch) {
+  if (!isInTable(state)) { return false }
+  if (dispatch) {
+    var rect = selectedRect(state);
+    dispatch(addRow(state.tr, rect, rect.top));
+  }
+  return true
+}
+
+// :: (EditorState, dispatch: ?(tr: Transaction)) → bool
+// Add a table row after the selection.
+function addRowAfter(state, dispatch) {
+  if (!isInTable(state)) { return false }
+  if (dispatch) {
+    var rect = selectedRect(state);
+    dispatch(addRow(state.tr, rect, rect.bottom));
+  }
+  return true
+}
+
+function removeRow(tr, ref, row) {
+  var map = ref.map;
+  var table = ref.table;
+  var tableStart = ref.tableStart;
+
+  var rowPos = 0;
+  for (var i = 0; i < row; i++) { rowPos += table.child(i).nodeSize; }
+  var nextRow = rowPos + table.child(row).nodeSize;
+
+  var mapFrom = tr.mapping.maps.length;
+  tr.delete(rowPos + tableStart, nextRow + tableStart);
+
+  for (var col = 0, index = row * map.width; col < map.width; col++, index++) {
+    var pos = map.map[index];
+    if (row > 0 && pos == map.map[index - map.width]) {
+      // If this cell starts in the row above, simply reduce its rowspan
+      var attrs = table.nodeAt(pos).attrs;
+      tr.setNodeMarkup(tr.mapping.slice(mapFrom).map(pos + tableStart), null, setAttr(attrs, "rowspan", attrs.rowspan - 1));
+      col += attrs.colspan - 1;
+    } else if (row < map.width && pos == map.map[index + map.width]) {
+      // Else, if it continues in the row below, it has to be moved down
+      var cell = table.nodeAt(pos);
+      var copy = cell.type.create(setAttr(cell.attrs, "rowspan", cell.attrs.rowspan - 1), cell.content);
+      var newPos = map.positionAt(row + 1, col, table);
+      tr.insert(tr.mapping.slice(mapFrom).map(tableStart + newPos), copy);
+      col += cell.attrs.colspan - 1;
+    }
+  }
+}
+
+// :: (EditorState, dispatch: ?(tr: Transaction)) → bool
+// Remove the selected rows from a table.
+function deleteRow(state, dispatch) {
+  if (!isInTable(state)) { return false }
+  if (dispatch) {
+    var rect = selectedRect(state), tr = state.tr;
+    if (rect.top == 0 && rect.bottom == rect.map.height) { return false }
+    for (var i = rect.bottom - 1;; i--) {
+      removeRow(tr, rect, i);
+      if (i == rect.top) { break }
+      rect.table = rect.tableStart ? tr.doc.nodeAt(rect.tableStart - 1) : tr.doc;
+      rect.map = TableMap.get(rect.table);
+    }
+    dispatch(tr);
+  }
+  return true
+}
+
+function isEmpty(cell) {
+  var c = cell.content;
+  return c.childCount == 1 && c.firstChild.isTextblock && c.firstChild.childCount == 0
+}
+
+function cellsOverlapRectangle(ref, rect) {
+  var width = ref.width;
+  var height = ref.height;
+  var map = ref.map;
+
+  var indexTop = rect.top * width + rect.left, indexLeft = indexTop;
+  var indexBottom = (rect.bottom - 1) * width + rect.left, indexRight = indexTop + (rect.right - rect.left - 1);
+  for (var i = rect.top; i < rect.bottom; i++) {
+    if (rect.left > 0 && map[indexLeft] == map[indexLeft - 1] ||
+        rect.right < width && map[indexRight] == map[indexRight + 1]) { return true }
+    indexLeft += width; indexRight += width;
+  }
+  for (var i$1 = rect.left; i$1 < rect.right; i$1++) {
+    if (rect.top > 0 && map[indexTop] == map[indexTop - width] ||
+        rect.bottom < height && map[indexBottom] == map[indexBottom + width]) { return true }
+    indexTop++; indexBottom++;
+  }
+  return false
+}
+
+// :: (EditorState, dispatch: ?(tr: Transaction)) → bool
+// Merge the selected cells into a single cell. Only available when
+// the selected cells' outline forms a rectangle.
+function mergeCells(state, dispatch) {
+  var sel = state.selection;
+  if (!(sel instanceof CellSelection) || sel.$anchorCell.pos == sel.$headCell.pos) { return false }
+  var rect = selectedRect(state);
+  var map = rect.map;
+  if (cellsOverlapRectangle(map, rect)) { return false }
+  if (dispatch) {
+    var tr = state.tr, seen = {}, content = prosemirrorModel.Fragment.empty, mergedPos, mergedCell;
+    for (var row = rect.top; row < rect.bottom; row++) {
+      for (var col = rect.left; col < rect.right; col++) {
+        var cellPos = map.map[row * map.width + col], cell = rect.table.nodeAt(cellPos);
+        if (seen[cellPos]) { continue }
+        seen[cellPos] = true;
+        if (mergedPos == null) {
+          mergedPos = cellPos;
+          mergedCell = cell;
+        } else {
+          if (!isEmpty(cell)) { content = content.append(cell.content); }
+          var mapped = tr.mapping.map(cellPos + rect.tableStart);
+          tr.delete(mapped, mapped + cell.nodeSize);
+        }
+      }
+    }
+    tr.setNodeMarkup(mergedPos + rect.tableStart, null,
+                     setAttr(addColSpan(mergedCell.attrs, mergedCell.attrs.colspan, (rect.right - rect.left) - mergedCell.attrs.colspan),
+                             "rowspan", rect.bottom - rect.top));
+    if (content.size) {
+      var end = mergedPos + 1 + mergedCell.content.size;
+      var start = isEmpty(mergedCell) ? mergedPos + 1 : end;
+      tr.replaceWith(start + rect.tableStart, end + rect.tableStart, content);
+    }
+    tr.setSelection(new CellSelection(tr.doc.resolve(mergedPos + rect.tableStart)));
+    dispatch(tr);
+  }
+  return true
+}
+
+// :: (EditorState, dispatch: ?(tr: Transaction)) → bool
+// Split a selected cell, whose rowpan or colspan is greater than one,
+// into smaller cells.
+function splitCell(state, dispatch) {
+  var sel = state.selection;
+  var cellNode, cellPos;
+  if (!(sel instanceof CellSelection)) {
+    cellNode = cellWrapping(sel.$from);
+    if (!cellNode) { return false }
+    cellPos = cellAround(sel.$from).pos;
+  } else {
+    if (sel.$anchorCell.pos != sel.$headCell.pos) { return false }
+    cellNode = sel.$anchorCell.nodeAfter;
+    cellPos = sel.$anchorCell.pos;
+  }
+  if (cellNode.attrs.colspan == 1 && cellNode.attrs.rowspan == 1) {return false}
+  if (dispatch) {
+    var baseAttrs = cellNode.attrs, attrs = [], colwidth = baseAttrs.colwidth;
+    if (baseAttrs.rowspan > 1) { baseAttrs = setAttr(baseAttrs, "rowspan", 1); }
+    if (baseAttrs.colspan > 1) { baseAttrs = setAttr(baseAttrs, "colspan", 1); }
+    var rect = selectedRect(state), tr = state.tr;
+    for (var i = 0; i < rect.right - rect.left; i++)
+      { attrs.push(colwidth ? setAttr(baseAttrs, "colwidth", colwidth && colwidth[i] ? [colwidth[i]] : null) : baseAttrs); }
+    var lastCell, cellType = tableNodeTypes(state.schema)[cellNode.type.spec.tableRole];
+    for (var row = 0; row < rect.bottom; row++) {
+      if (row >= rect.top) {
+        var pos = rect.map.positionAt(row, rect.left, rect.table);
+        if (row == rect.top) { pos += cellNode.nodeSize; }
+        for (var col = rect.left, i$1 = 0; col < rect.right; col++, i$1++) {
+          if (col == rect.left && row == rect.top) { continue }
+          tr.insert(lastCell = tr.mapping.map(pos + rect.tableStart, 1), cellType.createAndFill(attrs[i$1]));
+        }
+      }
+    }
+    tr.setNodeMarkup(cellPos, null, attrs[0]);
+    if (sel instanceof CellSelection)
+      { tr.setSelection(new CellSelection(tr.doc.resolve(sel.$anchorCell.pos),
+                                        lastCell && tr.doc.resolve(lastCell))); }
+    dispatch(tr);
+  }
+  return true
+}
+
+// :: (string, any) → (EditorState, dispatch: ?(tr: Transaction)) → bool
+// Returns a command that sets the given attribute to the given value,
+// and is only available when the currently selected cell doesn't
+// already have that attribute set to that value.
+function setCellAttr(name, value) {
+  return function(state, dispatch) {
+    if (!isInTable(state)) { return false }
+    var $cell = selectionCell(state);
+    if ($cell.nodeAfter.attrs[name] === value) { return false }
+    if (dispatch) {
+      var tr = state.tr;
+      if (state.selection instanceof CellSelection)
+        { state.selection.forEachCell(function (node, pos) {
+          if (node.attrs[name] !== value)
+            { tr.setNodeMarkup(pos, null, setAttr(node.attrs, name, value)); }
+        }); }
+      else
+        { tr.setNodeMarkup($cell.pos, null, setAttr($cell.nodeAfter.attrs, name, value)); }
+      dispatch(tr);
+    }
+    return true
+  }
+}
+
+function deprecated_toggleHeader(type) {
+  return function(state, dispatch) {
+    if (!isInTable(state)) { return false }
+    if (dispatch) {
+      var types = tableNodeTypes(state.schema);
+      var rect = selectedRect(state), tr = state.tr;
+      var cells = rect.map.cellsInRect(type == "column" ? new Rect(rect.left, 0, rect.right, rect.map.height) :
+                                       type == "row" ? new Rect(0, rect.top, rect.map.width, rect.bottom) : rect);
+      var nodes = cells.map(function (pos) { return rect.table.nodeAt(pos); });
+      for (var i = 0; i < cells.length; i++) // Remove headers, if any
+        { if (nodes[i].type == types.header_cell)
+          { tr.setNodeMarkup(rect.tableStart + cells[i], types.cell, nodes[i].attrs); } }
+      if (tr.steps.length == 0) { for (var i$1 = 0; i$1 < cells.length; i$1++) // No headers removed, add instead
+        { tr.setNodeMarkup(rect.tableStart + cells[i$1], types.header_cell, nodes[i$1].attrs); } }
+      dispatch(tr);
+    }
+    return true
+  }
+}
+
+function isHeaderEnabledByType(type, rect, types) {
+  // Get cell positions for first row or first column
+  var cellPositions = rect.map.cellsInRect({
+    left: 0,
+    top: 0,
+    right: type == "row" ? rect.map.width : 1,
+    bottom: type == "column" ? rect.map.height : 1,
+  });
+
+  for (var i = 0; i < cellPositions.length; i++) {
+    var cell = rect.table.nodeAt(cellPositions[i]);
+    if (cell && cell.type !== types.header_cell) {
+      return false
+    }
+  }
+
+  return true
+}
+
+// :: (string, ?{ useDeprecatedLogic: bool }) → (EditorState, dispatch: ?(tr: Transaction)) → bool
+// Toggles between row/column header and normal cells (Only applies to first row/column).
+// For deprecated behavior pass `useDeprecatedLogic` in options with true.
+function toggleHeader(type, options) {
+  options = options || { useDeprecatedLogic: false };
+
+  if (options.useDeprecatedLogic)
+    { return deprecated_toggleHeader(type) }
+
+  return function(state, dispatch) {
+    if (!isInTable(state)) { return false }
+    if (dispatch) {
+      var types = tableNodeTypes(state.schema);
+      var rect = selectedRect(state), tr = state.tr;
+
+      var isHeaderRowEnabled = isHeaderEnabledByType("row", rect, types);
+      var isHeaderColumnEnabled = isHeaderEnabledByType("column", rect, types);
+
+      var isHeaderEnabled = type === "column" ? isHeaderRowEnabled :
+                            type === "row"    ? isHeaderColumnEnabled : false;
+
+      var selectionStartsAt = isHeaderEnabled ? 1 : 0;
+
+      var cellsRect = type == "column" ? new Rect(0, selectionStartsAt, 1, rect.map.height) :
+                      type == "row" ? new Rect(selectionStartsAt, 0, rect.map.width, 1) : rect;
+
+      var newType = type == "column" ? isHeaderColumnEnabled ? types.cell : types.header_cell :
+                    type == "row" ? isHeaderRowEnabled ? types.cell : types.header_cell : types.cell;
+
+      rect.map.cellsInRect(cellsRect).forEach(function (relativeCellPos) {
+        var cellPos = relativeCellPos + rect.tableStart;
+        var cell = tr.doc.nodeAt(cellPos);
+
+        if (cell) {
+          tr.setNodeMarkup(cellPos, newType, cell.attrs);
+        }
+      });
+
+      dispatch(tr);
+    }
+    return true
+  }
+}
+
+// :: (EditorState, dispatch: ?(tr: Transaction)) → bool
+// Toggles whether the selected row contains header cells.
+var toggleHeaderRow = toggleHeader("row", { useDeprecatedLogic: true });
+
+// :: (EditorState, dispatch: ?(tr: Transaction)) → bool
+// Toggles whether the selected column contains header cells.
+var toggleHeaderColumn = toggleHeader("column", { useDeprecatedLogic: true });
+
+// :: (EditorState, dispatch: ?(tr: Transaction)) → bool
+// Toggles whether the selected cells are header cells.
+var toggleHeaderCell = toggleHeader("cell", { useDeprecatedLogic: true });
+
+function findNextCell($cell, dir) {
+  if (dir < 0) {
+    var before = $cell.nodeBefore;
+    if (before) { return $cell.pos - before.nodeSize }
+    for (var row = $cell.index(-1) - 1, rowEnd = $cell.before(); row >= 0; row--) {
+      var rowNode = $cell.node(-1).child(row);
+      if (rowNode.childCount) { return rowEnd - 1 - rowNode.lastChild.nodeSize }
+      rowEnd -= rowNode.nodeSize;
+    }
+  } else {
+    if ($cell.index() < $cell.parent.childCount - 1) { return $cell.pos + $cell.nodeAfter.nodeSize }
+    var table = $cell.node(-1);
+    for (var row$1 = $cell.indexAfter(-1), rowStart = $cell.after(); row$1 < table.childCount; row$1++) {
+      var rowNode$1 = table.child(row$1);
+      if (rowNode$1.childCount) { return rowStart + 1 }
+      rowStart += rowNode$1.nodeSize;
+    }
+  }
+}
+
+// :: (number) → (EditorState, dispatch: ?(tr: Transaction)) → bool
+// Returns a command for selecting the next (direction=1) or previous
+// (direction=-1) cell in a table.
+function goToNextCell(direction) {
+  return function(state, dispatch) {
+    if (!isInTable(state)) { return false }
+    var cell = findNextCell(selectionCell(state), direction);
+    if (cell == null) { return }
+    if (dispatch) {
+      var $cell = state.doc.resolve(cell);
+      dispatch(state.tr.setSelection(prosemirrorState.TextSelection.between($cell, moveCellForward($cell))).scrollIntoView());
+    }
+    return true
+  }
+}
+
+// :: (EditorState, ?(tr: Transaction)) → bool
+// Deletes the table around the selection, if any.
+function deleteTable(state, dispatch) {
+  var $pos = state.selection.$anchor;
+  for (var d = $pos.depth; d > 0; d--) {
+    var node = $pos.node(d);
+    if (node.type.spec.tableRole == "table") {
+      if (dispatch) { dispatch(state.tr.delete($pos.before(d), $pos.after(d)).scrollIntoView()); }
+      return true
+    }
+  }
+  return false
+}
+
+var TableView = function TableView(node, cellMinWidth) {
+  this.node = node;
+  this.cellMinWidth = cellMinWidth;
+  this.dom = document.createElement("div");
+  this.dom.className = "tableWrapper";
+  this.table = this.dom.appendChild(document.createElement("table"));
+  this.colgroup = this.table.appendChild(document.createElement("colgroup"));
+  updateColumns(node, this.colgroup, this.table, cellMinWidth);
+  this.contentDOM = this.table.appendChild(document.createElement("tbody"));
+};
+
+TableView.prototype.update = function update (node) {
+  if (node.type != this.node.type) { return false }
+  this.node = node;
+  updateColumns(node, this.colgroup, this.table, this.cellMinWidth);
+  return true
+};
+
+TableView.prototype.ignoreMutation = function ignoreMutation (record) {
+  return record.type == "attributes" && (record.target == this.table || this.colgroup.contains(record.target))
+};
+
+function updateColumns(node, colgroup, table, cellMinWidth, overrideCol, overrideValue) {
+  var totalWidth = 0, fixedWidth = true;
+  var nextDOM = colgroup.firstChild, row = node.firstChild;
+  for (var i = 0, col = 0; i < row.childCount; i++) {
+    var ref = row.child(i).attrs;
+    var colspan = ref.colspan;
+    var colwidth = ref.colwidth;
+    for (var j = 0; j < colspan; j++, col++) {
+      var hasWidth = overrideCol == col ? overrideValue : colwidth && colwidth[j];
+      var cssWidth = hasWidth ? hasWidth + "px" : "";
+      totalWidth += hasWidth || cellMinWidth;
+      if (!hasWidth) { fixedWidth = false; }
+      if (!nextDOM) {
+        colgroup.appendChild(document.createElement("col")).style.width = cssWidth;
+      } else {
+        if (nextDOM.style.width != cssWidth) { nextDOM.style.width = cssWidth; }
+        nextDOM = nextDOM.nextSibling;
+      }
+    }
+  }
+
+  while (nextDOM) {
+    var after = nextDOM.nextSibling;
+    nextDOM.parentNode.removeChild(nextDOM);
+    nextDOM = after;
+  }
+
+  if (fixedWidth) {
+    table.style.width = totalWidth + "px";
+    table.style.minWidth = "";
+  } else {
+    table.style.width = "";
+    table.style.minWidth = totalWidth + "px";
+  }
+}
+
+var key$1 = new prosemirrorState.PluginKey("tableColumnResizing");
+
+function columnResizing(ref) {
+  if ( ref === void 0 ) ref = {};
+  var handleWidth = ref.handleWidth; if ( handleWidth === void 0 ) handleWidth = 5;
+  var cellMinWidth = ref.cellMinWidth; if ( cellMinWidth === void 0 ) cellMinWidth = 25;
+  var View = ref.View; if ( View === void 0 ) View = TableView;
+  var lastColumnResizable = ref.lastColumnResizable; if ( lastColumnResizable === void 0 ) lastColumnResizable = true;
+
+  var plugin = new prosemirrorState.Plugin({
+    key: key$1,
+    state: {
+      init: function init(_, state) {
+        this.spec.props.nodeViews[tableNodeTypes(state.schema).table.name] =
+          function (node, view) { return new View(node, cellMinWidth, view); };
+        return new ResizeState(-1, false)
+      },
+      apply: function apply(tr, prev) {
+        return prev.apply(tr)
+      }
+    },
+    props: {
+      attributes: function attributes(state) {
+        var pluginState = key$1.getState(state);
+        return pluginState.activeHandle > -1 ? {class: "resize-cursor"} : null
+      },
+
+      handleDOMEvents: {
+        mousemove: function mousemove(view, event) { handleMouseMove(view, event, handleWidth, cellMinWidth, lastColumnResizable); },
+        mouseleave: function mouseleave(view) { handleMouseLeave(view); },
+        mousedown: function mousedown(view, event) { handleMouseDown$1(view, event, cellMinWidth); }
+      },
+
+      decorations: function decorations(state) {
+        var pluginState = key$1.getState(state);
+        if (pluginState.activeHandle > -1) { return handleDecorations(state, pluginState.activeHandle) }
+      },
+
+      nodeViews: {}
+    }
+  });
+  return plugin
+}
+
+var ResizeState = function ResizeState(activeHandle, dragging) {
+  this.activeHandle = activeHandle;
+  this.dragging = dragging;
+};
+
+ResizeState.prototype.apply = function apply (tr) {
+  var state = this, action = tr.getMeta(key$1);
+  if (action && action.setHandle != null)
+    { return new ResizeState(action.setHandle, null) }
+  if (action && action.setDragging !== undefined)
+    { return new ResizeState(state.activeHandle, action.setDragging) }
+  if (state.activeHandle > -1 && tr.docChanged) {
+    var handle = tr.mapping.map(state.activeHandle, -1);
+    if (!pointsAtCell(tr.doc.resolve(handle))) { handle = null; }
+    state = new ResizeState(handle, state.dragging);
+  }
+  return state
+};
+
+function handleMouseMove(view, event, handleWidth, cellMinWidth, lastColumnResizable) {
+  var pluginState = key$1.getState(view.state);
+
+  if (!pluginState.dragging) {
+    var target = domCellAround(event.target), cell = -1;
+    if (target) {
+      var ref = target.getBoundingClientRect();
+      var left = ref.left;
+      var right = ref.right;
+      if (event.clientX - left <= handleWidth)
+        { cell = edgeCell(view, event, "left"); }
+      else if (right - event.clientX <= handleWidth)
+        { cell = edgeCell(view, event, "right"); }
+    }
+
+    if (cell != pluginState.activeHandle) {
+      if (!lastColumnResizable && cell !== -1) {
+        var $cell = view.state.doc.resolve(cell);
+        var table = $cell.node(-1), map = TableMap.get(table), start = $cell.start(-1);
+        var col = map.colCount($cell.pos - start) + $cell.nodeAfter.attrs.colspan - 1;
+
+        if (col == map.width - 1) {
+          return
+        }
+      }
+
+      updateHandle(view, cell);
+    }
+  }
+}
+
+function handleMouseLeave(view) {
+  var pluginState = key$1.getState(view.state);
+  if (pluginState.activeHandle > -1 && !pluginState.dragging) { updateHandle(view, -1); }
+}
+
+function handleMouseDown$1(view, event, cellMinWidth) {
+  var pluginState = key$1.getState(view.state);
+  if (pluginState.activeHandle == -1 || pluginState.dragging) { return false }
+
+  var cell = view.state.doc.nodeAt(pluginState.activeHandle);
+  var width = currentColWidth(view, pluginState.activeHandle, cell.attrs);
+  view.dispatch(view.state.tr.setMeta(key$1, {setDragging: {startX: event.clientX, startWidth: width}}));
+
+  function finish(event) {
+    window.removeEventListener("mouseup", finish);
+    window.removeEventListener("mousemove", move);
+    var pluginState = key$1.getState(view.state);
+    if (pluginState.dragging) {
+      updateColumnWidth(view, pluginState.activeHandle, draggedWidth(pluginState.dragging, event, cellMinWidth));
+      view.dispatch(view.state.tr.setMeta(key$1, {setDragging: null}));
+    }
+  }
+  function move(event) {
+    if (!event.which) { return finish(event) }
+    var pluginState = key$1.getState(view.state);
+    var dragged = draggedWidth(pluginState.dragging, event, cellMinWidth);
+    displayColumnWidth(view, pluginState.activeHandle, dragged, cellMinWidth);
+  }
+
+  window.addEventListener("mouseup", finish);
+  window.addEventListener("mousemove", move);
+  event.preventDefault();
+  return true
+}
+
+function currentColWidth(view, cellPos, ref) {
+  var colspan = ref.colspan;
+  var colwidth = ref.colwidth;
+
+  var width = colwidth && colwidth[colwidth.length - 1];
+  if (width) { return width }
+  var dom = view.domAtPos(cellPos);
+  var node = dom.node.childNodes[dom.offset];
+  var domWidth = node.offsetWidth, parts = colspan;
+  if (colwidth) { for (var i = 0; i < colspan; i++) { if (colwidth[i]) {
+    domWidth -= colwidth[i];
+    parts--;
+  } } }
+  return domWidth / parts
+}
+
+function domCellAround(target) {
+  while (target && target.nodeName != "TD" && target.nodeName != "TH")
+    { target = target.classList.contains("ProseMirror") ? null : target.parentNode; }
+  return target
+}
+
+function edgeCell(view, event, side) {
+  var ref = view.posAtCoords({left: event.clientX, top: event.clientY});
+  var pos = ref.pos;
+  var $cell = cellAround(view.state.doc.resolve(pos));
+  if (!$cell) { return -1 }
+  if (side == "right") { return $cell.pos }
+  var map = TableMap.get($cell.node(-1)), start = $cell.start(-1);
+  var index = map.map.indexOf($cell.pos - start);
+  return index % map.width == 0 ? -1 : start + map.map[index - 1]
+}
+
+function draggedWidth(dragging, event, cellMinWidth) {
+  var offset = event.clientX - dragging.startX;
+  return Math.max(cellMinWidth, dragging.startWidth + offset)
+}
+
+function updateHandle(view, value) {
+  view.dispatch(view.state.tr.setMeta(key$1, {setHandle: value}));
+}
+
+function updateColumnWidth(view, cell, width) {
+  var $cell = view.state.doc.resolve(cell);
+  var table = $cell.node(-1), map = TableMap.get(table), start = $cell.start(-1);
+  var col = map.colCount($cell.pos - start) + $cell.nodeAfter.attrs.colspan - 1;
+  var tr = view.state.tr;
+  for (var row = 0; row < map.height; row++) {
+    var mapIndex = row * map.width + col;
+    // Rowspanning cell that has already been handled
+    if (row && map.map[mapIndex] == map.map[mapIndex - map.width]) { continue }
+    var pos = map.map[mapIndex];
+    var ref = table.nodeAt(pos);
+    var attrs = ref.attrs;
+    var index = attrs.colspan == 1 ? 0 : col - map.colCount(pos);
+    if (attrs.colwidth && attrs.colwidth[index] == width) { continue }
+    var colwidth = attrs.colwidth ? attrs.colwidth.slice() : zeroes(attrs.colspan);
+    colwidth[index] = width;
+    tr.setNodeMarkup(start + pos, null, setAttr(attrs, "colwidth", colwidth));
+  }
+  if (tr.docChanged) { view.dispatch(tr); }
+}
+
+function displayColumnWidth(view, cell, width, cellMinWidth) {
+  var $cell = view.state.doc.resolve(cell);
+  var table = $cell.node(-1), start = $cell.start(-1);
+  var col = TableMap.get(table).colCount($cell.pos - start) + $cell.nodeAfter.attrs.colspan - 1;
+  var dom = view.domAtPos($cell.start(-1)).node;
+  while (dom.nodeName != "TABLE") { dom = dom.parentNode; }
+  updateColumns(table, dom.firstChild, dom, cellMinWidth, col, width);
+}
+
+function zeroes(n) {
+  var result = [];
+  for (var i = 0; i < n; i++) { result.push(0); }
+  return result
+}
+
+function handleDecorations(state, cell) {
+  var decorations = [];
+  var $cell = state.doc.resolve(cell);
+  var table = $cell.node(-1), map = TableMap.get(table), start = $cell.start(-1);
+  var col = map.colCount($cell.pos - start) + $cell.nodeAfter.attrs.colspan;
+  for (var row = 0; row < map.height; row++) {
+    var index = col + row * map.width - 1;
+    // For positions that are have either a different cell or the end
+    // of the table to their right, and either the top of the table or
+    // a different cell above them, add a decoration
+    if ((col == map.width || map.map[index] != map.map[index + 1]) &&
+        (row == 0 || map.map[index - 1] != map.map[index - 1 - map.width])) {
+      var cellPos = map.map[index];
+      var pos = start + cellPos + table.nodeAt(cellPos).nodeSize - 1;
+      var dom = document.createElement("div");
+      dom.className = "column-resize-handle";
+      decorations.push(prosemirrorView.Decoration.widget(pos, dom));
+    }
+  }
+  return prosemirrorView.DecorationSet.create(state.doc, decorations)
+}
+
+// This file defines a plugin that handles the drawing of cell
+
+// :: () → Plugin
+//
+// Creates a [plugin](http://prosemirror.net/docs/ref/#state.Plugin)
+// that, when added to an editor, enables cell-selection, handles
+// cell-based copy/paste, and makes sure tables stay well-formed (each
+// row has the same width, and cells don't overlap).
+//
+// You should probably put this plugin near the end of your array of
+// plugins, since it handles mouse and arrow key events in tables
+// rather broadly, and other plugins, like the gap cursor or the
+// column-width dragging plugin, might want to get a turn first to
+// perform more specific behavior.
+function tableEditing(ref) {
+  if ( ref === void 0 ) ref = {};
+  var allowTableNodeSelection = ref.allowTableNodeSelection; if ( allowTableNodeSelection === void 0 ) allowTableNodeSelection = false;
+
+  return new prosemirrorState.Plugin({
+    key: key,
+
+    // This piece of state is used to remember when a mouse-drag
+    // cell-selection is happening, so that it can continue even as
+    // transactions (which might move its anchor cell) come in.
+    state: {
+      init: function init() { return null },
+      apply: function apply(tr, cur) {
+        var set = tr.getMeta(key);
+        if (set != null) { return set == -1 ? null : set }
+        if (cur == null || !tr.docChanged) { return cur }
+        var ref = tr.mapping.mapResult(cur);
+        var deleted = ref.deleted;
+        var pos = ref.pos;
+        return deleted ? null : pos
+      }
+    },
+
+    props: {
+      decorations: drawCellSelection,
+
+      handleDOMEvents: {
+        mousedown: handleMouseDown
+      },
+
+      createSelectionBetween: function createSelectionBetween(view) {
+        if (key.getState(view.state) != null) { return view.state.selection }
+      },
+
+      handleTripleClick: handleTripleClick,
+
+      handleKeyDown: handleKeyDown,
+
+      handlePaste: handlePaste
+    },
+
+    appendTransaction: function appendTransaction(_, oldState, state) {
+      return normalizeSelection(state, fixTables(state, oldState), allowTableNodeSelection)
+    }
+  })
+}
+
+exports.tableEditing = tableEditing;
+exports.fixTables = fixTables;
+exports.handlePaste = handlePaste;
+exports.cellAround = cellAround;
+exports.isInTable = isInTable;
+exports.selectionCell = selectionCell;
+exports.moveCellForward = moveCellForward;
+exports.inSameTable = inSameTable;
+exports.findCell = findCell;
+exports.colCount = colCount;
+exports.nextCell = nextCell;
+exports.tableNodes = tableNodes;
+exports.CellSelection = CellSelection;
+exports.TableMap = TableMap;
+exports.columnResizing = columnResizing;
+exports.columnResizingPluginKey = key$1;
+exports.updateColumnsOnResize = updateColumns;
+exports.__pastedCells = pastedCells;
+exports.__insertCells = insertCells;
+exports.__clipCells = clipCells;
+exports.addColumn = addColumn;
+exports.addColumnBefore = addColumnBefore;
+exports.addColumnAfter = addColumnAfter;
+exports.removeColumn = removeColumn;
+exports.deleteColumn = deleteColumn;
+exports.addRow = addRow;
+exports.addRowBefore = addRowBefore;
+exports.addRowAfter = addRowAfter;
+exports.removeRow = removeRow;
+exports.deleteRow = deleteRow;
+exports.mergeCells = mergeCells;
+exports.splitCell = splitCell;
+exports.setCellAttr = setCellAttr;
+exports.toggleHeader = toggleHeader;
+exports.toggleHeaderRow = toggleHeaderRow;
+exports.toggleHeaderColumn = toggleHeaderColumn;
+exports.toggleHeaderCell = toggleHeaderCell;
+exports.goToNextCell = goToNextCell;
+exports.deleteTable = deleteTable;
+//# sourceMappingURL=index.js.map
+
+
+/***/ }),
+
 /***/ "./node_modules/prosemirror-transform/dist/index.js":
 /*!**********************************************************!*\
   !*** ./node_modules/prosemirror-transform/dist/index.js ***!
@@ -36969,7 +39256,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 var prosemirrorState = __webpack_require__(/*! prosemirror-state */ "./node_modules/prosemirror-state/dist/index.js");
 var prosemirrorModel = __webpack_require__(/*! prosemirror-model */ "./node_modules/prosemirror-model/dist/index.js");
-var prosemirrorTables = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module 'prosemirror-tables'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+var prosemirrorTables = __webpack_require__(/*! prosemirror-tables */ "./node_modules/prosemirror-tables/dist/index.js");
 
 // :: (nodeType: union<NodeType, [NodeType]>) → (tr: Transaction) → Transaction
 // Returns a new transaction that removes a node of a given `nodeType`. It will return an original transaction if parent node hasn't been found.
@@ -53473,545 +55760,6 @@ module.exports = RopeSequence
 
 /***/ }),
 
-/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ReservationComponent.vue?vue&type=style&index=0&id=75cc3efc&scoped=true&lang=css&":
-/*!******************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ReservationComponent.vue?vue&type=style&index=0&id=75cc3efc&scoped=true&lang=css& ***!
-  \******************************************************************************************************************************************************************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-var content = __webpack_require__(/*! !../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./ReservationComponent.vue?vue&type=style&index=0&id=75cc3efc&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ReservationComponent.vue?vue&type=style&index=0&id=75cc3efc&scoped=true&lang=css&");
-
-if(typeof content === 'string') content = [[module.i, content, '']];
-
-var transform;
-var insertInto;
-
-
-
-var options = {"hmr":true}
-
-options.transform = transform
-options.insertInto = undefined;
-
-var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
-
-if(content.locals) module.exports = content.locals;
-
-if(false) {}
-
-/***/ }),
-
-/***/ "./node_modules/style-loader/lib/addStyles.js":
-/*!****************************************************!*\
-  !*** ./node_modules/style-loader/lib/addStyles.js ***!
-  \****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-/*
-	MIT License http://www.opensource.org/licenses/mit-license.php
-	Author Tobias Koppers @sokra
-*/
-
-var stylesInDom = {};
-
-var	memoize = function (fn) {
-	var memo;
-
-	return function () {
-		if (typeof memo === "undefined") memo = fn.apply(this, arguments);
-		return memo;
-	};
-};
-
-var isOldIE = memoize(function () {
-	// Test for IE <= 9 as proposed by Browserhacks
-	// @see http://browserhacks.com/#hack-e71d8692f65334173fee715c222cb805
-	// Tests for existence of standard globals is to allow style-loader
-	// to operate correctly into non-standard environments
-	// @see https://github.com/webpack-contrib/style-loader/issues/177
-	return window && document && document.all && !window.atob;
-});
-
-var getTarget = function (target, parent) {
-  if (parent){
-    return parent.querySelector(target);
-  }
-  return document.querySelector(target);
-};
-
-var getElement = (function (fn) {
-	var memo = {};
-
-	return function(target, parent) {
-                // If passing function in options, then use it for resolve "head" element.
-                // Useful for Shadow Root style i.e
-                // {
-                //   insertInto: function () { return document.querySelector("#foo").shadowRoot }
-                // }
-                if (typeof target === 'function') {
-                        return target();
-                }
-                if (typeof memo[target] === "undefined") {
-			var styleTarget = getTarget.call(this, target, parent);
-			// Special case to return head of iframe instead of iframe itself
-			if (window.HTMLIFrameElement && styleTarget instanceof window.HTMLIFrameElement) {
-				try {
-					// This will throw an exception if access to iframe is blocked
-					// due to cross-origin restrictions
-					styleTarget = styleTarget.contentDocument.head;
-				} catch(e) {
-					styleTarget = null;
-				}
-			}
-			memo[target] = styleTarget;
-		}
-		return memo[target]
-	};
-})();
-
-var singleton = null;
-var	singletonCounter = 0;
-var	stylesInsertedAtTop = [];
-
-var	fixUrls = __webpack_require__(/*! ./urls */ "./node_modules/style-loader/lib/urls.js");
-
-module.exports = function(list, options) {
-	if (typeof DEBUG !== "undefined" && DEBUG) {
-		if (typeof document !== "object") throw new Error("The style-loader cannot be used in a non-browser environment");
-	}
-
-	options = options || {};
-
-	options.attrs = typeof options.attrs === "object" ? options.attrs : {};
-
-	// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
-	// tags it will allow on a page
-	if (!options.singleton && typeof options.singleton !== "boolean") options.singleton = isOldIE();
-
-	// By default, add <style> tags to the <head> element
-        if (!options.insertInto) options.insertInto = "head";
-
-	// By default, add <style> tags to the bottom of the target
-	if (!options.insertAt) options.insertAt = "bottom";
-
-	var styles = listToStyles(list, options);
-
-	addStylesToDom(styles, options);
-
-	return function update (newList) {
-		var mayRemove = [];
-
-		for (var i = 0; i < styles.length; i++) {
-			var item = styles[i];
-			var domStyle = stylesInDom[item.id];
-
-			domStyle.refs--;
-			mayRemove.push(domStyle);
-		}
-
-		if(newList) {
-			var newStyles = listToStyles(newList, options);
-			addStylesToDom(newStyles, options);
-		}
-
-		for (var i = 0; i < mayRemove.length; i++) {
-			var domStyle = mayRemove[i];
-
-			if(domStyle.refs === 0) {
-				for (var j = 0; j < domStyle.parts.length; j++) domStyle.parts[j]();
-
-				delete stylesInDom[domStyle.id];
-			}
-		}
-	};
-};
-
-function addStylesToDom (styles, options) {
-	for (var i = 0; i < styles.length; i++) {
-		var item = styles[i];
-		var domStyle = stylesInDom[item.id];
-
-		if(domStyle) {
-			domStyle.refs++;
-
-			for(var j = 0; j < domStyle.parts.length; j++) {
-				domStyle.parts[j](item.parts[j]);
-			}
-
-			for(; j < item.parts.length; j++) {
-				domStyle.parts.push(addStyle(item.parts[j], options));
-			}
-		} else {
-			var parts = [];
-
-			for(var j = 0; j < item.parts.length; j++) {
-				parts.push(addStyle(item.parts[j], options));
-			}
-
-			stylesInDom[item.id] = {id: item.id, refs: 1, parts: parts};
-		}
-	}
-}
-
-function listToStyles (list, options) {
-	var styles = [];
-	var newStyles = {};
-
-	for (var i = 0; i < list.length; i++) {
-		var item = list[i];
-		var id = options.base ? item[0] + options.base : item[0];
-		var css = item[1];
-		var media = item[2];
-		var sourceMap = item[3];
-		var part = {css: css, media: media, sourceMap: sourceMap};
-
-		if(!newStyles[id]) styles.push(newStyles[id] = {id: id, parts: [part]});
-		else newStyles[id].parts.push(part);
-	}
-
-	return styles;
-}
-
-function insertStyleElement (options, style) {
-	var target = getElement(options.insertInto)
-
-	if (!target) {
-		throw new Error("Couldn't find a style target. This probably means that the value for the 'insertInto' parameter is invalid.");
-	}
-
-	var lastStyleElementInsertedAtTop = stylesInsertedAtTop[stylesInsertedAtTop.length - 1];
-
-	if (options.insertAt === "top") {
-		if (!lastStyleElementInsertedAtTop) {
-			target.insertBefore(style, target.firstChild);
-		} else if (lastStyleElementInsertedAtTop.nextSibling) {
-			target.insertBefore(style, lastStyleElementInsertedAtTop.nextSibling);
-		} else {
-			target.appendChild(style);
-		}
-		stylesInsertedAtTop.push(style);
-	} else if (options.insertAt === "bottom") {
-		target.appendChild(style);
-	} else if (typeof options.insertAt === "object" && options.insertAt.before) {
-		var nextSibling = getElement(options.insertAt.before, target);
-		target.insertBefore(style, nextSibling);
-	} else {
-		throw new Error("[Style Loader]\n\n Invalid value for parameter 'insertAt' ('options.insertAt') found.\n Must be 'top', 'bottom', or Object.\n (https://github.com/webpack-contrib/style-loader#insertat)\n");
-	}
-}
-
-function removeStyleElement (style) {
-	if (style.parentNode === null) return false;
-	style.parentNode.removeChild(style);
-
-	var idx = stylesInsertedAtTop.indexOf(style);
-	if(idx >= 0) {
-		stylesInsertedAtTop.splice(idx, 1);
-	}
-}
-
-function createStyleElement (options) {
-	var style = document.createElement("style");
-
-	if(options.attrs.type === undefined) {
-		options.attrs.type = "text/css";
-	}
-
-	if(options.attrs.nonce === undefined) {
-		var nonce = getNonce();
-		if (nonce) {
-			options.attrs.nonce = nonce;
-		}
-	}
-
-	addAttrs(style, options.attrs);
-	insertStyleElement(options, style);
-
-	return style;
-}
-
-function createLinkElement (options) {
-	var link = document.createElement("link");
-
-	if(options.attrs.type === undefined) {
-		options.attrs.type = "text/css";
-	}
-	options.attrs.rel = "stylesheet";
-
-	addAttrs(link, options.attrs);
-	insertStyleElement(options, link);
-
-	return link;
-}
-
-function addAttrs (el, attrs) {
-	Object.keys(attrs).forEach(function (key) {
-		el.setAttribute(key, attrs[key]);
-	});
-}
-
-function getNonce() {
-	if (false) {}
-
-	return __webpack_require__.nc;
-}
-
-function addStyle (obj, options) {
-	var style, update, remove, result;
-
-	// If a transform function was defined, run it on the css
-	if (options.transform && obj.css) {
-	    result = typeof options.transform === 'function'
-		 ? options.transform(obj.css) 
-		 : options.transform.default(obj.css);
-
-	    if (result) {
-	    	// If transform returns a value, use that instead of the original css.
-	    	// This allows running runtime transformations on the css.
-	    	obj.css = result;
-	    } else {
-	    	// If the transform function returns a falsy value, don't add this css.
-	    	// This allows conditional loading of css
-	    	return function() {
-	    		// noop
-	    	};
-	    }
-	}
-
-	if (options.singleton) {
-		var styleIndex = singletonCounter++;
-
-		style = singleton || (singleton = createStyleElement(options));
-
-		update = applyToSingletonTag.bind(null, style, styleIndex, false);
-		remove = applyToSingletonTag.bind(null, style, styleIndex, true);
-
-	} else if (
-		obj.sourceMap &&
-		typeof URL === "function" &&
-		typeof URL.createObjectURL === "function" &&
-		typeof URL.revokeObjectURL === "function" &&
-		typeof Blob === "function" &&
-		typeof btoa === "function"
-	) {
-		style = createLinkElement(options);
-		update = updateLink.bind(null, style, options);
-		remove = function () {
-			removeStyleElement(style);
-
-			if(style.href) URL.revokeObjectURL(style.href);
-		};
-	} else {
-		style = createStyleElement(options);
-		update = applyToTag.bind(null, style);
-		remove = function () {
-			removeStyleElement(style);
-		};
-	}
-
-	update(obj);
-
-	return function updateStyle (newObj) {
-		if (newObj) {
-			if (
-				newObj.css === obj.css &&
-				newObj.media === obj.media &&
-				newObj.sourceMap === obj.sourceMap
-			) {
-				return;
-			}
-
-			update(obj = newObj);
-		} else {
-			remove();
-		}
-	};
-}
-
-var replaceText = (function () {
-	var textStore = [];
-
-	return function (index, replacement) {
-		textStore[index] = replacement;
-
-		return textStore.filter(Boolean).join('\n');
-	};
-})();
-
-function applyToSingletonTag (style, index, remove, obj) {
-	var css = remove ? "" : obj.css;
-
-	if (style.styleSheet) {
-		style.styleSheet.cssText = replaceText(index, css);
-	} else {
-		var cssNode = document.createTextNode(css);
-		var childNodes = style.childNodes;
-
-		if (childNodes[index]) style.removeChild(childNodes[index]);
-
-		if (childNodes.length) {
-			style.insertBefore(cssNode, childNodes[index]);
-		} else {
-			style.appendChild(cssNode);
-		}
-	}
-}
-
-function applyToTag (style, obj) {
-	var css = obj.css;
-	var media = obj.media;
-
-	if(media) {
-		style.setAttribute("media", media)
-	}
-
-	if(style.styleSheet) {
-		style.styleSheet.cssText = css;
-	} else {
-		while(style.firstChild) {
-			style.removeChild(style.firstChild);
-		}
-
-		style.appendChild(document.createTextNode(css));
-	}
-}
-
-function updateLink (link, options, obj) {
-	var css = obj.css;
-	var sourceMap = obj.sourceMap;
-
-	/*
-		If convertToAbsoluteUrls isn't defined, but sourcemaps are enabled
-		and there is no publicPath defined then lets turn convertToAbsoluteUrls
-		on by default.  Otherwise default to the convertToAbsoluteUrls option
-		directly
-	*/
-	var autoFixUrls = options.convertToAbsoluteUrls === undefined && sourceMap;
-
-	if (options.convertToAbsoluteUrls || autoFixUrls) {
-		css = fixUrls(css);
-	}
-
-	if (sourceMap) {
-		// http://stackoverflow.com/a/26603875
-		css += "\n/*# sourceMappingURL=data:application/json;base64," + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + " */";
-	}
-
-	var blob = new Blob([css], { type: "text/css" });
-
-	var oldSrc = link.href;
-
-	link.href = URL.createObjectURL(blob);
-
-	if(oldSrc) URL.revokeObjectURL(oldSrc);
-}
-
-
-/***/ }),
-
-/***/ "./node_modules/style-loader/lib/urls.js":
-/*!***********************************************!*\
-  !*** ./node_modules/style-loader/lib/urls.js ***!
-  \***********************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-
-/**
- * When source maps are enabled, `style-loader` uses a link element with a data-uri to
- * embed the css on the page. This breaks all relative urls because now they are relative to a
- * bundle instead of the current page.
- *
- * One solution is to only use full urls, but that may be impossible.
- *
- * Instead, this function "fixes" the relative urls to be absolute according to the current page location.
- *
- * A rudimentary test suite is located at `test/fixUrls.js` and can be run via the `npm test` command.
- *
- */
-
-module.exports = function (css) {
-  // get current location
-  var location = typeof window !== "undefined" && window.location;
-
-  if (!location) {
-    throw new Error("fixUrls requires window.location");
-  }
-
-	// blank or null?
-	if (!css || typeof css !== "string") {
-	  return css;
-  }
-
-  var baseUrl = location.protocol + "//" + location.host;
-  var currentDir = baseUrl + location.pathname.replace(/\/[^\/]*$/, "/");
-
-	// convert each url(...)
-	/*
-	This regular expression is just a way to recursively match brackets within
-	a string.
-
-	 /url\s*\(  = Match on the word "url" with any whitespace after it and then a parens
-	   (  = Start a capturing group
-	     (?:  = Start a non-capturing group
-	         [^)(]  = Match anything that isn't a parentheses
-	         |  = OR
-	         \(  = Match a start parentheses
-	             (?:  = Start another non-capturing groups
-	                 [^)(]+  = Match anything that isn't a parentheses
-	                 |  = OR
-	                 \(  = Match a start parentheses
-	                     [^)(]*  = Match anything that isn't a parentheses
-	                 \)  = Match a end parentheses
-	             )  = End Group
-              *\) = Match anything and then a close parens
-          )  = Close non-capturing group
-          *  = Match anything
-       )  = Close capturing group
-	 \)  = Match a close parens
-
-	 /gi  = Get all matches, not the first.  Be case insensitive.
-	 */
-	var fixedCss = css.replace(/url\s*\(((?:[^)(]|\((?:[^)(]+|\([^)(]*\))*\))*)\)/gi, function(fullMatch, origUrl) {
-		// strip quotes (if they exist)
-		var unquotedOrigUrl = origUrl
-			.trim()
-			.replace(/^"(.*)"$/, function(o, $1){ return $1; })
-			.replace(/^'(.*)'$/, function(o, $1){ return $1; });
-
-		// already a full url? no change
-		if (/^(#|data:|http:\/\/|https:\/\/|file:\/\/\/|\s*$)/i.test(unquotedOrigUrl)) {
-		  return fullMatch;
-		}
-
-		// convert the url to a full url
-		var newUrl;
-
-		if (unquotedOrigUrl.indexOf("//") === 0) {
-		  	//TODO: should we add protocol?
-			newUrl = unquotedOrigUrl;
-		} else if (unquotedOrigUrl.indexOf("/") === 0) {
-			// path should be relative to the base url
-			newUrl = baseUrl + unquotedOrigUrl; // already starts with '/'
-		} else {
-			// path should be relative to current directory
-			newUrl = currentDir + unquotedOrigUrl.replace(/^\.\//, ""); // Strip leading './'
-		}
-
-		// send back the fixed url(...)
-		return "url(" + JSON.stringify(newUrl) + ")";
-	});
-
-	// send back the fixed css
-	return fixedCss;
-};
-
-
-/***/ }),
-
 /***/ "./node_modules/suncalc/suncalc.js":
 /*!*****************************************!*\
   !*** ./node_modules/suncalc/suncalc.js ***!
@@ -54995,7 +56743,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prosemirror_utils__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(prosemirror_utils__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var prosemirror_state__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! prosemirror-state */ "./node_modules/prosemirror-state/dist/index.js");
 /* harmony import */ var prosemirror_state__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(prosemirror_state__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var prosemirror_tables__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! prosemirror-tables */ "./node_modules/tiptap-extensions/node_modules/prosemirror-tables/dist/index.js");
+/* harmony import */ var prosemirror_tables__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! prosemirror-tables */ "./node_modules/prosemirror-tables/dist/index.js");
 /* harmony import */ var prosemirror_tables__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(prosemirror_tables__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var tiptap_utils__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! tiptap-utils */ "./node_modules/tiptap-utils/dist/utils.esm.js");
 /* harmony import */ var prosemirror_transform__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! prosemirror-transform */ "./node_modules/prosemirror-transform/dist/index.js");
@@ -57646,2214 +59394,6 @@ function (_Extension) {
 }(tiptap__WEBPACK_IMPORTED_MODULE_0__["Extension"]);
 
 
-
-
-/***/ }),
-
-/***/ "./node_modules/tiptap-extensions/node_modules/prosemirror-tables/dist/index.js":
-/*!**************************************************************************************!*\
-  !*** ./node_modules/tiptap-extensions/node_modules/prosemirror-tables/dist/index.js ***!
-  \**************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, '__esModule', { value: true });
-
-var prosemirrorState = __webpack_require__(/*! prosemirror-state */ "./node_modules/prosemirror-state/dist/index.js");
-var prosemirrorView = __webpack_require__(/*! prosemirror-view */ "./node_modules/prosemirror-view/dist/index.js");
-var prosemirrorModel = __webpack_require__(/*! prosemirror-model */ "./node_modules/prosemirror-model/dist/index.js");
-var prosemirrorTransform = __webpack_require__(/*! prosemirror-transform */ "./node_modules/prosemirror-transform/dist/index.js");
-var prosemirrorKeymap = __webpack_require__(/*! prosemirror-keymap */ "./node_modules/prosemirror-keymap/dist/keymap.js");
-
-// Because working with row and column-spanning cells is not quite
-// trivial, this code builds up a descriptive structure for a given
-// table node. The structures are cached with the (persistent) table
-// nodes as key, so that they only have to be recomputed when the
-// content of the table changes.
-//
-// This does mean that they have to store table-relative, not
-// document-relative positions. So code that uses them will typically
-// compute the start position of the table and offset positions passed
-// to or gotten from this structure by that amount.
-
-var readFromCache, addToCache;
-// Prefer using a weak map to cache table maps. Fall back on a
-// fixed-size cache if that's not supported.
-if (typeof WeakMap != "undefined") {
-  var cache = new WeakMap;
-  readFromCache = function (key) { return cache.get(key); };
-  addToCache = function (key, value) {
-    cache.set(key, value);
-    return value
-  };
-} else {
-  var cache$1 = [], cacheSize = 10, cachePos = 0;
-  readFromCache = function (key) {
-    for (var i = 0; i < cache$1.length; i += 2)
-      { if (cache$1[i] == key) { return cache$1[i + 1] } }
-  };
-  addToCache = function (key, value) {
-    if (cachePos == cacheSize) { cachePos = 0; }
-    cache$1[cachePos++] = key;
-    return cache$1[cachePos++] = value
-  };
-}
-
-var Rect = function Rect(left, top, right, bottom) {
-  this.left = left; this.top = top; this.right = right; this.bottom = bottom;
-};
-
-// ::- A table map describes the structore of a given table. To avoid
-// recomputing them all the time, they are cached per table node. To
-// be able to do that, positions saved in the map are relative to the
-// start of the table, rather than the start of the document.
-var TableMap = function TableMap(width, height, map, problems) {
-  // :: number The width of the table
-  this.width = width;
-  // :: number The table's height
-  this.height = height;
-  // :: [number] A width * height array with the start position of
-  // the cell covering that part of the table in each slot
-  this.map = map;
-  // An optional array of problems (cell overlap or non-rectangular
-  // shape) for the table, used by the table normalizer.
-  this.problems = problems;
-};
-
-// :: (number) → Rect
-// Find the dimensions of the cell at the given position.
-TableMap.prototype.findCell = function findCell (pos) {
-  for (var i = 0; i < this.map.length; i++) {
-    var curPos = this.map[i];
-    if (curPos != pos) { continue }
-    var left = i % this.width, top = (i / this.width) | 0;
-    var right = left + 1, bottom = top + 1;
-    for (var j = 1; right < this.width && this.map[i + j] == curPos; j++) { right++; }
-    for (var j$1 = 1; bottom < this.height && this.map[i + (this.width * j$1)] == curPos; j$1++) { bottom++; }
-    return new Rect(left, top, right, bottom)
-  }
-  throw new RangeError("No cell with offset " + pos + " found")
-};
-
-// :: (number) → number
-// Find the left side of the cell at the given position.
-TableMap.prototype.colCount = function colCount (pos) {
-  for (var i = 0; i < this.map.length; i++)
-    { if (this.map[i] == pos) { return i % this.width } }
-  throw new RangeError("No cell with offset " + pos + " found")
-};
-
-// :: (number, string, number) → ?number
-// Find the next cell in the given direction, starting from the cell
-// at `pos`, if any.
-TableMap.prototype.nextCell = function nextCell (pos, axis, dir) {
-  var ref = this.findCell(pos);
-    var left = ref.left;
-    var right = ref.right;
-    var top = ref.top;
-    var bottom = ref.bottom;
-  if (axis == "horiz") {
-    if (dir < 0 ? left == 0 : right == this.width) { return null }
-    return this.map[top * this.width + (dir < 0 ? left - 1 : right)]
-  } else {
-    if (dir < 0 ? top == 0 : bottom == this.height) { return null }
-    return this.map[left + this.width * (dir < 0 ? top - 1 : bottom)]
-  }
-};
-
-// :: (number, number) → Rect
-// Get the rectangle spanning the two given cells.
-TableMap.prototype.rectBetween = function rectBetween (a, b) {
-  var ref = this.findCell(a);
-    var leftA = ref.left;
-    var rightA = ref.right;
-    var topA = ref.top;
-    var bottomA = ref.bottom;
-  var ref$1 = this.findCell(b);
-    var leftB = ref$1.left;
-    var rightB = ref$1.right;
-    var topB = ref$1.top;
-    var bottomB = ref$1.bottom;
-  return new Rect(Math.min(leftA, leftB), Math.min(topA, topB),
-                  Math.max(rightA, rightB), Math.max(bottomA, bottomB))
-};
-
-// :: (Rect) → [number]
-// Return the position of all cells that have the top left corner in
-// the given rectangle.
-TableMap.prototype.cellsInRect = function cellsInRect (rect) {
-  var result = [], seen = {};
-  for (var row = rect.top; row < rect.bottom; row++) {
-    for (var col = rect.left; col < rect.right; col++) {
-      var index = row * this.width + col, pos = this.map[index];
-      if (seen[pos]) { continue }
-      seen[pos] = true;
-      if ((col != rect.left || !col || this.map[index - 1] != pos) &&
-          (row != rect.top || !row || this.map[index - this.width] != pos))
-        { result.push(pos); }
-    }
-  }
-  return result
-};
-
-// :: (number, number, Node) → number
-// Return the position at which the cell at the given row and column
-// starts, or would start, if a cell started there.
-TableMap.prototype.positionAt = function positionAt (row, col, table) {
-  for (var i = 0, rowStart = 0;; i++) {
-    var rowEnd = rowStart + table.child(i).nodeSize;
-    if (i == row) {
-      var index = col + row * this.width, rowEndIndex = (row + 1) * this.width;
-      // Skip past cells from previous rows (via rowspan)
-      while (index < rowEndIndex && this.map[index] < rowStart) { index++; }
-      return index == rowEndIndex ? rowEnd - 1 : this.map[index]
-    }
-    rowStart = rowEnd;
-  }
-};
-
-// :: (Node) → TableMap
-// Find the table map for the given table node.
-TableMap.get = function get (table) {
-  return readFromCache(table) || addToCache(table, computeMap(table))
-};
-
-// Compute a table map.
-function computeMap(table) {
-  if (table.type.spec.tableRole != "table") { throw new RangeError("Not a table node: " + table.type.name) }
-  var width = findWidth(table), height = table.childCount;
-  var map = [], mapPos = 0, problems = null, colWidths = [];
-  for (var i = 0, e = width * height; i < e; i++) { map[i] = 0; }
-
-  for (var row = 0, pos = 0; row < height; row++) {
-    var rowNode = table.child(row);
-    pos++;
-    for (var i$1 = 0;; i$1++) {
-      while (mapPos < map.length && map[mapPos] != 0) { mapPos++; }
-      if (i$1 == rowNode.childCount) { break }
-      var cellNode = rowNode.child(i$1);
-      var ref = cellNode.attrs;
-      var colspan = ref.colspan;
-      var rowspan = ref.rowspan;
-      var colwidth = ref.colwidth;
-      for (var h = 0; h < rowspan; h++) {
-        if (h + row >= height) {
-          (problems || (problems = [])).push({type: "overlong_rowspan", pos: pos, n: rowspan - h});
-          break
-        }
-        var start = mapPos + (h * width);
-        for (var w = 0; w < colspan; w++) {
-          if (map[start + w] == 0)
-            { map[start + w] = pos; }
-          else
-            { (problems || (problems = [])).push({type: "collision", row: row, pos: pos, n: colspan - w}); }
-          var colW = colwidth && colwidth[w];
-          if (colW) {
-            var widthIndex = ((start + w) % width) * 2, prev = colWidths[widthIndex];
-            if (prev == null || (prev != colW && colWidths[widthIndex + 1] == 1)) {
-              colWidths[widthIndex] = colW;
-              colWidths[widthIndex + 1] = 1;
-            } else if (prev == colW) {
-              colWidths[widthIndex + 1]++;
-            }
-          }
-        }
-      }
-      mapPos += colspan;
-      pos += cellNode.nodeSize;
-    }
-    var expectedPos = (row + 1) * width, missing = 0;
-    while (mapPos < expectedPos) { if (map[mapPos++] == 0) { missing++; } }
-    if (missing) { (problems || (problems = [])).push({type: "missing", row: row, n: missing}); }
-    pos++;
-  }
-
-  var tableMap = new TableMap(width, height, map, problems), badWidths = false;
-
-  // For columns that have defined widths, but whose widths disagree
-  // between rows, fix up the cells whose width doesn't match the
-  // computed one.
-  for (var i$2 = 0; !badWidths && i$2 < colWidths.length; i$2 += 2)
-    { if (colWidths[i$2] != null && colWidths[i$2 + 1] < height) { badWidths = true; } }
-  if (badWidths) { findBadColWidths(tableMap, colWidths, table); }
-
-  return tableMap
-}
-
-function findWidth(table) {
-  var width = -1, hasRowSpan = false;
-  for (var row = 0; row < table.childCount; row++) {
-    var rowNode = table.child(row), rowWidth = 0;
-    if (hasRowSpan) { for (var j = 0; j < row; j++) {
-      var prevRow = table.child(j);
-      for (var i = 0; i < prevRow.childCount; i++) {
-        var cell = prevRow.child(i);
-        if (j + cell.attrs.rowspan > row) { rowWidth += cell.attrs.colspan; }
-      }
-    } }
-    for (var i$1 = 0; i$1 < rowNode.childCount; i$1++) {
-      var cell$1 = rowNode.child(i$1);
-      rowWidth += cell$1.attrs.colspan;
-      if (cell$1.attrs.rowspan > 1) { hasRowSpan = true; }
-    }
-    if (width == -1)
-      { width = rowWidth; }
-    else if (width != rowWidth)
-      { width = Math.max(width, rowWidth); }
-  }
-  return width
-}
-
-function findBadColWidths(map, colWidths, table) {
-  if (!map.problems) { map.problems = []; }
-  for (var i = 0, seen = {}; i < map.map.length; i++) {
-    var pos = map.map[i];
-    if (seen[pos]) { continue }
-    seen[pos] = true;
-    var node = table.nodeAt(pos), updated = null;
-    for (var j = 0; j < node.attrs.colspan; j++) {
-      var col = (i + j) % map.width, colWidth = colWidths[col * 2];
-      if (colWidth != null && (!node.attrs.colwidth || node.attrs.colwidth[j] != colWidth))
-        { (updated || (updated = freshColWidth(node.attrs)))[j] = colWidth; }
-    }
-    if (updated) { map.problems.unshift({type: "colwidth mismatch", pos: pos, colwidth: updated}); }
-  }
-}
-
-function freshColWidth(attrs) {
-  if (attrs.colwidth) { return attrs.colwidth.slice() }
-  var result = [];
-  for (var i = 0; i < attrs.colspan; i++) { result.push(0); }
-  return result
-}
-
-// Various helper function for working with tables
-
-var key = new prosemirrorState.PluginKey("selectingCells");
-
-function cellAround($pos) {
-  for (var d = $pos.depth - 1; d > 0; d--)
-    { if ($pos.node(d).type.spec.tableRole == "row") { return $pos.node(0).resolve($pos.before(d + 1)) } }
-  return null
-}
-
-function cellWrapping($pos) {
-  for (var d = $pos.depth - 1; d > 0; d--) {
-    var role = $pos.node(d).type.spec.tableRole;
-    if (role === "cell" || role === 'header_cell') { return $pos.node(d) }
-  }
-  return null
-}
-
-function isInTable(state) {
-  var $head = state.selection.$head;
-  for (var d = $head.depth; d > 0; d--) { if ($head.node(d).type.spec.tableRole == "row") { return true } }
-  return false
-}
-
-function selectionCell(state) {
-  var sel = state.selection;
-  if (sel.$anchorCell) {
-    return sel.$anchorCell.pos > sel.$headCell.pos ? sel.$anchorCell : sel.$headCell;
-  } else if (sel.node && sel.node.type.spec.tableRole == "cell") {
-    return sel.$anchor
-  }
-  return cellAround(sel.$head) || cellNear(sel.$head)
-}
-
-function cellNear($pos) {
-  for (var after = $pos.nodeAfter, pos = $pos.pos; after; after = after.firstChild, pos++) {
-    var role = after.type.spec.tableRole;
-    if (role == "cell" || role == "header_cell") { return $pos.doc.resolve(pos) }
-  }
-  for (var before = $pos.nodeBefore, pos$1 = $pos.pos; before; before = before.lastChild, pos$1--) {
-    var role$1 = before.type.spec.tableRole;
-    if (role$1 == "cell" || role$1 == "header_cell") { return $pos.doc.resolve(pos$1 - before.nodeSize) }
-  }
-}
-
-function pointsAtCell($pos) {
-  return $pos.parent.type.spec.tableRole == "row" && $pos.nodeAfter
-}
-
-function moveCellForward($pos) {
-  return $pos.node(0).resolve($pos.pos + $pos.nodeAfter.nodeSize)
-}
-
-function inSameTable($a, $b) {
-  return $a.depth == $b.depth && $a.pos >= $b.start(-1) && $a.pos <= $b.end(-1)
-}
-
-function findCell($pos) {
-  return TableMap.get($pos.node(-1)).findCell($pos.pos - $pos.start(-1))
-}
-
-function colCount($pos) {
-  return TableMap.get($pos.node(-1)).colCount($pos.pos - $pos.start(-1))
-}
-
-function nextCell($pos, axis, dir) {
-  var start = $pos.start(-1), map = TableMap.get($pos.node(-1));
-  var moved = map.nextCell($pos.pos - start, axis, dir);
-  return moved == null ? null : $pos.node(0).resolve(start + moved)
-}
-
-function setAttr(attrs, name, value) {
-  var result = {};
-  for (var prop in attrs) { result[prop] = attrs[prop]; }
-  result[name] = value;
-  return result
-}
-
-function rmColSpan(attrs, pos, n) {
-  if ( n === void 0 ) n=1;
-
-  var result = setAttr(attrs, "colspan", attrs.colspan - n);
-  if (result.colwidth) {
-    result.colwidth = result.colwidth.slice();
-    result.colwidth.splice(pos, n);
-    if (!result.colwidth.some(function (w) { return w > 0; })) { result.colwidth = null; }
-  }
-  return result
-}
-
-function addColSpan(attrs, pos, n) {
-  if ( n === void 0 ) n=1;
-
-  var result = setAttr(attrs, "colspan", attrs.colspan + n);
-  if (result.colwidth) {
-    result.colwidth = result.colwidth.slice();
-    for (var i = 0; i < n; i++) { result.colwidth.splice(pos, 0, 0); }
-  }
-  return result
-}
-
-// This file defines a ProseMirror selection subclass that models
-
-// ::- A [`Selection`](http://prosemirror.net/docs/ref/#state.Selection)
-// subclass that represents a cell selection spanning part of a table.
-// With the plugin enabled, these will be created when the user
-// selects across cells, and will be drawn by giving selected cells a
-// `selectedCell` CSS class.
-var CellSelection = /*@__PURE__*/(function (Selection) {
-  function CellSelection($anchorCell, $headCell) {
-    if ( $headCell === void 0 ) $headCell = $anchorCell;
-
-    var table = $anchorCell.node(-1), map = TableMap.get(table), start = $anchorCell.start(-1);
-    var rect = map.rectBetween($anchorCell.pos - start, $headCell.pos - start);
-    var doc = $anchorCell.node(0);
-    var cells = map.cellsInRect(rect).filter(function (p) { return p != $headCell.pos - start; });
-    // Make the head cell the first range, so that it counts as the
-    // primary part of the selection
-    cells.unshift($headCell.pos - start);
-    var ranges = cells.map(function (pos) {
-      var cell = table.nodeAt(pos), from = pos + start + 1;
-      return new prosemirrorState.SelectionRange(doc.resolve(from), doc.resolve(from + cell.content.size))
-    });
-    Selection.call(this, ranges[0].$from, ranges[0].$to, ranges);
-    // :: ResolvedPos
-    // A resolved position pointing _in front of_ the anchor cell (the one
-    // that doesn't move when extending the selection).
-    this.$anchorCell = $anchorCell;
-    // :: ResolvedPos
-    // A resolved position pointing in front of the head cell (the one
-    // moves when extending the selection).
-    this.$headCell = $headCell;
-  }
-
-  if ( Selection ) CellSelection.__proto__ = Selection;
-  CellSelection.prototype = Object.create( Selection && Selection.prototype );
-  CellSelection.prototype.constructor = CellSelection;
-
-  CellSelection.prototype.map = function map (doc, mapping) {
-    var $anchorCell = doc.resolve(mapping.map(this.$anchorCell.pos));
-    var $headCell = doc.resolve(mapping.map(this.$headCell.pos));
-    if (pointsAtCell($anchorCell) && pointsAtCell($headCell) && inSameTable($anchorCell, $headCell)) {
-      var tableChanged = this.$anchorCell.node(-1) != $anchorCell.node(-1);
-      if (tableChanged && this.isRowSelection())
-        { return CellSelection.rowSelection($anchorCell, $headCell) }
-      else if (tableChanged && this.isColSelection())
-        { return CellSelection.colSelection($anchorCell, $headCell) }
-      else
-        { return new CellSelection($anchorCell, $headCell) }
-    }
-    return prosemirrorState.TextSelection.between($anchorCell, $headCell)
-  };
-
-  // :: () → Slice
-  // Returns a rectangular slice of table rows containing the selected
-  // cells.
-  CellSelection.prototype.content = function content () {
-    var table = this.$anchorCell.node(-1), map = TableMap.get(table), start = this.$anchorCell.start(-1);
-    var rect = map.rectBetween(this.$anchorCell.pos - start, this.$headCell.pos - start);
-    var seen = {}, rows = [];
-    for (var row = rect.top; row < rect.bottom; row++) {
-      var rowContent = [];
-      for (var index = row * map.width + rect.left, col = rect.left; col < rect.right; col++, index++) {
-        var pos = map.map[index];
-        if (!seen[pos]) {
-          seen[pos] = true;
-          var cellRect = map.findCell(pos), cell = table.nodeAt(pos);
-          var extraLeft = rect.left - cellRect.left, extraRight = cellRect.right - rect.right;
-          if (extraLeft > 0 || extraRight > 0) {
-            var attrs = cell.attrs;
-            if (extraLeft > 0) { attrs = rmColSpan(attrs, 0, extraLeft); }
-            if (extraRight > 0) { attrs = rmColSpan(attrs, attrs.colspan - extraRight, extraRight); }
-            if (cellRect.left < rect.left) { cell = cell.type.createAndFill(attrs); }
-            else { cell = cell.type.create(attrs, cell.content); }
-          }
-          if (cellRect.top < rect.top || cellRect.bottom > rect.bottom) {
-            var attrs$1 = setAttr(cell.attrs, "rowspan", Math.min(cellRect.bottom, rect.bottom) - Math.max(cellRect.top, rect.top));
-            if (cellRect.top < rect.top) { cell = cell.type.createAndFill(attrs$1); }
-            else { cell = cell.type.create(attrs$1, cell.content); }
-          }
-          rowContent.push(cell);
-        }
-      }
-      rows.push(table.child(row).copy(prosemirrorModel.Fragment.from(rowContent)));
-    }
-
-    var fragment = this.isColSelection() && this.isRowSelection() ? table : rows;
-    return new prosemirrorModel.Slice(prosemirrorModel.Fragment.from(fragment), 1, 1)
-  };
-
-  CellSelection.prototype.replace = function replace (tr, content) {
-    if ( content === void 0 ) content = prosemirrorModel.Slice.empty;
-
-    var mapFrom = tr.steps.length, ranges = this.ranges;
-    for (var i = 0; i < ranges.length; i++) {
-      var ref = ranges[i];
-      var $from = ref.$from;
-      var $to = ref.$to;
-      var mapping = tr.mapping.slice(mapFrom);
-      tr.replace(mapping.map($from.pos), mapping.map($to.pos), i ? prosemirrorModel.Slice.empty : content);
-    }
-    var sel = Selection.findFrom(tr.doc.resolve(tr.mapping.slice(mapFrom).map(this.to)), -1);
-    if (sel) { tr.setSelection(sel); }
-  };
-
-  CellSelection.prototype.replaceWith = function replaceWith (tr, node) {
-    this.replace(tr, new prosemirrorModel.Slice(prosemirrorModel.Fragment.from(node), 0, 0));
-  };
-
-  CellSelection.prototype.forEachCell = function forEachCell (f) {
-    var table = this.$anchorCell.node(-1), map = TableMap.get(table), start = this.$anchorCell.start(-1);
-    var cells = map.cellsInRect(map.rectBetween(this.$anchorCell.pos - start, this.$headCell.pos - start));
-    for (var i = 0; i < cells.length; i++)
-      { f(table.nodeAt(cells[i]), start + cells[i]); }
-  };
-
-  // :: () → bool
-  // True if this selection goes all the way from the top to the
-  // bottom of the table.
-  CellSelection.prototype.isColSelection = function isColSelection () {
-    var anchorTop = this.$anchorCell.index(-1), headTop = this.$headCell.index(-1);
-    if (Math.min(anchorTop, headTop) > 0) { return false }
-    var anchorBot = anchorTop + this.$anchorCell.nodeAfter.attrs.rowspan,
-        headBot = headTop + this.$headCell.nodeAfter.attrs.rowspan;
-    return Math.max(anchorBot, headBot) == this.$headCell.node(-1).childCount
-  };
-
-  // :: (ResolvedPos, ?ResolvedPos) → CellSelection
-  // Returns the smallest column selection that covers the given anchor
-  // and head cell.
-  CellSelection.colSelection = function colSelection ($anchorCell, $headCell) {
-    if ( $headCell === void 0 ) $headCell = $anchorCell;
-
-    var map = TableMap.get($anchorCell.node(-1)), start = $anchorCell.start(-1);
-    var anchorRect = map.findCell($anchorCell.pos - start), headRect = map.findCell($headCell.pos - start);
-    var doc = $anchorCell.node(0);
-    if (anchorRect.top <= headRect.top) {
-      if (anchorRect.top > 0)
-        { $anchorCell = doc.resolve(start + map.map[anchorRect.left]); }
-      if (headRect.bottom < map.height)
-        { $headCell = doc.resolve(start + map.map[map.width * (map.height - 1) + headRect.right - 1]); }
-    } else {
-      if (headRect.top > 0)
-        { $headCell = doc.resolve(start + map.map[headRect.left]); }
-      if (anchorRect.bottom < map.height)
-        { $anchorCell = doc.resolve(start + map.map[map.width * (map.height - 1) + anchorRect.right - 1]); }
-    }
-    return new CellSelection($anchorCell, $headCell)
-  };
-
-  // :: () → bool
-  // True if this selection goes all the way from the left to the
-  // right of the table.
-  CellSelection.prototype.isRowSelection = function isRowSelection () {
-    var map = TableMap.get(this.$anchorCell.node(-1)), start = this.$anchorCell.start(-1);
-    var anchorLeft = map.colCount(this.$anchorCell.pos - start),
-        headLeft = map.colCount(this.$headCell.pos - start);
-    if (Math.min(anchorLeft, headLeft) > 0) { return false }
-    var anchorRight = anchorLeft + this.$anchorCell.nodeAfter.attrs.colspan,
-        headRight = headLeft + this.$headCell.nodeAfter.attrs.colspan;
-    return Math.max(anchorRight, headRight) == map.width
-  };
-
-  CellSelection.prototype.eq = function eq (other) {
-    return other instanceof CellSelection && other.$anchorCell.pos == this.$anchorCell.pos &&
-      other.$headCell.pos == this.$headCell.pos
-  };
-
-  // :: (ResolvedPos, ?ResolvedPos) → CellSelection
-  // Returns the smallest row selection that covers the given anchor
-  // and head cell.
-  CellSelection.rowSelection = function rowSelection ($anchorCell, $headCell) {
-    if ( $headCell === void 0 ) $headCell = $anchorCell;
-
-    var map = TableMap.get($anchorCell.node(-1)), start = $anchorCell.start(-1);
-    var anchorRect = map.findCell($anchorCell.pos - start), headRect = map.findCell($headCell.pos - start);
-    var doc = $anchorCell.node(0);
-    if (anchorRect.left <= headRect.left) {
-      if (anchorRect.left > 0)
-        { $anchorCell = doc.resolve(start + map.map[anchorRect.top * map.width]); }
-      if (headRect.right < map.width)
-        { $headCell = doc.resolve(start + map.map[map.width * (headRect.top + 1) - 1]); }
-    } else {
-      if (headRect.left > 0)
-        { $headCell = doc.resolve(start + map.map[headRect.top * map.width]); }
-      if (anchorRect.right < map.width)
-        { $anchorCell = doc.resolve(start + map.map[map.width * (anchorRect.top + 1) - 1]); }
-    }
-    return new CellSelection($anchorCell, $headCell)
-  };
-
-  CellSelection.prototype.toJSON = function toJSON () {
-    return {type: "cell", anchor: this.$anchorCell.pos, head: this.$headCell.pos}
-  };
-
-  CellSelection.fromJSON = function fromJSON (doc, json) {
-    return new CellSelection(doc.resolve(json.anchor), doc.resolve(json.head))
-  };
-
-  // :: (Node, number, ?number) → CellSelection
-  CellSelection.create = function create (doc, anchorCell, headCell) {
-    if ( headCell === void 0 ) headCell = anchorCell;
-
-    return new CellSelection(doc.resolve(anchorCell), doc.resolve(headCell))
-  };
-
-  CellSelection.prototype.getBookmark = function getBookmark () { return new CellBookmark(this.$anchorCell.pos, this.$headCell.pos) };
-
-  return CellSelection;
-}(prosemirrorState.Selection));
-
-CellSelection.prototype.visible = false;
-
-prosemirrorState.Selection.jsonID("cell", CellSelection);
-
-var CellBookmark = function CellBookmark(anchor, head) {
-  this.anchor = anchor;
-  this.head = head;
-};
-CellBookmark.prototype.map = function map (mapping) {
-  return new CellBookmark(mapping.map(this.anchor), mapping.map(this.head))
-};
-CellBookmark.prototype.resolve = function resolve (doc) {
-  var $anchorCell = doc.resolve(this.anchor), $headCell = doc.resolve(this.head);
-  if ($anchorCell.parent.type.spec.tableRole == "row" &&
-      $headCell.parent.type.spec.tableRole == "row" &&
-      $anchorCell.index() < $anchorCell.parent.childCount &&
-      $headCell.index() < $headCell.parent.childCount &&
-      inSameTable($anchorCell, $headCell))
-    { return new CellSelection($anchorCell, $headCell) }
-  else
-    { return prosemirrorState.Selection.near($headCell, 1) }
-};
-
-function drawCellSelection(state) {
-  if (!(state.selection instanceof CellSelection)) { return null }
-  var cells = [];
-  state.selection.forEachCell(function (node, pos) {
-    cells.push(prosemirrorView.Decoration.node(pos, pos + node.nodeSize, {class: "selectedCell"}));
-  });
-  return prosemirrorView.DecorationSet.create(state.doc, cells)
-}
-
-function isCellBoundarySelection(ref) {
-  var $from = ref.$from;
-  var $to = ref.$to;
-
-  if ($from.pos == $to.pos || $from.pos < $from.pos - 6) { return false } // Cheap elimination
-  var afterFrom = $from.pos, beforeTo = $to.pos, depth = $from.depth;
-  for (; depth >= 0; depth--, afterFrom++)
-    { if ($from.after(depth + 1) < $from.end(depth)) { break } }
-  for (var d = $to.depth; d >= 0; d--, beforeTo--)
-    { if ($to.before(d + 1) > $to.start(d)) { break } }
-  return afterFrom == beforeTo && /row|table/.test($from.node(depth).type.spec.tableRole)
-}
-
-function isTextSelectionAcrossCells(ref) {
-  var $from = ref.$from;
-  var $to = ref.$to;
-
-  var fromCellBoundaryNode;
-  var toCellBoundaryNode;
-
-  for (var i = $from.depth; i > 0; i--) {
-    var node = $from.node(i);
-    if (node.type.spec.tableRole === 'cell' || node.type.spec.tableRole === 'header_cell') {
-      fromCellBoundaryNode = node;
-      break;
-    }
-  }
-
-  for (var i$1 = $to.depth; i$1 > 0; i$1--) {
-    var node$1 = $to.node(i$1);
-    if (node$1.type.spec.tableRole === 'cell' || node$1.type.spec.tableRole === 'header_cell') {
-      toCellBoundaryNode = node$1;
-      break;
-    }
-  }
-
-  return fromCellBoundaryNode !== toCellBoundaryNode && $to.parentOffset === 0
-}
-
-function normalizeSelection(state, tr, allowTableNodeSelection) {
-  var sel = (tr || state).selection, doc = (tr || state).doc, normalize, role;
-  if (sel instanceof prosemirrorState.NodeSelection && (role = sel.node.type.spec.tableRole)) {
-    if (role == "cell" || role == "header_cell") {
-      normalize = CellSelection.create(doc, sel.from);
-    } else if (role == "row") {
-      var $cell = doc.resolve(sel.from + 1);
-      normalize = CellSelection.rowSelection($cell, $cell);
-    } else if (!allowTableNodeSelection) {
-      var map = TableMap.get(sel.node), start = sel.from + 1;
-      var lastCell = start + map.map[map.width * map.height - 1];
-      normalize = CellSelection.create(doc, start + 1, lastCell);
-    }
-  } else if (sel instanceof prosemirrorState.TextSelection && isCellBoundarySelection(sel)) {
-    normalize = prosemirrorState.TextSelection.create(doc, sel.from);
-  } else if (sel instanceof prosemirrorState.TextSelection && isTextSelectionAcrossCells(sel)) {
-    normalize = prosemirrorState.TextSelection.create(doc, sel.$from.start(), sel.$from.end());
-  }
-  if (normalize)
-    { (tr || (tr = state.tr)).setSelection(normalize); }
-  return tr
-}
-
-// Helper for creating a schema that supports tables.
-
-function getCellAttrs(dom, extraAttrs) {
-  var widthAttr = dom.getAttribute("data-colwidth");
-  var widths = widthAttr && /^\d+(,\d+)*$/.test(widthAttr) ? widthAttr.split(",").map(function (s) { return Number(s); }) : null;
-  var colspan = Number(dom.getAttribute("colspan") || 1);
-  var result = {
-    colspan: colspan,
-    rowspan: Number(dom.getAttribute("rowspan") || 1),
-    colwidth: widths && widths.length == colspan ? widths : null
-  };
-  for (var prop in extraAttrs) {
-    var getter = extraAttrs[prop].getFromDOM;
-    var value = getter && getter(dom);
-    if (value != null) { result[prop] = value; }
-  }
-  return result
-}
-
-function setCellAttrs(node, extraAttrs) {
-  var attrs = {};
-  if (node.attrs.colspan != 1) { attrs.colspan = node.attrs.colspan; }
-  if (node.attrs.rowspan != 1) { attrs.rowspan = node.attrs.rowspan; }
-  if (node.attrs.colwidth)
-    { attrs["data-colwidth"] = node.attrs.colwidth.join(","); }
-  for (var prop in extraAttrs) {
-    var setter = extraAttrs[prop].setDOMAttr;
-    if (setter) { setter(node.attrs[prop], attrs); }
-  }
-  return attrs
-}
-
-// :: (Object) → Object
-//
-// This function creates a set of [node
-// specs](http://prosemirror.net/docs/ref/#model.SchemaSpec.nodes) for
-// `table`, `table_row`, and `table_cell` nodes types as used by this
-// module. The result can then be added to the set of nodes when
-// creating a a schema.
-//
-//   options::- The following options are understood:
-//
-//     tableGroup:: ?string
-//     A group name (something like `"block"`) to add to the table
-//     node type.
-//
-//     cellContent:: string
-//     The content expression for table cells.
-//
-//     cellAttributes:: ?Object
-//     Additional attributes to add to cells. Maps attribute names to
-//     objects with the following properties:
-//
-//       default:: any
-//       The attribute's default value.
-//
-//       getFromDOM:: ?(dom.Node) → any
-//       A function to read the attribute's value from a DOM node.
-//
-//       setDOMAttr:: ?(value: any, attrs: Object)
-//       A function to add the attribute's value to an attribute
-//       object that's used to render the cell's DOM.
-function tableNodes(options) {
-  var extraAttrs = options.cellAttributes || {};
-  var cellAttrs = {
-    colspan: {default: 1},
-    rowspan: {default: 1},
-    colwidth: {default: null}
-  };
-  for (var prop in extraAttrs)
-    { cellAttrs[prop] = {default: extraAttrs[prop].default}; }
-
-  return {
-    table: {
-      content: "table_row+",
-      tableRole: "table",
-      isolating: true,
-      group: options.tableGroup,
-      parseDOM: [{tag: "table"}],
-      toDOM: function toDOM() { return ["table", ["tbody", 0]] }
-    },
-    table_row: {
-      content: "(table_cell | table_header)*",
-      tableRole: "row",
-      parseDOM: [{tag: "tr"}],
-      toDOM: function toDOM() { return ["tr", 0] }
-    },
-    table_cell: {
-      content: options.cellContent,
-      attrs: cellAttrs,
-      tableRole: "cell",
-      isolating: true,
-      parseDOM: [{tag: "td", getAttrs: function (dom) { return getCellAttrs(dom, extraAttrs); }}],
-      toDOM: function toDOM(node) { return ["td", setCellAttrs(node, extraAttrs), 0] }
-    },
-    table_header: {
-      content: options.cellContent,
-      attrs: cellAttrs,
-      tableRole: "header_cell",
-      isolating: true,
-      parseDOM: [{tag: "th", getAttrs: function (dom) { return getCellAttrs(dom, extraAttrs); }}],
-      toDOM: function toDOM(node) { return ["th", setCellAttrs(node, extraAttrs), 0] }
-    }
-  }
-}
-
-function tableNodeTypes(schema) {
-  var result = schema.cached.tableNodeTypes;
-  if (!result) {
-    result = schema.cached.tableNodeTypes = {};
-    for (var name in schema.nodes) {
-      var type = schema.nodes[name], role = type.spec.tableRole;
-      if (role) { result[role] = type; }
-    }
-  }
-  return result
-}
-
-// Utilities used for copy/paste handling.
-
-// Utilities to help with copying and pasting table cells
-
-// : (Slice) → ?{width: number, height: number, rows: [Fragment]}
-// Get a rectangular area of cells from a slice, or null if the outer
-// nodes of the slice aren't table cells or rows.
-function pastedCells(slice) {
-  if (!slice.size) { return null }
-  var content = slice.content;
-  var openStart = slice.openStart;
-  var openEnd = slice.openEnd;
-  while (content.childCount == 1 && (openStart > 0 && openEnd > 0 || content.firstChild.type.spec.tableRole == "table")) {
-    openStart--;
-    openEnd--;
-    content = content.firstChild.content;
-  }
-  var first = content.firstChild, role = first.type.spec.tableRole;
-  var schema = first.type.schema, rows = [];
-  if (role == "row") {
-    for (var i = 0; i < content.childCount; i++) {
-      var cells = content.child(i).content;
-      var left = i ? 0 : Math.max(0, openStart - 1);
-      var right = i < content.childCount - 1 ? 0 : Math.max(0, openEnd - 1);
-      if (left || right) { cells = fitSlice(tableNodeTypes(schema).row, new prosemirrorModel.Slice(cells, left, right)).content; }
-      rows.push(cells);
-    }
-  } else if (role == "cell" || role == "header_cell") {
-    rows.push(openStart || openEnd ? fitSlice(tableNodeTypes(schema).row, new prosemirrorModel.Slice(content, openStart, openEnd)).content : content);
-  } else {
-    return null
-  }
-  return ensureRectangular(schema, rows)
-}
-
-// : (Schema, [Fragment]) → {width: number, height: number, rows: [Fragment]}
-// Compute the width and height of a set of cells, and make sure each
-// row has the same number of cells.
-function ensureRectangular(schema, rows) {
-  var widths = [];
-  for (var i = 0; i < rows.length; i++) {
-    var row = rows[i];
-    for (var j = row.childCount - 1; j >= 0; j--) {
-      var ref = row.child(j).attrs;
-      var rowspan = ref.rowspan;
-      var colspan = ref.colspan;
-      for (var r = i; r < i + rowspan; r++)
-        { widths[r] = (widths[r] || 0) + colspan; }
-    }
-  }
-  var width = 0;
-  for (var r$1 = 0; r$1 < widths.length; r$1++) { width = Math.max(width, widths[r$1]); }
-  for (var r$2 = 0; r$2 < widths.length; r$2++) {
-    if (r$2 >= rows.length) { rows.push(prosemirrorModel.Fragment.empty); }
-    if (widths[r$2] < width) {
-      var empty = tableNodeTypes(schema).cell.createAndFill(), cells = [];
-      for (var i$1 = widths[r$2]; i$1 < width; i$1++) { cells.push(empty); }
-      rows[r$2] = rows[r$2].append(prosemirrorModel.Fragment.from(cells));
-    }
-  }
-  return {height: rows.length, width: width, rows: rows}
-}
-
-function fitSlice(nodeType, slice) {
-  var node = nodeType.createAndFill();
-  var tr = new prosemirrorTransform.Transform(node).replace(0, node.content.size, slice);
-  return tr.doc
-}
-
-// : ({width: number, height: number, rows: [Fragment]}, number, number) → {width: number, height: number, rows: [Fragment]}
-// Clip or extend (repeat) the given set of cells to cover the given
-// width and height. Will clip rowspan/colspan cells at the edges when
-// they stick out.
-function clipCells(ref, newWidth, newHeight) {
-  var width = ref.width;
-  var height = ref.height;
-  var rows = ref.rows;
-
-  if (width != newWidth) {
-    var added = [], newRows = [];
-    for (var row = 0; row < rows.length; row++) {
-      var frag = rows[row], cells = [];
-      for (var col = added[row] || 0, i = 0; col < newWidth; i++) {
-        var cell = frag.child(i % frag.childCount);
-        if (col + cell.attrs.colspan > newWidth)
-          { cell = cell.type.create(rmColSpan(cell.attrs, cell.attrs.colspan, col + cell.attrs.colspan - newWidth), cell.content); }
-        cells.push(cell);
-        col += cell.attrs.colspan;
-        for (var j = 1; j < cell.attrs.rowspan; j++)
-          { added[row + j] = (added[row + j] || 0) + cell.attrs.colspan; }
-      }
-      newRows.push(prosemirrorModel.Fragment.from(cells));
-    }
-    rows = newRows;
-    width = newWidth;
-  }
-
-  if (height != newHeight) {
-    var newRows$1 = [];
-    for (var row$1 = 0, i$1 = 0; row$1 < newHeight; row$1++, i$1++) {
-      var cells$1 = [], source = rows[i$1 % height];
-      for (var j$1 = 0; j$1 < source.childCount; j$1++) {
-        var cell$1 = source.child(j$1);
-        if (row$1 + cell$1.attrs.rowspan > newHeight)
-          { cell$1 = cell$1.type.create(setAttr(cell$1.attrs, "rowspan", newHeight - cell$1.attrs.rowspan), cell$1.content); }
-        cells$1.push(cell$1);
-      }
-      newRows$1.push(prosemirrorModel.Fragment.from(cells$1));
-    }
-    rows = newRows$1;
-    height = newHeight;
-  }
-
-  return {width: width, height: height, rows: rows}
-}
-
-// Make sure a table has at least the given width and height. Return
-// true if something was changed.
-function growTable(tr, map, table, start, width, height, mapFrom) {
-  var schema = tr.doc.type.schema, types = tableNodeTypes(schema), empty, emptyHead;
-  if (width > map.width) {
-    for (var row = 0, rowEnd = 0; row < map.height; row++) {
-      var rowNode = table.child(row);
-      rowEnd += rowNode.nodeSize;
-      var cells = [], add = (void 0);
-      if (rowNode.lastChild == null || rowNode.lastChild.type == types.cell)
-        { add = empty || (empty = types.cell.createAndFill()); }
-      else
-        { add = emptyHead || (emptyHead = types.header_cell.createAndFill()); }
-      for (var i = map.width; i < width; i++) { cells.push(add); }
-      tr.insert(tr.mapping.slice(mapFrom).map(rowEnd - 1 + start), cells);
-    }
-  }
-  if (height > map.height) {
-    var cells$1 = [];
-    for (var i$1 = 0, start$1 = (map.height - 1) * map.width; i$1 < Math.max(map.width, width); i$1++) {
-      var header = i$1 >= map.width ? false :
-          table.nodeAt(map.map[start$1 + i$1]).type == types.header_cell;
-      cells$1.push(header
-                 ? (emptyHead || (emptyHead = types.header_cell.createAndFill()))
-                 : (empty || (empty = types.cell.createAndFill())));
-    }
-
-    var emptyRow = types.row.create(null, prosemirrorModel.Fragment.from(cells$1)), rows = [];
-    for (var i$2 = map.height; i$2 < height; i$2++) { rows.push(emptyRow); }
-    tr.insert(tr.mapping.slice(mapFrom).map(start + table.nodeSize - 2), rows);
-  }
-  return !!(empty || emptyHead)
-}
-
-// Make sure the given line (left, top) to (right, top) doesn't cross
-// any rowspan cells by splitting cells that cross it. Return true if
-// something changed.
-function isolateHorizontal(tr, map, table, start, left, right, top, mapFrom) {
-  if (top == 0 || top == map.height) { return false }
-  var found = false;
-  for (var col = left; col < right; col++) {
-    var index = top * map.width + col, pos = map.map[index];
-    if (map.map[index - map.width] == pos) {
-      found = true;
-      var cell = table.nodeAt(pos);
-      var ref = map.findCell(pos);
-      var cellTop = ref.top;
-      var cellLeft = ref.left;
-      tr.setNodeMarkup(tr.mapping.slice(mapFrom).map(pos + start), null, setAttr(cell.attrs, "rowspan", top - cellTop));
-      tr.insert(tr.mapping.slice(mapFrom).map(map.positionAt(top, cellLeft, table)),
-                cell.type.createAndFill(setAttr(cell.attrs, "rowspan", (cellTop + cell.attrs.rowspan) - top)));
-      col += cell.attrs.colspan - 1;
-    }
-  }
-  return found
-}
-
-// Make sure the given line (left, top) to (left, bottom) doesn't
-// cross any colspan cells by splitting cells that cross it. Return
-// true if something changed.
-function isolateVertical(tr, map, table, start, top, bottom, left, mapFrom) {
-  if (left == 0 || left == map.width) { return false }
-  var found = false;
-  for (var row = top; row < bottom; row++) {
-    var index = row * map.width + left, pos = map.map[index];
-    if (map.map[index - 1] == pos) {
-      found = true;
-      var cell = table.nodeAt(pos), cellLeft = map.colCount(pos);
-      var updatePos = tr.mapping.slice(mapFrom).map(pos + start);
-      tr.setNodeMarkup(updatePos, null, rmColSpan(cell.attrs, left - cellLeft, cell.attrs.colspan - (left - cellLeft)));
-      tr.insert(updatePos + cell.nodeSize, cell.type.createAndFill(rmColSpan(cell.attrs, 0, left - cellLeft)));
-      row += cell.attrs.rowspan - 1;
-    }
-  }
-  return found
-}
-
-// Insert the given set of cells (as returned by `pastedCells`) into a
-// table, at the position pointed at by rect.
-function insertCells(state, dispatch, tableStart, rect, cells) {
-  var table = tableStart ? state.doc.nodeAt(tableStart - 1) : state.doc, map = TableMap.get(table);
-  var top = rect.top;
-  var left = rect.left;
-  var right = left + cells.width, bottom = top + cells.height;
-  var tr = state.tr, mapFrom = 0;
-  function recomp() {
-    table = tableStart ? tr.doc.nodeAt(tableStart - 1) : tr.doc;
-    map = TableMap.get(table);
-    mapFrom = tr.mapping.maps.length;
-  }
-  // Prepare the table to be large enough and not have any cells
-  // crossing the boundaries of the rectangle that we want to
-  // insert into. If anything about it changes, recompute the table
-  // map so that subsequent operations can see the current shape.
-  if (growTable(tr, map, table, tableStart, right, bottom, mapFrom)) { recomp(); }
-  if (isolateHorizontal(tr, map, table, tableStart, left, right, top, mapFrom)) { recomp(); }
-  if (isolateHorizontal(tr, map, table, tableStart, left, right, bottom, mapFrom)) { recomp(); }
-  if (isolateVertical(tr, map, table, tableStart, top, bottom, left, mapFrom)) { recomp(); }
-  if (isolateVertical(tr, map, table, tableStart, top, bottom, right, mapFrom)) { recomp(); }
-
-  for (var row = top; row < bottom; row++) {
-    var from = map.positionAt(row, left, table), to = map.positionAt(row, right, table);
-    tr.replace(tr.mapping.slice(mapFrom).map(from + tableStart), tr.mapping.slice(mapFrom).map(to + tableStart),
-               new prosemirrorModel.Slice(cells.rows[row - top], 0, 0));
-  }
-  recomp();
-  tr.setSelection(new CellSelection(tr.doc.resolve(tableStart + map.positionAt(top, left, table)),
-                                    tr.doc.resolve(tableStart + map.positionAt(bottom - 1, right - 1, table))));
-  dispatch(tr);
-}
-
-// This file defines a number of helpers for wiring up user input to
-
-var handleKeyDown = prosemirrorKeymap.keydownHandler({
-  "ArrowLeft": arrow("horiz", -1),
-  "ArrowRight": arrow("horiz", 1),
-  "ArrowUp": arrow("vert", -1),
-  "ArrowDown": arrow("vert", 1),
-
-  "Shift-ArrowLeft": shiftArrow("horiz", -1),
-  "Shift-ArrowRight": shiftArrow("horiz", 1),
-  "Shift-ArrowUp": shiftArrow("vert", -1),
-  "Shift-ArrowDown": shiftArrow("vert", 1),
-
-  "Backspace": deleteCellSelection,
-  "Mod-Backspace": deleteCellSelection,
-  "Delete": deleteCellSelection,
-  "Mod-Delete": deleteCellSelection
-});
-
-function maybeSetSelection(state, dispatch, selection) {
-  if (selection.eq(state.selection)) { return false }
-  if (dispatch) { dispatch(state.tr.setSelection(selection).scrollIntoView()); }
-  return true
-}
-
-function arrow(axis, dir) {
-  return function (state, dispatch, view) {
-    var sel = state.selection;
-    if (sel instanceof CellSelection) {
-      return maybeSetSelection(state, dispatch, prosemirrorState.Selection.near(sel.$headCell, dir))
-    }
-    if (axis != "horiz" && !sel.empty) { return false }
-    var end = atEndOfCell(view, axis, dir);
-    if (end == null) { return false }
-    if (axis == "horiz") {
-      return maybeSetSelection(state, dispatch, prosemirrorState.Selection.near(state.doc.resolve(sel.head + dir), dir))
-    } else {
-      var $cell = state.doc.resolve(end), $next = nextCell($cell, axis, dir), newSel;
-      if ($next) { newSel = prosemirrorState.Selection.near($next, 1); }
-      else if (dir < 0) { newSel = prosemirrorState.Selection.near(state.doc.resolve($cell.before(-1)), -1); }
-      else { newSel = prosemirrorState.Selection.near(state.doc.resolve($cell.after(-1)), 1); }
-      return maybeSetSelection(state, dispatch, newSel)
-    }
-  }
-}
-
-function shiftArrow(axis, dir) {
-  return function (state, dispatch, view) {
-    var sel = state.selection;
-    if (!(sel instanceof CellSelection)) {
-      var end = atEndOfCell(view, axis, dir);
-      if (end == null) { return false }
-      sel = new CellSelection(state.doc.resolve(end));
-    }
-    var $head = nextCell(sel.$headCell, axis, dir);
-    if (!$head) { return false }
-    return maybeSetSelection(state, dispatch, new CellSelection(sel.$anchorCell, $head))
-  }
-}
-
-function deleteCellSelection(state, dispatch) {
-  var sel = state.selection;
-  if (!(sel instanceof CellSelection)) { return false }
-  if (dispatch) {
-    var tr = state.tr, baseContent = tableNodeTypes(state.schema).cell.createAndFill().content;
-    sel.forEachCell(function (cell, pos) {
-      if (!cell.content.eq(baseContent))
-        { tr.replace(tr.mapping.map(pos + 1), tr.mapping.map(pos + cell.nodeSize - 1),
-                   new prosemirrorModel.Slice(baseContent, 0, 0)); }
-    });
-    if (tr.docChanged) { dispatch(tr); }
-  }
-  return true
-}
-
-function handleTripleClick(view, pos) {
-  var doc = view.state.doc, $cell = cellAround(doc.resolve(pos));
-  if (!$cell) { return false }
-  view.dispatch(view.state.tr.setSelection(new CellSelection($cell)));
-  return true
-}
-
-function handlePaste(view, _, slice) {
-  if (!isInTable(view.state)) { return false }
-  var cells = pastedCells(slice), sel = view.state.selection;
-  if (sel instanceof CellSelection) {
-    if (!cells) { cells = {width: 1, height: 1, rows: [prosemirrorModel.Fragment.from(fitSlice(tableNodeTypes(view.state.schema).cell, slice))]}; }
-    var table = sel.$anchorCell.node(-1), start = sel.$anchorCell.start(-1);
-    var rect = TableMap.get(table).rectBetween(sel.$anchorCell.pos - start, sel.$headCell.pos - start);
-    cells = clipCells(cells, rect.right - rect.left, rect.bottom - rect.top);
-    insertCells(view.state, view.dispatch, start, rect, cells);
-    return true
-  } else if (cells) {
-    var $cell = selectionCell(view.state), start$1 = $cell.start(-1);
-    insertCells(view.state, view.dispatch, start$1, TableMap.get($cell.node(-1)).findCell($cell.pos - start$1), cells);
-    return true
-  } else {
-    return false
-  }
-}
-
-function handleMouseDown(view, startEvent) {
-  if (startEvent.ctrlKey || startEvent.metaKey) { return }
-
-  var startDOMCell = domInCell(view, startEvent.target), $anchor;
-  if (startEvent.shiftKey && (view.state.selection instanceof CellSelection)) {
-    // Adding to an existing cell selection
-    setCellSelection(view.state.selection.$anchorCell, startEvent);
-    startEvent.preventDefault();
-  } else if (startEvent.shiftKey && startDOMCell &&
-             ($anchor = cellAround(view.state.selection.$anchor)) != null &&
-             cellUnderMouse(view, startEvent).pos != $anchor.pos) {
-    // Adding to a selection that starts in another cell (causing a
-    // cell selection to be created).
-    setCellSelection($anchor, startEvent);
-    startEvent.preventDefault();
-  } else if (!startDOMCell) {
-    // Not in a cell, let the default behavior happen.
-    return
-  }
-
-  // Create and dispatch a cell selection between the given anchor and
-  // the position under the mouse.
-  function setCellSelection($anchor, event) {
-    var $head = cellUnderMouse(view, event);
-    var starting = key.getState(view.state) == null;
-    if (!$head || !inSameTable($anchor, $head)) {
-      if (starting) { $head = $anchor; }
-      else { return }
-    }
-    var selection = new CellSelection($anchor, $head);
-    if (starting || !view.state.selection.eq(selection)) {
-      var tr = view.state.tr.setSelection(selection);
-      if (starting) { tr.setMeta(key, $anchor.pos); }
-      view.dispatch(tr);
-    }
-  }
-
-  // Stop listening to mouse motion events.
-  function stop() {
-    view.root.removeEventListener("mouseup", stop);
-    view.root.removeEventListener("dragstart", stop);
-    view.root.removeEventListener("mousemove", move);
-    if (key.getState(view.state) != null) { view.dispatch(view.state.tr.setMeta(key, -1)); }
-  }
-
-  function move(event) {
-    var anchor = key.getState(view.state), $anchor;
-    if (anchor != null) {
-      // Continuing an existing cross-cell selection
-      $anchor = view.state.doc.resolve(anchor);
-    } else if (domInCell(view, event.target) != startDOMCell) {
-      // Moving out of the initial cell -- start a new cell selection
-      $anchor = cellUnderMouse(view, startEvent);
-      if (!$anchor) { return stop() }
-    }
-    if ($anchor) { setCellSelection($anchor, event); }
-  }
-  view.root.addEventListener("mouseup", stop);
-  view.root.addEventListener("dragstart", stop);
-  view.root.addEventListener("mousemove", move);
-}
-
-// Check whether the cursor is at the end of a cell (so that further
-// motion would move out of the cell)
-function atEndOfCell(view, axis, dir) {
-  if (!(view.state.selection instanceof prosemirrorState.TextSelection)) { return null }
-  var ref = view.state.selection;
-  var $head = ref.$head;
-  for (var d = $head.depth - 1; d >= 0; d--) {
-    var parent = $head.node(d), index = dir < 0 ? $head.index(d) : $head.indexAfter(d);
-    if (index != (dir < 0 ? 0 : parent.childCount)) { return null }
-    if (parent.type.spec.tableRole == "cell" || parent.type.spec.tableRole == "header_cell") {
-      var cellPos = $head.before(d);
-      var dirStr = axis == "vert" ? (dir > 0 ? "down" : "up") : (dir > 0 ? "right" : "left");
-      return view.endOfTextblock(dirStr) ? cellPos : null
-    }
-  }
-  return null
-}
-
-function domInCell(view, dom) {
-  for (; dom && dom != view.dom; dom = dom.parentNode)
-    { if (dom.nodeName == "TD" || dom.nodeName == "TH") { return dom } }
-}
-
-function cellUnderMouse(view, event) {
-  var mousePos = view.posAtCoords({left: event.clientX, top: event.clientY});
-  if (!mousePos) { return null }
-  return mousePos ? cellAround(view.state.doc.resolve(mousePos.pos)) : null
-}
-
-// This file defines helpers for normalizing tables, making sure no
-
-// Helper for iterating through the nodes in a document that changed
-// compared to the given previous document. Useful for avoiding
-// duplicate work on each transaction.
-function changedDescendants(old, cur, offset, f) {
-  var oldSize = old.childCount, curSize = cur.childCount;
-  outer: for (var i = 0, j = 0; i < curSize; i++) {
-    var child = cur.child(i);
-    for (var scan = j, e = Math.min(oldSize, i + 3); scan < e; scan++) {
-      if (old.child(scan) == child) {
-        j = scan + 1;
-        offset += child.nodeSize;
-        continue outer
-      }
-    }
-    f(child, offset);
-    if (j < oldSize && old.child(j).sameMarkup(child))
-      { changedDescendants(old.child(j), child, offset + 1, f); }
-    else
-      { child.nodesBetween(0, child.content.size, f, offset + 1); }
-    offset += child.nodeSize;
-  }
-}
-
-// :: (EditorState, ?EditorState) → ?Transaction
-// Inspect all tables in the given state's document and return a
-// transaction that fixes them, if necessary. If `oldState` was
-// provided, that is assumed to hold a previous, known-good state,
-// which will be used to avoid re-scanning unchanged parts of the
-// document.
-function fixTables(state, oldState) {
-  var tr, check = function (node, pos) {
-    if (node.type.spec.tableRole == "table") { tr = fixTable(state, node, pos, tr); }
-  };
-  if (!oldState) { state.doc.descendants(check); }
-  else if (oldState.doc != state.doc) { changedDescendants(oldState.doc, state.doc, 0, check); }
-  return tr
-}
-
-// : (EditorState, Node, number, ?Transaction) → ?Transaction
-// Fix the given table, if necessary. Will append to the transaction
-// it was given, if non-null, or create a new one if necessary.
-function fixTable(state, table, tablePos, tr) {
-  var map = TableMap.get(table);
-  if (!map.problems) { return tr }
-  if (!tr) { tr = state.tr; }
-
-  // Track which rows we must add cells to, so that we can adjust that
-  // when fixing collisions.
-  var mustAdd = [];
-  for (var i = 0; i < map.height; i++) { mustAdd.push(0); }
-  for (var i$1 = 0; i$1 < map.problems.length; i$1++) {
-    var prob = map.problems[i$1];
-    if (prob.type == "collision") {
-      var cell = table.nodeAt(prob.pos);
-      for (var j = 0; j < cell.attrs.rowspan; j++) { mustAdd[prob.row + j] += prob.n; }
-      tr.setNodeMarkup(tr.mapping.map(tablePos + 1 + prob.pos), null, rmColSpan(cell.attrs, cell.attrs.colspan - prob.n, prob.n));
-    } else if (prob.type == "missing") {
-      mustAdd[prob.row] += prob.n;
-    } else if (prob.type == "overlong_rowspan") {
-      var cell$1 = table.nodeAt(prob.pos);
-      tr.setNodeMarkup(tr.mapping.map(tablePos + 1 + prob.pos), null, setAttr(cell$1.attrs, "rowspan", cell$1.attrs.rowspan - prob.n));
-    } else if (prob.type == "colwidth mismatch") {
-      var cell$2 = table.nodeAt(prob.pos);
-      tr.setNodeMarkup(tr.mapping.map(tablePos + 1 + prob.pos), null, setAttr(cell$2.attrs, "colwidth", prob.colwidth));
-    }
-  }
-  var first, last;
-  for (var i$2 = 0; i$2 < mustAdd.length; i$2++) { if (mustAdd[i$2]) {
-    if (first == null) { first = i$2; }
-    last = i$2;
-  } }
-  // Add the necessary cells, using a heuristic for whether to add the
-  // cells at the start or end of the rows (if it looks like a 'bite'
-  // was taken out of the table, add cells at the start of the row
-  // after the bite. Otherwise add them at the end).
-  for (var i$3 = 0, pos = tablePos + 1; i$3 < map.height; i$3++) {
-    var row = table.child(i$3);
-    var end = pos + row.nodeSize;
-    var add = mustAdd[i$3];
-    if (add > 0) {
-      var tableNodeType = 'cell';
-      if (row.firstChild) {
-        tableNodeType = row.firstChild.type.spec.tableRole;
-      }
-      var nodes = [];
-      for (var j$1 = 0; j$1 < add; j$1++)
-        { nodes.push(tableNodeTypes(state.schema)[tableNodeType].createAndFill()); }
-      var side = (i$3 == 0 || first == i$3 - 1) && last == i$3 ? pos + 1 : end - 1;
-      tr.insert(tr.mapping.map(side), nodes);
-    }
-    pos = end;
-  }
-  return tr
-}
-
-// This file defines a number of table-related commands.
-
-// Helper to get the selected rectangle in a table, if any. Adds table
-// map, table node, and table start offset to the object for
-// convenience.
-function selectedRect(state) {
-  var sel = state.selection, $pos = selectionCell(state);
-  var table = $pos.node(-1), tableStart = $pos.start(-1), map = TableMap.get(table);
-  var rect;
-  if (sel instanceof CellSelection)
-    { rect = map.rectBetween(sel.$anchorCell.pos - tableStart, sel.$headCell.pos - tableStart); }
-  else
-    { rect = map.findCell($pos.pos - tableStart); }
-  rect.tableStart = tableStart;
-  rect.map = map;
-  rect.table = table;
-  return rect
-}
-
-function columnIsHeader(map, table, col) {
-  var headerCell = tableNodeTypes(table.type.schema).header_cell;
-  for (var row = 0; row < map.height; row++)
-    { if (table.nodeAt(map.map[col + row * map.width]).type != headerCell)
-      { return false } }
-  return true
-}
-
-// Add a column at the given position in a table.
-function addColumn(tr, ref, col) {
-  var map = ref.map;
-  var tableStart = ref.tableStart;
-  var table = ref.table;
-
-  var refColumn = col > 0 ? -1 : 0;
-  if (columnIsHeader(map, table, col + refColumn))
-    { refColumn = col == 0 || col == map.width ? null : 0; }
-
-  for (var row = 0; row < map.height; row++) {
-    var index = row * map.width + col;
-    // If this position falls inside a col-spanning cell
-    if (col > 0 && col < map.width && map.map[index - 1] == map.map[index]) {
-      var pos = map.map[index], cell = table.nodeAt(pos);
-      tr.setNodeMarkup(tr.mapping.map(tableStart + pos), null,
-                       addColSpan(cell.attrs, col - map.colCount(pos)));
-      // Skip ahead if rowspan > 1
-      row += cell.attrs.rowspan - 1;
-    } else {
-      var type = refColumn == null ? tableNodeTypes(table.type.schema).cell
-          : table.nodeAt(map.map[index + refColumn]).type;
-      var pos$1 = map.positionAt(row, col, table);
-      tr.insert(tr.mapping.map(tableStart + pos$1), type.createAndFill());
-    }
-  }
-  return tr
-}
-
-// :: (EditorState, dispatch: ?(tr: Transaction)) → bool
-// Command to add a column before the column with the selection.
-function addColumnBefore(state, dispatch) {
-  if (!isInTable(state)) { return false }
-  if (dispatch) {
-    var rect = selectedRect(state);
-    dispatch(addColumn(state.tr, rect, rect.left));
-  }
-  return true
-}
-
-// :: (EditorState, dispatch: ?(tr: Transaction)) → bool
-// Command to add a column after the column with the selection.
-function addColumnAfter(state, dispatch) {
-  if (!isInTable(state)) { return false }
-  if (dispatch) {
-    var rect = selectedRect(state);
-    dispatch(addColumn(state.tr, rect, rect.right));
-  }
-  return true
-}
-
-function removeColumn(tr, ref, col) {
-  var map = ref.map;
-  var table = ref.table;
-  var tableStart = ref.tableStart;
-
-  var mapStart = tr.mapping.maps.length;
-  for (var row = 0; row < map.height;) {
-    var index = row * map.width + col, pos = map.map[index], cell = table.nodeAt(pos);
-    // If this is part of a col-spanning cell
-    if ((col > 0 && map.map[index - 1] == pos) || (col < map.width - 1 && map.map[index + 1] == pos)) {
-      tr.setNodeMarkup(tr.mapping.slice(mapStart).map(tableStart + pos), null,
-                       rmColSpan(cell.attrs, col - map.colCount(pos)));
-    } else {
-      var start = tr.mapping.slice(mapStart).map(tableStart + pos);
-      tr.delete(start, start + cell.nodeSize);
-    }
-    row += cell.attrs.rowspan;
-  }
-}
-
-// :: (EditorState, dispatch: ?(tr: Transaction)) → bool
-// Command function that removes the selected columns from a table.
-function deleteColumn(state, dispatch) {
-  if (!isInTable(state)) { return false }
-  if (dispatch) {
-    var rect = selectedRect(state), tr = state.tr;
-    if (rect.left == 0 && rect.right == rect.map.width) { return false }
-    for (var i = rect.right - 1;; i--) {
-      removeColumn(tr, rect, i);
-      if (i == rect.left) { break }
-      rect.table = rect.tableStart ? tr.doc.nodeAt(rect.tableStart - 1) : tr.doc;
-      rect.map = TableMap.get(rect.table);
-    }
-    dispatch(tr);
-  }
-  return true
-}
-
-function rowIsHeader(map, table, row) {
-  var headerCell = tableNodeTypes(table.type.schema).header_cell;
-  for (var col = 0; col < map.width; col++)
-    { if (table.nodeAt(map.map[col + row * map.width]).type != headerCell)
-      { return false } }
-  return true
-}
-
-function addRow(tr, ref, row) {
-  var map = ref.map;
-  var tableStart = ref.tableStart;
-  var table = ref.table;
-
-  var rowPos = tableStart;
-  for (var i = 0; i < row; i++) { rowPos += table.child(i).nodeSize; }
-  var cells = [], refRow = row > 0 ? -1 : 0;
-  if (rowIsHeader(map, table, row + refRow))
-    { refRow = row == 0 || row == map.height ? null : 0; }
-  for (var col = 0, index = map.width * row; col < map.width; col++, index++) {
-    // Covered by a rowspan cell
-    if (row > 0 && row < map.height && map.map[index] == map.map[index - map.width]) {
-      var pos = map.map[index], attrs = table.nodeAt(pos).attrs;
-      tr.setNodeMarkup(tableStart + pos, null, setAttr(attrs, "rowspan", attrs.rowspan + 1));
-      col += attrs.colspan - 1;
-    } else {
-      var type = refRow == null ? tableNodeTypes(table.type.schema).cell
-          : table.nodeAt(map.map[index + refRow * map.width]).type;
-      cells.push(type.createAndFill());
-    }
-  }
-  tr.insert(rowPos, tableNodeTypes(table.type.schema).row.create(null, cells));
-  return tr
-}
-
-// :: (EditorState, dispatch: ?(tr: Transaction)) → bool
-// Add a table row before the selection.
-function addRowBefore(state, dispatch) {
-  if (!isInTable(state)) { return false }
-  if (dispatch) {
-    var rect = selectedRect(state);
-    dispatch(addRow(state.tr, rect, rect.top));
-  }
-  return true
-}
-
-// :: (EditorState, dispatch: ?(tr: Transaction)) → bool
-// Add a table row after the selection.
-function addRowAfter(state, dispatch) {
-  if (!isInTable(state)) { return false }
-  if (dispatch) {
-    var rect = selectedRect(state);
-    dispatch(addRow(state.tr, rect, rect.bottom));
-  }
-  return true
-}
-
-function removeRow(tr, ref, row) {
-  var map = ref.map;
-  var table = ref.table;
-  var tableStart = ref.tableStart;
-
-  var rowPos = 0;
-  for (var i = 0; i < row; i++) { rowPos += table.child(i).nodeSize; }
-  var nextRow = rowPos + table.child(row).nodeSize;
-
-  var mapFrom = tr.mapping.maps.length;
-  tr.delete(rowPos + tableStart, nextRow + tableStart);
-
-  for (var col = 0, index = row * map.width; col < map.width; col++, index++) {
-    var pos = map.map[index];
-    if (row > 0 && pos == map.map[index - map.width]) {
-      // If this cell starts in the row above, simply reduce its rowspan
-      var attrs = table.nodeAt(pos).attrs;
-      tr.setNodeMarkup(tr.mapping.slice(mapFrom).map(pos + tableStart), null, setAttr(attrs, "rowspan", attrs.rowspan - 1));
-      col += attrs.colspan - 1;
-    } else if (row < map.width && pos == map.map[index + map.width]) {
-      // Else, if it continues in the row below, it has to be moved down
-      var cell = table.nodeAt(pos);
-      var copy = cell.type.create(setAttr(cell.attrs, "rowspan", cell.attrs.rowspan - 1), cell.content);
-      var newPos = map.positionAt(row + 1, col, table);
-      tr.insert(tr.mapping.slice(mapFrom).map(tableStart + newPos), copy);
-      col += cell.attrs.colspan - 1;
-    }
-  }
-}
-
-// :: (EditorState, dispatch: ?(tr: Transaction)) → bool
-// Remove the selected rows from a table.
-function deleteRow(state, dispatch) {
-  if (!isInTable(state)) { return false }
-  if (dispatch) {
-    var rect = selectedRect(state), tr = state.tr;
-    if (rect.top == 0 && rect.bottom == rect.map.height) { return false }
-    for (var i = rect.bottom - 1;; i--) {
-      removeRow(tr, rect, i);
-      if (i == rect.top) { break }
-      rect.table = rect.tableStart ? tr.doc.nodeAt(rect.tableStart - 1) : tr.doc;
-      rect.map = TableMap.get(rect.table);
-    }
-    dispatch(tr);
-  }
-  return true
-}
-
-function isEmpty(cell) {
-  var c = cell.content;
-  return c.childCount == 1 && c.firstChild.isTextblock && c.firstChild.childCount == 0
-}
-
-function cellsOverlapRectangle(ref, rect) {
-  var width = ref.width;
-  var height = ref.height;
-  var map = ref.map;
-
-  var indexTop = rect.top * width + rect.left, indexLeft = indexTop;
-  var indexBottom = (rect.bottom - 1) * width + rect.left, indexRight = indexTop + (rect.right - rect.left - 1);
-  for (var i = rect.top; i < rect.bottom; i++) {
-    if (rect.left > 0 && map[indexLeft] == map[indexLeft - 1] ||
-        rect.right < width && map[indexRight] == map[indexRight + 1]) { return true }
-    indexLeft += width; indexRight += width;
-  }
-  for (var i$1 = rect.left; i$1 < rect.right; i$1++) {
-    if (rect.top > 0 && map[indexTop] == map[indexTop - width] ||
-        rect.bottom < height && map[indexBottom] == map[indexBottom + width]) { return true }
-    indexTop++; indexBottom++;
-  }
-  return false
-}
-
-// :: (EditorState, dispatch: ?(tr: Transaction)) → bool
-// Merge the selected cells into a single cell. Only available when
-// the selected cells' outline forms a rectangle.
-function mergeCells(state, dispatch) {
-  var sel = state.selection;
-  if (!(sel instanceof CellSelection) || sel.$anchorCell.pos == sel.$headCell.pos) { return false }
-  var rect = selectedRect(state);
-  var map = rect.map;
-  if (cellsOverlapRectangle(map, rect)) { return false }
-  if (dispatch) {
-    var tr = state.tr, seen = {}, content = prosemirrorModel.Fragment.empty, mergedPos, mergedCell;
-    for (var row = rect.top; row < rect.bottom; row++) {
-      for (var col = rect.left; col < rect.right; col++) {
-        var cellPos = map.map[row * map.width + col], cell = rect.table.nodeAt(cellPos);
-        if (seen[cellPos]) { continue }
-        seen[cellPos] = true;
-        if (mergedPos == null) {
-          mergedPos = cellPos;
-          mergedCell = cell;
-        } else {
-          if (!isEmpty(cell)) { content = content.append(cell.content); }
-          var mapped = tr.mapping.map(cellPos + rect.tableStart);
-          tr.delete(mapped, mapped + cell.nodeSize);
-        }
-      }
-    }
-    tr.setNodeMarkup(mergedPos + rect.tableStart, null,
-                     setAttr(addColSpan(mergedCell.attrs, mergedCell.attrs.colspan, (rect.right - rect.left) - mergedCell.attrs.colspan),
-                             "rowspan", rect.bottom - rect.top));
-    if (content.size) {
-      var end = mergedPos + 1 + mergedCell.content.size;
-      var start = isEmpty(mergedCell) ? mergedPos + 1 : end;
-      tr.replaceWith(start + rect.tableStart, end + rect.tableStart, content);
-    }
-    tr.setSelection(new CellSelection(tr.doc.resolve(mergedPos + rect.tableStart)));
-    dispatch(tr);
-  }
-  return true
-}
-
-// :: (EditorState, dispatch: ?(tr: Transaction)) → bool
-// Split a selected cell, whose rowpan or colspan is greater than one,
-// into smaller cells.
-function splitCell(state, dispatch) {
-  var sel = state.selection;
-  var cellNode, cellPos;
-  if (!(sel instanceof CellSelection)) {
-    cellNode = cellWrapping(sel.$from);
-    if (!cellNode) { return false }
-    cellPos = cellAround(sel.$from).pos;
-  } else {
-    if (sel.$anchorCell.pos != sel.$headCell.pos) { return false }
-    cellNode = sel.$anchorCell.nodeAfter;
-    cellPos = sel.$anchorCell.pos;
-  }
-  if (cellNode.attrs.colspan == 1 && cellNode.attrs.rowspan == 1) {return false}
-  if (dispatch) {
-    var baseAttrs = cellNode.attrs, attrs = [], colwidth = baseAttrs.colwidth;
-    if (baseAttrs.rowspan > 1) { baseAttrs = setAttr(baseAttrs, "rowspan", 1); }
-    if (baseAttrs.colspan > 1) { baseAttrs = setAttr(baseAttrs, "colspan", 1); }
-    var rect = selectedRect(state), tr = state.tr;
-    for (var i = 0; i < rect.right - rect.left; i++)
-      { attrs.push(colwidth ? setAttr(baseAttrs, "colwidth", colwidth && colwidth[i] ? [colwidth[i]] : null) : baseAttrs); }
-    var lastCell, cellType = tableNodeTypes(state.schema)[cellNode.type.spec.tableRole];
-    for (var row = 0; row < rect.bottom; row++) {
-      if (row >= rect.top) {
-        var pos = rect.map.positionAt(row, rect.left, rect.table);
-        if (row == rect.top) { pos += cellNode.nodeSize; }
-        for (var col = rect.left, i$1 = 0; col < rect.right; col++, i$1++) {
-          if (col == rect.left && row == rect.top) { continue }
-          tr.insert(lastCell = tr.mapping.map(pos + rect.tableStart, 1), cellType.createAndFill(attrs[i$1]));
-        }
-      }
-    }
-    tr.setNodeMarkup(cellPos, null, attrs[0]);
-    if (sel instanceof CellSelection)
-      { tr.setSelection(new CellSelection(tr.doc.resolve(sel.$anchorCell.pos),
-                                        lastCell && tr.doc.resolve(lastCell))); }
-    dispatch(tr);
-  }
-  return true
-}
-
-// :: (string, any) → (EditorState, dispatch: ?(tr: Transaction)) → bool
-// Returns a command that sets the given attribute to the given value,
-// and is only available when the currently selected cell doesn't
-// already have that attribute set to that value.
-function setCellAttr(name, value) {
-  return function(state, dispatch) {
-    if (!isInTable(state)) { return false }
-    var $cell = selectionCell(state);
-    if ($cell.nodeAfter.attrs[name] === value) { return false }
-    if (dispatch) {
-      var tr = state.tr;
-      if (state.selection instanceof CellSelection)
-        { state.selection.forEachCell(function (node, pos) {
-          if (node.attrs[name] !== value)
-            { tr.setNodeMarkup(pos, null, setAttr(node.attrs, name, value)); }
-        }); }
-      else
-        { tr.setNodeMarkup($cell.pos, null, setAttr($cell.nodeAfter.attrs, name, value)); }
-      dispatch(tr);
-    }
-    return true
-  }
-}
-
-function deprecated_toggleHeader(type) {
-  return function(state, dispatch) {
-    if (!isInTable(state)) { return false }
-    if (dispatch) {
-      var types = tableNodeTypes(state.schema);
-      var rect = selectedRect(state), tr = state.tr;
-      var cells = rect.map.cellsInRect(type == "column" ? new Rect(rect.left, 0, rect.right, rect.map.height) :
-                                       type == "row" ? new Rect(0, rect.top, rect.map.width, rect.bottom) : rect);
-      var nodes = cells.map(function (pos) { return rect.table.nodeAt(pos); });
-      for (var i = 0; i < cells.length; i++) // Remove headers, if any
-        { if (nodes[i].type == types.header_cell)
-          { tr.setNodeMarkup(rect.tableStart + cells[i], types.cell, nodes[i].attrs); } }
-      if (tr.steps.length == 0) { for (var i$1 = 0; i$1 < cells.length; i$1++) // No headers removed, add instead
-        { tr.setNodeMarkup(rect.tableStart + cells[i$1], types.header_cell, nodes[i$1].attrs); } }
-      dispatch(tr);
-    }
-    return true
-  }
-}
-
-function isHeaderEnabledByType(type, rect, types) {
-  // Get cell positions for first row or first column
-  var cellPositions = rect.map.cellsInRect({
-    left: 0,
-    top: 0,
-    right: type == "row" ? rect.map.width : 1,
-    bottom: type == "column" ? rect.map.height : 1,
-  });
-
-  for (var i = 0; i < cellPositions.length; i++) {
-    var cell = rect.table.nodeAt(cellPositions[i]);
-    if (cell && cell.type !== types.header_cell) {
-      return false
-    }
-  }
-
-  return true
-}
-
-// :: (string, ?{ useDeprecatedLogic: bool }) → (EditorState, dispatch: ?(tr: Transaction)) → bool
-// Toggles between row/column header and normal cells (Only applies to first row/column).
-// For deprecated behavior pass `useDeprecatedLogic` in options with true.
-function toggleHeader(type, options) {
-  options = options || { useDeprecatedLogic: false };
-
-  if (options.useDeprecatedLogic)
-    { return deprecated_toggleHeader(type) }
-
-  return function(state, dispatch) {
-    if (!isInTable(state)) { return false }
-    if (dispatch) {
-      var types = tableNodeTypes(state.schema);
-      var rect = selectedRect(state), tr = state.tr;
-
-      var isHeaderRowEnabled = isHeaderEnabledByType("row", rect, types);
-      var isHeaderColumnEnabled = isHeaderEnabledByType("column", rect, types);
-
-      var isHeaderEnabled = type === "column" ? isHeaderRowEnabled :
-                            type === "row"    ? isHeaderColumnEnabled : false;
-
-      var selectionStartsAt = isHeaderEnabled ? 1 : 0;
-
-      var cellsRect = type == "column" ? new Rect(0, selectionStartsAt, 1, rect.map.height) :
-                      type == "row" ? new Rect(selectionStartsAt, 0, rect.map.width, 1) : rect;
-
-      var newType = type == "column" ? isHeaderColumnEnabled ? types.cell : types.header_cell :
-                    type == "row" ? isHeaderRowEnabled ? types.cell : types.header_cell : types.cell;
-
-      rect.map.cellsInRect(cellsRect).forEach(function (relativeCellPos) {
-        var cellPos = relativeCellPos + rect.tableStart;
-        var cell = tr.doc.nodeAt(cellPos);
-
-        if (cell) {
-          tr.setNodeMarkup(cellPos, newType, cell.attrs);
-        }
-      });
-
-      dispatch(tr);
-    }
-    return true
-  }
-}
-
-// :: (EditorState, dispatch: ?(tr: Transaction)) → bool
-// Toggles whether the selected row contains header cells.
-var toggleHeaderRow = toggleHeader("row", { useDeprecatedLogic: true });
-
-// :: (EditorState, dispatch: ?(tr: Transaction)) → bool
-// Toggles whether the selected column contains header cells.
-var toggleHeaderColumn = toggleHeader("column", { useDeprecatedLogic: true });
-
-// :: (EditorState, dispatch: ?(tr: Transaction)) → bool
-// Toggles whether the selected cells are header cells.
-var toggleHeaderCell = toggleHeader("cell", { useDeprecatedLogic: true });
-
-function findNextCell($cell, dir) {
-  if (dir < 0) {
-    var before = $cell.nodeBefore;
-    if (before) { return $cell.pos - before.nodeSize }
-    for (var row = $cell.index(-1) - 1, rowEnd = $cell.before(); row >= 0; row--) {
-      var rowNode = $cell.node(-1).child(row);
-      if (rowNode.childCount) { return rowEnd - 1 - rowNode.lastChild.nodeSize }
-      rowEnd -= rowNode.nodeSize;
-    }
-  } else {
-    if ($cell.index() < $cell.parent.childCount - 1) { return $cell.pos + $cell.nodeAfter.nodeSize }
-    var table = $cell.node(-1);
-    for (var row$1 = $cell.indexAfter(-1), rowStart = $cell.after(); row$1 < table.childCount; row$1++) {
-      var rowNode$1 = table.child(row$1);
-      if (rowNode$1.childCount) { return rowStart + 1 }
-      rowStart += rowNode$1.nodeSize;
-    }
-  }
-}
-
-// :: (number) → (EditorState, dispatch: ?(tr: Transaction)) → bool
-// Returns a command for selecting the next (direction=1) or previous
-// (direction=-1) cell in a table.
-function goToNextCell(direction) {
-  return function(state, dispatch) {
-    if (!isInTable(state)) { return false }
-    var cell = findNextCell(selectionCell(state), direction);
-    if (cell == null) { return }
-    if (dispatch) {
-      var $cell = state.doc.resolve(cell);
-      dispatch(state.tr.setSelection(prosemirrorState.TextSelection.between($cell, moveCellForward($cell))).scrollIntoView());
-    }
-    return true
-  }
-}
-
-// :: (EditorState, ?(tr: Transaction)) → bool
-// Deletes the table around the selection, if any.
-function deleteTable(state, dispatch) {
-  var $pos = state.selection.$anchor;
-  for (var d = $pos.depth; d > 0; d--) {
-    var node = $pos.node(d);
-    if (node.type.spec.tableRole == "table") {
-      if (dispatch) { dispatch(state.tr.delete($pos.before(d), $pos.after(d)).scrollIntoView()); }
-      return true
-    }
-  }
-  return false
-}
-
-var TableView = function TableView(node, cellMinWidth) {
-  this.node = node;
-  this.cellMinWidth = cellMinWidth;
-  this.dom = document.createElement("div");
-  this.dom.className = "tableWrapper";
-  this.table = this.dom.appendChild(document.createElement("table"));
-  this.colgroup = this.table.appendChild(document.createElement("colgroup"));
-  updateColumns(node, this.colgroup, this.table, cellMinWidth);
-  this.contentDOM = this.table.appendChild(document.createElement("tbody"));
-};
-
-TableView.prototype.update = function update (node) {
-  if (node.type != this.node.type) { return false }
-  this.node = node;
-  updateColumns(node, this.colgroup, this.table, this.cellMinWidth);
-  return true
-};
-
-TableView.prototype.ignoreMutation = function ignoreMutation (record) {
-  return record.type == "attributes" && (record.target == this.table || this.colgroup.contains(record.target))
-};
-
-function updateColumns(node, colgroup, table, cellMinWidth, overrideCol, overrideValue) {
-  var totalWidth = 0, fixedWidth = true;
-  var nextDOM = colgroup.firstChild, row = node.firstChild;
-  for (var i = 0, col = 0; i < row.childCount; i++) {
-    var ref = row.child(i).attrs;
-    var colspan = ref.colspan;
-    var colwidth = ref.colwidth;
-    for (var j = 0; j < colspan; j++, col++) {
-      var hasWidth = overrideCol == col ? overrideValue : colwidth && colwidth[j];
-      var cssWidth = hasWidth ? hasWidth + "px" : "";
-      totalWidth += hasWidth || cellMinWidth;
-      if (!hasWidth) { fixedWidth = false; }
-      if (!nextDOM) {
-        colgroup.appendChild(document.createElement("col")).style.width = cssWidth;
-      } else {
-        if (nextDOM.style.width != cssWidth) { nextDOM.style.width = cssWidth; }
-        nextDOM = nextDOM.nextSibling;
-      }
-    }
-  }
-
-  while (nextDOM) {
-    var after = nextDOM.nextSibling;
-    nextDOM.parentNode.removeChild(nextDOM);
-    nextDOM = after;
-  }
-
-  if (fixedWidth) {
-    table.style.width = totalWidth + "px";
-    table.style.minWidth = "";
-  } else {
-    table.style.width = "";
-    table.style.minWidth = totalWidth + "px";
-  }
-}
-
-var key$1 = new prosemirrorState.PluginKey("tableColumnResizing");
-
-function columnResizing(ref) {
-  if ( ref === void 0 ) ref = {};
-  var handleWidth = ref.handleWidth; if ( handleWidth === void 0 ) handleWidth = 5;
-  var cellMinWidth = ref.cellMinWidth; if ( cellMinWidth === void 0 ) cellMinWidth = 25;
-  var View = ref.View; if ( View === void 0 ) View = TableView;
-  var lastColumnResizable = ref.lastColumnResizable; if ( lastColumnResizable === void 0 ) lastColumnResizable = true;
-
-  var plugin = new prosemirrorState.Plugin({
-    key: key$1,
-    state: {
-      init: function init(_, state) {
-        this.spec.props.nodeViews[tableNodeTypes(state.schema).table.name] =
-          function (node, view) { return new View(node, cellMinWidth, view); };
-        return new ResizeState(-1, false)
-      },
-      apply: function apply(tr, prev) {
-        return prev.apply(tr)
-      }
-    },
-    props: {
-      attributes: function attributes(state) {
-        var pluginState = key$1.getState(state);
-        return pluginState.activeHandle > -1 ? {class: "resize-cursor"} : null
-      },
-
-      handleDOMEvents: {
-        mousemove: function mousemove(view, event) { handleMouseMove(view, event, handleWidth, cellMinWidth, lastColumnResizable); },
-        mouseleave: function mouseleave(view) { handleMouseLeave(view); },
-        mousedown: function mousedown(view, event) { handleMouseDown$1(view, event, cellMinWidth); }
-      },
-
-      decorations: function decorations(state) {
-        var pluginState = key$1.getState(state);
-        if (pluginState.activeHandle > -1) { return handleDecorations(state, pluginState.activeHandle) }
-      },
-
-      nodeViews: {}
-    }
-  });
-  return plugin
-}
-
-var ResizeState = function ResizeState(activeHandle, dragging) {
-  this.activeHandle = activeHandle;
-  this.dragging = dragging;
-};
-
-ResizeState.prototype.apply = function apply (tr) {
-  var state = this, action = tr.getMeta(key$1);
-  if (action && action.setHandle != null)
-    { return new ResizeState(action.setHandle, null) }
-  if (action && action.setDragging !== undefined)
-    { return new ResizeState(state.activeHandle, action.setDragging) }
-  if (state.activeHandle > -1 && tr.docChanged) {
-    var handle = tr.mapping.map(state.activeHandle, -1);
-    if (!pointsAtCell(tr.doc.resolve(handle))) { handle = null; }
-    state = new ResizeState(handle, state.dragging);
-  }
-  return state
-};
-
-function handleMouseMove(view, event, handleWidth, cellMinWidth, lastColumnResizable) {
-  var pluginState = key$1.getState(view.state);
-
-  if (!pluginState.dragging) {
-    var target = domCellAround(event.target), cell = -1;
-    if (target) {
-      var ref = target.getBoundingClientRect();
-      var left = ref.left;
-      var right = ref.right;
-      if (event.clientX - left <= handleWidth)
-        { cell = edgeCell(view, event, "left"); }
-      else if (right - event.clientX <= handleWidth)
-        { cell = edgeCell(view, event, "right"); }
-    }
-
-    if (cell != pluginState.activeHandle) {
-      if (!lastColumnResizable && cell !== -1) {
-        var $cell = view.state.doc.resolve(cell);
-        var table = $cell.node(-1), map = TableMap.get(table), start = $cell.start(-1);
-        var col = map.colCount($cell.pos - start) + $cell.nodeAfter.attrs.colspan - 1;
-
-        if (col == map.width - 1) {
-          return
-        }
-      }
-
-      updateHandle(view, cell);
-    }
-  }
-}
-
-function handleMouseLeave(view) {
-  var pluginState = key$1.getState(view.state);
-  if (pluginState.activeHandle > -1 && !pluginState.dragging) { updateHandle(view, -1); }
-}
-
-function handleMouseDown$1(view, event, cellMinWidth) {
-  var pluginState = key$1.getState(view.state);
-  if (pluginState.activeHandle == -1 || pluginState.dragging) { return false }
-
-  var cell = view.state.doc.nodeAt(pluginState.activeHandle);
-  var width = currentColWidth(view, pluginState.activeHandle, cell.attrs);
-  view.dispatch(view.state.tr.setMeta(key$1, {setDragging: {startX: event.clientX, startWidth: width}}));
-
-  function finish(event) {
-    window.removeEventListener("mouseup", finish);
-    window.removeEventListener("mousemove", move);
-    var pluginState = key$1.getState(view.state);
-    if (pluginState.dragging) {
-      updateColumnWidth(view, pluginState.activeHandle, draggedWidth(pluginState.dragging, event, cellMinWidth));
-      view.dispatch(view.state.tr.setMeta(key$1, {setDragging: null}));
-    }
-  }
-  function move(event) {
-    if (!event.which) { return finish(event) }
-    var pluginState = key$1.getState(view.state);
-    var dragged = draggedWidth(pluginState.dragging, event, cellMinWidth);
-    displayColumnWidth(view, pluginState.activeHandle, dragged, cellMinWidth);
-  }
-
-  window.addEventListener("mouseup", finish);
-  window.addEventListener("mousemove", move);
-  event.preventDefault();
-  return true
-}
-
-function currentColWidth(view, cellPos, ref) {
-  var colspan = ref.colspan;
-  var colwidth = ref.colwidth;
-
-  var width = colwidth && colwidth[colwidth.length - 1];
-  if (width) { return width }
-  var dom = view.domAtPos(cellPos);
-  var node = dom.node.childNodes[dom.offset];
-  var domWidth = node.offsetWidth, parts = colspan;
-  if (colwidth) { for (var i = 0; i < colspan; i++) { if (colwidth[i]) {
-    domWidth -= colwidth[i];
-    parts--;
-  } } }
-  return domWidth / parts
-}
-
-function domCellAround(target) {
-  while (target && target.nodeName != "TD" && target.nodeName != "TH")
-    { target = target.classList.contains("ProseMirror") ? null : target.parentNode; }
-  return target
-}
-
-function edgeCell(view, event, side) {
-  var ref = view.posAtCoords({left: event.clientX, top: event.clientY});
-  var pos = ref.pos;
-  var $cell = cellAround(view.state.doc.resolve(pos));
-  if (!$cell) { return -1 }
-  if (side == "right") { return $cell.pos }
-  var map = TableMap.get($cell.node(-1)), start = $cell.start(-1);
-  var index = map.map.indexOf($cell.pos - start);
-  return index % map.width == 0 ? -1 : start + map.map[index - 1]
-}
-
-function draggedWidth(dragging, event, cellMinWidth) {
-  var offset = event.clientX - dragging.startX;
-  return Math.max(cellMinWidth, dragging.startWidth + offset)
-}
-
-function updateHandle(view, value) {
-  view.dispatch(view.state.tr.setMeta(key$1, {setHandle: value}));
-}
-
-function updateColumnWidth(view, cell, width) {
-  var $cell = view.state.doc.resolve(cell);
-  var table = $cell.node(-1), map = TableMap.get(table), start = $cell.start(-1);
-  var col = map.colCount($cell.pos - start) + $cell.nodeAfter.attrs.colspan - 1;
-  var tr = view.state.tr;
-  for (var row = 0; row < map.height; row++) {
-    var mapIndex = row * map.width + col;
-    // Rowspanning cell that has already been handled
-    if (row && map.map[mapIndex] == map.map[mapIndex - map.width]) { continue }
-    var pos = map.map[mapIndex];
-    var ref = table.nodeAt(pos);
-    var attrs = ref.attrs;
-    var index = attrs.colspan == 1 ? 0 : col - map.colCount(pos);
-    if (attrs.colwidth && attrs.colwidth[index] == width) { continue }
-    var colwidth = attrs.colwidth ? attrs.colwidth.slice() : zeroes(attrs.colspan);
-    colwidth[index] = width;
-    tr.setNodeMarkup(start + pos, null, setAttr(attrs, "colwidth", colwidth));
-  }
-  if (tr.docChanged) { view.dispatch(tr); }
-}
-
-function displayColumnWidth(view, cell, width, cellMinWidth) {
-  var $cell = view.state.doc.resolve(cell);
-  var table = $cell.node(-1), start = $cell.start(-1);
-  var col = TableMap.get(table).colCount($cell.pos - start) + $cell.nodeAfter.attrs.colspan - 1;
-  var dom = view.domAtPos($cell.start(-1)).node;
-  while (dom.nodeName != "TABLE") { dom = dom.parentNode; }
-  updateColumns(table, dom.firstChild, dom, cellMinWidth, col, width);
-}
-
-function zeroes(n) {
-  var result = [];
-  for (var i = 0; i < n; i++) { result.push(0); }
-  return result
-}
-
-function handleDecorations(state, cell) {
-  var decorations = [];
-  var $cell = state.doc.resolve(cell);
-  var table = $cell.node(-1), map = TableMap.get(table), start = $cell.start(-1);
-  var col = map.colCount($cell.pos - start) + $cell.nodeAfter.attrs.colspan;
-  for (var row = 0; row < map.height; row++) {
-    var index = col + row * map.width - 1;
-    // For positions that are have either a different cell or the end
-    // of the table to their right, and either the top of the table or
-    // a different cell above them, add a decoration
-    if ((col == map.width || map.map[index] != map.map[index + 1]) &&
-        (row == 0 || map.map[index - 1] != map.map[index - 1 - map.width])) {
-      var cellPos = map.map[index];
-      var pos = start + cellPos + table.nodeAt(cellPos).nodeSize - 1;
-      var dom = document.createElement("div");
-      dom.className = "column-resize-handle";
-      decorations.push(prosemirrorView.Decoration.widget(pos, dom));
-    }
-  }
-  return prosemirrorView.DecorationSet.create(state.doc, decorations)
-}
-
-// This file defines a plugin that handles the drawing of cell
-
-// :: () → Plugin
-//
-// Creates a [plugin](http://prosemirror.net/docs/ref/#state.Plugin)
-// that, when added to an editor, enables cell-selection, handles
-// cell-based copy/paste, and makes sure tables stay well-formed (each
-// row has the same width, and cells don't overlap).
-//
-// You should probably put this plugin near the end of your array of
-// plugins, since it handles mouse and arrow key events in tables
-// rather broadly, and other plugins, like the gap cursor or the
-// column-width dragging plugin, might want to get a turn first to
-// perform more specific behavior.
-function tableEditing(ref) {
-  if ( ref === void 0 ) ref = {};
-  var allowTableNodeSelection = ref.allowTableNodeSelection; if ( allowTableNodeSelection === void 0 ) allowTableNodeSelection = false;
-
-  return new prosemirrorState.Plugin({
-    key: key,
-
-    // This piece of state is used to remember when a mouse-drag
-    // cell-selection is happening, so that it can continue even as
-    // transactions (which might move its anchor cell) come in.
-    state: {
-      init: function init() { return null },
-      apply: function apply(tr, cur) {
-        var set = tr.getMeta(key);
-        if (set != null) { return set == -1 ? null : set }
-        if (cur == null || !tr.docChanged) { return cur }
-        var ref = tr.mapping.mapResult(cur);
-        var deleted = ref.deleted;
-        var pos = ref.pos;
-        return deleted ? null : pos
-      }
-    },
-
-    props: {
-      decorations: drawCellSelection,
-
-      handleDOMEvents: {
-        mousedown: handleMouseDown
-      },
-
-      createSelectionBetween: function createSelectionBetween(view) {
-        if (key.getState(view.state) != null) { return view.state.selection }
-      },
-
-      handleTripleClick: handleTripleClick,
-
-      handleKeyDown: handleKeyDown,
-
-      handlePaste: handlePaste
-    },
-
-    appendTransaction: function appendTransaction(_, oldState, state) {
-      return normalizeSelection(state, fixTables(state, oldState), allowTableNodeSelection)
-    }
-  })
-}
-
-exports.tableEditing = tableEditing;
-exports.fixTables = fixTables;
-exports.handlePaste = handlePaste;
-exports.cellAround = cellAround;
-exports.isInTable = isInTable;
-exports.selectionCell = selectionCell;
-exports.moveCellForward = moveCellForward;
-exports.inSameTable = inSameTable;
-exports.findCell = findCell;
-exports.colCount = colCount;
-exports.nextCell = nextCell;
-exports.tableNodes = tableNodes;
-exports.CellSelection = CellSelection;
-exports.TableMap = TableMap;
-exports.columnResizing = columnResizing;
-exports.columnResizingPluginKey = key$1;
-exports.updateColumnsOnResize = updateColumns;
-exports.__pastedCells = pastedCells;
-exports.__insertCells = insertCells;
-exports.__clipCells = clipCells;
-exports.addColumn = addColumn;
-exports.addColumnBefore = addColumnBefore;
-exports.addColumnAfter = addColumnAfter;
-exports.removeColumn = removeColumn;
-exports.deleteColumn = deleteColumn;
-exports.addRow = addRow;
-exports.addRowBefore = addRowBefore;
-exports.addRowAfter = addRowAfter;
-exports.removeRow = removeRow;
-exports.deleteRow = deleteRow;
-exports.mergeCells = mergeCells;
-exports.splitCell = splitCell;
-exports.setCellAttr = setCellAttr;
-exports.toggleHeader = toggleHeader;
-exports.toggleHeaderRow = toggleHeaderRow;
-exports.toggleHeaderColumn = toggleHeaderColumn;
-exports.toggleHeaderCell = toggleHeaderCell;
-exports.goToNextCell = goToNextCell;
-exports.deleteTable = deleteTable;
-//# sourceMappingURL=index.js.map
 
 
 /***/ }),
@@ -63988,7 +63528,7 @@ var render = function() {
                                   _c(
                                     "v-flex",
                                     { attrs: { "align-center": "", xs1: "" } },
-                                    [_c("p", [_vm._v("Tics -7500")])]
+                                    [_c("p", [_vm._v("Tics 0")])]
                                   ),
                                   _vm._v(" "),
                                   _c(
@@ -63998,8 +63538,8 @@ var render = function() {
                                       _c("v-slider", {
                                         attrs: {
                                           "thumb-label": "always",
-                                          min: "-7500",
-                                          max: "7500"
+                                          min: "0",
+                                          max: "30000"
                                         },
                                         model: {
                                           value: _vm.slider,
@@ -64016,7 +63556,7 @@ var render = function() {
                                   _c(
                                     "v-flex",
                                     { attrs: { "align-center": "", xs1: "" } },
-                                    [_c("p", [_vm._v("7500")])]
+                                    [_c("p", [_vm._v("30000")])]
                                   )
                                 ],
                                 1
@@ -64035,7 +63575,7 @@ var render = function() {
                                       _c("v-text-field", {
                                         attrs: {
                                           "min:0": "",
-                                          "max:15000": "",
+                                          "max:30000": "",
                                           label: "Tics",
                                           type: "number"
                                         },
@@ -64398,7 +63938,7 @@ var render = function() {
       _c(
         "v-dialog",
         {
-          attrs: { width: "500" },
+          attrs: { width: "800" },
           scopedSlots: _vm._u([
             {
               key: "activator",
@@ -64407,8 +63947,8 @@ var render = function() {
                 return [
                   _c(
                     "v-btn",
-                    _vm._g({ attrs: { color: "red lighten-2", dark: "" } }, on),
-                    [_vm._v("\n        Click Me\n      ")]
+                    _vm._g({ attrs: { color: "success", dark: "" } }, on),
+                    [_vm._v("\n        \tNuevo Equipamiento  \n        ")]
                   )
                 ]
               }
@@ -64433,12 +63973,292 @@ var render = function() {
                   staticClass: "headline grey lighten-2",
                   attrs: { "primary-title": "" }
                 },
-                [_vm._v("\n        Privacy Policy\n      ")]
+                [_vm._v("\n          Nuevo Equipamiento\n        ")]
               ),
               _vm._v(" "),
               _c(
                 "v-card-text",
-                [_c("editor-content", { attrs: { editor: _vm.editor } })],
+                [
+                  _c(
+                    "v-container",
+                    { attrs: { "grid-list-md": "" } },
+                    [
+                      _c(
+                        "v-layout",
+                        { attrs: { wrap: "" } },
+                        [
+                          _c(
+                            "v-flex",
+                            { attrs: { xs12: "" } },
+                            [
+                              _c("v-text-field", {
+                                attrs: { label: "Nombre Equipo", required: "" }
+                              })
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-flex",
+                            { attrs: { xs12: "" } },
+                            [
+                              _c("editor-menu-bar", {
+                                attrs: { editor: _vm.editor },
+                                scopedSlots: _vm._u([
+                                  {
+                                    key: "default",
+                                    fn: function(ref) {
+                                      var commands = ref.commands
+                                      var isActive = ref.isActive
+                                      return [
+                                        _c("div", { staticClass: "menubar" }, [
+                                          _c(
+                                            "button",
+                                            {
+                                              staticClass: "menubar__button",
+                                              class: {
+                                                "is-active": isActive.bold()
+                                              },
+                                              on: { click: commands.bold }
+                                            },
+                                            [
+                                              _c("v-icon", [
+                                                _vm._v("format_bold")
+                                              ])
+                                            ],
+                                            1
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "button",
+                                            {
+                                              staticClass: "menubar__button",
+                                              class: {
+                                                "is-active": isActive.italic()
+                                              },
+                                              on: { click: commands.italic }
+                                            },
+                                            [
+                                              _c("v-icon", [
+                                                _vm._v("format_italic")
+                                              ])
+                                            ],
+                                            1
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "button",
+                                            {
+                                              staticClass: "menubar__button",
+                                              class: {
+                                                "is-active": isActive.strike()
+                                              },
+                                              on: { click: commands.strike }
+                                            },
+                                            [
+                                              _c("v-icon", [
+                                                _vm._v("format_strikethrough")
+                                              ])
+                                            ],
+                                            1
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "button",
+                                            {
+                                              staticClass: "menubar__button",
+                                              class: {
+                                                "is-active": isActive.underline()
+                                              },
+                                              on: { click: commands.underline }
+                                            },
+                                            [
+                                              _c("v-icon", [
+                                                _vm._v("format_underlined")
+                                              ])
+                                            ],
+                                            1
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "button",
+                                            {
+                                              staticClass: "menubar__button",
+                                              class: {
+                                                "is-active": isActive.code()
+                                              },
+                                              on: { click: commands.code }
+                                            },
+                                            [_c("v-icon", [_vm._v("code")])],
+                                            1
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "button",
+                                            {
+                                              staticClass: "menubar__button",
+                                              class: {
+                                                "is-active": isActive.heading({
+                                                  level: 1
+                                                })
+                                              },
+                                              on: {
+                                                click: function($event) {
+                                                  return commands.heading({
+                                                    level: 1
+                                                  })
+                                                }
+                                              }
+                                            },
+                                            [
+                                              _vm._v(
+                                                "\n\t\t\t\t\t          H1\n\t\t\t\t\t        "
+                                              )
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "button",
+                                            {
+                                              staticClass: "menubar__button",
+                                              class: {
+                                                "is-active": isActive.heading({
+                                                  level: 2
+                                                })
+                                              },
+                                              on: {
+                                                click: function($event) {
+                                                  return commands.heading({
+                                                    level: 2
+                                                  })
+                                                }
+                                              }
+                                            },
+                                            [
+                                              _vm._v(
+                                                "\n\t\t\t\t\t          H2\n\t\t\t\t\t        "
+                                              )
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "button",
+                                            {
+                                              staticClass: "menubar__button",
+                                              class: {
+                                                "is-active": isActive.heading({
+                                                  level: 3
+                                                })
+                                              },
+                                              on: {
+                                                click: function($event) {
+                                                  return commands.heading({
+                                                    level: 3
+                                                  })
+                                                }
+                                              }
+                                            },
+                                            [
+                                              _vm._v(
+                                                "\n\t\t\t\t\t          H3\n\t\t\t\t\t        "
+                                              )
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "button",
+                                            {
+                                              staticClass: "menubar__button",
+                                              class: {
+                                                "is-active": isActive.bullet_list()
+                                              },
+                                              on: {
+                                                click: commands.bullet_list
+                                              }
+                                            },
+                                            [
+                                              _c("v-icon", [
+                                                _vm._v("format_list_bulleted")
+                                              ])
+                                            ],
+                                            1
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "button",
+                                            {
+                                              staticClass: "menubar__button",
+                                              class: {
+                                                "is-active": isActive.ordered_list()
+                                              },
+                                              on: {
+                                                click: commands.ordered_list
+                                              }
+                                            },
+                                            [
+                                              _c("v-icon", [
+                                                _vm._v("format_list_numbered")
+                                              ])
+                                            ],
+                                            1
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "button",
+                                            {
+                                              staticClass: "menubar__button",
+                                              class: {
+                                                "is-active": isActive.blockquote()
+                                              },
+                                              on: { click: commands.blockquote }
+                                            },
+                                            [
+                                              _c("v-icon", [
+                                                _vm._v("format_quote")
+                                              ])
+                                            ],
+                                            1
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "button",
+                                            {
+                                              staticClass: "menubar__button",
+                                              on: { click: commands.undo }
+                                            },
+                                            [_c("v-icon", [_vm._v("undo")])],
+                                            1
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "button",
+                                            {
+                                              staticClass: "menubar__button",
+                                              on: { click: commands.redo }
+                                            },
+                                            [_c("v-icon", [_vm._v("redo")])],
+                                            1
+                                          )
+                                        ])
+                                      ]
+                                    }
+                                  }
+                                ])
+                              }),
+                              _vm._v(" "),
+                              _c("editor-content", {
+                                attrs: { editor: _vm.editor }
+                              })
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
                 1
               ),
               _vm._v(" "),
@@ -64459,7 +64279,7 @@ var render = function() {
                         }
                       }
                     },
-                    [_vm._v("\n          I accept\n        ")]
+                    [_vm._v("\n            Guardar\n          ")]
                   )
                 ],
                 1
@@ -65598,10 +65418,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ReservationComponent.vue?vue&type=template&id=75cc3efc&scoped=true&":
-/*!***********************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ReservationComponent.vue?vue&type=template&id=75cc3efc&scoped=true& ***!
-  \***********************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ReservationWizard.vue?vue&type=template&id=6ae535fc&scoped=true&":
+/*!********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ReservationWizard.vue?vue&type=template&id=6ae535fc&scoped=true& ***!
+  \********************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -65661,885 +65481,619 @@ var render = function() {
                 1
               ),
               _vm._v(" "),
-              _c(
-                "v-container",
-                { attrs: { fluid: "" } },
-                [
-                  _c(
-                    "v-card",
-                    [
-                      _c(
-                        "v-layout",
-                        { attrs: { "align-center": "", row: "" } },
-                        [
-                          _c("v-flex", { attrs: { xs1: "" } }),
-                          _vm._v(" "),
-                          _c(
-                            "v-flex",
-                            { attrs: { xs2: "" } },
-                            [
-                              _c(
-                                "v-menu",
-                                {
-                                  ref: "menu",
-                                  attrs: {
-                                    "close-on-content-click": false,
-                                    "nudge-right": 40,
-                                    "return-value": _vm.date,
-                                    lazy: "",
-                                    transition: "scale-transition",
-                                    "offset-y": "",
-                                    "full-width": "",
-                                    "min-width": "290px"
-                                  },
-                                  on: {
-                                    "update:returnValue": function($event) {
-                                      _vm.date = $event
-                                    },
-                                    "update:return-value": function($event) {
-                                      _vm.date = $event
-                                    }
-                                  },
-                                  scopedSlots: _vm._u([
-                                    {
-                                      key: "activator",
-                                      fn: function(ref) {
-                                        var on = ref.on
-                                        return [
-                                          _c(
-                                            "v-text-field",
-                                            _vm._g(
-                                              {
-                                                attrs: {
-                                                  label: "Fecha",
-                                                  rules: _vm.generalRuleDate,
-                                                  "prepend-icon": "event",
-                                                  readonly: "",
-                                                  v: ""
-                                                },
-                                                model: {
-                                                  value: _vm.today,
-                                                  callback: function($$v) {
-                                                    _vm.today = $$v
-                                                  },
-                                                  expression: "today"
-                                                }
-                                              },
-                                              on
-                                            )
-                                          )
-                                        ]
-                                      }
-                                    }
-                                  ]),
-                                  model: {
-                                    value: _vm.menu,
-                                    callback: function($$v) {
-                                      _vm.menu = $$v
-                                    },
-                                    expression: "menu"
-                                  }
-                                },
-                                [
-                                  _vm._v(" "),
-                                  _c(
-                                    "v-date-picker",
-                                    {
-                                      attrs: { "no-title": "", scrollable: "" },
-                                      on: { input: _vm.change_date },
-                                      model: {
-                                        value: _vm.today,
-                                        callback: function($$v) {
-                                          _vm.today = $$v
-                                        },
-                                        expression: "today"
-                                      }
-                                    },
-                                    [
-                                      _c("v-spacer"),
-                                      _vm._v(" "),
-                                      _c(
-                                        "v-btn",
-                                        {
-                                          attrs: { flat: "", color: "primary" },
-                                          on: {
-                                            click: function($event) {
-                                              _vm.menu = false
-                                            }
-                                          }
-                                        },
-                                        [_vm._v("Cancel")]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "v-btn",
-                                        {
-                                          attrs: { flat: "", color: "primary" },
-                                          on: {
-                                            click: function($event) {
-                                              return _vm.$refs.menu.save(
-                                                _vm.date
-                                              )
-                                            }
-                                          }
-                                        },
-                                        [_vm._v("OK")]
-                                      )
-                                    ],
-                                    1
-                                  )
-                                ],
-                                1
-                              )
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c("v-flex", { attrs: { xs1: "" } }),
-                          _vm._v(" "),
-                          _c(
-                            "v-flex",
-                            { attrs: { xs2: "" } },
-                            [
-                              _c("v-select", {
-                                attrs: {
-                                  items: _vm.equipments,
-                                  "item-text": "name",
-                                  label: "Telescopio",
-                                  "return-object": "",
-                                  rules: _vm.blankRules,
-                                  required: ""
-                                },
-                                on: { input: _vm.changeTelescope },
-                                model: {
-                                  value: _vm.equipment,
-                                  callback: function($$v) {
-                                    _vm.equipment = $$v
-                                  },
-                                  expression: "equipment"
-                                }
-                              })
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c("v-flex", { attrs: { xs1: "" } }),
-                          _vm._v(" "),
-                          _c("v-flex", { attrs: { xs4: "" } }, [
-                            _c("span", { staticClass: "headline" }, [
-                              _vm._v(
-                                " Puntos Disponibles:" +
-                                  _vm._s(_vm.$store.getters.current_points)
-                              )
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("v-flex", { attrs: { xs4: "" } }, [
-                            _c("span", { staticClass: "headline" }, [
-                              _vm._v(
-                                " Puntos Disponibles:" +
-                                  _vm._s(_vm.$store.getters.current_points)
-                              )
-                            ])
-                          ]),
-                          _vm._v(
-                            "\n\t\t\t\t\thttps://www.accuweather.com/es/cl/san-pedro-de-atacama/57225/weather-forecast/57225\n\t\t\t"
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "v-layout",
-                        { attrs: { "align-center": "", row: "" } },
-                        [
-                          _c("v-flex", { attrs: { xs1: "" } }),
-                          _vm._v(" "),
-                          _c(
-                            "v-flex",
-                            { attrs: { xs1: "" } },
-                            [
-                              _c(
-                                "v-layout",
-                                { attrs: { "align-center": "", row: "" } },
-                                [
-                                  _c(
-                                    "v-flex",
-                                    { attrs: { xs12: "" } },
-                                    [
-                                      _c(
-                                        "v-card",
-                                        [
-                                          _c("v-img", {
-                                            attrs: {
-                                              src: _vm.moonUrl,
-                                              "aspect-ratio": "1"
-                                            }
-                                          })
-                                        ],
-                                        1
-                                      )
-                                    ],
-                                    1
-                                  )
-                                ],
-                                1
-                              )
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c("v-flex", { attrs: { xs1: "" } }),
-                          _vm._v(" "),
-                          _c(
-                            "v-flex",
-                            { attrs: { xs8: "" } },
-                            [
-                              _c(
-                                "v-layout",
-                                { attrs: { "align-center": "", row: "" } },
-                                [
-                                  _c("v-flex", { attrs: { xs1: "" } }),
-                                  _vm._v(" "),
-                                  _c("v-flex", { attrs: { xs12: "" } }, [
-                                    _c(
-                                      "div",
-                                      {
-                                        staticClass: "title font-weight-light"
-                                      },
-                                      [_vm._v(_vm._s(_vm.moon_state))]
-                                    )
-                                  ])
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "v-layout",
-                                { attrs: { "align-center": "", row: "" } },
-                                [
-                                  _c("v-flex", { attrs: { xs1: "" } }),
-                                  _vm._v(" "),
-                                  _c("v-flex", { attrs: { xs12: "" } }, [
-                                    _c(
-                                      "div",
-                                      {
-                                        staticClass: "title font-weight-light"
-                                      },
-                                      [
-                                        _vm._v(
-                                          "MoonSet: " + _vm._s(_vm.moonset)
-                                        )
-                                      ]
-                                    )
-                                  ])
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "v-layout",
-                                { attrs: { "align-center": "", row: "" } },
-                                [
-                                  _c("v-flex", { attrs: { xs1: "" } }),
-                                  _vm._v(" "),
-                                  _c("v-flex", { attrs: { xs12: "" } }, [
-                                    _c(
-                                      "div",
-                                      {
-                                        staticClass: "title font-weight-light"
-                                      },
-                                      [
-                                        _vm._v(
-                                          "MoonRise: " + _vm._s(_vm.moonrise)
-                                        )
-                                      ]
-                                    )
-                                  ])
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "v-layout",
-                                { attrs: { "align-center": "", row: "" } },
-                                [
-                                  _c("v-flex", { attrs: { xs1: "" } }),
-                                  _vm._v(" "),
-                                  _c("v-flex", { attrs: { xs12: "" } }, [
-                                    _c(
-                                      "div",
-                                      {
-                                        staticClass: "title font-weight-light"
-                                      },
-                                      [
-                                        _vm._v(
-                                          "SunRise: " + _vm._s(_vm.sunrise)
-                                        )
-                                      ]
-                                    )
-                                  ])
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "v-layout",
-                                { attrs: { "align-center": "", row: "" } },
-                                [
-                                  _c("v-flex", { attrs: { xs1: "" } }),
-                                  _vm._v(" "),
-                                  _c("v-flex", { attrs: { xs12: "" } }, [
-                                    _c(
-                                      "div",
-                                      {
-                                        staticClass: "title font-weight-light"
-                                      },
-                                      [_vm._v("SunSet: " + _vm._s(_vm.sunset))]
-                                    )
-                                  ])
-                                ],
-                                1
-                              )
-                            ],
-                            1
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "v-layout",
-                        { attrs: { "align-center": "", row: "" } },
-                        [_c("v-flex", { attrs: { xs1: "" } }, [_c("br")])],
-                        1
-                      )
-                    ],
-                    1
-                  )
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "v-container",
-                { attrs: { fluid: "" } },
-                [
-                  _c(
-                    "v-layout",
-                    { attrs: { row: "", wrap: "" } },
-                    [
-                      _c(
-                        "v-flex",
-                        { attrs: { xs12: "" } },
-                        [
-                          [
-                            _c(
-                              "v-layout",
-                              [
-                                _c(
-                                  "v-flex",
-                                  [
-                                    _c(
-                                      "v-sheet",
-                                      { attrs: { height: "500" } },
-                                      [
-                                        _c("v-calendar", {
-                                          attrs: {
-                                            now: _vm.today,
-                                            value: _vm.today,
-                                            color: "primary"
-                                          },
-                                          scopedSlots: _vm._u([
-                                            {
-                                              key: "day",
-                                              fn: function(ref) {
-                                                var date = ref.date
-                                                return [
-                                                  _vm._l(
-                                                    _vm.eventsMap[date],
-                                                    function(event) {
-                                                      return [
-                                                        _c(
-                                                          "v-menu",
-                                                          {
-                                                            key: event.title,
-                                                            attrs: {
-                                                              "full-width": "",
-                                                              "offset-x": ""
-                                                            },
-                                                            scopedSlots: _vm._u(
-                                                              [
-                                                                {
-                                                                  key:
-                                                                    "activator",
-                                                                  fn: function(
-                                                                    ref
-                                                                  ) {
-                                                                    var on =
-                                                                      ref.on
-                                                                    return [
-                                                                      !event.time
-                                                                        ? _c(
-                                                                            "div",
-                                                                            _vm._g(
-                                                                              {
-                                                                                directives: [
-                                                                                  {
-                                                                                    name:
-                                                                                      "ripple",
-                                                                                    rawName:
-                                                                                      "v-ripple"
-                                                                                  }
-                                                                                ],
-                                                                                staticClass:
-                                                                                  "my-event",
-                                                                                domProps: {
-                                                                                  innerHTML: _vm._s(
-                                                                                    event.title
-                                                                                  )
-                                                                                }
-                                                                              },
-                                                                              on
-                                                                            )
-                                                                          )
-                                                                        : _vm._e()
-                                                                    ]
-                                                                  }
-                                                                }
-                                                              ],
-                                                              null,
-                                                              true
-                                                            ),
-                                                            model: {
-                                                              value: event.open,
-                                                              callback: function(
-                                                                $$v
-                                                              ) {
-                                                                _vm.$set(
-                                                                  event,
-                                                                  "open",
-                                                                  $$v
-                                                                )
-                                                              },
-                                                              expression:
-                                                                "event.open"
-                                                            }
-                                                          },
-                                                          [
-                                                            _vm._v(" "),
-                                                            _c(
-                                                              "v-card",
-                                                              {
-                                                                attrs: {
-                                                                  color:
-                                                                    "grey lighten-4",
-                                                                  "min-width":
-                                                                    "350px",
-                                                                  flat: ""
-                                                                }
-                                                              },
-                                                              [
-                                                                _c(
-                                                                  "v-toolbar",
-                                                                  {
-                                                                    attrs: {
-                                                                      color:
-                                                                        "primary",
-                                                                      dark: ""
-                                                                    }
-                                                                  },
-                                                                  [
-                                                                    _c(
-                                                                      "v-btn",
-                                                                      {
-                                                                        attrs: {
-                                                                          icon:
-                                                                            ""
-                                                                        }
-                                                                      },
-                                                                      [
-                                                                        _c(
-                                                                          "v-icon",
-                                                                          [
-                                                                            _vm._v(
-                                                                              "edit"
-                                                                            )
-                                                                          ]
-                                                                        )
-                                                                      ],
-                                                                      1
-                                                                    ),
-                                                                    _vm._v(" "),
-                                                                    _c(
-                                                                      "v-toolbar-title",
-                                                                      {
-                                                                        domProps: {
-                                                                          innerHTML: _vm._s(
-                                                                            event.title
-                                                                          )
-                                                                        }
-                                                                      }
-                                                                    ),
-                                                                    _vm._v(" "),
-                                                                    _c(
-                                                                      "v-spacer"
-                                                                    ),
-                                                                    _vm._v(" "),
-                                                                    _c(
-                                                                      "v-btn",
-                                                                      {
-                                                                        attrs: {
-                                                                          icon:
-                                                                            ""
-                                                                        }
-                                                                      },
-                                                                      [
-                                                                        _c(
-                                                                          "v-icon",
-                                                                          [
-                                                                            _vm._v(
-                                                                              "favorite"
-                                                                            )
-                                                                          ]
-                                                                        )
-                                                                      ],
-                                                                      1
-                                                                    ),
-                                                                    _vm._v(" "),
-                                                                    _c(
-                                                                      "v-btn",
-                                                                      {
-                                                                        attrs: {
-                                                                          icon:
-                                                                            ""
-                                                                        }
-                                                                      },
-                                                                      [
-                                                                        _c(
-                                                                          "v-icon",
-                                                                          [
-                                                                            _vm._v(
-                                                                              "more_vert"
-                                                                            )
-                                                                          ]
-                                                                        )
-                                                                      ],
-                                                                      1
-                                                                    )
-                                                                  ],
-                                                                  1
-                                                                ),
-                                                                _vm._v(" "),
-                                                                _c(
-                                                                  "v-card-title",
-                                                                  {
-                                                                    attrs: {
-                                                                      "primary-title":
-                                                                        ""
-                                                                    }
-                                                                  },
-                                                                  [
-                                                                    _c("span", {
-                                                                      domProps: {
-                                                                        innerHTML: _vm._s(
-                                                                          event.details
-                                                                        )
-                                                                      }
-                                                                    })
-                                                                  ]
-                                                                ),
-                                                                _vm._v(" "),
-                                                                _c(
-                                                                  "v-card-actions",
-                                                                  [
-                                                                    _c(
-                                                                      "v-btn",
-                                                                      {
-                                                                        attrs: {
-                                                                          flat:
-                                                                            "",
-                                                                          color:
-                                                                            "secondary"
-                                                                        }
-                                                                      },
-                                                                      [
-                                                                        _vm._v(
-                                                                          "\n                      Cancel\n                    "
-                                                                        )
-                                                                      ]
-                                                                    )
-                                                                  ],
-                                                                  1
-                                                                )
-                                                              ],
-                                                              1
-                                                            )
-                                                          ],
-                                                          1
-                                                        )
-                                                      ]
-                                                    }
-                                                  )
-                                                ]
-                                              }
-                                            }
-                                          ])
-                                        })
-                                      ],
-                                      1
-                                    )
-                                  ],
-                                  1
-                                )
-                              ],
-                              1
-                            )
-                          ]
-                        ],
-                        2
-                      )
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "v-layout",
-                    { attrs: { "align-center": "", row: "" } },
-                    [
-                      _c("v-flex", { attrs: { xs1: "" } }),
-                      _vm._v(" "),
-                      _c(
-                        "v-flex",
-                        { attrs: { xs4: "" } },
-                        [
-                          [
-                            _c(
-                              "v-layout",
-                              { attrs: { wrap: "" } },
-                              [
-                                _c(
-                                  "v-flex",
-                                  { staticClass: "mb-3", attrs: { xs12: "" } },
-                                  [
-                                    _c(
-                                      "v-sheet",
-                                      { attrs: { height: "500" } },
-                                      [
-                                        _c("v-calendar", {
-                                          ref: "calendar",
-                                          attrs: {
-                                            type: _vm.type,
-                                            end: _vm.end,
-                                            color: "primary"
-                                          },
-                                          scopedSlots: _vm._u([
-                                            {
-                                              key: "interval",
-                                              fn: function(ref) {
-                                                var hour = ref.hour
-                                                return [
-                                                  _c(
-                                                    "div",
-                                                    {
-                                                      staticClass:
-                                                        "text-xs-center"
-                                                    },
-                                                    [
-                                                      _vm.reservationsArray.indexOf(
-                                                        hour
-                                                      ) > -1
-                                                        ? _c(
-                                                            "v-btn",
-                                                            {
-                                                              attrs: {
-                                                                small: "",
-                                                                color: "error"
-                                                              }
-                                                            },
-                                                            [
-                                                              _vm._v(
-                                                                "Reservado"
-                                                              )
-                                                            ]
-                                                          )
-                                                        : _vm._e(),
-                                                      _vm._v(" "),
-                                                      _vm.reservationsArray.indexOf(
-                                                        hour
-                                                      ) <= -1
-                                                        ? _c(
-                                                            "v-btn",
-                                                            {
-                                                              attrs: {
-                                                                small: "",
-                                                                color: "success"
-                                                              },
-                                                              on: {
-                                                                click: function(
-                                                                  $event
-                                                                ) {
-                                                                  return _vm.confirmReserv(
-                                                                    hour
-                                                                  )
-                                                                }
-                                                              }
-                                                            },
-                                                            [
-                                                              _vm._v(
-                                                                "Disponible"
-                                                              )
-                                                            ]
-                                                          )
-                                                        : _vm._e()
-                                                    ],
-                                                    1
-                                                  )
-                                                ]
-                                              }
-                                            }
-                                          ]),
-                                          model: {
-                                            value: _vm.start,
-                                            callback: function($$v) {
-                                              _vm.start = $$v
-                                            },
-                                            expression: "start"
-                                          }
-                                        })
-                                      ],
-                                      1
-                                    )
-                                  ],
-                                  1
-                                )
-                              ],
-                              1
-                            )
-                          ]
-                        ],
-                        2
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "v-flex",
-                        { attrs: { xs7: "" } },
-                        [_c("my-reservations")],
-                        1
-                      )
-                    ],
-                    1
-                  )
-                ],
-                1
-              )
-            ],
-            1
-          ),
-          _vm._v(" "),
-          [
-            _c(
-              "v-dialog",
-              {
-                attrs: { "max-width": "500px" },
-                model: {
-                  value: _vm.dialog2,
-                  callback: function($$v) {
-                    _vm.dialog2 = $$v
-                  },
-                  expression: "dialog2"
-                }
-              },
               [
                 _c(
-                  "v-card",
+                  "v-stepper",
+                  {
+                    model: {
+                      value: _vm.e1,
+                      callback: function($$v) {
+                        _vm.e1 = $$v
+                      },
+                      expression: "e1"
+                    }
+                  },
                   [
                     _c(
-                      "v-card-title",
-                      {
-                        staticClass: "headline grey lighten-2",
-                        attrs: { "primary-title": "" }
-                      },
-                      [_vm._v("\n\t\t\tConfirmar Reserva\n\t\t  ")]
+                      "v-stepper-header",
+                      [
+                        _c(
+                          "v-stepper-step",
+                          { attrs: { complete: _vm.e1 > 1, step: "1" } },
+                          [_vm._v("Elige tu Equipamiento")]
+                        ),
+                        _vm._v(" "),
+                        _c("v-divider"),
+                        _vm._v(" "),
+                        _c(
+                          "v-stepper-step",
+                          { attrs: { complete: _vm.e1 > 2, step: "2" } },
+                          [_vm._v("Elige Día de Observación")]
+                        ),
+                        _vm._v(" "),
+                        _c("v-divider"),
+                        _vm._v(" "),
+                        _c("v-stepper-step", { attrs: { step: "3" } }, [
+                          _vm._v("Reserva tu Hora")
+                        ])
+                      ],
+                      1
                     ),
                     _vm._v(" "),
                     _c(
-                      "v-card-text",
+                      "v-stepper-items",
                       [
                         _c(
-                          "v-container",
-                          { attrs: { "grid-list-md": "" } },
+                          "v-stepper-content",
+                          { attrs: { step: "1" } },
                           [
                             _c(
-                              "v-layout",
-                              { attrs: { wrap: "", row: "" } },
+                              "v-card",
+                              {
+                                staticClass: "mb-12",
+                                attrs: {
+                                  color: "grey lighten-1",
+                                  height: "200px"
+                                }
+                              },
                               [
-                                _c("v-flex", { attrs: { xs12: "" } }, [
-                                  _c(
-                                    "div",
-                                    { staticClass: "title font-weight-light" },
-                                    [
-                                      _vm._v(
-                                        "Equipo: " + _vm._s(this.equipment)
-                                      )
-                                    ]
-                                  )
+                                _c(
+                                  "v-layout",
+                                  { attrs: { row: "", wrap: "" } },
+                                  [
+                                    _c("v-flex", { attrs: { xs1: "" } }),
+                                    _vm._v(" "),
+                                    _c("v-flex", { attrs: { xs6: "" } }, [
+                                      _c("h1", [
+                                        _vm._v(" Elige tu Equipamiento ")
+                                      ])
+                                    ])
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "v-layout",
+                                  { attrs: { row: "", wrap: "" } },
+                                  [
+                                    _c("v-flex", { attrs: { xs1: "" } }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "v-flex",
+                                      { attrs: { xs6: "" } },
+                                      [
+                                        _c("v-select", {
+                                          attrs: {
+                                            items: _vm.equipments,
+                                            "item-text": "name",
+                                            label: "Equipamiento",
+                                            "return-object": "",
+                                            required: ""
+                                          },
+                                          on: { input: _vm.changeTelescope },
+                                          model: {
+                                            value: _vm.equipment,
+                                            callback: function($$v) {
+                                              _vm.equipment = $$v
+                                            },
+                                            expression: "equipment"
+                                          }
+                                        })
+                                      ],
+                                      1
+                                    )
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "v-layout",
+                                  { attrs: { row: "", wrap: "" } },
+                                  [
+                                    _c("v-flex", { attrs: { xs1: "" } }),
+                                    _vm._v(" "),
+                                    _c("v-flex", { attrs: { xs4: "" } }, [
+                                      _c("h2", [_vm._v(_vm._s(_vm.equipment))])
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("v-flex", { attrs: { xs1: "" } }),
+                                    _vm._v(" "),
+                                    _c("v-flex", { attrs: { xs6: "" } }, [
+                                      _c("h2", [
+                                        _vm._v(_vm._s(_vm.equipment_desc))
+                                      ])
+                                    ])
+                                  ],
+                                  1
+                                )
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "v-btn",
+                              {
+                                attrs: {
+                                  lass: "mx-2",
+                                  fab: "",
+                                  dark: "",
+                                  small: "",
+                                  color: "primary"
+                                },
+                                on: {
+                                  click: function($event) {
+                                    _vm.e1 = 2
+                                  }
+                                }
+                              },
+                              [
+                                _c("v-icon", { attrs: { dark: "" } }, [
+                                  _vm._v("arrow_forward")
+                                ])
+                              ],
+                              1
+                            )
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "v-stepper-content",
+                          { attrs: { step: "2" } },
+                          [
+                            _c(
+                              "v-card",
+                              {
+                                staticClass: "mb-12",
+                                attrs: {
+                                  color: "grey lighten-1",
+                                  height: "600px"
+                                }
+                              },
+                              [
+                                _c(
+                                  "v-layout",
+                                  { attrs: { row: "", wrap: "" } },
+                                  [
+                                    _c(
+                                      "v-flex",
+                                      { attrs: { xs12: "" } },
+                                      [
+                                        [
+                                          _c(
+                                            "v-layout",
+                                            { attrs: { "fill-height": "" } },
+                                            [
+                                              _c(
+                                                "v-flex",
+                                                [
+                                                  _c(
+                                                    "v-sheet",
+                                                    { attrs: { height: "64" } },
+                                                    [
+                                                      _c(
+                                                        "v-toolbar",
+                                                        {
+                                                          attrs: {
+                                                            flat: "",
+                                                            color: "white"
+                                                          }
+                                                        },
+                                                        [
+                                                          _c(
+                                                            "v-btn",
+                                                            {
+                                                              staticClass:
+                                                                "mr-4",
+                                                              attrs: {
+                                                                outlined: ""
+                                                              },
+                                                              on: {
+                                                                click:
+                                                                  _vm.setToday
+                                                              }
+                                                            },
+                                                            [
+                                                              _vm._v(
+                                                                "\n                                Volver a Hoy\n                              "
+                                                              )
+                                                            ]
+                                                          ),
+                                                          _vm._v(" "),
+                                                          _c(
+                                                            "v-btn",
+                                                            {
+                                                              attrs: {
+                                                                fab: "",
+                                                                text: "",
+                                                                small: ""
+                                                              },
+                                                              on: {
+                                                                click: _vm.prev
+                                                              }
+                                                            },
+                                                            [
+                                                              _c(
+                                                                "v-icon",
+                                                                {
+                                                                  attrs: {
+                                                                    small: ""
+                                                                  }
+                                                                },
+                                                                [
+                                                                  _vm._v(
+                                                                    "arrow_back_ios"
+                                                                  )
+                                                                ]
+                                                              )
+                                                            ],
+                                                            1
+                                                          ),
+                                                          _vm._v(" "),
+                                                          _c(
+                                                            "v-btn",
+                                                            {
+                                                              attrs: {
+                                                                fab: "",
+                                                                text: "",
+                                                                small: ""
+                                                              },
+                                                              on: {
+                                                                click: _vm.next
+                                                              }
+                                                            },
+                                                            [
+                                                              _c(
+                                                                "v-icon",
+                                                                {
+                                                                  attrs: {
+                                                                    small: ""
+                                                                  }
+                                                                },
+                                                                [
+                                                                  _vm._v(
+                                                                    "arrow_forward_ios"
+                                                                  )
+                                                                ]
+                                                              )
+                                                            ],
+                                                            1
+                                                          ),
+                                                          _vm._v(" "),
+                                                          _c(
+                                                            "v-toolbar-title",
+                                                            [
+                                                              _vm._v(
+                                                                "Elige tu día de Observación"
+                                                              )
+                                                            ]
+                                                          ),
+                                                          _vm._v(" "),
+                                                          _c("v-spacer")
+                                                        ],
+                                                        1
+                                                      )
+                                                    ],
+                                                    1
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "v-sheet",
+                                                    {
+                                                      attrs: { height: "400" }
+                                                    },
+                                                    [
+                                                      _c("v-calendar", {
+                                                        ref: "calendar",
+                                                        attrs: {
+                                                          color: "primary",
+                                                          events: _vm.events,
+                                                          "event-color":
+                                                            _vm.getEventColor,
+                                                          "event-margin-bottom": 3,
+                                                          now: _vm.today,
+                                                          type: _vm.type
+                                                        },
+                                                        on: {
+                                                          "click:event":
+                                                            _vm.showEvent,
+                                                          "click:more":
+                                                            _vm.viewDay,
+                                                          "click:date":
+                                                            _vm.viewDay,
+                                                          change:
+                                                            _vm.updateRange
+                                                        },
+                                                        model: {
+                                                          value: _vm.focus,
+                                                          callback: function(
+                                                            $$v
+                                                          ) {
+                                                            _vm.focus = $$v
+                                                          },
+                                                          expression: "focus"
+                                                        }
+                                                      }),
+                                                      _vm._v(" "),
+                                                      _c(
+                                                        "v-menu",
+                                                        {
+                                                          attrs: {
+                                                            "close-on-content-click": false,
+                                                            activator:
+                                                              _vm.selectedElement,
+                                                            "full-width": "",
+                                                            "offset-x": ""
+                                                          },
+                                                          model: {
+                                                            value:
+                                                              _vm.selectedOpen,
+                                                            callback: function(
+                                                              $$v
+                                                            ) {
+                                                              _vm.selectedOpen = $$v
+                                                            },
+                                                            expression:
+                                                              "selectedOpen"
+                                                          }
+                                                        },
+                                                        [
+                                                          _c(
+                                                            "v-card",
+                                                            {
+                                                              attrs: {
+                                                                color:
+                                                                  "grey lighten-4",
+                                                                "min-width":
+                                                                  "350px",
+                                                                flat: ""
+                                                              }
+                                                            },
+                                                            [
+                                                              _c(
+                                                                "v-toolbar",
+                                                                {
+                                                                  attrs: {
+                                                                    color:
+                                                                      _vm
+                                                                        .selectedEvent
+                                                                        .color,
+                                                                    dark: ""
+                                                                  }
+                                                                },
+                                                                [
+                                                                  _c(
+                                                                    "v-btn",
+                                                                    {
+                                                                      attrs: {
+                                                                        icon: ""
+                                                                      }
+                                                                    },
+                                                                    [
+                                                                      _c(
+                                                                        "v-icon",
+                                                                        [
+                                                                          _vm._v(
+                                                                            "edit"
+                                                                          )
+                                                                        ]
+                                                                      )
+                                                                    ],
+                                                                    1
+                                                                  ),
+                                                                  _vm._v(" "),
+                                                                  _c(
+                                                                    "v-toolbar-title",
+                                                                    {
+                                                                      domProps: {
+                                                                        innerHTML: _vm._s(
+                                                                          _vm
+                                                                            .selectedEvent
+                                                                            .name
+                                                                        )
+                                                                      }
+                                                                    }
+                                                                  ),
+                                                                  _vm._v(" "),
+                                                                  _c(
+                                                                    "v-spacer"
+                                                                  ),
+                                                                  _vm._v(" "),
+                                                                  _c(
+                                                                    "v-btn",
+                                                                    {
+                                                                      attrs: {
+                                                                        icon: ""
+                                                                      }
+                                                                    },
+                                                                    [
+                                                                      _c(
+                                                                        "v-icon",
+                                                                        [
+                                                                          _vm._v(
+                                                                            "favorite"
+                                                                          )
+                                                                        ]
+                                                                      )
+                                                                    ],
+                                                                    1
+                                                                  ),
+                                                                  _vm._v(" "),
+                                                                  _c(
+                                                                    "v-btn",
+                                                                    {
+                                                                      attrs: {
+                                                                        icon: ""
+                                                                      }
+                                                                    },
+                                                                    [
+                                                                      _c(
+                                                                        "v-icon",
+                                                                        [
+                                                                          _vm._v(
+                                                                            "more_vert"
+                                                                          )
+                                                                        ]
+                                                                      )
+                                                                    ],
+                                                                    1
+                                                                  )
+                                                                ],
+                                                                1
+                                                              ),
+                                                              _vm._v(" "),
+                                                              _c(
+                                                                "v-card-text",
+                                                                [
+                                                                  _c("span", {
+                                                                    domProps: {
+                                                                      innerHTML: _vm._s(
+                                                                        _vm
+                                                                          .selectedEvent
+                                                                          .details
+                                                                      )
+                                                                    }
+                                                                  })
+                                                                ]
+                                                              ),
+                                                              _vm._v(" "),
+                                                              _c(
+                                                                "v-card-actions",
+                                                                [
+                                                                  _c(
+                                                                    "v-btn",
+                                                                    {
+                                                                      attrs: {
+                                                                        text:
+                                                                          "",
+                                                                        color:
+                                                                          "secondary"
+                                                                      },
+                                                                      on: {
+                                                                        click: function(
+                                                                          $event
+                                                                        ) {
+                                                                          _vm.selectedOpen = false
+                                                                        }
+                                                                      }
+                                                                    },
+                                                                    [
+                                                                      _vm._v(
+                                                                        "\n                                    Cancel\n                                  "
+                                                                      )
+                                                                    ]
+                                                                  )
+                                                                ],
+                                                                1
+                                                              )
+                                                            ],
+                                                            1
+                                                          )
+                                                        ],
+                                                        1
+                                                      )
+                                                    ],
+                                                    1
+                                                  )
+                                                ],
+                                                1
+                                              )
+                                            ],
+                                            1
+                                          )
+                                        ]
+                                      ],
+                                      2
+                                    )
+                                  ],
+                                  1
+                                )
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "v-btn",
+                              {
+                                attrs: {
+                                  lass: "mx-2",
+                                  fab: "",
+                                  dark: "",
+                                  small: "",
+                                  color: "primary"
+                                },
+                                on: {
+                                  click: function($event) {
+                                    _vm.e1 = 1
+                                  }
+                                }
+                              },
+                              [
+                                _c("v-icon", { attrs: { dark: "" } }, [
+                                  _vm._v("arrow_back")
                                 ])
                               ],
                               1
                             ),
                             _vm._v(" "),
                             _c(
-                              "v-layout",
-                              { attrs: { wrap: "", row: "" } },
+                              "v-btn",
+                              {
+                                attrs: {
+                                  lass: "mx-2",
+                                  fab: "",
+                                  dark: "",
+                                  small: "",
+                                  color: "primary"
+                                },
+                                on: {
+                                  click: function($event) {
+                                    _vm.e1 = 3
+                                  }
+                                }
+                              },
                               [
-                                _c("v-flex", { attrs: { xs12: "" } }, [
-                                  _c(
-                                    "div",
-                                    { staticClass: "title font-weight-light" },
-                                    [
-                                      _vm._v(
-                                        "Puntos de esta reserva: " +
-                                          _vm._s(this.telescope_points)
-                                      )
-                                    ]
-                                  )
+                                _c("v-icon", { attrs: { dark: "" } }, [
+                                  _vm._v("arrow_forward")
                                 ])
                               ],
                               1
-                            ),
+                            )
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "v-stepper-content",
+                          { attrs: { step: "3" } },
+                          [
+                            _c("v-card", {
+                              staticClass: "mb-12",
+                              attrs: {
+                                color: "grey lighten-1",
+                                height: "200px"
+                              }
+                            }),
                             _vm._v(" "),
                             _c(
-                              "v-layout",
-                              { attrs: { wrap: "", row: "" } },
+                              "v-btn",
+                              {
+                                attrs: {
+                                  lass: "mx-2",
+                                  fab: "",
+                                  dark: "",
+                                  small: "",
+                                  color: "primary"
+                                },
+                                on: {
+                                  click: function($event) {
+                                    _vm.e1 = 2
+                                  }
+                                }
+                              },
                               [
-                                _c("v-flex", { attrs: { xs12: "" } }, [
-                                  _c(
-                                    "div",
-                                    { staticClass: "title font-weight-light" },
-                                    [_vm._v("Fecha:  " + _vm._s(this.today))]
-                                  )
-                                ])
-                              ],
-                              1
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "v-layout",
-                              { attrs: { wrap: "", row: "" } },
-                              [
-                                _c("v-flex", { attrs: { xs12: "" } }, [
-                                  _c(
-                                    "div",
-                                    { staticClass: "title font-weight-light" },
-                                    [
-                                      _vm._v(
-                                        "A las: " +
-                                          _vm._s(this.hourToReserv) +
-                                          " Horas"
-                                      )
-                                    ]
-                                  )
+                                _c("v-icon", { attrs: { dark: "" } }, [
+                                  _vm._v("arrow_back")
                                 ])
                               ],
                               1
@@ -66549,44 +66103,16 @@ var render = function() {
                         )
                       ],
                       1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "v-card-actions",
-                      [
-                        _c(
-                          "v-btn",
-                          {
-                            attrs: { color: "primary", flat: "" },
-                            on: { click: _vm.reserv }
-                          },
-                          [_vm._v("Reservar")]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "v-btn",
-                          {
-                            attrs: { color: "primary", flat: "" },
-                            on: {
-                              click: function($event) {
-                                _vm.dialog2 = false
-                              }
-                            }
-                          },
-                          [_vm._v("Close")]
-                        )
-                      ],
-                      1
                     )
                   ],
                   1
                 )
-              ],
-              1
-            )
-          ]
+              ]
+            ],
+            2
+          )
         ],
-        2
+        1
       )
     ],
     1
@@ -66673,7 +66199,153 @@ var render = function() {
                       _vm._v(" "),
                       _c("v-text-field", {
                         attrs: {
-                          label: "Select Image",
+                          label: "Seleccionar imagen",
+                          "prepend-icon": "attach_file"
+                        },
+                        on: { click: _vm.pickFile },
+                        model: {
+                          value: _vm.imageName,
+                          callback: function($$v) {
+                            _vm.imageName = $$v
+                          },
+                          expression: "imageName"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("input", {
+                        ref: "image",
+                        staticStyle: { display: "none" },
+                        attrs: { type: "file", accept: "image/*" },
+                        on: { change: _vm.onFilePicked }
+                      })
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-card-actions",
+                [
+                  _c("v-spacer"),
+                  _vm._v(" "),
+                  _c(
+                    "v-btn",
+                    {
+                      attrs: { color: "green darken-1", flat: "" },
+                      on: { click: _vm.submitFile }
+                    },
+                    [_vm._v("Guardar")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-btn",
+                    {
+                      attrs: { color: "green darken-1", flat: "" },
+                      on: {
+                        click: function($event) {
+                          _vm.dialog = false
+                        }
+                      }
+                    },
+                    [_vm._v("Cancelar")]
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/UploadEquipmentImage.vue?vue&type=template&id=4c363ab9&":
+/*!***********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/UploadEquipmentImage.vue?vue&type=template&id=4c363ab9& ***!
+  \***********************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "v-layout",
+    { attrs: { row: "", "justify-center": "" } },
+    [
+      _c(
+        "v-dialog",
+        {
+          attrs: { persistent: "", "max-width": "500" },
+          scopedSlots: _vm._u([
+            {
+              key: "activator",
+              fn: function(ref) {
+                var on = ref.on
+                return [
+                  _c(
+                    "v-btn",
+                    _vm._g(
+                      { attrs: { flat: "", icon: "", color: "red lighten-2" } },
+                      on
+                    ),
+                    [_c("v-icon", [_vm._v("add_a_photo")])],
+                    1
+                  )
+                ]
+              }
+            }
+          ]),
+          model: {
+            value: _vm.dialog,
+            callback: function($$v) {
+              _vm.dialog = $$v
+            },
+            expression: "dialog"
+          }
+        },
+        [
+          _vm._v(" "),
+          _c(
+            "v-card",
+            [
+              _c(
+                "v-card-text",
+                [
+                  _c(
+                    "v-flex",
+                    {
+                      staticClass:
+                        "text-xs-center text-sm-center text-md-center text-lg-center",
+                      attrs: { xs12: "" }
+                    },
+                    [
+                      _vm.imageUrl
+                        ? _c("img", {
+                            attrs: { src: _vm.imageUrl, height: "150" }
+                          })
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _c("v-text-field", {
+                        attrs: {
+                          label: "Seleccionar imagen",
                           "prepend-icon": "attach_file"
                         },
                         on: { click: _vm.pickFile },
@@ -67288,7 +66960,9 @@ var render = function() {
                                     })
                                   ],
                                   1
-                                )
+                                ),
+                                _vm._v(" "),
+                                _c("upload-equipment-image")
                               ],
                               1
                             ),
@@ -68034,7 +67708,7 @@ function normalizeComponent (
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /*!
-  * vue-router v3.0.5
+  * vue-router v3.0.7
   * (c) 2019 Evan You
   * @license MIT
   */
@@ -69422,10 +69096,8 @@ function createMatcher (
         }
       }
 
-      if (record) {
-        location.path = fillParams(record.path, location.params, ("named route \"" + name + "\""));
-        return _createRoute(record, location, redirectedFrom)
-      }
+      location.path = fillParams(record.path, location.params, ("named route \"" + name + "\""));
+      return _createRoute(record, location, redirectedFrom)
     } else if (location.path) {
       location.params = {};
       for (var i = 0; i < pathList.length; i++) {
@@ -69580,7 +69252,12 @@ var positionStore = Object.create(null);
 function setupScroll () {
   // Fix for #1585 for Firefox
   // Fix for #2195 Add optional third attribute to workaround a bug in safari https://bugs.webkit.org/show_bug.cgi?id=182678
-  window.history.replaceState({ key: getStateKey() }, '', window.location.href.replace(window.location.origin, ''));
+  // Fix for #2774 Support for apps loaded from Windows file shares not mapped to network drives: replaced location.origin with
+  // window.location.protocol + '//' + window.location.host
+  // location.host contains the port and location.hostname doesn't
+  var protocolAndPath = window.location.protocol + '//' + window.location.host;
+  var absolutePath = window.location.href.replace(protocolAndPath, '');
+  window.history.replaceState({ key: getStateKey() }, '', absolutePath);
   window.addEventListener('popstate', function (e) {
     saveScrollPosition();
     if (e.state && e.state.key) {
@@ -69805,7 +69482,7 @@ function resolveAsyncComponents (matched) {
           match.components[key] = resolvedDef;
           pending--;
           if (pending <= 0) {
-            next(to);
+            next();
           }
         });
 
@@ -70152,7 +69829,6 @@ function bindEnterGuard (
 ) {
   return function routeEnterGuard (to, from, next) {
     return guard(to, from, function (cb) {
-      next(cb);
       if (typeof cb === 'function') {
         cbs.push(function () {
           // #750
@@ -70163,6 +69839,7 @@ function bindEnterGuard (
           poll(cb, match.instances, key, isValid);
         });
       }
+      next(cb);
     })
   }
 }
@@ -70697,7 +70374,7 @@ function createHref (base, fullPath, mode) {
 }
 
 VueRouter.install = install;
-VueRouter.version = '3.0.5';
+VueRouter.version = '3.0.7';
 
 if (inBrowser && window.Vue) {
   window.Vue.use(VueRouter);
@@ -89166,7 +88843,7 @@ var __assign = undefined && undefined.__assign || function () {
             this.$emit('keydown', e);
         },
         onFocusin: function onFocusin(e) {
-            var target = event.target;
+            var target = e.target;
             if (
             // It isn't the document or the dialog body
             ![document, this.$refs.content].includes(target) &&
@@ -89198,7 +88875,7 @@ var __assign = undefined && undefined.__assign || function () {
                 var el = activator && activator.elm;
                 if (el) return el;
             }
-            Object(_util_console__WEBPACK_IMPORTED_MODULE_10__["consoleError"])('No activator found');
+            return null;
         },
         genActivator: function genActivator() {
             var _this = this;
@@ -91825,7 +91502,7 @@ var __assign = undefined && undefined.__assign || function () {
             tag = _a.tag,
             data = _a.data;
         data.attrs = Object.assign({}, data.attrs, this.$attrs);
-        return h('div', this.setTextColor(!this.disabled && this.color, {
+        return h('div', this.setTextColor(!this.disabled && this.isActive && this.color, {
             class: this.listClasses,
             attrs: {
                 disabled: this.disabled,
@@ -95584,7 +95261,8 @@ var __values = undefined && undefined.__values || function (o) {
                     avatar: avatar,
                     disabled: disabled,
                     ripple: true,
-                    value: value
+                    value: value,
+                    color: this.color
                 }
             };
             if (!this.$scopedSlots.item) {
@@ -101928,7 +101606,7 @@ var Vuetify = {
             return false;
         })(opts.components);
     },
-    version: '1.5.12'
+    version: '1.5.15'
 };
 function checkVueVersion(Vue, requiredVue) {
     var vueDep = requiredVue || '^2.5.18';
@@ -103614,7 +103292,7 @@ var Vuetify = {
         Vue.use(_components_Vuetify__WEBPACK_IMPORTED_MODULE_1__["default"], __assign({ components: _components__WEBPACK_IMPORTED_MODULE_2__,
             directives: _directives__WEBPACK_IMPORTED_MODULE_3__["default"] }, args));
     },
-    version: '1.5.12'
+    version: '1.5.15'
 };
 if (typeof window !== 'undefined' && window.Vue) {
     window.Vue.use(Vuetify);
@@ -108210,7 +107888,7 @@ function createRange(length) {
 function getZIndex(el) {
     if (!el || el.nodeType !== Node.ELEMENT_NODE) return 0;
     var index = +window.getComputedStyle(el).getPropertyValue('z-index');
-    if (isNaN(index)) return getZIndex(el.parentNode);
+    if (!index) return getZIndex(el.parentNode);
     return index;
 }
 var tagsToReplace = {
@@ -108660,7 +108338,7 @@ module.exports = __WEBPACK_EXTERNAL_MODULE_vue__;
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Store", function() { return Store; });
+/* WEBPACK VAR INJECTION */(function(global) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Store", function() { return Store; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "install", function() { return install; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "mapState", function() { return mapState; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "mapMutations", function() { return mapMutations; });
@@ -108668,7 +108346,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "mapActions", function() { return mapActions; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createNamespacedHelpers", function() { return createNamespacedHelpers; });
 /**
- * vuex v3.1.0
+ * vuex v3.1.1
  * (c) 2019 Evan You
  * @license MIT
  */
@@ -108708,9 +108386,12 @@ function applyMixin (Vue) {
   }
 }
 
-var devtoolHook =
-  typeof window !== 'undefined' &&
-  window.__VUE_DEVTOOLS_GLOBAL_HOOK__;
+var target = typeof window !== 'undefined'
+  ? window
+  : typeof global !== 'undefined'
+    ? global
+    : {};
+var devtoolHook = target.__VUE_DEVTOOLS_GLOBAL_HOOK__;
 
 function devtoolPlugin (store) {
   if (!devtoolHook) { return }
@@ -108754,6 +108435,12 @@ function isPromise (val) {
 
 function assert (condition, msg) {
   if (!condition) { throw new Error(("[vuex] " + msg)) }
+}
+
+function partial (fn, arg) {
+  return function () {
+    return fn(arg)
+  }
 }
 
 // Base data struct for store's module, package with some attribute and method
@@ -109217,7 +108904,9 @@ function resetStoreVM (store, state, hot) {
   var computed = {};
   forEachValue(wrappedGetters, function (fn, key) {
     // use computed to leverage its lazy-caching mechanism
-    computed[key] = function () { return fn(store); };
+    // direct inline function use will lead to closure preserving oldVm.
+    // using partial to return function with only arguments preserved in closure enviroment.
+    computed[key] = partial(fn, store);
     Object.defineProperty(store.getters, key, {
       get: function () { return store._vm[key]; },
       enumerable: true // for local getters
@@ -109656,7 +109345,7 @@ function getModuleByNamespace (store, helper, namespace) {
 var index_esm = {
   Store: Store,
   install: install,
-  version: '3.1.0',
+  version: '3.1.1',
   mapState: mapState,
   mapMutations: mapMutations,
   mapGetters: mapGetters,
@@ -109667,6 +109356,7 @@ var index_esm = {
 /* harmony default export */ __webpack_exports__["default"] = (index_esm);
 
 
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js")))
 
 /***/ }),
 
@@ -110221,7 +109911,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_AppComponent__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/AppComponent */ "./resources/js/components/AppComponent.vue");
 /* harmony import */ var _components_MyReservationsComponent__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/MyReservationsComponent */ "./resources/js/components/MyReservationsComponent.vue");
 /* harmony import */ var _components_UploadAvatarComponent__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/UploadAvatarComponent */ "./resources/js/components/UploadAvatarComponent.vue");
-/* harmony import */ var _components_NewEquipment__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/NewEquipment */ "./resources/js/components/NewEquipment.vue");
+/* harmony import */ var _components_UploadEquipmentImage__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/UploadEquipmentImage */ "./resources/js/components/UploadEquipmentImage.vue");
+/* harmony import */ var _components_NewEquipment__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/NewEquipment */ "./resources/js/components/NewEquipment.vue");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -110233,9 +109924,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
- // import ControlComponent     from './components/ControlComponent'
-// import PointsComponent      from './components/PointsComponent'
-// import ReservationComponent from './components/ReservationComponent'
+ // import ControlComponent      from './components/ControlComponent'
+// import PointsComponent       from './components/PointsComponent'
+// import ReservationComponent  from './components/ReservationComponent'
+
 
 
 
@@ -110264,7 +109956,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('app', __webpack_require__(
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('my-reservations', _components_MyReservationsComponent__WEBPACK_IMPORTED_MODULE_7__["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('upload-avatar', _components_UploadAvatarComponent__WEBPACK_IMPORTED_MODULE_8__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('new-equipment', _components_NewEquipment__WEBPACK_IMPORTED_MODULE_9__["default"]); //AppComponent
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('upload-equipment-image', _components_UploadEquipmentImage__WEBPACK_IMPORTED_MODULE_9__["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('new-equipment', _components_NewEquipment__WEBPACK_IMPORTED_MODULE_10__["default"]); //AppComponent
 
 var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   el: '#App',
@@ -110775,20 +110468,18 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/ReservationComponent.vue":
-/*!**********************************************************!*\
-  !*** ./resources/js/components/ReservationComponent.vue ***!
-  \**********************************************************/
+/***/ "./resources/js/components/ReservationWizard.vue":
+/*!*******************************************************!*\
+  !*** ./resources/js/components/ReservationWizard.vue ***!
+  \*******************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _ReservationComponent_vue_vue_type_template_id_75cc3efc_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ReservationComponent.vue?vue&type=template&id=75cc3efc&scoped=true& */ "./resources/js/components/ReservationComponent.vue?vue&type=template&id=75cc3efc&scoped=true&");
-/* harmony import */ var _ReservationComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ReservationComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/ReservationComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _ReservationComponent_vue_vue_type_style_index_0_id_75cc3efc_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ReservationComponent.vue?vue&type=style&index=0&id=75cc3efc&scoped=true&lang=css& */ "./resources/js/components/ReservationComponent.vue?vue&type=style&index=0&id=75cc3efc&scoped=true&lang=css&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
+/* harmony import */ var _ReservationWizard_vue_vue_type_template_id_6ae535fc_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ReservationWizard.vue?vue&type=template&id=6ae535fc&scoped=true& */ "./resources/js/components/ReservationWizard.vue?vue&type=template&id=6ae535fc&scoped=true&");
+/* harmony import */ var _ReservationWizard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ReservationWizard.vue?vue&type=script&lang=js& */ "./resources/js/components/ReservationWizard.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -110796,67 +110487,51 @@ __webpack_require__.r(__webpack_exports__);
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
-  _ReservationComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _ReservationComponent_vue_vue_type_template_id_75cc3efc_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _ReservationComponent_vue_vue_type_template_id_75cc3efc_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _ReservationWizard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ReservationWizard_vue_vue_type_template_id_6ae535fc_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ReservationWizard_vue_vue_type_template_id_6ae535fc_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
-  "75cc3efc",
+  "6ae535fc",
   null
   
 )
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/ReservationComponent.vue"
+component.options.__file = "resources/js/components/ReservationWizard.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/ReservationComponent.vue?vue&type=script&lang=js&":
-/*!***********************************************************************************!*\
-  !*** ./resources/js/components/ReservationComponent.vue?vue&type=script&lang=js& ***!
-  \***********************************************************************************/
+/***/ "./resources/js/components/ReservationWizard.vue?vue&type=script&lang=js&":
+/*!********************************************************************************!*\
+  !*** ./resources/js/components/ReservationWizard.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ReservationComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./ReservationComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ReservationComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ReservationComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ReservationWizard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./ReservationWizard.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ReservationWizard.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ReservationWizard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/ReservationComponent.vue?vue&type=style&index=0&id=75cc3efc&scoped=true&lang=css&":
-/*!*******************************************************************************************************************!*\
-  !*** ./resources/js/components/ReservationComponent.vue?vue&type=style&index=0&id=75cc3efc&scoped=true&lang=css& ***!
-  \*******************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ReservationComponent_vue_vue_type_style_index_0_id_75cc3efc_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./ReservationComponent.vue?vue&type=style&index=0&id=75cc3efc&scoped=true&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ReservationComponent.vue?vue&type=style&index=0&id=75cc3efc&scoped=true&lang=css&");
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ReservationComponent_vue_vue_type_style_index_0_id_75cc3efc_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ReservationComponent_vue_vue_type_style_index_0_id_75cc3efc_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ReservationComponent_vue_vue_type_style_index_0_id_75cc3efc_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ReservationComponent_vue_vue_type_style_index_0_id_75cc3efc_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
- /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ReservationComponent_vue_vue_type_style_index_0_id_75cc3efc_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
-
-/***/ }),
-
-/***/ "./resources/js/components/ReservationComponent.vue?vue&type=template&id=75cc3efc&scoped=true&":
-/*!*****************************************************************************************************!*\
-  !*** ./resources/js/components/ReservationComponent.vue?vue&type=template&id=75cc3efc&scoped=true& ***!
-  \*****************************************************************************************************/
+/***/ "./resources/js/components/ReservationWizard.vue?vue&type=template&id=6ae535fc&scoped=true&":
+/*!**************************************************************************************************!*\
+  !*** ./resources/js/components/ReservationWizard.vue?vue&type=template&id=6ae535fc&scoped=true& ***!
+  \**************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ReservationComponent_vue_vue_type_template_id_75cc3efc_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./ReservationComponent.vue?vue&type=template&id=75cc3efc&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ReservationComponent.vue?vue&type=template&id=75cc3efc&scoped=true&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ReservationComponent_vue_vue_type_template_id_75cc3efc_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ReservationWizard_vue_vue_type_template_id_6ae535fc_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./ReservationWizard.vue?vue&type=template&id=6ae535fc&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ReservationWizard.vue?vue&type=template&id=6ae535fc&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ReservationWizard_vue_vue_type_template_id_6ae535fc_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ReservationComponent_vue_vue_type_template_id_75cc3efc_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ReservationWizard_vue_vue_type_template_id_6ae535fc_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -110926,6 +110601,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UploadAvatarComponent_vue_vue_type_template_id_0895e6f0___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UploadAvatarComponent_vue_vue_type_template_id_0895e6f0___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/UploadEquipmentImage.vue":
+/*!**********************************************************!*\
+  !*** ./resources/js/components/UploadEquipmentImage.vue ***!
+  \**********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _UploadEquipmentImage_vue_vue_type_template_id_4c363ab9___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./UploadEquipmentImage.vue?vue&type=template&id=4c363ab9& */ "./resources/js/components/UploadEquipmentImage.vue?vue&type=template&id=4c363ab9&");
+/* harmony import */ var _UploadEquipmentImage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./UploadEquipmentImage.vue?vue&type=script&lang=js& */ "./resources/js/components/UploadEquipmentImage.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _UploadEquipmentImage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _UploadEquipmentImage_vue_vue_type_template_id_4c363ab9___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _UploadEquipmentImage_vue_vue_type_template_id_4c363ab9___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/UploadEquipmentImage.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/UploadEquipmentImage.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************!*\
+  !*** ./resources/js/components/UploadEquipmentImage.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_UploadEquipmentImage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./UploadEquipmentImage.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/UploadEquipmentImage.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_UploadEquipmentImage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/UploadEquipmentImage.vue?vue&type=template&id=4c363ab9&":
+/*!*****************************************************************************************!*\
+  !*** ./resources/js/components/UploadEquipmentImage.vue?vue&type=template&id=4c363ab9& ***!
+  \*****************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UploadEquipmentImage_vue_vue_type_template_id_4c363ab9___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./UploadEquipmentImage.vue?vue&type=template&id=4c363ab9& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/UploadEquipmentImage.vue?vue&type=template&id=4c363ab9&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UploadEquipmentImage_vue_vue_type_template_id_4c363ab9___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UploadEquipmentImage_vue_vue_type_template_id_4c363ab9___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
