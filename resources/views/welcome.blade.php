@@ -243,12 +243,12 @@
                     </div>  
                     <div class="englishPhpotos">
                         <a href="/en">
-                            <img src= "http://127.0.0.1:8000/images/english.png" class="english ">
+                            <img src= "http://54.70.235.195/images/english.png" class="english ">
                         </a>    
                     </div>
                     <div class="spanishPhoto">
                         <a href="/es">
-                            <img src="http://127.0.0.1:8000/images/spanish.png" class="spanish ">
+                            <img src="http://54.70.235.195/images/spanish.png" class="spanish ">
                         </a>    
                     </div>  
                           <div class="collapse navbar-collapse" id="navbarNav">
@@ -310,23 +310,23 @@
   
     <div class="row">
         <div class="telescope col-md">
-            <img src="http://127.0.0.1:8000/images/telescope48.png" class="foto">
+            <img src="http://54.70.235.195/images/telescope48.png" class="foto">
             <h5>ELIGE Y RESERVA TU TELESCOPIO: Podrás elegir tu telescopio y luego reservar el tiempo y fecha que tendrás el equipo a tu disposición.</h5>
         </div>
         <div class="lupa col-md">
-           <img src="http://127.0.0.1:8000/images/search48.png" class="foto">
+           <img src="http://54.70.235.195/images/search48.png" class="foto">
            <h5>ELIJE UN OBJETO DEL UNIVERSO: Podrás elegir de nuestra base de datos galaxias, cúmulos, estrellas, entre otros objetos.  
                 Si deseas buscar objetos por tu cuenta también podrás hacerlo!
             </h5>
         </div>
         <div class="camera col-md">
-           <img src="http://127.0.0.1:8000/images/camera48.png" class="foto">
+           <img src="http://54.70.235.195/images/camera48.png" class="foto">
            <h5>ELIJE LOS PARAMETROS DE TU IMAGEN: Podrás elegir los parámetros de tu foto , operar la sensibilidad de la cámara, tiempo de exposición y tamaño de tu foto.
                 Si no sabes de estos parámetros, no te preocupes, nosotros automáticamente te los proporcionamos.
               </h5>
         </div>
         <div class="cloud col-md">
-            <img src="http://127.0.0.1:8000/images/cloud48.png" class="foto">
+            <img src="http://54.70.235.195/images/cloud48.png" class="foto">
             <h5>DISPARA Y DISFRUTA TU PROPIA FOTO DEL UNIVERO.  Una vez que hayas configurado tus parámetros y estés Ok.  Haz un click, dispara, y disfruta tu bella foto del universo. </h5>
         </div>
     
@@ -342,32 +342,32 @@
     <h2>¿POR QUE USAR ATACAMA SCOPE?</h2>
     <div class="row">
             <div class="telescope col-md">
-                <img src="http://127.0.0.1:8000/images/clouds48.png" class="foto">
+                <img src="http://54.70.235.195/images/clouds48.png" class="foto">
                 <h4>Estamos en los cielos del desierto de atacama, uno de los mas limpios del planeta.</h4>
             </div>
             <div class="lupa col-md">
                
-               <img src="http://127.0.0.1:8000/images/globe48.png" class="foto">
+               <img src="http://54.70.235.195/images/globe48.png" class="foto">
                <h4>Puedes operarlo via internet desde cualquier parte del planeta.</h4>
             </div>
     </div>
     <div class="row">
             <div class="telescope col-md">
-                <img src="http://127.0.0.1:8000/images/telescope48.png" class="foto" >
+                <img src="http://54.70.235.195/images/telescope48.png" class="foto" >
                 <h4>Sin comprar equipos de alto costo</h4>
             </div>
             <div class="lupa col-md">
-               <img src="http://127.0.0.1:8000/images/emoticon48.png" class="foto">
+               <img src="http://54.70.235.195/images/emoticon48.png" class="foto">
                <h4>Usa nuestros equipos de forma simple. Busca tus objetos en el universo, dispara, y descarga tu foto.</h4>
             </div>
     </div>
     <div class="row">
             <div class="telescope col-md">
-                <img src="http://127.0.0.1:8000/images/money48.png" class="foto">
+                <img src="http://54.70.235.195/images/money48.png" class="foto">
                 <h4>Desde tu escritorio, podrás disfrutar los cielos del desierto de atacama, sin gastos extras en viajes, estadía, etc.</h4>
             </div>
             <div class="lupa col-md">
-               <img src="http://127.0.0.1:8000/images/moon48.png" class="foto">
+               <img src="http://54.70.235.195/images/moon48.png" class="foto">
                <h4>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Laudantium obcaecati .</h4>
             </div>
     </div>
@@ -383,15 +383,15 @@
         
     <div class="row">
         <div class="image1 col-md-4">
-            <img src="http://127.0.0.1:8000/foto1.png" class="photo-gallery" >
+            <img src="http://54.70.235.195/foto1.png" class="photo-gallery" >
             <p> Telescopio 300mm f/4.5 <br/> 5 min exp. iso:3500</p>
         </div>
         <div class="image2 col-md-4">
-            <img src="http://127.0.0.1:8000/foto2.png" class="photo-gallery" >
+            <img src="http://54.70.235.195/foto2.png" class="photo-gallery" >
             <p> Telescopio 300mm f/4.5 <br/> 5 min exp. iso:3500</p>
         </div>
         <div class="img3 col-md-4">
-            <img src="http://127.0.0.1:8000/foto3.png" class="photo-gallery" >
+            <img src="http://54.70.235.195/foto3.png" class="photo-gallery" >
             <p> Telescopio 300mm f/4.5 <br/> 5 min exp. iso:3500</p>
         </div>
 

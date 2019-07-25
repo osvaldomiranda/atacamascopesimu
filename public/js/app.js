@@ -67901,7 +67901,7 @@ var render = function() {
                                     {
                                       attrs: {
                                         href:
-                                          "https://www.accuweather.com/es/cl/san-pedro-de-atacama/57225/daily-weather-forecast/57225?day=6",
+                                          "https://www.accuweather.com/es/cl/san-pedro-de-atacama/57225/daily-weather-forecast/57225?day=0",
                                         target: "_blank"
                                       }
                                     },
