@@ -227,15 +227,15 @@
         initialize () {
             var app= this;
 
-            axios.get('/api/weather')
-            .then(function (resp) {    
-                app.weather =  resp.data[0]; 
-                app.weather_image = "https://developer.accuweather.com/sites/default/files/0"+app.weather["WeatherIcon"]+"-s.png" ;              
-            })
-            .catch(function (resp) {
-                console.log(resp);
-                alert("Error accuweather :" + resp);
-            });
+            // axios.get('/api/weather')
+            // .then(function (resp) {    
+            //     app.weather =  resp.data[0]; 
+            //     app.weather_image = "https://developer.accuweather.com/sites/default/files/0"+app.weather["WeatherIcon"]+"-s.png" ;              
+            // })
+            // .catch(function (resp) {
+            //     console.log(resp);
+            //     alert("Error accuweather :" + resp);
+            // });
 
         },
         pointsClick (){

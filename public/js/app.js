@@ -6045,14 +6045,15 @@ __webpack_require__.r(__webpack_exports__);
       this.object = a.name;
     },
     initialize: function initialize() {
-      var app = this;
-      axios.get('/api/weather').then(function (resp) {
-        app.weather = resp.data[0];
-        app.weather_image = "https://developer.accuweather.com/sites/default/files/0" + app.weather["WeatherIcon"] + "-s.png";
-      })["catch"](function (resp) {
-        console.log(resp);
-        alert("Error accuweather :" + resp);
-      });
+      var app = this; // axios.get('/api/weather')
+      // .then(function (resp) {    
+      //     app.weather =  resp.data[0]; 
+      //     app.weather_image = "https://developer.accuweather.com/sites/default/files/0"+app.weather["WeatherIcon"]+"-s.png" ;              
+      // })
+      // .catch(function (resp) {
+      //     console.log(resp);
+      //     alert("Error accuweather :" + resp);
+      // });
     },
     pointsClick: function pointsClick() {
       var ComponentPoints = vue__WEBPACK_IMPORTED_MODULE_1___default.a.extend(_components_PointsComponent__WEBPACK_IMPORTED_MODULE_2__["default"]);
