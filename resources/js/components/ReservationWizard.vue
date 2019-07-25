@@ -20,7 +20,7 @@
 
       <v-divider></v-divider>
 
-      <v-stepper-step :complete="e1 > 2" step="2">Elige Día de Observación</v-stepper-step>
+      <v-stepper-step :complete="e1 > 2" step="2">Elige Día de Observación </v-stepper-step>
 
       <v-divider></v-divider>
 
@@ -31,8 +31,8 @@
       <v-stepper-content step="1">
         <v-card
           class="mb-12"
-          color="grey lighten-1"
-          height="200px"
+
+          height="450px"
         >
 
             <v-layout row wrap>
@@ -61,15 +61,27 @@
                 </v-flex>
 
               </v-layout>
+
+
+
               <v-layout row wrap>
                 <v-flex xs1>
                 </v-flex>
+                <v-flex xs2>
+                <v-card>
+                    <v-img
+                        v-bind:src= "img" 
+                        aspect-ratio="1"
+                    ></v-img>  
+                </v-card> 
+              </v-flex>
+
                 <v-flex xs4>
                   <h2>{{ equipment }}</h2>
                 </v-flex>
                 <v-flex xs1>
                 </v-flex>
-                <v-flex xs6>
+                <v-flex xs4>
                   <h2>{{ equipment_desc }}</h2>
                 </v-flex>
             </v-layout>
@@ -88,8 +100,8 @@
       <v-stepper-content step="2">
         <v-card
           class="mb-12"
-          color="grey lighten-1"
-          height="600px"
+          
+          height="650px"
         >
             
 
@@ -102,8 +114,9 @@
             </v-layout>   -->  
 
             <v-layout row wrap>
-                
-                <v-flex xs12>
+                <v-flex xs1>
+                </v-flex>
+                <v-flex xs10>
                     <template>
                       <v-layout fill-height>
                         <v-flex>
@@ -118,33 +131,9 @@
                               <v-btn fab text small @click="next">
                                 <v-icon small>arrow_forward_ios</v-icon>
                               </v-btn>
-                              <v-toolbar-title>Elige tu día de Observación</v-toolbar-title>
+                              <v-toolbar-title>Elige tu día de Observación {{ focus }}</v-toolbar-title>
                               <v-spacer></v-spacer>
-                              <!-- <v-menu bottom right>
-                                <template v-slot:activator="{ on }">
-                                  <v-btn
-                                    outlined
-                                    v-on="on"
-                                  >
-                                    <span>{{ typeToLabel[type] }}</span>
-                                    <v-icon right>arrow_drop_down</v-icon>
-                                  </v-btn>
-                                </template>
-                                <v-list>
-                                  <v-list-item @click="type = 'day'">
-                                    <v-list-item-title>Day</v-list-item-title>
-                                  </v-list-item>
-                                  <v-list-item @click="type = 'week'">
-                                    <v-list-item-title>Week</v-list-item-title>
-                                  </v-list-item>
-                                  <v-list-item @click="type = 'month'">
-                                    <v-list-item-title>Month</v-list-item-title>
-                                  </v-list-item>
-                                  <v-list-item @click="type = '4day'">
-                                    <v-list-item-title>4 days</v-list-item-title>
-                                  </v-list-item>
-                                </v-list>
-                              </v-menu> -->
+      
                             </v-toolbar>
                           </v-sheet>
                           <v-sheet height="400">
@@ -164,60 +153,109 @@
                             >
                
 
-                            </v-calendar>
-                            <v-menu
-                              v-model="selectedOpen"
-                              :close-on-content-click="false"
-                              :activator="selectedElement"
-                              full-width
-                              offset-x
-                            >
-                              <v-card
-                                color="grey lighten-4"
-                                min-width="350px"
-                                flat
-                              >
+                             <template v-slot:day="{ date }">
+                                <template>
+                                    <v-layout row wrap>
+                                        <v-flex xs1>
+                                          
+                                        </v-flex>
+                                        <v-flex xs2> 
+                                            <v-card>
+                                                <v-img
+                                                    v-bind:src= "moonImages(date)" 
+                                                    aspect-ratio="1"
+                                                    max-width="45"
+                                                    max-height="45"
+                                                ></v-img>
+                                                
+                                            </v-card> 
+                                        </v-flex>
+                                        <v-flex xs1>
+                                          
+                                        </v-flex>
+                                        <v-flex xs4> 
+                                          <v-layout row wrap>
+                                            <v-flex xs1>
+                                              
+                                            </v-flex>
+                                            <v-flex xs10>
+                                              <p>{{ moonSet(date) }}</p>
+                                            </v-flex>
+                                          </v-layout>
+                                          <v-layout row wrap>
+                                            <v-flex xs1>
+                                              
+                                            </v-flex>
+                                            <v-flex xs10>
+                                              <p>{{ moonRise(date) }}</p>
+                                            </v-flex>
+                                          </v-layout>                                          
+                                        </v-flex>
+                                    </v-layout>    
+                                </template>
 
-                                <v-toolbar
-                                  :color="selectedEvent.color"
-                                  dark
-                                >
-                                  <v-btn icon>
-                                    <v-icon>edit</v-icon>
-                                  </v-btn>
-                                  <v-toolbar-title v-html="selectedEvent.name"></v-toolbar-title>
-                                  <v-spacer></v-spacer>
-                                  <v-btn icon>
-                                    <v-icon>favorite</v-icon>
-                                  </v-btn>
-                                  <v-btn icon>
-                                    <v-icon>more_vert</v-icon>
-                                  </v-btn>
-                                </v-toolbar>
-
-                                <v-card-text>
-                                  <span v-html="selectedEvent.details"></span>
-                                </v-card-text>
-                                <v-card-actions>
-                                  <v-btn
-                                    text
-                                    color="secondary"
-                                    @click="selectedOpen = false"
+                                <template v-for="event in eventsMap[date]">
+                                  <v-menu
+                                    :key="event.title"
+                                    v-model="event.open"
+                                    full-width
+                                    offset-x
                                   >
-                                    Cancel
-                                  </v-btn>
-                                </v-card-actions>
-                              </v-card>
-                            </v-menu>
+                                    <template v-slot:activator="{ on }">
+                                      <div
+                                        v-if="!event.time"
+                                        v-ripple
+                                        class="my-event"
+                                        v-on="on"
+                                        v-html="event.title"
+                                      ></div>
+                                    </template>
+                                    <v-card
+                                      color="grey lighten-4"
+                                      min-width="350px"
+                                      flat
+                                    >
+                                      <v-toolbar
+                                        color="primary"
+                                        dark
+                                      >
+                                      <!--   <v-btn icon>
+                                          <v-icon>edit</v-icon>
+                                        </v-btn> -->
+                                        <v-toolbar-title v-html="event.title"></v-toolbar-title>
+                                        <v-spacer></v-spacer>
+<!--                                         <v-btn icon>
+                                          <v-icon>favorite</v-icon>
+                                        </v-btn>
+                                        <v-btn icon>
+                                          <v-icon>more_vert</v-icon>
+                                        </v-btn> -->
+                                      </v-toolbar>
+                                      <v-card-title primary-title>
+                                        <span v-html="event.details"></span>
+                                      </v-card-title>
+                                      <v-card-actions>
+                                        <v-btn
+                                          flat
+                                          color="secondary"
+                                        >
+                                          Cancel
+                                        </v-btn>
+                                      </v-card-actions>
+                                    </v-card>
+                                  </v-menu>
+                                </template>
+                              </template>
+
+
+
+
+                            </v-calendar>
+
                           </v-sheet>
                         </v-flex>
                       </v-layout>
                     </template>
-
-
-
-
-
 
                 </v-flex>
             </v-layout>    
@@ -248,9 +286,55 @@
       <v-stepper-content step="3">
         <v-card
           class="mb-12"
-          color="grey lighten-1"
-          height="200px"
-        ></v-card>
+          height="450px"
+        >
+          
+
+          <v-layout align-center row>
+                  <v-flex xs1>
+                  </v-flex>
+                  <v-flex xs4>
+                  
+                  <template>
+                    <v-layout wrap>
+                    <v-flex
+                      xs12
+                      class="mb-3"
+                    >
+                      <v-sheet height="400">
+                      <v-calendar
+                        ref="calendar"
+                        v-model="focus"
+                        type="day"
+                        :end="end"
+                        color="primary"
+                      >
+                            <template v-slot:interval="{ hour }">
+                            <div
+                              class="text-xs-center"
+                            >
+                              <v-btn small v-if="reservationsArray.indexOf(hour)>-1" color="error">Reservado</v-btn>
+                              <v-btn small v-if="reservationsArray.indexOf(hour)<=-1" color="success" @click="confirmReserv(hour)">Disponible</v-btn>
+
+                            </div>
+                            </template>            
+                      </v-calendar>
+                      </v-sheet>
+                    </v-flex>
+
+                    </v-layout>
+                  </template>
+              </v-flex>
+              <v-flex xs7>
+                <my-reservations></my-reservations>  
+              </v-flex>
+            </v-layout>
+
+
+
+
+
+        </v-card>
 
 
         <v-btn
@@ -267,6 +351,50 @@
 </template>
 
   </v-card>
+
+  <template>
+    <v-dialog v-model="dialog2" max-width="500px">
+    <v-card>
+    
+      <v-card-title
+      class="headline grey lighten-2"
+      primary-title
+      >
+      Confirmar Reserva
+      </v-card-title>
+      <v-card-text>
+      <v-container grid-list-md>
+      <v-layout wrap row>
+        <v-flex xs12>
+        <div class="title font-weight-light">Equipo: {{ this.equipment }}</div>
+        </v-flex>
+      </v-layout>
+      <v-layout wrap row>
+        <v-flex xs12>
+        <div class="title font-weight-light">Puntos de esta reserva: {{ this.telescope_points }}</div>
+        </v-flex>
+      </v-layout>  
+      <v-layout wrap row>
+        <v-flex xs12>
+        <div class="title font-weight-light">Fecha:  {{ this.today }}</div>
+        </v-flex>
+      </v-layout>
+      <v-layout wrap row>
+        <v-flex xs12>
+        <div class="title font-weight-light">A las: {{ this.hourToReserv }} Horas</div>
+        </v-flex>
+      </v-layout>
+      
+      </v-container>
+      </v-card-text>
+      <v-card-actions>
+      <v-btn color="primary" flat @click="reserv">Reservar</v-btn>
+      <v-btn color="primary" flat @click="dialog2=false">Close</v-btn>
+      </v-card-actions>
+    </v-card>
+    </v-dialog>
+  </template>
+
   </v-dialog>
   </v-layout>
 
@@ -281,6 +409,7 @@
 
 <script>
   import SunCalc from 'suncalc';  
+  import lune from 'lune';  
   import { mapState } from 'vuex';
 
   var actualDate = new Date().toISOString().substr(0, 10)
@@ -331,6 +460,8 @@
 
   data () {
     return {
+    img: "https://cdn.shopify.com/s/files/1/1935/4371/products/12046_Advanced_VX_9_25_SCT_1_570x380@2x.jpg?v=1554219678",
+
     e1: 0,
     generalRuleDate: [v => !!v || 'Campo requerido',
       v=> v >= actualDate || 'Debe ser fecha mayor a la actual',
@@ -439,6 +570,7 @@
       var app = this;
       app.today = actualDate;
       app.start = app.today; 
+      app.focus = app.today; 
 
       
       app.suntimes = SunCalc.getTimes(new Date(), 33.0000, -70.3326);
@@ -555,7 +687,8 @@
         alert("Error reservation create :" + resp);
       });
 
-      app.dialog2=false;  
+      app.dialog2=false; 
+      app.dialog=false;  
     },
     points (){
       let c_points = this.$store.getters.current_points - this.telescope_points;
@@ -676,8 +809,9 @@
       
     },
     viewDay ({ date }) {
-        this.focus = date
-        this.type = 'day'
+        this.focus = date;
+        this.start = this.focus;
+        this.reservatios_day();
     },
 
       getEventColor (event) {
@@ -720,6 +854,136 @@
       },
 
 
+
+      moonRise(a){
+        var moon_times = SunCalc.getMoonTimes(new Date(a + 'T00:00'), 33.0000, -70.3326);
+       // alert(JSON.stringify(app.moon_times));
+        var moonset = moon_times["rise"];
+        var monset_time =''
+        if(moonset){
+          monset_time = 'Rise:' + moonset.toLocaleTimeString();
+        } 
+        
+        return monset_time;
+
+      },
+
+      moonSet(a){
+        var moon_times = SunCalc.getMoonTimes(new Date(a + 'T00:00'), 33.0000, -70.3326);
+       // alert(JSON.stringify(app.moon_times));
+        var moonset = moon_times["set"];
+        var monset_time =''
+        if(moonset){
+          monset_time = 'Set:' + moonset.toLocaleTimeString();
+        } 
+        
+        return monset_time;
+
+      },
+
+      moonImages(a){
+
+        var imageUrl='';
+        
+        var some_date = new Date(a + 'T00:00')
+        var some_date_phase = lune.phase(some_date)
+
+        var age = some_date_phase['age'];
+ 
+        var age = parseInt(some_date_phase['age']); 
+        switch (age) {
+        case 1:
+          imageUrl = require('./../../assets/images/Luna01.jpg');
+          break;
+        case 2:
+          imageUrl = require('./../../assets/images/Luna02.jpg');
+          break;
+        case 3:
+          imageUrl = require('./../../assets/images/Luna03.jpg');
+          break;
+        case 4:
+          imageUrl = require('./../../assets/images/Luna04.jpg');
+          break;
+        case 5:
+          imageUrl = require('./../../assets/images/Luna05.jpg');
+          break;
+        case 6:
+          imageUrl = require('./../../assets/images/Luna06.jpg');
+          break;
+        case 7:
+          imageUrl = require('./../../assets/images/Luna07.jpg');
+          break;
+        case 8:
+          imageUrl = require('./../../assets/images/Luna08.jpg');
+          break;
+        case 9:
+          imageUrl = require('./../../assets/images/Luna09.jpg');
+          break;
+        case 10:
+          imageUrl = require('./../../assets/images/Luna10.jpg');
+          break;
+        case 11:
+          imageUrl = require('./../../assets/images/Luna11.jpg');
+          break;
+        case 12:
+          imageUrl = require('./../../assets/images/Luna12.jpg');
+          break;
+        case 13:
+          imageUrl = require('./../../assets/images/Luna13.jpg');
+          break;
+        case 14:
+          imageUrl = require('./../../assets/images/Luna14.jpg');
+          break;
+        case 15:
+          imageUrl = require('./../../assets/images/Luna15.jpg');
+          break;
+        case 16:
+          imageUrl = require('./../../assets/images/Luna16.jpg');
+          break;
+        case 17:
+          imageUrl= require('./../../assets/images/Luna17.jpg');
+          break;
+        case 18:
+          imageUrl = require('./../../assets/images/Luna18.jpg');
+          break;
+        case 19:
+          imageUrl = require('./../../assets/images/Luna19.jpg');
+          break;
+        case 20:
+          imageUrl = require('./../../assets/images/Luna20.jpg');
+          break;
+        case 21:
+          imageUrl = require('./../../assets/images/Luna21.jpg');
+          break;
+        case 22:
+          imageUrl = require('./../../assets/images/Luna22.jpg');
+          break;
+        case 23:
+          imageUrl = require('./../../assets/images/Luna23.jpg');
+          break;
+        case 24:
+          imageUrl = require('./../../assets/images/Luna24.jpg');
+          break;
+        case 25:
+          imageUrl= require('./../../assets/images/Luna25.jpg');
+          break;
+        case 26:
+          imageUrl = require('./../../assets/images/Luna26.jpg');
+          break;
+        case 27:
+          imageUrl = require('./../../assets/images/Luna27.jpg');
+          break;
+        case 28:
+          imageUrl = require('./../../assets/images/Luna28.jpg');
+          break;
+        case 29:
+          imageUrl = require('./../../assets/images/Luna29.jpg');
+          break;
+        }
+
+
+        return imageUrl;
+      }
 
 
   },

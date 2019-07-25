@@ -32,7 +32,7 @@
 
                         </v-flex>
                         <v-flex xs4 align-end flexbox>
-                            <a href="https://www.accuweather.com/es/cl/san-pedro-de-atacama/57225/daily-weather-forecast/57225?day=6">
+                            <a href="https://www.accuweather.com/es/cl/san-pedro-de-atacama/57225/daily-weather-forecast/57225?day=6" target=_blank>
                             Ver Pronóstico
                             </a>
                         </v-flex>

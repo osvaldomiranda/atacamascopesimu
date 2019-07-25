@@ -4541,7 +4541,9 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var suncalc__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! suncalc */ "./node_modules/suncalc/suncalc.js");
 /* harmony import */ var suncalc__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(suncalc__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var lune__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lune */ "./node_modules/lune/lib/lune.js");
+/* harmony import */ var lune__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lune__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 var _computed$computed$da;
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -4827,11 +4829,140 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 var actualDate = new Date().toISOString().substr(0, 10);
 /* harmony default export */ __webpack_exports__["default"] = (_computed$computed$da = {
-  computed: Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])({
+  computed: Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapState"])({
     //equipments: state => state.equipments,
     reservations: function reservations(state) {
       return state.reservations;
@@ -4877,6 +5008,7 @@ var actualDate = new Date().toISOString().substr(0, 10);
   }
 }), _defineProperty(_computed$computed$da, "data", function data() {
   return {
+    img: "https://cdn.shopify.com/s/files/1/1935/4371/products/12046_Advanced_VX_9_25_SCT_1_570x380@2x.jpg?v=1554219678",
     e1: 0,
     generalRuleDate: [function (v) {
       return !!v || 'Campo requerido';
@@ -4972,6 +5104,7 @@ var actualDate = new Date().toISOString().substr(0, 10);
     var app = this;
     app.today = actualDate;
     app.start = app.today;
+    app.focus = app.today;
     app.suntimes = suncalc__WEBPACK_IMPORTED_MODULE_0___default.a.getTimes(new Date(), 33.0000, -70.3326); // format sunrise time from the Date object
 
     app.sunset = app.suntimes.sunset;
@@ -5068,6 +5201,7 @@ var actualDate = new Date().toISOString().substr(0, 10);
       alert("Error reservation create :" + resp);
     });
     app.dialog2 = false;
+    app.dialog = false;
   },
   points: function points() {
     var c_points = this.$store.getters.current_points - this.telescope_points;
@@ -5209,7 +5343,8 @@ var actualDate = new Date().toISOString().substr(0, 10);
   viewDay: function viewDay(_ref) {
     var date = _ref.date;
     this.focus = date;
-    this.type = 'day';
+    this.start = this.focus;
+    this.reservatios_day();
   },
   getEventColor: function getEventColor(event) {
     return event.color;
@@ -5255,6 +5390,157 @@ var actualDate = new Date().toISOString().substr(0, 10);
   },
   nth: function nth(d) {
     return d > 3 && d < 21 ? 'th' : ['th', 'st', 'nd', 'rd', 'th', 'th', 'th', 'th', 'th', 'th'][d % 10];
+  },
+  moonRise: function moonRise(a) {
+    var moon_times = suncalc__WEBPACK_IMPORTED_MODULE_0___default.a.getMoonTimes(new Date(a + 'T00:00'), 33.0000, -70.3326); // alert(JSON.stringify(app.moon_times));
+
+    var moonset = moon_times["rise"];
+    var monset_time = '';
+
+    if (moonset) {
+      monset_time = 'Rise:' + moonset.toLocaleTimeString();
+    }
+
+    return monset_time;
+  },
+  moonSet: function moonSet(a) {
+    var moon_times = suncalc__WEBPACK_IMPORTED_MODULE_0___default.a.getMoonTimes(new Date(a + 'T00:00'), 33.0000, -70.3326); // alert(JSON.stringify(app.moon_times));
+
+    var moonset = moon_times["set"];
+    var monset_time = '';
+
+    if (moonset) {
+      monset_time = 'Set:' + moonset.toLocaleTimeString();
+    }
+
+    return monset_time;
+  },
+  moonImages: function moonImages(a) {
+    var imageUrl = '';
+    var some_date = new Date(a + 'T00:00');
+    var some_date_phase = lune__WEBPACK_IMPORTED_MODULE_1___default.a.phase(some_date);
+    var age = some_date_phase['age'];
+    var age = parseInt(some_date_phase['age']);
+
+    switch (age) {
+      case 1:
+        imageUrl = __webpack_require__(/*! ./../../assets/images/Luna01.jpg */ "./resources/assets/images/Luna01.jpg");
+        break;
+
+      case 2:
+        imageUrl = __webpack_require__(/*! ./../../assets/images/Luna02.jpg */ "./resources/assets/images/Luna02.jpg");
+        break;
+
+      case 3:
+        imageUrl = __webpack_require__(/*! ./../../assets/images/Luna03.jpg */ "./resources/assets/images/Luna03.jpg");
+        break;
+
+      case 4:
+        imageUrl = __webpack_require__(/*! ./../../assets/images/Luna04.jpg */ "./resources/assets/images/Luna04.jpg");
+        break;
+
+      case 5:
+        imageUrl = __webpack_require__(/*! ./../../assets/images/Luna05.jpg */ "./resources/assets/images/Luna05.jpg");
+        break;
+
+      case 6:
+        imageUrl = __webpack_require__(/*! ./../../assets/images/Luna06.jpg */ "./resources/assets/images/Luna06.jpg");
+        break;
+
+      case 7:
+        imageUrl = __webpack_require__(/*! ./../../assets/images/Luna07.jpg */ "./resources/assets/images/Luna07.jpg");
+        break;
+
+      case 8:
+        imageUrl = __webpack_require__(/*! ./../../assets/images/Luna08.jpg */ "./resources/assets/images/Luna08.jpg");
+        break;
+
+      case 9:
+        imageUrl = __webpack_require__(/*! ./../../assets/images/Luna09.jpg */ "./resources/assets/images/Luna09.jpg");
+        break;
+
+      case 10:
+        imageUrl = __webpack_require__(/*! ./../../assets/images/Luna10.jpg */ "./resources/assets/images/Luna10.jpg");
+        break;
+
+      case 11:
+        imageUrl = __webpack_require__(/*! ./../../assets/images/Luna11.jpg */ "./resources/assets/images/Luna11.jpg");
+        break;
+
+      case 12:
+        imageUrl = __webpack_require__(/*! ./../../assets/images/Luna12.jpg */ "./resources/assets/images/Luna12.jpg");
+        break;
+
+      case 13:
+        imageUrl = __webpack_require__(/*! ./../../assets/images/Luna13.jpg */ "./resources/assets/images/Luna13.jpg");
+        break;
+
+      case 14:
+        imageUrl = __webpack_require__(/*! ./../../assets/images/Luna14.jpg */ "./resources/assets/images/Luna14.jpg");
+        break;
+
+      case 15:
+        imageUrl = __webpack_require__(/*! ./../../assets/images/Luna15.jpg */ "./resources/assets/images/Luna15.jpg");
+        break;
+
+      case 16:
+        imageUrl = __webpack_require__(/*! ./../../assets/images/Luna16.jpg */ "./resources/assets/images/Luna16.jpg");
+        break;
+
+      case 17:
+        imageUrl = __webpack_require__(/*! ./../../assets/images/Luna17.jpg */ "./resources/assets/images/Luna17.jpg");
+        break;
+
+      case 18:
+        imageUrl = __webpack_require__(/*! ./../../assets/images/Luna18.jpg */ "./resources/assets/images/Luna18.jpg");
+        break;
+
+      case 19:
+        imageUrl = __webpack_require__(/*! ./../../assets/images/Luna19.jpg */ "./resources/assets/images/Luna19.jpg");
+        break;
+
+      case 20:
+        imageUrl = __webpack_require__(/*! ./../../assets/images/Luna20.jpg */ "./resources/assets/images/Luna20.jpg");
+        break;
+
+      case 21:
+        imageUrl = __webpack_require__(/*! ./../../assets/images/Luna21.jpg */ "./resources/assets/images/Luna21.jpg");
+        break;
+
+      case 22:
+        imageUrl = __webpack_require__(/*! ./../../assets/images/Luna22.jpg */ "./resources/assets/images/Luna22.jpg");
+        break;
+
+      case 23:
+        imageUrl = __webpack_require__(/*! ./../../assets/images/Luna23.jpg */ "./resources/assets/images/Luna23.jpg");
+        break;
+
+      case 24:
+        imageUrl = __webpack_require__(/*! ./../../assets/images/Luna24.jpg */ "./resources/assets/images/Luna24.jpg");
+        break;
+
+      case 25:
+        imageUrl = __webpack_require__(/*! ./../../assets/images/Luna25.jpg */ "./resources/assets/images/Luna25.jpg");
+        break;
+
+      case 26:
+        imageUrl = __webpack_require__(/*! ./../../assets/images/Luna26.jpg */ "./resources/assets/images/Luna26.jpg");
+        break;
+
+      case 27:
+        imageUrl = __webpack_require__(/*! ./../../assets/images/Luna27.jpg */ "./resources/assets/images/Luna27.jpg");
+        break;
+
+      case 28:
+        imageUrl = __webpack_require__(/*! ./../../assets/images/Luna28.jpg */ "./resources/assets/images/Luna28.jpg");
+        break;
+
+      case 29:
+        imageUrl = __webpack_require__(/*! ./../../assets/images/Luna29.jpg */ "./resources/assets/images/Luna29.jpg");
+        break;
+    }
+
+    return imageUrl;
   }
 }), _computed$computed$da);
 
@@ -25470,6 +25756,407 @@ function getLanguage(name) {
 
   return languages[name] || languages[aliases[name]]
 }
+
+
+/***/ }),
+
+/***/ "./node_modules/lune/lib/julian.js":
+/*!*****************************************!*\
+  !*** ./node_modules/lune/lib/julian.js ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+function fromDate (date) {
+  return date.getTime() / 86400000 + 2440587.5
+}
+
+function toDate (julian) {
+  return new Date((julian - 2440587.5) * 86400000)
+}
+
+exports.fromDate = fromDate
+exports.toDate = toDate
+
+
+/***/ }),
+
+/***/ "./node_modules/lune/lib/lune.js":
+/*!***************************************!*\
+  !*** ./node_modules/lune/lib/lune.js ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/**
+ * This library calculates the current phase of the moon
+ * as well as finds the dates of the recent moon phases.
+ *
+ * Ported from python version found here:
+ * https://bazaar.launchpad.net/~keturn/py-moon-phase/trunk/annotate/head:/moon.py
+ *
+ * Author: Ryan Seys (https://github.com/ryanseys)
+ */
+
+
+
+const julian = __webpack_require__(/*! ./julian */ "./node_modules/lune/lib/julian.js")
+
+// Phases of the moon & precision
+const NEW = 0
+const FIRST = 1
+const FULL = 2
+const LAST = 3
+const PHASE_MASK = 3
+
+// Astronomical Constants
+// JDN stands for Julian Day Number
+// Angles here are in degrees
+// 1980 January 0.0 in JDN
+// XXX: DateTime(1980).jdn yields 2444239.5 -- which one is right?
+// XXX: even though 2444239.5 is correct for the 1 Jan 1980, 2444238.5 gives
+// better accuracy results... possibly somebody chose all of the below
+// constants based on the wrong epoch?
+const EPOCH = 2444238.5
+
+// Ecliptic longitude of the Sun at epoch 1980.0
+const ECLIPTIC_LONGITUDE_EPOCH = 278.833540
+
+// Ecliptic longitude of the Sun at perigee
+const ECLIPTIC_LONGITUDE_PERIGEE = 282.596403
+
+// Eccentricity of Earth's orbit
+const ECCENTRICITY = 0.016718
+
+// Semi-major axis of Earth's orbit, in kilometers
+const SUN_SMAXIS = 1.49585e8
+
+// Sun's angular size, in degrees, at semi-major axis distance
+const SUN_ANGULAR_SIZE_SMAXIS = 0.533128
+
+// Elements of the Moon's orbit, epoch 1980.0
+// Moon's mean longitude at the epoch
+const MOON_MEAN_LONGITUDE_EPOCH = 64.975464
+
+// Mean longitude of the perigee at the epoch
+const MOON_MEAN_PERIGEE_EPOCH = 349.383063
+
+// Eccentricity of the Moon's orbit
+const MOON_ECCENTRICITY = 0.054900
+
+// Semi-major axis of the Moon's orbit, in kilometers
+const MOON_SMAXIS = 384401.0
+
+// MOON_SMAXIS premultiplied by the angular size of the Moon from the Earth
+const MOON_ANGULAR_SIZE_SMAXIS = MOON_SMAXIS * 0.5181
+
+// Synodic month (new Moon to new Moon), in days
+const SYNODIC_MONTH = 29.53058868
+
+function fixangle (a) {
+  return a - 360.0 * Math.floor(a / 360.0)
+}
+
+/**
+ * Convert degrees to radians
+ * @param  {Number} d Angle in degrees
+ * @return {Number}   Angle in radians
+ */
+function torad (d) {
+  return (Math.PI / 180.0) * d
+}
+
+/**
+ * Convert radians to degrees
+ * @param  {Number} r Angle in radians
+ * @return {Number}   Angle in degrees
+ */
+function todeg (r) {
+  return (180.0 / Math.PI) * r
+}
+
+function dsin (d) {
+  return Math.sin(torad(d))
+}
+
+function dcos (d) {
+  return Math.cos(torad(d))
+}
+
+/**
+ * Solve the equation of Kepler.
+ */
+function kepler (m, ecc) {
+  const epsilon = 1e-6
+
+  m = torad(m)
+  let e = m
+  while (1) {
+    const delta = e - ecc * Math.sin(e) - m
+    e -= delta / (1.0 - ecc * Math.cos(e))
+
+    if (Math.abs(delta) <= epsilon) {
+      break
+    }
+  }
+
+  return e
+}
+
+/**
+ * Finds the phase information for specific date.
+ * @param  {Date} phase_date Date to get phase information of.
+ * @return {Object}          Phase data
+ */
+function phase (phase_date) {
+  if (!phase_date) {
+    phase_date = new Date()
+  }
+  phase_date = julian.fromDate(phase_date)
+
+  const day = phase_date - EPOCH
+
+  // calculate sun position
+  const sun_mean_anomaly =
+    (360.0 / 365.2422) * day +
+    (ECLIPTIC_LONGITUDE_EPOCH - ECLIPTIC_LONGITUDE_PERIGEE)
+  const sun_true_anomaly =
+    2 * todeg(Math.atan(
+      Math.sqrt((1.0 + ECCENTRICITY) / (1.0 - ECCENTRICITY)) *
+      Math.tan(0.5 * kepler(sun_mean_anomaly, ECCENTRICITY))
+    ))
+  const sun_ecliptic_longitude =
+    ECLIPTIC_LONGITUDE_PERIGEE + sun_true_anomaly
+  const sun_orbital_distance_factor =
+    (1 + ECCENTRICITY * dcos(sun_true_anomaly)) /
+    (1 - ECCENTRICITY * ECCENTRICITY)
+
+  // calculate moon position
+  const moon_mean_longitude =
+    MOON_MEAN_LONGITUDE_EPOCH + 13.1763966 * day
+  const moon_mean_anomaly =
+    moon_mean_longitude - 0.1114041 * day - MOON_MEAN_PERIGEE_EPOCH
+  const moon_evection =
+    1.2739 * dsin(
+      2 * (moon_mean_longitude - sun_ecliptic_longitude) - moon_mean_anomaly
+    )
+  const moon_annual_equation =
+    0.1858 * dsin(sun_mean_anomaly)
+  // XXX: what is the proper name for this value?
+  const moon_mp =
+    moon_mean_anomaly +
+    moon_evection -
+    moon_annual_equation -
+    0.37 * dsin(sun_mean_anomaly)
+  const moon_equation_center_correction =
+    6.2886 * dsin(moon_mp)
+  const moon_corrected_longitude =
+    moon_mean_longitude +
+    moon_evection +
+    moon_equation_center_correction -
+    moon_annual_equation +
+    0.214 * dsin(2.0 * moon_mp)
+  const moon_age =
+    fixangle(
+      moon_corrected_longitude -
+      sun_ecliptic_longitude +
+      0.6583 * dsin(
+        2 * (moon_corrected_longitude - sun_ecliptic_longitude)
+      )
+    )
+  const moon_distance =
+    (MOON_SMAXIS * (1.0 - MOON_ECCENTRICITY * MOON_ECCENTRICITY)) /
+    (1.0 + MOON_ECCENTRICITY * dcos(moon_mp + moon_equation_center_correction))
+
+  return {
+    phase: (1.0 / 360.0) * moon_age,
+    illuminated: 0.5 * (1.0 - dcos(moon_age)),
+    age: (SYNODIC_MONTH / 360.0) * moon_age,
+    distance: moon_distance,
+    angular_diameter: MOON_ANGULAR_SIZE_SMAXIS / moon_distance,
+    sun_distance: SUN_SMAXIS / sun_orbital_distance_factor,
+    sun_angular_diameter: SUN_ANGULAR_SIZE_SMAXIS * sun_orbital_distance_factor
+  }
+}
+
+/**
+ * Calculates time of the mean new Moon for a given base date.
+ * This argument K to this function is the precomputed synodic month
+ * index, given by:
+ *   K = (year - 1900) * 12.3685
+ * where year is expressed as a year and fractional year.
+ * @param  {Date} sdate   Start date
+ * @param  {[type]} k     [description]
+ * @return {[type]}       [description]
+ */
+function meanphase (sdate, k) {
+  // Time in Julian centuries from 1900 January 12 noon UTC
+  const delta_t = (sdate - -2208945600000.0) / 86400000.0
+  const t = delta_t / 36525
+  return 2415020.75933 +
+    SYNODIC_MONTH * k +
+    (0.0001178 - 0.000000155 * t) * t * t +
+    0.00033 * dsin(166.56 + (132.87 - 0.009173 * t) * t)
+}
+
+/**
+ * Given a K value used to determine the mean phase of the new moon, and a
+ * phase selector (0, 1, 2, 3), obtain the true, corrected phase time.
+ * @param  {[type]} k      [description]
+ * @param  {[type]} tphase [description]
+ * @return {[type]}        [description]
+ */
+function truephase (k, tphase) {
+  // restrict tphase to (0, 1, 2, 3)
+  tphase = tphase & PHASE_MASK
+
+  // add phase to new moon time
+  k = k + 0.25 * tphase
+
+  // Time in Julian centuries from 1900 January 0.5
+  const t = (1.0 / 1236.85) * k
+
+  // Mean time of phase
+  let pt = 2415020.75933 +
+    SYNODIC_MONTH * k +
+    (0.0001178 - 0.000000155 * t) * t * t +
+    0.00033 * dsin(166.56 + (132.87 - 0.009173 * t) * t)
+
+  // Sun's mean anomaly
+  const m = 359.2242 + 29.10535608 * k - (0.0000333 - 0.00000347 * t) * t * t
+
+  // Moon's mean anomaly
+  const mprime = 306.0253 + 385.81691806 * k + (0.0107306 + 0.00001236 * t) * t * t
+
+  // Moon's argument of latitude
+  const f = 21.2964 + 390.67050646 * k - (0.0016528 - 0.00000239 * t) * t * t
+
+  // use different correction equations depending on the phase being sought
+  switch (tphase) {
+    // new and full moon use one correction
+    case NEW:
+    case FULL:
+      pt += (0.1734 - 0.000393 * t) * dsin(m) +
+        0.0021 * dsin(2 * m) -
+        0.4068 * dsin(mprime) +
+        0.0161 * dsin(2 * mprime) -
+        0.0004 * dsin(3 * mprime) +
+        0.0104 * dsin(2 * f) -
+        0.0051 * dsin(m + mprime) -
+        0.0074 * dsin(m - mprime) +
+        0.0004 * dsin(2 * f + m) -
+        0.0004 * dsin(2 * f - m) -
+        0.0006 * dsin(2 * f + mprime) +
+        0.0010 * dsin(2 * f - mprime) +
+        0.0005 * dsin(m + 2 * mprime)
+      break
+
+    // first and last quarter moon use a different correction
+    case FIRST:
+    case LAST:
+      pt += (0.1721 - 0.0004 * t) * dsin(m) +
+        0.0021 * dsin(2 * m) -
+        0.6280 * dsin(mprime) +
+        0.0089 * dsin(2 * mprime) -
+        0.0004 * dsin(3 * mprime) +
+        0.0079 * dsin(2 * f) -
+        0.0119 * dsin(m + mprime) -
+        0.0047 * dsin(m - mprime) +
+        0.0003 * dsin(2 * f + m) -
+        0.0004 * dsin(2 * f - m) -
+        0.0006 * dsin(2 * f + mprime) +
+        0.0021 * dsin(2 * f - mprime) +
+        0.0003 * dsin(m + 2 * mprime) +
+        0.0004 * dsin(m - 2 * mprime) -
+        0.0003 * dsin(2 * m + mprime)
+
+      // the sign of the last term depends on whether we're looking for a first
+      // or last quarter moon!
+      const sign = (tphase < FULL) ? +1 : -1
+      pt += sign * (0.0028 - 0.0004 * dcos(m) + 0.0003 * dcos(mprime))
+
+      break
+  }
+
+  return julian.toDate(pt)
+}
+
+/**
+ * Find time of phases of the moon which surround the current date.
+ * Five phases are found, starting and ending with the new moons
+ * which bound the current lunation.
+ * @param  {Date} sdate Date to start hunting from (defaults to current date)
+ * @return {Object}     Object containing recent past and future phases
+ */
+function phase_hunt (sdate) {
+  if (!sdate) {
+    sdate = new Date()
+  }
+
+  let adate = new Date(sdate.getTime() - (45 * 86400000)) // 45 days prior
+  let k1 = Math.floor(12.3685 * (adate.getFullYear() + (1.0 / 12.0) * adate.getMonth() - 1900))
+  let nt1 = meanphase(adate.getTime(), k1)
+
+  sdate = julian.fromDate(sdate)
+  adate = nt1 + SYNODIC_MONTH
+  let k2 = k1 + 1
+  let nt2 = meanphase(adate, k2)
+  while (nt1 > sdate || sdate >= nt2) {
+    adate += SYNODIC_MONTH
+    k1++
+    k2++
+    nt1 = nt2
+    nt2 = meanphase(adate, k2)
+  }
+
+  return {
+    new_date: truephase(k1, NEW),
+    q1_date: truephase(k1, FIRST),
+    full_date: truephase(k1, FULL),
+    q3_date: truephase(k1, LAST),
+    nextnew_date: truephase(k2, NEW)
+  }
+}
+
+function phase_range (start, end, phase) {
+  start = start.getTime()
+  end = end.getTime()
+
+  let t = start - 45 * 86400000
+
+  let k
+  {
+    const d = new Date(t)
+    k = Math.floor(12.3685 * (d.getFullYear() + (1.0 / 12.0) * d.getMonth() - 1900))
+  }
+
+  let date = truephase(k, phase)
+  // skip every phase before starting date
+  while (date.getTime() < start) {
+    k++
+    date = truephase(k, phase)
+  }
+  // add every phase before (or on!) ending date to a list, and return it
+  const list = []
+  while (date.getTime() <= end) {
+    list.push(date)
+    k++
+    date = truephase(k, phase)
+  }
+  return list
+}
+
+exports.PHASE_NEW = NEW
+exports.PHASE_FIRST = FIRST
+exports.PHASE_FULL = FULL
+exports.PHASE_LAST = LAST
+exports.phase = phase
+exports.phase_hunt = phase_hunt
+exports.phase_range = phase_range
 
 
 /***/ }),
@@ -56254,7 +56941,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prosemirror_utils__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(prosemirror_utils__WEBPACK_IMPORTED_MODULE_6__);
 
     /*!
-    * tiptap-commands v1.10.9
+    * tiptap-commands v1.10.10
     * (c) 2019 Scrumpy UG (limited liability)
     * @license MIT
     */
@@ -56699,7 +57386,7 @@ function updateMark (type, attrs) {
 /*!***************************************************************!*\
   !*** ./node_modules/tiptap-extensions/dist/extensions.esm.js ***!
   \***************************************************************/
-/*! exports provided: Blockquote, Bold, BulletList, Code, CodeBlock, CodeBlockHighlight, Collaboration, HardBreak, Heading, Highlight, History, HorizontalRule, Image, Italic, Link, ListItem, Mention, OrderedList, Placeholder, Search, Strike, Suggestions, Table, TableCell, TableHeader, TableRow, TodoItem, TodoList, Underline */
+/*! exports provided: Blockquote, Bold, BulletList, Code, CodeBlock, CodeBlockHighlight, Collaboration, HardBreak, Heading, Highlight, History, HorizontalRule, Image, Italic, Link, ListItem, Mention, OrderedList, Placeholder, Search, Strike, Suggestions, Table, TableCell, TableHeader, TableRow, TodoItem, TodoList, TrailingNode, Underline */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -56732,6 +57419,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TableRow", function() { return TableRow; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TodoItem", function() { return TodoItem; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TodoList", function() { return TodoList; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TrailingNode", function() { return TrailingNode; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Underline", function() { return Underline; });
 /* harmony import */ var tiptap__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tiptap */ "./node_modules/tiptap/dist/tiptap.esm.js");
 /* harmony import */ var tiptap_commands__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! tiptap-commands */ "./node_modules/tiptap-commands/dist/commands.esm.js");
@@ -56754,7 +57442,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prosemirror_history__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(prosemirror_history__WEBPACK_IMPORTED_MODULE_10__);
 
     /*!
-    * tiptap-extensions v1.24.2
+    * tiptap-extensions v1.24.4
     * (c) 2019 Scrumpy UG (limited liability)
     * @license MIT
     */
@@ -59004,16 +59692,11 @@ function (_Extension) {
   _createClass(History, [{
     key: "keys",
     value: function keys() {
-      var isWindows = typeof navigator !== 'undefined' ? /Win/.test(navigator.platform) : false;
       var keymap = {
         'Mod-z': prosemirror_history__WEBPACK_IMPORTED_MODULE_10__["undo"],
+        'Mod-y': prosemirror_history__WEBPACK_IMPORTED_MODULE_10__["redo"],
         'Shift-Mod-z': prosemirror_history__WEBPACK_IMPORTED_MODULE_10__["redo"]
       };
-
-      if (isWindows) {
-        keymap['Mod-y'] = prosemirror_history__WEBPACK_IMPORTED_MODULE_10__["redo"];
-      }
-
       return keymap;
     }
   }, {
@@ -59393,6 +60076,92 @@ function (_Extension) {
   return Search;
 }(tiptap__WEBPACK_IMPORTED_MODULE_0__["Extension"]);
 
+var TrailingNode =
+/*#__PURE__*/
+function (_Extension) {
+  _inherits(TrailingNode, _Extension);
+
+  function TrailingNode() {
+    _classCallCheck(this, TrailingNode);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(TrailingNode).apply(this, arguments));
+  }
+
+  _createClass(TrailingNode, [{
+    key: "name",
+    get: function get() {
+      return 'trailing_node';
+    }
+  }, {
+    key: "defaultOptions",
+    get: function get() {
+      return {
+        node: 'paragraph',
+        notAfter: ['paragraph']
+      };
+    }
+  }, {
+    key: "plugins",
+    get: function get() {
+      var _this = this;
+
+      var plugin = new tiptap__WEBPACK_IMPORTED_MODULE_0__["PluginKey"](this.name);
+      var disabledNodes = Object.entries(this.editor.schema.nodes).map(function (_ref) {
+        var _ref2 = _slicedToArray(_ref, 2),
+            value = _ref2[1];
+
+        return value;
+      }).filter(function (node) {
+        return _this.options.notAfter.includes(node.name);
+      });
+      return [new tiptap__WEBPACK_IMPORTED_MODULE_0__["Plugin"]({
+        key: plugin,
+        view: function view() {
+          return {
+            update: function update(view) {
+              var state = view.state;
+              var insertNodeAtEnd = plugin.getState(state);
+
+              if (!insertNodeAtEnd) {
+                return;
+              }
+
+              var doc = state.doc,
+                  schema = state.schema,
+                  tr = state.tr;
+              var type = schema.nodes[_this.options.node];
+              var transaction = tr.insert(doc.content.size, type.create());
+              view.dispatch(transaction);
+            }
+          };
+        },
+        state: {
+          init: function init(_, state) {
+            var lastNode = state.tr.doc.lastChild;
+            return !Object(tiptap_utils__WEBPACK_IMPORTED_MODULE_7__["nodeEqualsType"])({
+              node: lastNode,
+              types: disabledNodes
+            });
+          },
+          apply: function apply(tr, value) {
+            if (!tr.docChanged) {
+              return value;
+            }
+
+            var lastNode = tr.doc.lastChild;
+            return !Object(tiptap_utils__WEBPACK_IMPORTED_MODULE_7__["nodeEqualsType"])({
+              node: lastNode,
+              types: disabledNodes
+            });
+          }
+        }
+      })];
+    }
+  }]);
+
+  return TrailingNode;
+}(tiptap__WEBPACK_IMPORTED_MODULE_0__["Extension"]);
+
 
 
 
@@ -59402,7 +60171,7 @@ function (_Extension) {
 /*!*****************************************************!*\
   !*** ./node_modules/tiptap-utils/dist/utils.esm.js ***!
   \*****************************************************/
-/*! exports provided: getMarkAttrs, getMarkRange, markIsActive, nodeIsActive */
+/*! exports provided: getMarkAttrs, getMarkRange, markIsActive, nodeEqualsType, nodeIsActive */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -59410,12 +60179,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getMarkAttrs", function() { return getMarkAttrs; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getMarkRange", function() { return getMarkRange; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "markIsActive", function() { return markIsActive; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "nodeEqualsType", function() { return nodeEqualsType; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "nodeIsActive", function() { return nodeIsActive; });
 /* harmony import */ var prosemirror_utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! prosemirror-utils */ "./node_modules/prosemirror-utils/dist/index.js");
 /* harmony import */ var prosemirror_utils__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(prosemirror_utils__WEBPACK_IMPORTED_MODULE_0__);
 
     /*!
-    * tiptap-utils v1.5.7
+    * tiptap-utils v1.5.8
     * (c) 2019 Scrumpy UG (limited liability)
     * @license MIT
     */
@@ -59442,7 +60212,7 @@ function _nonIterableSpread() {
   throw new TypeError("Invalid attempt to spread non-iterable instance");
 }
 
-function getMarkAttrs (state, type) {
+function getMarkAttrs(state, type) {
   var _state$selection = state.selection,
       from = _state$selection.from,
       to = _state$selection.to;
@@ -59461,7 +60231,7 @@ function getMarkAttrs (state, type) {
   return {};
 }
 
-function getMarkRange () {
+function getMarkRange() {
   var $pos = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
   var type = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
 
@@ -59504,7 +60274,7 @@ function getMarkRange () {
   };
 }
 
-function markIsActive (state, type) {
+function markIsActive(state, type) {
   var _state$selection = state.selection,
       from = _state$selection.from,
       $from = _state$selection.$from,
@@ -59518,7 +60288,13 @@ function markIsActive (state, type) {
   return !!state.doc.rangeHasMark(from, to, type);
 }
 
-function nodeIsActive (state, type) {
+function nodeEqualsType(_ref) {
+  var types = _ref.types,
+      node = _ref.node;
+  return Array.isArray(types) && types.includes(node.type) || node.type === types;
+}
+
+function nodeIsActive(state, type) {
   var attrs = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
 
   var predicate = function predicate(node) {
@@ -59589,7 +60365,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tiptap_commands__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! tiptap-commands */ "./node_modules/tiptap-commands/dist/commands.esm.js");
 
     /*!
-    * tiptap v1.23.2
+    * tiptap v1.23.4
     * (c) 2019 Scrumpy UG (limited liability)
     * @license MIT
     */
@@ -59955,10 +60731,12 @@ function () {
         }
       }
 
+      var isCopy = event.type === 'copy';
       var isPaste = event.type === 'paste';
+      var isCut = event.type === 'cut';
       var isDrag = event.type.startsWith('drag') || event.type === 'drop';
 
-      if (draggable && isDrag || isPaste) {
+      if (draggable && isDrag || isCopy || isPaste || isCut) {
         return false;
       }
 
@@ -65508,7 +66286,7 @@ var render = function() {
                         _c(
                           "v-stepper-step",
                           { attrs: { complete: _vm.e1 > 2, step: "2" } },
-                          [_vm._v("Elige Día de Observación")]
+                          [_vm._v("Elige Día de Observación ")]
                         ),
                         _vm._v(" "),
                         _c("v-divider"),
@@ -65531,10 +66309,7 @@ var render = function() {
                               "v-card",
                               {
                                 staticClass: "mb-12",
-                                attrs: {
-                                  color: "grey lighten-1",
-                                  height: "200px"
-                                }
+                                attrs: { height: "450px" }
                               },
                               [
                                 _c(
@@ -65592,13 +66367,33 @@ var render = function() {
                                   [
                                     _c("v-flex", { attrs: { xs1: "" } }),
                                     _vm._v(" "),
+                                    _c(
+                                      "v-flex",
+                                      { attrs: { xs2: "" } },
+                                      [
+                                        _c(
+                                          "v-card",
+                                          [
+                                            _c("v-img", {
+                                              attrs: {
+                                                src: _vm.img,
+                                                "aspect-ratio": "1"
+                                              }
+                                            })
+                                          ],
+                                          1
+                                        )
+                                      ],
+                                      1
+                                    ),
+                                    _vm._v(" "),
                                     _c("v-flex", { attrs: { xs4: "" } }, [
                                       _c("h2", [_vm._v(_vm._s(_vm.equipment))])
                                     ]),
                                     _vm._v(" "),
                                     _c("v-flex", { attrs: { xs1: "" } }),
                                     _vm._v(" "),
-                                    _c("v-flex", { attrs: { xs6: "" } }, [
+                                    _c("v-flex", { attrs: { xs4: "" } }, [
                                       _c("h2", [
                                         _vm._v(_vm._s(_vm.equipment_desc))
                                       ])
@@ -65645,19 +66440,18 @@ var render = function() {
                               "v-card",
                               {
                                 staticClass: "mb-12",
-                                attrs: {
-                                  color: "grey lighten-1",
-                                  height: "600px"
-                                }
+                                attrs: { height: "650px" }
                               },
                               [
                                 _c(
                                   "v-layout",
                                   { attrs: { row: "", wrap: "" } },
                                   [
+                                    _c("v-flex", { attrs: { xs1: "" } }),
+                                    _vm._v(" "),
                                     _c(
                                       "v-flex",
-                                      { attrs: { xs12: "" } },
+                                      { attrs: { xs10: "" } },
                                       [
                                         [
                                           _c(
@@ -65764,7 +66558,10 @@ var render = function() {
                                                             "v-toolbar-title",
                                                             [
                                                               _vm._v(
-                                                                "Elige tu día de Observación"
+                                                                "Elige tu día de Observación " +
+                                                                  _vm._s(
+                                                                    _vm.focus
+                                                                  )
                                                               )
                                                             ]
                                                           ),
@@ -65804,6 +66601,389 @@ var render = function() {
                                                           change:
                                                             _vm.updateRange
                                                         },
+                                                        scopedSlots: _vm._u([
+                                                          {
+                                                            key: "day",
+                                                            fn: function(ref) {
+                                                              var date =
+                                                                ref.date
+                                                              return [
+                                                                [
+                                                                  _c(
+                                                                    "v-layout",
+                                                                    {
+                                                                      attrs: {
+                                                                        row: "",
+                                                                        wrap: ""
+                                                                      }
+                                                                    },
+                                                                    [
+                                                                      _c(
+                                                                        "v-flex",
+                                                                        {
+                                                                          attrs: {
+                                                                            xs1:
+                                                                              ""
+                                                                          }
+                                                                        }
+                                                                      ),
+                                                                      _vm._v(
+                                                                        " "
+                                                                      ),
+                                                                      _c(
+                                                                        "v-flex",
+                                                                        {
+                                                                          attrs: {
+                                                                            xs2:
+                                                                              ""
+                                                                          }
+                                                                        },
+                                                                        [
+                                                                          _c(
+                                                                            "v-card",
+                                                                            [
+                                                                              _c(
+                                                                                "v-img",
+                                                                                {
+                                                                                  attrs: {
+                                                                                    src: _vm.moonImages(
+                                                                                      date
+                                                                                    ),
+                                                                                    "aspect-ratio":
+                                                                                      "1",
+                                                                                    "max-width":
+                                                                                      "45",
+                                                                                    "max-height":
+                                                                                      "45"
+                                                                                  }
+                                                                                }
+                                                                              )
+                                                                            ],
+                                                                            1
+                                                                          )
+                                                                        ],
+                                                                        1
+                                                                      ),
+                                                                      _vm._v(
+                                                                        " "
+                                                                      ),
+                                                                      _c(
+                                                                        "v-flex",
+                                                                        {
+                                                                          attrs: {
+                                                                            xs1:
+                                                                              ""
+                                                                          }
+                                                                        }
+                                                                      ),
+                                                                      _vm._v(
+                                                                        " "
+                                                                      ),
+                                                                      _c(
+                                                                        "v-flex",
+                                                                        {
+                                                                          attrs: {
+                                                                            xs4:
+                                                                              ""
+                                                                          }
+                                                                        },
+                                                                        [
+                                                                          _c(
+                                                                            "v-layout",
+                                                                            {
+                                                                              attrs: {
+                                                                                row:
+                                                                                  "",
+                                                                                wrap:
+                                                                                  ""
+                                                                              }
+                                                                            },
+                                                                            [
+                                                                              _c(
+                                                                                "v-flex",
+                                                                                {
+                                                                                  attrs: {
+                                                                                    xs1:
+                                                                                      ""
+                                                                                  }
+                                                                                }
+                                                                              ),
+                                                                              _vm._v(
+                                                                                " "
+                                                                              ),
+                                                                              _c(
+                                                                                "v-flex",
+                                                                                {
+                                                                                  attrs: {
+                                                                                    xs10:
+                                                                                      ""
+                                                                                  }
+                                                                                },
+                                                                                [
+                                                                                  _c(
+                                                                                    "p",
+                                                                                    [
+                                                                                      _vm._v(
+                                                                                        _vm._s(
+                                                                                          _vm.moonSet(
+                                                                                            date
+                                                                                          )
+                                                                                        )
+                                                                                      )
+                                                                                    ]
+                                                                                  )
+                                                                                ]
+                                                                              )
+                                                                            ],
+                                                                            1
+                                                                          ),
+                                                                          _vm._v(
+                                                                            " "
+                                                                          ),
+                                                                          _c(
+                                                                            "v-layout",
+                                                                            {
+                                                                              attrs: {
+                                                                                row:
+                                                                                  "",
+                                                                                wrap:
+                                                                                  ""
+                                                                              }
+                                                                            },
+                                                                            [
+                                                                              _c(
+                                                                                "v-flex",
+                                                                                {
+                                                                                  attrs: {
+                                                                                    xs1:
+                                                                                      ""
+                                                                                  }
+                                                                                }
+                                                                              ),
+                                                                              _vm._v(
+                                                                                " "
+                                                                              ),
+                                                                              _c(
+                                                                                "v-flex",
+                                                                                {
+                                                                                  attrs: {
+                                                                                    xs10:
+                                                                                      ""
+                                                                                  }
+                                                                                },
+                                                                                [
+                                                                                  _c(
+                                                                                    "p",
+                                                                                    [
+                                                                                      _vm._v(
+                                                                                        _vm._s(
+                                                                                          _vm.moonRise(
+                                                                                            date
+                                                                                          )
+                                                                                        )
+                                                                                      )
+                                                                                    ]
+                                                                                  )
+                                                                                ]
+                                                                              )
+                                                                            ],
+                                                                            1
+                                                                          )
+                                                                        ],
+                                                                        1
+                                                                      )
+                                                                    ],
+                                                                    1
+                                                                  )
+                                                                ],
+                                                                _vm._v(" "),
+                                                                _vm._l(
+                                                                  _vm.eventsMap[
+                                                                    date
+                                                                  ],
+                                                                  function(
+                                                                    event
+                                                                  ) {
+                                                                    return [
+                                                                      _c(
+                                                                        "v-menu",
+                                                                        {
+                                                                          key:
+                                                                            event.title,
+                                                                          attrs: {
+                                                                            "full-width":
+                                                                              "",
+                                                                            "offset-x":
+                                                                              ""
+                                                                          },
+                                                                          scopedSlots: _vm._u(
+                                                                            [
+                                                                              {
+                                                                                key:
+                                                                                  "activator",
+                                                                                fn: function(
+                                                                                  ref
+                                                                                ) {
+                                                                                  var on =
+                                                                                    ref.on
+                                                                                  return [
+                                                                                    !event.time
+                                                                                      ? _c(
+                                                                                          "div",
+                                                                                          _vm._g(
+                                                                                            {
+                                                                                              directives: [
+                                                                                                {
+                                                                                                  name:
+                                                                                                    "ripple",
+                                                                                                  rawName:
+                                                                                                    "v-ripple"
+                                                                                                }
+                                                                                              ],
+                                                                                              staticClass:
+                                                                                                "my-event",
+                                                                                              domProps: {
+                                                                                                innerHTML: _vm._s(
+                                                                                                  event.title
+                                                                                                )
+                                                                                              }
+                                                                                            },
+                                                                                            on
+                                                                                          )
+                                                                                        )
+                                                                                      : _vm._e()
+                                                                                  ]
+                                                                                }
+                                                                              }
+                                                                            ],
+                                                                            null,
+                                                                            true
+                                                                          ),
+                                                                          model: {
+                                                                            value:
+                                                                              event.open,
+                                                                            callback: function(
+                                                                              $$v
+                                                                            ) {
+                                                                              _vm.$set(
+                                                                                event,
+                                                                                "open",
+                                                                                $$v
+                                                                              )
+                                                                            },
+                                                                            expression:
+                                                                              "event.open"
+                                                                          }
+                                                                        },
+                                                                        [
+                                                                          _vm._v(
+                                                                            " "
+                                                                          ),
+                                                                          _c(
+                                                                            "v-card",
+                                                                            {
+                                                                              attrs: {
+                                                                                color:
+                                                                                  "grey lighten-4",
+                                                                                "min-width":
+                                                                                  "350px",
+                                                                                flat:
+                                                                                  ""
+                                                                              }
+                                                                            },
+                                                                            [
+                                                                              _c(
+                                                                                "v-toolbar",
+                                                                                {
+                                                                                  attrs: {
+                                                                                    color:
+                                                                                      "primary",
+                                                                                    dark:
+                                                                                      ""
+                                                                                  }
+                                                                                },
+                                                                                [
+                                                                                  _c(
+                                                                                    "v-toolbar-title",
+                                                                                    {
+                                                                                      domProps: {
+                                                                                        innerHTML: _vm._s(
+                                                                                          event.title
+                                                                                        )
+                                                                                      }
+                                                                                    }
+                                                                                  ),
+                                                                                  _vm._v(
+                                                                                    " "
+                                                                                  ),
+                                                                                  _c(
+                                                                                    "v-spacer"
+                                                                                  )
+                                                                                ],
+                                                                                1
+                                                                              ),
+                                                                              _vm._v(
+                                                                                " "
+                                                                              ),
+                                                                              _c(
+                                                                                "v-card-title",
+                                                                                {
+                                                                                  attrs: {
+                                                                                    "primary-title":
+                                                                                      ""
+                                                                                  }
+                                                                                },
+                                                                                [
+                                                                                  _c(
+                                                                                    "span",
+                                                                                    {
+                                                                                      domProps: {
+                                                                                        innerHTML: _vm._s(
+                                                                                          event.details
+                                                                                        )
+                                                                                      }
+                                                                                    }
+                                                                                  )
+                                                                                ]
+                                                                              ),
+                                                                              _vm._v(
+                                                                                " "
+                                                                              ),
+                                                                              _c(
+                                                                                "v-card-actions",
+                                                                                [
+                                                                                  _c(
+                                                                                    "v-btn",
+                                                                                    {
+                                                                                      attrs: {
+                                                                                        flat:
+                                                                                          "",
+                                                                                        color:
+                                                                                          "secondary"
+                                                                                      }
+                                                                                    },
+                                                                                    [
+                                                                                      _vm._v(
+                                                                                        "\n                                          Cancel\n                                        "
+                                                                                      )
+                                                                                    ]
+                                                                                  )
+                                                                                ],
+                                                                                1
+                                                                              )
+                                                                            ],
+                                                                            1
+                                                                          )
+                                                                        ],
+                                                                        1
+                                                                      )
+                                                                    ]
+                                                                  }
+                                                                )
+                                                              ]
+                                                            }
+                                                          }
+                                                        ]),
                                                         model: {
                                                           value: _vm.focus,
                                                           callback: function(
@@ -65813,185 +66993,7 @@ var render = function() {
                                                           },
                                                           expression: "focus"
                                                         }
-                                                      }),
-                                                      _vm._v(" "),
-                                                      _c(
-                                                        "v-menu",
-                                                        {
-                                                          attrs: {
-                                                            "close-on-content-click": false,
-                                                            activator:
-                                                              _vm.selectedElement,
-                                                            "full-width": "",
-                                                            "offset-x": ""
-                                                          },
-                                                          model: {
-                                                            value:
-                                                              _vm.selectedOpen,
-                                                            callback: function(
-                                                              $$v
-                                                            ) {
-                                                              _vm.selectedOpen = $$v
-                                                            },
-                                                            expression:
-                                                              "selectedOpen"
-                                                          }
-                                                        },
-                                                        [
-                                                          _c(
-                                                            "v-card",
-                                                            {
-                                                              attrs: {
-                                                                color:
-                                                                  "grey lighten-4",
-                                                                "min-width":
-                                                                  "350px",
-                                                                flat: ""
-                                                              }
-                                                            },
-                                                            [
-                                                              _c(
-                                                                "v-toolbar",
-                                                                {
-                                                                  attrs: {
-                                                                    color:
-                                                                      _vm
-                                                                        .selectedEvent
-                                                                        .color,
-                                                                    dark: ""
-                                                                  }
-                                                                },
-                                                                [
-                                                                  _c(
-                                                                    "v-btn",
-                                                                    {
-                                                                      attrs: {
-                                                                        icon: ""
-                                                                      }
-                                                                    },
-                                                                    [
-                                                                      _c(
-                                                                        "v-icon",
-                                                                        [
-                                                                          _vm._v(
-                                                                            "edit"
-                                                                          )
-                                                                        ]
-                                                                      )
-                                                                    ],
-                                                                    1
-                                                                  ),
-                                                                  _vm._v(" "),
-                                                                  _c(
-                                                                    "v-toolbar-title",
-                                                                    {
-                                                                      domProps: {
-                                                                        innerHTML: _vm._s(
-                                                                          _vm
-                                                                            .selectedEvent
-                                                                            .name
-                                                                        )
-                                                                      }
-                                                                    }
-                                                                  ),
-                                                                  _vm._v(" "),
-                                                                  _c(
-                                                                    "v-spacer"
-                                                                  ),
-                                                                  _vm._v(" "),
-                                                                  _c(
-                                                                    "v-btn",
-                                                                    {
-                                                                      attrs: {
-                                                                        icon: ""
-                                                                      }
-                                                                    },
-                                                                    [
-                                                                      _c(
-                                                                        "v-icon",
-                                                                        [
-                                                                          _vm._v(
-                                                                            "favorite"
-                                                                          )
-                                                                        ]
-                                                                      )
-                                                                    ],
-                                                                    1
-                                                                  ),
-                                                                  _vm._v(" "),
-                                                                  _c(
-                                                                    "v-btn",
-                                                                    {
-                                                                      attrs: {
-                                                                        icon: ""
-                                                                      }
-                                                                    },
-                                                                    [
-                                                                      _c(
-                                                                        "v-icon",
-                                                                        [
-                                                                          _vm._v(
-                                                                            "more_vert"
-                                                                          )
-                                                                        ]
-                                                                      )
-                                                                    ],
-                                                                    1
-                                                                  )
-                                                                ],
-                                                                1
-                                                              ),
-                                                              _vm._v(" "),
-                                                              _c(
-                                                                "v-card-text",
-                                                                [
-                                                                  _c("span", {
-                                                                    domProps: {
-                                                                      innerHTML: _vm._s(
-                                                                        _vm
-                                                                          .selectedEvent
-                                                                          .details
-                                                                      )
-                                                                    }
-                                                                  })
-                                                                ]
-                                                              ),
-                                                              _vm._v(" "),
-                                                              _c(
-                                                                "v-card-actions",
-                                                                [
-                                                                  _c(
-                                                                    "v-btn",
-                                                                    {
-                                                                      attrs: {
-                                                                        text:
-                                                                          "",
-                                                                        color:
-                                                                          "secondary"
-                                                                      },
-                                                                      on: {
-                                                                        click: function(
-                                                                          $event
-                                                                        ) {
-                                                                          _vm.selectedOpen = false
-                                                                        }
-                                                                      }
-                                                                    },
-                                                                    [
-                                                                      _vm._v(
-                                                                        "\n                                    Cancel\n                                  "
-                                                                      )
-                                                                    ]
-                                                                  )
-                                                                ],
-                                                                1
-                                                              )
-                                                            ],
-                                                            1
-                                                          )
-                                                        ],
-                                                        1
-                                                      )
+                                                      })
                                                     ],
                                                     1
                                                   )
@@ -66067,13 +67069,155 @@ var render = function() {
                           "v-stepper-content",
                           { attrs: { step: "3" } },
                           [
-                            _c("v-card", {
-                              staticClass: "mb-12",
-                              attrs: {
-                                color: "grey lighten-1",
-                                height: "200px"
-                              }
-                            }),
+                            _c(
+                              "v-card",
+                              {
+                                staticClass: "mb-12",
+                                attrs: { height: "450px" }
+                              },
+                              [
+                                _c(
+                                  "v-layout",
+                                  { attrs: { "align-center": "", row: "" } },
+                                  [
+                                    _c("v-flex", { attrs: { xs1: "" } }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "v-flex",
+                                      { attrs: { xs4: "" } },
+                                      [
+                                        [
+                                          _c(
+                                            "v-layout",
+                                            { attrs: { wrap: "" } },
+                                            [
+                                              _c(
+                                                "v-flex",
+                                                {
+                                                  staticClass: "mb-3",
+                                                  attrs: { xs12: "" }
+                                                },
+                                                [
+                                                  _c(
+                                                    "v-sheet",
+                                                    {
+                                                      attrs: { height: "400" }
+                                                    },
+                                                    [
+                                                      _c("v-calendar", {
+                                                        ref: "calendar",
+                                                        attrs: {
+                                                          type: "day",
+                                                          end: _vm.end,
+                                                          color: "primary"
+                                                        },
+                                                        scopedSlots: _vm._u([
+                                                          {
+                                                            key: "interval",
+                                                            fn: function(ref) {
+                                                              var hour =
+                                                                ref.hour
+                                                              return [
+                                                                _c(
+                                                                  "div",
+                                                                  {
+                                                                    staticClass:
+                                                                      "text-xs-center"
+                                                                  },
+                                                                  [
+                                                                    _vm.reservationsArray.indexOf(
+                                                                      hour
+                                                                    ) > -1
+                                                                      ? _c(
+                                                                          "v-btn",
+                                                                          {
+                                                                            attrs: {
+                                                                              small:
+                                                                                "",
+                                                                              color:
+                                                                                "error"
+                                                                            }
+                                                                          },
+                                                                          [
+                                                                            _vm._v(
+                                                                              "Reservado"
+                                                                            )
+                                                                          ]
+                                                                        )
+                                                                      : _vm._e(),
+                                                                    _vm._v(" "),
+                                                                    _vm.reservationsArray.indexOf(
+                                                                      hour
+                                                                    ) <= -1
+                                                                      ? _c(
+                                                                          "v-btn",
+                                                                          {
+                                                                            attrs: {
+                                                                              small:
+                                                                                "",
+                                                                              color:
+                                                                                "success"
+                                                                            },
+                                                                            on: {
+                                                                              click: function(
+                                                                                $event
+                                                                              ) {
+                                                                                return _vm.confirmReserv(
+                                                                                  hour
+                                                                                )
+                                                                              }
+                                                                            }
+                                                                          },
+                                                                          [
+                                                                            _vm._v(
+                                                                              "Disponible"
+                                                                            )
+                                                                          ]
+                                                                        )
+                                                                      : _vm._e()
+                                                                  ],
+                                                                  1
+                                                                )
+                                                              ]
+                                                            }
+                                                          }
+                                                        ]),
+                                                        model: {
+                                                          value: _vm.focus,
+                                                          callback: function(
+                                                            $$v
+                                                          ) {
+                                                            _vm.focus = $$v
+                                                          },
+                                                          expression: "focus"
+                                                        }
+                                                      })
+                                                    ],
+                                                    1
+                                                  )
+                                                ],
+                                                1
+                                              )
+                                            ],
+                                            1
+                                          )
+                                        ]
+                                      ],
+                                      2
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "v-flex",
+                                      { attrs: { xs7: "" } },
+                                      [_c("my-reservations")],
+                                      1
+                                    )
+                                  ],
+                                  1
+                                )
+                              ],
+                              1
+                            ),
                             _vm._v(" "),
                             _c(
                               "v-btn",
@@ -66110,9 +67254,158 @@ var render = function() {
               ]
             ],
             2
-          )
+          ),
+          _vm._v(" "),
+          [
+            _c(
+              "v-dialog",
+              {
+                attrs: { "max-width": "500px" },
+                model: {
+                  value: _vm.dialog2,
+                  callback: function($$v) {
+                    _vm.dialog2 = $$v
+                  },
+                  expression: "dialog2"
+                }
+              },
+              [
+                _c(
+                  "v-card",
+                  [
+                    _c(
+                      "v-card-title",
+                      {
+                        staticClass: "headline grey lighten-2",
+                        attrs: { "primary-title": "" }
+                      },
+                      [_vm._v("\n      Confirmar Reserva\n      ")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "v-card-text",
+                      [
+                        _c(
+                          "v-container",
+                          { attrs: { "grid-list-md": "" } },
+                          [
+                            _c(
+                              "v-layout",
+                              { attrs: { wrap: "", row: "" } },
+                              [
+                                _c("v-flex", { attrs: { xs12: "" } }, [
+                                  _c(
+                                    "div",
+                                    { staticClass: "title font-weight-light" },
+                                    [
+                                      _vm._v(
+                                        "Equipo: " + _vm._s(this.equipment)
+                                      )
+                                    ]
+                                  )
+                                ])
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "v-layout",
+                              { attrs: { wrap: "", row: "" } },
+                              [
+                                _c("v-flex", { attrs: { xs12: "" } }, [
+                                  _c(
+                                    "div",
+                                    { staticClass: "title font-weight-light" },
+                                    [
+                                      _vm._v(
+                                        "Puntos de esta reserva: " +
+                                          _vm._s(this.telescope_points)
+                                      )
+                                    ]
+                                  )
+                                ])
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "v-layout",
+                              { attrs: { wrap: "", row: "" } },
+                              [
+                                _c("v-flex", { attrs: { xs12: "" } }, [
+                                  _c(
+                                    "div",
+                                    { staticClass: "title font-weight-light" },
+                                    [_vm._v("Fecha:  " + _vm._s(this.today))]
+                                  )
+                                ])
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "v-layout",
+                              { attrs: { wrap: "", row: "" } },
+                              [
+                                _c("v-flex", { attrs: { xs12: "" } }, [
+                                  _c(
+                                    "div",
+                                    { staticClass: "title font-weight-light" },
+                                    [
+                                      _vm._v(
+                                        "A las: " +
+                                          _vm._s(this.hourToReserv) +
+                                          " Horas"
+                                      )
+                                    ]
+                                  )
+                                ])
+                              ],
+                              1
+                            )
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "v-card-actions",
+                      [
+                        _c(
+                          "v-btn",
+                          {
+                            attrs: { color: "primary", flat: "" },
+                            on: { click: _vm.reserv }
+                          },
+                          [_vm._v("Reservar")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "v-btn",
+                          {
+                            attrs: { color: "primary", flat: "" },
+                            on: {
+                              click: function($event) {
+                                _vm.dialog2 = false
+                              }
+                            }
+                          },
+                          [_vm._v("Close")]
+                        )
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                )
+              ],
+              1
+            )
+          ]
         ],
-        1
+        2
       )
     ],
     1
@@ -66608,7 +67901,8 @@ var render = function() {
                                     {
                                       attrs: {
                                         href:
-                                          "https://www.accuweather.com/es/cl/san-pedro-de-atacama/57225/daily-weather-forecast/57225?day=6"
+                                          "https://www.accuweather.com/es/cl/san-pedro-de-atacama/57225/daily-weather-forecast/57225?day=6",
+                                        target: "_blank"
                                       }
                                     },
                                     [
