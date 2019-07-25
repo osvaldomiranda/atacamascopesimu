@@ -67827,55 +67827,7 @@ var render = function() {
                             [
                               _c("v-flex", {
                                 attrs: { xs4: "", "align-end": "", flexbox: "" }
-                              }),
-                              _vm._v(" "),
-                              _c(
-                                "v-flex",
-                                {
-                                  attrs: {
-                                    xs2: "",
-                                    "align-end": "",
-                                    flexbox: ""
-                                  }
-                                },
-                                [
-                                  _c("v-img", {
-                                    attrs: { src: _vm.weather_image }
-                                  })
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "v-flex",
-                                {
-                                  attrs: {
-                                    xs4: "",
-                                    "align-end": "",
-                                    flexbox: ""
-                                  }
-                                },
-                                [
-                                  _c("span", { staticClass: "subheading" }, [
-                                    _vm._v(
-                                      " " +
-                                        _vm._s(_vm.weather["WeatherText"]) +
-                                        " " +
-                                        _vm._s(
-                                          _vm.weather["Temperature"]["Metric"][
-                                            "Value"
-                                          ]
-                                        ) +
-                                        " º" +
-                                        _vm._s(
-                                          _vm.weather["Temperature"]["Metric"][
-                                            "Unit"
-                                          ]
-                                        )
-                                    )
-                                  ])
-                                ]
-                              )
+                              })
                             ],
                             1
                           ),
@@ -67909,7 +67861,7 @@ var render = function() {
                                     },
                                     [
                                       _vm._v(
-                                        "\n                          Ver Pronóstico\n                          "
+                                        "\n                            Ver Pronóstico\n                            "
                                       )
                                     ]
                                   )

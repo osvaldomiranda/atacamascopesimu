@@ -20,12 +20,12 @@
                         <v-flex xs4 align-end flexbox>
 
                         </v-flex>
-                        <v-flex xs2 align-end flexbox>
+<!--                         <v-flex xs2 align-end flexbox>
                             <v-img :src= "weather_image" ></v-img>
                         </v-flex>
                         <v-flex xs4 align-end flexbox>
                           <span class="subheading"> {{ weather["WeatherText"] }} {{weather["Temperature"]["Metric"]["Value"]}} º{{weather["Temperature"]["Metric"]["Unit"]}}</span>
-                        </v-flex>
+                        </v-flex> -->
                   </v-layout>
                   <v-layout align-center row>
                         <v-flex xs4 align-end flexbox>
