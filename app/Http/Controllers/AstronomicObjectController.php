@@ -10,8 +10,6 @@ class AstronomicObjectController extends Controller
     public function index(Request $request)
     {
 
-       
-
         $astronomicObjects = AstronomicObject::where('catalog','SolarSistem')->get()->toArray();
 
         // $catalog = $request->input('catalog');

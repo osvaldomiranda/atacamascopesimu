@@ -1955,11 +1955,10 @@ __webpack_require__.r(__webpack_exports__);
 
         var c_points = (app.points_in || 0) - (app.points_out || 0);
         app.$store.commit('changeCurrentPoints', c_points);
-      }); // .catch(function (resp) {
-      //     console.log(resp);
-      //     alert("Error Points :" + resp);
-      // });
-
+      })["catch"](function (resp) {
+        console.log(resp);
+        alert("Error Points :" + resp);
+      });
       this.$router.push('/dashboard');
     },
     logout: function logout() {
@@ -6046,15 +6045,14 @@ __webpack_require__.r(__webpack_exports__);
       this.object = a.name;
     },
     initialize: function initialize() {
-      var app = this; // axios.get('/api/weather')
-      // .then(function (resp) {    
-      //     app.weather =  resp.data[0]; 
-      //     app.weather_image = "https://developer.accuweather.com/sites/default/files/0"+app.weather["WeatherIcon"]+"-s.png" ;              
-      // })
-      // .catch(function (resp) {
-      //     console.log(resp);
-      //     alert("Error accuweather :" + resp);
-      // });
+      var app = this;
+      axios.get('/api/weather').then(function (resp) {
+        app.weather = resp.data[0];
+        app.weather_image = "https://developer.accuweather.com/sites/default/files/0" + app.weather["WeatherIcon"] + "-s.png";
+      })["catch"](function (resp) {
+        console.log(resp);
+        alert("Error accuweather :" + resp);
+      });
     },
     pointsClick: function pointsClick() {
       var ComponentPoints = vue__WEBPACK_IMPORTED_MODULE_1___default.a.extend(_components_PointsComponent__WEBPACK_IMPORTED_MODULE_2__["default"]);

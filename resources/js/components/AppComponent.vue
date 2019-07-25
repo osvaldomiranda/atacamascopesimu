@@ -110,11 +110,11 @@
                  }
                  let c_points = (app.points_in || 0) - (app.points_out || 0);
                  app.$store.commit('changeCurrentPoints',c_points );
+            })
+            .catch(function (resp) {
+                console.log(resp);
+                alert("Error Points :" + resp);
             });
-            // .catch(function (resp) {
-            //     console.log(resp);
-            //     alert("Error Points :" + resp);
-            // });
 
             this.$router.push('/dashboard');
 
