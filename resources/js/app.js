@@ -24,6 +24,7 @@ import NewEquipment             from './components/NewEquipment'
 
 
 
+
 Vue.use(Vuex);
 Vue.use(VueRouter);
 

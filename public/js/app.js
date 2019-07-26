@@ -1903,6 +1903,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2080,6 +2081,7 @@ __webpack_require__.r(__webpack_exports__);
 
         channel.bind('App\\Events\\MessageSent', function (data) {
           if (app.chatUserID) {
+            alert(data.message);
             app.messages.push(data.message);
           }
         }); // End pusher listener
@@ -3158,7 +3160,8 @@ __webpack_require__.r(__webpack_exports__);
       }]
     };
   },
-  created: function created() {},
+  created: function created() {//this.initialize();
+  },
   mounted: function mounted() {
     this.initialize();
   },
@@ -3185,6 +3188,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     initialize: function initialize() {
+      //alert('initialize');
       this.imageRefresh();
       this.openChat();
       this.getMyImages();
@@ -3216,7 +3220,11 @@ __webpack_require__.r(__webpack_exports__);
     openChat: function openChat() {
       var app = this; // Start pusher listener
 
-      Pusher.logToConsole = true; //e6e9d9fd854d385c5f5b
+      Pusher.logToConsole = true; //production
+      // app_id = "764758"
+      // key = "6a09b6dc7cbc0cce55a3"
+      // secret = "3821c2b9107f68e63aba"
+      // cluster = "us2"
 
       var pusher = new Pusher('e6e9d9fd854d385c5f5b', {
         cluster: 'us2',
@@ -3226,7 +3234,6 @@ __webpack_require__.r(__webpack_exports__);
 
       channel.bind('App\\Events\\MessageSent', function (data) {
         app.state = data.message['message'];
-        alert(JSON.stringify(data.message));
 
         if (app.state == "Imagen Recibida") {
           app.imageRefresh();
@@ -5126,19 +5133,20 @@ var actualDate = new Date().toISOString().substr(0, 10);
     this.moon();
     this.reservatios_day();
   },
-  moon: function moon() {
-    var app = this;
-    axios.get('/api/moon_state', {
-      headers: {
-        'moondate': app.start
-      }
-    }).then(function (resp) {
-      app.moon_state = resp.data;
-      app.moonImage();
-    })["catch"](function (resp) {
-      console.log(resp);
-      alert("Error moon :" + resp);
-    });
+  moon: function moon() {// var app = this;
+    // axios.get('/api/moon_state',{
+    //   headers: { 
+    //     'moondate': app.start,
+    //   }
+    // })
+    // .then(function (resp) { 
+    //    app.moon_state = resp.data;
+    //    app.moonImage();
+    // })
+    // .catch(function (resp) {
+    //   console.log(resp);
+    //   alert("Error moon :" + resp);
+    // });
   },
   confirmReserv: function confirmReserv(hour) {
     this.hourToReserv = hour;
@@ -62394,6 +62402,10 @@ var render = function() {
               _vm._v(" "),
               _c("v-btn", { attrs: { to: "/publications", flat: "" } }, [
                 _vm._v("Publicaciones")
+              ]),
+              _vm._v(" "),
+              _c("v-btn", { attrs: { to: "/chat", flat: "" } }, [
+                _vm._v("chat")
               ]),
               _vm._v(" "),
               _vm.$store.getters.user["role"] == 1

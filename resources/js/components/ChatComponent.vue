@@ -100,7 +100,7 @@
 
           channel.bind('App\\Events\\MessageSent', function (data) {
             if (app.chatUserID) {
-
+              alert(data.message);
               app.messages.push(data.message)
             }
           })
