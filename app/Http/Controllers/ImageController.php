@@ -27,7 +27,7 @@ class ImageController extends Controller
 
             $filename = substr($path,7,100);
              $path = 'http://54.70.235.195/storage/' . $filename;
-            // $path = 'http://192.168.0.102/storage/' . $filename;
+            //$path = 'http://10.200.112.245/storage/' . $filename;
 
     		$image = new Image;
     		$image->name = 'Hola.jpg';
