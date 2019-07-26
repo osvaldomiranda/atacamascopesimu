@@ -3188,7 +3188,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     initialize: function initialize() {
-      //alert('initialize');
+      alert('initialize');
       this.imageRefresh();
       this.openChat();
       this.getMyImages();
@@ -3234,6 +3234,7 @@ __webpack_require__.r(__webpack_exports__);
 
       channel.bind('App\\Events\\MessageSent', function (data) {
         app.state = data.message['message'];
+        alert(JSON.stringify(data.message));
 
         if (app.state == "Imagen Recibida") {
           app.imageRefresh();

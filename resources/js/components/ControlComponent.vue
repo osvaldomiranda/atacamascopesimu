@@ -855,7 +855,7 @@
     	},
       	initialize () {
 
-      		//alert('initialize');
+      		alert('initialize');
       		this.imageRefresh();
             this.openChat();
             this.getMyImages();
@@ -909,13 +909,14 @@
 	        var pusher = new Pusher('e6e9d9fd854d385c5f5b', {
 	            cluster: 'us2',
 	            forceTLS: true
-	        })
+	        });
 
 	        var channel = pusher.subscribe('newMessage-1-2'); // newMessage-[chatting-with-who]-[my-id]
 
 	        channel.bind('App\\Events\\MessageSent', function (data) {
 	            
 	            app.state = data.message['message'];
+	            alert(JSON.stringify(data.message));
 
 	            if (app.state=="Imagen Recibida"){
 
