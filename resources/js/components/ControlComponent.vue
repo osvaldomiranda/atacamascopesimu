@@ -896,7 +896,7 @@
 
 	          // Start pusher listener
 	        Pusher.logToConsole = true
-
+//e6e9d9fd854d385c5f5b
 	        var pusher = new Pusher('e6e9d9fd854d385c5f5b', {
 	            cluster: 'us2',
 	            forceTLS: true
@@ -907,6 +907,7 @@
 	        channel.bind('App\\Events\\MessageSent', function (data) {
 	            
 	            app.state = data.message['message'];
+	            alert(JSON.stringify(data.message));
 
 	            if (app.state=="Imagen Recibida"){
 

@@ -3216,7 +3216,8 @@ __webpack_require__.r(__webpack_exports__);
     openChat: function openChat() {
       var app = this; // Start pusher listener
 
-      Pusher.logToConsole = true;
+      Pusher.logToConsole = true; //e6e9d9fd854d385c5f5b
+
       var pusher = new Pusher('e6e9d9fd854d385c5f5b', {
         cluster: 'us2',
         forceTLS: true
@@ -3225,6 +3226,7 @@ __webpack_require__.r(__webpack_exports__);
 
       channel.bind('App\\Events\\MessageSent', function (data) {
         app.state = data.message['message'];
+        alert(JSON.stringify(data.message));
 
         if (app.state == "Imagen Recibida") {
           app.imageRefresh();

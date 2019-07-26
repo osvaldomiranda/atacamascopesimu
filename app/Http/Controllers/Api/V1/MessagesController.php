@@ -34,6 +34,9 @@ class MessagesController extends Controller
             'message'     => $request->input('message'),
         ]);
 
+        
+        Info($message);
+
         broadcast(new MessageSent($message));
 
         return $message->fresh();
