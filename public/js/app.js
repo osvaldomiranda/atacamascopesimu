@@ -3222,7 +3222,7 @@ __webpack_require__.r(__webpack_exports__);
         cluster: 'us2',
         forceTLS: true
       });
-      var channel = pusher.subscribe('newMessage-' + 1 + '-' + 2); // newMessage-[chatting-with-who]-[my-id]
+      var channel = pusher.subscribe('newMessage-1-2'); // newMessage-[chatting-with-who]-[my-id]
 
       channel.bind('App\\Events\\MessageSent', function (data) {
         app.state = data.message['message'];

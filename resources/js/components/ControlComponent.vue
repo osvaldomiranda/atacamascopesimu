@@ -896,13 +896,20 @@
 
 	          // Start pusher listener
 	        Pusher.logToConsole = true
-//e6e9d9fd854d385c5f5b
-	        var pusher = new Pusher('e6e9d9fd854d385c5f5b', {
+
+
+// app_id = "764758"
+// key = "6a09b6dc7cbc0cce55a3"
+// secret = "3821c2b9107f68e63aba"
+// cluster = "us2"
+
+
+	        var pusher = new Pusher('6a09b6dc7cbc0cce55a3', {
 	            cluster: 'us2',
 	            forceTLS: true
 	        })
 
-	        var channel = pusher.subscribe('newMessage-' + 1 + '-' + 2) // newMessage-[chatting-with-who]-[my-id]
+	        var channel = pusher.subscribe('newMessage-1-2') // newMessage-[chatting-with-who]-[my-id]
 
 	        channel.bind('App\\Events\\MessageSent', function (data) {
 	            
