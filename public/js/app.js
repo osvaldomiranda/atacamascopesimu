@@ -2072,8 +2072,12 @@ __webpack_require__.r(__webpack_exports__);
         app.chatUserID = 2;
         alert('chatOpen'); // Start pusher listener
 
-        Pusher.logToConsole = true;
-        var pusher = new Pusher('e6e9d9fd854d385c5f5b', {
+        Pusher.logToConsole = true; // app_id = "764758"
+        // key = "6a09b6dc7cbc0cce55a3"
+        // secret = "3821c2b9107f68e63aba"
+        // cluster = "us2"
+
+        var pusher = new Pusher('6a09b6dc7cbc0cce55a3', {
           cluster: 'us2',
           forceTLS: true
         });
@@ -3226,7 +3230,7 @@ __webpack_require__.r(__webpack_exports__);
       // secret = "3821c2b9107f68e63aba"
       // cluster = "us2"
 
-      var pusher = new Pusher('e6e9d9fd854d385c5f5b', {
+      var pusher = new Pusher('6a09b6dc7cbc0cce55a3', {
         cluster: 'us2',
         forceTLS: true
       });
