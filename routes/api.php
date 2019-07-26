@@ -20,7 +20,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('/upload/{command_id}', 'ImageController@upload');
 Route::get('/astronomic_objects', 'AstronomicObjectController@index');
 Route::get('/astronomic_objects/coords', 'AstronomicObjectController@coords');
-Route::get('/moon_state', 'AstronomicObjectController@moon');
+// Route::get('/moon_state', 'AstronomicObjectController@moon');
 
 
 Route::get('/astronomic_objects/solarsistem', 'AstronomicObjectController@solarSistem');

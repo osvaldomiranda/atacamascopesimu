@@ -604,20 +604,20 @@
 
 
     moon (){
-      var app = this;
-      axios.get('/api/moon_state',{
-        headers: { 
-          'moondate': app.start,
-        }
-      })
-      .then(function (resp) { 
-         app.moon_state = resp.data;
-         app.moonImage();
-      })
-      .catch(function (resp) {
-        console.log(resp);
-        alert("Error moon :" + resp);
-      });
+      // var app = this;
+      // axios.get('/api/moon_state',{
+      //   headers: { 
+      //     'moondate': app.start,
+      //   }
+      // })
+      // .then(function (resp) { 
+      //    app.moon_state = resp.data;
+      //    app.moonImage();
+      // })
+      // .catch(function (resp) {
+      //   console.log(resp);
+      //   alert("Error moon :" + resp);
+      // });
     },
 
     confirmReserv (hour){
