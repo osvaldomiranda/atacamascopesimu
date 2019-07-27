@@ -447,15 +447,19 @@
 			app.today = actualDate;
 			app.start = app.today; 
 
+
+			// Vitoco: Lat -22°57'15"    
+			// Vitoco: Long 68°14'23"
+
 			
-			app.suntimes = SunCalc.getTimes(new Date(), 33.0000, -70.3326);
+			app.suntimes = SunCalc.getTimes(new Date(), -22.96, 68.24);
 			// format sunrise time from the Date object
 			app.sunset = app.suntimes.sunset;
 			app.sunrise = app.suntimes.sunrise;
 
 			
 
-			app.moon_times = SunCalc.getMoonTimes(new Date(), 33.0000, -70.3326);
+			app.moon_times = SunCalc.getMoonTimes(new Date(), -22.96, 68.24);
 		   // alert(JSON.stringify(app.moon_times));
 			app.moonset = app.moon_times["set"];
 			app.moonrise = app.moon_times["rise"];
@@ -514,7 +518,7 @@
 			alert(a);
 			this.start=a;
 			this.end = a;
-			this.moon_times = SunCalc.getMoonTimes(new Date(a), 33.0000, -70.3326);
+			this.moon_times = SunCalc.getMoonTimes(new Date(a), -22.96, 68.24);
 			this.moonset = this.moon_times["set"];
 			this.moonrise = this.moon_times["rise"];
 			this.moon();

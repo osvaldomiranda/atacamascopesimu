@@ -419,12 +419,12 @@
 							<v-flex align-center xs4>
 							
 							    <v-select
-							      v-model="Iso"
+							      v-model="selectedIso"
 							      :items="Isos"
 							      item-text='iso'
 							      return-object
 							      :rules="[v => !!v || 'Obligatorio']"
-							      label="Sencibilidad"
+							      label="Sensibilidad"
 							      @input= "selectIso"
 							      required
 							    ></v-select>
@@ -753,6 +753,7 @@
 	        'Adentro',
 	        'Afuera',
 	    ],
+	    selectedIso:'',
 
 	    Isos: [
 			{choice: 1, iso: 100},
@@ -916,7 +917,7 @@
 	        channel.bind('App\\Events\\MessageSent', function (data) {
 	            
 	            app.state = data.message['message'];
-	            alert(JSON.stringify(data.message));
+	           // alert(JSON.stringify(data.message));
 
 	            if (app.state=="Imagen Recibida"){
 
@@ -946,7 +947,7 @@
         },
 
         move(){
-
+        	this.state = 'Enviando Comando';
         	if(this.Ar_screen){
 	        	var $command = {'command': 'MONTURA', 'type': 'mount', 'status': 'PENDIENTE',
 	        	                'ar': this.Ar, 'dec': this.Dec, 'user_id': this.$store.getters.user['id'], 'equipment_id': 1};
@@ -965,6 +966,7 @@
         	}
         },
         shoot(){
+        	this.state = 'Enviando Comando';
         	var $command = {'command': 'CAMARA', 'type': 'shoot', 'status': 'PENDIENTE',
         	                'exptime': this.Exp, 'iso': this.Iso, 'ar': this.Ar_act, 'dec': this.Dec_act, 'user_id': this.$store.getters.user['id'], 'equipment_id': 1};
 
@@ -990,10 +992,11 @@
         	this.current = "Ar:" + this.Ar_act + ", Dec:"+ this.Dec_act + ", Iso:"+this.Iso_act+", Exp:"+this.Exp_act;
         },
         focus(){
+        	this.state = 'Enviando Comando';
         	var $command = {'command': 'ENFOCADOR', 'type': 'focuser', 'status': 'PENDIENTE',
         	                'steps': this.slider, 'direction': 1, 'user_id': this.$store.getters.user['id'], 'equipment_id': 1};
 
-        	alert(JSON.stringify($command));
+        	//alert(JSON.stringify($command));
 
 
 
@@ -1130,6 +1133,7 @@
     	},
 
     	selectIso(a){
+    		this.selectedIso = a;
     		this.Iso = a.choice;
     	}
 

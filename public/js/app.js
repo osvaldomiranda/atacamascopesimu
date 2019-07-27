@@ -3040,6 +3040,7 @@ __webpack_require__.r(__webpack_exports__);
       Dir: 'Adentro',
       Pasos: ['100', '200', '400', '600', '800', '1000', '2000', '3000'],
       Dirs: ['Adentro', 'Afuera'],
+      selectedIso: '',
       Isos: [{
         choice: 1,
         iso: 100
@@ -3237,8 +3238,7 @@ __webpack_require__.r(__webpack_exports__);
       var channel = pusher.subscribe('newMessage-1-2'); // newMessage-[chatting-with-who]-[my-id]
 
       channel.bind('App\\Events\\MessageSent', function (data) {
-        app.state = data.message['message'];
-        alert(JSON.stringify(data.message));
+        app.state = data.message['message']; // alert(JSON.stringify(data.message));
 
         if (app.state == "Imagen Recibida") {
           app.imageRefresh();
@@ -3260,6 +3260,8 @@ __webpack_require__.r(__webpack_exports__);
       this.getAstrnomicObject();
     },
     move: function move() {
+      this.state = 'Enviando Comando';
+
       if (this.Ar_screen) {
         var $command = {
           'command': 'MONTURA',
@@ -3279,6 +3281,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     shoot: function shoot() {
+      this.state = 'Enviando Comando';
       var $command = {
         'command': 'CAMARA',
         'type': 'shoot',
@@ -3306,6 +3309,7 @@ __webpack_require__.r(__webpack_exports__);
       this.current = "Ar:" + this.Ar_act + ", Dec:" + this.Dec_act + ", Iso:" + this.Iso_act + ", Exp:" + this.Exp_act;
     },
     focus: function focus() {
+      this.state = 'Enviando Comando';
       var $command = {
         'command': 'ENFOCADOR',
         'type': 'focuser',
@@ -3314,8 +3318,8 @@ __webpack_require__.r(__webpack_exports__);
         'direction': 1,
         'user_id': this.$store.getters.user['id'],
         'equipment_id': 1
-      };
-      alert(JSON.stringify($command));
+      }; //alert(JSON.stringify($command));
+
       axios.post('/api/command/focus', $command).then(function (resp) {})["catch"](function (resp) {
         console.log(resp);
         alert("Error focus :" + resp);
@@ -3421,6 +3425,7 @@ __webpack_require__.r(__webpack_exports__);
       this.dialog3 = false;
     },
     selectIso: function selectIso(a) {
+      this.selectedIso = a;
       this.Iso = a.choice;
     }
   }
@@ -5360,6 +5365,7 @@ var actualDate = new Date().toISOString().substr(0, 10);
     this.focus = date;
     this.start = this.focus;
     this.reservatios_day();
+    this.e1 = 3;
   },
   getEventColor: function getEventColor(event) {
     return event.color;
@@ -64202,16 +64208,16 @@ var render = function() {
                                               return !!v || "Obligatorio"
                                             }
                                           ],
-                                          label: "Sencibilidad",
+                                          label: "Sensibilidad",
                                           required: ""
                                         },
                                         on: { input: _vm.selectIso },
                                         model: {
-                                          value: _vm.Iso,
+                                          value: _vm.selectedIso,
                                           callback: function($$v) {
-                                            _vm.Iso = $$v
+                                            _vm.selectedIso = $$v
                                           },
-                                          expression: "Iso"
+                                          expression: "selectedIso"
                                         }
                                       })
                                     ],
@@ -66744,7 +66750,7 @@ var render = function() {
                                                                                     [
                                                                                       _vm._v(
                                                                                         _vm._s(
-                                                                                          _vm.moonSet(
+                                                                                          _vm.moonRise(
                                                                                             date
                                                                                           )
                                                                                         )
@@ -66796,7 +66802,7 @@ var render = function() {
                                                                                     [
                                                                                       _vm._v(
                                                                                         _vm._s(
-                                                                                          _vm.moonRise(
+                                                                                          _vm.moonSet(
                                                                                             date
                                                                                           )
                                                                                         )
@@ -111178,7 +111184,7 @@ module.exports = "/images/Luna27.jpg?0d522ba10f772d7b3614c039bffdef19";
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/images/Luna28.jpg?017a46ef20501dd65df0a1c09f608819";
+module.exports = "/images/Luna28.jpg?eb94839bf026d5a52694bb83f96b046f";
 
 /***/ }),
 
@@ -111189,7 +111195,7 @@ module.exports = "/images/Luna28.jpg?017a46ef20501dd65df0a1c09f608819";
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/images/Luna29.jpg?1eb6c1f057dcffe1321bee3c29ef7563";
+module.exports = "/images/Luna29.jpg?2ca9e26d6e24d23e1d68de696249e3f8";
 
 /***/ }),
 

@@ -179,7 +179,7 @@
                                               
                                             </v-flex>
                                             <v-flex xs10>
-                                              <p>{{ moonSet(date) }}</p>
+                                              <p>{{ moonRise(date) }}</p>
                                             </v-flex>
                                           </v-layout>
                                           <v-layout row wrap>
@@ -187,7 +187,7 @@
                                               
                                             </v-flex>
                                             <v-flex xs10>
-                                              <p>{{ moonRise(date) }}</p>
+                                              <p>{{ moonSet(date) }}</p>
                                             </v-flex>
                                           </v-layout>                                          
                                         </v-flex>
@@ -812,6 +812,7 @@
         this.focus = date;
         this.start = this.focus;
         this.reservatios_day();
+        this.e1 = 3;
     },
 
       getEventColor (event) {
