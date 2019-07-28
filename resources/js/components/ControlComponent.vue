@@ -23,7 +23,7 @@
 					<v-layout align-center row>
 						<v-flex xs12>	
 					    	<v-card>
-					    		<a  :href="imageUrl">
+					    		<a  :href="imageUrl" target="_blank">
 					      		<v-img
 					      	  		v-bind:src="imageUrl"
 					      	  		aspect-ratio="1"
@@ -529,7 +529,7 @@
 					    >
 					      <template v-slot:items="props">
 					        <td>
-					        	<a :href="props.item.path">
+					        	<a :href="props.item.path" target="_blank">
 						        	<v-img
 				      	  				v-bind:src="props.item.path"
 				      	  				aspect-ratio="1"

@@ -62745,7 +62745,12 @@ var render = function() {
                                   _c("v-card", [
                                     _c(
                                       "a",
-                                      { attrs: { href: _vm.imageUrl } },
+                                      {
+                                        attrs: {
+                                          href: _vm.imageUrl,
+                                          target: "_blank"
+                                        }
+                                      },
                                       [
                                         _c("v-img", {
                                           attrs: {
@@ -64472,7 +64477,10 @@ var render = function() {
                                           _c(
                                             "a",
                                             {
-                                              attrs: { href: props.item.path }
+                                              attrs: {
+                                                href: props.item.path,
+                                                target: "_blank"
+                                              }
                                             },
                                             [
                                               _c("v-img", {
