@@ -18,8 +18,9 @@ def main(argv):
     elif opt in ("-c", "--command"):
       command_id = arg
 
-  list_of_files = glob.glob('/home/deployer/atacamascope/*.jpg') # * means all if need specific format then *.csv
+  list_of_files = glob.glob('/home/felipe/*.jpg') # * means all if need specific format then *.csv
   latest_file = max(list_of_files, key=os.path.getctime)
+
   ip='54.70.235.195'
   url = 'http://'+ip+'/api/upload/'+command_id
 
@@ -31,7 +32,7 @@ def main(argv):
 
   print(r)
 
-  os.remove(latest_file)
-
+  os.rename('/home/felipe/capt0001.jpg','/home/felipe/jpgimage'+command_id+'.jpg')
+  os.rename('/home/felipe/capt0000.cr2','/home/felipe/rwowimage'+command_id+'.cr2')
 if __name__ == "__main__":
    main(sys.argv[1:])

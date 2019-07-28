@@ -1,9 +1,13 @@
 import subprocess
 import threading
+import time
+import requests
+import os
 from subprocess import call
 
 global i
-
+ip = '54.70.235.195'
+cwd = os.getcwd()
 def printit():
     t = threading.Timer(2, printit)
     t.start()
@@ -13,7 +17,7 @@ def printit():
         b_ra = subprocess.check_output(comando, shell=True,stderr=subprocess.STDOUT)
         c_ra = b_ra.decode("utf-8")
         ra = round( float(c_ra.split('=',1)[1]),2)
-        # print(ra)
+        print(ra)
     except subprocess.CalledProcessError as e:
         raise RuntimeError("command '{}' return with error (code {}): {}".format(e.cmd, e.returncode, e.output))
 
@@ -23,7 +27,7 @@ def printit():
         b_dec = subprocess.check_output(comando, shell=True,stderr=subprocess.STDOUT)
         c_dec = b_dec.decode("utf-8")
         dec = round( float(c_dec.split('=',1)[1]),2)
-        # print(dec)
+        print(dec)
 
     except subprocess.CalledProcessError as e:
         raise RuntimeError("command '{}' return with error (code {}): {}".format(e.cmd, e.returncode, e.output))
@@ -33,6 +37,10 @@ def printit():
     if ra==ra_ant and dec==dec_ant : 
         t.cancel()
         print('listo')    
+        url = 'http://'+ip+'/api/messages/send?sender_id=1&receiver_id=2&message=Montura ok '
+        global data 
+        data = '{}'
+        response = requests.post(url, data=data)
     else :
         ra_ant  = ra
         dec_ant = dec   
@@ -58,6 +66,5 @@ except subprocess.CalledProcessError as e:
 print("valores de RA - DEC")
 print(ra_ant)
 print(dec_ant)
-  
+time.sleep(3) 
 printit()
-

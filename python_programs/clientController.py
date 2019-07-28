@@ -1,7 +1,7 @@
 import json
 import subprocess
-import requests
 import time
+import requests
 import os
 import threading
 from subprocess import call
@@ -13,8 +13,6 @@ cwd = os.getcwd()
 url = 'http://'+ip+'/api/command/mountcamera'
 data = '{}'
 response = requests.get(url, data=data)
-
-
 
 
 if(response.ok):
@@ -35,28 +33,24 @@ if(response.ok):
         try:
             url = 'http://'+ip+'/api/messages/send?sender_id=1&receiver_id=2&message=Posicionando Montura'
             data = '{}'
-            response = requests.post(url, data=data)  
-                      
+            response = requests.post(url, data=data)            
             subprocess.check_output(comando, shell=True,stderr=subprocess.STDOUT)
-            
+
+            call(["/usr/bin/python", cwd + "/stopMonitor.py"])
         except subprocess.CalledProcessError as e:
             raise RuntimeError("command '{}' return with error (code {}): {}".format(e.cmd, e.returncode, e.output))
 
     if(jData['type']=='shoot'):
         data = '{}'
         response = requests.post(url, data=data)
-        url = 'http://'+ip+'/api/messages/send?sender_id=1&receiver_id=2&message=Comando Imagen recibido'
 
         iso = jData['iso']
         exptime = jData['exptime']
-
-        
-
-        try:
+        try:    
             url = 'http://'+ip+'/api/messages/send?sender_id=1&receiver_id=2&message=Obteniendo Imagen'
             response = requests.post(url, data=data)
 
-            call(["gphoto2", "--set-config-index","/main/imgsettings/iso="+str(iso)]) 
+            call(["gphoto2","--set-config-index", "/main/imgsettings/iso="+str(iso)])
             call(["gphoto2","--set-config","eosremoterelease=2", "--wait-event="+str(exptime)+"s","--set-config", "eosremoterelease=4","--wait-event-and-download=5s"])
         except subprocess.CalledProcessError as e:
             raise RuntimeError("command '{}' return with error (code {}): {}".format(e.cmd, e.returncode, e.output))
@@ -65,6 +59,7 @@ if(response.ok):
         time.sleep( 5 )
         response = requests.post(url, data=data)
         call(["/usr/bin/python", cwd + "/uploadPhoto.py", "-c", str(jData['id'])])
+
 
 
    
