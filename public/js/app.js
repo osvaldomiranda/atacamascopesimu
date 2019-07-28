@@ -3117,7 +3117,7 @@ __webpack_require__.r(__webpack_exports__);
         choice: 25,
         iso: 25600
       }],
-      Exps: ['1', '2', '4', '6', '8', '10', '20', '30', '60'],
+      Exps: ['1', '2', '4', '6', '8', '10', '20', '30', '40', '60', '120', '240', '300'],
       headers: [{
         text: 'Nombre',
         value: 'name'
