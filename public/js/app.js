@@ -2693,81 +2693,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   computed: Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['astronomc_objects']),
@@ -62811,7 +62736,26 @@ var render = function() {
                     [
                       _c(
                         "v-card",
+                        { staticClass: "py-4 px-2" },
                         [
+                          _c(
+                            "v-layout",
+                            [
+                              _c("v-flex", { attrs: { xs4: "" } }, [
+                                _c("span", { staticClass: "headline" }, [
+                                  _vm._v(" " + _vm._s(_vm.object))
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c("v-flex", { attrs: { xs4: "" } }, [
+                                _c("span", { staticClass: "headline" }, [
+                                  _vm._v(" Estado:" + _vm._s(_vm.state))
+                                ])
+                              ])
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
                           _c(
                             "v-card-title",
                             [
@@ -63061,260 +63005,1043 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "v-layout",
-                { staticClass: "py-2" },
                 [
                   _c(
                     "v-flex",
-                    { staticClass: "px-2", attrs: { xs8: "" } },
+                    { staticClass: "px-2", attrs: { xs4: "" } },
                     [
                       _c(
-                        "v-flex",
-                        { staticClass: "px-2", attrs: { xs5: "" } },
+                        "v-card",
+                        { staticClass: "py-2 px-2" },
                         [
                           _c(
-                            "v-card",
+                            "v-layout",
+                            [
+                              _c("v-flex", { attrs: { xs12: "" } }, [
+                                _c("span", { staticClass: "headline" }, [
+                                  _vm._v("Montura")
+                                ])
+                              ])
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-layout",
                             [
                               _c(
-                                "v-container",
-                                { attrs: { "fill-height": "", fluid: "" } },
+                                "v-flex",
+                                { staticClass: "px-2", attrs: { xs6: "" } },
                                 [
-                                  _c(
-                                    "v-layout",
-                                    { attrs: { "fill-height": "" } },
-                                    [
-                                      _c(
-                                        "v-flex",
-                                        {
-                                          attrs: {
-                                            xs12: "",
-                                            "align-end": "",
-                                            flexbox: ""
-                                          }
-                                        },
-                                        [
-                                          _c(
-                                            "span",
-                                            { staticClass: "headline" },
-                                            [_vm._v("Montura")]
-                                          )
-                                        ]
-                                      )
-                                    ],
-                                    1
-                                  )
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "v-layout",
-                                { attrs: { "align-center": "", row: "" } },
-                                [
-                                  _c("v-flex", {
-                                    attrs: { "align-center": "", xs1: "" }
-                                  }),
-                                  _vm._v(" "),
-                                  _c(
-                                    "v-flex",
-                                    { attrs: { "align-center": "", xs4: "" } },
-                                    [
-                                      _c("v-text-field", {
-                                        attrs: {
-                                          label: "Asención Recta",
-                                          readonly: "true"
-                                        },
-                                        model: {
-                                          value: _vm.Ar_screen,
-                                          callback: function($$v) {
-                                            _vm.Ar_screen = $$v
-                                          },
-                                          expression: "Ar_screen"
-                                        }
-                                      })
-                                    ],
-                                    1
-                                  ),
-                                  _vm._v(" "),
-                                  _c("v-flex", {
-                                    attrs: { "align-center": "", xs1: "" }
-                                  }),
-                                  _vm._v(" "),
-                                  _c(
-                                    "v-flex",
-                                    { attrs: { "align-center": "", xs4: "" } },
-                                    [
-                                      _c("v-text-field", {
-                                        attrs: {
-                                          label: "Declinación",
-                                          readonly: "true"
-                                        },
-                                        model: {
-                                          value: _vm.Dec_screen,
-                                          callback: function($$v) {
-                                            _vm.Dec_screen = $$v
-                                          },
-                                          expression: "Dec_screen"
-                                        }
-                                      })
-                                    ],
-                                    1
-                                  ),
-                                  _vm._v(" "),
-                                  _c("v-flex", {
-                                    attrs: { "align-center": "", xs1: "" }
+                                  _c("v-text-field", {
+                                    attrs: {
+                                      label: "Asención Recta",
+                                      readonly: "true"
+                                    },
+                                    model: {
+                                      value: _vm.Ar_screen,
+                                      callback: function($$v) {
+                                        _vm.Ar_screen = $$v
+                                      },
+                                      expression: "Ar_screen"
+                                    }
                                   })
                                 ],
                                 1
                               ),
                               _vm._v(" "),
                               _c(
-                                "v-btn",
-                                {
-                                  attrs: { color: "warning" },
-                                  on: {
-                                    click: function($event) {
-                                      return _vm.move()
+                                "v-flex",
+                                { staticClass: "px-2", attrs: { xs4: "" } },
+                                [
+                                  _c("v-text-field", {
+                                    attrs: {
+                                      label: "Declinación",
+                                      readonly: "true"
+                                    },
+                                    model: {
+                                      value: _vm.Dec_screen,
+                                      callback: function($$v) {
+                                        _vm.Dec_screen = $$v
+                                      },
+                                      expression: "Dec_screen"
                                     }
-                                  }
-                                },
-                                [_vm._v("Mover")]
+                                  })
+                                ],
+                                1
                               )
                             ],
                             1
-                          )
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-btn",
+                            {
+                              attrs: { color: "warning" },
+                              on: {
+                                click: function($event) {
+                                  return _vm.move()
+                                }
+                              }
+                            },
+                            [_vm._v("Mover")]
+                          ),
+                          _vm._v(" "),
+                          [
+                            _c(
+                              "v-dialog",
+                              {
+                                attrs: { persistent: "", "max-width": "800px" },
+                                scopedSlots: _vm._u([
+                                  {
+                                    key: "activator",
+                                    fn: function(ref) {
+                                      var on = ref.on
+                                      return [
+                                        _c(
+                                          "v-btn",
+                                          _vm._g(
+                                            {
+                                              attrs: {
+                                                color: "warning",
+                                                dark: ""
+                                              }
+                                            },
+                                            on
+                                          ),
+                                          [_vm._v("Mov.Fino")]
+                                        )
+                                      ]
+                                    }
+                                  }
+                                ]),
+                                model: {
+                                  value: _vm.dialog2,
+                                  callback: function($$v) {
+                                    _vm.dialog2 = $$v
+                                  },
+                                  expression: "dialog2"
+                                }
+                              },
+                              [
+                                _vm._v(" "),
+                                _c(
+                                  "v-card",
+                                  [
+                                    _c("v-card-title", [
+                                      _c("span", { staticClass: "headline" }, [
+                                        _vm._v("Movimiento Fino")
+                                      ])
+                                    ]),
+                                    _vm._v(" "),
+                                    _c(
+                                      "v-card-text",
+                                      [
+                                        _c(
+                                          "v-container",
+                                          { attrs: { "grid-list-md": "" } },
+                                          [
+                                            _c(
+                                              "v-layout",
+                                              {
+                                                attrs: {
+                                                  "align-center": "",
+                                                  row: ""
+                                                }
+                                              },
+                                              [
+                                                _c(
+                                                  "span",
+                                                  { staticClass: "title" },
+                                                  [_vm._v("Ascención Recta")]
+                                                )
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "v-layout",
+                                              {
+                                                attrs: {
+                                                  "align-center": "",
+                                                  row: ""
+                                                }
+                                              },
+                                              [
+                                                _c("v-flex", {
+                                                  attrs: {
+                                                    "align-center": "",
+                                                    xs1: ""
+                                                  }
+                                                }),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "v-flex",
+                                                  {
+                                                    attrs: {
+                                                      "align-center": "",
+                                                      xs3: ""
+                                                    }
+                                                  },
+                                                  [
+                                                    _c("v-text-field", {
+                                                      attrs: {
+                                                        type: "number",
+                                                        "min:0": "",
+                                                        "max:23": "",
+                                                        rules:
+                                                          _vm.twentythreeRule,
+                                                        label: "AR Horas"
+                                                      },
+                                                      model: {
+                                                        value: _vm.h_ra,
+                                                        callback: function(
+                                                          $$v
+                                                        ) {
+                                                          _vm.h_ra = $$v
+                                                        },
+                                                        expression: "h_ra"
+                                                      }
+                                                    })
+                                                  ],
+                                                  1
+                                                ),
+                                                _vm._v(" "),
+                                                _c("v-flex", {
+                                                  attrs: {
+                                                    "align-center": "",
+                                                    xs1: ""
+                                                  }
+                                                }),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "v-flex",
+                                                  {
+                                                    attrs: {
+                                                      "align-center": "",
+                                                      xs3: ""
+                                                    }
+                                                  },
+                                                  [
+                                                    _c("v-text-field", {
+                                                      attrs: {
+                                                        "min:0": "",
+                                                        "max:59": "",
+                                                        type: "number",
+                                                        rules: _vm.sixtyRule,
+                                                        label: "AR Minutos",
+                                                        "append-outer-icon":
+                                                          "add_circle_outline",
+                                                        "prepend-icon":
+                                                          "remove_circle_outline"
+                                                      },
+                                                      on: {
+                                                        "click:append-outer":
+                                                          _vm.inc_m_ra,
+                                                        "click:prepend":
+                                                          _vm.dec_m_ra
+                                                      },
+                                                      model: {
+                                                        value: _vm.m_ra,
+                                                        callback: function(
+                                                          $$v
+                                                        ) {
+                                                          _vm.m_ra = $$v
+                                                        },
+                                                        expression: "m_ra"
+                                                      }
+                                                    })
+                                                  ],
+                                                  1
+                                                ),
+                                                _vm._v(" "),
+                                                _c("v-flex", {
+                                                  attrs: {
+                                                    "align-center": "",
+                                                    xs1: ""
+                                                  }
+                                                }),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "v-flex",
+                                                  {
+                                                    attrs: {
+                                                      "align-center": "",
+                                                      xs3: ""
+                                                    }
+                                                  },
+                                                  [
+                                                    _c("v-text-field", {
+                                                      attrs: {
+                                                        type: "number",
+                                                        label: "AR Segundos",
+                                                        "min:0": "",
+                                                        "max:59": "",
+                                                        rules: _vm.sixtyRule,
+                                                        readonly: "",
+                                                        "append-outer-icon":
+                                                          "add_circle_outline",
+                                                        "prepend-icon":
+                                                          "remove_circle_outline"
+                                                      },
+                                                      on: {
+                                                        "click:append-outer":
+                                                          _vm.inc_s_ra,
+                                                        "click:prepend":
+                                                          _vm.dec_s_ra
+                                                      },
+                                                      model: {
+                                                        value: _vm.s_ra,
+                                                        callback: function(
+                                                          $$v
+                                                        ) {
+                                                          _vm.s_ra = $$v
+                                                        },
+                                                        expression: "s_ra"
+                                                      }
+                                                    })
+                                                  ],
+                                                  1
+                                                ),
+                                                _vm._v(" "),
+                                                _c("v-flex", {
+                                                  attrs: {
+                                                    "align-center": "",
+                                                    xs1: ""
+                                                  }
+                                                })
+                                              ],
+                                              1
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "v-layout",
+                                              {
+                                                attrs: {
+                                                  "align-center": "",
+                                                  row: ""
+                                                }
+                                              },
+                                              [
+                                                _c(
+                                                  "span",
+                                                  { staticClass: "title" },
+                                                  [_vm._v("Declinación")]
+                                                )
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "v-layout",
+                                              {
+                                                attrs: {
+                                                  "align-center": "",
+                                                  row: ""
+                                                }
+                                              },
+                                              [
+                                                _c("v-flex", {
+                                                  attrs: {
+                                                    "align-center": "",
+                                                    xs1: ""
+                                                  }
+                                                }),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "v-flex",
+                                                  {
+                                                    attrs: {
+                                                      "align-center": "",
+                                                      xs3: ""
+                                                    }
+                                                  },
+                                                  [
+                                                    _c("v-text-field", {
+                                                      attrs: {
+                                                        type: "number",
+                                                        label: "DEC Grados",
+                                                        "min:-90": "",
+                                                        "max:90": "",
+                                                        rules: _vm.ninetyRule
+                                                      },
+                                                      model: {
+                                                        value: _vm.h_dec,
+                                                        callback: function(
+                                                          $$v
+                                                        ) {
+                                                          _vm.h_dec = $$v
+                                                        },
+                                                        expression: "h_dec"
+                                                      }
+                                                    })
+                                                  ],
+                                                  1
+                                                ),
+                                                _vm._v(" "),
+                                                _c("v-flex", {
+                                                  attrs: {
+                                                    "align-center": "",
+                                                    xs1: ""
+                                                  }
+                                                }),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "v-flex",
+                                                  {
+                                                    attrs: {
+                                                      "align-center": "",
+                                                      xs3: ""
+                                                    }
+                                                  },
+                                                  [
+                                                    _c("v-text-field", {
+                                                      attrs: {
+                                                        "min:0": "",
+                                                        "max:59": "",
+                                                        type: "number",
+                                                        label: "DEC Minutos",
+                                                        rules: _vm.sixtyRule,
+                                                        "append-outer-icon":
+                                                          "add_circle_outline",
+                                                        "prepend-icon":
+                                                          "remove_circle_outline"
+                                                      },
+                                                      on: {
+                                                        "click:append-outer":
+                                                          _vm.inc_m_dec,
+                                                        "click:prepend":
+                                                          _vm.dec_m_dec
+                                                      },
+                                                      model: {
+                                                        value: _vm.m_dec,
+                                                        callback: function(
+                                                          $$v
+                                                        ) {
+                                                          _vm.m_dec = $$v
+                                                        },
+                                                        expression: "m_dec"
+                                                      }
+                                                    })
+                                                  ],
+                                                  1
+                                                ),
+                                                _vm._v(" "),
+                                                _c("v-flex", {
+                                                  attrs: {
+                                                    "align-center": "",
+                                                    xs1: ""
+                                                  }
+                                                }),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "v-flex",
+                                                  {
+                                                    attrs: {
+                                                      "align-center": "",
+                                                      xs3: ""
+                                                    }
+                                                  },
+                                                  [
+                                                    _c("v-text-field", {
+                                                      attrs: {
+                                                        type: "number",
+                                                        label: "DEC Segundos",
+                                                        rules: _vm.sixtyRule,
+                                                        "min:0": "",
+                                                        "max:59": "",
+                                                        "append-outer-icon":
+                                                          "add_circle_outline",
+                                                        "prepend-icon":
+                                                          "remove_circle_outline"
+                                                      },
+                                                      on: {
+                                                        "click:append-outer":
+                                                          _vm.inc_s_dec,
+                                                        "click:prepend":
+                                                          _vm.dec_s_dec
+                                                      },
+                                                      model: {
+                                                        value: _vm.s_dec,
+                                                        callback: function(
+                                                          $$v
+                                                        ) {
+                                                          _vm.s_dec = $$v
+                                                        },
+                                                        expression: "s_dec"
+                                                      }
+                                                    })
+                                                  ],
+                                                  1
+                                                ),
+                                                _vm._v(" "),
+                                                _c("v-flex", {
+                                                  attrs: {
+                                                    "align-center": "",
+                                                    xs1: ""
+                                                  }
+                                                })
+                                              ],
+                                              1
+                                            )
+                                          ],
+                                          1
+                                        )
+                                      ],
+                                      1
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "v-card-actions",
+                                      [
+                                        _c("v-spacer"),
+                                        _vm._v(" "),
+                                        _c(
+                                          "v-btn",
+                                          {
+                                            attrs: {
+                                              color: "blue darken-1",
+                                              flat: ""
+                                            },
+                                            on: {
+                                              click: function($event) {
+                                                _vm.dialog2 = false
+                                              }
+                                            }
+                                          },
+                                          [_vm._v("Cerrar")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "v-btn",
+                                          {
+                                            attrs: {
+                                              color: "blue darken-1",
+                                              flat: ""
+                                            },
+                                            on: { click: _vm.savefine }
+                                          },
+                                          [_vm._v("Guardar")]
+                                        )
+                                      ],
+                                      1
+                                    )
+                                  ],
+                                  1
+                                )
+                              ],
+                              1
+                            )
+                          ],
+                          _vm._v(" "),
+                          [
+                            _c(
+                              "v-dialog",
+                              {
+                                attrs: { persistent: "", "max-width": "600px" },
+                                scopedSlots: _vm._u([
+                                  {
+                                    key: "activator",
+                                    fn: function(ref) {
+                                      var on = ref.on
+                                      return [
+                                        _c(
+                                          "v-btn",
+                                          _vm._g(
+                                            {
+                                              attrs: {
+                                                color: "warning",
+                                                dark: ""
+                                              }
+                                            },
+                                            on
+                                          ),
+                                          [_vm._v("Mis Coords.")]
+                                        )
+                                      ]
+                                    }
+                                  }
+                                ]),
+                                model: {
+                                  value: _vm.dialog3,
+                                  callback: function($$v) {
+                                    _vm.dialog3 = $$v
+                                  },
+                                  expression: "dialog3"
+                                }
+                              },
+                              [
+                                _vm._v(" "),
+                                _c(
+                                  "v-card",
+                                  [
+                                    _c("v-card-title", [
+                                      _c("span", { staticClass: "headline" }, [
+                                        _vm._v("Coordenadas especificas")
+                                      ])
+                                    ]),
+                                    _vm._v(" "),
+                                    _c(
+                                      "v-card-text",
+                                      [
+                                        _c(
+                                          "v-container",
+                                          { attrs: { "grid-list-md": "" } },
+                                          [
+                                            _c(
+                                              "v-layout",
+                                              {
+                                                attrs: {
+                                                  "align-center": "",
+                                                  row: ""
+                                                }
+                                              },
+                                              [
+                                                _c(
+                                                  "span",
+                                                  { staticClass: "title" },
+                                                  [_vm._v("Ascención Recta")]
+                                                )
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "v-layout",
+                                              {
+                                                attrs: {
+                                                  "align-center": "",
+                                                  row: ""
+                                                }
+                                              },
+                                              [
+                                                _c("v-flex", {
+                                                  attrs: {
+                                                    "align-center": "",
+                                                    xs1: ""
+                                                  }
+                                                }),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "v-flex",
+                                                  {
+                                                    attrs: {
+                                                      "align-center": "",
+                                                      xs3: ""
+                                                    }
+                                                  },
+                                                  [
+                                                    _c("v-text-field", {
+                                                      attrs: {
+                                                        "min:0": "",
+                                                        "max:23": "",
+                                                        rules:
+                                                          _vm.twentythreeRule,
+                                                        type: "number",
+                                                        label: "AR Horas"
+                                                      },
+                                                      model: {
+                                                        value: _vm.h_ra,
+                                                        callback: function(
+                                                          $$v
+                                                        ) {
+                                                          _vm.h_ra = $$v
+                                                        },
+                                                        expression: "h_ra"
+                                                      }
+                                                    })
+                                                  ],
+                                                  1
+                                                ),
+                                                _vm._v(" "),
+                                                _c("v-flex", {
+                                                  attrs: {
+                                                    "align-center": "",
+                                                    xs1: ""
+                                                  }
+                                                }),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "v-flex",
+                                                  {
+                                                    attrs: {
+                                                      "align-center": "",
+                                                      xs3: ""
+                                                    }
+                                                  },
+                                                  [
+                                                    _c("v-text-field", {
+                                                      attrs: {
+                                                        "min:0": "",
+                                                        "max:59": "",
+                                                        rules: _vm.sixtyRule,
+                                                        type: "number",
+                                                        label: "AR Minutos"
+                                                      },
+                                                      model: {
+                                                        value: _vm.m_ra,
+                                                        callback: function(
+                                                          $$v
+                                                        ) {
+                                                          _vm.m_ra = $$v
+                                                        },
+                                                        expression: "m_ra"
+                                                      }
+                                                    })
+                                                  ],
+                                                  1
+                                                ),
+                                                _vm._v(" "),
+                                                _c("v-flex", {
+                                                  attrs: {
+                                                    "align-center": "",
+                                                    xs1: ""
+                                                  }
+                                                }),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "v-flex",
+                                                  {
+                                                    attrs: {
+                                                      "align-center": "",
+                                                      xs3: ""
+                                                    }
+                                                  },
+                                                  [
+                                                    _c("v-text-field", {
+                                                      attrs: {
+                                                        "min:0": "",
+                                                        "max:59": "",
+                                                        rules: _vm.sixtyRule,
+                                                        label: "AR Segundos",
+                                                        type: "number"
+                                                      },
+                                                      model: {
+                                                        value: _vm.s_ra,
+                                                        callback: function(
+                                                          $$v
+                                                        ) {
+                                                          _vm.s_ra = $$v
+                                                        },
+                                                        expression: "s_ra"
+                                                      }
+                                                    })
+                                                  ],
+                                                  1
+                                                ),
+                                                _vm._v(" "),
+                                                _c("v-flex", {
+                                                  attrs: {
+                                                    "align-center": "",
+                                                    xs1: ""
+                                                  }
+                                                })
+                                              ],
+                                              1
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "v-layout",
+                                              {
+                                                attrs: {
+                                                  "align-center": "",
+                                                  row: ""
+                                                }
+                                              },
+                                              [
+                                                _c(
+                                                  "span",
+                                                  { staticClass: "title" },
+                                                  [_vm._v("Declinación")]
+                                                )
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "v-layout",
+                                              {
+                                                attrs: {
+                                                  "align-center": "",
+                                                  row: ""
+                                                }
+                                              },
+                                              [
+                                                _c("v-flex", {
+                                                  attrs: {
+                                                    "align-center": "",
+                                                    xs1: ""
+                                                  }
+                                                }),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "v-flex",
+                                                  {
+                                                    attrs: {
+                                                      "align-center": "",
+                                                      xs3: ""
+                                                    }
+                                                  },
+                                                  [
+                                                    _c("v-text-field", {
+                                                      attrs: {
+                                                        "min:-90": "",
+                                                        "max:90": "",
+                                                        rules: _vm.ninetyRule,
+                                                        label: "DEC Grados",
+                                                        type: "number"
+                                                      },
+                                                      model: {
+                                                        value: _vm.h_dec,
+                                                        callback: function(
+                                                          $$v
+                                                        ) {
+                                                          _vm.h_dec = $$v
+                                                        },
+                                                        expression: "h_dec"
+                                                      }
+                                                    })
+                                                  ],
+                                                  1
+                                                ),
+                                                _vm._v(" "),
+                                                _c("v-flex", {
+                                                  attrs: {
+                                                    "align-center": "",
+                                                    xs1: ""
+                                                  }
+                                                }),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "v-flex",
+                                                  {
+                                                    attrs: {
+                                                      "align-center": "",
+                                                      xs3: ""
+                                                    }
+                                                  },
+                                                  [
+                                                    _c("v-text-field", {
+                                                      attrs: {
+                                                        label: "DEC Minutos",
+                                                        "min:0": "",
+                                                        "max:59": "",
+                                                        rules: _vm.sixtyRule,
+                                                        type: "number"
+                                                      },
+                                                      model: {
+                                                        value: _vm.m_dec,
+                                                        callback: function(
+                                                          $$v
+                                                        ) {
+                                                          _vm.m_dec = $$v
+                                                        },
+                                                        expression: "m_dec"
+                                                      }
+                                                    })
+                                                  ],
+                                                  1
+                                                ),
+                                                _vm._v(" "),
+                                                _c("v-flex", {
+                                                  attrs: {
+                                                    "align-center": "",
+                                                    xs1: ""
+                                                  }
+                                                }),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "v-flex",
+                                                  {
+                                                    attrs: {
+                                                      "align-center": "",
+                                                      xs3: ""
+                                                    }
+                                                  },
+                                                  [
+                                                    _c("v-text-field", {
+                                                      attrs: {
+                                                        "min:0": "",
+                                                        "max:59": "",
+                                                        rules: _vm.sixtyRule,
+                                                        label: "DEC Segundos",
+                                                        type: "number"
+                                                      },
+                                                      model: {
+                                                        value: _vm.s_dec,
+                                                        callback: function(
+                                                          $$v
+                                                        ) {
+                                                          _vm.s_dec = $$v
+                                                        },
+                                                        expression: "s_dec"
+                                                      }
+                                                    })
+                                                  ],
+                                                  1
+                                                ),
+                                                _vm._v(" "),
+                                                _c("v-flex", {
+                                                  attrs: {
+                                                    "align-center": "",
+                                                    xs1: ""
+                                                  }
+                                                })
+                                              ],
+                                              1
+                                            )
+                                          ],
+                                          1
+                                        )
+                                      ],
+                                      1
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "v-card-actions",
+                                      [
+                                        _c("v-spacer"),
+                                        _vm._v(" "),
+                                        _c(
+                                          "v-btn",
+                                          {
+                                            attrs: {
+                                              color: "blue darken-1",
+                                              flat: ""
+                                            },
+                                            on: {
+                                              click: function($event) {
+                                                _vm.dialog3 = false
+                                              }
+                                            }
+                                          },
+                                          [_vm._v("Cerrar")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "v-btn",
+                                          {
+                                            attrs: {
+                                              color: "blue darken-1",
+                                              flat: ""
+                                            },
+                                            on: { click: _vm.savecoords }
+                                          },
+                                          [_vm._v("Guardar")]
+                                        )
+                                      ],
+                                      1
+                                    )
+                                  ],
+                                  1
+                                )
+                              ],
+                              1
+                            )
+                          ]
                         ],
-                        1
-                      ),
-                      _vm._v(" "),
+                        2
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-flex",
+                    { staticClass: "px-2", attrs: { xs4: "" } },
+                    [
                       _c(
-                        "v-flex",
-                        { attrs: { xs5: "" } },
+                        "v-card",
+                        { staticClass: "py-2 px-2" },
                         [
                           _c(
-                            "v-card",
+                            "v-layout",
                             [
-                              _c(
-                                "v-container",
-                                { attrs: { "fill-height": "", fluid: "" } },
-                                [
-                                  _c(
-                                    "v-layout",
-                                    { attrs: { "fill-height": "" } },
-                                    [
-                                      _c(
-                                        "v-flex",
-                                        {
-                                          attrs: {
-                                            xs12: "",
-                                            "align-end": "",
-                                            flexbox: ""
-                                          }
-                                        },
-                                        [
-                                          _c(
-                                            "span",
-                                            { staticClass: "headline" },
-                                            [_vm._v("Camara")]
-                                          )
-                                        ]
-                                      )
-                                    ],
-                                    1
-                                  )
-                                ],
-                                1
-                              ),
+                              _c("v-flex", { attrs: { xs12: "" } }, [
+                                _c("span", { staticClass: "headline" }, [
+                                  _vm._v("Camara")
+                                ])
+                              ])
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-layout",
+                            [
+                              _c("v-flex", { attrs: { xs1: "" } }),
                               _vm._v(" "),
                               _c(
-                                "v-layout",
-                                { attrs: { "align-center": "", row: "" } },
+                                "v-flex",
+                                { attrs: { xs4: "" } },
                                 [
-                                  _c("v-flex", {
-                                    attrs: { "align-center": "", xs1: "" }
-                                  }),
-                                  _vm._v(" "),
-                                  _c(
-                                    "v-flex",
-                                    { attrs: { "align-center": "", xs4: "" } },
-                                    [
-                                      _c("v-select", {
-                                        attrs: {
-                                          items: _vm.Isos,
-                                          "item-text": "iso",
-                                          "return-object": "",
-                                          rules: [
-                                            function(v) {
-                                              return !!v || "Obligatorio"
-                                            }
-                                          ],
-                                          label: "Sensibilidad",
-                                          required: ""
-                                        },
-                                        on: { input: _vm.selectIso },
-                                        model: {
-                                          value: _vm.selectedIso,
-                                          callback: function($$v) {
-                                            _vm.selectedIso = $$v
-                                          },
-                                          expression: "selectedIso"
+                                  _c("v-select", {
+                                    attrs: {
+                                      items: _vm.Isos,
+                                      "item-text": "iso",
+                                      "return-object": "",
+                                      rules: [
+                                        function(v) {
+                                          return !!v || "Obligatorio"
                                         }
-                                      })
-                                    ],
-                                    1
-                                  ),
-                                  _vm._v(" "),
-                                  _c("v-flex", {
-                                    attrs: { "align-center": "", xs1: "" }
-                                  }),
-                                  _vm._v(" "),
-                                  _c(
-                                    "v-flex",
-                                    { attrs: { "align-center": "", xs4: "" } },
-                                    [
-                                      _c("v-select", {
-                                        attrs: {
-                                          items: _vm.Exps,
-                                          rules: [
-                                            function(v) {
-                                              return !!v || "Obligatorio"
-                                            }
-                                          ],
-                                          label: "Tiempo Exposición",
-                                          required: ""
-                                        },
-                                        model: {
-                                          value: _vm.Exp,
-                                          callback: function($$v) {
-                                            _vm.Exp = $$v
-                                          },
-                                          expression: "Exp"
-                                        }
-                                      })
-                                    ],
-                                    1
-                                  ),
-                                  _vm._v(" "),
-                                  _c("v-flex", {
-                                    attrs: { "align-center": "", xs1: "" }
+                                      ],
+                                      label: "Sensibilidad",
+                                      required: ""
+                                    },
+                                    on: { input: _vm.selectIso },
+                                    model: {
+                                      value: _vm.selectedIso,
+                                      callback: function($$v) {
+                                        _vm.selectedIso = $$v
+                                      },
+                                      expression: "selectedIso"
+                                    }
                                   })
                                 ],
                                 1
                               ),
                               _vm._v(" "),
+                              _c("v-flex", { attrs: { xs1: "" } }),
+                              _vm._v(" "),
                               _c(
-                                "v-btn",
-                                {
-                                  attrs: { color: "warning" },
-                                  on: {
-                                    click: function($event) {
-                                      return _vm.shoot()
+                                "v-flex",
+                                { attrs: { xs4: "" } },
+                                [
+                                  _c("v-select", {
+                                    attrs: {
+                                      items: _vm.Exps,
+                                      rules: [
+                                        function(v) {
+                                          return !!v || "Obligatorio"
+                                        }
+                                      ],
+                                      label: "Tiempo Exposición",
+                                      required: ""
+                                    },
+                                    model: {
+                                      value: _vm.Exp,
+                                      callback: function($$v) {
+                                        _vm.Exp = $$v
+                                      },
+                                      expression: "Exp"
                                     }
-                                  }
-                                },
-                                [_vm._v("Disparar")]
-                              )
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c("v-flex", { attrs: { xs1: "" } })
                             ],
                             1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-btn",
+                            {
+                              attrs: { color: "warning" },
+                              on: {
+                                click: function($event) {
+                                  return _vm.shoot()
+                                }
+                              }
+                            },
+                            [_vm._v("Disparar")]
                           )
                         ],
                         1
@@ -63329,1339 +64056,57 @@ var render = function() {
                     [
                       _c(
                         "v-card",
+                        { staticClass: "py-2 px-2" },
                         [
+                          _c(
+                            "v-layout",
+                            [
+                              _c("v-flex", { attrs: { xs12: "" } }, [
+                                _c("span", { staticClass: "headline" }, [
+                                  _vm._v("Enfocador")
+                                ])
+                              ])
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
                           _c(
                             "v-layout",
                             [
                               _c(
                                 "v-flex",
-                                {
-                                  attrs: {
-                                    xs4: "",
-                                    "align-end": "",
-                                    flexbox: ""
-                                  }
-                                },
-                                [_c("span", [_vm._v(" " + _vm._s(_vm.object))])]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "v-flex",
-                                {
-                                  attrs: {
-                                    xs4: "",
-                                    "align-end": "",
-                                    flexbox: ""
-                                  }
-                                },
+                                { attrs: { xs4: "" } },
                                 [
-                                  _c("span", { staticClass: "headline" }, [
-                                    _vm._v(" Estado:" + _vm._s(_vm.state))
-                                  ])
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "v-flex",
-                                {
-                                  attrs: {
-                                    xs4: "",
-                                    "align-end": "",
-                                    flexbox: ""
-                                  }
-                                },
-                                [
-                                  _c("p", [
-                                    _vm._v("Actual: " + _vm._s(_vm.current))
-                                  ])
-                                ]
-                              )
-                            ],
-                            1
-                          )
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  )
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "v-container",
-                { attrs: { fluid: "" } },
-                [
-                  _c(
-                    "v-layout",
-                    { attrs: { "align-center": "", row: "" } },
-                    [
-                      _c(
-                        "v-flex",
-                        { attrs: { xs4: "" } },
-                        [
-                          _c(
-                            "v-card",
-                            [
-                              _c(
-                                "v-container",
-                                { attrs: { "fill-height": "", fluid: "" } },
-                                [
-                                  _c(
-                                    "v-layout",
-                                    { attrs: { "fill-height": "" } },
-                                    [
-                                      _c(
-                                        "v-flex",
-                                        {
-                                          attrs: {
-                                            xs12: "",
-                                            "align-end": "",
-                                            flexbox: ""
-                                          }
-                                        },
-                                        [
-                                          _c(
-                                            "span",
-                                            { staticClass: "headline" },
-                                            [_vm._v("Montura")]
-                                          )
-                                        ]
-                                      )
-                                    ],
-                                    1
-                                  )
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "v-layout",
-                                { attrs: { "align-center": "", row: "" } },
-                                [
-                                  _c("v-flex", {
-                                    attrs: { "align-center": "", xs1: "" }
-                                  }),
-                                  _vm._v(" "),
-                                  _c(
-                                    "v-flex",
-                                    { attrs: { "align-center": "", xs4: "" } },
-                                    [
-                                      _c("v-text-field", {
-                                        attrs: {
-                                          label: "Asención Recta",
-                                          readonly: "true"
-                                        },
-                                        model: {
-                                          value: _vm.Ar_screen,
-                                          callback: function($$v) {
-                                            _vm.Ar_screen = $$v
-                                          },
-                                          expression: "Ar_screen"
-                                        }
-                                      })
-                                    ],
-                                    1
-                                  ),
-                                  _vm._v(" "),
-                                  _c("v-flex", {
-                                    attrs: { "align-center": "", xs1: "" }
-                                  }),
-                                  _vm._v(" "),
-                                  _c(
-                                    "v-flex",
-                                    { attrs: { "align-center": "", xs4: "" } },
-                                    [
-                                      _c("v-text-field", {
-                                        attrs: {
-                                          label: "Declinación",
-                                          readonly: "true"
-                                        },
-                                        model: {
-                                          value: _vm.Dec_screen,
-                                          callback: function($$v) {
-                                            _vm.Dec_screen = $$v
-                                          },
-                                          expression: "Dec_screen"
-                                        }
-                                      })
-                                    ],
-                                    1
-                                  ),
-                                  _vm._v(" "),
-                                  _c("v-flex", {
-                                    attrs: { "align-center": "", xs1: "" }
+                                  _c("v-text-field", {
+                                    attrs: {
+                                      "min:0": "",
+                                      "max:30000": "",
+                                      label: "Tics",
+                                      type: "number"
+                                    },
+                                    model: {
+                                      value: _vm.slider,
+                                      callback: function($$v) {
+                                        _vm.slider = $$v
+                                      },
+                                      expression: "slider"
+                                    }
                                   })
                                 ],
                                 1
                               ),
                               _vm._v(" "),
                               _c(
-                                "v-btn",
-                                {
-                                  attrs: { color: "warning" },
-                                  on: {
-                                    click: function($event) {
-                                      return _vm.move()
-                                    }
-                                  }
-                                },
-                                [_vm._v("Mover")]
-                              ),
-                              _vm._v(" "),
-                              [
-                                _c(
-                                  "v-dialog",
-                                  {
-                                    attrs: {
-                                      persistent: "",
-                                      "max-width": "800px"
+                                "v-flex",
+                                { attrs: { xs4: "" } },
+                                [
+                                  _c(
+                                    "v-btn",
+                                    {
+                                      attrs: { color: "warning" },
+                                      on: { click: _vm.focus }
                                     },
-                                    scopedSlots: _vm._u([
-                                      {
-                                        key: "activator",
-                                        fn: function(ref) {
-                                          var on = ref.on
-                                          return [
-                                            _c(
-                                              "v-btn",
-                                              _vm._g(
-                                                {
-                                                  attrs: {
-                                                    color: "warning",
-                                                    dark: ""
-                                                  }
-                                                },
-                                                on
-                                              ),
-                                              [_vm._v("Mov.Fino")]
-                                            )
-                                          ]
-                                        }
-                                      }
-                                    ]),
-                                    model: {
-                                      value: _vm.dialog2,
-                                      callback: function($$v) {
-                                        _vm.dialog2 = $$v
-                                      },
-                                      expression: "dialog2"
-                                    }
-                                  },
-                                  [
-                                    _vm._v(" "),
-                                    _c(
-                                      "v-card",
-                                      [
-                                        _c("v-card-title", [
-                                          _c(
-                                            "span",
-                                            { staticClass: "headline" },
-                                            [_vm._v("Movimiento Fino")]
-                                          )
-                                        ]),
-                                        _vm._v(" "),
-                                        _c(
-                                          "v-card-text",
-                                          [
-                                            _c(
-                                              "v-container",
-                                              { attrs: { "grid-list-md": "" } },
-                                              [
-                                                _c(
-                                                  "v-layout",
-                                                  {
-                                                    attrs: {
-                                                      "align-center": "",
-                                                      row: ""
-                                                    }
-                                                  },
-                                                  [
-                                                    _c(
-                                                      "span",
-                                                      { staticClass: "title" },
-                                                      [
-                                                        _vm._v(
-                                                          "Ascención Recta"
-                                                        )
-                                                      ]
-                                                    )
-                                                  ]
-                                                ),
-                                                _vm._v(" "),
-                                                _c(
-                                                  "v-layout",
-                                                  {
-                                                    attrs: {
-                                                      "align-center": "",
-                                                      row: ""
-                                                    }
-                                                  },
-                                                  [
-                                                    _c("v-flex", {
-                                                      attrs: {
-                                                        "align-center": "",
-                                                        xs1: ""
-                                                      }
-                                                    }),
-                                                    _vm._v(" "),
-                                                    _c(
-                                                      "v-flex",
-                                                      {
-                                                        attrs: {
-                                                          "align-center": "",
-                                                          xs3: ""
-                                                        }
-                                                      },
-                                                      [
-                                                        _c("v-text-field", {
-                                                          attrs: {
-                                                            type: "number",
-                                                            "min:0": "",
-                                                            "max:23": "",
-                                                            rules:
-                                                              _vm.twentythreeRule,
-                                                            label: "AR Horas"
-                                                          },
-                                                          model: {
-                                                            value: _vm.h_ra,
-                                                            callback: function(
-                                                              $$v
-                                                            ) {
-                                                              _vm.h_ra = $$v
-                                                            },
-                                                            expression: "h_ra"
-                                                          }
-                                                        })
-                                                      ],
-                                                      1
-                                                    ),
-                                                    _vm._v(" "),
-                                                    _c("v-flex", {
-                                                      attrs: {
-                                                        "align-center": "",
-                                                        xs1: ""
-                                                      }
-                                                    }),
-                                                    _vm._v(" "),
-                                                    _c(
-                                                      "v-flex",
-                                                      {
-                                                        attrs: {
-                                                          "align-center": "",
-                                                          xs3: ""
-                                                        }
-                                                      },
-                                                      [
-                                                        _c("v-text-field", {
-                                                          attrs: {
-                                                            "min:0": "",
-                                                            "max:59": "",
-                                                            type: "number",
-                                                            rules:
-                                                              _vm.sixtyRule,
-                                                            label: "AR Minutos",
-                                                            "append-outer-icon":
-                                                              "add_circle_outline",
-                                                            "prepend-icon":
-                                                              "remove_circle_outline"
-                                                          },
-                                                          on: {
-                                                            "click:append-outer":
-                                                              _vm.inc_m_ra,
-                                                            "click:prepend":
-                                                              _vm.dec_m_ra
-                                                          },
-                                                          model: {
-                                                            value: _vm.m_ra,
-                                                            callback: function(
-                                                              $$v
-                                                            ) {
-                                                              _vm.m_ra = $$v
-                                                            },
-                                                            expression: "m_ra"
-                                                          }
-                                                        })
-                                                      ],
-                                                      1
-                                                    ),
-                                                    _vm._v(" "),
-                                                    _c("v-flex", {
-                                                      attrs: {
-                                                        "align-center": "",
-                                                        xs1: ""
-                                                      }
-                                                    }),
-                                                    _vm._v(" "),
-                                                    _c(
-                                                      "v-flex",
-                                                      {
-                                                        attrs: {
-                                                          "align-center": "",
-                                                          xs3: ""
-                                                        }
-                                                      },
-                                                      [
-                                                        _c("v-text-field", {
-                                                          attrs: {
-                                                            type: "number",
-                                                            label:
-                                                              "AR Segundos",
-                                                            "min:0": "",
-                                                            "max:59": "",
-                                                            rules:
-                                                              _vm.sixtyRule,
-                                                            readonly: "",
-                                                            "append-outer-icon":
-                                                              "add_circle_outline",
-                                                            "prepend-icon":
-                                                              "remove_circle_outline"
-                                                          },
-                                                          on: {
-                                                            "click:append-outer":
-                                                              _vm.inc_s_ra,
-                                                            "click:prepend":
-                                                              _vm.dec_s_ra
-                                                          },
-                                                          model: {
-                                                            value: _vm.s_ra,
-                                                            callback: function(
-                                                              $$v
-                                                            ) {
-                                                              _vm.s_ra = $$v
-                                                            },
-                                                            expression: "s_ra"
-                                                          }
-                                                        })
-                                                      ],
-                                                      1
-                                                    ),
-                                                    _vm._v(" "),
-                                                    _c("v-flex", {
-                                                      attrs: {
-                                                        "align-center": "",
-                                                        xs1: ""
-                                                      }
-                                                    })
-                                                  ],
-                                                  1
-                                                ),
-                                                _vm._v(" "),
-                                                _c(
-                                                  "v-layout",
-                                                  {
-                                                    attrs: {
-                                                      "align-center": "",
-                                                      row: ""
-                                                    }
-                                                  },
-                                                  [
-                                                    _c(
-                                                      "span",
-                                                      { staticClass: "title" },
-                                                      [_vm._v("Declinación")]
-                                                    )
-                                                  ]
-                                                ),
-                                                _vm._v(" "),
-                                                _c(
-                                                  "v-layout",
-                                                  {
-                                                    attrs: {
-                                                      "align-center": "",
-                                                      row: ""
-                                                    }
-                                                  },
-                                                  [
-                                                    _c("v-flex", {
-                                                      attrs: {
-                                                        "align-center": "",
-                                                        xs1: ""
-                                                      }
-                                                    }),
-                                                    _vm._v(" "),
-                                                    _c(
-                                                      "v-flex",
-                                                      {
-                                                        attrs: {
-                                                          "align-center": "",
-                                                          xs3: ""
-                                                        }
-                                                      },
-                                                      [
-                                                        _c("v-text-field", {
-                                                          attrs: {
-                                                            type: "number",
-                                                            label: "DEC Grados",
-                                                            "min:-90": "",
-                                                            "max:90": "",
-                                                            rules:
-                                                              _vm.ninetyRule
-                                                          },
-                                                          model: {
-                                                            value: _vm.h_dec,
-                                                            callback: function(
-                                                              $$v
-                                                            ) {
-                                                              _vm.h_dec = $$v
-                                                            },
-                                                            expression: "h_dec"
-                                                          }
-                                                        })
-                                                      ],
-                                                      1
-                                                    ),
-                                                    _vm._v(" "),
-                                                    _c("v-flex", {
-                                                      attrs: {
-                                                        "align-center": "",
-                                                        xs1: ""
-                                                      }
-                                                    }),
-                                                    _vm._v(" "),
-                                                    _c(
-                                                      "v-flex",
-                                                      {
-                                                        attrs: {
-                                                          "align-center": "",
-                                                          xs3: ""
-                                                        }
-                                                      },
-                                                      [
-                                                        _c("v-text-field", {
-                                                          attrs: {
-                                                            "min:0": "",
-                                                            "max:59": "",
-                                                            type: "number",
-                                                            label:
-                                                              "DEC Minutos",
-                                                            rules:
-                                                              _vm.sixtyRule,
-                                                            "append-outer-icon":
-                                                              "add_circle_outline",
-                                                            "prepend-icon":
-                                                              "remove_circle_outline"
-                                                          },
-                                                          on: {
-                                                            "click:append-outer":
-                                                              _vm.inc_m_dec,
-                                                            "click:prepend":
-                                                              _vm.dec_m_dec
-                                                          },
-                                                          model: {
-                                                            value: _vm.m_dec,
-                                                            callback: function(
-                                                              $$v
-                                                            ) {
-                                                              _vm.m_dec = $$v
-                                                            },
-                                                            expression: "m_dec"
-                                                          }
-                                                        })
-                                                      ],
-                                                      1
-                                                    ),
-                                                    _vm._v(" "),
-                                                    _c("v-flex", {
-                                                      attrs: {
-                                                        "align-center": "",
-                                                        xs1: ""
-                                                      }
-                                                    }),
-                                                    _vm._v(" "),
-                                                    _c(
-                                                      "v-flex",
-                                                      {
-                                                        attrs: {
-                                                          "align-center": "",
-                                                          xs3: ""
-                                                        }
-                                                      },
-                                                      [
-                                                        _c("v-text-field", {
-                                                          attrs: {
-                                                            type: "number",
-                                                            label:
-                                                              "DEC Segundos",
-                                                            rules:
-                                                              _vm.sixtyRule,
-                                                            "min:0": "",
-                                                            "max:59": "",
-                                                            "append-outer-icon":
-                                                              "add_circle_outline",
-                                                            "prepend-icon":
-                                                              "remove_circle_outline"
-                                                          },
-                                                          on: {
-                                                            "click:append-outer":
-                                                              _vm.inc_s_dec,
-                                                            "click:prepend":
-                                                              _vm.dec_s_dec
-                                                          },
-                                                          model: {
-                                                            value: _vm.s_dec,
-                                                            callback: function(
-                                                              $$v
-                                                            ) {
-                                                              _vm.s_dec = $$v
-                                                            },
-                                                            expression: "s_dec"
-                                                          }
-                                                        })
-                                                      ],
-                                                      1
-                                                    ),
-                                                    _vm._v(" "),
-                                                    _c("v-flex", {
-                                                      attrs: {
-                                                        "align-center": "",
-                                                        xs1: ""
-                                                      }
-                                                    })
-                                                  ],
-                                                  1
-                                                )
-                                              ],
-                                              1
-                                            )
-                                          ],
-                                          1
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "v-card-actions",
-                                          [
-                                            _c("v-spacer"),
-                                            _vm._v(" "),
-                                            _c(
-                                              "v-btn",
-                                              {
-                                                attrs: {
-                                                  color: "blue darken-1",
-                                                  flat: ""
-                                                },
-                                                on: {
-                                                  click: function($event) {
-                                                    _vm.dialog2 = false
-                                                  }
-                                                }
-                                              },
-                                              [_vm._v("Cerrar")]
-                                            ),
-                                            _vm._v(" "),
-                                            _c(
-                                              "v-btn",
-                                              {
-                                                attrs: {
-                                                  color: "blue darken-1",
-                                                  flat: ""
-                                                },
-                                                on: { click: _vm.savefine }
-                                              },
-                                              [_vm._v("Guardar")]
-                                            )
-                                          ],
-                                          1
-                                        )
-                                      ],
-                                      1
-                                    )
-                                  ],
-                                  1
-                                )
-                              ],
-                              _vm._v(" "),
-                              [
-                                _c(
-                                  "v-dialog",
-                                  {
-                                    attrs: {
-                                      persistent: "",
-                                      "max-width": "600px"
-                                    },
-                                    scopedSlots: _vm._u([
-                                      {
-                                        key: "activator",
-                                        fn: function(ref) {
-                                          var on = ref.on
-                                          return [
-                                            _c(
-                                              "v-btn",
-                                              _vm._g(
-                                                {
-                                                  attrs: {
-                                                    color: "warning",
-                                                    dark: ""
-                                                  }
-                                                },
-                                                on
-                                              ),
-                                              [_vm._v("Mis Coords.")]
-                                            )
-                                          ]
-                                        }
-                                      }
-                                    ]),
-                                    model: {
-                                      value: _vm.dialog3,
-                                      callback: function($$v) {
-                                        _vm.dialog3 = $$v
-                                      },
-                                      expression: "dialog3"
-                                    }
-                                  },
-                                  [
-                                    _vm._v(" "),
-                                    _c(
-                                      "v-card",
-                                      [
-                                        _c("v-card-title", [
-                                          _c(
-                                            "span",
-                                            { staticClass: "headline" },
-                                            [_vm._v("Coordenadas especificas")]
-                                          )
-                                        ]),
-                                        _vm._v(" "),
-                                        _c(
-                                          "v-card-text",
-                                          [
-                                            _c(
-                                              "v-container",
-                                              { attrs: { "grid-list-md": "" } },
-                                              [
-                                                _c(
-                                                  "v-layout",
-                                                  {
-                                                    attrs: {
-                                                      "align-center": "",
-                                                      row: ""
-                                                    }
-                                                  },
-                                                  [
-                                                    _c(
-                                                      "span",
-                                                      { staticClass: "title" },
-                                                      [
-                                                        _vm._v(
-                                                          "Ascención Recta"
-                                                        )
-                                                      ]
-                                                    )
-                                                  ]
-                                                ),
-                                                _vm._v(" "),
-                                                _c(
-                                                  "v-layout",
-                                                  {
-                                                    attrs: {
-                                                      "align-center": "",
-                                                      row: ""
-                                                    }
-                                                  },
-                                                  [
-                                                    _c("v-flex", {
-                                                      attrs: {
-                                                        "align-center": "",
-                                                        xs1: ""
-                                                      }
-                                                    }),
-                                                    _vm._v(" "),
-                                                    _c(
-                                                      "v-flex",
-                                                      {
-                                                        attrs: {
-                                                          "align-center": "",
-                                                          xs3: ""
-                                                        }
-                                                      },
-                                                      [
-                                                        _c("v-text-field", {
-                                                          attrs: {
-                                                            "min:0": "",
-                                                            "max:23": "",
-                                                            rules:
-                                                              _vm.twentythreeRule,
-                                                            type: "number",
-                                                            label: "AR Horas"
-                                                          },
-                                                          model: {
-                                                            value: _vm.h_ra,
-                                                            callback: function(
-                                                              $$v
-                                                            ) {
-                                                              _vm.h_ra = $$v
-                                                            },
-                                                            expression: "h_ra"
-                                                          }
-                                                        })
-                                                      ],
-                                                      1
-                                                    ),
-                                                    _vm._v(" "),
-                                                    _c("v-flex", {
-                                                      attrs: {
-                                                        "align-center": "",
-                                                        xs1: ""
-                                                      }
-                                                    }),
-                                                    _vm._v(" "),
-                                                    _c(
-                                                      "v-flex",
-                                                      {
-                                                        attrs: {
-                                                          "align-center": "",
-                                                          xs3: ""
-                                                        }
-                                                      },
-                                                      [
-                                                        _c("v-text-field", {
-                                                          attrs: {
-                                                            "min:0": "",
-                                                            "max:59": "",
-                                                            rules:
-                                                              _vm.sixtyRule,
-                                                            type: "number",
-                                                            label: "AR Minutos"
-                                                          },
-                                                          model: {
-                                                            value: _vm.m_ra,
-                                                            callback: function(
-                                                              $$v
-                                                            ) {
-                                                              _vm.m_ra = $$v
-                                                            },
-                                                            expression: "m_ra"
-                                                          }
-                                                        })
-                                                      ],
-                                                      1
-                                                    ),
-                                                    _vm._v(" "),
-                                                    _c("v-flex", {
-                                                      attrs: {
-                                                        "align-center": "",
-                                                        xs1: ""
-                                                      }
-                                                    }),
-                                                    _vm._v(" "),
-                                                    _c(
-                                                      "v-flex",
-                                                      {
-                                                        attrs: {
-                                                          "align-center": "",
-                                                          xs3: ""
-                                                        }
-                                                      },
-                                                      [
-                                                        _c("v-text-field", {
-                                                          attrs: {
-                                                            "min:0": "",
-                                                            "max:59": "",
-                                                            rules:
-                                                              _vm.sixtyRule,
-                                                            label:
-                                                              "AR Segundos",
-                                                            type: "number"
-                                                          },
-                                                          model: {
-                                                            value: _vm.s_ra,
-                                                            callback: function(
-                                                              $$v
-                                                            ) {
-                                                              _vm.s_ra = $$v
-                                                            },
-                                                            expression: "s_ra"
-                                                          }
-                                                        })
-                                                      ],
-                                                      1
-                                                    ),
-                                                    _vm._v(" "),
-                                                    _c("v-flex", {
-                                                      attrs: {
-                                                        "align-center": "",
-                                                        xs1: ""
-                                                      }
-                                                    })
-                                                  ],
-                                                  1
-                                                ),
-                                                _vm._v(" "),
-                                                _c(
-                                                  "v-layout",
-                                                  {
-                                                    attrs: {
-                                                      "align-center": "",
-                                                      row: ""
-                                                    }
-                                                  },
-                                                  [
-                                                    _c(
-                                                      "span",
-                                                      { staticClass: "title" },
-                                                      [_vm._v("Declinación")]
-                                                    )
-                                                  ]
-                                                ),
-                                                _vm._v(" "),
-                                                _c(
-                                                  "v-layout",
-                                                  {
-                                                    attrs: {
-                                                      "align-center": "",
-                                                      row: ""
-                                                    }
-                                                  },
-                                                  [
-                                                    _c("v-flex", {
-                                                      attrs: {
-                                                        "align-center": "",
-                                                        xs1: ""
-                                                      }
-                                                    }),
-                                                    _vm._v(" "),
-                                                    _c(
-                                                      "v-flex",
-                                                      {
-                                                        attrs: {
-                                                          "align-center": "",
-                                                          xs3: ""
-                                                        }
-                                                      },
-                                                      [
-                                                        _c("v-text-field", {
-                                                          attrs: {
-                                                            "min:-90": "",
-                                                            "max:90": "",
-                                                            rules:
-                                                              _vm.ninetyRule,
-                                                            label: "DEC Grados",
-                                                            type: "number"
-                                                          },
-                                                          model: {
-                                                            value: _vm.h_dec,
-                                                            callback: function(
-                                                              $$v
-                                                            ) {
-                                                              _vm.h_dec = $$v
-                                                            },
-                                                            expression: "h_dec"
-                                                          }
-                                                        })
-                                                      ],
-                                                      1
-                                                    ),
-                                                    _vm._v(" "),
-                                                    _c("v-flex", {
-                                                      attrs: {
-                                                        "align-center": "",
-                                                        xs1: ""
-                                                      }
-                                                    }),
-                                                    _vm._v(" "),
-                                                    _c(
-                                                      "v-flex",
-                                                      {
-                                                        attrs: {
-                                                          "align-center": "",
-                                                          xs3: ""
-                                                        }
-                                                      },
-                                                      [
-                                                        _c("v-text-field", {
-                                                          attrs: {
-                                                            label:
-                                                              "DEC Minutos",
-                                                            "min:0": "",
-                                                            "max:59": "",
-                                                            rules:
-                                                              _vm.sixtyRule,
-                                                            type: "number"
-                                                          },
-                                                          model: {
-                                                            value: _vm.m_dec,
-                                                            callback: function(
-                                                              $$v
-                                                            ) {
-                                                              _vm.m_dec = $$v
-                                                            },
-                                                            expression: "m_dec"
-                                                          }
-                                                        })
-                                                      ],
-                                                      1
-                                                    ),
-                                                    _vm._v(" "),
-                                                    _c("v-flex", {
-                                                      attrs: {
-                                                        "align-center": "",
-                                                        xs1: ""
-                                                      }
-                                                    }),
-                                                    _vm._v(" "),
-                                                    _c(
-                                                      "v-flex",
-                                                      {
-                                                        attrs: {
-                                                          "align-center": "",
-                                                          xs3: ""
-                                                        }
-                                                      },
-                                                      [
-                                                        _c("v-text-field", {
-                                                          attrs: {
-                                                            "min:0": "",
-                                                            "max:59": "",
-                                                            rules:
-                                                              _vm.sixtyRule,
-                                                            label:
-                                                              "DEC Segundos",
-                                                            type: "number"
-                                                          },
-                                                          model: {
-                                                            value: _vm.s_dec,
-                                                            callback: function(
-                                                              $$v
-                                                            ) {
-                                                              _vm.s_dec = $$v
-                                                            },
-                                                            expression: "s_dec"
-                                                          }
-                                                        })
-                                                      ],
-                                                      1
-                                                    ),
-                                                    _vm._v(" "),
-                                                    _c("v-flex", {
-                                                      attrs: {
-                                                        "align-center": "",
-                                                        xs1: ""
-                                                      }
-                                                    })
-                                                  ],
-                                                  1
-                                                )
-                                              ],
-                                              1
-                                            )
-                                          ],
-                                          1
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "v-card-actions",
-                                          [
-                                            _c("v-spacer"),
-                                            _vm._v(" "),
-                                            _c(
-                                              "v-btn",
-                                              {
-                                                attrs: {
-                                                  color: "blue darken-1",
-                                                  flat: ""
-                                                },
-                                                on: {
-                                                  click: function($event) {
-                                                    _vm.dialog3 = false
-                                                  }
-                                                }
-                                              },
-                                              [_vm._v("Cerrar")]
-                                            ),
-                                            _vm._v(" "),
-                                            _c(
-                                              "v-btn",
-                                              {
-                                                attrs: {
-                                                  color: "blue darken-1",
-                                                  flat: ""
-                                                },
-                                                on: { click: _vm.savecoords }
-                                              },
-                                              [_vm._v("Guardar")]
-                                            )
-                                          ],
-                                          1
-                                        )
-                                      ],
-                                      1
-                                    )
-                                  ],
-                                  1
-                                )
-                              ]
-                            ],
-                            2
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "v-flex",
-                        { attrs: { xs4: "" } },
-                        [
-                          _c(
-                            "v-card",
-                            [
-                              _c(
-                                "v-container",
-                                { attrs: { "fill-height": "", fluid: "" } },
-                                [
-                                  _c(
-                                    "v-layout",
-                                    { attrs: { "fill-height": "" } },
-                                    [
-                                      _c(
-                                        "v-flex",
-                                        {
-                                          attrs: {
-                                            xs12: "",
-                                            "align-end": "",
-                                            flexbox: ""
-                                          }
-                                        },
-                                        [
-                                          _c(
-                                            "span",
-                                            { staticClass: "headline" },
-                                            [_vm._v("Camara")]
-                                          )
-                                        ]
-                                      )
-                                    ],
-                                    1
-                                  )
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "v-layout",
-                                { attrs: { "align-center": "", row: "" } },
-                                [
-                                  _c("v-flex", {
-                                    attrs: { "align-center": "", xs1: "" }
-                                  }),
-                                  _vm._v(" "),
-                                  _c(
-                                    "v-flex",
-                                    { attrs: { "align-center": "", xs4: "" } },
-                                    [
-                                      _c("v-select", {
-                                        attrs: {
-                                          items: _vm.Isos,
-                                          "item-text": "iso",
-                                          "return-object": "",
-                                          rules: [
-                                            function(v) {
-                                              return !!v || "Obligatorio"
-                                            }
-                                          ],
-                                          label: "Sensibilidad",
-                                          required: ""
-                                        },
-                                        on: { input: _vm.selectIso },
-                                        model: {
-                                          value: _vm.selectedIso,
-                                          callback: function($$v) {
-                                            _vm.selectedIso = $$v
-                                          },
-                                          expression: "selectedIso"
-                                        }
-                                      })
-                                    ],
-                                    1
-                                  ),
-                                  _vm._v(" "),
-                                  _c("v-flex", {
-                                    attrs: { "align-center": "", xs1: "" }
-                                  }),
-                                  _vm._v(" "),
-                                  _c(
-                                    "v-flex",
-                                    { attrs: { "align-center": "", xs4: "" } },
-                                    [
-                                      _c("v-select", {
-                                        attrs: {
-                                          items: _vm.Exps,
-                                          rules: [
-                                            function(v) {
-                                              return !!v || "Obligatorio"
-                                            }
-                                          ],
-                                          label: "Tiempo Exposición",
-                                          required: ""
-                                        },
-                                        model: {
-                                          value: _vm.Exp,
-                                          callback: function($$v) {
-                                            _vm.Exp = $$v
-                                          },
-                                          expression: "Exp"
-                                        }
-                                      })
-                                    ],
-                                    1
-                                  ),
-                                  _vm._v(" "),
-                                  _c("v-flex", {
-                                    attrs: { "align-center": "", xs1: "" }
-                                  })
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "v-btn",
-                                {
-                                  attrs: { color: "warning" },
-                                  on: {
-                                    click: function($event) {
-                                      return _vm.shoot()
-                                    }
-                                  }
-                                },
-                                [_vm._v("Disparar")]
-                              )
-                            ],
-                            1
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "v-flex",
-                        { attrs: { xs4: "" } },
-                        [
-                          _c(
-                            "v-card",
-                            [
-                              _c(
-                                "v-container",
-                                { attrs: { "fill-height": "", fluid: "" } },
-                                [
-                                  _c(
-                                    "v-layout",
-                                    { attrs: { "fill-height": "" } },
-                                    [
-                                      _c(
-                                        "v-flex",
-                                        {
-                                          attrs: {
-                                            xs12: "",
-                                            "align-end": "",
-                                            flexbox: ""
-                                          }
-                                        },
-                                        [
-                                          _c(
-                                            "span",
-                                            { staticClass: "headline" },
-                                            [_vm._v("Enfocador")]
-                                          )
-                                        ]
-                                      )
-                                    ],
-                                    1
-                                  )
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "v-layout",
-                                { attrs: { row: "" } },
-                                [
-                                  _c("v-flex", {
-                                    attrs: { "align-center": "", xs1: "" }
-                                  }),
-                                  _vm._v(" "),
-                                  _c(
-                                    "v-flex",
-                                    { attrs: { "align-center": "", xs1: "" } },
-                                    [_c("p", [_vm._v("Tics 0")])]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "v-flex",
-                                    { attrs: { xs8: "" } },
-                                    [
-                                      _c("v-slider", {
-                                        attrs: {
-                                          "thumb-label": "always",
-                                          min: "0",
-                                          max: "30000"
-                                        },
-                                        model: {
-                                          value: _vm.slider,
-                                          callback: function($$v) {
-                                            _vm.slider = $$v
-                                          },
-                                          expression: "slider"
-                                        }
-                                      })
-                                    ],
-                                    1
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "v-flex",
-                                    { attrs: { "align-center": "", xs1: "" } },
-                                    [_c("p", [_vm._v("30000")])]
-                                  )
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "v-layout",
-                                { attrs: { row: "" } },
-                                [
-                                  _c("v-flex", { attrs: { xs1: "" } }),
-                                  _vm._v(" "),
-                                  _c(
-                                    "v-flex",
-                                    { attrs: { xs4: "" } },
-                                    [
-                                      _c("v-text-field", {
-                                        attrs: {
-                                          "min:0": "",
-                                          "max:30000": "",
-                                          label: "Tics",
-                                          type: "number"
-                                        },
-                                        model: {
-                                          value: _vm.slider,
-                                          callback: function($$v) {
-                                            _vm.slider = $$v
-                                          },
-                                          expression: "slider"
-                                        }
-                                      })
-                                    ],
-                                    1
-                                  ),
-                                  _vm._v(" "),
-                                  _c("v-flex", { attrs: { xs1: "" } }),
-                                  _vm._v(" "),
-                                  _c(
-                                    "v-flex",
-                                    { attrs: { xs4: "" } },
-                                    [
-                                      _c(
-                                        "v-btn",
-                                        {
-                                          attrs: { color: "warning" },
-                                          on: { click: _vm.focus }
-                                        },
-                                        [_vm._v("Enfocar")]
-                                      )
-                                    ],
-                                    1
+                                    [_vm._v("Enfocar")]
                                   )
                                 ],
                                 1
