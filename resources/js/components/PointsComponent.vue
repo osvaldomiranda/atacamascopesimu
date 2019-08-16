@@ -5,7 +5,7 @@
         <v-btn color="warning" dark v-on="on">Comprar Puntos</v-btn>
       </template> -->
       <v-card>
-        <v-toolbar dark color="primary">
+        <v-toolbar dark color="amarillo">
           <v-btn icon dark @click="dialog = false">
             <v-icon>close</v-icon>
           </v-btn>
@@ -46,7 +46,7 @@
                                 </v-flex>
 
                                 <v-flex xs3 align-end flexbox>
-                                    <v-btn @click="pay()" color="success">Proceso de Pago</v-btn>
+                                    <v-btn @click="pay()" outline color="amarillo">Proceso de Pago</v-btn>
                                 </v-flex>
                             </v-layout>
                         </v-container>

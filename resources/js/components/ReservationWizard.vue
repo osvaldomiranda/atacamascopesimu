@@ -5,7 +5,7 @@
     <v-btn color="warning" dark v-on="on">Reservar</v-btn>
     </template> -->
     <v-card>
-    <v-toolbar dark color="primary">
+    <v-toolbar dark color="morado">
       <v-btn icon dark @click="dialog = false">
       <v-icon>close</v-icon>
       </v-btn>
@@ -14,17 +14,17 @@
     </v-toolbar>
 
 <template>
-  <v-stepper v-model="e1">
+  <v-stepper dark color="morado" v-model="e1">
     <v-stepper-header>
-      <v-stepper-step :complete="e1 > 1" step="1">Elige tu Equipamiento</v-stepper-step>
+      <v-stepper-step color="morado"  :complete="e1 > 1" step="1">Elige tu Equipamiento</v-stepper-step>
 
       <v-divider></v-divider>
 
-      <v-stepper-step :complete="e1 > 2" step="2">Elige Día de Observación </v-stepper-step>
+      <v-stepper-step color="morado"  :complete="e1 > 2" step="2">Elige Día de Observación </v-stepper-step>
 
       <v-divider></v-divider>
 
-      <v-stepper-step step="3">Reserva tu Hora</v-stepper-step>
+      <v-stepper-step color="morado"  step="3">Reserva tu Hora</v-stepper-step>
     </v-stepper-header>
 
     <v-stepper-items>
@@ -88,7 +88,7 @@
         </v-card>
 
         <v-btn
-          lass="mx-2" fab dark small color="primary"
+          lass="mx-2" fab dark small color="morado"
           @click="e1 = 2"
         >
           <v-icon dark>arrow_forward</v-icon>
@@ -267,14 +267,14 @@
 
 
         <v-btn
-          lass="mx-2" fab dark small color="primary"
+          lass="mx-2" fab dark small color="morado"
           @click="e1 = 1"
         >
           <v-icon dark>arrow_back</v-icon>
         </v-btn>
 
         <v-btn
-          lass="mx-2" fab dark small color="primary"
+          lass="mx-2" fab dark small color="morado"
           @click="e1 = 3"
         >
           <v-icon dark>arrow_forward</v-icon>
@@ -338,7 +338,7 @@
 
 
         <v-btn
-          lass="mx-2" fab dark small color="primary"
+          lass="mx-2" fab dark small color="morado"
           @click="e1 = 2"
         >
           <v-icon dark>arrow_back</v-icon>
@@ -571,6 +571,8 @@
       app.today = actualDate;
       app.start = app.today; 
       app.focus = app.today; 
+
+      // -22.96, 68.24
 
       
       app.suntimes = SunCalc.getTimes(new Date(), 33.0000, -70.3326);
@@ -857,7 +859,8 @@
 
 
       moonRise(a){
-        var moon_times = SunCalc.getMoonTimes(new Date(a + 'T00:00'), 33.0000, -70.3326);
+
+        var moon_times = SunCalc.getMoonTimes(new Date(a + 'T00:00'), -22.96, 68.24);
        // alert(JSON.stringify(app.moon_times));
         var moonset = moon_times["rise"];
         var monset_time =''
@@ -870,8 +873,8 @@
       },
 
       moonSet(a){
-        var moon_times = SunCalc.getMoonTimes(new Date(a + 'T00:00'), 33.0000, -70.3326);
-       // alert(JSON.stringify(app.moon_times));
+
+        var moon_times = SunCalc.getMoonTimes(new Date(a + 'T00:00'), -22.96, 68.24);
         var moonset = moon_times["set"];
         var monset_time =''
         if(moonset){

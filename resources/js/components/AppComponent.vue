@@ -1,5 +1,8 @@
 <template>
-  <v-app id="inspire">
+  <v-app id="inspire" dark style="
+    background: #0e1820;
+
+  ">
     <v-toolbar
       :clipped-left="$vuetify.breakpoint.lgAndUp"
       app

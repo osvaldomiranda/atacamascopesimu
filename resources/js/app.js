@@ -45,7 +45,14 @@ Vue.use(Vuetify, {
         error: '#FF5252',
         info: '#2196F3',
         success: '#4CAF50',
-        warning: '#FFC107'
+        warning: '#FFC107',
+
+        morado: '#8874A7',
+        verde: '#0BD8B5',
+        amarillo: '#FFCC00',
+        rojo:'#CC3200',
+
+        backgraundColor: '#0E1820',
     }
 });
 

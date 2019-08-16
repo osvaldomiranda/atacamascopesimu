@@ -29,7 +29,7 @@
                     <v-btn color="warning" dark @click="control" >Interfaz de Control</v-btn> 
                   </td> -->
                   <td class="text-xs-left"> 
-                    <v-btn color="warning" dark @click="control_avanzado" >Interfaz de Control</v-btn> 
+                    <v-btn color="morado"  round dark @click="control_avanzado" >Interfaz de Control</v-btn> 
                   </td>
                 </tr>
                 </template>

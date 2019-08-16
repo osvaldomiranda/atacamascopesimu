@@ -4,8 +4,8 @@
 <!--       <template v-slot:activator="{ on }">
         <v-btn color="warning" dark v-on="on">Interfaz de Control</v-btn>
       </template> -->
-      <v-card>
-        <v-toolbar dark color="primary">
+      <v-card color="backgraundColor" >
+        <v-toolbar dark color="rojo">
           <v-btn icon dark @click="dialog = false">
             <v-icon>close</v-icon>
           </v-btn>
@@ -14,35 +14,8 @@
         </v-toolbar>
 
 
-		 <v-container fluid>
-
-		    <v-layout align-center row>
-		    	<v-flex xs1>
-				</v-flex>
-				<v-flex xs2>
-					<v-layout align-center row>
-						<v-flex xs12>	
-					    	<v-card>
-					    		<a  :href="imageUrl" target="_blank">
-					      		<v-img
-					      	  		v-bind:src="imageUrl"
-					      	  		aspect-ratio="1"
-					      		></v-img>
-					      		</a>
-					    	</v-card> 
-					    </v-flex>
-					</v-layout>   
-					<v-layout align-center row>
-						<v-flex xs12>
-							<p>{{current_shot}}</p> 	
-						</v-flex>
-					</v-layout>	
-		      	</v-flex>
-
-				<v-flex xs1>
-				</v-flex>
-
-				<v-flex xs7 style="overflow: auto">
+		    <v-layout class="py-2">
+				<v-flex xs8 class="px-2" style="overflow: auto">
 
 					  <v-card>
 					    <v-card-title>
@@ -87,46 +60,140 @@
 					    >
 					      <template v-slot:items="props">
 					      	<tr @click="showAlert(props.item)">
+					      		<td>
+					      			<v-btn outline round color="amarillo">Usar</v-btn>
+					      		</td>
 						        <td class="text-xs-right">{{ props.item.name }}</td>
+						        <td class="text-xs-right">{{ (props.item.colloquial_name || '') + ' ' + (props.item.nombre_coloquial || '')}}</td>
+						        <td class="text-xs-right">{{ props.item.constellation }}</td>
 						        <td class="text-xs-right">{{ props.item.catalog }}</td>
 						        <td class="text-xs-right">{{ props.item.type_object }}</td>
-						        <td class="text-xs-right">{{ props.item.constellation }}</td>
-						        <td class="text-xs-right">{{ (props.item.colloquial_name || '') + ' ' + (props.item.nombre_coloquial || '')}}</td>
 						        <td class="text-xs-right">{{ props.item.ra }}</td>
 						        <td class="text-xs-right">{{ props.item.dec }}</td>
 					    	</tr>
 					      </template>
-					      <v-alert v-slot:no-results :value="true" color="error" icon="warning">
-					        Your search for "{{ search }}" found no results.
-					      </v-alert>
 					    </v-data-table>
 					  </v-card>	
 
 				</v-flex>
-		      			
+		      	<v-flex xs4 class="px-4">
+					<v-layout align-center row>
+						<v-flex xs12>	
+					    	<v-card>
+					    		<a  :href="imageUrl" target="_blank">
+					      		<v-img
+					      	  		v-bind:src="imageUrl"
+					      	  		aspect-ratio="1"
+					      		></v-img>
+					      		</a>
+					    	</v-card> 
+					    </v-flex>
+					</v-layout>   
+		      	</v-flex>
 		    </v-layout>
-		</v-container>    
-		<v-container fluid>
-		    <v-layout align-center row>
-				<v-flex xs12>
+ 
+
+		    <v-layout class="py-2">
+		    	<v-flex xs8 class="px-2">
+					<v-flex xs5 class="px-2">
+						<v-card>
+							<v-container fill-height fluid>
+					            <v-layout fill-height>
+					              <v-flex xs12 align-end flexbox>
+					                <span class="headline">Montura</span>
+					              </v-flex>
+					            </v-layout>
+					        </v-container>
+
+							<v-layout align-center row>
+								<v-flex align-center xs1>
+								</v-flex>	
+								<v-flex align-center xs4>
+									<v-text-field
+									    v-model="Ar_screen"
+									    label="Asención Recta"
+									    readonly=true
+									    ></v-text-field>
+			          			</v-flex>
+								<v-flex align-center xs1>
+								</v-flex>
+								<v-flex align-center xs4>
+									<v-text-field
+									    v-model="Dec_screen"
+									    label="Declinación"
+									    readonly=true
+									    ></v-text-field>
+			          			</v-flex>
+								<v-flex align-center xs1>
+								</v-flex>		          			
+			          		</v-layout>	
+			          		<v-btn color="warning" @click="move()">Mover</v-btn>
+			          	</v-card>
+			        </v-flex>  
+			        <v-flex xs5>
+						<v-card>
+							<v-container fill-height fluid>
+					            <v-layout fill-height>
+					              <v-flex xs12 align-end flexbox>
+					                <span class="headline">Camara</span>
+					              </v-flex>
+					            </v-layout>
+					        </v-container>
+
+							<v-layout align-center row>
+								<v-flex align-center xs1>
+								</v-flex>	
+								<v-flex align-center xs4>
+								
+								    <v-select
+								      v-model="selectedIso"
+								      :items="Isos"
+								      item-text='iso'
+								      return-object
+								      :rules="[v => !!v || 'Obligatorio']"
+								      label="Sensibilidad"
+								      @input= "selectIso"
+								      required
+								    ></v-select>
+
+			          			</v-flex>
+								<v-flex align-center xs1>
+								</v-flex>	
+
+								<v-flex align-center xs4>
+								    <v-select
+								      v-model="Exp"
+								      :items="Exps"
+								      :rules="[v => !!v || 'Obligatorio']"
+								      label="Tiempo Exposición"
+								      required
+								    ></v-select>
+			          			</v-flex>
+								<v-flex align-center xs1>
+								</v-flex>	
+			          		</v-layout>	
+			          		<v-btn color="warning" @click="shoot()">Disparar</v-btn>
+				    	</v-card> 
+			        </v-flex>
+		    	</v-flex>	
+
+				<v-flex xs4 class="px-2">
 					<v-card>
-						<v-container  fluid>
-				            <v-layout >
-				              	<v-flex xs4 align-end flexbox>
-				                	<span class="display-1"> {{ object }}</span>
-				              	</v-flex>
-				              	<v-flex xs4 align-end flexbox>
-				                	<span class="headline"> Estado:{{ state }}</span>
-				              	</v-flex>
-				              	<v-flex xs4 align-end flexbox>
-				              		<p>Actual: {{current}}</p>
-				          		</v-flex>
-				            </v-layout>
-				        </v-container>
+				        <v-layout >
+				          	<v-flex xs4 align-end flexbox>
+				            	<span > {{ object }}</span>
+				          	</v-flex>
+				          	<v-flex xs4 align-end flexbox>
+				            	<span class="headline"> Estado:{{ state }}</span>
+				          	</v-flex>
+				          	<v-flex xs4 align-end flexbox>
+				          		<p>Actual: {{current}}</p>
+				       	</v-flex>
+				        </v-layout>
 				    </v-card>
 				</v-flex>
 			</v-layout>
-		</v-container>		        
+	        
 
 		<v-container fluid>
 		    <v-layout align-center row>
@@ -162,9 +229,6 @@
 							<v-flex align-center xs1>
 							</v-flex>		          			
 		          		</v-layout>	
-
-
-
 		          		<v-btn color="warning" @click="move()">Mover</v-btn>
 <template>
 
@@ -804,11 +868,12 @@
 	    ],
 
         headers: [
+          { text: 'Usar', value: 'name' },
           { text: 'Nombre', value: 'name' },
+          { text: 'Descripción', value: 'colloquial_name' },
+          { text: 'Constelación', value: 'constellation' },
           { text: 'Catalogo', value: 'catalog' },
           { text: 'Tipo', value: 'type_object' },
-          { text: 'Constelación', value: 'constellation' },
-          { text: 'Descripción', value: 'colloquial_name' },
           { text: 'AR', value: 'ra' },
           { text: 'DEC', value: 'dec' }
         ],

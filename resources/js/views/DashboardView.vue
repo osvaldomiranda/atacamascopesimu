@@ -1,152 +1,155 @@
 <template>
-  <v-layout row justify-center>
-
-  <v-flex xs12>
-    <v-card>
-
-    <v-container fluid>
-      <v-layout align-center row>
-
-            <v-flex xs4 align-end flexbox>
-                <v-layout align-center row>
-                     <v-flex xs4 align-end flexbox>
-
-                        </v-flex>
-                    <v-flex xs4 align-end flexbox>
-                        <span class="subheading">Clima Actual</span>
-                    </v-flex>
-                </v-layout>     
-                  <v-layout align-center row>
-                        <v-flex xs4 align-end flexbox>
-
-                        </v-flex>
-                        <v-flex xs2 align-end flexbox>
-                            <v-img :src= "weather_image" ></v-img>
-                        </v-flex>
-                        <v-flex xs4 align-end flexbox>
-                          <span class="subheading"> {{ weather["WeatherText"] }} {{weather["Temperature"]["Metric"]["Value"]}} º{{weather["Temperature"]["Metric"]["Unit"]}}</span>
-                        </v-flex>
-                  </v-layout>
-                  <v-layout align-center row>
-                        <v-flex xs4 align-end flexbox>
-
-                        </v-flex>
-                        <v-flex xs4 align-end flexbox>
-                            <a href="https://www.accuweather.com/es/cl/san-pedro-de-atacama/57225/daily-weather-forecast/57225?day=0" target=_blank>
-                            Ver Pronóstico
-                            </a>
-                        </v-flex>
-
-
-
-                  </v-layout>
-            </v-flex>
-            <v-flex xs4 align-end flexbox>
-              <span class="subheading"> Puntos Disponibles:{{ $store.getters.current_points }}</span>
-            </v-flex>
-
-            <v-flex xs4 align-end flexbox>
-                <div>
-                    <!-- <points-component></points-component> -->
-                    <v-btn color="warning" dark @click="pointsClick" >Comprar Puntos</v-btn> 
-                   <!--  <reservation-component></reservation-component> -->
-                    <v-btn color="warning" dark @click="reservClick" >Reservar</v-btn>       
-                </div>
-            </v-flex>
-
-      </v-layout>
-
-
-
-
-      <v-layout align-center row>
-            <v-flex xs1>
-            </v-flex>
-
-
-        </v-layout>
-        <v-layout align-center row>
-            <v-flex xs1>
-            </v-flex>    
-            <v-flex xs2 align-center  sm2 md1>
-                <v-layout align-center row>
-                    <v-flex align-center xs12>
-                        <v-avatar
-                            size="150px"
-                        >
-                            <img
-                              :src="$store.getters.user['avatar']"
-                              alt="Avatar"
-                            >
-                        </v-avatar>
-                    </v-flex>
-                </v-layout>
-                <v-layout align-center row>
-                    <v-flex xs1>
-                    </v-flex> 
-                </v-layout>  
-                <v-layout align-center row>
-                    <v-flex align-center xs1>
-                        <upload-avatar></upload-avatar>
-                    </v-flex>    
-                    <v-flex align-center xs1>
-                    </v-flex>
-                    <v-flex align-center xs10>
-                        <span class="body-2">{{ $store.getters.user['email'] }}</span>
-                    </v-flex>  
-                </v-layout> 
-            </v-flex>            
-            <v-flex xs1>
-            </v-flex> 
-
-            <v-flex xs8 align-center flexbox>
-                <my-reservations></my-reservations>  
-            </v-flex>
-        </v-layout>
-    </v-container>  
-
-
-     <v-container fluid>
-        <v-layout align-center row>
-        <v-flex xs12 style="overflow: auto">
-
-            <v-card>
-              <v-card-title>
-                <span class="headline">Mis Sesiones</span>
-                <v-spacer></v-spacer>
-              </v-card-title>
-              <v-data-table
-                :headers="mySessionsHeaders"
-                :items="sessions"
-                :search="search"
-              >
-                <template v-slot:items="props">
-                  <td>
-                    <v-img
-                        v-bind:src="props.item.img"
-                        aspect-ratio="1"
-                    ></v-img>
-                  </td>
-
-    
-                  <td class="text-xs-left">{{ props.item.session_date }}</td>
-                  <td class="text-xs-left">{{ props.item.session_hour }}</td>
-                  <td class="text-xs-left">{{ props.item.img_count }}</td>
-                  <td class="text-xs-left">{{ props.item.equipment_name }}</td>
-                  <td class="text-xs-left"></td>
-
-
-                </template>
-              </v-data-table>
-            </v-card> 
-            </v-flex>
-
-        </v-layout>
-    </v-container>
-
-
-      </v-card>
+  <v-layout row>
+    <v-flex xs8 class="px-2">
+        <v-card class="py-4">
+            <my-reservations></my-reservations>
+            <v-layout>
+                <v-flex xs1>
+                </v-flex>
+                <v-flex xs6>
+                    <v-btn round color="morado"  dark @click="reservClick" >Reservar</v-btn> 
+                </v-flex>
+            </v-layout>            
+        </v-card>
     </v-flex>  
+
+    <v-flex xs4>
+        <v-layout class="px-1">
+            <v-flex xs12 class="px-1">
+                <v-card>
+                    <v-layout>
+                        <v-flex xs1>
+                        </v-flex>
+                        <v-flex xs8 class="py-2">
+                            <span class="subheading">Clima Actual</span>
+                        </v-flex>
+                    </v-layout>     
+                    <v-layout>
+                            <v-flex xs1 align-end flexbox>
+
+                            </v-flex>
+                            <v-flex xs4 align-end flexbox>
+                                <v-img :src= "weather_image" ></v-img>
+                            </v-flex>
+                            <v-flex xs4 align-end flexbox>
+                              <span style="color:#0BD8B5" class="subheading"> {{ weather["WeatherText"] }} {{weather["Temperature"]["Metric"]["Value"]}} º{{weather["Temperature"]["Metric"]["Unit"]}}</span>
+                            </v-flex>
+                      </v-layout>
+                      <v-layout align-center row>
+                            <v-flex xs5 align-end flexbox>
+                            </v-flex>
+                            <v-flex xs4 align-end flexbox>
+                                <v-btn round color="verde"  href="https://www.accuweather.com/es/cl/san-pedro-de-atacama/57225/daily-weather-forecast/57225?day=0"  target="_blank">
+                                    Ver Pronóstico    
+                                </v-btn>
+                            </v-flex>
+                      </v-layout>   
+                      <br>               
+                </v-card>
+            </v-flex>
+        </v-layout>
+        <br>
+        <v-layout class="px-1">
+            <v-flex xs12 class="px-1">
+                <v-card class="py-1">
+                    <v-layout>
+                        <v-flex xs1 >
+                        </v-flex>
+                        <v-flex xs8 class="px-1">
+                            <span class="subheading">Puntos</span>
+                        </v-flex>
+                    </v-layout>   
+                    <v-layout class="px-1">
+                        <v-flex xs4>
+                        </v-flex>                  
+                        <v-flex xs4 align-end flexbox>
+                          <span style="color:#FFCC00"  class="display-3">{{ $store.getters.current_points }}</span>
+                        </v-flex>
+                    </v-layout>    
+                    <v-layout class="px-1">
+                        <v-flex xs5>
+                        </v-flex> 
+                        <v-flex xs4 align-end flexbox>
+                            <div>
+                                <v-btn round color="amarillo"  dark @click="pointsClick" >Comprar Puntos</v-btn>      
+                            </div>
+                        </v-flex>                      
+                    </v-layout>
+                    <br>
+                </v-card>
+            </v-flex>
+        </v-layout>
+    </v-flex>
+
+    <v-flex xs12 class="px-2">
+        <br>
+        <v-card>
+            <v-layout row wrap>
+                <v-flex xs1>
+                </v-flex>    
+                <v-flex xs2>
+                    <v-layout align-center row>
+                        <v-flex align-center xs12 class="py-2">
+                            <v-avatar
+                                size="150px"
+                            >
+                                <img
+                                  :src="$store.getters.user['avatar']"
+                                  alt="Avatar"
+                                >
+                            </v-avatar>
+                        </v-flex>
+                    </v-layout>
+                    <v-layout align-center row>
+                        <v-flex xs1>
+                        </v-flex> 
+                    </v-layout>  
+                    <v-layout align-center row>
+                        <v-flex align-center xs1>
+                            <upload-avatar></upload-avatar>
+                        </v-flex>    
+                        <v-flex align-center xs1>
+                        </v-flex>
+                        <v-flex align-center xs10>
+                            <span class="body-2">{{ $store.getters.user['email'] }}</span>
+                        </v-flex>  
+                    </v-layout> 
+                </v-flex>
+                <v-flex xs1>
+                  
+                </v-flex>
+                <v-flex xs7>
+                    <v-card>
+                        <v-card-title>
+                            <span class="headline">Mis Sesiones</span>
+                            <v-spacer></v-spacer>
+                        </v-card-title>
+                        <v-data-table
+                            :headers="mySessionsHeaders"
+                            :items="sessions"
+                            :search="search"
+                        >
+                            <template v-slot:items="props">
+                                <td>
+                                    <v-img
+                                        v-bind:src="props.item.img"
+                                        aspect-ratio="1"
+                                    ></v-img>
+                                </td>
+
+                                <td class="text-xs-left">{{ props.item.session_date }}</td>
+                                <td class="text-xs-left">{{ props.item.session_hour }}</td>
+                                <td class="text-xs-left">{{ props.item.img_count }}</td>
+                                <td class="text-xs-left">{{ props.item.equipment_name }}</td>
+                                <td class="text-xs-left"></td>
+                            </template>
+                        </v-data-table>
+                    </v-card> 
+                </v-flex>
+            </v-layout>              
+        </v-card>  
+    </v-flex>
+  
     <div ref="container">
     </div>
   </v-layout>

@@ -536,8 +536,7 @@
 					// alert(JSON.stringify(resp.data[i]));
 					app.reservationsArray.push(resp.data[i].hour); 
 
-
-					 app.events.push( {title: 'Reservado a las ' + resp.data[i].hour + 'Hrs',
+					app.events.push( {title: 'Reservado a las ' + resp.data[i].hour + 'Hrs',
            								details: 'Reservado',
           								date: resp.data[i].date,
            							    open: false } )   

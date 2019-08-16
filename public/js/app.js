@@ -1904,6 +1904,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2140,6 +2143,70 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -3119,20 +3186,23 @@ __webpack_require__.r(__webpack_exports__);
       }],
       Exps: ['1', '2', '4', '6', '8', '10', '20', '30', '40', '60', '120', '240', '300'],
       headers: [{
+        text: 'Usar',
+        value: 'name'
+      }, {
         text: 'Nombre',
         value: 'name'
+      }, {
+        text: 'Descripción',
+        value: 'colloquial_name'
+      }, {
+        text: 'Constelación',
+        value: 'constellation'
       }, {
         text: 'Catalogo',
         value: 'catalog'
       }, {
         text: 'Tipo',
         value: 'type_object'
-      }, {
-        text: 'Constelación',
-        value: 'constellation'
-      }, {
-        text: 'Descripción',
-        value: 'colloquial_name'
       }, {
         text: 'AR',
         value: 'ra'
@@ -5123,7 +5193,8 @@ var actualDate = new Date().toISOString().substr(0, 10);
     var app = this;
     app.today = actualDate;
     app.start = app.today;
-    app.focus = app.today;
+    app.focus = app.today; // -22.96, 68.24
+
     app.suntimes = suncalc__WEBPACK_IMPORTED_MODULE_0___default.a.getTimes(new Date(), 33.0000, -70.3326); // format sunrise time from the Date object
 
     app.sunset = app.suntimes.sunset;
@@ -5413,7 +5484,7 @@ var actualDate = new Date().toISOString().substr(0, 10);
     return d > 3 && d < 21 ? 'th' : ['th', 'st', 'nd', 'rd', 'th', 'th', 'th', 'th', 'th', 'th'][d % 10];
   },
   moonRise: function moonRise(a) {
-    var moon_times = suncalc__WEBPACK_IMPORTED_MODULE_0___default.a.getMoonTimes(new Date(a + 'T00:00'), 33.0000, -70.3326); // alert(JSON.stringify(app.moon_times));
+    var moon_times = suncalc__WEBPACK_IMPORTED_MODULE_0___default.a.getMoonTimes(new Date(a + 'T00:00'), -22.96, 68.24); // alert(JSON.stringify(app.moon_times));
 
     var moonset = moon_times["rise"];
     var monset_time = '';
@@ -5425,8 +5496,7 @@ var actualDate = new Date().toISOString().substr(0, 10);
     return monset_time;
   },
   moonSet: function moonSet(a) {
-    var moon_times = suncalc__WEBPACK_IMPORTED_MODULE_0___default.a.getMoonTimes(new Date(a + 'T00:00'), 33.0000, -70.3326); // alert(JSON.stringify(app.moon_times));
-
+    var moon_times = suncalc__WEBPACK_IMPORTED_MODULE_0___default.a.getMoonTimes(new Date(a + 'T00:00'), -22.96, 68.24);
     var moonset = moon_times["set"];
     var monset_time = '';
 
@@ -5830,6 +5900,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _components_PointsComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../components/PointsComponent */ "./resources/js/components/PointsComponent.vue");
 /* harmony import */ var _components_ReservationWizard__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./../components/ReservationWizard */ "./resources/js/components/ReservationWizard.vue");
+//
+//
+//
 //
 //
 //
@@ -62368,7 +62441,10 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "v-app",
-    { attrs: { id: "inspire" } },
+    {
+      staticStyle: { background: "#0e1820" },
+      attrs: { id: "inspire", dark: "" }
+    },
     [
       _c(
         "v-toolbar",
@@ -62694,10 +62770,11 @@ var render = function() {
         [
           _c(
             "v-card",
+            { attrs: { color: "backgraundColor" } },
             [
               _c(
                 "v-toolbar",
-                { attrs: { dark: "", color: "primary" } },
+                { attrs: { dark: "", color: "rojo" } },
                 [
                   _c(
                     "v-btn",
@@ -62721,316 +62798,254 @@ var render = function() {
               ),
               _vm._v(" "),
               _c(
-                "v-container",
-                { attrs: { fluid: "" } },
+                "v-layout",
+                { staticClass: "py-2" },
                 [
                   _c(
-                    "v-layout",
-                    { attrs: { "align-center": "", row: "" } },
+                    "v-flex",
+                    {
+                      staticClass: "px-2",
+                      staticStyle: { overflow: "auto" },
+                      attrs: { xs8: "" }
+                    },
                     [
-                      _c("v-flex", { attrs: { xs1: "" } }),
-                      _vm._v(" "),
                       _c(
-                        "v-flex",
-                        { attrs: { xs2: "" } },
+                        "v-card",
                         [
                           _c(
-                            "v-layout",
-                            { attrs: { "align-center": "", row: "" } },
+                            "v-card-title",
                             [
+                              _c("v-select", {
+                                attrs: {
+                                  items: _vm.types,
+                                  label: "Tipo",
+                                  "single-line": "",
+                                  "hide-details": ""
+                                },
+                                on: { input: _vm.filterType },
+                                model: {
+                                  value: _vm.type,
+                                  callback: function($$v) {
+                                    _vm.type = $$v
+                                  },
+                                  expression: "type"
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("v-spacer"),
+                              _vm._v(" "),
+                              _c("v-select", {
+                                attrs: {
+                                  items: _vm.Constellations,
+                                  "item-text": "latin",
+                                  label: "Constelación",
+                                  "return-object": "",
+                                  "single-line": "",
+                                  "hide-details": ""
+                                },
+                                on: { input: _vm.filterConstellation },
+                                model: {
+                                  value: _vm.Constellation,
+                                  callback: function($$v) {
+                                    _vm.Constellation = $$v
+                                  },
+                                  expression: "Constellation"
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("v-spacer"),
+                              _vm._v(" "),
+                              _c("v-text-field", {
+                                attrs: {
+                                  label: "Buscar",
+                                  "single-line": "",
+                                  "hide-details": ""
+                                },
+                                model: {
+                                  value: _vm.search,
+                                  callback: function($$v) {
+                                    _vm.search = $$v
+                                  },
+                                  expression: "search"
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("v-spacer"),
+                              _vm._v(" "),
                               _c(
-                                "v-flex",
-                                { attrs: { xs12: "" } },
-                                [
-                                  _c("v-card", [
-                                    _c(
-                                      "a",
-                                      {
-                                        attrs: {
-                                          href: _vm.imageUrl,
-                                          target: "_blank"
-                                        }
-                                      },
-                                      [
-                                        _c("v-img", {
-                                          attrs: {
-                                            src: _vm.imageUrl,
-                                            "aspect-ratio": "1"
-                                          }
-                                        })
-                                      ],
-                                      1
-                                    )
-                                  ])
-                                ],
+                                "v-btn",
+                                {
+                                  attrs: {
+                                    flat: "",
+                                    icon: "",
+                                    color: "blue lighten-2"
+                                  },
+                                  on: { click: _vm.search_object }
+                                },
+                                [_c("v-icon", [_vm._v("search")])],
                                 1
                               )
                             ],
                             1
                           ),
                           _vm._v(" "),
-                          _c(
-                            "v-layout",
-                            { attrs: { "align-center": "", row: "" } },
-                            [
-                              _c("v-flex", { attrs: { xs12: "" } }, [
-                                _c("p", [_vm._v(_vm._s(_vm.current_shot))])
-                              ])
-                            ],
-                            1
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c("v-flex", { attrs: { xs1: "" } }),
-                      _vm._v(" "),
-                      _c(
-                        "v-flex",
-                        {
-                          staticStyle: { overflow: "auto" },
-                          attrs: { xs7: "" }
-                        },
-                        [
-                          _c(
-                            "v-card",
-                            [
-                              _c(
-                                "v-card-title",
-                                [
-                                  _c("v-select", {
-                                    attrs: {
-                                      items: _vm.types,
-                                      label: "Tipo",
-                                      "single-line": "",
-                                      "hide-details": ""
-                                    },
-                                    on: { input: _vm.filterType },
-                                    model: {
-                                      value: _vm.type,
-                                      callback: function($$v) {
-                                        _vm.type = $$v
-                                      },
-                                      expression: "type"
-                                    }
-                                  }),
-                                  _vm._v(" "),
-                                  _c("v-spacer"),
-                                  _vm._v(" "),
-                                  _c("v-select", {
-                                    attrs: {
-                                      items: _vm.Constellations,
-                                      "item-text": "latin",
-                                      label: "Constelación",
-                                      "return-object": "",
-                                      "single-line": "",
-                                      "hide-details": ""
-                                    },
-                                    on: { input: _vm.filterConstellation },
-                                    model: {
-                                      value: _vm.Constellation,
-                                      callback: function($$v) {
-                                        _vm.Constellation = $$v
-                                      },
-                                      expression: "Constellation"
-                                    }
-                                  }),
-                                  _vm._v(" "),
-                                  _c("v-spacer"),
-                                  _vm._v(" "),
-                                  _c("v-text-field", {
-                                    attrs: {
-                                      label: "Buscar",
-                                      "single-line": "",
-                                      "hide-details": ""
-                                    },
-                                    model: {
-                                      value: _vm.search,
-                                      callback: function($$v) {
-                                        _vm.search = $$v
-                                      },
-                                      expression: "search"
-                                    }
-                                  }),
-                                  _vm._v(" "),
-                                  _c("v-spacer"),
-                                  _vm._v(" "),
-                                  _c(
-                                    "v-btn",
-                                    {
-                                      attrs: {
-                                        flat: "",
-                                        icon: "",
-                                        color: "blue lighten-2"
-                                      },
-                                      on: { click: _vm.search_object }
-                                    },
-                                    [_c("v-icon", [_vm._v("search")])],
-                                    1
-                                  )
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "v-data-table",
-                                {
-                                  attrs: {
-                                    headers: _vm.headers,
-                                    items: _vm.FilteredObjects,
-                                    "rows-per-page-items": _vm.rowsPerPageItems,
-                                    pagination: _vm.pagination
-                                  },
-                                  on: {
-                                    "update:pagination": function($event) {
-                                      _vm.pagination = $event
-                                    }
-                                  },
-                                  scopedSlots: _vm._u([
-                                    {
-                                      key: "items",
-                                      fn: function(props) {
-                                        return [
-                                          _c(
-                                            "tr",
-                                            {
-                                              on: {
-                                                click: function($event) {
-                                                  return _vm.showAlert(
-                                                    props.item
-                                                  )
-                                                }
-                                              }
-                                            },
-                                            [
-                                              _c(
-                                                "td",
-                                                {
-                                                  staticClass: "text-xs-right"
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    _vm._s(props.item.name)
-                                                  )
-                                                ]
-                                              ),
-                                              _vm._v(" "),
-                                              _c(
-                                                "td",
-                                                {
-                                                  staticClass: "text-xs-right"
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    _vm._s(props.item.catalog)
-                                                  )
-                                                ]
-                                              ),
-                                              _vm._v(" "),
-                                              _c(
-                                                "td",
-                                                {
-                                                  staticClass: "text-xs-right"
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    _vm._s(
-                                                      props.item.type_object
-                                                    )
-                                                  )
-                                                ]
-                                              ),
-                                              _vm._v(" "),
-                                              _c(
-                                                "td",
-                                                {
-                                                  staticClass: "text-xs-right"
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    _vm._s(
-                                                      props.item.constellation
-                                                    )
-                                                  )
-                                                ]
-                                              ),
-                                              _vm._v(" "),
-                                              _c(
-                                                "td",
-                                                {
-                                                  staticClass: "text-xs-right"
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    _vm._s(
-                                                      (props.item
-                                                        .colloquial_name ||
-                                                        "") +
-                                                        " " +
-                                                        (props.item
-                                                          .nombre_coloquial ||
-                                                          "")
-                                                    )
-                                                  )
-                                                ]
-                                              ),
-                                              _vm._v(" "),
-                                              _c(
-                                                "td",
-                                                {
-                                                  staticClass: "text-xs-right"
-                                                },
-                                                [_vm._v(_vm._s(props.item.ra))]
-                                              ),
-                                              _vm._v(" "),
-                                              _c(
-                                                "td",
-                                                {
-                                                  staticClass: "text-xs-right"
-                                                },
-                                                [_vm._v(_vm._s(props.item.dec))]
-                                              )
-                                            ]
-                                          )
-                                        ]
-                                      }
-                                    }
-                                  ]),
-                                  model: {
-                                    value: _vm.selected,
-                                    callback: function($$v) {
-                                      _vm.selected = $$v
-                                    },
-                                    expression: "selected"
-                                  }
-                                },
-                                [
-                                  _vm._v(" "),
-                                  _c("v-alert", {
-                                    attrs: {
-                                      value: true,
-                                      color: "error",
-                                      icon: "warning"
-                                    },
-                                    scopedSlots: _vm._u([
+                          _c("v-data-table", {
+                            attrs: {
+                              headers: _vm.headers,
+                              items: _vm.FilteredObjects,
+                              "rows-per-page-items": _vm.rowsPerPageItems,
+                              pagination: _vm.pagination
+                            },
+                            on: {
+                              "update:pagination": function($event) {
+                                _vm.pagination = $event
+                              }
+                            },
+                            scopedSlots: _vm._u([
+                              {
+                                key: "items",
+                                fn: function(props) {
+                                  return [
+                                    _c(
+                                      "tr",
                                       {
-                                        key: "no-results",
-                                        fn: function() {
-                                          return [
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.showAlert(props.item)
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _c(
+                                          "td",
+                                          [
+                                            _c(
+                                              "v-btn",
+                                              {
+                                                attrs: {
+                                                  outline: "",
+                                                  round: "",
+                                                  color: "amarillo"
+                                                }
+                                              },
+                                              [_vm._v("Usar")]
+                                            )
+                                          ],
+                                          1
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "td",
+                                          { staticClass: "text-xs-right" },
+                                          [_vm._v(_vm._s(props.item.name))]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "td",
+                                          { staticClass: "text-xs-right" },
+                                          [
                                             _vm._v(
-                                              '\n\t\t\t\t\t        Your search for "' +
-                                                _vm._s(_vm.search) +
-                                                '" found no results.\n\t\t\t\t\t      '
+                                              _vm._s(
+                                                (props.item.colloquial_name ||
+                                                  "") +
+                                                  " " +
+                                                  (props.item
+                                                    .nombre_coloquial || "")
+                                              )
                                             )
                                           ]
-                                        },
-                                        proxy: true
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "td",
+                                          { staticClass: "text-xs-right" },
+                                          [
+                                            _vm._v(
+                                              _vm._s(props.item.constellation)
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "td",
+                                          { staticClass: "text-xs-right" },
+                                          [_vm._v(_vm._s(props.item.catalog))]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "td",
+                                          { staticClass: "text-xs-right" },
+                                          [
+                                            _vm._v(
+                                              _vm._s(props.item.type_object)
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "td",
+                                          { staticClass: "text-xs-right" },
+                                          [_vm._v(_vm._s(props.item.ra))]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "td",
+                                          { staticClass: "text-xs-right" },
+                                          [_vm._v(_vm._s(props.item.dec))]
+                                        )
+                                      ]
+                                    )
+                                  ]
+                                }
+                              }
+                            ]),
+                            model: {
+                              value: _vm.selected,
+                              callback: function($$v) {
+                                _vm.selected = $$v
+                              },
+                              expression: "selected"
+                            }
+                          })
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-flex",
+                    { staticClass: "px-4", attrs: { xs4: "" } },
+                    [
+                      _c(
+                        "v-layout",
+                        { attrs: { "align-center": "", row: "" } },
+                        [
+                          _c(
+                            "v-flex",
+                            { attrs: { xs12: "" } },
+                            [
+                              _c("v-card", [
+                                _c(
+                                  "a",
+                                  {
+                                    attrs: {
+                                      href: _vm.imageUrl,
+                                      target: "_blank"
+                                    }
+                                  },
+                                  [
+                                    _c("v-img", {
+                                      attrs: {
+                                        src: _vm.imageUrl,
+                                        "aspect-ratio": "1"
                                       }
-                                    ])
-                                  })
-                                ],
-                                1
-                              )
+                                    })
+                                  ],
+                                  1
+                                )
+                              ])
                             ],
                             1
                           )
@@ -63045,50 +63060,33 @@ var render = function() {
               ),
               _vm._v(" "),
               _c(
-                "v-container",
-                { attrs: { fluid: "" } },
+                "v-layout",
+                { staticClass: "py-2" },
                 [
                   _c(
-                    "v-layout",
-                    { attrs: { "align-center": "", row: "" } },
+                    "v-flex",
+                    { staticClass: "px-2", attrs: { xs8: "" } },
                     [
                       _c(
                         "v-flex",
-                        { attrs: { xs12: "" } },
+                        { staticClass: "px-2", attrs: { xs5: "" } },
                         [
                           _c(
                             "v-card",
                             [
                               _c(
                                 "v-container",
-                                { attrs: { fluid: "" } },
+                                { attrs: { "fill-height": "", fluid: "" } },
                                 [
                                   _c(
                                     "v-layout",
+                                    { attrs: { "fill-height": "" } },
                                     [
                                       _c(
                                         "v-flex",
                                         {
                                           attrs: {
-                                            xs4: "",
-                                            "align-end": "",
-                                            flexbox: ""
-                                          }
-                                        },
-                                        [
-                                          _c(
-                                            "span",
-                                            { staticClass: "display-1" },
-                                            [_vm._v(" " + _vm._s(_vm.object))]
-                                          )
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "v-flex",
-                                        {
-                                          attrs: {
-                                            xs4: "",
+                                            xs12: "",
                                             "align-end": "",
                                             flexbox: ""
                                           }
@@ -63097,30 +63095,8 @@ var render = function() {
                                           _c(
                                             "span",
                                             { staticClass: "headline" },
-                                            [
-                                              _vm._v(
-                                                " Estado:" + _vm._s(_vm.state)
-                                              )
-                                            ]
+                                            [_vm._v("Montura")]
                                           )
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "v-flex",
-                                        {
-                                          attrs: {
-                                            xs4: "",
-                                            "align-end": "",
-                                            flexbox: ""
-                                          }
-                                        },
-                                        [
-                                          _c("p", [
-                                            _vm._v(
-                                              "Actual: " + _vm._s(_vm.current)
-                                            )
-                                          ])
                                         ]
                                       )
                                     ],
@@ -63128,6 +63104,277 @@ var render = function() {
                                   )
                                 ],
                                 1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-layout",
+                                { attrs: { "align-center": "", row: "" } },
+                                [
+                                  _c("v-flex", {
+                                    attrs: { "align-center": "", xs1: "" }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-flex",
+                                    { attrs: { "align-center": "", xs4: "" } },
+                                    [
+                                      _c("v-text-field", {
+                                        attrs: {
+                                          label: "Asención Recta",
+                                          readonly: "true"
+                                        },
+                                        model: {
+                                          value: _vm.Ar_screen,
+                                          callback: function($$v) {
+                                            _vm.Ar_screen = $$v
+                                          },
+                                          expression: "Ar_screen"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c("v-flex", {
+                                    attrs: { "align-center": "", xs1: "" }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-flex",
+                                    { attrs: { "align-center": "", xs4: "" } },
+                                    [
+                                      _c("v-text-field", {
+                                        attrs: {
+                                          label: "Declinación",
+                                          readonly: "true"
+                                        },
+                                        model: {
+                                          value: _vm.Dec_screen,
+                                          callback: function($$v) {
+                                            _vm.Dec_screen = $$v
+                                          },
+                                          expression: "Dec_screen"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c("v-flex", {
+                                    attrs: { "align-center": "", xs1: "" }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-btn",
+                                {
+                                  attrs: { color: "warning" },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.move()
+                                    }
+                                  }
+                                },
+                                [_vm._v("Mover")]
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-flex",
+                        { attrs: { xs5: "" } },
+                        [
+                          _c(
+                            "v-card",
+                            [
+                              _c(
+                                "v-container",
+                                { attrs: { "fill-height": "", fluid: "" } },
+                                [
+                                  _c(
+                                    "v-layout",
+                                    { attrs: { "fill-height": "" } },
+                                    [
+                                      _c(
+                                        "v-flex",
+                                        {
+                                          attrs: {
+                                            xs12: "",
+                                            "align-end": "",
+                                            flexbox: ""
+                                          }
+                                        },
+                                        [
+                                          _c(
+                                            "span",
+                                            { staticClass: "headline" },
+                                            [_vm._v("Camara")]
+                                          )
+                                        ]
+                                      )
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-layout",
+                                { attrs: { "align-center": "", row: "" } },
+                                [
+                                  _c("v-flex", {
+                                    attrs: { "align-center": "", xs1: "" }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-flex",
+                                    { attrs: { "align-center": "", xs4: "" } },
+                                    [
+                                      _c("v-select", {
+                                        attrs: {
+                                          items: _vm.Isos,
+                                          "item-text": "iso",
+                                          "return-object": "",
+                                          rules: [
+                                            function(v) {
+                                              return !!v || "Obligatorio"
+                                            }
+                                          ],
+                                          label: "Sensibilidad",
+                                          required: ""
+                                        },
+                                        on: { input: _vm.selectIso },
+                                        model: {
+                                          value: _vm.selectedIso,
+                                          callback: function($$v) {
+                                            _vm.selectedIso = $$v
+                                          },
+                                          expression: "selectedIso"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c("v-flex", {
+                                    attrs: { "align-center": "", xs1: "" }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-flex",
+                                    { attrs: { "align-center": "", xs4: "" } },
+                                    [
+                                      _c("v-select", {
+                                        attrs: {
+                                          items: _vm.Exps,
+                                          rules: [
+                                            function(v) {
+                                              return !!v || "Obligatorio"
+                                            }
+                                          ],
+                                          label: "Tiempo Exposición",
+                                          required: ""
+                                        },
+                                        model: {
+                                          value: _vm.Exp,
+                                          callback: function($$v) {
+                                            _vm.Exp = $$v
+                                          },
+                                          expression: "Exp"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c("v-flex", {
+                                    attrs: { "align-center": "", xs1: "" }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-btn",
+                                {
+                                  attrs: { color: "warning" },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.shoot()
+                                    }
+                                  }
+                                },
+                                [_vm._v("Disparar")]
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-flex",
+                    { staticClass: "px-2", attrs: { xs4: "" } },
+                    [
+                      _c(
+                        "v-card",
+                        [
+                          _c(
+                            "v-layout",
+                            [
+                              _c(
+                                "v-flex",
+                                {
+                                  attrs: {
+                                    xs4: "",
+                                    "align-end": "",
+                                    flexbox: ""
+                                  }
+                                },
+                                [_c("span", [_vm._v(" " + _vm._s(_vm.object))])]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-flex",
+                                {
+                                  attrs: {
+                                    xs4: "",
+                                    "align-end": "",
+                                    flexbox: ""
+                                  }
+                                },
+                                [
+                                  _c("span", { staticClass: "headline" }, [
+                                    _vm._v(" Estado:" + _vm._s(_vm.state))
+                                  ])
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-flex",
+                                {
+                                  attrs: {
+                                    xs4: "",
+                                    "align-end": "",
+                                    flexbox: ""
+                                  }
+                                },
+                                [
+                                  _c("p", [
+                                    _vm._v("Actual: " + _vm._s(_vm.current))
+                                  ])
+                                ]
                               )
                             ],
                             1
@@ -64658,7 +64905,11 @@ var render = function() {
                                       _c(
                                         "v-btn",
                                         {
-                                          attrs: { color: "warning", dark: "" },
+                                          attrs: {
+                                            color: "morado",
+                                            round: "",
+                                            dark: ""
+                                          },
                                           on: { click: _vm.control_avanzado }
                                         },
                                         [_vm._v("Interfaz de Control")]
@@ -65834,7 +66085,7 @@ var render = function() {
             [
               _c(
                 "v-toolbar",
-                { attrs: { dark: "", color: "primary" } },
+                { attrs: { dark: "", color: "amarillo" } },
                 [
                   _c(
                     "v-btn",
@@ -65968,7 +66219,10 @@ var render = function() {
                                           _c(
                                             "v-btn",
                                             {
-                                              attrs: { color: "success" },
+                                              attrs: {
+                                                outline: "",
+                                                color: "amarillo"
+                                              },
                                               on: {
                                                 click: function($event) {
                                                   return _vm.pay()
@@ -66269,7 +66523,7 @@ var render = function() {
             [
               _c(
                 "v-toolbar",
-                { attrs: { dark: "", color: "primary" } },
+                { attrs: { dark: "", color: "morado" } },
                 [
                   _c(
                     "v-btn",
@@ -66296,6 +66550,7 @@ var render = function() {
                 _c(
                   "v-stepper",
                   {
+                    attrs: { dark: "", color: "morado" },
                     model: {
                       value: _vm.e1,
                       callback: function($$v) {
@@ -66310,7 +66565,13 @@ var render = function() {
                       [
                         _c(
                           "v-stepper-step",
-                          { attrs: { complete: _vm.e1 > 1, step: "1" } },
+                          {
+                            attrs: {
+                              color: "morado",
+                              complete: _vm.e1 > 1,
+                              step: "1"
+                            }
+                          },
                           [_vm._v("Elige tu Equipamiento")]
                         ),
                         _vm._v(" "),
@@ -66318,15 +66579,23 @@ var render = function() {
                         _vm._v(" "),
                         _c(
                           "v-stepper-step",
-                          { attrs: { complete: _vm.e1 > 2, step: "2" } },
+                          {
+                            attrs: {
+                              color: "morado",
+                              complete: _vm.e1 > 2,
+                              step: "2"
+                            }
+                          },
                           [_vm._v("Elige Día de Observación ")]
                         ),
                         _vm._v(" "),
                         _c("v-divider"),
                         _vm._v(" "),
-                        _c("v-stepper-step", { attrs: { step: "3" } }, [
-                          _vm._v("Reserva tu Hora")
-                        ])
+                        _c(
+                          "v-stepper-step",
+                          { attrs: { color: "morado", step: "3" } },
+                          [_vm._v("Reserva tu Hora")]
+                        )
                       ],
                       1
                     ),
@@ -66446,7 +66715,7 @@ var render = function() {
                                   fab: "",
                                   dark: "",
                                   small: "",
-                                  color: "primary"
+                                  color: "morado"
                                 },
                                 on: {
                                   click: function($event) {
@@ -67055,7 +67324,7 @@ var render = function() {
                                   fab: "",
                                   dark: "",
                                   small: "",
-                                  color: "primary"
+                                  color: "morado"
                                 },
                                 on: {
                                   click: function($event) {
@@ -67079,7 +67348,7 @@ var render = function() {
                                   fab: "",
                                   dark: "",
                                   small: "",
-                                  color: "primary"
+                                  color: "morado"
                                 },
                                 on: {
                                   click: function($event) {
@@ -67260,7 +67529,7 @@ var render = function() {
                                   fab: "",
                                   dark: "",
                                   small: "",
-                                  color: "primary"
+                                  color: "morado"
                                 },
                                 on: {
                                   click: function($event) {
@@ -67804,145 +68073,164 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "v-layout",
-    { attrs: { row: "", "justify-center": "" } },
+    { attrs: { row: "" } },
     [
       _c(
         "v-flex",
-        { attrs: { xs12: "" } },
+        { staticClass: "px-2", attrs: { xs8: "" } },
         [
           _c(
             "v-card",
+            { staticClass: "py-4" },
             [
+              _c("my-reservations"),
+              _vm._v(" "),
               _c(
-                "v-container",
-                { attrs: { fluid: "" } },
+                "v-layout",
                 [
+                  _c("v-flex", { attrs: { xs1: "" } }),
+                  _vm._v(" "),
                   _c(
-                    "v-layout",
-                    { attrs: { "align-center": "", row: "" } },
+                    "v-flex",
+                    { attrs: { xs6: "" } },
                     [
                       _c(
-                        "v-flex",
-                        { attrs: { xs4: "", "align-end": "", flexbox: "" } },
+                        "v-btn",
+                        {
+                          attrs: { round: "", color: "morado", dark: "" },
+                          on: { click: _vm.reservClick }
+                        },
+                        [_vm._v("Reservar")]
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-flex",
+        { attrs: { xs4: "" } },
+        [
+          _c(
+            "v-layout",
+            { staticClass: "px-1" },
+            [
+              _c(
+                "v-flex",
+                { staticClass: "px-1", attrs: { xs12: "" } },
+                [
+                  _c(
+                    "v-card",
+                    [
+                      _c(
+                        "v-layout",
                         [
+                          _c("v-flex", { attrs: { xs1: "" } }),
+                          _vm._v(" "),
                           _c(
-                            "v-layout",
-                            { attrs: { "align-center": "", row: "" } },
+                            "v-flex",
+                            { staticClass: "py-2", attrs: { xs8: "" } },
                             [
-                              _c("v-flex", {
-                                attrs: { xs4: "", "align-end": "", flexbox: "" }
-                              }),
-                              _vm._v(" "),
-                              _c(
-                                "v-flex",
-                                {
-                                  attrs: {
-                                    xs4: "",
-                                    "align-end": "",
-                                    flexbox: ""
-                                  }
-                                },
-                                [
-                                  _c("span", { staticClass: "subheading" }, [
-                                    _vm._v("Clima Actual")
-                                  ])
-                                ]
-                              )
+                              _c("span", { staticClass: "subheading" }, [
+                                _vm._v("Clima Actual")
+                              ])
+                            ]
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-layout",
+                        [
+                          _c("v-flex", {
+                            attrs: { xs1: "", "align-end": "", flexbox: "" }
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "v-flex",
+                            {
+                              attrs: { xs4: "", "align-end": "", flexbox: "" }
+                            },
+                            [
+                              _c("v-img", { attrs: { src: _vm.weather_image } })
                             ],
                             1
                           ),
                           _vm._v(" "),
                           _c(
-                            "v-layout",
-                            { attrs: { "align-center": "", row: "" } },
+                            "v-flex",
+                            {
+                              attrs: { xs4: "", "align-end": "", flexbox: "" }
+                            },
                             [
-                              _c("v-flex", {
-                                attrs: { xs4: "", "align-end": "", flexbox: "" }
-                              }),
-                              _vm._v(" "),
                               _c(
-                                "v-flex",
+                                "span",
                                 {
-                                  attrs: {
-                                    xs2: "",
-                                    "align-end": "",
-                                    flexbox: ""
-                                  }
+                                  staticClass: "subheading",
+                                  staticStyle: { color: "#0BD8B5" }
                                 },
                                 [
-                                  _c("v-img", {
-                                    attrs: { src: _vm.weather_image }
-                                  })
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "v-flex",
-                                {
-                                  attrs: {
-                                    xs4: "",
-                                    "align-end": "",
-                                    flexbox: ""
-                                  }
-                                },
-                                [
-                                  _c("span", { staticClass: "subheading" }, [
-                                    _vm._v(
+                                  _vm._v(
+                                    " " +
+                                      _vm._s(_vm.weather["WeatherText"]) +
                                       " " +
-                                        _vm._s(_vm.weather["WeatherText"]) +
-                                        " " +
-                                        _vm._s(
-                                          _vm.weather["Temperature"]["Metric"][
-                                            "Value"
-                                          ]
-                                        ) +
-                                        " º" +
-                                        _vm._s(
-                                          _vm.weather["Temperature"]["Metric"][
-                                            "Unit"
-                                          ]
-                                        )
-                                    )
-                                  ])
+                                      _vm._s(
+                                        _vm.weather["Temperature"]["Metric"][
+                                          "Value"
+                                        ]
+                                      ) +
+                                      " º" +
+                                      _vm._s(
+                                        _vm.weather["Temperature"]["Metric"][
+                                          "Unit"
+                                        ]
+                                      )
+                                  )
                                 ]
                               )
-                            ],
-                            1
-                          ),
+                            ]
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-layout",
+                        { attrs: { "align-center": "", row: "" } },
+                        [
+                          _c("v-flex", {
+                            attrs: { xs5: "", "align-end": "", flexbox: "" }
+                          }),
                           _vm._v(" "),
                           _c(
-                            "v-layout",
-                            { attrs: { "align-center": "", row: "" } },
+                            "v-flex",
+                            {
+                              attrs: { xs4: "", "align-end": "", flexbox: "" }
+                            },
                             [
-                              _c("v-flex", {
-                                attrs: { xs4: "", "align-end": "", flexbox: "" }
-                              }),
-                              _vm._v(" "),
                               _c(
-                                "v-flex",
+                                "v-btn",
                                 {
                                   attrs: {
-                                    xs4: "",
-                                    "align-end": "",
-                                    flexbox: ""
+                                    round: "",
+                                    color: "verde",
+                                    href:
+                                      "https://www.accuweather.com/es/cl/san-pedro-de-atacama/57225/daily-weather-forecast/57225?day=0",
+                                    target: "_blank"
                                   }
                                 },
                                 [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: {
-                                        href:
-                                          "https://www.accuweather.com/es/cl/san-pedro-de-atacama/57225/daily-weather-forecast/57225?day=0",
-                                        target: "_blank"
-                                      }
-                                    },
-                                    [
-                                      _vm._v(
-                                        "\n                          Ver Pronóstico\n                          "
-                                      )
-                                    ]
+                                  _vm._v(
+                                    "\n                                  Ver Pronóstico    \n                              "
                                   )
                                 ]
                               )
@@ -67953,132 +68241,167 @@ var render = function() {
                         1
                       ),
                       _vm._v(" "),
+                      _c("br")
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c("br"),
+          _vm._v(" "),
+          _c(
+            "v-layout",
+            { staticClass: "px-1" },
+            [
+              _c(
+                "v-flex",
+                { staticClass: "px-1", attrs: { xs12: "" } },
+                [
+                  _c(
+                    "v-card",
+                    { staticClass: "py-1" },
+                    [
                       _c(
-                        "v-flex",
-                        { attrs: { xs4: "", "align-end": "", flexbox: "" } },
+                        "v-layout",
                         [
-                          _c("span", { staticClass: "subheading" }, [
-                            _vm._v(
-                              " Puntos Disponibles:" +
-                                _vm._s(_vm.$store.getters.current_points)
-                            )
-                          ])
-                        ]
+                          _c("v-flex", { attrs: { xs1: "" } }),
+                          _vm._v(" "),
+                          _c(
+                            "v-flex",
+                            { staticClass: "px-1", attrs: { xs8: "" } },
+                            [
+                              _c("span", { staticClass: "subheading" }, [
+                                _vm._v("Puntos")
+                              ])
+                            ]
+                          )
+                        ],
+                        1
                       ),
                       _vm._v(" "),
                       _c(
-                        "v-flex",
-                        { attrs: { xs4: "", "align-end": "", flexbox: "" } },
+                        "v-layout",
+                        { staticClass: "px-1" },
                         [
+                          _c("v-flex", { attrs: { xs4: "" } }),
+                          _vm._v(" "),
                           _c(
-                            "div",
+                            "v-flex",
+                            {
+                              attrs: { xs4: "", "align-end": "", flexbox: "" }
+                            },
                             [
                               _c(
-                                "v-btn",
+                                "span",
                                 {
-                                  attrs: { color: "warning", dark: "" },
-                                  on: { click: _vm.pointsClick }
+                                  staticClass: "display-3",
+                                  staticStyle: { color: "#FFCC00" }
                                 },
-                                [_vm._v("Comprar Puntos")]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "v-btn",
-                                {
-                                  attrs: { color: "warning", dark: "" },
-                                  on: { click: _vm.reservClick }
-                                },
-                                [_vm._v("Reservar")]
+                                [
+                                  _vm._v(
+                                    _vm._s(_vm.$store.getters.current_points)
+                                  )
+                                ]
                               )
-                            ],
-                            1
+                            ]
                           )
-                        ]
-                      )
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "v-layout",
-                    { attrs: { "align-center": "", row: "" } },
-                    [_c("v-flex", { attrs: { xs1: "" } })],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "v-layout",
-                    { attrs: { "align-center": "", row: "" } },
-                    [
-                      _c("v-flex", { attrs: { xs1: "" } }),
+                        ],
+                        1
+                      ),
                       _vm._v(" "),
                       _c(
-                        "v-flex",
-                        {
-                          attrs: {
-                            xs2: "",
-                            "align-center": "",
-                            sm2: "",
-                            md1: ""
-                          }
-                        },
+                        "v-layout",
+                        { staticClass: "px-1" },
                         [
+                          _c("v-flex", { attrs: { xs5: "" } }),
+                          _vm._v(" "),
                           _c(
-                            "v-layout",
-                            { attrs: { "align-center": "", row: "" } },
+                            "v-flex",
+                            {
+                              attrs: { xs4: "", "align-end": "", flexbox: "" }
+                            },
                             [
                               _c(
-                                "v-flex",
-                                { attrs: { "align-center": "", xs12: "" } },
+                                "div",
                                 [
-                                  _c("v-avatar", { attrs: { size: "150px" } }, [
-                                    _c("img", {
+                                  _c(
+                                    "v-btn",
+                                    {
                                       attrs: {
-                                        src: _vm.$store.getters.user["avatar"],
-                                        alt: "Avatar"
-                                      }
-                                    })
-                                  ])
+                                        round: "",
+                                        color: "amarillo",
+                                        dark: ""
+                                      },
+                                      on: { click: _vm.pointsClick }
+                                    },
+                                    [_vm._v("Comprar Puntos")]
+                                  )
                                 ],
                                 1
                               )
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
+                            ]
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c("br")
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-flex",
+        { staticClass: "px-2", attrs: { xs12: "" } },
+        [
+          _c("br"),
+          _vm._v(" "),
+          _c(
+            "v-card",
+            [
+              _c(
+                "v-layout",
+                { attrs: { row: "", wrap: "" } },
+                [
+                  _c("v-flex", { attrs: { xs1: "" } }),
+                  _vm._v(" "),
+                  _c(
+                    "v-flex",
+                    { attrs: { xs2: "" } },
+                    [
+                      _c(
+                        "v-layout",
+                        { attrs: { "align-center": "", row: "" } },
+                        [
                           _c(
-                            "v-layout",
-                            { attrs: { "align-center": "", row: "" } },
-                            [_c("v-flex", { attrs: { xs1: "" } })],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "v-layout",
-                            { attrs: { "align-center": "", row: "" } },
+                            "v-flex",
+                            {
+                              staticClass: "py-2",
+                              attrs: { "align-center": "", xs12: "" }
+                            },
                             [
-                              _c(
-                                "v-flex",
-                                { attrs: { "align-center": "", xs1: "" } },
-                                [_c("upload-avatar")],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c("v-flex", {
-                                attrs: { "align-center": "", xs1: "" }
-                              }),
-                              _vm._v(" "),
-                              _c(
-                                "v-flex",
-                                { attrs: { "align-center": "", xs10: "" } },
-                                [
-                                  _c("span", { staticClass: "body-2" }, [
-                                    _vm._v(
-                                      _vm._s(_vm.$store.getters.user["email"])
-                                    )
-                                  ])
-                                ]
-                              )
+                              _c("v-avatar", { attrs: { size: "150px" } }, [
+                                _c("img", {
+                                  attrs: {
+                                    src: _vm.$store.getters.user["avatar"],
+                                    alt: "Avatar"
+                                  }
+                                })
+                              ])
                             ],
                             1
                           )
@@ -68086,122 +68409,111 @@ var render = function() {
                         1
                       ),
                       _vm._v(" "),
-                      _c("v-flex", { attrs: { xs1: "" } }),
+                      _c(
+                        "v-layout",
+                        { attrs: { "align-center": "", row: "" } },
+                        [_c("v-flex", { attrs: { xs1: "" } })],
+                        1
+                      ),
                       _vm._v(" "),
                       _c(
-                        "v-flex",
-                        { attrs: { xs8: "", "align-center": "", flexbox: "" } },
-                        [_c("my-reservations")],
+                        "v-layout",
+                        { attrs: { "align-center": "", row: "" } },
+                        [
+                          _c(
+                            "v-flex",
+                            { attrs: { "align-center": "", xs1: "" } },
+                            [_c("upload-avatar")],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("v-flex", {
+                            attrs: { "align-center": "", xs1: "" }
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "v-flex",
+                            { attrs: { "align-center": "", xs10: "" } },
+                            [
+                              _c("span", { staticClass: "body-2" }, [
+                                _vm._v(_vm._s(_vm.$store.getters.user["email"]))
+                              ])
+                            ]
+                          )
+                        ],
                         1
                       )
                     ],
                     1
-                  )
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "v-container",
-                { attrs: { fluid: "" } },
-                [
+                  ),
+                  _vm._v(" "),
+                  _c("v-flex", { attrs: { xs1: "" } }),
+                  _vm._v(" "),
                   _c(
-                    "v-layout",
-                    { attrs: { "align-center": "", row: "" } },
+                    "v-flex",
+                    { attrs: { xs7: "" } },
                     [
                       _c(
-                        "v-flex",
-                        {
-                          staticStyle: { overflow: "auto" },
-                          attrs: { xs12: "" }
-                        },
+                        "v-card",
                         [
                           _c(
-                            "v-card",
+                            "v-card-title",
                             [
-                              _c(
-                                "v-card-title",
-                                [
-                                  _c("span", { staticClass: "headline" }, [
-                                    _vm._v("Mis Sesiones")
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("v-spacer")
-                                ],
-                                1
-                              ),
+                              _c("span", { staticClass: "headline" }, [
+                                _vm._v("Mis Sesiones")
+                              ]),
                               _vm._v(" "),
-                              _c("v-data-table", {
-                                attrs: {
-                                  headers: _vm.mySessionsHeaders,
-                                  items: _vm.sessions,
-                                  search: _vm.search
-                                },
-                                scopedSlots: _vm._u([
-                                  {
-                                    key: "items",
-                                    fn: function(props) {
-                                      return [
-                                        _c(
-                                          "td",
-                                          [
-                                            _c("v-img", {
-                                              attrs: {
-                                                src: props.item.img,
-                                                "aspect-ratio": "1"
-                                              }
-                                            })
-                                          ],
-                                          1
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "td",
-                                          { staticClass: "text-xs-left" },
-                                          [
-                                            _vm._v(
-                                              _vm._s(props.item.session_date)
-                                            )
-                                          ]
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "td",
-                                          { staticClass: "text-xs-left" },
-                                          [
-                                            _vm._v(
-                                              _vm._s(props.item.session_hour)
-                                            )
-                                          ]
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "td",
-                                          { staticClass: "text-xs-left" },
-                                          [_vm._v(_vm._s(props.item.img_count))]
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "td",
-                                          { staticClass: "text-xs-left" },
-                                          [
-                                            _vm._v(
-                                              _vm._s(props.item.equipment_name)
-                                            )
-                                          ]
-                                        ),
-                                        _vm._v(" "),
-                                        _c("td", {
-                                          staticClass: "text-xs-left"
-                                        })
-                                      ]
-                                    }
-                                  }
-                                ])
-                              })
+                              _c("v-spacer")
                             ],
                             1
-                          )
+                          ),
+                          _vm._v(" "),
+                          _c("v-data-table", {
+                            attrs: {
+                              headers: _vm.mySessionsHeaders,
+                              items: _vm.sessions,
+                              search: _vm.search
+                            },
+                            scopedSlots: _vm._u([
+                              {
+                                key: "items",
+                                fn: function(props) {
+                                  return [
+                                    _c(
+                                      "td",
+                                      [
+                                        _c("v-img", {
+                                          attrs: {
+                                            src: props.item.img,
+                                            "aspect-ratio": "1"
+                                          }
+                                        })
+                                      ],
+                                      1
+                                    ),
+                                    _vm._v(" "),
+                                    _c("td", { staticClass: "text-xs-left" }, [
+                                      _vm._v(_vm._s(props.item.session_date))
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("td", { staticClass: "text-xs-left" }, [
+                                      _vm._v(_vm._s(props.item.session_hour))
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("td", { staticClass: "text-xs-left" }, [
+                                      _vm._v(_vm._s(props.item.img_count))
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("td", { staticClass: "text-xs-left" }, [
+                                      _vm._v(_vm._s(props.item.equipment_name))
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("td", { staticClass: "text-xs-left" })
+                                  ]
+                                }
+                              }
+                            ])
+                          })
                         ],
                         1
                       )
@@ -111274,7 +111586,12 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuetify__WEBPACK_IMPORTED_MODULE_
     error: '#FF5252',
     info: '#2196F3',
     success: '#4CAF50',
-    warning: '#FFC107'
+    warning: '#FFC107',
+    morado: '#8874A7',
+    verde: '#0BD8B5',
+    amarillo: '#FFCC00',
+    rojo: '#CC3200',
+    backgraundColor: '#0E1820'
   }
 });
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('app', __webpack_require__(/*! ./views/App.vue */ "./resources/js/views/App.vue")); // Vue.component('control-component', ControlComponent);
