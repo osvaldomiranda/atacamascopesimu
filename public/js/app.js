@@ -2693,6 +2693,28 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   computed: Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['astronomc_objects']),
@@ -4952,25 +4974,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -5022,7 +5025,7 @@ var actualDate = new Date().toISOString().substr(0, 10);
   }
 }), _defineProperty(_computed$computed$da, "data", function data() {
   return {
-    img: "https://cdn.shopify.com/s/files/1/1935/4371/products/12046_Advanced_VX_9_25_SCT_1_570x380@2x.jpg?v=1554219678",
+    img: "https://cdn.shopify.com/s/files/1/1935/4371/products/12046_Advanced_VX_9_25_SCT_1_570x380@2x.png?v=1554219678",
     e1: 0,
     generalRuleDate: [function (v) {
       return !!v || 'Campo requerido';
@@ -5232,132 +5235,9 @@ var actualDate = new Date().toISOString().substr(0, 10);
       alert("Error reservation my_reservations :" + resp);
     });
   },
-  moonImage: function moonImage() {
-    var app = this;
-    var splitted = app.moon_state.split(':');
-    var age = parseInt(splitted[3]);
-
-    switch (age) {
-      case 1:
-        app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna01.jpg */ "./resources/assets/images/Luna01.jpg");
-        break;
-
-      case 2:
-        app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna02.jpg */ "./resources/assets/images/Luna02.jpg");
-        break;
-
-      case 3:
-        app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna03.jpg */ "./resources/assets/images/Luna03.jpg");
-        break;
-
-      case 4:
-        app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna04.jpg */ "./resources/assets/images/Luna04.jpg");
-        break;
-
-      case 5:
-        app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna05.jpg */ "./resources/assets/images/Luna05.jpg");
-        break;
-
-      case 6:
-        app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna06.jpg */ "./resources/assets/images/Luna06.jpg");
-        break;
-
-      case 7:
-        app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna07.jpg */ "./resources/assets/images/Luna07.jpg");
-        break;
-
-      case 8:
-        app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna08.jpg */ "./resources/assets/images/Luna08.jpg");
-        break;
-
-      case 9:
-        app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna09.jpg */ "./resources/assets/images/Luna09.jpg");
-        break;
-
-      case 10:
-        app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna10.jpg */ "./resources/assets/images/Luna10.jpg");
-        break;
-
-      case 11:
-        app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna11.jpg */ "./resources/assets/images/Luna11.jpg");
-        break;
-
-      case 12:
-        app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna12.jpg */ "./resources/assets/images/Luna12.jpg");
-        break;
-
-      case 13:
-        app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna13.jpg */ "./resources/assets/images/Luna13.jpg");
-        break;
-
-      case 14:
-        app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna14.jpg */ "./resources/assets/images/Luna14.jpg");
-        break;
-
-      case 15:
-        app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna15.jpg */ "./resources/assets/images/Luna15.jpg");
-        break;
-
-      case 16:
-        app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna16.jpg */ "./resources/assets/images/Luna16.jpg");
-        break;
-
-      case 17:
-        app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna17.jpg */ "./resources/assets/images/Luna17.jpg");
-        break;
-
-      case 18:
-        app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna18.jpg */ "./resources/assets/images/Luna18.jpg");
-        break;
-
-      case 19:
-        app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna19.jpg */ "./resources/assets/images/Luna19.jpg");
-        break;
-
-      case 20:
-        app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna20.jpg */ "./resources/assets/images/Luna20.jpg");
-        break;
-
-      case 21:
-        app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna21.jpg */ "./resources/assets/images/Luna21.jpg");
-        break;
-
-      case 22:
-        app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna22.jpg */ "./resources/assets/images/Luna22.jpg");
-        break;
-
-      case 23:
-        app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna23.jpg */ "./resources/assets/images/Luna23.jpg");
-        break;
-
-      case 24:
-        app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna24.jpg */ "./resources/assets/images/Luna24.jpg");
-        break;
-
-      case 25:
-        app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna25.jpg */ "./resources/assets/images/Luna25.jpg");
-        break;
-
-      case 26:
-        app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna26.jpg */ "./resources/assets/images/Luna26.jpg");
-        break;
-
-      case 27:
-        app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna27.jpg */ "./resources/assets/images/Luna27.jpg");
-        break;
-
-      case 28:
-        app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna28.jpg */ "./resources/assets/images/Luna28.jpg");
-        break;
-
-      case 29:
-        app.moonUrl = __webpack_require__(/*! ./../../assets/images/Luna29.jpg */ "./resources/assets/images/Luna29.jpg");
-        break;
-    } //alert(app.moonUrl);
-
-  },
   viewDay: function viewDay(_ref) {
     var date = _ref.date;
+    //validar que la fecha a reservar sea mayor o igual a hoy
     this.focus = date;
     this.start = this.focus;
     this.reservatios_day();
@@ -5440,119 +5320,119 @@ var actualDate = new Date().toISOString().substr(0, 10);
 
     switch (age) {
       case 1:
-        imageUrl = __webpack_require__(/*! ./../../assets/images/Luna01.jpg */ "./resources/assets/images/Luna01.jpg");
+        imageUrl = __webpack_require__(/*! ./../../assets/images/Luna01.png */ "./resources/assets/images/Luna01.png");
         break;
 
       case 2:
-        imageUrl = __webpack_require__(/*! ./../../assets/images/Luna02.jpg */ "./resources/assets/images/Luna02.jpg");
+        imageUrl = __webpack_require__(/*! ./../../assets/images/Luna02.png */ "./resources/assets/images/Luna02.png");
         break;
 
       case 3:
-        imageUrl = __webpack_require__(/*! ./../../assets/images/Luna03.jpg */ "./resources/assets/images/Luna03.jpg");
+        imageUrl = __webpack_require__(/*! ./../../assets/images/Luna03.png */ "./resources/assets/images/Luna03.png");
         break;
 
       case 4:
-        imageUrl = __webpack_require__(/*! ./../../assets/images/Luna04.jpg */ "./resources/assets/images/Luna04.jpg");
+        imageUrl = __webpack_require__(/*! ./../../assets/images/Luna04.png */ "./resources/assets/images/Luna04.png");
         break;
 
       case 5:
-        imageUrl = __webpack_require__(/*! ./../../assets/images/Luna05.jpg */ "./resources/assets/images/Luna05.jpg");
+        imageUrl = __webpack_require__(/*! ./../../assets/images/Luna05.png */ "./resources/assets/images/Luna05.png");
         break;
 
       case 6:
-        imageUrl = __webpack_require__(/*! ./../../assets/images/Luna06.jpg */ "./resources/assets/images/Luna06.jpg");
+        imageUrl = __webpack_require__(/*! ./../../assets/images/Luna06.png */ "./resources/assets/images/Luna06.png");
         break;
 
       case 7:
-        imageUrl = __webpack_require__(/*! ./../../assets/images/Luna07.jpg */ "./resources/assets/images/Luna07.jpg");
+        imageUrl = __webpack_require__(/*! ./../../assets/images/Luna07.png */ "./resources/assets/images/Luna07.png");
         break;
 
       case 8:
-        imageUrl = __webpack_require__(/*! ./../../assets/images/Luna08.jpg */ "./resources/assets/images/Luna08.jpg");
+        imageUrl = __webpack_require__(/*! ./../../assets/images/Luna08.png */ "./resources/assets/images/Luna08.png");
         break;
 
       case 9:
-        imageUrl = __webpack_require__(/*! ./../../assets/images/Luna09.jpg */ "./resources/assets/images/Luna09.jpg");
+        imageUrl = __webpack_require__(/*! ./../../assets/images/Luna09.png */ "./resources/assets/images/Luna09.png");
         break;
 
       case 10:
-        imageUrl = __webpack_require__(/*! ./../../assets/images/Luna10.jpg */ "./resources/assets/images/Luna10.jpg");
+        imageUrl = __webpack_require__(/*! ./../../assets/images/Luna10.png */ "./resources/assets/images/Luna10.png");
         break;
 
       case 11:
-        imageUrl = __webpack_require__(/*! ./../../assets/images/Luna11.jpg */ "./resources/assets/images/Luna11.jpg");
+        imageUrl = __webpack_require__(/*! ./../../assets/images/Luna11.png */ "./resources/assets/images/Luna11.png");
         break;
 
       case 12:
-        imageUrl = __webpack_require__(/*! ./../../assets/images/Luna12.jpg */ "./resources/assets/images/Luna12.jpg");
+        imageUrl = __webpack_require__(/*! ./../../assets/images/Luna12.png */ "./resources/assets/images/Luna12.png");
         break;
 
       case 13:
-        imageUrl = __webpack_require__(/*! ./../../assets/images/Luna13.jpg */ "./resources/assets/images/Luna13.jpg");
+        imageUrl = __webpack_require__(/*! ./../../assets/images/Luna13.png */ "./resources/assets/images/Luna13.png");
         break;
 
       case 14:
-        imageUrl = __webpack_require__(/*! ./../../assets/images/Luna14.jpg */ "./resources/assets/images/Luna14.jpg");
+        imageUrl = __webpack_require__(/*! ./../../assets/images/Luna14.png */ "./resources/assets/images/Luna14.png");
         break;
 
       case 15:
-        imageUrl = __webpack_require__(/*! ./../../assets/images/Luna15.jpg */ "./resources/assets/images/Luna15.jpg");
+        imageUrl = __webpack_require__(/*! ./../../assets/images/Luna15.png */ "./resources/assets/images/Luna15.png");
         break;
 
       case 16:
-        imageUrl = __webpack_require__(/*! ./../../assets/images/Luna16.jpg */ "./resources/assets/images/Luna16.jpg");
+        imageUrl = __webpack_require__(/*! ./../../assets/images/Luna16.png */ "./resources/assets/images/Luna16.png");
         break;
 
       case 17:
-        imageUrl = __webpack_require__(/*! ./../../assets/images/Luna17.jpg */ "./resources/assets/images/Luna17.jpg");
+        imageUrl = __webpack_require__(/*! ./../../assets/images/Luna17.png */ "./resources/assets/images/Luna17.png");
         break;
 
       case 18:
-        imageUrl = __webpack_require__(/*! ./../../assets/images/Luna18.jpg */ "./resources/assets/images/Luna18.jpg");
+        imageUrl = __webpack_require__(/*! ./../../assets/images/Luna18.png */ "./resources/assets/images/Luna18.png");
         break;
 
       case 19:
-        imageUrl = __webpack_require__(/*! ./../../assets/images/Luna19.jpg */ "./resources/assets/images/Luna19.jpg");
+        imageUrl = __webpack_require__(/*! ./../../assets/images/Luna19.png */ "./resources/assets/images/Luna19.png");
         break;
 
       case 20:
-        imageUrl = __webpack_require__(/*! ./../../assets/images/Luna20.jpg */ "./resources/assets/images/Luna20.jpg");
+        imageUrl = __webpack_require__(/*! ./../../assets/images/Luna20.png */ "./resources/assets/images/Luna20.png");
         break;
 
       case 21:
-        imageUrl = __webpack_require__(/*! ./../../assets/images/Luna21.jpg */ "./resources/assets/images/Luna21.jpg");
+        imageUrl = __webpack_require__(/*! ./../../assets/images/Luna21.png */ "./resources/assets/images/Luna21.png");
         break;
 
       case 22:
-        imageUrl = __webpack_require__(/*! ./../../assets/images/Luna22.jpg */ "./resources/assets/images/Luna22.jpg");
+        imageUrl = __webpack_require__(/*! ./../../assets/images/Luna22.png */ "./resources/assets/images/Luna22.png");
         break;
 
       case 23:
-        imageUrl = __webpack_require__(/*! ./../../assets/images/Luna23.jpg */ "./resources/assets/images/Luna23.jpg");
+        imageUrl = __webpack_require__(/*! ./../../assets/images/Luna23.png */ "./resources/assets/images/Luna23.png");
         break;
 
       case 24:
-        imageUrl = __webpack_require__(/*! ./../../assets/images/Luna24.jpg */ "./resources/assets/images/Luna24.jpg");
+        imageUrl = __webpack_require__(/*! ./../../assets/images/Luna24.png */ "./resources/assets/images/Luna24.png");
         break;
 
       case 25:
-        imageUrl = __webpack_require__(/*! ./../../assets/images/Luna25.jpg */ "./resources/assets/images/Luna25.jpg");
+        imageUrl = __webpack_require__(/*! ./../../assets/images/Luna25.png */ "./resources/assets/images/Luna25.png");
         break;
 
       case 26:
-        imageUrl = __webpack_require__(/*! ./../../assets/images/Luna26.jpg */ "./resources/assets/images/Luna26.jpg");
+        imageUrl = __webpack_require__(/*! ./../../assets/images/Luna26.png */ "./resources/assets/images/Luna26.png");
         break;
 
       case 27:
-        imageUrl = __webpack_require__(/*! ./../../assets/images/Luna27.jpg */ "./resources/assets/images/Luna27.jpg");
+        imageUrl = __webpack_require__(/*! ./../../assets/images/Luna27.png */ "./resources/assets/images/Luna27.png");
         break;
 
       case 28:
-        imageUrl = __webpack_require__(/*! ./../../assets/images/Luna28.jpg */ "./resources/assets/images/Luna28.jpg");
+        imageUrl = __webpack_require__(/*! ./../../assets/images/Luna28.png */ "./resources/assets/images/Luna28.png");
         break;
 
       case 29:
-        imageUrl = __webpack_require__(/*! ./../../assets/images/Luna29.jpg */ "./resources/assets/images/Luna29.jpg");
+        imageUrl = __webpack_require__(/*! ./../../assets/images/Luna29.png */ "./resources/assets/images/Luna29.png");
         break;
     }
 
@@ -5984,7 +5864,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 
 
- //import ReservationComponent from './../components/ReservationComponent';
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -6859,6 +6738,112 @@ __webpack_require__.r(__webpack_exports__);
     }
   }
 });
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ControlComponent.vue?vue&type=style&index=0&lang=css&":
+/*!**********************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ControlComponent.vue?vue&type=style&index=0&lang=css& ***!
+  \**********************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.my-span {\n  \tbackground-color: transparent;\n  \tcolor: white;\n    position: absolute;\n    width: 100%;\n    bottom: 0;\n    text-align: center;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/lib/css-base.js":
+/*!*************************************************!*\
+  !*** ./node_modules/css-loader/lib/css-base.js ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/*
+	MIT License http://www.opensource.org/licenses/mit-license.php
+	Author Tobias Koppers @sokra
+*/
+// css base code, injected by the css-loader
+module.exports = function(useSourceMap) {
+	var list = [];
+
+	// return the list of modules as css string
+	list.toString = function toString() {
+		return this.map(function (item) {
+			var content = cssWithMappingToString(item, useSourceMap);
+			if(item[2]) {
+				return "@media " + item[2] + "{" + content + "}";
+			} else {
+				return content;
+			}
+		}).join("");
+	};
+
+	// import a list of modules into the list
+	list.i = function(modules, mediaQuery) {
+		if(typeof modules === "string")
+			modules = [[null, modules, ""]];
+		var alreadyImportedModules = {};
+		for(var i = 0; i < this.length; i++) {
+			var id = this[i][0];
+			if(typeof id === "number")
+				alreadyImportedModules[id] = true;
+		}
+		for(i = 0; i < modules.length; i++) {
+			var item = modules[i];
+			// skip already imported module
+			// this implementation is not 100% perfect for weird media query combinations
+			//  when a module is imported multiple times with different media queries.
+			//  I hope this will never occur (Hey this way we have smaller bundles)
+			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
+				if(mediaQuery && !item[2]) {
+					item[2] = mediaQuery;
+				} else if(mediaQuery) {
+					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
+				}
+				list.push(item);
+			}
+		}
+	};
+	return list;
+};
+
+function cssWithMappingToString(item, useSourceMap) {
+	var content = item[1] || '';
+	var cssMapping = item[3];
+	if (!cssMapping) {
+		return content;
+	}
+
+	if (useSourceMap && typeof btoa === 'function') {
+		var sourceMapping = toComment(cssMapping);
+		var sourceURLs = cssMapping.sources.map(function (source) {
+			return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */'
+		});
+
+		return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
+	}
+
+	return [content].join('\n');
+}
+
+// Adapted from convert-source-map (MIT)
+function toComment(sourceMap) {
+	// eslint-disable-next-line no-undef
+	var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
+	var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
+
+	return '/*# ' + data + ' */';
+}
+
 
 /***/ }),
 
@@ -56466,6 +56451,545 @@ module.exports = RopeSequence
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ControlComponent.vue?vue&type=style&index=0&lang=css&":
+/*!**************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ControlComponent.vue?vue&type=style&index=0&lang=css& ***!
+  \**************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./ControlComponent.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ControlComponent.vue?vue&type=style&index=0&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
+/***/ "./node_modules/style-loader/lib/addStyles.js":
+/*!****************************************************!*\
+  !*** ./node_modules/style-loader/lib/addStyles.js ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/*
+	MIT License http://www.opensource.org/licenses/mit-license.php
+	Author Tobias Koppers @sokra
+*/
+
+var stylesInDom = {};
+
+var	memoize = function (fn) {
+	var memo;
+
+	return function () {
+		if (typeof memo === "undefined") memo = fn.apply(this, arguments);
+		return memo;
+	};
+};
+
+var isOldIE = memoize(function () {
+	// Test for IE <= 9 as proposed by Browserhacks
+	// @see http://browserhacks.com/#hack-e71d8692f65334173fee715c222cb805
+	// Tests for existence of standard globals is to allow style-loader
+	// to operate correctly into non-standard environments
+	// @see https://github.com/webpack-contrib/style-loader/issues/177
+	return window && document && document.all && !window.atob;
+});
+
+var getTarget = function (target, parent) {
+  if (parent){
+    return parent.querySelector(target);
+  }
+  return document.querySelector(target);
+};
+
+var getElement = (function (fn) {
+	var memo = {};
+
+	return function(target, parent) {
+                // If passing function in options, then use it for resolve "head" element.
+                // Useful for Shadow Root style i.e
+                // {
+                //   insertInto: function () { return document.querySelector("#foo").shadowRoot }
+                // }
+                if (typeof target === 'function') {
+                        return target();
+                }
+                if (typeof memo[target] === "undefined") {
+			var styleTarget = getTarget.call(this, target, parent);
+			// Special case to return head of iframe instead of iframe itself
+			if (window.HTMLIFrameElement && styleTarget instanceof window.HTMLIFrameElement) {
+				try {
+					// This will throw an exception if access to iframe is blocked
+					// due to cross-origin restrictions
+					styleTarget = styleTarget.contentDocument.head;
+				} catch(e) {
+					styleTarget = null;
+				}
+			}
+			memo[target] = styleTarget;
+		}
+		return memo[target]
+	};
+})();
+
+var singleton = null;
+var	singletonCounter = 0;
+var	stylesInsertedAtTop = [];
+
+var	fixUrls = __webpack_require__(/*! ./urls */ "./node_modules/style-loader/lib/urls.js");
+
+module.exports = function(list, options) {
+	if (typeof DEBUG !== "undefined" && DEBUG) {
+		if (typeof document !== "object") throw new Error("The style-loader cannot be used in a non-browser environment");
+	}
+
+	options = options || {};
+
+	options.attrs = typeof options.attrs === "object" ? options.attrs : {};
+
+	// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
+	// tags it will allow on a page
+	if (!options.singleton && typeof options.singleton !== "boolean") options.singleton = isOldIE();
+
+	// By default, add <style> tags to the <head> element
+        if (!options.insertInto) options.insertInto = "head";
+
+	// By default, add <style> tags to the bottom of the target
+	if (!options.insertAt) options.insertAt = "bottom";
+
+	var styles = listToStyles(list, options);
+
+	addStylesToDom(styles, options);
+
+	return function update (newList) {
+		var mayRemove = [];
+
+		for (var i = 0; i < styles.length; i++) {
+			var item = styles[i];
+			var domStyle = stylesInDom[item.id];
+
+			domStyle.refs--;
+			mayRemove.push(domStyle);
+		}
+
+		if(newList) {
+			var newStyles = listToStyles(newList, options);
+			addStylesToDom(newStyles, options);
+		}
+
+		for (var i = 0; i < mayRemove.length; i++) {
+			var domStyle = mayRemove[i];
+
+			if(domStyle.refs === 0) {
+				for (var j = 0; j < domStyle.parts.length; j++) domStyle.parts[j]();
+
+				delete stylesInDom[domStyle.id];
+			}
+		}
+	};
+};
+
+function addStylesToDom (styles, options) {
+	for (var i = 0; i < styles.length; i++) {
+		var item = styles[i];
+		var domStyle = stylesInDom[item.id];
+
+		if(domStyle) {
+			domStyle.refs++;
+
+			for(var j = 0; j < domStyle.parts.length; j++) {
+				domStyle.parts[j](item.parts[j]);
+			}
+
+			for(; j < item.parts.length; j++) {
+				domStyle.parts.push(addStyle(item.parts[j], options));
+			}
+		} else {
+			var parts = [];
+
+			for(var j = 0; j < item.parts.length; j++) {
+				parts.push(addStyle(item.parts[j], options));
+			}
+
+			stylesInDom[item.id] = {id: item.id, refs: 1, parts: parts};
+		}
+	}
+}
+
+function listToStyles (list, options) {
+	var styles = [];
+	var newStyles = {};
+
+	for (var i = 0; i < list.length; i++) {
+		var item = list[i];
+		var id = options.base ? item[0] + options.base : item[0];
+		var css = item[1];
+		var media = item[2];
+		var sourceMap = item[3];
+		var part = {css: css, media: media, sourceMap: sourceMap};
+
+		if(!newStyles[id]) styles.push(newStyles[id] = {id: id, parts: [part]});
+		else newStyles[id].parts.push(part);
+	}
+
+	return styles;
+}
+
+function insertStyleElement (options, style) {
+	var target = getElement(options.insertInto)
+
+	if (!target) {
+		throw new Error("Couldn't find a style target. This probably means that the value for the 'insertInto' parameter is invalid.");
+	}
+
+	var lastStyleElementInsertedAtTop = stylesInsertedAtTop[stylesInsertedAtTop.length - 1];
+
+	if (options.insertAt === "top") {
+		if (!lastStyleElementInsertedAtTop) {
+			target.insertBefore(style, target.firstChild);
+		} else if (lastStyleElementInsertedAtTop.nextSibling) {
+			target.insertBefore(style, lastStyleElementInsertedAtTop.nextSibling);
+		} else {
+			target.appendChild(style);
+		}
+		stylesInsertedAtTop.push(style);
+	} else if (options.insertAt === "bottom") {
+		target.appendChild(style);
+	} else if (typeof options.insertAt === "object" && options.insertAt.before) {
+		var nextSibling = getElement(options.insertAt.before, target);
+		target.insertBefore(style, nextSibling);
+	} else {
+		throw new Error("[Style Loader]\n\n Invalid value for parameter 'insertAt' ('options.insertAt') found.\n Must be 'top', 'bottom', or Object.\n (https://github.com/webpack-contrib/style-loader#insertat)\n");
+	}
+}
+
+function removeStyleElement (style) {
+	if (style.parentNode === null) return false;
+	style.parentNode.removeChild(style);
+
+	var idx = stylesInsertedAtTop.indexOf(style);
+	if(idx >= 0) {
+		stylesInsertedAtTop.splice(idx, 1);
+	}
+}
+
+function createStyleElement (options) {
+	var style = document.createElement("style");
+
+	if(options.attrs.type === undefined) {
+		options.attrs.type = "text/css";
+	}
+
+	if(options.attrs.nonce === undefined) {
+		var nonce = getNonce();
+		if (nonce) {
+			options.attrs.nonce = nonce;
+		}
+	}
+
+	addAttrs(style, options.attrs);
+	insertStyleElement(options, style);
+
+	return style;
+}
+
+function createLinkElement (options) {
+	var link = document.createElement("link");
+
+	if(options.attrs.type === undefined) {
+		options.attrs.type = "text/css";
+	}
+	options.attrs.rel = "stylesheet";
+
+	addAttrs(link, options.attrs);
+	insertStyleElement(options, link);
+
+	return link;
+}
+
+function addAttrs (el, attrs) {
+	Object.keys(attrs).forEach(function (key) {
+		el.setAttribute(key, attrs[key]);
+	});
+}
+
+function getNonce() {
+	if (false) {}
+
+	return __webpack_require__.nc;
+}
+
+function addStyle (obj, options) {
+	var style, update, remove, result;
+
+	// If a transform function was defined, run it on the css
+	if (options.transform && obj.css) {
+	    result = typeof options.transform === 'function'
+		 ? options.transform(obj.css) 
+		 : options.transform.default(obj.css);
+
+	    if (result) {
+	    	// If transform returns a value, use that instead of the original css.
+	    	// This allows running runtime transformations on the css.
+	    	obj.css = result;
+	    } else {
+	    	// If the transform function returns a falsy value, don't add this css.
+	    	// This allows conditional loading of css
+	    	return function() {
+	    		// noop
+	    	};
+	    }
+	}
+
+	if (options.singleton) {
+		var styleIndex = singletonCounter++;
+
+		style = singleton || (singleton = createStyleElement(options));
+
+		update = applyToSingletonTag.bind(null, style, styleIndex, false);
+		remove = applyToSingletonTag.bind(null, style, styleIndex, true);
+
+	} else if (
+		obj.sourceMap &&
+		typeof URL === "function" &&
+		typeof URL.createObjectURL === "function" &&
+		typeof URL.revokeObjectURL === "function" &&
+		typeof Blob === "function" &&
+		typeof btoa === "function"
+	) {
+		style = createLinkElement(options);
+		update = updateLink.bind(null, style, options);
+		remove = function () {
+			removeStyleElement(style);
+
+			if(style.href) URL.revokeObjectURL(style.href);
+		};
+	} else {
+		style = createStyleElement(options);
+		update = applyToTag.bind(null, style);
+		remove = function () {
+			removeStyleElement(style);
+		};
+	}
+
+	update(obj);
+
+	return function updateStyle (newObj) {
+		if (newObj) {
+			if (
+				newObj.css === obj.css &&
+				newObj.media === obj.media &&
+				newObj.sourceMap === obj.sourceMap
+			) {
+				return;
+			}
+
+			update(obj = newObj);
+		} else {
+			remove();
+		}
+	};
+}
+
+var replaceText = (function () {
+	var textStore = [];
+
+	return function (index, replacement) {
+		textStore[index] = replacement;
+
+		return textStore.filter(Boolean).join('\n');
+	};
+})();
+
+function applyToSingletonTag (style, index, remove, obj) {
+	var css = remove ? "" : obj.css;
+
+	if (style.styleSheet) {
+		style.styleSheet.cssText = replaceText(index, css);
+	} else {
+		var cssNode = document.createTextNode(css);
+		var childNodes = style.childNodes;
+
+		if (childNodes[index]) style.removeChild(childNodes[index]);
+
+		if (childNodes.length) {
+			style.insertBefore(cssNode, childNodes[index]);
+		} else {
+			style.appendChild(cssNode);
+		}
+	}
+}
+
+function applyToTag (style, obj) {
+	var css = obj.css;
+	var media = obj.media;
+
+	if(media) {
+		style.setAttribute("media", media)
+	}
+
+	if(style.styleSheet) {
+		style.styleSheet.cssText = css;
+	} else {
+		while(style.firstChild) {
+			style.removeChild(style.firstChild);
+		}
+
+		style.appendChild(document.createTextNode(css));
+	}
+}
+
+function updateLink (link, options, obj) {
+	var css = obj.css;
+	var sourceMap = obj.sourceMap;
+
+	/*
+		If convertToAbsoluteUrls isn't defined, but sourcemaps are enabled
+		and there is no publicPath defined then lets turn convertToAbsoluteUrls
+		on by default.  Otherwise default to the convertToAbsoluteUrls option
+		directly
+	*/
+	var autoFixUrls = options.convertToAbsoluteUrls === undefined && sourceMap;
+
+	if (options.convertToAbsoluteUrls || autoFixUrls) {
+		css = fixUrls(css);
+	}
+
+	if (sourceMap) {
+		// http://stackoverflow.com/a/26603875
+		css += "\n/*# sourceMappingURL=data:application/json;base64," + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + " */";
+	}
+
+	var blob = new Blob([css], { type: "text/css" });
+
+	var oldSrc = link.href;
+
+	link.href = URL.createObjectURL(blob);
+
+	if(oldSrc) URL.revokeObjectURL(oldSrc);
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/style-loader/lib/urls.js":
+/*!***********************************************!*\
+  !*** ./node_modules/style-loader/lib/urls.js ***!
+  \***********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+
+/**
+ * When source maps are enabled, `style-loader` uses a link element with a data-uri to
+ * embed the css on the page. This breaks all relative urls because now they are relative to a
+ * bundle instead of the current page.
+ *
+ * One solution is to only use full urls, but that may be impossible.
+ *
+ * Instead, this function "fixes" the relative urls to be absolute according to the current page location.
+ *
+ * A rudimentary test suite is located at `test/fixUrls.js` and can be run via the `npm test` command.
+ *
+ */
+
+module.exports = function (css) {
+  // get current location
+  var location = typeof window !== "undefined" && window.location;
+
+  if (!location) {
+    throw new Error("fixUrls requires window.location");
+  }
+
+	// blank or null?
+	if (!css || typeof css !== "string") {
+	  return css;
+  }
+
+  var baseUrl = location.protocol + "//" + location.host;
+  var currentDir = baseUrl + location.pathname.replace(/\/[^\/]*$/, "/");
+
+	// convert each url(...)
+	/*
+	This regular expression is just a way to recursively match brackets within
+	a string.
+
+	 /url\s*\(  = Match on the word "url" with any whitespace after it and then a parens
+	   (  = Start a capturing group
+	     (?:  = Start a non-capturing group
+	         [^)(]  = Match anything that isn't a parentheses
+	         |  = OR
+	         \(  = Match a start parentheses
+	             (?:  = Start another non-capturing groups
+	                 [^)(]+  = Match anything that isn't a parentheses
+	                 |  = OR
+	                 \(  = Match a start parentheses
+	                     [^)(]*  = Match anything that isn't a parentheses
+	                 \)  = Match a end parentheses
+	             )  = End Group
+              *\) = Match anything and then a close parens
+          )  = Close non-capturing group
+          *  = Match anything
+       )  = Close capturing group
+	 \)  = Match a close parens
+
+	 /gi  = Get all matches, not the first.  Be case insensitive.
+	 */
+	var fixedCss = css.replace(/url\s*\(((?:[^)(]|\((?:[^)(]+|\([^)(]*\))*\))*)\)/gi, function(fullMatch, origUrl) {
+		// strip quotes (if they exist)
+		var unquotedOrigUrl = origUrl
+			.trim()
+			.replace(/^"(.*)"$/, function(o, $1){ return $1; })
+			.replace(/^'(.*)'$/, function(o, $1){ return $1; });
+
+		// already a full url? no change
+		if (/^(#|data:|http:\/\/|https:\/\/|file:\/\/\/|\s*$)/i.test(unquotedOrigUrl)) {
+		  return fullMatch;
+		}
+
+		// convert the url to a full url
+		var newUrl;
+
+		if (unquotedOrigUrl.indexOf("//") === 0) {
+		  	//TODO: should we add protocol?
+			newUrl = unquotedOrigUrl;
+		} else if (unquotedOrigUrl.indexOf("/") === 0) {
+			// path should be relative to the base url
+			newUrl = baseUrl + unquotedOrigUrl; // already starts with '/'
+		} else {
+			// path should be relative to current directory
+			newUrl = currentDir + unquotedOrigUrl.replace(/^\.\//, ""); // Strip leading './'
+		}
+
+		// send back the fixed url(...)
+		return "url(" + JSON.stringify(newUrl) + ")";
+	});
+
+	// send back the fixed css
+	return fixedCss;
+};
+
+
+/***/ }),
+
 /***/ "./node_modules/suncalc/suncalc.js":
 /*!*****************************************!*\
   !*** ./node_modules/suncalc/suncalc.js ***!
@@ -62386,7 +62910,7 @@ var render = function() {
             { staticClass: "ml-0 pl-3", staticStyle: { width: "600px" } },
             [
               _c("span", { staticClass: "hidden-md-and-down" }, [
-                _vm._v("AtacamaScaope")
+                _vm._v("AtacamaScope")
               ]),
               _vm._v(" "),
               _c("v-spacer")
@@ -62741,17 +63265,25 @@ var render = function() {
                           _c(
                             "v-layout",
                             [
-                              _c("v-flex", { attrs: { xs4: "" } }, [
-                                _c("span", { staticClass: "headline" }, [
-                                  _vm._v(" " + _vm._s(_vm.object))
-                                ])
-                              ]),
+                              _c(
+                                "v-flex",
+                                { staticClass: "px-2", attrs: { xs4: "" } },
+                                [
+                                  _c("span", { staticClass: "headline" }, [
+                                    _vm._v(" " + _vm._s(_vm.object))
+                                  ])
+                                ]
+                              ),
                               _vm._v(" "),
-                              _c("v-flex", { attrs: { xs4: "" } }, [
-                                _c("span", { staticClass: "headline" }, [
-                                  _vm._v(" Estado:" + _vm._s(_vm.state))
-                                ])
-                              ])
+                              _c(
+                                "v-flex",
+                                { staticClass: "px-2", attrs: { xs8: "" } },
+                                [
+                                  _c("span", { staticClass: "headline" }, [
+                                    _vm._v(" Estado:" + _vm._s(_vm.state))
+                                  ])
+                                ]
+                              )
                             ],
                             1
                           ),
@@ -62980,12 +63512,22 @@ var render = function() {
                                     }
                                   },
                                   [
-                                    _c("v-img", {
-                                      attrs: {
-                                        src: _vm.imageUrl,
-                                        "aspect-ratio": "1"
-                                      }
-                                    })
+                                    _c(
+                                      "v-img",
+                                      {
+                                        attrs: {
+                                          src: _vm.imageUrl,
+                                          "aspect-ratio": "1"
+                                        }
+                                      },
+                                      [
+                                        _c("span", { staticClass: "my-span" }, [
+                                          _vm._v(
+                                            "M16 AR:16h53m6.75s DEC:-22°9m19s ISO:1200 T:30s"
+                                          )
+                                        ])
+                                      ]
+                                    )
                                   ],
                                   1
                                 )
@@ -63077,7 +63619,7 @@ var render = function() {
                           _c(
                             "v-btn",
                             {
-                              attrs: { color: "warning" },
+                              attrs: { round: "", color: "morado" },
                               on: {
                                 click: function($event) {
                                   return _vm.move()
@@ -63103,7 +63645,8 @@ var render = function() {
                                           _vm._g(
                                             {
                                               attrs: {
-                                                color: "warning",
+                                                round: "",
+                                                color: "morado",
                                                 dark: ""
                                               }
                                             },
@@ -63548,7 +64091,8 @@ var render = function() {
                                           _vm._g(
                                             {
                                               attrs: {
-                                                color: "warning",
+                                                round: "",
+                                                color: "morado",
                                                 dark: ""
                                               }
                                             },
@@ -63965,11 +64509,9 @@ var render = function() {
                           _c(
                             "v-layout",
                             [
-                              _c("v-flex", { attrs: { xs1: "" } }),
-                              _vm._v(" "),
                               _c(
                                 "v-flex",
-                                { attrs: { xs4: "" } },
+                                { staticClass: "px-2", attrs: { xs4: "" } },
                                 [
                                   _c("v-select", {
                                     attrs: {
@@ -63997,11 +64539,9 @@ var render = function() {
                                 1
                               ),
                               _vm._v(" "),
-                              _c("v-flex", { attrs: { xs1: "" } }),
-                              _vm._v(" "),
                               _c(
                                 "v-flex",
-                                { attrs: { xs4: "" } },
+                                { staticClass: "px-2", attrs: { xs6: "" } },
                                 [
                                   _c("v-select", {
                                     attrs: {
@@ -64011,7 +64551,7 @@ var render = function() {
                                           return !!v || "Obligatorio"
                                         }
                                       ],
-                                      label: "Tiempo Exposición",
+                                      label: "Tiempo Exposición(Segundos)",
                                       required: ""
                                     },
                                     model: {
@@ -64024,9 +64564,7 @@ var render = function() {
                                   })
                                 ],
                                 1
-                              ),
-                              _vm._v(" "),
-                              _c("v-flex", { attrs: { xs1: "" } })
+                              )
                             ],
                             1
                           ),
@@ -64034,7 +64572,7 @@ var render = function() {
                           _c(
                             "v-btn",
                             {
-                              attrs: { color: "warning" },
+                              attrs: { round: "", color: "verde" },
                               on: {
                                 click: function($event) {
                                   return _vm.shoot()
@@ -64061,10 +64599,14 @@ var render = function() {
                           _c(
                             "v-layout",
                             [
-                              _c("v-flex", { attrs: { xs12: "" } }, [
+                              _c("v-flex", { attrs: { xs6: "" } }, [
                                 _c("span", { staticClass: "headline" }, [
                                   _vm._v("Enfocador")
                                 ])
+                              ]),
+                              _vm._v(" "),
+                              _c("v-flex", { attrs: { xs6: "" } }, [
+                                _c("p", [_vm._v("Posición Actual: 15000")])
                               ])
                             ],
                             1
@@ -64075,7 +64617,7 @@ var render = function() {
                             [
                               _c(
                                 "v-flex",
-                                { attrs: { xs4: "" } },
+                                { staticClass: "px-2", attrs: { xs4: "" } },
                                 [
                                   _c("v-text-field", {
                                     attrs: {
@@ -64098,12 +64640,47 @@ var render = function() {
                               _vm._v(" "),
                               _c(
                                 "v-flex",
+                                { staticClass: "px-2", attrs: { xs6: "" } },
+                                [
+                                  _c("v-select", {
+                                    attrs: {
+                                      items: _vm.Dirs,
+                                      "item-text": "Dir",
+                                      "return-object": "",
+                                      rules: [
+                                        function(v) {
+                                          return !!v || "Obligatorio"
+                                        }
+                                      ],
+                                      label: "Dirección",
+                                      required: ""
+                                    },
+                                    model: {
+                                      value: _vm.selectedDir,
+                                      callback: function($$v) {
+                                        _vm.selectedDir = $$v
+                                      },
+                                      expression: "selectedDir"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-layout",
+                            [
+                              _c(
+                                "v-flex",
                                 { attrs: { xs4: "" } },
                                 [
                                   _c(
                                     "v-btn",
                                     {
-                                      attrs: { color: "warning" },
+                                      attrs: { round: "", color: "amarillo" },
                                       on: { click: _vm.focus }
                                     },
                                     [_vm._v("Enfocar")]
@@ -64125,114 +64702,94 @@ var render = function() {
               ),
               _vm._v(" "),
               _c(
-                "v-container",
-                { attrs: { fluid: "" } },
+                "v-layout",
                 [
                   _c(
-                    "v-layout",
-                    { attrs: { "align-center": "", row: "" } },
+                    "v-flex",
+                    {
+                      staticClass: "px-2 py-2",
+                      staticStyle: { overflow: "auto" },
+                      attrs: { xs12: "" }
+                    },
                     [
                       _c(
-                        "v-flex",
-                        {
-                          staticStyle: { overflow: "auto" },
-                          attrs: { xs12: "" }
-                        },
+                        "v-card",
+                        { staticClass: "px-4 py-4" },
                         [
                           _c(
-                            "v-card",
+                            "v-card-title",
                             [
-                              _c(
-                                "v-card-title",
-                                [
-                                  _c("span", { staticClass: "headline" }, [
-                                    _vm._v("Mis fotos")
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("v-spacer")
-                                ],
-                                1
-                              ),
+                              _c("span", { staticClass: "headline" }, [
+                                _vm._v("Mis fotos")
+                              ]),
                               _vm._v(" "),
-                              _c("v-data-table", {
-                                attrs: {
-                                  headers: _vm.myImagesHeaders,
-                                  items: _vm.myImages,
-                                  search: _vm.search
-                                },
-                                scopedSlots: _vm._u([
-                                  {
-                                    key: "items",
-                                    fn: function(props) {
-                                      return [
-                                        _c("td", [
-                                          _c(
-                                            "a",
-                                            {
-                                              attrs: {
-                                                href: props.item.path,
-                                                target: "_blank"
-                                              }
-                                            },
-                                            [
-                                              _c("v-img", {
-                                                attrs: {
-                                                  src: props.item.path,
-                                                  "aspect-ratio": "1"
-                                                }
-                                              })
-                                            ],
-                                            1
-                                          )
-                                        ]),
-                                        _vm._v(" "),
-                                        _c(
-                                          "td",
-                                          { staticClass: "text-xs-right" },
-                                          [_vm._v(_vm._s(props.item.name))]
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "td",
-                                          { staticClass: "text-xs-right" },
-                                          [_vm._v(_vm._s(props.item.iso))]
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "td",
-                                          { staticClass: "text-xs-right" },
-                                          [_vm._v(_vm._s(props.item.exptime))]
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "td",
-                                          { staticClass: "text-xs-right" },
-                                          [_vm._v(_vm._s(props.item.ar))]
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "td",
-                                          { staticClass: "text-xs-right" },
-                                          [_vm._v(_vm._s(props.item.dec))]
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "td",
-                                          { staticClass: "text-xs-right" },
-                                          [
-                                            _vm._v(
-                                              _vm._s(props.item.created_at)
-                                            )
-                                          ]
-                                        )
-                                      ]
-                                    }
-                                  }
-                                ])
-                              })
+                              _c("v-spacer")
                             ],
                             1
-                          )
+                          ),
+                          _vm._v(" "),
+                          _c("v-data-table", {
+                            attrs: {
+                              headers: _vm.myImagesHeaders,
+                              items: _vm.myImages,
+                              search: _vm.search
+                            },
+                            scopedSlots: _vm._u([
+                              {
+                                key: "items",
+                                fn: function(props) {
+                                  return [
+                                    _c("td", [
+                                      _c(
+                                        "a",
+                                        {
+                                          staticClass: "px-2 py-2",
+                                          attrs: {
+                                            href: props.item.path,
+                                            target: "_blank"
+                                          }
+                                        },
+                                        [
+                                          _c("v-img", {
+                                            attrs: {
+                                              src:
+                                                "http://localhost:8000/public/image/vialactea1.jpg",
+                                              "aspect-ratio": "1"
+                                            }
+                                          })
+                                        ],
+                                        1
+                                      )
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("td", { staticClass: "text-xs-left" }, [
+                                      _vm._v(_vm._s(props.item.object_name))
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("td", { staticClass: "text-xs-left" }, [
+                                      _vm._v(_vm._s(props.item.iso_string))
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("td", { staticClass: "text-xs-left" }, [
+                                      _vm._v(_vm._s(props.item.exptime) + "s")
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("td", { staticClass: "text-xs-left" }, [
+                                      _vm._v(_vm._s(props.item.ar_string))
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("td", { staticClass: "text-xs-left" }, [
+                                      _vm._v(_vm._s(props.item.dec_string))
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("td", { staticClass: "text-xs-left" }, [
+                                      _vm._v(_vm._s(props.item.created_at))
+                                    ])
+                                  ]
+                                }
+                              }
+                            ])
+                          })
                         ],
                         1
                       )
@@ -66055,34 +66612,38 @@ var render = function() {
                             _c(
                               "v-card",
                               {
-                                staticClass: "mb-12",
+                                staticClass: "px-4 py-4 mb-12",
                                 attrs: { height: "450px" }
                               },
                               [
                                 _c(
                                   "v-layout",
-                                  { attrs: { row: "", wrap: "" } },
                                   [
-                                    _c("v-flex", { attrs: { xs1: "" } }),
-                                    _vm._v(" "),
-                                    _c("v-flex", { attrs: { xs6: "" } }, [
-                                      _c("h1", [
-                                        _vm._v(" Elige tu Equipamiento ")
-                                      ])
-                                    ])
+                                    _c(
+                                      "v-flex",
+                                      {
+                                        staticClass: "px-4",
+                                        attrs: { xs6: "" }
+                                      },
+                                      [
+                                        _c("h1", [
+                                          _vm._v(" Elige tu Equipamiento ")
+                                        ])
+                                      ]
+                                    )
                                   ],
                                   1
                                 ),
                                 _vm._v(" "),
                                 _c(
                                   "v-layout",
-                                  { attrs: { row: "", wrap: "" } },
                                   [
-                                    _c("v-flex", { attrs: { xs1: "" } }),
-                                    _vm._v(" "),
                                     _c(
                                       "v-flex",
-                                      { attrs: { xs6: "" } },
+                                      {
+                                        staticClass: "px-4",
+                                        attrs: { xs6: "" }
+                                      },
                                       [
                                         _c("v-select", {
                                           attrs: {
@@ -66110,13 +66671,13 @@ var render = function() {
                                 _vm._v(" "),
                                 _c(
                                   "v-layout",
-                                  { attrs: { row: "", wrap: "" } },
                                   [
-                                    _c("v-flex", { attrs: { xs1: "" } }),
-                                    _vm._v(" "),
                                     _c(
                                       "v-flex",
-                                      { attrs: { xs2: "" } },
+                                      {
+                                        staticClass: "px-4",
+                                        attrs: { xs2: "" }
+                                      },
                                       [
                                         _c(
                                           "v-card",
@@ -66187,7 +66748,11 @@ var render = function() {
                               "v-card",
                               {
                                 staticClass: "mb-12",
-                                attrs: { height: "650px" }
+                                attrs: {
+                                  flat: "",
+                                  color: "transparent",
+                                  height: "630px"
+                                }
                               },
                               [
                                 _c(
@@ -66217,17 +66782,17 @@ var render = function() {
                                                         {
                                                           attrs: {
                                                             flat: "",
-                                                            color: "white"
+                                                            color: "morado"
                                                           }
                                                         },
                                                         [
                                                           _c(
                                                             "v-btn",
                                                             {
-                                                              staticClass:
-                                                                "mr-4",
                                                               attrs: {
-                                                                outlined: ""
+                                                                outline: "",
+                                                                round: "",
+                                                                color: "white"
                                                               },
                                                               on: {
                                                                 click:
@@ -66324,13 +66889,14 @@ var render = function() {
                                                   _c(
                                                     "v-sheet",
                                                     {
-                                                      attrs: { height: "400" }
+                                                      attrs: { height: "540" }
                                                     },
                                                     [
                                                       _c("v-calendar", {
                                                         ref: "calendar",
                                                         attrs: {
-                                                          color: "primary",
+                                                          color:
+                                                            "bacgraundColor",
                                                           events: _vm.events,
                                                           "event-color":
                                                             _vm.getEventColor,
@@ -66359,35 +66925,40 @@ var render = function() {
                                                                   _c(
                                                                     "v-layout",
                                                                     {
-                                                                      attrs: {
-                                                                        row: "",
-                                                                        wrap: ""
+                                                                      on: {
+                                                                        click: function(
+                                                                          $event
+                                                                        ) {
+                                                                          return _vm.viewDay(
+                                                                            {
+                                                                              date: date
+                                                                            }
+                                                                          )
+                                                                        }
                                                                       }
                                                                     },
                                                                     [
                                                                       _c(
                                                                         "v-flex",
                                                                         {
+                                                                          staticClass:
+                                                                            "px-2",
                                                                           attrs: {
-                                                                            xs1:
-                                                                              ""
-                                                                          }
-                                                                        }
-                                                                      ),
-                                                                      _vm._v(
-                                                                        " "
-                                                                      ),
-                                                                      _c(
-                                                                        "v-flex",
-                                                                        {
-                                                                          attrs: {
-                                                                            xs2:
+                                                                            xs4:
                                                                               ""
                                                                           }
                                                                         },
                                                                         [
                                                                           _c(
                                                                             "v-card",
+                                                                            {
+                                                                              attrs: {
+                                                                                flat:
+                                                                                  "",
+                                                                                color:
+                                                                                  "transparent"
+                                                                              }
+                                                                            },
                                                                             [
                                                                               _c(
                                                                                 "v-img",
@@ -66417,18 +66988,8 @@ var render = function() {
                                                                       _c(
                                                                         "v-flex",
                                                                         {
-                                                                          attrs: {
-                                                                            xs1:
-                                                                              ""
-                                                                          }
-                                                                        }
-                                                                      ),
-                                                                      _vm._v(
-                                                                        " "
-                                                                      ),
-                                                                      _c(
-                                                                        "v-flex",
-                                                                        {
+                                                                          staticClass:
+                                                                            "px-2",
                                                                           attrs: {
                                                                             xs4:
                                                                               ""
@@ -66436,105 +66997,55 @@ var render = function() {
                                                                         },
                                                                         [
                                                                           _c(
-                                                                            "v-layout",
+                                                                            "v-flex",
                                                                             {
                                                                               attrs: {
-                                                                                row:
-                                                                                  "",
-                                                                                wrap:
+                                                                                xs12:
                                                                                   ""
                                                                               }
                                                                             },
                                                                             [
                                                                               _c(
-                                                                                "v-flex",
-                                                                                {
-                                                                                  attrs: {
-                                                                                    xs1:
-                                                                                      ""
-                                                                                  }
-                                                                                }
-                                                                              ),
-                                                                              _vm._v(
-                                                                                " "
-                                                                              ),
-                                                                              _c(
-                                                                                "v-flex",
-                                                                                {
-                                                                                  attrs: {
-                                                                                    xs10:
-                                                                                      ""
-                                                                                  }
-                                                                                },
+                                                                                "p",
                                                                                 [
-                                                                                  _c(
-                                                                                    "p",
-                                                                                    [
-                                                                                      _vm._v(
-                                                                                        _vm._s(
-                                                                                          _vm.moonRise(
-                                                                                            date
-                                                                                          )
-                                                                                        )
+                                                                                  _vm._v(
+                                                                                    _vm._s(
+                                                                                      _vm.moonRise(
+                                                                                        date
                                                                                       )
-                                                                                    ]
+                                                                                    )
                                                                                   )
                                                                                 ]
                                                                               )
-                                                                            ],
-                                                                            1
+                                                                            ]
                                                                           ),
                                                                           _vm._v(
                                                                             " "
                                                                           ),
                                                                           _c(
-                                                                            "v-layout",
+                                                                            "v-flex",
                                                                             {
+                                                                              staticClass:
+                                                                                "px-2",
                                                                               attrs: {
-                                                                                row:
-                                                                                  "",
-                                                                                wrap:
+                                                                                xs12:
                                                                                   ""
                                                                               }
                                                                             },
                                                                             [
                                                                               _c(
-                                                                                "v-flex",
-                                                                                {
-                                                                                  attrs: {
-                                                                                    xs1:
-                                                                                      ""
-                                                                                  }
-                                                                                }
-                                                                              ),
-                                                                              _vm._v(
-                                                                                " "
-                                                                              ),
-                                                                              _c(
-                                                                                "v-flex",
-                                                                                {
-                                                                                  attrs: {
-                                                                                    xs10:
-                                                                                      ""
-                                                                                  }
-                                                                                },
+                                                                                "p",
                                                                                 [
-                                                                                  _c(
-                                                                                    "p",
-                                                                                    [
-                                                                                      _vm._v(
-                                                                                        _vm._s(
-                                                                                          _vm.moonSet(
-                                                                                            date
-                                                                                          )
-                                                                                        )
+                                                                                  _vm._v(
+                                                                                    _vm._s(
+                                                                                      _vm.moonSet(
+                                                                                        date
                                                                                       )
-                                                                                    ]
+                                                                                    )
                                                                                   )
                                                                                 ]
                                                                               )
-                                                                            ],
-                                                                            1
+                                                                            ]
                                                                           )
                                                                         ],
                                                                         1
@@ -66820,7 +67331,11 @@ var render = function() {
                               "v-card",
                               {
                                 staticClass: "mb-12",
-                                attrs: { height: "450px" }
+                                attrs: {
+                                  flat: "",
+                                  color: "transparent",
+                                  height: "450px"
+                                }
                               },
                               [
                                 _c(
@@ -66879,6 +67394,8 @@ var render = function() {
                                                                           "v-btn",
                                                                           {
                                                                             attrs: {
+                                                                              round:
+                                                                                "",
                                                                               small:
                                                                                 "",
                                                                               color:
@@ -66900,6 +67417,8 @@ var render = function() {
                                                                           "v-btn",
                                                                           {
                                                                             attrs: {
+                                                                              round:
+                                                                                "",
                                                                               small:
                                                                                 "",
                                                                               color:
@@ -66965,6 +67484,8 @@ var render = function() {
                               ],
                               1
                             ),
+                            _vm._v(" "),
+                            _c("br"),
                             _vm._v(" "),
                             _c(
                               "v-btn",
@@ -110645,322 +111166,322 @@ module.exports = function(module) {
 
 /***/ }),
 
-/***/ "./resources/assets/images/Luna01.jpg":
+/***/ "./resources/assets/images/Luna01.png":
 /*!********************************************!*\
-  !*** ./resources/assets/images/Luna01.jpg ***!
+  !*** ./resources/assets/images/Luna01.png ***!
   \********************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/images/Luna01.jpg?6ec5b8df029298d15d62877554e9d722";
+module.exports = "/images/Luna01.png?33820b5560aca1b9d2c8e31db1439466";
 
 /***/ }),
 
-/***/ "./resources/assets/images/Luna02.jpg":
+/***/ "./resources/assets/images/Luna02.png":
 /*!********************************************!*\
-  !*** ./resources/assets/images/Luna02.jpg ***!
+  !*** ./resources/assets/images/Luna02.png ***!
   \********************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/images/Luna02.jpg?7734303c50d7564b9e69a9a2978df1b5";
+module.exports = "/images/Luna02.png?8941972a0199ad263cb0f8b5108480f3";
 
 /***/ }),
 
-/***/ "./resources/assets/images/Luna03.jpg":
+/***/ "./resources/assets/images/Luna03.png":
 /*!********************************************!*\
-  !*** ./resources/assets/images/Luna03.jpg ***!
+  !*** ./resources/assets/images/Luna03.png ***!
   \********************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/images/Luna03.jpg?372b4cc5b67f487a7299554a4f3e7317";
+module.exports = "/images/Luna03.png?6147cd9a3909e36ad43195cc74865983";
 
 /***/ }),
 
-/***/ "./resources/assets/images/Luna04.jpg":
+/***/ "./resources/assets/images/Luna04.png":
 /*!********************************************!*\
-  !*** ./resources/assets/images/Luna04.jpg ***!
+  !*** ./resources/assets/images/Luna04.png ***!
   \********************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/images/Luna04.jpg?d5995ca2e4fb8ddc0b3526392f0951ba";
+module.exports = "/images/Luna04.png?87a51302a394516ef49ef8d13f1bd088";
 
 /***/ }),
 
-/***/ "./resources/assets/images/Luna05.jpg":
+/***/ "./resources/assets/images/Luna05.png":
 /*!********************************************!*\
-  !*** ./resources/assets/images/Luna05.jpg ***!
+  !*** ./resources/assets/images/Luna05.png ***!
   \********************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/images/Luna05.jpg?ae24c851ad33524f5d6b26bfd27fa457";
+module.exports = "/images/Luna05.png?d59ac5beec0a1621c172f523e3e1c0e7";
 
 /***/ }),
 
-/***/ "./resources/assets/images/Luna06.jpg":
+/***/ "./resources/assets/images/Luna06.png":
 /*!********************************************!*\
-  !*** ./resources/assets/images/Luna06.jpg ***!
+  !*** ./resources/assets/images/Luna06.png ***!
   \********************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/images/Luna06.jpg?23e3592910fd96cb9257781d7bdfd956";
+module.exports = "/images/Luna06.png?eca018d83313496bbdbfa546059732b7";
 
 /***/ }),
 
-/***/ "./resources/assets/images/Luna07.jpg":
+/***/ "./resources/assets/images/Luna07.png":
 /*!********************************************!*\
-  !*** ./resources/assets/images/Luna07.jpg ***!
+  !*** ./resources/assets/images/Luna07.png ***!
   \********************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/images/Luna07.jpg?9d502f915159c5e0b286b0260f3ec35a";
+module.exports = "/images/Luna07.png?a6b73fccda61aeed6606bd370f5f83dc";
 
 /***/ }),
 
-/***/ "./resources/assets/images/Luna08.jpg":
+/***/ "./resources/assets/images/Luna08.png":
 /*!********************************************!*\
-  !*** ./resources/assets/images/Luna08.jpg ***!
+  !*** ./resources/assets/images/Luna08.png ***!
   \********************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/images/Luna08.jpg?6e6183f495bc710e61a295047c380f27";
+module.exports = "/images/Luna08.png?7048d8afb10ee02c985e6a3357a62aa1";
 
 /***/ }),
 
-/***/ "./resources/assets/images/Luna09.jpg":
+/***/ "./resources/assets/images/Luna09.png":
 /*!********************************************!*\
-  !*** ./resources/assets/images/Luna09.jpg ***!
+  !*** ./resources/assets/images/Luna09.png ***!
   \********************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/images/Luna09.jpg?9392faed5ab6d0f872902be4b75535fa";
+module.exports = "/images/Luna09.png?6bc7d4869b4f4472f942be496fd6e727";
 
 /***/ }),
 
-/***/ "./resources/assets/images/Luna10.jpg":
+/***/ "./resources/assets/images/Luna10.png":
 /*!********************************************!*\
-  !*** ./resources/assets/images/Luna10.jpg ***!
+  !*** ./resources/assets/images/Luna10.png ***!
   \********************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/images/Luna10.jpg?ea6ba0fa4343a57757de7c2e72d44682";
+module.exports = "/images/Luna10.png?03c91c8201788706f463237a700ae255";
 
 /***/ }),
 
-/***/ "./resources/assets/images/Luna11.jpg":
+/***/ "./resources/assets/images/Luna11.png":
 /*!********************************************!*\
-  !*** ./resources/assets/images/Luna11.jpg ***!
+  !*** ./resources/assets/images/Luna11.png ***!
   \********************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/images/Luna11.jpg?bf62b15fc0445bb6494798211ef021f5";
+module.exports = "/images/Luna11.png?4f30c501881feec00589223cfd165416";
 
 /***/ }),
 
-/***/ "./resources/assets/images/Luna12.jpg":
+/***/ "./resources/assets/images/Luna12.png":
 /*!********************************************!*\
-  !*** ./resources/assets/images/Luna12.jpg ***!
+  !*** ./resources/assets/images/Luna12.png ***!
   \********************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/images/Luna12.jpg?904375d0f271e7408bddf015490dd9e6";
+module.exports = "/images/Luna12.png?3c4f8776d99bfe0f26b0259331696761";
 
 /***/ }),
 
-/***/ "./resources/assets/images/Luna13.jpg":
+/***/ "./resources/assets/images/Luna13.png":
 /*!********************************************!*\
-  !*** ./resources/assets/images/Luna13.jpg ***!
+  !*** ./resources/assets/images/Luna13.png ***!
   \********************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/images/Luna13.jpg?f603a5b5bc5b7f92f203d05ea60c61d1";
+module.exports = "/images/Luna13.png?32e33dd08172688ef8396ab5084a042a";
 
 /***/ }),
 
-/***/ "./resources/assets/images/Luna14.jpg":
+/***/ "./resources/assets/images/Luna14.png":
 /*!********************************************!*\
-  !*** ./resources/assets/images/Luna14.jpg ***!
+  !*** ./resources/assets/images/Luna14.png ***!
   \********************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/images/Luna14.jpg?ed81cc4dcf39dd30c96f518e2b6f31e7";
+module.exports = "/images/Luna14.png?58efb43e080dde541362eec2db9615d1";
 
 /***/ }),
 
-/***/ "./resources/assets/images/Luna15.jpg":
+/***/ "./resources/assets/images/Luna15.png":
 /*!********************************************!*\
-  !*** ./resources/assets/images/Luna15.jpg ***!
+  !*** ./resources/assets/images/Luna15.png ***!
   \********************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/images/Luna15.jpg?6280174c82e29582b28d12cab70ca575";
+module.exports = "/images/Luna15.png?e17b58d07d8f20c6e9a08c71a4641c5a";
 
 /***/ }),
 
-/***/ "./resources/assets/images/Luna16.jpg":
+/***/ "./resources/assets/images/Luna16.png":
 /*!********************************************!*\
-  !*** ./resources/assets/images/Luna16.jpg ***!
+  !*** ./resources/assets/images/Luna16.png ***!
   \********************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/images/Luna16.jpg?c150d91ef96814a037b8bf04a5892225";
+module.exports = "/images/Luna16.png?170ab848bae53e0af3cfd2ddf57caa8e";
 
 /***/ }),
 
-/***/ "./resources/assets/images/Luna17.jpg":
+/***/ "./resources/assets/images/Luna17.png":
 /*!********************************************!*\
-  !*** ./resources/assets/images/Luna17.jpg ***!
+  !*** ./resources/assets/images/Luna17.png ***!
   \********************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/images/Luna17.jpg?b09b169230c91e69d2fddeb93d440ab7";
+module.exports = "/images/Luna17.png?fd52ecb465ac09b693d28068007586a0";
 
 /***/ }),
 
-/***/ "./resources/assets/images/Luna18.jpg":
+/***/ "./resources/assets/images/Luna18.png":
 /*!********************************************!*\
-  !*** ./resources/assets/images/Luna18.jpg ***!
+  !*** ./resources/assets/images/Luna18.png ***!
   \********************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/images/Luna18.jpg?f99c48e5a44977e894f73d423533e724";
+module.exports = "/images/Luna18.png?c65dbaa8e62053cbe7b4cd1fcfd62463";
 
 /***/ }),
 
-/***/ "./resources/assets/images/Luna19.jpg":
+/***/ "./resources/assets/images/Luna19.png":
 /*!********************************************!*\
-  !*** ./resources/assets/images/Luna19.jpg ***!
+  !*** ./resources/assets/images/Luna19.png ***!
   \********************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/images/Luna19.jpg?9472d4c0aaa04a6f489009ea9b2176c7";
+module.exports = "/images/Luna19.png?ba67c42c0151830cdb2dc788dd4e6d57";
 
 /***/ }),
 
-/***/ "./resources/assets/images/Luna20.jpg":
+/***/ "./resources/assets/images/Luna20.png":
 /*!********************************************!*\
-  !*** ./resources/assets/images/Luna20.jpg ***!
+  !*** ./resources/assets/images/Luna20.png ***!
   \********************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/images/Luna20.jpg?9d8e6439461c273acb9e63a09c1384c3";
+module.exports = "/images/Luna20.png?c8bcb7822444e4d9333691184f13934b";
 
 /***/ }),
 
-/***/ "./resources/assets/images/Luna21.jpg":
+/***/ "./resources/assets/images/Luna21.png":
 /*!********************************************!*\
-  !*** ./resources/assets/images/Luna21.jpg ***!
+  !*** ./resources/assets/images/Luna21.png ***!
   \********************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/images/Luna21.jpg?47b952260e932904ab7ad842ae89bbc2";
+module.exports = "/images/Luna21.png?aa801c1f6cf4ad51cabe1e6290b0dd33";
 
 /***/ }),
 
-/***/ "./resources/assets/images/Luna22.jpg":
+/***/ "./resources/assets/images/Luna22.png":
 /*!********************************************!*\
-  !*** ./resources/assets/images/Luna22.jpg ***!
+  !*** ./resources/assets/images/Luna22.png ***!
   \********************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/images/Luna22.jpg?1eedede8a999e093254794b3f8346da9";
+module.exports = "/images/Luna22.png?1efb223799f5e1fa7c04e2b258bd4920";
 
 /***/ }),
 
-/***/ "./resources/assets/images/Luna23.jpg":
+/***/ "./resources/assets/images/Luna23.png":
 /*!********************************************!*\
-  !*** ./resources/assets/images/Luna23.jpg ***!
+  !*** ./resources/assets/images/Luna23.png ***!
   \********************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/images/Luna23.jpg?0728af58a9f0031f86a56bde6c2c98c6";
+module.exports = "/images/Luna23.png?e61865b8b4cc76e6df8369021af4c679";
 
 /***/ }),
 
-/***/ "./resources/assets/images/Luna24.jpg":
+/***/ "./resources/assets/images/Luna24.png":
 /*!********************************************!*\
-  !*** ./resources/assets/images/Luna24.jpg ***!
+  !*** ./resources/assets/images/Luna24.png ***!
   \********************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/images/Luna24.jpg?33577c4b1a39c45a592c1b2bd5cdad96";
+module.exports = "/images/Luna24.png?666a28caadd433a9b29e71433112d18e";
 
 /***/ }),
 
-/***/ "./resources/assets/images/Luna25.jpg":
+/***/ "./resources/assets/images/Luna25.png":
 /*!********************************************!*\
-  !*** ./resources/assets/images/Luna25.jpg ***!
+  !*** ./resources/assets/images/Luna25.png ***!
   \********************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/images/Luna25.jpg?9962d775da6f175f15be9a0e7ebd6a49";
+module.exports = "/images/Luna25.png?a158e06ea5072406126762d9c76da77a";
 
 /***/ }),
 
-/***/ "./resources/assets/images/Luna26.jpg":
+/***/ "./resources/assets/images/Luna26.png":
 /*!********************************************!*\
-  !*** ./resources/assets/images/Luna26.jpg ***!
+  !*** ./resources/assets/images/Luna26.png ***!
   \********************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/images/Luna26.jpg?8e8756bed6cb21d3c8d1ae8a3856edcb";
+module.exports = "/images/Luna26.png?90e6be1d135c402bb97e5b9f38ed9688";
 
 /***/ }),
 
-/***/ "./resources/assets/images/Luna27.jpg":
+/***/ "./resources/assets/images/Luna27.png":
 /*!********************************************!*\
-  !*** ./resources/assets/images/Luna27.jpg ***!
+  !*** ./resources/assets/images/Luna27.png ***!
   \********************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/images/Luna27.jpg?0d522ba10f772d7b3614c039bffdef19";
+module.exports = "/images/Luna27.png?93245f480add1e8c3e07b7d2e2102bdf";
 
 /***/ }),
 
-/***/ "./resources/assets/images/Luna28.jpg":
+/***/ "./resources/assets/images/Luna28.png":
 /*!********************************************!*\
-  !*** ./resources/assets/images/Luna28.jpg ***!
+  !*** ./resources/assets/images/Luna28.png ***!
   \********************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/images/Luna28.jpg?eb94839bf026d5a52694bb83f96b046f";
+module.exports = "/images/Luna28.png?e1cea5febafd8bae2dba4564d5ef15a2";
 
 /***/ }),
 
-/***/ "./resources/assets/images/Luna29.jpg":
+/***/ "./resources/assets/images/Luna29.png":
 /*!********************************************!*\
-  !*** ./resources/assets/images/Luna29.jpg ***!
+  !*** ./resources/assets/images/Luna29.png ***!
   \********************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/images/Luna29.jpg?2ca9e26d6e24d23e1d68de696249e3f8";
+module.exports = "/images/Luna29.png?4d0010d6d3f0f0e5c7c41f817a6e28ab";
 
 /***/ }),
 
@@ -111223,7 +111744,9 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ControlComponent_vue_vue_type_template_id_4d31128b___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ControlComponent.vue?vue&type=template&id=4d31128b& */ "./resources/js/components/ControlComponent.vue?vue&type=template&id=4d31128b&");
 /* harmony import */ var _ControlComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ControlComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/ControlComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _ControlComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ControlComponent.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/ControlComponent.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
 
 
 
@@ -111231,7 +111754,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
   _ControlComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _ControlComponent_vue_vue_type_template_id_4d31128b___WEBPACK_IMPORTED_MODULE_0__["render"],
   _ControlComponent_vue_vue_type_template_id_4d31128b___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
@@ -111260,6 +111783,22 @@ component.options.__file = "resources/js/components/ControlComponent.vue"
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ControlComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./ControlComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ControlComponent.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ControlComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/ControlComponent.vue?vue&type=style&index=0&lang=css&":
+/*!***************************************************************************************!*\
+  !*** ./resources/js/components/ControlComponent.vue?vue&type=style&index=0&lang=css& ***!
+  \***************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ControlComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./ControlComponent.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ControlComponent.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ControlComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ControlComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ControlComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ControlComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ControlComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 

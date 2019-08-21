@@ -38,6 +38,12 @@ class ImageController extends Controller
             $image->exptime = $command->exptime;
             $image->iso     = $command->iso;
 
+            $image->ar_string   = $command->ar_string;
+            $image->dec_string  = $command->dec_string;
+            $image->object_name = $command->exptime_string;
+            $image->iso_string  = $command->iso_string;
+
+
     		$image->user_id = $command->user_id;
     		$image->equipment_id = 1;
     		$image->save();
@@ -56,7 +62,8 @@ class ImageController extends Controller
         $image = Image::where('user_id',Auth::id())->get();
 
         if($image->count()>0){
-            $path =  $image->last()->path;
+            // $path =  $image->last()->path;
+            $path = url('images/vialactea1.jpg');
         } else {
             $path = url('images/sanpeter2.jpg');
         }

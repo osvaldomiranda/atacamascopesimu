@@ -9,7 +9,7 @@
       fixed
     >
       <v-toolbar-title style="width: 600px" class="ml-0 pl-3">
-        <span class="hidden-md-and-down">AtacamaScaope</span>
+        <span class="hidden-md-and-down">AtacamaScope</span>
            <v-spacer></v-spacer>
       </v-toolbar-title>
 

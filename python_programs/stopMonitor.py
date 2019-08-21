@@ -37,13 +37,17 @@ def printit():
     if ra==ra_ant and dec==dec_ant : 
         t.cancel()
         print('listo')    
-        url = 'http://'+ip+'/api/messages/send?sender_id=1&receiver_id=2&message=Montura ok '
+        url = 'http://'+ip+'/api/messages/send?sender_id=1&receiver_id=2&message=Montura OK '
         global data 
         data = '{}'
         response = requests.post(url, data=data)
     else :
         ra_ant  = ra
         dec_ant = dec   
+        url = 'http://'+ip+'/api/messages/send?sender_id=1&receiver_id=2&message= AR:' + str(ra) + ' DEC:'+ str(dec)
+        global data 
+        data = '{}'
+        response = requests.post(url, data=data)
 
 
 comando = 'indi_getprop "Celestron GPS.EQUATORIAL_EOD_COORD.RA"'

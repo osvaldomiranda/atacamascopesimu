@@ -149,9 +149,9 @@
             </v-layout>              
         </v-card>  
     </v-flex>
-  
     <div ref="container">
     </div>
+
   </v-layout>
 </template>
 
@@ -159,7 +159,6 @@
   import { mapState } from 'vuex';  
   import Vue from 'vue';  
   import PointsComponent      from './../components/PointsComponent';
-  //import ReservationComponent from './../components/ReservationComponent';
   import ReservationComponent from './../components/ReservationWizard';
 
 
@@ -252,7 +251,7 @@
             var instance = new ComponentReserv({store: this.$store});
             instance.$mount();
             this.$refs.container.appendChild(instance.$el);
-        }
+        },
 
     },
   }

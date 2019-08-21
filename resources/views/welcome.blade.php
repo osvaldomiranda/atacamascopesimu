@@ -287,7 +287,11 @@
         <!--ATACAMASCOPE-->
 
         <div class="atacamascope container">
-            <h1>AtacamaScope</h1>
+            <br>
+            <br>
+            <img src="http://localhost:8000/public/image/white_full.png" class="foto">
+            
+            <!-- <h1>AtacamaScope</h1> -->
          
                  <h2 class="text-left">{{ __('landing.title') }}</h2>
                   <h3 class="text-left">Unos cuantos clicks y ya estarás observando el universo de san pedro de atacama</h3>

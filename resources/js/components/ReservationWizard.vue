@@ -30,23 +30,18 @@
     <v-stepper-items>
       <v-stepper-content step="1">
         <v-card
-          class="mb-12"
-
+          class="px-4 py-4 mb-12"
           height="450px"
         >
 
-            <v-layout row wrap>
-                <v-flex xs1>
-                </v-flex>
-                <v-flex xs6>
+            <v-layout>
+                <v-flex xs6 class="px-4">
                     <h1> Elige tu Equipamiento </h1>
                 </v-flex>
             </v-layout>    
 
-            <v-layout row wrap>
-                <v-flex xs1>
-                </v-flex>
-                <v-flex xs6>
+            <v-layout>
+                <v-flex xs6 class="px-4">
                     <v-select
                       v-model="equipment"
                       :items="equipments"
@@ -64,10 +59,8 @@
 
 
 
-              <v-layout row wrap>
-                <v-flex xs1>
-                </v-flex>
-                <v-flex xs2>
+              <v-layout>
+                <v-flex xs2 class="px-4">
                 <v-card>
                     <v-img
                         v-bind:src= "img" 
@@ -100,8 +93,9 @@
       <v-stepper-content step="2">
         <v-card
           class="mb-12"
-          
-          height="650px"
+          flat
+          color="transparent"
+          height="630px"
         >
             
 
@@ -121,8 +115,8 @@
                       <v-layout fill-height>
                         <v-flex>
                           <v-sheet height="64">
-                            <v-toolbar flat color="white">
-                              <v-btn outlined class="mr-4" @click="setToday">
+                            <v-toolbar flat color="morado">
+                              <v-btn outline round color="white" @click="setToday">
                                 Volver a Hoy
                               </v-btn>
                               <v-btn fab text small @click="prev">
@@ -136,11 +130,11 @@
       
                             </v-toolbar>
                           </v-sheet>
-                          <v-sheet height="400">
+                          <v-sheet  height="540">
                             <v-calendar
                               ref="calendar"
                               v-model="focus"
-                              color="primary"
+                              color="bacgraundColor"
                               :events="events"
                               :event-color="getEventColor"
                               :event-margin-bottom="3"
@@ -154,44 +148,33 @@
                
 
                              <template v-slot:day="{ date }">
+
                                 <template>
-                                    <v-layout row wrap>
-                                        <v-flex xs1>
-                                          
-                                        </v-flex>
-                                        <v-flex xs2> 
-                                            <v-card>
+
+                                    <v-layout @click="viewDay({ date })">
+                                        <v-flex xs4 class="px-2"> 
+                                            <v-card flat color="transparent">
                                                 <v-img
                                                     v-bind:src= "moonImages(date)" 
                                                     aspect-ratio="1"
                                                     max-width="45"
                                                     max-height="45"
-                                                ></v-img>
-                                                
+                                                ></v-img>   
                                             </v-card> 
                                         </v-flex>
-                                        <v-flex xs1>
-                                          
-                                        </v-flex>
-                                        <v-flex xs4> 
-                                          <v-layout row wrap>
-                                            <v-flex xs1>
-                                              
-                                            </v-flex>
-                                            <v-flex xs10>
+
+
+                                        <v-flex xs4 class="px-2">                                           
+                                            <v-flex xs12>
                                               <p>{{ moonRise(date) }}</p>
                                             </v-flex>
-                                          </v-layout>
-                                          <v-layout row wrap>
-                                            <v-flex xs1>
-                                              
-                                            </v-flex>
-                                            <v-flex xs10>
+                                            <v-flex xs12 class="px-2">
                                               <p>{{ moonSet(date) }}</p>
-                                            </v-flex>
-                                          </v-layout>                                          
+                                            </v-flex>                            
                                         </v-flex>
                                     </v-layout>    
+
+
                                 </template>
 
                                 <template v-for="event in eventsMap[date]">
@@ -286,6 +269,8 @@
       <v-stepper-content step="3">
         <v-card
           class="mb-12"
+          flat
+          color="transparent"
           height="450px"
         >
           
@@ -313,8 +298,8 @@
                             <div
                               class="text-xs-center"
                             >
-                              <v-btn small v-if="reservationsArray.indexOf(hour)>-1" color="error">Reservado</v-btn>
-                              <v-btn small v-if="reservationsArray.indexOf(hour)<=-1" color="success" @click="confirmReserv(hour)">Disponible</v-btn>
+                              <v-btn round small v-if="reservationsArray.indexOf(hour)>-1" color="error">Reservado</v-btn>
+                              <v-btn round small v-if="reservationsArray.indexOf(hour)<=-1" color="success" @click="confirmReserv(hour)">Disponible</v-btn>
 
                             </div>
                             </template>            
@@ -330,12 +315,8 @@
               </v-flex>
             </v-layout>
 
-
-
-
-
         </v-card>
-
+        <br>
 
         <v-btn
           lass="mx-2" fab dark small color="morado"
@@ -460,7 +441,7 @@
 
   data () {
     return {
-    img: "https://cdn.shopify.com/s/files/1/1935/4371/products/12046_Advanced_VX_9_25_SCT_1_570x380@2x.jpg?v=1554219678",
+    img: "https://cdn.shopify.com/s/files/1/1935/4371/products/12046_Advanced_VX_9_25_SCT_1_570x380@2x.png?v=1554219678",
 
     e1: 0,
     generalRuleDate: [v => !!v || 'Campo requerido',
@@ -711,106 +692,9 @@
     },
 
 
-    moonImage (){
-      var app = this;
-      var splitted = app.moon_state.split(':');
-      var age = parseInt(splitted[3]); 
-      switch (age) {
-      case 1:
-        app.moonUrl = require('./../../assets/images/Luna01.jpg');
-        break;
-      case 2:
-        app.moonUrl = require('./../../assets/images/Luna02.jpg');
-        break;
-      case 3:
-        app.moonUrl = require('./../../assets/images/Luna03.jpg');
-        break;
-      case 4:
-        app.moonUrl = require('./../../assets/images/Luna04.jpg');
-        break;
-      case 5:
-        app.moonUrl = require('./../../assets/images/Luna05.jpg');
-        break;
-      case 6:
-        app.moonUrl = require('./../../assets/images/Luna06.jpg');
-        break;
-      case 7:
-        app.moonUrl = require('./../../assets/images/Luna07.jpg');
-        break;
-      case 8:
-        app.moonUrl = require('./../../assets/images/Luna08.jpg');
-        break;
-      case 9:
-        app.moonUrl = require('./../../assets/images/Luna09.jpg');
-        break;
-      case 10:
-        app.moonUrl = require('./../../assets/images/Luna10.jpg');
-        break;
-      case 11:
-        app.moonUrl = require('./../../assets/images/Luna11.jpg');
-        break;
-      case 12:
-        app.moonUrl = require('./../../assets/images/Luna12.jpg');
-        break;
-      case 13:
-        app.moonUrl = require('./../../assets/images/Luna13.jpg');
-        break;
-      case 14:
-        app.moonUrl = require('./../../assets/images/Luna14.jpg');
-        break;
-      case 15:
-        app.moonUrl = require('./../../assets/images/Luna15.jpg');
-        break;
-      case 16:
-        app.moonUrl = require('./../../assets/images/Luna16.jpg');
-        break;
-      case 17:
-        app.moonUrl = require('./../../assets/images/Luna17.jpg');
-        break;
-      case 18:
-        app.moonUrl = require('./../../assets/images/Luna18.jpg');
-        break;
-      case 19:
-        app.moonUrl = require('./../../assets/images/Luna19.jpg');
-        break;
-      case 20:
-        app.moonUrl = require('./../../assets/images/Luna20.jpg');
-        break;
-      case 21:
-        app.moonUrl = require('./../../assets/images/Luna21.jpg');
-        break;
-      case 22:
-        app.moonUrl = require('./../../assets/images/Luna22.jpg');
-        break;
-      case 23:
-        app.moonUrl = require('./../../assets/images/Luna23.jpg');
-        break;
-      case 24:
-        app.moonUrl = require('./../../assets/images/Luna24.jpg');
-        break;
-      case 25:
-        app.moonUrl = require('./../../assets/images/Luna25.jpg');
-        break;
-      case 26:
-        app.moonUrl = require('./../../assets/images/Luna26.jpg');
-        break;
-      case 27:
-        app.moonUrl = require('./../../assets/images/Luna27.jpg');
-        break;
-      case 28:
-        app.moonUrl = require('./../../assets/images/Luna28.jpg');
-        break;
-      case 29:
-        app.moonUrl = require('./../../assets/images/Luna29.jpg');
-        break;
-      }
-
-      //alert(app.moonUrl);
-
-
-      
-    },
     viewDay ({ date }) {
+
+        //validar que la fecha a reservar sea mayor o igual a hoy
         this.focus = date;
         this.start = this.focus;
         this.reservatios_day();
@@ -897,91 +781,91 @@
         var age = parseInt(some_date_phase['age']); 
         switch (age) {
         case 1:
-          imageUrl = require('./../../assets/images/Luna01.jpg');
+          imageUrl = require('./../../assets/images/Luna01.png');
           break;
         case 2:
-          imageUrl = require('./../../assets/images/Luna02.jpg');
+          imageUrl = require('./../../assets/images/Luna02.png');
           break;
         case 3:
-          imageUrl = require('./../../assets/images/Luna03.jpg');
+          imageUrl = require('./../../assets/images/Luna03.png');
           break;
         case 4:
-          imageUrl = require('./../../assets/images/Luna04.jpg');
+          imageUrl = require('./../../assets/images/Luna04.png');
           break;
         case 5:
-          imageUrl = require('./../../assets/images/Luna05.jpg');
+          imageUrl = require('./../../assets/images/Luna05.png');
           break;
         case 6:
-          imageUrl = require('./../../assets/images/Luna06.jpg');
+          imageUrl = require('./../../assets/images/Luna06.png');
           break;
         case 7:
-          imageUrl = require('./../../assets/images/Luna07.jpg');
+          imageUrl = require('./../../assets/images/Luna07.png');
           break;
         case 8:
-          imageUrl = require('./../../assets/images/Luna08.jpg');
+          imageUrl = require('./../../assets/images/Luna08.png');
           break;
         case 9:
-          imageUrl = require('./../../assets/images/Luna09.jpg');
+          imageUrl = require('./../../assets/images/Luna09.png');
           break;
         case 10:
-          imageUrl = require('./../../assets/images/Luna10.jpg');
+          imageUrl = require('./../../assets/images/Luna10.png');
           break;
         case 11:
-          imageUrl = require('./../../assets/images/Luna11.jpg');
+          imageUrl = require('./../../assets/images/Luna11.png');
           break;
         case 12:
-          imageUrl = require('./../../assets/images/Luna12.jpg');
+          imageUrl = require('./../../assets/images/Luna12.png');
           break;
         case 13:
-          imageUrl = require('./../../assets/images/Luna13.jpg');
+          imageUrl = require('./../../assets/images/Luna13.png');
           break;
         case 14:
-          imageUrl = require('./../../assets/images/Luna14.jpg');
+          imageUrl = require('./../../assets/images/Luna14.png');
           break;
         case 15:
-          imageUrl = require('./../../assets/images/Luna15.jpg');
+          imageUrl = require('./../../assets/images/Luna15.png');
           break;
         case 16:
-          imageUrl = require('./../../assets/images/Luna16.jpg');
+          imageUrl = require('./../../assets/images/Luna16.png');
           break;
         case 17:
-          imageUrl= require('./../../assets/images/Luna17.jpg');
+          imageUrl= require('./../../assets/images/Luna17.png');
           break;
         case 18:
-          imageUrl = require('./../../assets/images/Luna18.jpg');
+          imageUrl = require('./../../assets/images/Luna18.png');
           break;
         case 19:
-          imageUrl = require('./../../assets/images/Luna19.jpg');
+          imageUrl = require('./../../assets/images/Luna19.png');
           break;
         case 20:
-          imageUrl = require('./../../assets/images/Luna20.jpg');
+          imageUrl = require('./../../assets/images/Luna20.png');
           break;
         case 21:
-          imageUrl = require('./../../assets/images/Luna21.jpg');
+          imageUrl = require('./../../assets/images/Luna21.png');
           break;
         case 22:
-          imageUrl = require('./../../assets/images/Luna22.jpg');
+          imageUrl = require('./../../assets/images/Luna22.png');
           break;
         case 23:
-          imageUrl = require('./../../assets/images/Luna23.jpg');
+          imageUrl = require('./../../assets/images/Luna23.png');
           break;
         case 24:
-          imageUrl = require('./../../assets/images/Luna24.jpg');
+          imageUrl = require('./../../assets/images/Luna24.png');
           break;
         case 25:
-          imageUrl= require('./../../assets/images/Luna25.jpg');
+          imageUrl= require('./../../assets/images/Luna25.png');
           break;
         case 26:
-          imageUrl = require('./../../assets/images/Luna26.jpg');
+          imageUrl = require('./../../assets/images/Luna26.png');
           break;
         case 27:
-          imageUrl = require('./../../assets/images/Luna27.jpg');
+          imageUrl = require('./../../assets/images/Luna27.png');
           break;
         case 28:
-          imageUrl = require('./../../assets/images/Luna28.jpg');
+          imageUrl = require('./../../assets/images/Luna28.png');
           break;
         case 29:
-          imageUrl = require('./../../assets/images/Luna29.jpg');
+          imageUrl = require('./../../assets/images/Luna29.png');
           break;
         }
 

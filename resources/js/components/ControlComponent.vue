@@ -1,3 +1,13 @@
+<style>
+	.my-span {
+	  	background-color: transparent;
+	  	color: white;
+	    position: absolute;
+	    width: 100%;
+	    bottom: 0;
+	    text-align: center;
+	}
+</style>
 <template>
   <v-layout>
     <v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition">
@@ -19,10 +29,10 @@
 
 					  <v-card class="py-4 px-2">
 				        <v-layout>
-				          <v-flex xs4>
+				          <v-flex xs4 class="px-2">
 				            <span class="headline"> {{ object }}</span>
 				          </v-flex>
-				          	<v-flex xs4>
+				          	<v-flex xs8 class="px-2">
 				            	<span class="headline"> Estado:{{ state }}</span>
 				          	</v-flex>
 				        </v-layout>
@@ -94,7 +104,9 @@
 					      		<v-img
 					      	  		v-bind:src="imageUrl"
 					      	  		aspect-ratio="1"
-					      		></v-img>
+					      		>
+					      			<span class="my-span">M16 AR:16h53m6.75s DEC:-22°9m19s ISO:1200 T:30s</span>
+					      		</v-img>
 					      		</a>
 					    	</v-card> 
 					    </v-flex>
@@ -151,11 +163,11 @@
 								    ></v-text-field>
 		          			</v-flex>	          			
 		          		</v-layout>	
-		          		<v-btn color="warning" @click="move()">Mover</v-btn>
+		          		<v-btn round color="morado" @click="move()">Mover</v-btn>
 						<template>
 						    <v-dialog v-model="dialog2" persistent max-width="800px">
 						      <template v-slot:activator="{ on }">
-						        <v-btn color="warning" dark v-on="on">Mov.Fino</v-btn>
+						        <v-btn round color="morado" dark v-on="on">Mov.Fino</v-btn>
 						      </template>
 						      <v-card>
 						        <v-card-title>
@@ -276,7 +288,7 @@
 						<template>
 						    <v-dialog v-model="dialog3" persistent max-width="600px">
 						      <template v-slot:activator="{ on }">
-						        <v-btn color="warning" dark v-on="on">Mis Coords.</v-btn>
+						        <v-btn round color="morado" dark v-on="on">Mis Coords.</v-btn>
 						      </template>
 						      <v-card>
 						        <v-card-title>
@@ -397,9 +409,8 @@
 
 
 						<v-layout>
-							<v-flex xs1>
-							</v-flex>	
-							<v-flex xs4>
+	
+							<v-flex xs4 class="px-2">
 							
 							    <v-select
 							      v-model="selectedIso"
@@ -413,26 +424,22 @@
 							    ></v-select>
 
 		          			</v-flex>
-							<v-flex xs1>
-							</v-flex>	
-
-							<v-flex xs4>
+							<v-flex xs6 class="px-2">
 
 
 							    <v-select
 							      v-model="Exp"
 							      :items="Exps"
 							      :rules="[v => !!v || 'Obligatorio']"
-							      label="Tiempo Exposición"
+							      label="Tiempo Exposición(Segundos)"
 							      required
 							    ></v-select>
 
 
 		          			</v-flex>
-							<v-flex xs1>
-							</v-flex>	
+
 		          		</v-layout>	
-		          		<v-btn color="warning" @click="shoot()">Disparar</v-btn>
+		          		<v-btn round color="verde" @click="shoot()">Disparar</v-btn>
 			    	</v-card> 
 				</v-flex>
 
@@ -449,36 +456,18 @@
 				<v-flex xs4 class="px-2">
 					<v-card class="py-2 px-2">
 				        <v-layout>
-				          <v-flex xs12>
+				          <v-flex xs6>
 				            <span class="headline">Enfocador</span>
+				          </v-flex>
+				          <v-flex xs6>
+				            <p>Posición Actual: 15000</p>
 				          </v-flex>
 				        </v-layout>
 
 
-<!-- 						<v-layout >
 
-							<v-flex xs1>
-								<p>Tics 0</p>
-							</v-flex>	
-						    <v-flex xs8>
-
-
-							    <v-slider
-							        v-model="slider"
-							        thumb-label="always"
-							        min="0"
-							        max="30000"
-							    >
-							    </v-slider>
-
-
-						    </v-flex>
-							<v-flex xs1>
-								<p>30000</p>
-							</v-flex>	
-		          		</v-layout>	 -->
 		          		<v-layout >
-		          		    <v-flex xs4>
+		          		    <v-flex xs4 class="px-2">
 		          		    	<v-text-field
 								    v-model="slider"
 								    min:0
@@ -487,8 +476,23 @@
 								    type="number" 
 								    ></v-text-field>
 		          		    </v-flex>
+		          		    <v-flex xs6 class="px-2">	
+							    <v-select
+							      v-model="selectedDir"
+							      :items="Dirs"
+							      item-text='Dir'
+							      return-object
+							      :rules="[v => !!v || 'Obligatorio']"
+							      label="Dirección"
+							     
+							      required
+							    ></v-select>
+							</v-flex>    
+
+		          		</v-layout> 
+		          		<v-layout>   
 		          		    <v-flex xs4>
-		          		    	<v-btn color="warning" @click="focus">Enfocar</v-btn>	
+		          		    	<v-btn round color="amarillo" @click="focus">Enfocar</v-btn>	
 		          		    </v-flex>
 		          		</v-layout>
 		          		
@@ -502,11 +506,10 @@
 
 
 
-		 <v-container fluid>
-		    <v-layout align-center row>
-				<v-flex xs12 style="overflow: auto">
-
-					  <v-card>
+		 
+		    <v-layout>
+				<v-flex xs12 class="px-2 py-2" style="overflow: auto">
+					  <v-card class="px-4 py-4">
 					    <v-card-title>
 					      <span class="headline">Mis fotos</span>
 					      <v-spacer></v-spacer>
@@ -516,7 +519,7 @@
 					      :items="myImages"
 					      :search="search"
 					    >
-					      <template v-slot:items="props">
+<!-- 					      <template v-slot:items="props">
 					        <td>
 					        	<a :href="props.item.path" target="_blank">
 						        	<v-img
@@ -532,13 +535,32 @@
 					        <td class="text-xs-right">{{ props.item.ar }}</td>
 					        <td class="text-xs-right">{{ props.item.dec }}</td>
 					        <td class="text-xs-right">{{ props.item.created_at }}</td>
+					      </template> -->
+
+
+					      <template v-slot:items="props">
+					        <td>
+					        	<a class="px-2 py-2" :href="props.item.path" target="_blank">
+						        	<v-img
+				      	  				src="http://localhost:8000/public/image/vialactea1.jpg"
+				      	  				aspect-ratio="1"
+				      				></v-img>
+			      				</a>
+					        </td>
+
+					        <td class="text-xs-left">{{ props.item.object_name }}</td>
+					        <td class="text-xs-left">{{ props.item.iso_string }}</td>
+					        <td class="text-xs-left">{{ props.item.exptime }}s</td>
+					        <td class="text-xs-left">{{ props.item.ar_string }}</td>
+					        <td class="text-xs-left">{{ props.item.dec_string }}</td>
+					        <td class="text-xs-left">{{ props.item.created_at }}</td>
 					      </template>
+					      
 					    </v-data-table>
 					  </v-card>	
 		      	</v-flex>
-
 		    </v-layout>
-		</v-container>
+		
 
 
       </v-card>
