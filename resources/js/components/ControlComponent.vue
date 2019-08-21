@@ -519,7 +519,7 @@
 					      :items="myImages"
 					      :search="search"
 					    >
-<!-- 					      <template v-slot:items="props">
+					      <template v-slot:items="props">
 					        <td>
 					        	<a :href="props.item.path" target="_blank">
 						        	<v-img
@@ -535,10 +535,10 @@
 					        <td class="text-xs-right">{{ props.item.ar }}</td>
 					        <td class="text-xs-right">{{ props.item.dec }}</td>
 					        <td class="text-xs-right">{{ props.item.created_at }}</td>
-					      </template> -->
+					      </template>
 
 
-					      <template v-slot:items="props">
+<!-- 					      <template v-slot:items="props">
 					        <td>
 					        	<a class="px-2 py-2" :href="props.item.path" target="_blank">
 						        	<v-img
@@ -554,7 +554,7 @@
 					        <td class="text-xs-left">{{ props.item.ar_string }}</td>
 					        <td class="text-xs-left">{{ props.item.dec_string }}</td>
 					        <td class="text-xs-left">{{ props.item.created_at }}</td>
-					      </template>
+					      </template> -->
 					      
 					    </v-data-table>
 					  </v-card>	
