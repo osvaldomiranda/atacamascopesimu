@@ -100,6 +100,20 @@ class AstronomicObjectController extends Controller
 	    return response()->json($coord);	
     }
 
+    public function horizon(Request $request){
+        $object = $request->input('object');
+
+
+        // python horizon.py -c
+        $coord= shell_exec("python horizon.py -c " . $object );       
+        
+        $alt = preg_split("/d/",$coord)[0];
+        return $alt;    
+    }
+
+
+    
+
     public function moon(Request $request){
 
        // Info($request->header());

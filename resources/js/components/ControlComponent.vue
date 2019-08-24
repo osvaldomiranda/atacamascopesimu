@@ -519,6 +519,8 @@
 					      :items="myImages"
 					      :search="search"
 					    >
+
+
 					      <template v-slot:items="props">
 					        <td>
 					        	<a class="px-2 py-2" :href="props.item.path" target="_blank">
@@ -612,14 +614,13 @@
 
         catalog:'SolarSistem',
         catalogs: ['SolarSistem','Messier','NGC', 'IC'],
-        type:'Planet',
-        types:[	'Planet',
-        		'Asterismo o Cúmulo Abierto',
+        type:'Galaxia',
+        types:[	'Galaxia',       		
+                'Asterismo o Cúmulo Abierto',
 				'Cúmulo abierto',
 				'Cúmulo Globular',
 				'Estrella',
 				'Estrella doble',
-				'Galaxia',
 				'Galaxias en Interacción',
 				'Nebulosa',
 				'Nebulosa de emisión Hidrógeno',
@@ -629,6 +630,7 @@
 				'Nebulosa y Cúmulo',
 				'Nova',
 				'Otro',
+				'Planet',
 				'Par de Galaxias',
 				'Remanente de Supernova',
 				'Trío de Galaxias',],
@@ -847,8 +849,26 @@
       	//	if (event.target.classList.contains('btn__content')) return;
       		var app = this;
  
-
       		this.object = a.name;
+
+	      	axios.get('/api/astronomic_objects/horizon?object=' + a.name)
+	            .then(function (resp) {    
+
+	            	if(resp.data<=0){
+	            		//alert(JSON.stringify(resp.data));
+        				app.Ar = 0;
+				        app.Dec = 0;
+				        app.Ar_screen = '';
+				        app.Dec_screen = '';
+				        app.object = 'Seleccione Objeto';
+	            		alert('Objeto Bajo el Horizonte');
+
+	            	}
+	            })
+	            .catch(function (resp) {
+	                console.log(resp);
+	                alert("Error shoot :" + resp);
+	            });      		
 
       		if(a.catalog=='SolarSistem'){
 	      		axios.get('/api/astronomic_objects/solarsistem?object=' + a.name)

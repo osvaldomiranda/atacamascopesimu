@@ -2715,6 +2715,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   computed: Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['astronomc_objects']),
@@ -2760,8 +2762,8 @@ __webpack_require__.r(__webpack_exports__);
       s_dec: 0,
       catalog: 'SolarSistem',
       catalogs: ['SolarSistem', 'Messier', 'NGC', 'IC'],
-      type: 'Planet',
-      types: ['Planet', 'Asterismo o Cúmulo Abierto', 'Cúmulo abierto', 'Cúmulo Globular', 'Estrella', 'Estrella doble', 'Galaxia', 'Galaxias en Interacción', 'Nebulosa', 'Nebulosa de emisión Hidrógeno', 'Nebulosa de Reflexión', 'Nebulosa Extragaláctica', 'Nebulosa Planetaria', 'Nebulosa y Cúmulo', 'Nova', 'Otro', 'Par de Galaxias', 'Remanente de Supernova', 'Trío de Galaxias'],
+      type: 'Galaxia',
+      types: ['Galaxia', 'Asterismo o Cúmulo Abierto', 'Cúmulo abierto', 'Cúmulo Globular', 'Estrella', 'Estrella doble', 'Galaxias en Interacción', 'Nebulosa', 'Nebulosa de emisión Hidrógeno', 'Nebulosa de Reflexión', 'Nebulosa Extragaláctica', 'Nebulosa Planetaria', 'Nebulosa y Cúmulo', 'Nova', 'Otro', 'Planet', 'Par de Galaxias', 'Remanente de Supernova', 'Trío de Galaxias'],
       Constellation: '',
       Constellations: [{
         name: '',
@@ -3192,6 +3194,20 @@ __webpack_require__.r(__webpack_exports__);
       //	if (event.target.classList.contains('btn__content')) return;
       var app = this;
       this.object = a.name;
+      axios.get('/api/astronomic_objects/horizon?object=' + a.name).then(function (resp) {
+        if (resp.data <= 0) {
+          //alert(JSON.stringify(resp.data));
+          app.Ar = 0;
+          app.Dec = 0;
+          app.Ar_screen = '';
+          app.Dec_screen = '';
+          app.object = 'Seleccione Objeto';
+          alert('Objeto Bajo el Horizonte');
+        }
+      })["catch"](function (resp) {
+        console.log(resp);
+        alert("Error shoot :" + resp);
+      });
 
       if (a.catalog == 'SolarSistem') {
         axios.get('/api/astronomic_objects/solarsistem?object=' + a.name).then(function (resp) {
@@ -5025,7 +5041,7 @@ var actualDate = new Date().toISOString().substr(0, 10);
   }
 }), _defineProperty(_computed$computed$da, "data", function data() {
   return {
-    img: "https://cdn.shopify.com/s/files/1/1935/4371/products/12046_Advanced_VX_9_25_SCT_1_570x380@2x.png?v=1554219678",
+    img: "http://www.celestron.es/wp-content/uploads/2017/05/12077_-CGX-L_EdgeHD_14_Kit_01.jpeg",
     e1: 0,
     generalRuleDate: [function (v) {
       return !!v || 'Campo requerido';
@@ -5173,7 +5189,7 @@ var actualDate = new Date().toISOString().substr(0, 10);
     alert(a);
     this.start = a;
     this.end = a;
-    this.moon_times = suncalc__WEBPACK_IMPORTED_MODULE_0___default.a.getMoonTimes(new Date(a), 33.0000, -70.3326);
+    this.moon_times = suncalc__WEBPACK_IMPORTED_MODULE_0___default.a.getMoonTimes(new Date(a), -22.96, 68.24);
     this.moonset = this.moon_times["set"];
     this.moonrise = this.moon_times["rise"];
     this.moon();
@@ -64752,8 +64768,7 @@ var render = function() {
                                         [
                                           _c("v-img", {
                                             attrs: {
-                                              src:
-                                                "http://localhost:8000/public/image/vialactea1.jpg",
+                                              src: props.item.path,
                                               "aspect-ratio": "1"
                                             }
                                           })

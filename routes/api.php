@@ -24,6 +24,8 @@ Route::get('/astronomic_objects/coords', 'AstronomicObjectController@coords');
 
 
 Route::get('/astronomic_objects/solarsistem', 'AstronomicObjectController@solarSistem');
+Route::get('/astronomic_objects/horizon', 'AstronomicObjectController@horizon');
+
 Route::get('/search_objects', 'AstronomicObjectController@search');
 
 Route::post('/command/move', 'CommandController@move');

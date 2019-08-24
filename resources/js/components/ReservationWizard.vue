@@ -441,7 +441,7 @@
 
   data () {
     return {
-    img: "https://cdn.shopify.com/s/files/1/1935/4371/products/12046_Advanced_VX_9_25_SCT_1_570x380@2x.png?v=1554219678",
+    img: "http://www.celestron.es/wp-content/uploads/2017/05/12077_-CGX-L_EdgeHD_14_Kit_01.jpeg",
 
     e1: 0,
     generalRuleDate: [v => !!v || 'Campo requerido',
@@ -621,7 +621,7 @@
       alert(a);
       this.start=a;
       this.end = a;
-      this.moon_times = SunCalc.getMoonTimes(new Date(a), 33.0000, -70.3326);
+      this.moon_times = SunCalc.getMoonTimes(new Date(a), -22.96, 68.24);
       this.moonset = this.moon_times["set"];
       this.moonrise = this.moon_times["rise"];
       this.moon();
