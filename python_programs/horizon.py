@@ -1,23 +1,38 @@
+import datetime
+import sys, getopt
 import astropy.units as u
 from astropy.time import Time
 from astropy.coordinates import SkyCoord, EarthLocation, AltAz
 
-santiago = EarthLocation(lat= -33.4434*u.deg, lon= -70*u.deg, height=33*u.m)
 
-utcoffset = -4*u.hour
-hoy = Time('2019-05-15 18:32:00') - utcoffset
+def main(argv):
+  command_id = ''
+  try:
+    opts, args = getopt.getopt(argv,"hc:",["command="])
+  except getopt.GetoptError:
+    print('planeta.py -c <command at format 1> ')
+    sys.exit(2)
+  for opt, arg in opts:
+    if opt == '-h':
+      print('planeta.py -c <command at format 1> ')
+      sys.exit()
+    elif opt in ("-c", "--command"):
+      command_id = arg
 
 
-astronomical_object = SkyCoord.from_name('M43')
-alt_az = astronomical_object.transform_to(AltAz(obstime=hoy,location=santiago))
+    santiago = EarthLocation(lat= -22.96*u.deg, lon= -68.24*u.deg, height=300*u.m)
 
-print("*********  Coordenadas Ecuatoriales ***********")
-print(astronomical_object)
-print(astronomical_object.to_string('dms'))
+	#-22.96, 68.24
 
-print(astronomical_object.ra.hms)
-print(astronomical_object.dec.hms)
+    utcoffset = -4*u.hour
+    hoy = Time(datetime.datetime.now()) - utcoffset
 
-print("********* Coordenadas AltAz ***********")
-print(alt_az)
-print("********************")
+
+    astronomical_object = SkyCoord.from_name(command_id)
+    alt_az = astronomical_object.transform_to(AltAz(obstime=hoy,location=santiago))
+
+
+    print(alt_az.alt)
+
+if __name__ == "__main__":
+   main(sys.argv[1:])
