@@ -30,7 +30,7 @@
     <v-stepper-items>
       <v-stepper-content step="1">
         <v-card
-          class="px-4 py-4 mb-12"
+          class="px-4 py-4 xs-6"
           height="450px"
         >
 

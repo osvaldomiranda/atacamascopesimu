@@ -2717,6 +2717,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   computed: Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['astronomc_objects']),
@@ -2762,8 +2773,8 @@ __webpack_require__.r(__webpack_exports__);
       s_dec: 0,
       catalog: 'SolarSistem',
       catalogs: ['SolarSistem', 'Messier', 'NGC', 'IC'],
-      type: 'Galaxia',
-      types: ['Galaxia', 'Asterismo o Cúmulo Abierto', 'Cúmulo abierto', 'Cúmulo Globular', 'Estrella', 'Estrella doble', 'Galaxias en Interacción', 'Nebulosa', 'Nebulosa de emisión Hidrógeno', 'Nebulosa de Reflexión', 'Nebulosa Extragaláctica', 'Nebulosa Planetaria', 'Nebulosa y Cúmulo', 'Nova', 'Otro', 'Planet', 'Par de Galaxias', 'Remanente de Supernova', 'Trío de Galaxias'],
+      type: 'Cúmulo abierto',
+      types: ['Cúmulo abierto', 'Galaxia', 'Asterismo o Cúmulo Abierto', 'Cúmulo Globular', 'Estrella', 'Estrella doble', 'Galaxias en Interacción', 'Nebulosa', 'Nebulosa de emisión Hidrógeno', 'Nebulosa de Reflexión', 'Nebulosa Extragaláctica', 'Nebulosa Planetaria', 'Nebulosa y Cúmulo', 'Nova', 'Otro', 'Planet', 'Par de Galaxias', 'Remanente de Supernova', 'Trío de Galaxias'],
       Constellation: '',
       Constellations: [{
         name: '',
@@ -3052,9 +3063,9 @@ __webpack_require__.r(__webpack_exports__);
       },
       object: 'Seleccione Objeto',
       state: 'En espera',
-      Paso: '100',
+      Tic: '15',
       Dir: 'Adentro',
-      Pasos: ['100', '200', '400', '600', '800', '1000', '2000', '3000'],
+      Tics: ['15', '50', '100', '250', '500'],
       Dirs: ['Adentro', 'Afuera'],
       selectedIso: '',
       Isos: [{
@@ -64635,19 +64646,25 @@ var render = function() {
                                 "v-flex",
                                 { staticClass: "px-2", attrs: { xs4: "" } },
                                 [
-                                  _c("v-text-field", {
+                                  _c("v-select", {
                                     attrs: {
-                                      "min:0": "",
-                                      "max:30000": "",
+                                      items: _vm.Tics,
+                                      "item-text": "Tic",
+                                      "return-object": "",
+                                      rules: [
+                                        function(v) {
+                                          return !!v || "Obligatorio"
+                                        }
+                                      ],
                                       label: "Tics",
-                                      type: "number"
+                                      required: ""
                                     },
                                     model: {
-                                      value: _vm.slider,
+                                      value: _vm.selectedTics,
                                       callback: function($$v) {
-                                        _vm.slider = $$v
+                                        _vm.selectedTics = $$v
                                       },
-                                      expression: "slider"
+                                      expression: "selectedTics"
                                     }
                                   })
                                 ],
@@ -66627,7 +66644,7 @@ var render = function() {
                             _c(
                               "v-card",
                               {
-                                staticClass: "px-4 py-4 mb-12",
+                                staticClass: "px-4 py-4 xs-6",
                                 attrs: { height: "450px" }
                               },
                               [

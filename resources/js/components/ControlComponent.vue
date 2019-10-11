@@ -468,13 +468,24 @@
 
 		          		<v-layout >
 		          		    <v-flex xs4 class="px-2">
-		          		    	<v-text-field
+<!-- 		          		    	<v-text-field
 								    v-model="slider"
 								    min:0
 								    max:30000
 								    label="Tics"
 								    type="number" 
-								    ></v-text-field>
+								    ></v-text-field> -->
+
+								<v-select
+							      v-model="selectedTics"
+							      :items="Tics"
+							      item-text='Tic'
+							      return-object
+							      :rules="[v => !!v || 'Obligatorio']"
+							      label="Tics"
+							     
+							      required
+							    ></v-select>    
 		          		    </v-flex>
 		          		    <v-flex xs6 class="px-2">	
 							    <v-select
@@ -614,10 +625,10 @@
 
         catalog:'SolarSistem',
         catalogs: ['SolarSistem','Messier','NGC', 'IC'],
-        type:'Galaxia',
-        types:[	'Galaxia',       		
+        type:'Cúmulo abierto',
+        types:[	'Cúmulo abierto',
+        		'Galaxia',       		
                 'Asterismo o Cúmulo Abierto',
-				'Cúmulo abierto',
 				'Cúmulo Globular',
 				'Estrella',
 				'Estrella doble',
@@ -749,17 +760,14 @@
 
 		object:'Seleccione Objeto',
 		state:'En espera',
-		Paso:'100',
+		Tic:'15',
 		Dir:'Adentro',
-	    Pasos: [
+	    Tics: [
+	        '15',
+	        '50',
 	        '100',
-	        '200',
-	        '400',
-	        '600',
-	        '800',
-	        '1000',
-	        '2000',
-	        '3000',
+	        '250',
+	        '500',
 	    ],
 
 	    Dirs: [

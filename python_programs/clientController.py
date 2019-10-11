@@ -50,9 +50,10 @@ if(response.ok):
             url = 'http://'+ip+'/api/messages/send?sender_id=1&receiver_id=2&message=Obteniendo Imagen'
             response = requests.post(url, data=data)
 
+            
             call(["gphoto2","--set-config-index", "/main/imgsettings/iso="+str(iso)])
             call(["gphoto2","--set-config","eosremoterelease=2", "--wait-event="+str(exptime)+"s","--set-config", "eosremoterelease=4","--wait-event-and-download=5s"])
-            call(["/usr/bin/python", cwd + "/CameraStopMonitor.py"], "-c "+str(exptime))
+            call(["/usr/bin/python", cwd + "/CameraStopMonitor.py", "-c "+str(exptime),'&'])
         except subprocess.CalledProcessError as e:
             raise RuntimeError("command '{}' return with error (code {}): {}".format(e.cmd, e.returncode, e.output))
 
