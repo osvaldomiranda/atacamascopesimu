@@ -2719,15 +2719,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   computed: Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['astronomc_objects']),
@@ -2773,8 +2764,8 @@ __webpack_require__.r(__webpack_exports__);
       s_dec: 0,
       catalog: 'SolarSistem',
       catalogs: ['SolarSistem', 'Messier', 'NGC', 'IC'],
-      type: 'Cúmulo abierto',
-      types: ['Cúmulo abierto', 'Galaxia', 'Asterismo o Cúmulo Abierto', 'Cúmulo Globular', 'Estrella', 'Estrella doble', 'Galaxias en Interacción', 'Nebulosa', 'Nebulosa de emisión Hidrógeno', 'Nebulosa de Reflexión', 'Nebulosa Extragaláctica', 'Nebulosa Planetaria', 'Nebulosa y Cúmulo', 'Nova', 'Otro', 'Planet', 'Par de Galaxias', 'Remanente de Supernova', 'Trío de Galaxias'],
+      type: 'Cúmulo Globular',
+      types: ['Cúmulo Globular', 'Cúmulo abierto', 'Galaxia', 'Asterismo o Cúmulo Abierto', 'Estrella', 'Estrella doble', 'Galaxias en Interacción', 'Nebulosa', 'Nebulosa de emisión Hidrógeno', 'Nebulosa de Reflexión', 'Nebulosa Extragaláctica', 'Nebulosa Planetaria', 'Nebulosa y Cúmulo', 'Nova', 'Otro', 'Planet', 'Par de Galaxias', 'Remanente de Supernova', 'Trío de Galaxias'],
       Constellation: '',
       Constellations: [{
         name: '',
