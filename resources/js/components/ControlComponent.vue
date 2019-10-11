@@ -901,7 +901,7 @@
     	},
       	initialize () {
 
-      		alert('initialize');
+      		//alert('initialize');
       		this.imageRefresh();
             this.openChat();
             this.getMyImages();

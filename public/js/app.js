@@ -3237,7 +3237,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     initialize: function initialize() {
-      alert('initialize');
+      //alert('initialize');
       this.imageRefresh();
       this.openChat();
       this.getMyImages();
