@@ -26,11 +26,36 @@
  
         	<v-container grid-list-md>
             	<v-layout wrap>
-              		<v-flex xs12>
-                		<v-text-field label="Nombre Equipo" required></v-text-field>
+              		<v-flex xs6>
+                		<v-text-field v-model='eqName' label="Nombre Equipo" required></v-text-field>
               		</v-flex>
+
+                    <v-flex sm6 md6 class="text-xs-center text-sm-center text-md-center text-lg-center">
+
+                        <v-text-field label="Adjuntar Archivo JPG" @click='pickEqFile' v-model='imageEqName' prepend-icon='attach_file'></v-text-field>
+                            <input
+                                type="file"
+                                style="display: none"
+                                ref="imageEq"
+                                accept=".jpg"
+                                @change="onEqFilePicked"
+                            >
+                    </v-flex>
+
+
               		<v-flex xs12>
-              			<editor-menu-bar :editor="editor" v-slot="{ commands, isActive }">
+                     <v-textarea
+                          clearable
+                          clear-icon="cancel"
+                          label="Descripción"
+                          value="Descripción"
+                          v-model = 'eqDescription'
+                        >      
+                    </v-textarea>
+
+
+
+<!--               	<editor-menu-bar :editor="editor" v-slot="{ commands, isActive }">
 					      <div class="menubar">
 
 					        <button
@@ -138,7 +163,7 @@
 					      </div>
 					    </editor-menu-bar>
 
-			        	<editor-content :editor="editor" />
+			        	<editor-content :editor="editor" /> -->
               		</v-flex>	
 
 			 	</v-layout>
@@ -154,7 +179,7 @@
           <v-btn
             color="primary"
             flat
-            @click="dialog = false"
+            @click="eqSave"
           >
             Guardar
           </v-btn>
@@ -167,69 +192,131 @@
 
 
 
-
 <script>
 // Import the basic building blocks
 
-import { Editor, EditorContent, EditorMenuBar } from 'tiptap'
-import {
-  Blockquote,
-  CodeBlock,
-  HardBreak,
-  Heading,
-  OrderedList,
-  BulletList,
-  ListItem,
-  TodoItem,
-  TodoList,
-  Bold,
-  Code,
-  Italic,
-  Link,
-  Strike,
-  Underline,
-  History,
-} from 'tiptap-extensions'
+// import { Editor, EditorContent, EditorMenuBar } from 'tiptap'
+// import {
+//   Blockquote,
+//   CodeBlock,
+//   HardBreak,
+//   Heading,
+//   OrderedList,
+//   BulletList,
+//   ListItem,
+//   TodoItem,
+//   TodoList,
+//   Bold,
+//   Code,
+//   Italic,
+//   Link,
+//   Strike,
+//   Underline,
+//   History,
+// } from 'tiptap-extensions'
 
 export default {
-  components: {
-    EditorContent,
-    EditorMenuBar,
-  },
   data() {
     return {
+       eqName: '',
+       eqDescription: '',
+       imageEqName: '',
+       imageEqFile: '',
+       imageEqUrl: '',
+
       dialog: false,	
       // Create an `Editor` instance with some default content. The editor is 
       // then passed to the `EditorContent` component as a `prop`
-      editor: new Editor({
-        extensions: [
-          new Blockquote(),
-          new CodeBlock(),
-          new HardBreak(),
-          new Heading({ levels: [1, 2, 3] }),
-          new BulletList(),
-          new OrderedList(),
-          new ListItem(),
-          new TodoItem(),
-          new TodoList(),
-          new Bold(),
-          new Code(),
-          new Italic(),
-          new Link(),
-          new Strike(),
-          new Underline(),
-          new History(),
-        ],
-        content: `
-          <h3>Descripción</h1>
+      // editor: new Editor({
+      //   extensions: [
+      //     new Blockquote(),
+      //     new CodeBlock(),
+      //     new HardBreak(),
+      //     new Heading({ levels: [1, 2, 3] }),
+      //     new BulletList(),
+      //     new OrderedList(),
+      //     new ListItem(),
+      //     new TodoItem(),
+      //     new TodoList(),
+      //     new Bold(),
+      //     new Code(),
+      //     new Italic(),
+      //     new Link(),
+      //     new Strike(),
+      //     new Underline(),
+      //     new History(),
+      //   ],
+      //   content: `
+      //     <h3>Descripción</h1>
           
-        `,
-      }),
+      //   `,
+      // }),
     }
   },
-  beforeDestroy() {
-    // Always destroy your editor instance when it's no longer needed
-    this.editor.destroy()
-  },
+
+
+   methods: {
+
+        pickEqFile () {
+            this.$refs.imageEq.click()
+        },
+        
+        onEqFilePicked (e) {
+            const files = e.target.files
+            if(files[0] !== undefined) {
+                this.imageEqName = files[0].name
+                if(this.imageEqName.lastIndexOf('.') <= 0) {
+                    return
+                }
+                const fr = new FileReader ()
+                fr.readAsDataURL(files[0])
+                fr.addEventListener('load', () => {
+                    this.imageEqUrl = fr.result
+                    this.imageEqFile = files[0] // this is an image file that can be sent to server...
+                })
+            } else {
+                this.imageEqName = ''
+                this.imageEqFile = ''
+                this.imageEqUrl = ''
+            }
+        },
+
+
+        eqSave(){
+            var app = this;
+        
+        
+            
+            //if (this.$refs.form_estimation.validate()){
+                var emit = {
+                    'name'        : this.eqName,
+                    'description' : this.eqDescription,
+                }
+      
+                let formData = new FormData();
+                formData.append('data',  JSON.stringify(emit));
+                formData.append('file', this.imageEqFile);
+                axios.post('/api/equipment/new',formData,
+                    {
+                        headers: {
+                            'Content-Type': 'multipart/form-data'
+                    }
+                })
+                .then(function (resp) {
+                    //app.initialize();
+                })
+                .catch(function (resp) {
+                    console.log(resp);
+                    alert("Error source_types :" + resp);
+                });
+
+                this.dialog = false;           
+            //}     
+
+      },
+
+
+    }    
+
 }
 </script>

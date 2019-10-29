@@ -15,9 +15,20 @@ class EquipmentController extends Controller
 
 
     public function new(Request $request){
+
+        $data = json_decode($request->data);
+
+        Info('Equipment new 21');
+        Info($request);
+
+        $fileName = $request->file->getClientOriginalName();        
+        $fileDir = $request->file->storeAs('files',$fileName);  
+
 	    $equipment = new Equipment();
-	    $equipment->name	    = $request->input('name');
-	    $equipment->description	= $request->input('description');
+	    $equipment->name	    = $data->name;
+	    $equipment->description	= $data->description;
+        $equipment->image_name  = $fileName;
+        $equipment->image       = $fileDir;
         $equipment->save();
 
         return response()->json($equipment);
