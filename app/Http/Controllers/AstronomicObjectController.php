@@ -29,17 +29,17 @@ class AstronomicObjectController extends Controller
         Info($type);
 
         if($type and !$constellation){
-            Info("tipo y ! const");
+            // Info("tipo y ! const");
             $astronomicObjects = AstronomicObject::where('type_object',$type)->get()->toArray();
         }
 
         if(!$type and $constellation){
-            Info("!tipo y const");
+            // Info("!tipo y const");
             $astronomicObjects = AstronomicObject::where('constellation',$constellation)->get()->toArray();
         }
 
         if($type and $constellation){
-            Info("tipo y const");
+            // Info("tipo y const");
             $astronomicObjects = AstronomicObject::where('constellation',$constellation)->where('type_object',$type)->get()->toArray();
         }
 

@@ -19,7 +19,7 @@
           <v-btn icon dark @click="dialog = false">
             <v-icon>close</v-icon>
           </v-btn>
-          <v-toolbar-title>Interfaz de Control</v-toolbar-title>
+          <v-toolbar-title>Interfaz de Control para el Administrador</v-toolbar-title>
           <v-spacer></v-spacer>
         </v-toolbar>
 
@@ -105,7 +105,7 @@
 					      	  		v-bind:src="imageUrl"
 					      	  		aspect-ratio="1"
 					      		>
-					      			<span class="my-span">M16 AR:16h53m6.75s DEC:-22°9m19s ISO:1200 T:30s</span>
+					      			
 					      		</v-img>
 					      		</a>
 					    	</v-card> 
@@ -755,14 +755,17 @@
 		object:'Seleccione Objeto',
 		state:'En espera',
 		Tic:'15',
-		Dir:'Adentro',
+		selectedDir:'Adentro',
 	    Tics: [
 	        '15',
 	        '50',
 	        '100',
 	        '250',
 	        '500',
-	    ],
+	        '1000',
+	        '5000',
+	        '10000',
+	   	    ],
 
 	    Dirs: [
 	        'Adentro',
@@ -1059,9 +1062,19 @@
         	this.current = "Ar:" + this.Ar_act + ", Dec:"+ this.Dec_act + ", Iso:"+this.Iso_act+", Exp:"+this.Exp_act;
         },
         focus(){
+
+        	alert(this.selectedDir);
+
+        	var dir = 0;
+        	if(this.selectedDir=='Adentro'){
+        		dir = 1;
+        	}
+
+        	alert(dir);
+
         	this.state = 'Enviando Comando';
         	var $command = {'command': 'ENFOCADOR', 'type': 'focuser', 'status': 'PENDIENTE',
-        	                'steps': this.slider, 'direction': 1, 'user_id': this.$store.getters.user['id'], 'equipment_id': 1};
+        	                'steps': this.slider, 'direction': dir, 'user_id': this.$store.getters.user['id'], 'equipment_id': 1};
 
         	//alert(JSON.stringify($command));
 

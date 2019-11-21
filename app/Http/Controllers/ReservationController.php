@@ -18,7 +18,9 @@ class ReservationController extends Controller
     }
 
     public function myReservations(Request $request){
-        $reservations = Reservation::with('equipment')->whereDate('date','>=',Carbon::now())->where('user_id', 3)-> get();
+
+        $user_id = Auth::id();
+        $reservations = Reservation::with('equipment')->whereDate('date','>=',Carbon::now())->where('user_id', $user_id)-> get();
         return response()->json($reservations);
     }
     public function reservations(Request $request){
@@ -41,10 +43,17 @@ class ReservationController extends Controller
             'current_points' => 'required',
         ]);
 
+
+        // Info("*****************************");
+        // Info($request->input('date'));
+        // Info("*****************************");
+
+
+
         $reservation = new Reservation();
         $reservation->user_id       = Auth::id();
         $reservation->equipment_id  = $request->input('equipment_id');
-        $reservation->date          = $request->input('date');
+        $reservation->date          = $request->input('date'); 
         $reservation->hour          = $request->input('hour');
         $reservation->points_out    = $request->input('points_out');
         $reservation->state         = 'CREADA';

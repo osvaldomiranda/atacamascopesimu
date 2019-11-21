@@ -25,6 +25,8 @@ class ImageController extends Controller
 
     		$path = $request->photo->store('public');
 
+
+            //TODO: revisar como hacer que la direccion de la imagen sea facil de obtener
             $filename = substr($path,7,100);
              $path = 'http://54.70.235.195/storage/' . $filename;
             //$path = 'http://10.200.112.245/storage/' . $filename;
@@ -48,6 +50,8 @@ class ImageController extends Controller
     		$image->equipment_id = 1;
     		$image->save();
 
+            //TODO: cuando se tenga mas de un telescopio, se debe 
+            //TODO: reemplazar el receiver_id, con el id del usuario
             $message = Message::create([
                 'sender_id'   => 1,
                 'receiver_id' => 2,

@@ -113,6 +113,9 @@ class CommandController extends Controller
 	    	$command->status = 'ENVIADO';
 	    	$command->save();
 
+
+	    	//TODO: cuando se tenga mas de un telescopio, se debe 
+	    	//TODO: reemplazar el receiver_id, con el id del usuario
 	        $message = Message::create([
 	            'sender_id'   => 1,
 	            'receiver_id' => 2,

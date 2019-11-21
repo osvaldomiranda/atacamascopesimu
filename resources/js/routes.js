@@ -2,12 +2,13 @@ import App from './views/App'
 import Vue from 'vue';
 import VueRouter from 'vue-router'
 
-import DashboardView    from './views/DashboardView'
-import OffersView       from './views/OffersView'
-import PublicationsView from './views/PublicationsView'
-import UsersView        from './views/UsersView'
-import StatisticsView   from './views/StatisticsView'
-import EquipmentView   from './views/EquipmentView'
+import DashboardView     from './views/DashboardView'
+import OffersView        from './views/OffersView'
+import PublicationsView  from './views/PublicationsView'
+import UsersView         from './views/UsersView'
+import StatisticsView    from './views/StatisticsView'
+import EquipmentView     from './views/EquipmentView'
+import AdminControlView  from './views/AdminControlView'
 
 import ChatComponent   from './components/ChatComponent'
 import AppComponent   from './components/AppComponent'
@@ -59,6 +60,11 @@ const router = new VueRouter({
             path: '/equipment',
             name: 'Equipment',
             component: EquipmentView,
+        },
+        {
+            path: '/admincontrol',
+            name: 'AdminControl',
+            component: AdminControlView,
         },
     ],
 });

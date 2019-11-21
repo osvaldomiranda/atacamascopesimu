@@ -357,7 +357,7 @@
       </v-layout>  
       <v-layout wrap row>
         <v-flex xs12>
-        <div class="title font-weight-light">Fecha:  {{ this.today }}</div>
+        <div class="title font-weight-light">Fecha:  {{ this.reserv_date }}</div>
         </v-flex>
       </v-layout>
       <v-layout wrap row>
@@ -450,7 +450,7 @@
 
     blankRules: [v => !!v || 'Campo requerido'],
     today: '2019-05-08',
-    date: '2019-05-08',
+    reserv_date: '2019-05-08',
     moon_state:"",
     moon_times:"",
     moonset:"",
@@ -631,7 +631,7 @@
 
     reservatios_day () {
       var app = this;
-      axios.get('/api/reservations?equipment_id='+app.equipment_id+'&date='+app.start)
+      axios.get('/api/reservations?equipment_id='+app.equipment_id+'&date='+app.reserv_date)
       .then(function (resp) {  
         app.reservationsArray=[];
         app.events=[];
@@ -655,8 +655,11 @@
 
     reserv (){
       var app = this
-      let userId = document.head.querySelector('meta[name="userID"]');
-      var reserv = {'user_id':4, 'equipment_id': this.equipment_id, 'date': this.start, 'hour': this.hourToReserv , 'points_out': this.telescope_points, 'current_points': this.$store.getters.current_points - this.telescope_points };
+
+      // alert(JSON.stringify(this.reserv_date));
+
+
+      var reserv = {'user_id':4, 'equipment_id': this.equipment_id, 'date': this.reserv_date, 'hour': this.hourToReserv , 'points_out': this.telescope_points, 'current_points': this.$store.getters.current_points - this.telescope_points };
 
 
       axios.post('/api/reservation/create', reserv)
@@ -693,8 +696,10 @@
 
 
     viewDay ({ date }) {
-
         //validar que la fecha a reservar sea mayor o igual a hoy
+
+        // alert(JSON.stringify(date));
+        this.reserv_date = date;
         this.focus = date;
         this.start = this.focus;
         this.reservatios_day();

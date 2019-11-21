@@ -12,7 +12,7 @@ def printit():
     t = threading.Timer(2, printit)
     t.start()
 
-    comando = 'indi_getprop "Pegasus DMFC.ABS_FOCUS_POSITION.FOCUS_ABSOLUTE_POSITION"'
+    comando = '/usr/bin/indi_getprop "Pegasus DMFC.ABS_FOCUS_POSITION.FOCUS_ABSOLUTE_POSITION"'
 
     try:
         b_ra = subprocess.check_output(comando, shell=True,stderr=subprocess.STDOUT)
@@ -38,7 +38,7 @@ def printit():
         response = requests.post(url, data=data)
 
 
-comando = 'indi_getprop "Pegasus DMFC.ABS_FOCUS_POSITION.FOCUS_ABSOLUTE_POSITION"'
+comando = '/usr/bin/indi_getprop "Pegasus DMFC.ABS_FOCUS_POSITION.FOCUS_ABSOLUTE_POSITION"'
 try:
     b_ra = subprocess.check_output(comando, shell=True,stderr=subprocess.STDOUT)
     c_ra = b_ra.decode("utf-8")

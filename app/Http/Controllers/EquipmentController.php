@@ -18,7 +18,7 @@ class EquipmentController extends Controller
 
         $data = json_decode($request->data);
 
-        Info('Equipment new 21');
+        // Info('Equipment new 21');
         Info($request);
 
         $fileName = $request->file->getClientOriginalName();        
