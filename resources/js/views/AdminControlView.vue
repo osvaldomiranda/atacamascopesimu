@@ -1074,7 +1074,7 @@
 
         	this.state = 'Enviando Comando';
         	var $command = {'command': 'ENFOCADOR', 'type': 'focuser', 'status': 'PENDIENTE',
-        	                'steps': this.slider, 'direction': dir, 'user_id': this.$store.getters.user['id'], 'equipment_id': 1};
+        	                'steps': this.selectedTics, 'direction': dir, 'user_id': this.$store.getters.user['id'], 'equipment_id': 1};
 
         	//alert(JSON.stringify($command));
 
