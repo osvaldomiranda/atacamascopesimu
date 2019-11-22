@@ -987,6 +987,10 @@
 	            	app.conteo();	
 	            }
 
+	            if (app.state=="Subiendo Imagen"){
+	            	app.pulsa();
+	            }
+
 	            if (app.state=="Imagen Recibida"){
 	            	app.pulsa();
 	            	app.imageRefresh();
