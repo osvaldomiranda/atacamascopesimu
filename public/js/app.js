@@ -2727,6 +2727,7 @@ __webpack_require__.r(__webpack_exports__);
       tiempo: 0,
       contando: true,
       tiempos: [],
+      metadata: '',
       ninetyRule: [function (v) {
         return !!v || 'Campo requerido';
       }, function (v) {
@@ -5166,11 +5167,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
 
 
 
@@ -5249,7 +5245,7 @@ var actualDate = new Date().toISOString().substr(0, 10);
     points_out: 0,
     hourToReserv: '',
     equipment: 'Equipo Principal',
-    equipment_desc: '',
+    equipment_desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     equipment_image: '',
     reservationsArray: [],
     equipment_id: 1,
@@ -5434,13 +5430,16 @@ var actualDate = new Date().toISOString().substr(0, 10);
   },
   viewDay: function viewDay(_ref) {
     var date = _ref.date;
+
     //validar que la fecha a reservar sea mayor o igual a hoy
     // alert(JSON.stringify(date));
-    this.reserv_date = date;
-    this.focus = date;
-    this.start = this.focus;
-    this.reservatios_day();
-    this.e1 = 3;
+    if (date < this.today) {} else {
+      this.reserv_date = date;
+      this.focus = date;
+      this.start = this.focus;
+      this.reservatios_day();
+      this.e1 = 3;
+    }
   },
   getEventColor: function getEventColor(event) {
     return event.color;
@@ -7027,6 +7026,10 @@ __webpack_require__.r(__webpack_exports__);
           app.conteo();
         }
 
+        if (app.state == "Subiendo Imagen") {
+          app.pulsa();
+        }
+
         if (app.state == "Imagen Recibida") {
           app.pulsa();
           app.imageRefresh();
@@ -7110,7 +7113,7 @@ __webpack_require__.r(__webpack_exports__);
         'command': 'ENFOCADOR',
         'type': 'focuser',
         'status': 'PENDIENTE',
-        'steps': this.slider,
+        'steps': this.selectedTics,
         'direction': dir,
         'user_id': this.$store.getters.user['id'],
         'equipment_id': 1
@@ -39514,9 +39517,7 @@ var render = function() {
                                       },
                                       [
                                         _c("span", { staticClass: "my-span" }, [
-                                          _vm._v(
-                                            "M16 AR:16h53m6.75s DEC:-22°9m19s ISO:1200 T:30s"
-                                          )
+                                          _vm._v(_vm._s(this.metadata))
                                         ])
                                       ]
                                     )
@@ -42472,7 +42473,7 @@ var render = function() {
                                     _c(
                                       "v-flex",
                                       {
-                                        staticClass: "px-4",
+                                        staticClass: "px-4 py-4",
                                         attrs: { xs2: "" }
                                       },
                                       [
@@ -42492,17 +42493,22 @@ var render = function() {
                                       1
                                     ),
                                     _vm._v(" "),
-                                    _c("v-flex", { attrs: { xs4: "" } }, [
-                                      _c("h2", [_vm._v(_vm._s(_vm.equipment))])
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("v-flex", { attrs: { xs1: "" } }),
-                                    _vm._v(" "),
-                                    _c("v-flex", { attrs: { xs4: "" } }, [
-                                      _c("h2", [
-                                        _vm._v(_vm._s(_vm.equipment_desc))
-                                      ])
-                                    ])
+                                    _c(
+                                      "v-flex",
+                                      {
+                                        staticClass: "px-4 py-4",
+                                        attrs: { xs8: "" }
+                                      },
+                                      [
+                                        _c("h2", [
+                                          _vm._v(_vm._s(_vm.equipment))
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("h4", [
+                                          _vm._v(_vm._s(_vm.equipment_desc))
+                                        ])
+                                      ]
+                                    )
                                   ],
                                   1
                                 )
@@ -42786,7 +42792,7 @@ var render = function() {
                                                                         "v-flex",
                                                                         {
                                                                           staticClass:
-                                                                            "px-2",
+                                                                            "px-1",
                                                                           attrs: {
                                                                             xs4:
                                                                               ""
@@ -42823,7 +42829,7 @@ var render = function() {
                                                                             "v-flex",
                                                                             {
                                                                               staticClass:
-                                                                                "px-2",
+                                                                                "px-1",
                                                                               attrs: {
                                                                                 xs12:
                                                                                   ""

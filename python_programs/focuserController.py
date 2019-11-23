@@ -50,6 +50,6 @@ if(response.ok):
             data = '{}'
             response = requests.post(url, data=data)            
             subprocess.check_output(comando, shell=True,stderr=subprocess.STDOUT)
-            call(["/usr/bin/python3", cwd + "/focuserStopMonitor.py"])
+            call(["/usr/bin/python3",  "/home/ubuntu/atacama_scope/focuserStopMonitor.py"])
         except subprocess.CalledProcessError as e:
             raise RuntimeError("command '{}' return with error (code {}): {}".format(e.cmd, e.returncode, e.output))

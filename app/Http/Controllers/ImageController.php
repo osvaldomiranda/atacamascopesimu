@@ -76,13 +76,13 @@ class ImageController extends Controller
     }
 
     public function index(request $request){
-        $images = Image::where('user_id',Auth::id())->get();
+        $images = Image::where('user_id',Auth::id())->orderBy('created_at', 'desc')->get();
         return response()->json($images);
     }
 
     public function myImages(request $request){
         
-        $images = Image::where('user_id',Auth::id())->get();
+        $images = Image::where('user_id',Auth::id())->orderBy('created_at', 'desc')->get();
         return response()->json($images);
     }
 

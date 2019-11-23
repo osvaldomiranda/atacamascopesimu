@@ -60,22 +60,17 @@
 
 
               <v-layout>
-                <v-flex xs2 class="px-4">
-                <v-card>
-                    <v-img
-                        v-bind:src= "img" 
-                        aspect-ratio="1"
-                    ></v-img>  
-                </v-card> 
-              </v-flex>
-
-                <v-flex xs4>
+                <v-flex xs2 class="px-4 py-4">                  
+                  <v-card>
+                      <v-img
+                          v-bind:src= "img" 
+                          aspect-ratio="1"
+                      ></v-img>  
+                  </v-card> 
+                </v-flex>
+                <v-flex xs8 class="px-4 py-4">
                   <h2>{{ equipment }}</h2>
-                </v-flex>
-                <v-flex xs1>
-                </v-flex>
-                <v-flex xs4>
-                  <h2>{{ equipment_desc }}</h2>
+                  <h4>{{ equipment_desc }}</h4>
                 </v-flex>
             </v-layout>
         </v-card>
@@ -164,11 +159,11 @@
                                         </v-flex>
 
 
-                                        <v-flex xs4 class="px-2">                                           
+                                        <v-flex xs4 class="px-1">                                           
                                             <v-flex xs12>
                                               <p>{{ moonRise(date) }}</p>
                                             </v-flex>
-                                            <v-flex xs12 class="px-2">
+                                            <v-flex xs12 class="px-1">
                                               <p>{{ moonSet(date) }}</p>
                                             </v-flex>                            
                                         </v-flex>
@@ -466,7 +461,7 @@
     points_out:0,
     hourToReserv:'',
     equipment: 'Equipo Principal',
-    equipment_desc: '',
+    equipment_desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     equipment_image: '',
 
     reservationsArray:[],
@@ -547,6 +542,8 @@
 
 
     initialize () {
+
+      
 
       var app = this;
       app.today = actualDate;
@@ -699,11 +696,16 @@
         //validar que la fecha a reservar sea mayor o igual a hoy
 
         // alert(JSON.stringify(date));
-        this.reserv_date = date;
-        this.focus = date;
-        this.start = this.focus;
-        this.reservatios_day();
-        this.e1 = 3;
+        if(date<this.today){
+          
+        } else {
+
+            this.reserv_date = date;
+            this.focus = date;
+            this.start = this.focus;
+            this.reservatios_day();
+            this.e1 = 3;
+        }
     },
 
       getEventColor (event) {

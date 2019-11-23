@@ -105,7 +105,7 @@
 					      	  		v-bind:src="imageUrl"
 					      	  		aspect-ratio="1"
 					      		>
-					      			<span class="my-span">M16 AR:16h53m6.75s DEC:-22°9m19s ISO:1200 T:30s</span>
+					      			<span class="my-span">{{ this.metadata }}</span>
 					      		</v-img>
 					      		</a>
 					    	</v-card> 
@@ -583,6 +583,8 @@
       	tiempo: 0,
       	contando: true,
         tiempos: [],
+
+        metadata: '',
 
         ninetyRule: [v => !!v || 'Campo requerido',
             v=> v <= 90 || 'Debe ser  menor o igual a 90',
