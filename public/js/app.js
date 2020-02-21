@@ -3060,7 +3060,7 @@ __webpack_require__.r(__webpack_exports__);
       state: 'En espera',
       Tic: '15',
       Dir: 'Adentro',
-      Tics: ['15', '50', '100', '250', '500'],
+      Tics: ['100', '500', '1000', '2500', '5000', '10000'],
       Dirs: ['Adentro', 'Afuera'],
       selectedIso: '',
       Isos: [{
