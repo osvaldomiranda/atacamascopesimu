@@ -428,10 +428,11 @@
 
 
 							    <v-select
-							      v-model="Exp"
+							      v-model="SelectedExp"
 							      :items="Exps"
 							      :rules="[v => !!v || 'Obligatorio']"
 							      label="Tiempo Exposición(Segundos)"
+							      @input= "selectExp"
 							      required
 							    ></v-select>
 
@@ -469,12 +470,13 @@
 		          		<v-layout >
 		          		    <v-flex xs4 class="px-2">
 								<v-select
-							      v-model="selectedTics"
+							      v-model="selectedTic"
 							      :items="Tics"
 							      item-text='Tic'
 							      return-object
 							      :rules="[v => !!v || 'Obligatorio']"
-							      label="Tics"		     
+							      label="Tics"	
+							      @input= "selectTic"	     
 							      required
 							    ></v-select>    
 		          		    </v-flex>
@@ -486,7 +488,7 @@
 							      return-object
 							      :rules="[v => !!v || 'Obligatorio']"
 							      label="Dirección"
-							     
+							      @input= "selectDir"
 							      required
 							    ></v-select>
 							</v-flex>    
@@ -756,8 +758,8 @@
 
 		object:'Seleccione Objeto',
 		state:'En espera',
-		Tic:'15',
-		Dir:'Adentro',
+		selectedTic:'100',
+		selectedDir:'Adentro',
 	    Tics: [
 	        '100',
 	        '500',
@@ -771,8 +773,8 @@
 	        'Adentro',
 	        'Afuera',
 	    ],
-	    selectedIso:'',
 
+	    selectedIso:'',
 	    Isos: [
 			{choice: 1, iso: 100},
 			{choice: 2, iso: 125},
@@ -877,24 +879,24 @@
  
       		this.object = a.name;
 
-	      	axios.get('/api/astronomic_objects/horizon?object=' + a.name)
-	            .then(function (resp) {    
+	      	// axios.get('/api/astronomic_objects/horizon?object=' + a.name)
+	       //      .then(function (resp) {    
 
-	            	if(resp.data<=0){
-	            		//alert(JSON.stringify(resp.data));
-        				app.Ar = 0;
-				        app.Dec = 0;
-				        app.Ar_screen = '';
-				        app.Dec_screen = '';
-				        app.object = 'Seleccione Objeto';
-	            		alert('Objeto Bajo el Horizonte');
+	       //      	if(resp.data<=0){
+	       //      		//alert(JSON.stringify(resp.data));
+        // 				app.Ar = 0;
+				    //     app.Dec = 0;
+				    //     app.Ar_screen = '';
+				    //     app.Dec_screen = '';
+				    //     app.object = 'Seleccione Objeto';
+	       //      		alert('Objeto Bajo el Horizonte');
 
-	            	}
-	            })
-	            .catch(function (resp) {
-	                console.log(resp);
-	                alert("Error shoot :" + resp);
-	            });      		
+	       //      	}
+	       //      })
+	       //      .catch(function (resp) {
+	       //          console.log(resp);
+	       //          alert("Error shoot :" + resp);
+	       //      });      		
 
       		if(a.catalog=='SolarSistem'){
 	      		axios.get('/api/astronomic_objects/solarsistem?object=' + a.name)
@@ -1064,7 +1066,7 @@
         focus(){
         	this.state = 'Enviando Comando';
         	var $command = {'command': 'ENFOCADOR', 'type': 'focuser', 'status': 'PENDIENTE',
-        	                'steps': this.slider, 'direction': 1, 'user_id': this.$store.getters.user['id'], 'equipment_id': 1};
+        	                'steps': this.Tic, 'direction': this.Dir, 'user_id': this.$store.getters.user['id'], 'equipment_id': 1};
 
         	//alert(JSON.stringify($command));
 
@@ -1203,10 +1205,30 @@
     	},
 
     	selectIso(a){
-    		this.selectedIso = a;
+       		this.selectedIso = a;
     		this.Iso = a.choice;
     	},
 
+    	selectExp(a){
+    		this.selectedExp = a;
+    		this.Exp = a;
+    	},
+
+
+    	selectTic(a){
+    		this.selectedTic = a;
+    		this.Tic = a;
+    	},
+
+    	selectDir(a){
+    		this.selectedDir = a;
+    		if(a=="Afuera") {
+    			this.Dir = 1;
+    		} else {
+    			this.Dir = 0;
+    		}
+    		
+    	},
 
         pad(num, tam) {
             var s = num + '';

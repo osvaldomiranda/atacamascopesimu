@@ -2719,6 +2719,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   computed: Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['astronomc_objects']),
@@ -3058,8 +3060,8 @@ __webpack_require__.r(__webpack_exports__);
       },
       object: 'Seleccione Objeto',
       state: 'En espera',
-      Tic: '15',
-      Dir: 'Adentro',
+      selectedTic: '100',
+      selectedDir: 'Adentro',
       Tics: ['100', '500', '1000', '2500', '5000', '10000'],
       Dirs: ['Adentro', 'Afuera'],
       selectedIso: '',
@@ -3215,21 +3217,22 @@ __webpack_require__.r(__webpack_exports__);
     showAlert: function showAlert(a) {
       //	if (event.target.classList.contains('btn__content')) return;
       var app = this;
-      this.object = a.name;
-      axios.get('/api/astronomic_objects/horizon?object=' + a.name).then(function (resp) {
-        if (resp.data <= 0) {
-          //alert(JSON.stringify(resp.data));
-          app.Ar = 0;
-          app.Dec = 0;
-          app.Ar_screen = '';
-          app.Dec_screen = '';
-          app.object = 'Seleccione Objeto';
-          alert('Objeto Bajo el Horizonte');
-        }
-      })["catch"](function (resp) {
-        console.log(resp);
-        alert("Error shoot :" + resp);
-      });
+      this.object = a.name; // axios.get('/api/astronomic_objects/horizon?object=' + a.name)
+      //      .then(function (resp) {    
+      //      	if(resp.data<=0){
+      //      		//alert(JSON.stringify(resp.data));
+      // 				app.Ar = 0;
+      //     app.Dec = 0;
+      //     app.Ar_screen = '';
+      //     app.Dec_screen = '';
+      //     app.object = 'Seleccione Objeto';
+      //      		alert('Objeto Bajo el Horizonte');
+      //      	}
+      //      })
+      //      .catch(function (resp) {
+      //          console.log(resp);
+      //          alert("Error shoot :" + resp);
+      //      });      		
 
       if (a.catalog == 'SolarSistem') {
         axios.get('/api/astronomic_objects/solarsistem?object=' + a.name).then(function (resp) {
@@ -3374,8 +3377,8 @@ __webpack_require__.r(__webpack_exports__);
         'command': 'ENFOCADOR',
         'type': 'focuser',
         'status': 'PENDIENTE',
-        'steps': this.slider,
-        'direction': 1,
+        'steps': this.Tic,
+        'direction': this.Dir,
         'user_id': this.$store.getters.user['id'],
         'equipment_id': 1
       }; //alert(JSON.stringify($command));
@@ -3487,6 +3490,23 @@ __webpack_require__.r(__webpack_exports__);
     selectIso: function selectIso(a) {
       this.selectedIso = a;
       this.Iso = a.choice;
+    },
+    selectExp: function selectExp(a) {
+      this.selectedExp = a;
+      this.Exp = a;
+    },
+    selectTic: function selectTic(a) {
+      this.selectedTic = a;
+      this.Tic = a;
+    },
+    selectDir: function selectDir(a) {
+      this.selectedDir = a;
+
+      if (a == "Afuera") {
+        this.Dir = 1;
+      } else {
+        this.Dir = 0;
+      }
     },
     pad: function pad(num, tam) {
       var s = num + '';
@@ -40547,12 +40567,13 @@ var render = function() {
                                       label: "Tiempo Exposición(Segundos)",
                                       required: ""
                                     },
+                                    on: { input: _vm.selectExp },
                                     model: {
-                                      value: _vm.Exp,
+                                      value: _vm.SelectedExp,
                                       callback: function($$v) {
-                                        _vm.Exp = $$v
+                                        _vm.SelectedExp = $$v
                                       },
-                                      expression: "Exp"
+                                      expression: "SelectedExp"
                                     }
                                   })
                                 ],
@@ -40621,12 +40642,13 @@ var render = function() {
                                       label: "Tics",
                                       required: ""
                                     },
+                                    on: { input: _vm.selectTic },
                                     model: {
-                                      value: _vm.selectedTics,
+                                      value: _vm.selectedTic,
                                       callback: function($$v) {
-                                        _vm.selectedTics = $$v
+                                        _vm.selectedTic = $$v
                                       },
-                                      expression: "selectedTics"
+                                      expression: "selectedTic"
                                     }
                                   })
                                 ],
@@ -40650,6 +40672,7 @@ var render = function() {
                                       label: "Dirección",
                                       required: ""
                                     },
+                                    on: { input: _vm.selectDir },
                                     model: {
                                       value: _vm.selectedDir,
                                       callback: function($$v) {
