@@ -986,6 +986,8 @@
 	            app.state = data.message['message'];
 	           // alert(JSON.stringify(data.message));
 
+	          //Estado:Pos.Actual :18825.0
+
 
 	            if (app.state=="Obteniendo Imagen"){
 	            	//app.conteo();	
@@ -1068,14 +1070,18 @@
         focus(){
 
         	if(!this.Tic){
+        		this.Tic = 100;
+        	}
 
+        	if(!this.Dir){
+        		this.Dir = 0;
         	}
 
         	this.state = 'Enviando Comando';
         	var $command = {'command': 'ENFOCADOR', 'type': 'focuser', 'status': 'PENDIENTE',
         	                'steps': this.Tic, 'direction': this.Dir, 'user_id': this.$store.getters.user['id'], 'equipment_id': 1};
 
-        	alert(JSON.stringify($command));
+        	//alert(JSON.stringify($command));
 
 
 

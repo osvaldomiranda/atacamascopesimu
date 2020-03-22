@@ -3299,6 +3299,7 @@ __webpack_require__.r(__webpack_exports__);
 
       channel.bind('App\\Events\\MessageSent', function (data) {
         app.state = data.message['message']; // alert(JSON.stringify(data.message));
+        //Estado:Pos.Actual :18825.0
 
         if (app.state == "Obteniendo Imagen") {//app.conteo();	
         }
@@ -3373,7 +3374,13 @@ __webpack_require__.r(__webpack_exports__);
       this.current = "Ar:" + this.Ar_act + ", Dec:" + this.Dec_act + ", Iso:" + this.Iso_act + ", Exp:" + this.Exp_act;
     },
     focus: function focus() {
-      if (!this.Tic) {}
+      if (!this.Tic) {
+        this.Tic = 100;
+      }
+
+      if (!this.Dir) {
+        this.Dir = 0;
+      }
 
       this.state = 'Enviando Comando';
       var $command = {
@@ -3384,8 +3391,8 @@ __webpack_require__.r(__webpack_exports__);
         'direction': this.Dir,
         'user_id': this.$store.getters.user['id'],
         'equipment_id': 1
-      };
-      alert(JSON.stringify($command));
+      }; //alert(JSON.stringify($command));
+
       axios.post('/api/command/focus', $command).then(function (resp) {})["catch"](function (resp) {
         console.log(resp);
         alert("Error focus :" + resp);
