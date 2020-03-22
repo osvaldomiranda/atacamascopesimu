@@ -760,6 +760,8 @@
 		state:'En espera',
 		selectedTic:'100',
 		selectedDir:'Adentro',
+		tic:100,
+		dir:1,
 	    Tics: [
 	        '100',
 	        '500',
@@ -986,11 +988,11 @@
 
 
 	            if (app.state=="Obteniendo Imagen"){
-	            	app.conteo();	
+	            	//app.conteo();	
 	            }
 
 	            if (app.state=="Imagen Recibida"){
-	            	app.pulsa();
+	            //	app.pulsa();
 	            	app.imageRefresh();
 	            }
 	            
@@ -1064,11 +1066,16 @@
         	this.current = "Ar:" + this.Ar_act + ", Dec:"+ this.Dec_act + ", Iso:"+this.Iso_act+", Exp:"+this.Exp_act;
         },
         focus(){
+
+        	if(!this.Tic){
+
+        	}
+
         	this.state = 'Enviando Comando';
         	var $command = {'command': 'ENFOCADOR', 'type': 'focuser', 'status': 'PENDIENTE',
         	                'steps': this.Tic, 'direction': this.Dir, 'user_id': this.$store.getters.user['id'], 'equipment_id': 1};
 
-        	//alert(JSON.stringify($command));
+        	alert(JSON.stringify($command));
 
 
 

@@ -52,6 +52,9 @@ class CommandController extends Controller
         $command->save();
     }
     public function focus(request $request){
+    	Info("*****************");
+    	Info($request);
+
 
 
     	$this->validate($request, [
