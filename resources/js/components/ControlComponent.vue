@@ -1004,6 +1004,8 @@
 	           var posactual = app.state.substring(1, 3);
 	           var imageMsg = str.indexOf("Imagen");
 
+	           alert(posactual);
+
 	           	if(posactual=="Pos"){
                		var n = str.indexOf(":");
                		var position = app.state.substring(n+1,10);

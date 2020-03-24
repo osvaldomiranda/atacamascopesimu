@@ -3313,6 +3313,7 @@ __webpack_require__.r(__webpack_exports__);
 
         var posactual = app.state.substring(1, 3);
         var imageMsg = str.indexOf("Imagen");
+        alert(posactual);
 
         if (posactual == "Pos") {
           var n = str.indexOf(":");
