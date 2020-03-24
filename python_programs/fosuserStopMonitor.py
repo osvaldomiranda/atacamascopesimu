@@ -27,8 +27,14 @@ def printit():
     global data 
     if ra==ra_ant :
         t.cancel()
-        print('listo')    
-        url = 'http://'+ip+'/api/messages/send?sender_id=1&receiver_id=2&message=Enfocador OK '
+        print('listo')   
+
+        url = 'http://'+ip+'/api/messages/send?sender_id=1&receiver_id=2&message=Pos.Actual :' + str(ra)
+        data = '{}'
+        response = requests.post(url, data=data)
+
+
+        url = 'http://'+ip+'/api/messages/send?sender_id=1&receiver_id=2&message=Enfocador OK'
         data = '{}'
         response = requests.post(url, data=data)
     else :

@@ -2721,6 +2721,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   computed: Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['astronomc_objects']),
@@ -2729,6 +2740,8 @@ __webpack_require__.r(__webpack_exports__);
       tiempo: 0,
       contando: true,
       tiempos: [],
+      focuser_state: 'Posición: 500',
+      camera_state: 'Imagen Recibida',
       metadata: '',
       ninetyRule: [function (v) {
         return !!v || 'Campo requerido';
@@ -3200,21 +3213,18 @@ __webpack_require__.r(__webpack_exports__);
     this.initialize();
   },
   methods: {
-    conteo: function conteo() {
-      var tiempos = [];
-
-      if (tiempos === null || tiempos === '') {
-        this.tiempos = [];
-      } else {
-        // tiempos = tiempos.split(',');
-        for (var i = 0; i < tiempos.length; i++) {
-          tiempos[i] = parseInt(tiempos[i]);
-        }
-
-        this.tiempos = tiempos;
-      }
-
-      setInterval(this.actualizaTiempo, 1000);
+    conteo: function conteo() {// var tiempos = [];
+      //       if(tiempos === null || tiempos === '') {
+      //           this.tiempos = [];
+      //       }
+      //       else {
+      //           // tiempos = tiempos.split(',');
+      //           for(var i = 0; i < tiempos.length; i++) {
+      //               tiempos[i] = parseInt(tiempos[i]);
+      //           }
+      //           this.tiempos = tiempos;
+      //       }
+      //       setInterval(this.actualizaTiempo, 1000);
     },
     showAlert: function showAlert(a) {
       //	if (event.target.classList.contains('btn__content')) return;
@@ -3301,7 +3311,17 @@ __webpack_require__.r(__webpack_exports__);
         app.state = data.message['message']; // alert(JSON.stringify(data.message));
         //Estado:Pos.Actual :18825.0
 
-        if (app.state == "Obteniendo Imagen") {//app.conteo();	
+        var posactual = app.state.substring(1, 3);
+        var imageMsg = str.indexOf("Imagen");
+
+        if (posactual == "Pos") {
+          var n = str.indexOf(":");
+          var position = app.state.substring(n + 1, 10);
+          app.focuser_state = position;
+        }
+
+        if (imageMsg > 0) {
+          app.camera_state = app.state;
         }
 
         if (app.state == "Imagen Recibida") {
@@ -6477,6 +6497,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   computed: Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['astronomc_objects']),
@@ -6484,6 +6510,8 @@ __webpack_require__.r(__webpack_exports__);
     return {
       tiempo: 0,
       contando: true,
+      focuser_state: 'Pos:0',
+      camera_state: 'Imagen Recibida',
       tiempos: [],
       ninetyRule: [function (v) {
         return !!v || 'Campo requerido';
@@ -40594,16 +40622,35 @@ var render = function() {
                           ),
                           _vm._v(" "),
                           _c(
-                            "v-btn",
-                            {
-                              attrs: { round: "", color: "verde" },
-                              on: {
-                                click: function($event) {
-                                  return _vm.shoot()
-                                }
-                              }
-                            },
-                            [_vm._v("Disparar")]
+                            "v-layout",
+                            [
+                              _c(
+                                "v-flex",
+                                { attrs: { xs4: "" } },
+                                [
+                                  _c(
+                                    "v-btn",
+                                    {
+                                      attrs: { round: "", color: "verde" },
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.shoot()
+                                        }
+                                      }
+                                    },
+                                    [_vm._v("Disparar")]
+                                  )
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c("v-flex", { attrs: { xs6: "" } }, [
+                                _c("span", { staticClass: "headline" }, [
+                                  _vm._v(_vm._s(this.camera_state))
+                                ])
+                              ])
+                            ],
+                            1
                           )
                         ],
                         1
@@ -40715,7 +40762,13 @@ var render = function() {
                                   )
                                 ],
                                 1
-                              )
+                              ),
+                              _vm._v(" "),
+                              _c("v-flex", { attrs: { xs6: "" } }, [
+                                _c("span", { staticClass: "headline" }, [
+                                  _vm._v(_vm._s(this.focuser_state))
+                                ])
+                              ])
                             ],
                             1
                           )
@@ -45317,7 +45370,29 @@ var render = function() {
                                   )
                                 ],
                                 1
-                              )
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-flex",
+                                { attrs: { xs4: "" } },
+                                [
+                                  _c(
+                                    "v-btn",
+                                    {
+                                      attrs: { round: "", color: "amarillo" },
+                                      on: { click: _vm.focus }
+                                    },
+                                    [_vm._v("SetCero")]
+                                  )
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c("v-flex", { attrs: { xs6: "" } }, [
+                                _c("span", { staticClass: "headline" }, [
+                                  _vm._v(_vm._s(this.focuser_state))
+                                ])
+                              ])
                             ],
                             1
                           )

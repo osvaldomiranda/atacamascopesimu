@@ -32,24 +32,29 @@ if(response.ok):
             raise RuntimeError("command '{}' return with error (code {}): {}".format(e.cmd, e.returncode, e.output))
 
         s = int(steps)   
-        r = int(ra) 
-        if(direction=='1'):
-            s = s * -1
+        r = int(ra)
 
-        focus = r + s   
-            
+        if(direction>=0)
 
-        url = 'http://'+ip+'/api/messages/send?sender_id=1&receiver_id=2&message=Comando Enfocador recibido'
-        data = '{}'
-        response = requests.post(url, data=data)
+            if(direction=='1'):
+                s = s * -1
 
-        comando = "/usr/bin/indi_setprop 'Pegasus DMFC.ABS_FOCUS_POSITION.FOCUS_ABSOLUTE_POSITION="+str(focus)+"'"
-        print(comando)
-        try:
-            url = 'http://'+ip+'/api/messages/send?sender_id=1&receiver_id=2&message=Comenzando Enfoque'
+            focus = r + s   
+                
+
+            url = 'http://'+ip+'/api/messages/send?sender_id=1&receiver_id=2&message=Comando Enfocador recibido'
             data = '{}'
-            response = requests.post(url, data=data)            
-            subprocess.check_output(comando, shell=True,stderr=subprocess.STDOUT)
-            call(["/usr/bin/python3",  "/home/ubuntu/atacama_scope/focuserStopMonitor.py"])
-        except subprocess.CalledProcessError as e:
-            raise RuntimeError("command '{}' return with error (code {}): {}".format(e.cmd, e.returncode, e.output))
+            response = requests.post(url, data=data)
+
+            comando = "/usr/bin/indi_setprop 'Pegasus DMFC.ABS_FOCUS_POSITION.FOCUS_ABSOLUTE_POSITION="+str(focus)+"'"
+            print(comando)
+            try:
+                url = 'http://'+ip+'/api/messages/send?sender_id=1&receiver_id=2&message=Comenzando Enfoque'
+                data = '{}'
+                response = requests.post(url, data=data)            
+                subprocess.check_output(comando, shell=True,stderr=subprocess.STDOUT)
+                call(["/usr/bin/python3",  "/home/ubuntu/atacama_scope/focuserStopMonitor.py"])
+            except subprocess.CalledProcessError as e:
+                raise RuntimeError("command '{}' return with error (code {}): {}".format(e.cmd, e.returncode, e.output))
+        else
+x

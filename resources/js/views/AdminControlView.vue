@@ -496,6 +496,12 @@
 		          		    <v-flex xs4>
 		          		    	<v-btn round color="amarillo" @click="focus">Enfocar</v-btn>	
 		          		    </v-flex>
+		          		    <v-flex xs4>
+		          		    	<v-btn round color="amarillo" @click="focus">SetCero</v-btn>	
+		          		    </v-flex>
+		          		    <v-flex xs6>
+		          		    	<span class="headline">{{ this.focuser_state }}</span>
+		          		    </v-flex>
 		          		</v-layout>
 		          		
 			    	</v-card> 
@@ -582,6 +588,8 @@
       return {
       	tiempo: 0,
       	contando: true,
+      	focuser_state:'Pos:0',
+        camera_state: 'Imagen Recibida',
         tiempos: [],
 
         ninetyRule: [v => !!v || 'Campo requerido',

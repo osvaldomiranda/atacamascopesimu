@@ -439,8 +439,16 @@
 
 		          			</v-flex>
 
-		          		</v-layout>	
-		          		<v-btn round color="verde" @click="shoot()">Disparar</v-btn>
+		          		</v-layout>
+		          		<v-layout>
+		          			<v-flex xs4>
+		          				<v-btn round color="verde" @click="shoot()">Disparar</v-btn>	  
+		          			</v-flex>
+		          		    <v-flex xs6>
+		          		    	<span class="headline">{{ this.camera_state }}</span>
+		          		    	
+		          		    </v-flex>
+		          		</v-layout>
 			    	</v-card> 
 				</v-flex>
 
@@ -497,6 +505,9 @@
 		          		<v-layout>   
 		          		    <v-flex xs4>
 		          		    	<v-btn round color="amarillo" @click="focus">Enfocar</v-btn>	
+		          		    </v-flex>
+		          		    <v-flex xs6>
+		          		    	<span class="headline">{{ this.focuser_state }}</span>
 		          		    </v-flex>
 		          		</v-layout>
 		          		
@@ -585,6 +596,8 @@
       	tiempo: 0,
       	contando: true,
         tiempos: [],
+        focuser_state:'Posición: 500',
+        camera_state: 'Imagen Recibida',
 
         metadata: '',
 
@@ -860,19 +873,19 @@
     methods: {
 
     	conteo (){
-    		        var tiempos = [];
+    		        // var tiempos = [];
 
-                    if(tiempos === null || tiempos === '') {
-                        this.tiempos = [];
-                    }
-                    else {
-                        // tiempos = tiempos.split(',');
-                        for(var i = 0; i < tiempos.length; i++) {
-                            tiempos[i] = parseInt(tiempos[i]);
-                        }
-                        this.tiempos = tiempos;
-                    }
-                    setInterval(this.actualizaTiempo, 1000);
+              //       if(tiempos === null || tiempos === '') {
+              //           this.tiempos = [];
+              //       }
+              //       else {
+              //           // tiempos = tiempos.split(',');
+              //           for(var i = 0; i < tiempos.length; i++) {
+              //               tiempos[i] = parseInt(tiempos[i]);
+              //           }
+              //           this.tiempos = tiempos;
+              //       }
+              //       setInterval(this.actualizaTiempo, 1000);
     	},
 
     	showAlert(a){
@@ -986,11 +999,21 @@
 	            app.state = data.message['message'];
 	           // alert(JSON.stringify(data.message));
 
-	          //Estado:Pos.Actual :18825.0
+	           //Estado:Pos.Actual :18825.0
+
+	           var posactual = app.state.substring(1, 3);
+	           var imageMsg = str.indexOf("Imagen");
+
+	           	if(posactual=="Pos"){
+               		var n = str.indexOf(":");
+               		var position = app.state.substring(n+1,10);
+               		app.focuser_state = position;
+           		}
 
 
-	            if (app.state=="Obteniendo Imagen"){
-	            	//app.conteo();	
+
+	            if (imageMsg>0){
+	            	app.camera_state = app.state;	
 	            }
 
 	            if (app.state=="Imagen Recibida"){
