@@ -998,27 +998,22 @@
 
 	        channel.bind('App\\Events\\MessageSent', function (data) {
 	            
-	            app.state = data.message['message'];
+	            // app.state = data.message['message'];
 	           // alert(JSON.stringify(data.message));
 
 	           //Estado:Pos.Actual :18825.0
 
-	           var posactual = app.state.substring(0, 3);
-	           var imageMsg = app.state.indexOf("Imagen");
-
-	          
-
-	           
+	           var posactual = data.message['message'].substring(0, 3);
+	           var imageMsg = data.message['message'].indexOf("Imagen");
 
 	           	if(posactual=="Pos"){
-	         
-
                		var n = app.state.indexOf(":");
-               		
                		var position = app.state.substring(n+1,n+10);
-               		
-               		app.focuser_state = parseInt(position,10) - app.$store.getters.current_focus;
-               		
+               		var focuser_state = parseInt(position,10) - app.$store.getters.current_focus;
+               		app.focuser_state = 'Posición:' + focuser_state;
+               		app.state = app.focuser_state;
+           		} else {
+           			app.state = data.message['message'];
            		}
 
 
