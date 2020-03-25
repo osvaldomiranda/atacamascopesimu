@@ -3316,8 +3316,8 @@ __webpack_require__.r(__webpack_exports__);
         var imageMsg = data.message['message'].indexOf("Imagen");
 
         if (posactual == "Pos") {
-          var n = app.state.indexOf(":");
-          var position = app.state.substring(n + 1, n + 10);
+          var n = data.message['message'].indexOf(":");
+          var position = data.message['message'].substring(n + 1, n + 10);
           app.focuser_state = parseInt(position, 10) - app.$store.getters.current_focus;
           app.state = app.focuser_state;
         } else {
