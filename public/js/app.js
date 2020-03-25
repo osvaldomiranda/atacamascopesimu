@@ -3317,7 +3317,7 @@ __webpack_require__.r(__webpack_exports__);
 
         if (posactual == "Pos") {
           alert(posactual);
-          var n = str.indexOf(":");
+          var n = app.state.indexOf(":");
           alert(n);
           var position = app.state.substring(n + 1, 10);
           alert(position);
