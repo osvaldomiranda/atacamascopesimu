@@ -3314,12 +3314,12 @@ __webpack_require__.r(__webpack_exports__);
 
         var posactual = app.state.substring(0, 3);
         var imageMsg = app.state.indexOf("Imagen");
-        alert(posactual);
 
         if (posactual == "Pos") {
+          alert(posactual);
           var n = str.indexOf(":");
           var position = app.state.substring(n + 1, 10);
-          app.focuser_state = parseInt(position) - app.$store.getters.current_focus;
+          app.focuser_state = position.toString();
           alert(app.focuser_state);
         }
 
