@@ -1011,11 +1011,13 @@
 	           
 
 	           	if(posactual=="Pos"){
-	           		 alert(posactual);
-               		var n = str.indexOf(":");
-               		var position = app.state.substring(n+1,10);
-               		app.focuser_state = position.toString();
+	           		alert(posactual);
 
+               		var n = str.indexOf(":");
+               		alert(n);
+               		var position = app.state.substring(n+1,10);
+               		alert(position);
+               		app.focuser_state = position;
                		alert(app.focuser_state);
            		}
 

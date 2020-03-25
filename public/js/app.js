@@ -3318,8 +3318,10 @@ __webpack_require__.r(__webpack_exports__);
         if (posactual == "Pos") {
           alert(posactual);
           var n = str.indexOf(":");
+          alert(n);
           var position = app.state.substring(n + 1, 10);
-          app.focuser_state = position.toString();
+          alert(position);
+          app.focuser_state = position;
           alert(app.focuser_state);
         }
 
