@@ -3319,6 +3319,7 @@ __webpack_require__.r(__webpack_exports__);
           var n = str.indexOf(":");
           var position = app.state.substring(n + 1, 10);
           app.focuser_state = parseInt(position) - app.$store.getters.current_focus;
+          alert(app.focuser_state);
         }
 
         if (imageMsg >= 0) {
