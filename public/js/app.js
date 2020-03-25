@@ -2740,7 +2740,7 @@ __webpack_require__.r(__webpack_exports__);
       tiempo: 0,
       contando: true,
       tiempos: [],
-      focuser_state: '',
+      focuser_state: 0,
       current_focus: 0,
       camera_state: 'Imagen Recibida',
       metadata: '',
@@ -3318,8 +3318,7 @@ __webpack_require__.r(__webpack_exports__);
         if (posactual == "Pos") {
           var n = app.state.indexOf(":");
           var position = app.state.substring(n + 1, n + 10);
-          var focuser_state = parseInt(position, 10) - app.$store.getters.current_focus;
-          app.focuser_state = 'Posición:' + focuser_state.toString();
+          app.focuser_state = parseInt(position, 10) - app.$store.getters.current_focus;
           app.state = app.focuser_state;
         } else {
           app.state = data.message['message'];
@@ -40771,7 +40770,9 @@ var render = function() {
                               _vm._v(" "),
                               _c("v-flex", { attrs: { xs6: "" } }, [
                                 _c("span", { staticClass: "headline" }, [
-                                  _vm._v(_vm._s(this.focuser_state))
+                                  _vm._v(
+                                    "Posición: " + _vm._s(this.focuser_state)
+                                  )
                                 ])
                               ])
                             ],

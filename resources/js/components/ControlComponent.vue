@@ -507,7 +507,7 @@
 		          		    	<v-btn round color="amarillo" @click="focus">Enfocar</v-btn>	
 		          		    </v-flex>
 		          		    <v-flex xs6>
-		          		    	<span class="headline">{{ this.focuser_state }}</span>
+		          		    	<span class="headline">Posición: {{ this.focuser_state }}</span>
 		          		    </v-flex>
 		          		</v-layout>
 		          		
@@ -596,7 +596,7 @@
       	tiempo: 0,
       	contando: true,
         tiempos: [],
-        focuser_state:'',
+        focuser_state: 0,
  		current_focus: 0,
         camera_state: 'Imagen Recibida',
 
@@ -1009,8 +1009,7 @@
 	           	if(posactual=="Pos"){
                		var n = app.state.indexOf(":");
                		var position = app.state.substring(n+1,n+10);
-               		var focuser_state = parseInt(position,10) - app.$store.getters.current_focus;
-               		app.focuser_state = 'Posición:' + focuser_state.toString();
+               		app.focuser_state = parseInt(position,10) - app.$store.getters.current_focus;
                		app.state = app.focuser_state;
            		} else {
            			app.state = data.message['message'];
