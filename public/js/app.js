@@ -3316,13 +3316,9 @@ __webpack_require__.r(__webpack_exports__);
         var imageMsg = app.state.indexOf("Imagen");
 
         if (posactual == "Pos") {
-          alert(posactual);
           var n = app.state.indexOf(":");
-          alert(n);
-          var position = app.state.substring(n + 1, 10);
-          alert(position);
+          var position = app.state.substring(n + 1, n + 10);
           app.focuser_state = position;
-          alert(app.focuser_state);
         }
 
         if (imageMsg >= 0) {
