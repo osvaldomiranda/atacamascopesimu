@@ -1006,7 +1006,7 @@
 	           var posactual = app.state.substring(0, 3);
 	           var imageMsg = app.state.indexOf("Imagen");
 
-	           // alert(posactual);
+	           alert(posactual);
 
 	           
 
