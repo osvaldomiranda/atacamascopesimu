@@ -1010,7 +1010,7 @@
                		var n = app.state.indexOf(":");
                		var position = app.state.substring(n+1,n+10);
                		var focuser_state = parseInt(position,10) - app.$store.getters.current_focus;
-               		app.focuser_state = 'Posición:' + focuser_state;
+               		app.focuser_state = 'Posición:' + focuser_state.toString();
                		app.state = app.focuser_state;
            		} else {
            			app.state = data.message['message'];
