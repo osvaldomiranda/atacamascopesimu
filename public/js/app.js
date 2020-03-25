@@ -2740,7 +2740,8 @@ __webpack_require__.r(__webpack_exports__);
       tiempo: 0,
       contando: true,
       tiempos: [],
-      focuser_state: 'Posición: 500',
+      focuser_state: '',
+      current_focus: 0,
       camera_state: 'Imagen Recibida',
       metadata: '',
       ninetyRule: [function (v) {
@@ -3311,17 +3312,16 @@ __webpack_require__.r(__webpack_exports__);
         app.state = data.message['message']; // alert(JSON.stringify(data.message));
         //Estado:Pos.Actual :18825.0
 
-        var posactual = app.state.substring(1, 3);
-        var imageMsg = str.indexOf("Imagen");
-        alert(posactual);
+        var posactual = app.state.substring(0, 3);
+        var imageMsg = app.state.indexOf("Imagen"); // alert(posactual);
 
         if (posactual == "Pos") {
           var n = str.indexOf(":");
           var position = app.state.substring(n + 1, 10);
-          app.focuser_state = position;
+          app.focuser_state = parseInt(position) - app.$store.getters.current_focus;
         }
 
-        if (imageMsg > 0) {
+        if (imageMsg >= 0) {
           app.camera_state = app.state;
         }
 
@@ -89143,14 +89143,15 @@ __webpack_require__.r(__webpack_exports__);
 /*!******************************************************!*\
   !*** ./resources/js/components/ControlComponent.vue ***!
   \******************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ControlComponent_vue_vue_type_template_id_4d31128b___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ControlComponent.vue?vue&type=template&id=4d31128b& */ "./resources/js/components/ControlComponent.vue?vue&type=template&id=4d31128b&");
 /* harmony import */ var _ControlComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ControlComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/ControlComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _ControlComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ControlComponent.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/ControlComponent.vue?vue&type=style&index=0&lang=css&");
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _ControlComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _ControlComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _ControlComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ControlComponent.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/ControlComponent.vue?vue&type=style&index=0&lang=css&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -89182,7 +89183,7 @@ component.options.__file = "resources/js/components/ControlComponent.vue"
 /*!*******************************************************************************!*\
   !*** ./resources/js/components/ControlComponent.vue?vue&type=script&lang=js& ***!
   \*******************************************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -89809,7 +89810,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     equipments: [],
     reservations: [],
     my_reservations: [],
-    current_points: 0
+    current_points: 0,
+    current_focus: 26000
   },
   mutations: {
     changeUser: function changeUser(state, user) {
@@ -89826,6 +89828,9 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     },
     changeCurrentPoints: function changeCurrentPoints(state, current_points) {
       state.current_points = current_points;
+    },
+    changeCurrentFocus: function changeCurrentFocus(state, current_focus) {
+      state.current_focus = current_focus;
     }
   },
   getters: {
@@ -89843,6 +89848,9 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     },
     current_points: function current_points(state) {
       return state.current_points;
+    },
+    current_focus: function current_focus(state) {
+      return state.current_focus;
     }
   }
 }));

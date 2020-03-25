@@ -596,7 +596,8 @@
       	tiempo: 0,
       	contando: true,
         tiempos: [],
-        focuser_state:'Posición: 500',
+        focuser_state:'',
+ 		current_focus: 0,
         camera_state: 'Imagen Recibida',
 
         metadata: '',
@@ -868,7 +869,8 @@
 
     },
     mounted (){
-    	 this.initialize();
+    	this.initialize();
+
     },
     methods: {
 
@@ -1001,20 +1003,22 @@
 
 	           //Estado:Pos.Actual :18825.0
 
-	           var posactual = app.state.substring(1, 3);
-	           var imageMsg = str.indexOf("Imagen");
+	           var posactual = app.state.substring(0, 3);
+	           var imageMsg = app.state.indexOf("Imagen");
 
-	           alert(posactual);
+	           // alert(posactual);
+
+	           
 
 	           	if(posactual=="Pos"){
                		var n = str.indexOf(":");
                		var position = app.state.substring(n+1,10);
-               		app.focuser_state = position;
+               		app.focuser_state = parseInt(position) - app.$store.getters.current_focus;
            		}
 
 
 
-	            if (imageMsg>0){
+	            if (imageMsg>=0){
 	            	app.camera_state = app.state;	
 	            }
 

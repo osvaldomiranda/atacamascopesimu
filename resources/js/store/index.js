@@ -13,6 +13,7 @@ export default new Vuex.Store(
 	  reservations:[],
 	  my_reservations:[],
 	  current_points:0,
+	  current_focus:26000,
 	},
 	mutations: {
 		changeUser(state, user) {
@@ -32,6 +33,9 @@ export default new Vuex.Store(
 		changeCurrentPoints(state, current_points) {
 		  	state.current_points = current_points;
 		},
+		changeCurrentFocus(state, current_focus) {
+		  	state.current_focus = current_focus;
+		},
 	},
 	getters: {
 		user: state=> state.user,
@@ -39,6 +43,7 @@ export default new Vuex.Store(
 		reservations: state=> state.reservations,
 		my_reservations: state=> state.my_reservations,
 		current_points: state=> state.current_points,
+		current_focus: state=> state.current_focus,
 
 	}
 });
