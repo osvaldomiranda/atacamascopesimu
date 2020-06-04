@@ -20,7 +20,7 @@ class Image extends Model
 	        return '';
 	    }
 
-	    $path = 'http://10.200.112.245/storage/' . $filename;
+	    $path = 'http://54.70.235.195//storage/' . $filename;
  
 	    return $path;  	
     }

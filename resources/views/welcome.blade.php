@@ -289,7 +289,7 @@
         <div class="atacamascope container">
             <br>
             <br>
-            <img src="http://localhost:8000/public/image/white_full.png" class="foto">
+            <img src="http://54.70.235.195/public/image/white_full.png" class="foto">
             
             <!-- <h1>AtacamaScope</h1> -->
          
