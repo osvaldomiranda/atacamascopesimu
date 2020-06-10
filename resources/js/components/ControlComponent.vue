@@ -30,7 +30,7 @@
 					  <v-card class="py-4 px-2">
 				        <v-layout>
 				          <v-flex xs4 class="px-2">
-				            <span class="headline"> {{ object }}</span>
+				            <span class="headline">1.- {{ object }}</span>
 				          </v-flex>
 				          	<v-flex xs8 class="px-2">
 				            	<span class="headline"> Estado:{{ state }}</span>
@@ -144,7 +144,7 @@
  
 				        <v-layout>
 				          <v-flex xs12>
-				            <span class="headline">Montura</span>
+				            <span class="headline">2.- Mover Montura</span>
 				          </v-flex>
 				        </v-layout>
 						<v-layout>
@@ -403,7 +403,7 @@
 					<v-card class="py-2 px-2">
 				        <v-layout>
 				          <v-flex xs12>
-				            <span class="headline">Camara</span>
+				            <span class="headline">3.- Sacar Foto</span>
 				          </v-flex>
 				        </v-layout>
 
@@ -1002,29 +1002,30 @@
 	           // alert(JSON.stringify(data.message));
 
 	           //Estado:Pos.Actual :18825.0
+	           if(data.message['message']!='NaN'){  
+		           var posactual = data.message['message'].substring(0, 3);
+		           var imageMsg = data.message['message'].indexOf("Imagen");
 
-	           var posactual = data.message['message'].substring(0, 3);
-	           var imageMsg = data.message['message'].indexOf("Imagen");
-
-	           	if(posactual=="Pos"){
-               		var n = data.message['message'].indexOf(":");
-               		var position = data.message['message'].substring(n+1,n+10);
-               		app.focuser_state = parseInt(position,10) - app.$store.getters.current_focus;
-               		app.state = app.focuser_state;
-           		} else {
-           			app.state = data.message['message'];
-           		}
+		           	if(posactual=="Pos"){
+	               		var n = data.message['message'].indexOf(":");
+	               		var position = data.message['message'].substring(n+1,n+10);
+	               		app.focuser_state = parseInt(position,10) - app.$store.getters.current_focus;
+	               		app.state = app.focuser_state;
+	           		} else {
+	           			app.state = data.message['message'];
+	           		}
 
 
 
-	            if (imageMsg>=0){
-	            	app.camera_state = app.state;	
-	            }
+		            if (imageMsg>=0){
+		            	app.camera_state = app.state;	
+		            }
 
-	            if (app.state=="Imagen Recibida"){
-	            //	app.pulsa();
-	            	app.imageRefresh();
-	            }
+		            if (app.state=="Imagen Recibida"){
+		            //	app.pulsa();
+		            	app.imageRefresh();
+		            }
+	        	}
 	            
 	        })
 	          // End pusher listener

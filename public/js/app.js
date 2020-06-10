@@ -3312,25 +3312,27 @@ __webpack_require__.r(__webpack_exports__);
         // app.state = data.message['message'];
         // alert(JSON.stringify(data.message));
         //Estado:Pos.Actual :18825.0
-        var posactual = data.message['message'].substring(0, 3);
-        var imageMsg = data.message['message'].indexOf("Imagen");
+        if (data.message['message'] != 'NaN') {
+          var posactual = data.message['message'].substring(0, 3);
+          var imageMsg = data.message['message'].indexOf("Imagen");
 
-        if (posactual == "Pos") {
-          var n = data.message['message'].indexOf(":");
-          var position = data.message['message'].substring(n + 1, n + 10);
-          app.focuser_state = parseInt(position, 10) - app.$store.getters.current_focus;
-          app.state = app.focuser_state;
-        } else {
-          app.state = data.message['message'];
-        }
+          if (posactual == "Pos") {
+            var n = data.message['message'].indexOf(":");
+            var position = data.message['message'].substring(n + 1, n + 10);
+            app.focuser_state = parseInt(position, 10) - app.$store.getters.current_focus;
+            app.state = app.focuser_state;
+          } else {
+            app.state = data.message['message'];
+          }
 
-        if (imageMsg >= 0) {
-          app.camera_state = app.state;
-        }
+          if (imageMsg >= 0) {
+            app.camera_state = app.state;
+          }
 
-        if (app.state == "Imagen Recibida") {
-          //	app.pulsa();
-          app.imageRefresh();
+          if (app.state == "Imagen Recibida") {
+            //	app.pulsa();
+            app.imageRefresh();
+          }
         }
       }); // End pusher listener
     },
@@ -39327,7 +39329,7 @@ var render = function() {
                                 { staticClass: "px-2", attrs: { xs4: "" } },
                                 [
                                   _c("span", { staticClass: "headline" }, [
-                                    _vm._v(" " + _vm._s(_vm.object))
+                                    _vm._v("1.- " + _vm._s(_vm.object))
                                   ])
                                 ]
                               ),
@@ -39616,7 +39618,7 @@ var render = function() {
                             [
                               _c("v-flex", { attrs: { xs12: "" } }, [
                                 _c("span", { staticClass: "headline" }, [
-                                  _vm._v("Montura")
+                                  _vm._v("2.- Mover Montura")
                                 ])
                               ])
                             ],
@@ -40554,7 +40556,7 @@ var render = function() {
                             [
                               _c("v-flex", { attrs: { xs12: "" } }, [
                                 _c("span", { staticClass: "headline" }, [
-                                  _vm._v("Camara")
+                                  _vm._v("3.- Sacar Foto")
                                 ])
                               ])
                             ],
@@ -90449,8 +90451,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/osvaldo/atacama_scope/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/osvaldo/atacama_scope/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/macbook/atacamaScope/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/macbook/atacamaScope/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
