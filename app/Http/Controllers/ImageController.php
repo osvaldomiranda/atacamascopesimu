@@ -17,22 +17,23 @@ class ImageController extends Controller
     public function upload($command_id, request $request)
     {
         $command = Command::where('id', $command_id)->get()->first();
+        $user_id = Auth::id();
     	
         Info($command);
 
     	if($request->hasFile('photo')){
 
-
-           // $path = $request->photo->store('public');
-
             $file = $request->file('photo');
             $name=time().$file->getClientOriginalName();
 
+            Info($name);
 
-            $filename = 'image-' . $user->id . '-' . time() . '.' . $file->getClientOriginalExtension();
-            
+            $filename = 'image-' . $user_id . '-' . time() . '.' . $file->getClientOriginalExtension();
+
+            Info($filename);
 
             $result=Storage::disk('s3')->put($filename, file_get_contents($file), 'public');
+
 
     		$image = new Image;
     		$image->name = $name;
