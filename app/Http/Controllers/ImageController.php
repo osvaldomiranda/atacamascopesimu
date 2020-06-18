@@ -23,17 +23,20 @@ class ImageController extends Controller
     	if($request->hasFile('photo')){
 
 
-    		$path = $request->photo->store('public');
+           // $path = $request->photo->store('public');
+
+            $file = $request->file('photo');
+            $name=time().$file->getClientOriginalName();
 
 
-            //TODO: revisar como hacer que la direccion de la imagen sea facil de obtener
-            $filename = substr($path,7,100);
-             $path = 'http://54.70.235.195/storage/' . $filename;
-            //$path = 'http://10.200.112.245/storage/' . $filename;
+            $filename = 'image-' . $user->id . '-' . time() . '.' . $file->getClientOriginalExtension();
+            
+
+            $result=Storage::disk('s3')->put($filename, file_get_contents($file), 'public');
 
     		$image = new Image;
-    		$image->name = 'Hola.jpg';
-    		$image->path = $path;
+    		$image->name = $name;
+    		$image->path = Storage::disk('s3')->url($filename);;
 
             $image->ar      = $command->ar;
             $image->dec     = $command->dec;

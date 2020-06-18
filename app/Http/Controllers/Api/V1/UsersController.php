@@ -21,9 +21,12 @@ class UsersController extends Controller
     }
 
  
+
     public function save_avatar(Request $request)
     {
         $user = Auth::user();
+
+        info($request);
        	
         request()->validate([
             'avatar' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
@@ -32,11 +35,13 @@ class UsersController extends Controller
 		if($request->hasFile('avatar')){
             $file = $request->file('avatar');
 
-            $filename = 'avatar-' . $user->id  . '.' . $file->getClientOriginalExtension();
-            $path = $file->storeAs('users', $filename);
+            $filename = 'avatar-1' . $user->id  . '.' . $file->getClientOriginalExtension();
+            
+
+            $result=Storage::disk('s3')->put($filename, file_get_contents($file), 'public');
 
 
-            $user->avatar =  Storage::url($path);
+            $user->avatar =  Storage::disk('s3')->url($filename);
             $user->save();
 
         }
@@ -46,6 +51,11 @@ class UsersController extends Controller
  
     }
 
+    public function avatar_url(Request $request)
+    {
+        $user = Auth::user();
+
+    }
 
 
 }
