@@ -20,22 +20,15 @@
                 :pagination.sync="pagination"
               >
                 <template v-slot:items="props">
-                  <tr @click="showAlert(props.item)">
-                  <td class="text-xs-left">{{ props.item.equipment.name }}</td>
-                  <td class="text-xs-left">{{ props.item.date }}</td>
-                  <td class="text-xs-left">{{ props.item.hour }}</td>
-                  <td class="text-xs-left">{{ props.item.points }}</td>
-                 <!--  <td class="text-xs-left"> 
-                    <v-btn color="warning" dark @click="control" >Interfaz de Control</v-btn> 
-                  </td> -->
-                  <td class="text-xs-left"> 
-                    <v-btn color="morado"  round dark @click="control_avanzado" >Interfaz de Control</v-btn> 
-                  </td>
+                  <tr>
+                      <td class="text-xs-left">{{ props.item.equipment.name }}</td>
+                      <td class="text-xs-left">{{ props.item.date }}</td>
+                      <td class="text-xs-left">{{ props.item.hour }}</td>
+                      <td class="text-xs-left"> 
+                        <v-btn color="morado"  round dark @click="control_avanzado" >Interfaz de Control</v-btn> 
+                      </td>
                 </tr>
                 </template>
-                <v-alert v-slot:no-results :value="true" color="error" icon="warning">
-                  Your search for "{{ search }}" found no results.
-                </v-alert>
               </v-data-table>
             </v-card> 
             <v-flex xs1>

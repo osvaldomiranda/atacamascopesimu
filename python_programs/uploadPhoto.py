@@ -10,8 +10,8 @@ def main(argv):
   
   print(cwd)
 
-  # ip='54.70.235.195'
-  ip='localhost:8000'
+  ip='34.219.96.49'
+  # ip='localhost:8000'
   try:
     opts, args = getopt.getopt(argv,"hc:",["command="])
   except getopt.GetoptError:

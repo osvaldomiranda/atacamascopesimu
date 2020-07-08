@@ -30,10 +30,11 @@
 					  <v-card class="py-4 px-2">
 				        <v-layout>
 				          <v-flex xs4 class="px-2">
-				            <span class="headline">1.- {{ object.name }}</span>
+				            <span v-if='object.name' class="headline">1.- {{ object.name }}</span>
+				            <span v-else class="headline">1.- Seleccione un Objeto</span>
 				          </v-flex>
 				          	<v-flex xs8 class="px-2">
-				            	<span class="headline"> Estado:{{ state }}</span>
+				            	<span class="headline"> Estado Sistema:{{ state }}</span>
 				          	</v-flex>
 				        </v-layout>
 					    <v-card-title>
@@ -84,7 +85,6 @@
 						        <td class="text-xs-right">{{ props.item.name }}</td>
 						        <td class="text-xs-right">{{ (props.item.colloquial_name || '') + ' ' + (props.item.nombre_coloquial || '')}}</td>
 						        <td class="text-xs-right">{{ props.item.constellation }}</td>
-						        <td class="text-xs-right">{{ props.item.catalog }}</td>
 						        <td class="text-xs-right">{{ props.item.type_object }}</td>
 						        <td class="text-xs-right">{{ props.item.ra }}</td>
 						        <td class="text-xs-right">{{ props.item.dec }}</td>
@@ -553,25 +553,6 @@
 					        <td class="text-xs-left">{{ props.item.dec_string }}</td>
 					        <td class="text-xs-left">{{ props.item.created_at }}</td>
 					      </template>
-
-
-<!-- 					      <template v-slot:items="props">
-					        <td>
-					        	<a class="px-2 py-2" :href="props.item.path" target="_blank">
-						        	<v-img
-				      	  				src="http://localhost:8000/public/image/vialactea1.jpg"
-				      	  				aspect-ratio="1"
-				      				></v-img>
-			      				</a>
-					        </td>
-
-					        <td class="text-xs-left">{{ props.item.object_name }}</td>
-					        <td class="text-xs-left">{{ props.item.iso_string }}</td>
-					        <td class="text-xs-left">{{ props.item.exptime }}s</td>
-					        <td class="text-xs-left">{{ props.item.ar_string }}</td>
-					        <td class="text-xs-left">{{ props.item.dec_string }}</td>
-					        <td class="text-xs-left">{{ props.item.created_at }}</td>
-					      </template> -->
 					      
 					    </v-data-table>
 					  </v-card>	
@@ -765,9 +746,9 @@
         current:'',
         current_shot:'',	
 
-        rowsPerPageItems: [3, 5, 10, 20],
+        rowsPerPageItems: [4, 6, 10, 20],
 		pagination: {
-    		rowsPerPage: 3
+    		rowsPerPage: 4
 		},	
 
 		object:'',
@@ -844,7 +825,6 @@
           { text: 'Nombre', value: 'name' },
           { text: 'Descripción', value: 'colloquial_name' },
           { text: 'Constelación', value: 'constellation' },
-          { text: 'Catalogo', value: 'catalog' },
           { text: 'Tipo', value: 'type_object' },
           { text: 'AR', value: 'ra' },
           { text: 'DEC', value: 'dec' }

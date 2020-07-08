@@ -27,7 +27,20 @@
         <v-btn v-if="$store.getters.user['role']==1" :to="'/users'" flat>Usuarios</v-btn>  
 
         <v-btn flat @click="logout">logout</v-btn>
-      </v-toolbar-items>        
+      
+      <v-spacer></v-spacer>
+      <v-btn icon @click="toRoute('/myself')">
+        <v-avatar  size="34px">
+                <img
+                    :src="$store.getters.user['avatar']"
+                        alt="Avatar"
+                >
+        </v-avatar>
+      </v-btn> 
+
+
+
+      </v-toolbar-items>       
     </v-toolbar>
 
 

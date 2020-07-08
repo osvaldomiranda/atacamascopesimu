@@ -1,4 +1,35 @@
 <template>
+<!--     <v-layout row>
+                  <v-flex xs2>
+                    <v-layout align-center row>
+                        <v-flex align-center xs12 class="py-2">
+                            <v-avatar
+                                size="100px"
+                            >
+                                <img
+                                  :src="$store.getters.user['avatar']"
+                                  alt="Avatar"
+                                >
+                            </v-avatar>
+                        </v-flex>
+                    </v-layout>
+                    <v-layout align-center row>
+                        <v-flex xs1>
+                        </v-flex> 
+                    </v-layout>  
+                    <v-layout align-center row>
+                        <v-flex align-center xs1>
+                            <upload-avatar></upload-avatar>
+                        </v-flex>    
+                        <v-flex align-center xs1>
+                        </v-flex>
+                        <v-flex align-center xs10>
+                            <span class="body-2">{{ $store.getters.user['email'] }}</span>
+                        </v-flex>  
+                    </v-layout> 
+                </v-flex>
+    </v-layout>  -->          
+
   <v-layout row>
     <v-flex xs8 class="px-2">
         <v-card class="py-4">
@@ -81,72 +112,38 @@
         </v-layout>
     </v-flex>
 
-    <v-flex xs12 class="px-2">
-        <br>
-        <v-card>
-            <v-layout row wrap>
-                <v-flex xs1>
-                </v-flex>    
-                <v-flex xs2>
-                    <v-layout align-center row>
-                        <v-flex align-center xs12 class="py-2">
-                            <v-avatar
-                                size="150px"
-                            >
-                                <img
-                                  :src="$store.getters.user['avatar']"
-                                  alt="Avatar"
-                                >
-                            </v-avatar>
-                        </v-flex>
-                    </v-layout>
-                    <v-layout align-center row>
-                        <v-flex xs1>
-                        </v-flex> 
-                    </v-layout>  
-                    <v-layout align-center row>
-                        <v-flex align-center xs1>
-                            <upload-avatar></upload-avatar>
-                        </v-flex>    
-                        <v-flex align-center xs1>
-                        </v-flex>
-                        <v-flex align-center xs10>
-                            <span class="body-2">{{ $store.getters.user['email'] }}</span>
-                        </v-flex>  
-                    </v-layout> 
-                </v-flex>
-                <v-flex xs1>
-                  
-                </v-flex>
-                <v-flex xs7>
-                    <v-card>
+    <v-flex xs12 class="px-2 py-4">
+                      <v-card>
                         <v-card-title>
-                            <span class="headline">Mis Sesiones</span>
-                            <v-spacer></v-spacer>
+                          <span class="headline">Mis fotos</span>
                         </v-card-title>
                         <v-data-table
-                            :headers="mySessionsHeaders"
-                            :items="sessions"
-                            :search="search"
+                          :headers="myImagesHeaders"
+                          :items="myImages"
                         >
-                            <template v-slot:items="props">
-                                <td>
+
+
+                          <template v-slot:items="props">
+                            <td>
+                                <a class="px-2 py-2" :href="props.item.path" target="_blank">
                                     <v-img
-                                        v-bind:src="props.item.img"
+                                        v-bind:src="props.item.path"
                                         aspect-ratio="1"
                                     ></v-img>
-                                </td>
-
-                                <td class="text-xs-left">{{ props.item.session_date }}</td>
-                                <td class="text-xs-left">{{ props.item.session_hour }}</td>
-                                <td class="text-xs-left">{{ props.item.img_count }}</td>
-                                <td class="text-xs-left">{{ props.item.equipment_name }}</td>
-                                <td class="text-xs-left"></td>
-                            </template>
+                                </a>
+                            </td>
+                            <td class="text-xs-left">{{ props.item.object_name }}</td>
+                            <td class="text-xs-left">{{ props.item.iso_string }}</td>
+                            <td class="text-xs-left">{{ props.item.exptime }}s</td>
+                            <td class="text-xs-left">{{ props.item.ar_string }}</td>
+                            <td class="text-xs-left">{{ props.item.dec_string }}</td>
+                            <td class="text-xs-left">{{ props.item.created_at }}</td>
+                          </template>
+                          
                         </v-data-table>
-                    </v-card> 
-                </v-flex>
-            </v-layout>              
+                      </v-card> 
+
+            
         </v-card>  
     </v-flex>
     <div ref="container">
@@ -239,6 +236,8 @@
                 alert("Error accuweather :" + resp);
             });
 
+            this.getMyImages();
+
         },
         pointsClick (){
             var ComponentPoints = Vue.extend(PointsComponent)
@@ -251,6 +250,18 @@
             var instance = new ComponentReserv({store: this.$store});
             instance.$mount();
             this.$refs.container.appendChild(instance.$el);
+        },
+
+        getMyImages(){
+            let app = this;
+            axios.get('/api/images')
+            .then(function (resp) {
+                app.myImages = resp.data;               
+            })
+            .catch(function (resp) {
+                console.log(resp);
+                alert("Error shoot :" + resp);
+            });
         },
 
     },
