@@ -30,6 +30,12 @@ class CommandController extends Controller
         $command->save();
     }
     public function shoot(request $request){
+
+    	Info("******* shot *********");
+    	info($request);
+    	Info("******* shot *********");
+
+
     	$this->validate($request, [
 	        'type' => 'required',
 	        'status' => 'required',
@@ -45,9 +51,12 @@ class CommandController extends Controller
         $command->status		= $request->input('status');
         $command->exptime  		= $request->input('exptime');
         $command->iso 			= $request->input('iso');	
-        $command->ar  			= $request->input('ar');
-        $command->dec 			= $request->input('dec');	
+        $command->ar_string  	= $request->input('ar');
+        $command->dec_string 	= $request->input('dec');	
         $command->user_id		= $request->input('user_id');
+        $command->object_name	= $request->input('object_name');
+        $command->object_id		= $request->input('object_id');
+        $command->iso_string	= $request->input('iso_string');
         $command->equipment_id	= $request->input('equipment_id');
         $command->save();
     }

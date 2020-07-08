@@ -3072,7 +3072,7 @@ __webpack_require__.r(__webpack_exports__);
       pagination: {
         rowsPerPage: 3
       },
-      object: 'Seleccione Objeto',
+      object: '',
       state: 'En espera',
       selectedTic: '100',
       selectedDir: 'Adentro',
@@ -3230,7 +3230,8 @@ __webpack_require__.r(__webpack_exports__);
     showAlert: function showAlert(a) {
       //	if (event.target.classList.contains('btn__content')) return;
       var app = this;
-      this.object = a.name; // axios.get('/api/astronomic_objects/horizon?object=' + a.name)
+      this.object = a;
+      alert(JSON.stringify(this.object)); // axios.get('/api/astronomic_objects/horizon?object=' + a.name)
       //      .then(function (resp) {    
       //      	if(resp.data<=0){
       //      		//alert(JSON.stringify(resp.data));
@@ -3373,19 +3374,22 @@ __webpack_require__.r(__webpack_exports__);
     },
     shoot: function shoot() {
       this.state = 'Enviando Comando';
-      var $command = {
+      var command = {
         'command': 'CAMARA',
         'type': 'shoot',
         'status': 'PENDIENTE',
         'exptime': this.Exp,
         'iso': this.Iso,
-        'ar': this.Ar_act,
-        'dec': this.Dec_act,
+        'iso_string': this.selectedIso.iso,
+        'ar': this.Ar_screen,
+        'dec': this.Dec_screen,
         'user_id': this.$store.getters.user['id'],
-        'equipment_id': 1
+        'equipment_id': 1,
+        'object_id': this.object.id,
+        'object_name': this.object.name
       };
       this.imageUrl = '';
-      axios.post('/api/command/shoot', $command).then(function (resp) {})["catch"](function (resp) {
+      axios.post('/api/command/shoot', command).then(function (resp) {})["catch"](function (resp) {
         console.log(resp);
         alert("Error create reservation :" + resp);
       });
@@ -39329,7 +39333,7 @@ var render = function() {
                                 { staticClass: "px-2", attrs: { xs4: "" } },
                                 [
                                   _c("span", { staticClass: "headline" }, [
-                                    _vm._v("1.- " + _vm._s(_vm.object))
+                                    _vm._v("1.- " + _vm._s(_vm.object.name))
                                   ])
                                 ]
                               ),
@@ -89150,14 +89154,15 @@ __webpack_require__.r(__webpack_exports__);
 /*!******************************************************!*\
   !*** ./resources/js/components/ControlComponent.vue ***!
   \******************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ControlComponent_vue_vue_type_template_id_4d31128b___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ControlComponent.vue?vue&type=template&id=4d31128b& */ "./resources/js/components/ControlComponent.vue?vue&type=template&id=4d31128b&");
 /* harmony import */ var _ControlComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ControlComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/ControlComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _ControlComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ControlComponent.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/ControlComponent.vue?vue&type=style&index=0&lang=css&");
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _ControlComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _ControlComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _ControlComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ControlComponent.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/ControlComponent.vue?vue&type=style&index=0&lang=css&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -89189,7 +89194,7 @@ component.options.__file = "resources/js/components/ControlComponent.vue"
 /*!*******************************************************************************!*\
   !*** ./resources/js/components/ControlComponent.vue?vue&type=script&lang=js& ***!
   \*******************************************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

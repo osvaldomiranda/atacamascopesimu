@@ -30,7 +30,7 @@
 					  <v-card class="py-4 px-2">
 				        <v-layout>
 				          <v-flex xs4 class="px-2">
-				            <span class="headline">1.- {{ object }}</span>
+				            <span class="headline">1.- {{ object.name }}</span>
 				          </v-flex>
 				          	<v-flex xs8 class="px-2">
 				            	<span class="headline"> Estado:{{ state }}</span>
@@ -770,7 +770,7 @@
     		rowsPerPage: 3
 		},	
 
-		object:'Seleccione Objeto',
+		object:'',
 		state:'En espera',
 		selectedTic:'100',
 		selectedDir:'Adentro',
@@ -894,7 +894,8 @@
       	//	if (event.target.classList.contains('btn__content')) return;
       		var app = this;
  
-      		this.object = a.name;
+      		this.object = a;
+      		alert(JSON.stringify(this.object));
 
 	      	// axios.get('/api/astronomic_objects/horizon?object=' + a.name)
 	       //      .then(function (resp) {    
@@ -1070,12 +1071,15 @@
         },
         shoot(){
         	this.state = 'Enviando Comando';
-   
-        	var $command = {'command': 'CAMARA', 'type': 'shoot', 'status': 'PENDIENTE',
-        	                'exptime': this.Exp, 'iso': this.Iso, 'ar': this.Ar_act, 'dec': this.Dec_act, 'user_id': this.$store.getters.user['id'], 'equipment_id': 1};
+
+
+        	var command = {'command': 'CAMARA', 'type': 'shoot', 'status': 'PENDIENTE',
+        	                'exptime': this.Exp, 'iso': this.Iso, 'iso_string': this.selectedIso.iso,'ar': this.Ar_screen, 'dec': this.Dec_screen, 'user_id': this.$store.getters.user['id'], 'equipment_id': 1, 'object_id':this.object.id, 'object_name': this.object.name};
+
+
 
         	this.imageUrl = '';
-        	axios.post('/api/command/shoot', $command)
+        	axios.post('/api/command/shoot', command)
             .then(function (resp) {    
             })
             .catch(function (resp) {

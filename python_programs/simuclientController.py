@@ -8,7 +8,8 @@ from subprocess import call
 
 
 
-ip = '54.70.235.195'
+# ip = '54.70.235.195'
+ip = 'localhost:8000'
 cwd = os.getcwd()
 url = 'http://'+ip+'/api/command/mountcamera'
 data = '{}'
@@ -59,7 +60,7 @@ if(response.ok):
         url = 'http://'+ip+'/api/messages/send?sender_id=1&receiver_id=2&message=Subiendo Imagen'
         time.sleep( 5 )
         response = requests.post(url, data=data)
-        call(["python3", cwd + "/uploadPhoto.py", "-c", str(jData['id'])])
+        call(["python", cwd + "/uploadPhoto.py", "-c", str(jData['id'])])
 
 
 

@@ -16,10 +16,19 @@ class ImageController extends Controller
 {
     public function upload($command_id, request $request)
     {
+
+        Info("****** upload *******");
+        Info($request);
+        Info($command_id);
+        
+
+
         $command = Command::where('id', $command_id)->get()->first();
         $user_id = Auth::id();
     	
         Info($command);
+        Info("****** upload *******");
+        
 
     	if($request->hasFile('photo')){
 
@@ -46,7 +55,7 @@ class ImageController extends Controller
 
             $image->ar_string   = $command->ar_string;
             $image->dec_string  = $command->dec_string;
-            $image->object_name = $command->exptime_string;
+            $image->object_name = $command->object_name;
             $image->iso_string  = $command->iso_string;
 
 
@@ -62,7 +71,7 @@ class ImageController extends Controller
                 'message'     => 'Imagen Recibida',
             ]);
 
-            broadcast(new MessageSent($message));
+          //  broadcast(new MessageSent($message));
     	}
     }
 
