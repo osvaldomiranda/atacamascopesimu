@@ -71,7 +71,7 @@ class ImageController extends Controller
                 'message'     => 'Imagen Recibida',
             ]);
 
-          //  broadcast(new MessageSent($message));
+            broadcast(new MessageSent($message));
     	}
     }
 
