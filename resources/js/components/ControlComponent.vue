@@ -10,6 +10,7 @@
 </style>
 <template>
   <v-layout>
+  	<loading ref="Loading"></loading> 
     <v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition">
 <!--       <template v-slot:activator="{ on }">
         <v-btn color="warning" dark v-on="on">Interfaz de Control</v-btn>
@@ -570,6 +571,9 @@
 
 <script>
   import { mapState } from 'vuex';
+  import Vue from 'vue';  
+  import Loading from '../components/Loading.vue'
+
   export default {
   	computed: mapState(['astronomc_objects']),
     data () {
@@ -843,14 +847,13 @@
     },
     created () {
       	//this.initialize();
-
-
-
-
     },
     mounted (){
     	this.initialize();
 
+    },
+    components: {
+          Loading,
     },
     methods: {
 
@@ -870,50 +873,53 @@
               //       setInterval(this.actualizaTiempo, 1000);
     	},
 
-    	showAlert(a){
+    	async showAlert(a){
       	//	if (event.target.classList.contains('btn__content')) return;
       		var app = this;
  
       		this.object = a;
-      		alert(JSON.stringify(this.object));
 
-	      	// axios.get('/api/astronomic_objects/horizon?object=' + a.name)
-	       //      .then(function (resp) {    
+      		this.$refs.Loading.show("Calculando si el objeto es visible, un momento por favor") 
 
-	       //      	if(resp.data<=0){
-	       //      		//alert(JSON.stringify(resp.data));
-        // 				app.Ar = 0;
-				    //     app.Dec = 0;
-				    //     app.Ar_screen = '';
-				    //     app.Dec_screen = '';
-				    //     app.object = 'Seleccione Objeto';
-	       //      		alert('Objeto Bajo el Horizonte');
-
-	       //      	}
-	       //      })
-	       //      .catch(function (resp) {
-	       //          console.log(resp);
-	       //          alert("Error shoot :" + resp);
-	       //      });      		
-
-      		if(a.catalog=='SolarSistem'){
-	      		axios.get('/api/astronomic_objects/solarsistem?object=' + a.name)
+	      	await axios.get('/api/astronomic_objects/horizon?object=' + a.name)
 	            .then(function (resp) {    
-	            	//alert(JSON.stringify(resp.data));
-	            	app.Ar_screen = resp.data["ar"];
-	            	app.Dec_screen = resp.data["dec"];
-	            	app.coords(app.Ar_screen, app.Dec_screen); 
+
+	            	if(resp.data>0){
+	            		//alert(JSON.stringify(resp.data));
+        				app.Ar = 0;
+				        app.Dec = 0;
+				        app.Ar_screen = '';
+				        app.Dec_screen = '';
+	            		alert('Objeto Bajo el Horizonte');
+
+	            	} else {
+	            		app.Ar_screen = app.object.ra;
+      					app.Dec_screen = app.object.dec;
+      					app.coords(app.Ar_screen, app.Dec_screen); 
+	            	}
 	            })
 	            .catch(function (resp) {
 	                console.log(resp);
 	                alert("Error shoot :" + resp);
-	            });
-      		} else {
+	            }); 
+	        this.$refs.Loading.hide()      		
 
-      			this.Ar_screen = a.ra;
-      			this.Dec_screen = a.dec;
-      			this.coords(app.Ar_screen, app.Dec_screen); 
-      		}    
+      		// if(a.catalog=='SolarSistem'){
+	      	// 	axios.get('/api/astronomic_objects/solarsistem?object=' + a.name)
+	       //      .then(function (resp) {    
+	       //      	//alert(JSON.stringify(resp.data));
+	       //      	app.Ar_screen = resp.data["ar"];
+	       //      	app.Dec_screen = resp.data["dec"];
+	       //      	app.coords(app.Ar_screen, app.Dec_screen); 
+	       //      })
+	       //      .catch(function (resp) {
+	       //          console.log(resp);
+	       //          alert("Error shoot :" + resp);
+	       //      });
+      		// } else {
+
+
+      		// }    
 
       				
     	},

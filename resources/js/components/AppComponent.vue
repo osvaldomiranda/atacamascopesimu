@@ -19,7 +19,7 @@
         <v-btn :to="'/equipment'" flat>Equipos</v-btn> 
         <v-btn :to="'/offers'" flat>Ofertas</v-btn> 
         <v-btn :to="'/publications'" flat>Publicaciones</v-btn>
-        <v-btn :to="'/admincontrol'" flat>Control</v-btn>
+        <!-- <v-btn :to="'/admincontrol'" flat>Control</v-btn> -->
 
 
 

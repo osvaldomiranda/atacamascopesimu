@@ -138,6 +138,12 @@
                             <td class="text-xs-left">{{ props.item.ar_string }}</td>
                             <td class="text-xs-left">{{ props.item.dec_string }}</td>
                             <td class="text-xs-left">{{ props.item.created_at }}</td>
+                            <td>
+                                <v-btn round color="morado" small class="white--text"  @click="download">
+                                  <v-icon>cloud_download</v-icon>
+                                  Imagen Raw
+                                </v-btn>
+                            </td>
                           </template>
                           
                         </v-data-table>
@@ -184,12 +190,14 @@
 
         ],
         myImages: [],
-        mySessionsHeaders: [
+        myImagesHeaders: [
           { text: 'Foto', value: 'img' },
-          { text: 'Fecha', value: 'session_date' },
-          { text: 'Hora', value: 'session_hour' },
-          { text: 'cantidad de fotos', value: 'img_count' },
-          { text: 'Equipo', value: 'equipment_name' },
+          { text: 'Nombre', value: 'name' },
+          { text: 'ISO', value: 'iso' },
+          { text: 'TiempoExp', value: 'exptime' },
+          { text: 'Coord AR', value: 'ar' },
+          { text: 'Coord DEC', value: 'dec' },
+          { text: 'Fecha', value: 'created_at' }
         ],
         reservations:[
             {
@@ -263,6 +271,10 @@
                 alert("Error shoot :" + resp);
             });
         },
+
+        download(){
+            alert('Estamos subiendo la imagen al servidor, estará disponible dentro de las proximas horas');
+        }
 
     },
   }
