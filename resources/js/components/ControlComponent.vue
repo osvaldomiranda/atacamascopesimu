@@ -884,7 +884,8 @@
 	      	await axios.get('/api/astronomic_objects/horizon?object=' + a.name)
 	            .then(function (resp) {    
 
-	            	if(resp.data>0){
+	            	alert(JSON.stringify(resp.data));
+	            	if(resp.data<=0){
 	            		//alert(JSON.stringify(resp.data));
         				app.Ar = 0;
 				        app.Dec = 0;
