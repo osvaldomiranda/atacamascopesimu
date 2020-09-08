@@ -47434,7 +47434,7 @@ var render = function() {
                           _c(
                             "v-btn",
                             {
-                              attrs: { round: "", color: "verde", dark: "" },
+                              attrs: { round: "", color: "morado", dark: "" },
                               on: { click: _vm.reservClick }
                             },
                             [_vm._v("Reserva tu hora de telescopio Aquí")]
