@@ -49,6 +49,7 @@
     </v-navigation-drawer>
 
   <v-toolbar app dark color="#0e1820">
+    
     <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
     <v-toolbar-title>
       Atacama Scope
