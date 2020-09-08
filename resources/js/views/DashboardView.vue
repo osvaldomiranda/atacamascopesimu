@@ -8,9 +8,11 @@
                 <v-layout>
                 <v-flex xs1>
                 </v-flex>
+                
                 <v-flex xs6>
                     <v-btn round color="morado"  dark @click="reservClick" >Reserva tu hora de telescopio Aquí</v-btn> 
                 </v-flex>
+
             </v-layout>   
             <my-reservations></my-reservations>
         </v-card>
