@@ -3334,8 +3334,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     getAstrnomicObject: function getAstrnomicObject() {
       var app = this;
-      var constellation = app.Constellation ? app.Constellation.name : "Cru";
-      alert("getAstrnomicObject");
+      var constellation = app.Constellation ? app.Constellation.name : "Cru"; //alert("getAstrnomicObject")
+
       axios.get('/api/astronomic_objects?constellation=' + constellation + '&type=' + app.type).then(function (resp) {
         app.FilteredObjects = resp.data;
       })["catch"](function (resp) {
@@ -4509,8 +4509,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     getAstrnomicObject: function getAstrnomicObject() {
       var app = this;
-      var constellation = app.Constellation ? app.Constellation.name : "Cru";
-      alert("getAstrnomicObject");
+      var constellation = app.Constellation ? app.Constellation.name : "Cru"; //alert("getAstrnomicObject")
+
       axios.get('/api/astronomic_objects?constellation=' + constellation + '&type=' + app.type).then(function (resp) {
         app.FilteredObjects = resp.data;
       })["catch"](function (resp) {
