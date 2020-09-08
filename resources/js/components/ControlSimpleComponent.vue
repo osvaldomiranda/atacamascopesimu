@@ -58,18 +58,7 @@
 							    single-line
 						        hide-details
 							    ></v-select>
-					        <v-spacer></v-spacer>
-    	
-						      <v-text-field
-						        v-model="search"
-						        label="Buscar"
-						        single-line
-						        hide-details
-						      ></v-text-field>
-						      <v-spacer></v-spacer> 
-						      <v-btn @click='getAstrnomicObjectName' flat icon color="blue lighten-2">
-            					<v-icon>search</v-icon>
-        					  </v-btn>
+
 
 					    </v-card-title>
 					    <v-data-table
@@ -84,12 +73,12 @@
 					      		<td>
 					      			<v-btn outline round color="amarillo">Usar</v-btn>
 					      		</td>
-						        <td class="text-xs-left">{{ props.item.name }}</td>
+						  
 						        <td class="text-xs-left">{{ (props.item.colloquial_name || '') + ' ' + (props.item.nombre_coloquial || '')}}</td>
 						        <td class="text-xs-left">{{ props.item.constellation }}</td>
 						        <td class="text-xs-left">{{ props.item.type_object }}</td>
-						        <td class="text-xs-left">{{ props.item.ra }}</td>
-						        <td class="text-xs-left">{{ props.item.dec }}</td>
+						        <td class="text-xs-left">{{ props.item.name }}</td>
+
 					    	</tr>
 					      </template>
 					    </v-data-table>
@@ -141,12 +130,12 @@
 	        
 
 		    <v-layout>
-				<v-flex xs4 class="px-2">
+				<v-flex xs6 class="px-2">
 					<v-card class="py-2 px-2">
  
 				        <v-layout>
 				          <v-flex xs12>
-				            <span class="headline">2.- Mover Montura</span>
+				            <span class="headline">2.- Mover Telescopio</span>
 				          </v-flex>
 				        </v-layout>
 						<v-layout>
@@ -166,242 +155,13 @@
 		          			</v-flex>	          			
 		          		</v-layout>	
 		          		<v-btn round color="morado" @click="move()">Mover</v-btn>
-						<template>
-						    <v-dialog v-model="dialog2" persistent max-width="800px">
-						      <template v-slot:activator="{ on }">
-						        <v-btn round color="morado" dark v-on="on">Mov.Fino</v-btn>
-						      </template>
-						      <v-card>
-						        <v-card-title>
-						          <span class="headline">Movimiento Fino</span>
-						        </v-card-title>
-						        <v-card-text>
-						          <v-container grid-list-md>
-						          				<v-layout align-center row>
-						          					<span class="title">Ascención Recta</span>
-						          				</v-layout>
-												<v-layout align-center row>
-													<v-flex align-center xs1>
-													</v-flex>	
-													<v-flex align-center xs3>
-														<v-text-field
-														    v-model="h_ra"
-														    type="number" 
-														    min:0
-														    max:23
-														    :rules='twentythreeRule'
-														    label="AR Horas"
-														    ></v-text-field>
-								          			</v-flex>
-													<v-flex align-center xs1>
-													</v-flex>
-													<v-flex align-center xs3>
-														<v-text-field 
-															v-model="m_ra" 
-														    min:0
-														    max:59
-															type="number" 
-															:rules='sixtyRule'
-															label="AR Minutos" 
-															append-outer-icon="add_circle_outline" @click:append-outer="inc_m_ra" 
-															prepend-icon="remove_circle_outline" @click:prepend="dec_m_ra">
-														</v-text-field>
-								          			</v-flex>
-													<v-flex align-center xs1>
-													</v-flex>	
-													<v-flex align-center xs3>
-
-														<v-text-field 
-															v-model="s_ra" 
-															type="number" 
-															label="AR Segundos" 
-														    min:0
-														    max:59
-															:rules='sixtyRule'
-															readonly
-															append-outer-icon="add_circle_outline" @click:append-outer="inc_s_ra" 
-															prepend-icon="remove_circle_outline" @click:prepend="dec_s_ra">
-														</v-text-field>
-								          			</v-flex>
-													<v-flex align-center xs1>
-													</v-flex>		          			
-								          		</v-layout>	
-						          				<v-layout align-center row>
-						          					<span class="title">Declinación</span>
-						          				</v-layout>
-
-												<v-layout align-center row>
-
-													<v-flex align-center xs1>
-													</v-flex>	
-													<v-flex align-center xs3>
-														<v-text-field
-														    v-model="h_dec"
-														    type="number" 
-														    label="DEC Grados"
-														    min:-90
-														    max:90								        
-														    :rules='ninetyRule'
-														></v-text-field>
-								          			</v-flex>
-													<v-flex align-center xs1>
-													</v-flex>
-													<v-flex align-center xs3>
-														<v-text-field 
-															v-model="m_dec" 
-														    min:0
-														    max:59	
-															type="number" 
-															label="DEC Minutos" 
-															:rules='sixtyRule'
-															append-outer-icon="add_circle_outline" @click:append-outer="inc_m_dec" 
-															prepend-icon="remove_circle_outline" @click:prepend="dec_m_dec">
-														</v-text-field>
-								          			</v-flex>
-													<v-flex align-center xs1>
-													</v-flex>	
-													<v-flex align-center xs3>
-														<v-text-field 
-															v-model="s_dec" 
-															type="number" 
-															label="DEC Segundos" 
-															:rules='sixtyRule'
-														    min:0
-														    max:59	
-															append-outer-icon="add_circle_outline" @click:append-outer="inc_s_dec" 
-															prepend-icon="remove_circle_outline" @click:prepend="dec_s_dec">
-														</v-text-field>
-								          			</v-flex>
-													<v-flex align-center xs1>
-													</v-flex>		          			
-								          		</v-layout>	
-						          </v-container>
-						         
-						        </v-card-text>
-						        <v-card-actions>
-						          <v-spacer></v-spacer>
-						          <v-btn color="blue darken-1" flat @click="dialog2 = false">Cerrar</v-btn>
-						          <v-btn color="blue darken-1" flat @click="savefine">Guardar</v-btn>
-						        </v-card-actions>
-						      </v-card>
-						    </v-dialog>
-						</template>
-
-						<template>
-						    <v-dialog v-model="dialog3" persistent max-width="600px">
-						      <template v-slot:activator="{ on }">
-						        <v-btn round color="morado" dark v-on="on">Mis Coords.</v-btn>
-						      </template>
-						      <v-card>
-						        <v-card-title>
-						          <span class="headline">Coordenadas especificas</span>
-						        </v-card-title>
-						        <v-card-text>
-						          <v-container grid-list-md>
-						          	          	<v-layout align-center row>
-						          				<span class="title">Ascención Recta</span>
-						          				</v-layout>
-												<v-layout align-center row>
-													<v-flex align-center xs1>
-													</v-flex>	
-													<v-flex align-center xs3>
-														<v-text-field
-														    v-model="h_ra"
-														    min:0
-														    max:23
-														    :rules='twentythreeRule'
-														    type="number" 	
-														    label="AR Horas"
-														    ></v-text-field>
-								          			</v-flex>
-													<v-flex align-center xs1>
-													</v-flex>
-													<v-flex align-center xs3>
-														<v-text-field
-														    min:0
-														    max:59
-														    :rules='sixtyRule'
-														    v-model="m_ra"
-														    type="number" 
-														    label="AR Minutos"
-														    ></v-text-field>
-								          			</v-flex>
-													<v-flex align-center xs1>
-													</v-flex>	
-													<v-flex align-center xs3>
-														<v-text-field
-														    v-model="s_ra"
-														    min:0
-														    max:59
-														    :rules='sixtyRule'
-														    label="AR Segundos"
-														    type="number" 
-														    ></v-text-field>
-								          			</v-flex>
-													<v-flex align-center xs1>
-													</v-flex>		          			
-								          		</v-layout>	
-								          		<v-layout align-center row>
-						          					<span class="title">Declinación</span>
-						          				</v-layout>
-												<v-layout align-center row>
-													<v-flex align-center xs1>
-													</v-flex>	
-													<v-flex align-center xs3>
-														<v-text-field
-														    v-model="h_dec"
-														    min:-90
-														    max:90
-														    :rules='ninetyRule'
-														    label="DEC Grados"
-														    type="number" 
-														    ></v-text-field>
-								          			</v-flex>
-													<v-flex align-center xs1>
-													</v-flex>
-													<v-flex align-center xs3>
-														<v-text-field
-														    v-model="m_dec"
-														    label="DEC Minutos"
-														    min:0
-														    max:59
-														    :rules='sixtyRule'
-														    type="number" 
-														    ></v-text-field>
-								          			</v-flex>
-													<v-flex align-center xs1>
-													</v-flex>	
-													<v-flex align-center xs3>
-														<v-text-field
-														    v-model="s_dec"
-														    min:0
-														    max:59
-														    :rules='sixtyRule'
-														    label="DEC Segundos"
-														    type="number" 
-														    ></v-text-field>
-								          			</v-flex>
-													<v-flex align-center xs1>
-													</v-flex>		          			
-								          		</v-layout>	
-						          </v-container>
-						        </v-card-text>
-						        <v-card-actions>
-						          <v-spacer></v-spacer>
-						          <v-btn color="blue darken-1" flat @click="dialog3 = false">Cerrar</v-btn>
-						          <v-btn color="blue darken-1" flat @click="savecoords">Guardar</v-btn>
-						        </v-card-actions>
-						      </v-card>
-						    </v-dialog>
-
-						</template>
 			 		</v-card> 
 				</v-flex>
 
 
 
 
-				<v-flex xs4 class="px-2">
+				<v-flex xs6 class="px-2">
 					<v-card class="py-2 px-2">
 				        <v-layout>
 				          <v-flex xs12>
@@ -454,69 +214,6 @@
 			    	</v-card> 
 				</v-flex>
 
-
-
-
-
-
-
-
-
-<!-- ***************************************** -->
-
-				<v-flex xs4 class="px-2">
-					<v-card class="py-2 px-2">
-				        <v-layout>
-				          <v-flex xs6>
-				            <span class="headline">Enfocador</span>
-				          </v-flex>
-<!-- 				          <v-flex xs6>
-				            <p>Posición Actual: 15000</p>
-				          </v-flex> -->
-				        </v-layout>
-
-
-
-		          		<v-layout >
-		          		    <v-flex xs4 class="px-2">
-								<v-select
-							      v-model="selectedTic"
-							      :items="Tics"
-							      item-text='Tic'
-							      return-object
-							      :rules="[v => !!v || 'Obligatorio']"
-							      label="Tics"	
-							      @input= "selectTic"	     
-							      required
-							    ></v-select>    
-		          		    </v-flex>
-		          		    <v-flex xs6 class="px-2">	
-							    <v-select
-							      v-model="selectedDir"
-							      :items="Dirs"
-							      item-text='Dir'
-							      return-object
-							      :rules="[v => !!v || 'Obligatorio']"
-							      label="Dirección"
-							      @input= "selectDir"
-							      required
-							    ></v-select>
-							</v-flex>    
-
-		          		</v-layout> 
-		          		<v-layout>   
-		          		    <v-flex xs4>
-		          		    	<v-btn round color="amarillo" @click="focus">Enfocar</v-btn>	
-		          		    </v-flex>
-		          		    <v-flex xs6>
-		          		    	<span class="headline">Posición: {{ this.focuser_state }}</span>
-		          		    </v-flex>
-		          		</v-layout>
-		          		
-			    	</v-card> 
-				</v-flex>
-
-<!-- ***************************** -->
 
 			</v-layout>
 		
@@ -859,12 +556,11 @@
 
         headers: [
           { text: 'Usar', value: 'name' },
-          { text: 'Nombre', value: 'name' },
           { text: 'Descripción', value: 'colloquial_name' },
           { text: 'Constelación', value: 'constellation' },
           { text: 'Tipo', value: 'type_object' },
-          { text: 'AR', value: 'ra' },
-          { text: 'DEC', value: 'dec' }
+          { text: 'Nombre', value: 'name' },
+
         ],
         myImages: [],
         myImagesHeaders: [

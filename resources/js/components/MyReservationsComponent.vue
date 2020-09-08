@@ -25,7 +25,8 @@
                       <td class="text-xs-left">{{ props.item.date }}</td>
                       <td class="text-xs-left">{{ props.item.hour }}</td>
                       <td class="text-xs-left"> 
-                        <v-btn color="morado"  round dark @click="control_avanzado" >Interfaz de Control</v-btn> 
+                        <v-btn color="morado"  round dark @click="control" >Control Principiante</v-btn> 
+                        <v-btn color="morado"  round dark @click="control_avanzado" >Control Avanzado</v-btn> 
                       </td>
                 </tr>
                 </template>
@@ -49,7 +50,7 @@
   import Vue from 'vue';
   import { mapState } from 'vuex';
   import ControlComponent     from './ControlComponent';
-  import PointandshootComponent     from './PointandshootComponent';
+  import PointandshootComponent     from './ControlSimpleComponent';
   
   export default {
     computed: mapState({

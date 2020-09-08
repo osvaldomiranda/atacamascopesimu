@@ -1,52 +1,58 @@
-<template>
-<!--     <v-layout row>
-                  <v-flex xs2>
-                    <v-layout align-center row>
-                        <v-flex align-center xs12 class="py-2">
-                            <v-avatar
-                                size="100px"
-                            >
-                                <img
-                                  :src="$store.getters.user['avatar']"
-                                  alt="Avatar"
-                                >
-                            </v-avatar>
-                        </v-flex>
-                    </v-layout>
-                    <v-layout align-center row>
-                        <v-flex xs1>
-                        </v-flex> 
-                    </v-layout>  
-                    <v-layout align-center row>
-                        <v-flex align-center xs1>
-                            <upload-avatar></upload-avatar>
-                        </v-flex>    
-                        <v-flex align-center xs1>
-                        </v-flex>
-                        <v-flex align-center xs10>
-                            <span class="body-2">{{ $store.getters.user['email'] }}</span>
-                        </v-flex>  
-                    </v-layout> 
-                </v-flex>
-    </v-layout>  -->          
+<template>       
+
+<v-container>
 
   <v-layout row>
-    <v-flex xs8 class="px-2">
+    <v-flex xs12 class="px-2">
         <v-card class="py-4">
-            <my-reservations></my-reservations>
-            <v-layout>
+                <v-layout>
                 <v-flex xs1>
                 </v-flex>
                 <v-flex xs6>
-                    <v-btn round color="morado"  dark @click="reservClick" >Reservar</v-btn> 
+                    <v-btn round color="verde"  dark @click="reservClick" >Reserva tu hora de telescopio Aquí</v-btn> 
                 </v-flex>
-            </v-layout>            
+            </v-layout>   
+            <my-reservations></my-reservations>
         </v-card>
     </v-flex>  
+  </v-layout>
 
-    <v-flex xs4>
-        <v-layout class="px-1">
-            <v-flex xs12 class="px-1">
+  <v-layout row>
+
+            <v-flex xs6 class="px-1 py-4">
+                <v-card >
+                    <v-layout>
+                        <v-flex xs1 >
+                        </v-flex>
+                        <v-flex xs8 class="px-1">
+                            <span class="subheading">Puntos</span>
+                        </v-flex>
+                    </v-layout>   
+                    <v-layout class="px-1">
+                        <v-flex xs4>
+                        </v-flex>                  
+                        <v-flex xs4 align-end flexbox>
+                          <span style="color:#FFCC00"  class="display-3">{{ $store.getters.current_points }}</span>
+                        </v-flex>
+                    </v-layout>    
+                    <v-layout class="px-1">
+                        <v-flex xs5>
+                        </v-flex> 
+                        <v-flex xs4 align-end flexbox>
+                            <div>
+                                <v-btn round color="amarillo"  dark @click="pointsClick" >Comprar Puntos</v-btn>      
+                            </div>
+
+                        </v-flex>                      
+                    </v-layout>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                </v-card>
+            </v-flex>
+
+            <v-flex xs6 class="px-1 py-4">
                 <v-card>
                     <v-layout>
                         <v-flex xs1>
@@ -78,40 +84,9 @@
                       <br>               
                 </v-card>
             </v-flex>
-        </v-layout>
-        <br>
-        <v-layout class="px-1">
-            <v-flex xs12 class="px-1">
-                <v-card class="py-1">
-                    <v-layout>
-                        <v-flex xs1 >
-                        </v-flex>
-                        <v-flex xs8 class="px-1">
-                            <span class="subheading">Puntos</span>
-                        </v-flex>
-                    </v-layout>   
-                    <v-layout class="px-1">
-                        <v-flex xs4>
-                        </v-flex>                  
-                        <v-flex xs4 align-end flexbox>
-                          <span style="color:#FFCC00"  class="display-3">{{ $store.getters.current_points }}</span>
-                        </v-flex>
-                    </v-layout>    
-                    <v-layout class="px-1">
-                        <v-flex xs5>
-                        </v-flex> 
-                        <v-flex xs4 align-end flexbox>
-                            <div>
-                                <v-btn round color="amarillo"  dark @click="pointsClick" >Comprar Puntos</v-btn>      
-                            </div>
-                        </v-flex>                      
-                    </v-layout>
-                    <br>
-                </v-card>
-            </v-flex>
-        </v-layout>
-    </v-flex>
-
+    </v-layout>
+   
+    <v-layout row>
     <v-flex xs12 class="px-2 py-4">
                       <v-card>
                         <v-card-title>
@@ -121,8 +96,6 @@
                           :headers="myImagesHeaders"
                           :items="myImages"
                         >
-
-
                           <template v-slot:items="props">
                             <td>
                                 <a class="px-2 py-2" :href="props.item.path" target="_blank">
@@ -148,14 +121,15 @@
                           
                         </v-data-table>
                       </v-card> 
-
-            
-        </v-card>  
     </v-flex>
+    </v-layout>
+
+
+
     <div ref="container">
     </div>
 
-  </v-layout>
+  </v-container>
 </template>
 
 <script>

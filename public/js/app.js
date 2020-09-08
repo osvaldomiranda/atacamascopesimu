@@ -1932,6 +1932,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2750,6 +2755,29 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2757,6 +2785,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   computed: Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])(['astronomc_objects']),
   data: function data() {
     return {
+      snackbar: false,
+      y: 'top',
+      x: null,
+      mode: 'vertical',
+      timeout: 6000,
+      text: '',
       tiempo: 0,
       contando: true,
       tiempos: [],
@@ -2804,9 +2838,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       s_dec: 0,
       catalog: 'SolarSistem',
       catalogs: ['SolarSistem', 'Messier', 'NGC', 'IC'],
-      type: 'Cúmulo Globular',
-      types: ['Cúmulo Globular', 'Cúmulo abierto', 'Galaxia', 'Asterismo o Cúmulo Abierto', 'Estrella', 'Estrella doble', 'Galaxias en Interacción', 'Nebulosa', 'Nebulosa de emisión Hidrógeno', 'Nebulosa de Reflexión', 'Nebulosa Extragaláctica', 'Nebulosa Planetaria', 'Nebulosa y Cúmulo', 'Nova', 'Otro', 'Planet', 'Par de Galaxias', 'Remanente de Supernova', 'Trío de Galaxias'],
-      Constellation: '',
+      type: "Cúmulo abierto",
+      name: null,
+      types: [' ', 'Cúmulo Globular', 'Cúmulo abierto', 'Galaxia', 'Asterismo o Cúmulo Abierto', 'Estrella', 'Estrella doble', 'Galaxias en Interacción', 'Nebulosa', 'Nebulosa de emisión Hidrógeno', 'Nebulosa de Reflexión', 'Nebulosa Extragaláctica', 'Nebulosa Planetaria', 'Nebulosa y Cúmulo', 'Nova', 'Otro', 'Planet', 'Par de Galaxias', 'Remanente de Supernova', 'Trío de Galaxias'],
+      Constellation: {
+        name: 'Cru',
+        latin: 'Crux'
+      },
       Constellations: [{
         name: '',
         latin: ' '
@@ -3234,19 +3272,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     Loading: _components_Loading_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
   },
   methods: {
-    conteo: function conteo() {// var tiempos = [];
-      //       if(tiempos === null || tiempos === '') {
-      //           this.tiempos = [];
-      //       }
-      //       else {
-      //           // tiempos = tiempos.split(',');
-      //           for(var i = 0; i < tiempos.length; i++) {
-      //               tiempos[i] = parseInt(tiempos[i]);
-      //           }
-      //           this.tiempos = tiempos;
-      //       }
-      //       setInterval(this.actualizaTiempo, 1000);
-    },
     showAlert: function () {
       var _showAlert = _asyncToGenerator(
       /*#__PURE__*/
@@ -3262,16 +3287,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 this.$refs.Loading.show("Calculando si el objeto es visible, un momento por favor");
                 _context.next = 5;
                 return axios.get('/api/astronomic_objects/horizon?object=' + a.name).then(function (resp) {
-                  alert(JSON.stringify(resp.data));
-
-                  if (resp.data <= 0) {
+                  if (resp.data <= 5) {
                     //alert(JSON.stringify(resp.data));
                     app.Ar = 0;
                     app.Dec = 0;
                     app.Ar_screen = '';
                     app.Dec_screen = '';
-                    alert('Objeto Bajo el Horizonte');
+                    app.text = "Objeto NO VISIBLE,altura Alt/Az BAJO el HORIZONTE: " + JSON.stringify(resp.data) + 'º';
+                    app.snackbar = true; // alert("Objeto no visible,altura Alt/Az bajo el horizonte: " + JSON.stringify(resp.data) +'º');
                   } else {
+                    // app.text = "Altura Alt/Az sobre el horizonte: " + JSON.stringify(resp.data) +'º';
+                    // app.snackbar = true;
+                    // alert("Altura Alt/Az sobre el horizonte: " + JSON.stringify(resp.data) +'º');
                     app.Ar_screen = app.object.ra;
                     app.Dec_screen = app.object.dec;
                     app.coords(app.Ar_screen, app.Dec_screen);
@@ -3282,20 +3309,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 });
 
               case 5:
-                this.$refs.Loading.hide(); // if(a.catalog=='SolarSistem'){
-                // 	axios.get('/api/astronomic_objects/solarsistem?object=' + a.name)
-                //      .then(function (resp) {    
-                //      	//alert(JSON.stringify(resp.data));
-                //      	app.Ar_screen = resp.data["ar"];
-                //      	app.Dec_screen = resp.data["dec"];
-                //      	app.coords(app.Ar_screen, app.Dec_screen); 
-                //      })
-                //      .catch(function (resp) {
-                //          console.log(resp);
-                //          alert("Error shoot :" + resp);
-                //      });
-                // } else {
-                // }    
+                this.$refs.Loading.hide();
 
               case 6:
               case "end":
@@ -3318,26 +3332,21 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.getMyImages();
       this.getAstrnomicObject();
     },
-    search_object: function search_object() {
-      alert("Search");
+    getAstrnomicObject: function getAstrnomicObject() {
       var app = this;
-      axios.get('/api/search_objects?name=' + app.search).then(function (resp) {
-        app.FilteredObjects = resp.data; // const distinctConst=[...new Set(app.astronomic_objects.map(x => x.constellation))];
-        // app.Constellations = distinctConst.sort();
-        // alert(JSON.stringify(app.FilteredObjects));
+      var constellation = app.Constellation ? app.Constellation.name : "Cru";
+      alert("getAstrnomicObject");
+      axios.get('/api/astronomic_objects?constellation=' + constellation + '&type=' + app.type).then(function (resp) {
+        app.FilteredObjects = resp.data;
       })["catch"](function (resp) {
-        //console.log(resp);
         alert("Error astronomic_objects :" + resp);
       });
     },
-    getAstrnomicObject: function getAstrnomicObject() {
+    getAstrnomicObjectName: function getAstrnomicObjectName() {
       var app = this;
-      axios.get('/api/astronomic_objects?constellation=' + app.constellation + '&catalog=' + app.catalog + '&type=' + app.type).then(function (resp) {
-        app.FilteredObjects = resp.data; // const distinctConst=[...new Set(app.astronomic_objects.map(x => x.constellation))];
-        // app.Constellations = distinctConst.sort();
-        // alert(JSON.stringify(app.FilteredObjects));
+      axios.get('/api/astronomic_objects?name=' + app.search).then(function (resp) {
+        app.FilteredObjects = resp.data;
       })["catch"](function (resp) {
-        //console.log(resp);
         alert("Error astronomic_objects :" + resp);
       });
     },
@@ -3384,19 +3393,1180 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }
       }); // End pusher listener
     },
-    filter: function filter(a) {
-      this.catalog = a;
+    move: function move() {
+      this.state = 'Enviando Comando';
+
+      if (this.Ar_screen) {
+        var $command = {
+          'command': 'MONTURA',
+          'type': 'mount',
+          'status': 'PENDIENTE',
+          'ar': this.Ar,
+          'dec': this.Dec,
+          'user_id': this.$store.getters.user['id'],
+          'equipment_id': 1
+        }; //alert(JSON.stringify($command));
+
+        axios.post('/api/command/move', $command).then(function (resp) {})["catch"](function (resp) {
+          console.log(resp);
+          alert("Error move :" + resp);
+        });
+        this.currentRefresh();
+      }
+    },
+    shoot: function shoot() {
+      this.state = 'Enviando Comando';
+      var command = {
+        'command': 'CAMARA',
+        'type': 'shoot',
+        'status': 'PENDIENTE',
+        'exptime': this.Exp,
+        'iso': this.Iso,
+        'iso_string': this.selectedIso.iso,
+        'ar': this.Ar_screen,
+        'dec': this.Dec_screen,
+        'user_id': this.$store.getters.user['id'],
+        'equipment_id': 1,
+        'object_id': this.object.id,
+        'object_name': this.object.name
+      };
+      this.imageUrl = '';
+      axios.post('/api/command/shoot', command).then(function (resp) {})["catch"](function (resp) {
+        console.log(resp);
+        alert("Error create reservation :" + resp);
+      });
+      this.currentRefresh();
+      this.current_shot = this.current;
+    },
+    currentRefresh: function currentRefresh() {
+      this.Ar_act = this.Ar;
+      this.Dec_act = this.Dec;
+      this.Iso_act = this.Iso;
+      this.Exp_act = this.Exp;
+      this.current = "Ar:" + this.Ar_act + ", Dec:" + this.Dec_act + ", Iso:" + this.Iso_act + ", Exp:" + this.Exp_act;
+    },
+    focus: function focus() {
+      if (!this.Tic) {
+        this.Tic = 100;
+      }
+
+      if (!this.Dir) {
+        this.Dir = 0;
+      }
+
+      this.state = 'Enviando Comando';
+      var $command = {
+        'command': 'ENFOCADOR',
+        'type': 'focuser',
+        'status': 'PENDIENTE',
+        'steps': this.Tic,
+        'direction': this.Dir,
+        'user_id': this.$store.getters.user['id'],
+        'equipment_id': 1
+      }; //alert(JSON.stringify($command));
+
+      axios.post('/api/command/focus', $command).then(function (resp) {})["catch"](function (resp) {
+        console.log(resp);
+        alert("Error focus :" + resp);
+      });
+    },
+    saveImage: function saveImage() {},
+    imageRefresh: function imageRefresh() {
+      var app = this;
+      axios.get('/api/image/last').then(function (resp) {
+        app.imageUrl = resp.data;
+      })["catch"](function (resp) {
+        console.log(resp);
+        alert("Error shoot :" + resp);
+      });
+      app.getMyImages();
+    },
+    getMyImages: function getMyImages() {
+      var app = this;
+      axios.get('/api/images').then(function (resp) {
+        app.myImages = resp.data;
+      })["catch"](function (resp) {
+        console.log(resp);
+        alert("Error shoot :" + resp);
+      });
+    },
+    coords: function coords(ra, dec) {
+      var res = ra.replace(/h/g, " ");
+      res = res.replace(/m/g, " ");
+      res = res.replace(/s/g, " ");
+      this.h_ra = parseFloat(res.split(" ")[0]);
+      this.m_ra = parseFloat(res.split(" ")[1]);
+      this.s_ra = parseFloat(res.split(" ")[2]);
+      var ra_selected = this.h_ra + this.m_ra / 60 + this.s_ra / 3600;
+      this.Ar = ra_selected;
+      res = dec.replace(/°/g, " ");
+      res = res.replace(/m/g, " ");
+      res = res.replace(/s/g, " ");
+      this.h_dec = parseFloat(res.split(" ")[0]);
+      this.m_dec = parseFloat(res.split(" ")[1]);
+      this.s_dec = parseFloat(res.split(" ")[2]);
+      var dec_selected = 0;
+      var h_dec_loc = this.h_dec;
+
+      if (h_dec_loc < 0) {
+        h_dec_loc = h_dec_loc * -1;
+        dec_selected = -(h_dec_loc + this.m_dec / 60 + this.s_dec / 3600);
+      } else {
+        dec_selected = h_dec_loc + this.m_dec / 60 + this.s_dec / 3600;
+      }
+
+      this.Dec = dec_selected;
+    },
+    inc_s_ra: function inc_s_ra() {
+      if (this.s_ra < 60) {
+        this.s_ra = parseInt(this.s_ra, 10) + 1;
+      }
+    },
+    dec_s_ra: function dec_s_ra() {
+      if (this.s_ra > 0) {
+        this.s_ra = parseInt(this.s_ra, 10) - 1;
+      }
+    },
+    inc_m_ra: function inc_m_ra() {
+      if (this.m_ra < 60) {
+        this.m_ra = parseInt(this.m_ra, 10) + 1;
+      }
+    },
+    dec_m_ra: function dec_m_ra() {
+      if (this.m_ra > 0) {
+        this.m_ra = parseInt(this.m_ra, 10) - 1;
+      }
+    },
+    inc_s_dec: function inc_s_dec() {
+      if (this.s_dec < 60) {
+        this.s_dec = parseInt(this.s_dec, 10) + 1;
+      }
+    },
+    dec_s_dec: function dec_s_dec() {
+      if (this.s_dec > 0) {
+        this.s_dec = parseInt(this.s_dec, 10) - 1;
+      }
+    },
+    inc_m_dec: function inc_m_dec() {
+      if (this.m_dec < 60) {
+        this.m_dec = parseInt(this.m_dec, 10) + 1;
+      }
+    },
+    dec_m_dec: function dec_m_dec() {
+      if (this.m_dec > 0) {
+        this.m_dec = parseInt(this.m_dec, 10) - 1;
+      }
+    },
+    savefine: function savefine() {
+      this.Ar_screen = this.h_ra + 'h' + this.m_ra + 'm' + this.s_ra + 's';
+      this.Dec_screen = this.h_dec + '°' + this.m_dec + 'm' + this.s_dec + 's';
+      this.coords(this.Ar_screen, this.Dec_screen);
+      this.dialog2 = false;
+    },
+    savecoords: function savecoords() {
+      this.Ar_screen = this.h_ra + 'h' + this.m_ra + 'm' + this.s_ra + 's';
+      this.Dec_screen = this.h_dec + '°' + this.m_dec + 'm' + this.s_dec + 's';
+      this.coords(this.Ar_screen, this.Dec_screen);
+      this.dialog3 = false;
+    },
+    selectIso: function selectIso(a) {
+      this.selectedIso = a;
+      this.Iso = a.choice;
+    },
+    selectExp: function selectExp(a) {
+      this.selectedExp = a;
+      this.Exp = a;
+    },
+    selectTic: function selectTic(a) {
+      this.selectedTic = a;
+      this.Tic = a;
+    },
+    selectDir: function selectDir(a) {
+      this.selectedDir = a;
+
+      if (a == "Afuera") {
+        this.Dir = 1;
+      } else {
+        this.Dir = 0;
+      }
+    },
+    pad: function pad(num, tam) {
+      var s = num + '';
+
+      while (s.length < tam) {
+        s = '0' + s;
+      }
+
+      return s;
+    },
+    tiempoFormateado: function tiempoFormateado() {
+      return formateaTiempo(this.tiempo);
+    },
+    actualizaTiempo: function actualizaTiempo() {
+      if (this.contando) {
+        this.tiempo++;
+        this.state = '  ' + this.tiempo + ' Seg';
+      }
+    },
+    pulsa: function pulsa() {
+      this.reinicia();
+      this.contando = !this.contando;
+    },
+    reinicia: function reinicia() {
+      this.tiempo = 0;
+    },
+    agregaTiempo: function agregaTiempo() {
+      this.tiempos.push(this.tiempo);
+      this.tiempo = 0;
+      this.$store.commit('tiempos', this.tiempos);
+    },
+    borrarTiempos: function borrarTiempos() {
+      this.tiempos.splice(0, this.tiempos.length);
+      this.$store.commit('tiempos', this.tiempos);
+    },
+    totalTiempos: function totalTiempos() {
+      var total = 0;
+
+      for (var i = 0; i < this.tiempos.length; i++) {
+        total += this.tiempos[i];
+      }
+
+      return total;
+    }
+  },
+  filters: {
+    formateaTiempo: function formateaTiempo(t) {
+      var horas = parseInt(t / 3600);
+      var minutos = parseInt(t / 60) % 60;
+      var segundos = t % 60;
+      var s = this.pad(horas, 2) + ':' + this.pad(minutos, 2) + ':' + this.pad(segundos, 2);
+      return s;
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ControlSimpleComponent.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ControlSimpleComponent.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _components_Loading_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/Loading.vue */ "./resources/js/components/Loading.vue");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  computed: Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])(['astronomc_objects']),
+  data: function data() {
+    return {
+      snackbar: false,
+      y: 'top',
+      x: null,
+      mode: 'vertical',
+      timeout: 6000,
+      text: '',
+      tiempo: 0,
+      contando: true,
+      tiempos: [],
+      focuser_state: 0,
+      current_focus: 0,
+      camera_state: 'Imagen Recibida',
+      metadata: '',
+      ninetyRule: [function (v) {
+        return !!v || 'Campo requerido';
+      }, function (v) {
+        return v <= 90 || 'Debe ser  menor o igual a 90';
+      }, function (v) {
+        return v >= -90 || 'Debe ser mayor o igual a -90';
+      }],
+      sixtyRule: [function (v) {
+        return !!v || 'Campo requerido';
+      }, function (v) {
+        return v <= 59 || 'Debe ser menor a 60';
+      }, function (v) {
+        return v >= 0 || 'Debe ser mayor a o igual 0';
+      }],
+      twentythreeRule: [function (v) {
+        return !!v || 'Campo requerido';
+      }, function (v) {
+        return v <= 23 || 'Debe ser menor o igual a 23';
+      }, function (v) {
+        return v >= 0 || 'Debe ser mayor a o igual 0';
+      }],
+      blankRules: [function (v) {
+        return !!v || 'Campo requerido';
+      }],
+      dialog: true,
+      dialog2: false,
+      dialog3: false,
+      slider: 0,
+      astronomic_objects: [],
+      selected: [],
+      search: '',
+      imageUrl: '',
+      h_ra: 0,
+      m_ra: 0,
+      s_ra: 0,
+      h_dec: 0,
+      m_dec: 0,
+      s_dec: 0,
+      catalog: 'SolarSistem',
+      catalogs: ['SolarSistem', 'Messier', 'NGC', 'IC'],
+      type: "Cúmulo abierto",
+      name: null,
+      types: [' ', 'Cúmulo Globular', 'Cúmulo abierto', 'Galaxia', 'Asterismo o Cúmulo Abierto', 'Estrella', 'Estrella doble', 'Galaxias en Interacción', 'Nebulosa', 'Nebulosa de emisión Hidrógeno', 'Nebulosa de Reflexión', 'Nebulosa Extragaláctica', 'Nebulosa Planetaria', 'Nebulosa y Cúmulo', 'Nova', 'Otro', 'Planet', 'Par de Galaxias', 'Remanente de Supernova', 'Trío de Galaxias'],
+      Constellation: {
+        name: 'Cru',
+        latin: 'Crux'
+      },
+      Constellations: [{
+        name: '',
+        latin: ' '
+      }, {
+        name: 'And',
+        latin: 'Andromeda'
+      }, {
+        name: 'Ant',
+        latin: 'Antlia'
+      }, {
+        name: 'Aps',
+        latin: 'Apus'
+      }, {
+        name: 'Aql',
+        latin: 'Aquila'
+      }, {
+        name: 'Aqr',
+        latin: 'Aquarius'
+      }, {
+        name: 'Ara',
+        latin: 'Ara'
+      }, {
+        name: 'Ari',
+        latin: 'Aries'
+      }, {
+        name: 'Aur',
+        latin: 'Auriga'
+      }, {
+        name: 'Boo',
+        latin: 'Bootes'
+      }, {
+        name: 'Cae',
+        latin: 'Caelum'
+      }, {
+        name: 'Cam',
+        latin: 'Camelopardalis'
+      }, {
+        name: 'Cap',
+        latin: 'Capricornus'
+      }, {
+        name: 'Car',
+        latin: 'Carina'
+      }, {
+        name: 'Cas',
+        latin: 'Cassiopeia'
+      }, {
+        name: 'Cen',
+        latin: 'Centaurus'
+      }, {
+        name: 'Cep',
+        latin: 'Cepheus'
+      }, {
+        name: 'Cet',
+        latin: 'Cetus'
+      }, {
+        name: 'Cha',
+        latin: 'Chamaleon'
+      }, {
+        name: 'Cir',
+        latin: 'Circinus'
+      }, {
+        name: 'CMa',
+        latin: 'Canis Major'
+      }, {
+        name: 'CMi',
+        latin: 'Canis Minor'
+      }, {
+        name: 'Cnc',
+        latin: 'Cancer'
+      }, {
+        name: 'Col',
+        latin: 'Columba'
+      }, {
+        name: 'Com',
+        latin: 'Coma Berenices'
+      }, {
+        name: 'CrA',
+        latin: 'Corona Australis'
+      }, {
+        name: 'CrB',
+        latin: 'Corona Borealis'
+      }, {
+        name: 'Crt',
+        latin: 'Crater'
+      }, {
+        name: 'Cru',
+        latin: 'Crux'
+      }, {
+        name: 'Crv',
+        latin: 'Corvus'
+      }, {
+        name: 'CVn',
+        latin: 'Canes Venatici'
+      }, {
+        name: 'Cyg',
+        latin: 'Cygnus'
+      }, {
+        name: 'Del',
+        latin: 'Delphinus'
+      }, {
+        name: 'Dor',
+        latin: 'Dorado'
+      }, {
+        name: 'Dra',
+        latin: 'Draco'
+      }, {
+        name: 'Equ',
+        latin: 'Equuleus'
+      }, {
+        name: 'Eri',
+        latin: 'Eridanus'
+      }, {
+        name: 'For',
+        latin: 'Fornax'
+      }, {
+        name: 'Gem',
+        latin: 'Gemini'
+      }, {
+        name: 'Gru',
+        latin: 'Grus'
+      }, {
+        name: 'Her',
+        latin: 'Hercules'
+      }, {
+        name: 'Hor',
+        latin: 'Horologium'
+      }, {
+        name: 'Hya',
+        latin: 'Hydra'
+      }, {
+        name: 'Hyi',
+        latin: 'Hydrus'
+      }, {
+        name: 'Ind',
+        latin: 'Indus'
+      }, {
+        name: 'Lac',
+        latin: 'Lacerta'
+      }, {
+        name: 'Leo',
+        latin: 'Leo'
+      }, {
+        name: 'Lep',
+        latin: 'Lepus'
+      }, {
+        name: 'Lib',
+        latin: 'Libra'
+      }, {
+        name: 'LMi',
+        latin: 'Leo Minor'
+      }, {
+        name: 'Lup',
+        latin: 'Lupus'
+      }, {
+        name: 'Lyn',
+        latin: 'Lynx'
+      }, {
+        name: 'Lyr',
+        latin: 'Lyra'
+      }, {
+        name: 'Men',
+        latin: 'Mensa'
+      }, {
+        name: 'Mic',
+        latin: 'Microscopium'
+      }, {
+        name: 'Mon',
+        latin: 'Monoceros'
+      }, {
+        name: 'Mus',
+        latin: 'Musca'
+      }, {
+        name: 'Nor',
+        latin: 'Norma'
+      }, {
+        name: 'Oct',
+        latin: 'Octans'
+      }, {
+        name: 'Oph',
+        latin: 'Ophiuchus'
+      }, {
+        name: 'Ori',
+        latin: 'Orion'
+      }, {
+        name: 'Pav',
+        latin: 'Pavo'
+      }, {
+        name: 'Peg',
+        latin: 'Pegasus'
+      }, {
+        name: 'Per',
+        latin: 'Perseus'
+      }, {
+        name: 'Phe',
+        latin: 'Phoenix'
+      }, {
+        name: 'Pic',
+        latin: 'Pictor'
+      }, {
+        name: 'PsA',
+        latin: 'Piscis Austrinus'
+      }, {
+        name: 'Psc',
+        latin: 'Pisces'
+      }, {
+        name: 'Pup',
+        latin: 'Puppis'
+      }, {
+        name: 'Pyx',
+        latin: 'Pyxis'
+      }, {
+        name: 'Ret',
+        latin: 'Reticulum'
+      }, {
+        name: 'Scl',
+        latin: 'Sculptor'
+      }, {
+        name: 'Sco',
+        latin: 'Scorpius'
+      }, {
+        name: 'Sct',
+        latin: 'Scutum'
+      }, {
+        name: 'Ser',
+        latin: 'Serpens'
+      }, {
+        name: 'Sex',
+        latin: 'Sextans'
+      }, {
+        name: 'Sge',
+        latin: 'Sagitta'
+      }, {
+        name: 'Sgr',
+        latin: 'Sagittarius'
+      }, {
+        name: 'Tau',
+        latin: 'Taurus'
+      }, {
+        name: 'Tel',
+        latin: 'Telescopium'
+      }, {
+        name: 'TrA',
+        latin: 'Triangulum Australe'
+      }, {
+        name: 'Tri',
+        latin: 'Triangulum'
+      }, {
+        name: 'Tuc',
+        latin: 'Tucana'
+      }, {
+        name: 'UMa',
+        latin: 'Ursa Major'
+      }, {
+        name: 'UMi',
+        latin: 'Ursa Minor'
+      }, {
+        name: 'Vel',
+        latin: 'Vela'
+      }, {
+        name: 'Vir',
+        latin: 'Virgo'
+      }, {
+        name: 'Vol',
+        latin: 'Volans'
+      }, {
+        name: 'Vul',
+        latin: 'Vulpecula'
+      }],
+      FilteredObjects: [],
+      Ar: 0,
+      Dec: 0,
+      Ar_screen: '',
+      Dec_screen: '',
+      Iso: '100',
+      Exp: '1',
+      Ar_act: 0,
+      Dec_act: 0,
+      Iso_act: 0,
+      Exp_act: 0,
+      current: '',
+      current_shot: '',
+      rowsPerPageItems: [4, 6, 10, 20],
+      pagination: {
+        rowsPerPage: 4
+      },
+      object: '',
+      state: 'En espera',
+      selectedTic: '100',
+      selectedDir: 'Adentro',
+      tic: 100,
+      dir: 1,
+      Tics: ['100', '500', '1000', '2500', '5000', '10000'],
+      Dirs: ['Adentro', 'Afuera'],
+      selectedIso: '',
+      Isos: [{
+        choice: 1,
+        iso: 100
+      }, {
+        choice: 2,
+        iso: 125
+      }, {
+        choice: 3,
+        iso: 160
+      }, {
+        choice: 4,
+        iso: 200
+      }, {
+        choice: 5,
+        iso: 250
+      }, {
+        choice: 6,
+        iso: 320
+      }, {
+        choice: 7,
+        iso: 400
+      }, {
+        choice: 8,
+        iso: 500
+      }, {
+        choice: 9,
+        iso: 640
+      }, {
+        choice: 10,
+        iso: 800
+      }, {
+        choice: 11,
+        iso: 1000
+      }, {
+        choice: 12,
+        iso: 1250
+      }, {
+        choice: 13,
+        iso: 1600
+      }, {
+        choice: 14,
+        iso: 2000
+      }, {
+        choice: 15,
+        iso: 2500
+      }, {
+        choice: 16,
+        iso: 3200
+      }, {
+        choice: 17,
+        iso: 4000
+      }, {
+        choice: 18,
+        iso: 5000
+      }, {
+        choice: 19,
+        iso: 6400
+      }, {
+        choice: 20,
+        iso: 8000
+      }, {
+        choice: 21,
+        iso: 10000
+      }, {
+        choice: 22,
+        iso: 12800
+      }, {
+        choice: 23,
+        iso: 16000
+      }, {
+        choice: 24,
+        iso: 20000
+      }, {
+        choice: 25,
+        iso: 25600
+      }],
+      Exps: ['1', '2', '4', '6', '8', '10', '20', '30', '40', '60', '120', '240', '300'],
+      headers: [{
+        text: 'Usar',
+        value: 'name'
+      }, {
+        text: 'Descripción',
+        value: 'colloquial_name'
+      }, {
+        text: 'Constelación',
+        value: 'constellation'
+      }, {
+        text: 'Tipo',
+        value: 'type_object'
+      }, {
+        text: 'Nombre',
+        value: 'name'
+      }],
+      myImages: [],
+      myImagesHeaders: [{
+        text: 'Foto',
+        value: 'img'
+      }, {
+        text: 'Nombre',
+        value: 'name'
+      }, {
+        text: 'ISO',
+        value: 'iso'
+      }, {
+        text: 'TiempoExp',
+        value: 'exptime'
+      }, {
+        text: 'Coord AR',
+        value: 'ar'
+      }, {
+        text: 'Coord DEC',
+        value: 'dec'
+      }, {
+        text: 'Fecha',
+        value: 'created_at'
+      }]
+    };
+  },
+  created: function created() {//this.initialize();
+  },
+  mounted: function mounted() {
+    this.initialize();
+  },
+  components: {
+    Loading: _components_Loading_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
+  },
+  methods: {
+    showAlert: function () {
+      var _showAlert = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(a) {
+        var app;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                //	if (event.target.classList.contains('btn__content')) return;
+                app = this;
+                this.object = a;
+                this.$refs.Loading.show("Calculando si el objeto es visible, un momento por favor");
+                _context.next = 5;
+                return axios.get('/api/astronomic_objects/horizon?object=' + a.name).then(function (resp) {
+                  if (resp.data <= 5) {
+                    //alert(JSON.stringify(resp.data));
+                    app.Ar = 0;
+                    app.Dec = 0;
+                    app.Ar_screen = '';
+                    app.Dec_screen = '';
+                    app.text = "Objeto NO VISIBLE,altura Alt/Az BAJO el HORIZONTE: " + JSON.stringify(resp.data) + 'º';
+                    app.snackbar = true; // alert("Objeto no visible,altura Alt/Az bajo el horizonte: " + JSON.stringify(resp.data) +'º');
+                  } else {
+                    // app.text = "Altura Alt/Az sobre el horizonte: " + JSON.stringify(resp.data) +'º';
+                    // app.snackbar = true;
+                    // alert("Altura Alt/Az sobre el horizonte: " + JSON.stringify(resp.data) +'º');
+                    app.Ar_screen = app.object.ra;
+                    app.Dec_screen = app.object.dec;
+                    app.coords(app.Ar_screen, app.Dec_screen);
+                  }
+                })["catch"](function (resp) {
+                  console.log(resp);
+                  alert("Error shoot :" + resp);
+                });
+
+              case 5:
+                this.$refs.Loading.hide();
+
+              case 6:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function showAlert(_x) {
+        return _showAlert.apply(this, arguments);
+      }
+
+      return showAlert;
+    }(),
+    initialize: function initialize() {
+      //alert('initialize');
+      this.imageRefresh();
+      this.openChat();
+      this.getMyImages();
       this.getAstrnomicObject();
     },
-    filterType: function filterType(a) {
-      this.type = a;
-      this.getAstrnomicObject();
+    getAstrnomicObject: function getAstrnomicObject() {
+      var app = this;
+      var constellation = app.Constellation ? app.Constellation.name : "Cru";
+      alert("getAstrnomicObject");
+      axios.get('/api/astronomic_objects?constellation=' + constellation + '&type=' + app.type).then(function (resp) {
+        app.FilteredObjects = resp.data;
+      })["catch"](function (resp) {
+        alert("Error astronomic_objects :" + resp);
+      });
     },
-    filterConstellation: function filterConstellation(a) {
-      // alert(JSON.stringify(a));
-      // alert(a.name);
-      this.constellation = a.name;
-      this.getAstrnomicObject();
+    getAstrnomicObjectName: function getAstrnomicObjectName() {
+      var app = this;
+      axios.get('/api/astronomic_objects?name=' + app.search).then(function (resp) {
+        app.FilteredObjects = resp.data;
+      })["catch"](function (resp) {
+        alert("Error astronomic_objects :" + resp);
+      });
+    },
+    openChat: function openChat() {
+      var app = this; // Start pusher listener
+
+      Pusher.logToConsole = true; //production
+      // app_id = "764758"
+      // key = "6a09b6dc7cbc0cce55a3"
+      // secret = "3821c2b9107f68e63aba"
+      // cluster = "us2"
+
+      var pusher = new Pusher('6a09b6dc7cbc0cce55a3', {
+        cluster: 'us2',
+        forceTLS: true
+      });
+      var channel = pusher.subscribe('newMessage-1-2'); // newMessage-[chatting-with-who]-[my-id]
+
+      channel.bind('App\\Events\\MessageSent', function (data) {
+        // app.state = data.message['message'];
+        // alert(JSON.stringify(data.message));
+        //Estado:Pos.Actual :18825.0
+        if (data.message['message'] != 'NaN') {
+          var posactual = data.message['message'].substring(0, 3);
+          var imageMsg = data.message['message'].indexOf("Imagen");
+
+          if (posactual == "Pos") {
+            var n = data.message['message'].indexOf(":");
+            var position = data.message['message'].substring(n + 1, n + 10);
+            app.focuser_state = parseInt(position, 10) - app.$store.getters.current_focus;
+            app.state = app.focuser_state;
+          } else {
+            app.state = data.message['message'];
+          }
+
+          if (imageMsg >= 0) {
+            app.camera_state = app.state;
+          }
+
+          if (app.state == "Imagen Recibida") {
+            //	app.pulsa();
+            app.imageRefresh();
+          }
+        }
+      }); // End pusher listener
     },
     move: function move() {
       this.state = 'Enviando Comando';
@@ -3734,7 +4904,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _ControlComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ControlComponent */ "./resources/js/components/ControlComponent.vue");
-/* harmony import */ var _PointandshootComponent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./PointandshootComponent */ "./resources/js/components/PointandshootComponent.vue");
+/* harmony import */ var _ControlSimpleComponent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ControlSimpleComponent */ "./resources/js/components/ControlSimpleComponent.vue");
+//
 //
 //
 //
@@ -3837,7 +5008,7 @@ __webpack_require__.r(__webpack_exports__);
       this.$refs.container.appendChild(instance.$el);
     },
     control: function control() {
-      var ComponentClass = vue__WEBPACK_IMPORTED_MODULE_0___default.a.extend(_PointandshootComponent__WEBPACK_IMPORTED_MODULE_3__["default"]);
+      var ComponentClass = vue__WEBPACK_IMPORTED_MODULE_0___default.a.extend(_ControlSimpleComponent__WEBPACK_IMPORTED_MODULE_3__["default"]);
       var instance = new ComponentClass(); // instance.$slots.default = ['Click me!']
 
       instance.$mount(); // pass nothing
@@ -4156,554 +5327,6 @@ __webpack_require__.r(__webpack_exports__);
         alert("Error source_types :" + resp);
       });
       this.dialog = false; //}     
-    }
-  }
-});
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/PointandshootComponent.vue?vue&type=script&lang=js&":
-/*!*********************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/PointandshootComponent.vue?vue&type=script&lang=js& ***!
-  \*********************************************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  computed: Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['astronomc_objects']),
-  data: function data() {
-    return {
-      ninetyRule: [function (v) {
-        return !!v || 'Campo requerido';
-      }, function (v) {
-        return v <= 90 || 'Debe ser  menor o igual a 90';
-      }, function (v) {
-        return v >= -90 || 'Debe ser mayor o igual a -90';
-      }],
-      sixtyRule: [function (v) {
-        return !!v || 'Campo requerido';
-      }, function (v) {
-        return v <= 59 || 'Debe ser menor a 60';
-      }, function (v) {
-        return v >= 0 || 'Debe ser mayor a o igual 0';
-      }],
-      twentythreeRule: [function (v) {
-        return !!v || 'Campo requerido';
-      }, function (v) {
-        return v <= 23 || 'Debe ser menor o igual a 23';
-      }, function (v) {
-        return v >= 0 || 'Debe ser mayor a o igual 0';
-      }],
-      blankRules: [function (v) {
-        return !!v || 'Campo requerido';
-      }],
-      dialog: true,
-      dialog2: false,
-      dialog3: false,
-      astronomic_objects: [],
-      selected: [],
-      search: '',
-      imageUrl: '',
-      h_ra: 0,
-      m_ra: 0,
-      s_ra: 0,
-      h_dec: 0,
-      m_dec: 0,
-      s_dec: 0,
-      catalog: 'SolarSistem',
-      catalogs: ['SolarSistem', 'Messier', 'NGC', 'IC'],
-      type: 'Planet',
-      types: ['Planet', 'Asterismo o Cúmulo Abierto', 'Cúmulo abierto', 'Cúmulo Globular', 'Estrella', 'Estrella doble', 'Galaxia', 'Galaxias en Interacción', 'Nebulosa', 'Nebulosa de emisión Hidrógeno', 'Nebulosa de Reflexión', 'Nebulosa Extragaláctica', 'Nebulosa Planetaria', 'Nebulosa y Cúmulo', 'Nova', 'Otro', 'Par de Galaxias', 'Remanente de Supernova', 'Trío de Galaxias'],
-      Constellation: '',
-      Constellations: [],
-      FilteredObjects: [],
-      Ar: 0,
-      Dec: 0,
-      Ar_screen: '',
-      Dec_screen: '',
-      Iso: '100',
-      Exp: '1',
-      Ar_act: 0,
-      Dec_act: 0,
-      Iso_act: 0,
-      Exp_act: 0,
-      current: '',
-      current_shot: '',
-      rowsPerPageItems: [3, 5, 10, 20],
-      pagination: {
-        rowsPerPage: 3
-      },
-      object: 'Seleccione Objeto',
-      state: 'En espera',
-      Paso: '100',
-      Dir: 'Adentro',
-      Pasos: ['100', '200', '400', '600', '800', '1000', '2000', '3000'],
-      Dirs: ['Adentro', 'Afuera'],
-      Isos: ['100', '200', '400', '600', '800', '1000', '2000', '3000'],
-      Exps: ['1', '2', '4', '6', '8', '1', '2', '3'],
-      headers: [{
-        text: 'Nombre',
-        value: 'name'
-      }, {
-        text: 'Catalogo',
-        value: 'catalog'
-      }, {
-        text: 'Tipo',
-        value: 'type_object'
-      }, {
-        text: 'Constelación',
-        value: 'constellation'
-      }, {
-        text: 'AR',
-        value: 'ra'
-      }, {
-        text: 'DEC',
-        value: 'dec'
-      }],
-      myImages: [],
-      myImagesHeaders: [{
-        text: 'Foto',
-        value: 'img'
-      }, {
-        text: 'Nombre',
-        value: 'name'
-      }, {
-        text: 'ISO',
-        value: 'iso'
-      }, {
-        text: 'TiempoExp',
-        value: 'exptime'
-      }, {
-        text: 'Coord AR',
-        value: 'ar'
-      }, {
-        text: 'Coord DEC',
-        value: 'dec'
-      }, {
-        text: 'Fecha',
-        value: 'created_at'
-      }]
-    };
-  },
-  created: function created() {},
-  mounted: function mounted() {
-    this.initialize();
-  },
-  methods: {
-    showAlert: function showAlert(a) {
-      //	if (event.target.classList.contains('btn__content')) return;
-      var app = this;
-      this.object = a.name;
-
-      if (a.catalog == 'SolarSistem') {
-        axios.get('/api/astronomic_objects/solarsistem?object=' + a.name).then(function (resp) {
-          //alert(JSON.stringify(resp.data));
-          app.Ar_screen = resp.data["ar"];
-          app.Dec_screen = resp.data["dec"];
-          app.coords(app.Ar_screen, app.Dec_screen);
-          app.Iso = 100;
-          app.Exp = '2s';
-        })["catch"](function (resp) {
-          console.log(resp);
-          alert("Error shoot :" + resp);
-        });
-      } else {
-        this.Ar_screen = a.ra;
-        this.Dec_screen = a.dec;
-        this.coords(app.Ar_screen, app.Dec_screen);
-        app.Iso = a.iso;
-        app.Exp = a.exptime;
-      }
-    },
-    initialize: function initialize() {
-      this.openChat();
-      this.getMyImages();
-      this.getAstrnomicObject();
-    },
-    getAstrnomicObject: function getAstrnomicObject() {
-      var app = this;
-      axios.get('/api/astronomic_objects?constellation=' + app.contellation + '&catalog=' + app.catalog + '&type=' + app.type).then(function (resp) {
-        app.FilteredObjects = resp.data; // const distinctConst=[...new Set(app.astronomic_objects.map(x => x.constellation))];
-        // app.Constellations = distinctConst.sort();
-        // alert(JSON.stringify(app.FilteredObjects));
-      })["catch"](function (resp) {
-        //console.log(resp);
-        alert("Error astronomic_objects :" + resp);
-      });
-    },
-    openChat: function openChat() {
-      var app = this; // Start pusher listener
-
-      Pusher.logToConsole = true;
-      var pusher = new Pusher('e6e9d9fd854d385c5f5b', {
-        cluster: 'us2',
-        forceTLS: true
-      });
-      var channel = pusher.subscribe('newMessage-' + 1 + '-' + 2); // newMessage-[chatting-with-who]-[my-id]
-
-      channel.bind('App\\Events\\MessageSent', function (data) {
-        app.state = data.message['message'];
-
-        if (app.state == "Imagen Recibida") {
-          app.imageRefresh();
-        }
-      }); // End pusher listener
-    },
-    filter: function filter(a) {
-      this.catalog = a;
-      this.getAstrnomicObject();
-    },
-    filterType: function filterType(a) {
-      this.type = a;
-      this.getAstrnomicObject();
-    },
-    filterConstellation: function filterConstellation(a) {
-      if (a == "Todas") {
-        this.FilteredObjects = this.astronomic_objects;
-      } else {
-        this.FilteredObjects = this.FilteredObjects.filter(function (it) {
-          return it.constellation == a;
-        });
-      }
-    },
-    shoot: function shoot() {
-      var $command = {
-        'command': 'CAMARA',
-        'type': 'pointandshoot',
-        'status': 'PENDIENTE',
-        'exptime': this.Exp,
-        'iso': this.Iso,
-        'ar': this.Ar_act,
-        'dec': this.Dec_act,
-        'user_id': 1,
-        'equipment_id': 1
-      };
-      this.imageUrl = '';
-      axios.post('/api/command/pointandshoot', $command).then(function (resp) {})["catch"](function (resp) {
-        console.log(resp);
-        alert("Error create command pont and shoot :" + resp);
-      });
-      this.currentRefresh();
-      this.current_shot = this.current;
-    },
-    currentRefresh: function currentRefresh() {
-      this.Ar_act = this.Ar;
-      this.Dec_act = this.Dec;
-      this.Iso_act = this.Iso;
-      this.Exp_act = this.Exp;
-      this.current = "Ar:" + this.Ar_act + ", Dec:" + this.Dec_act + ", Iso:" + this.Iso_act + ", Exp:" + this.Exp_act;
-    },
-    focus: function focus() {
-      var $command = {
-        'command': 'ENFOCADOR',
-        'type': 'focuser',
-        'status': 'PENDIENTE',
-        'steps': this.Paso,
-        'direction': 1,
-        'user_id': 1,
-        'equipment_id': 1
-      }; //alert(JSON.stringify($command));
-
-      axios.post('/api/command/focus', $command).then(function (resp) {})["catch"](function (resp) {
-        console.log(resp);
-        alert("Error focus :" + resp);
-      });
-    },
-    saveImage: function saveImage() {},
-    imageRefresh: function imageRefresh() {
-      var app = this;
-      axios.get('/api/image/last').then(function (resp) {
-        app.imageUrl = resp.data;
-      })["catch"](function (resp) {
-        console.log(resp);
-        alert("Error shoot :" + resp);
-      });
-      app.getMyImages();
-    },
-    getMyImages: function getMyImages() {
-      var app = this;
-      axios.get('/api/images').then(function (resp) {
-        app.myImages = resp.data;
-      })["catch"](function (resp) {
-        console.log(resp);
-        alert("Error shoot :" + resp);
-      });
-    },
-    coords: function coords(ra, dec) {
-      var res = ra.replace(/h/g, " ");
-      res = res.replace(/m/g, " ");
-      res = res.replace(/s/g, " ");
-      this.h_ra = parseFloat(res.split(" ")[0]);
-      this.m_ra = parseFloat(res.split(" ")[1]);
-      this.s_ra = parseFloat(res.split(" ")[2]);
-      var ra_selected = this.h_ra + this.m_ra / 60 + this.s_ra / 3600;
-      this.Ar = ra_selected;
-      res = dec.replace(/°/g, " ");
-      res = res.replace(/m/g, " ");
-      res = res.replace(/s/g, " ");
-      this.h_dec = parseFloat(res.split(" ")[0]);
-      this.m_dec = parseFloat(res.split(" ")[1]);
-      this.s_dec = parseFloat(res.split(" ")[2]);
-      var dec_selected = 0;
-      var h_dec_loc = this.h_dec;
-
-      if (h_dec_loc < 0) {
-        h_dec_loc = h_dec_loc * -1;
-        dec_selected = -(h_dec_loc + this.m_dec / 60 + this.s_dec / 3600);
-      } else {
-        dec_selected = h_dec_loc + this.m_dec / 60 + this.s_dec / 3600;
-      }
-
-      this.Dec = dec_selected;
-    },
-    inc_s_ra: function inc_s_ra() {
-      if (this.s_ra < 60) {
-        this.s_ra = parseInt(this.s_ra, 10) + 1;
-      }
-    },
-    dec_s_ra: function dec_s_ra() {
-      if (this.s_ra > 0) {
-        this.s_ra = parseInt(this.s_ra, 10) - 1;
-      }
-    },
-    inc_m_ra: function inc_m_ra() {
-      if (this.m_ra < 60) {
-        this.m_ra = parseInt(this.m_ra, 10) + 1;
-      }
-    },
-    dec_m_ra: function dec_m_ra() {
-      if (this.m_ra > 0) {
-        this.m_ra = parseInt(this.m_ra, 10) - 1;
-      }
-    },
-    inc_s_dec: function inc_s_dec() {
-      if (this.s_dec < 60) {
-        this.s_dec = parseInt(this.s_dec, 10) + 1;
-      }
-    },
-    dec_s_dec: function dec_s_dec() {
-      if (this.s_dec > 0) {
-        this.s_dec = parseInt(this.s_dec, 10) - 1;
-      }
-    },
-    inc_m_dec: function inc_m_dec() {
-      if (this.m_dec < 60) {
-        this.m_dec = parseInt(this.m_dec, 10) + 1;
-      }
-    },
-    dec_m_dec: function dec_m_dec() {
-      if (this.m_dec > 0) {
-        this.m_dec = parseInt(this.m_dec, 10) - 1;
-      }
-    },
-    savefine: function savefine() {
-      this.Ar_screen = this.h_ra + 'h' + this.m_ra + 'm' + this.s_ra + 's';
-      this.Dec_screen = this.h_dec + '°' + this.m_dec + 'm' + this.s_dec + 's';
-      this.coords(this.Ar_screen, this.Dec_screen);
-      this.dialog2 = false;
-    },
-    savecoords: function savecoords() {
-      this.Ar_screen = this.h_ra + 'h' + this.m_ra + 'm' + this.s_ra + 's';
-      this.Dec_screen = this.h_dec + '°' + this.m_dec + 'm' + this.s_dec + 's';
-      this.coords(this.Ar_screen, this.Dec_screen);
-      this.dialog3 = false;
     }
   }
 });
@@ -5336,6 +5959,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -5446,12 +6078,7 @@ var actualDate = new Date().toISOString().substr(0, 10);
     }],
     focus: '2019-01-08',
     type: 'month',
-    typeToLabel: {
-      month: 'Month',
-      week: 'Week',
-      day: 'Day',
-      '4day': '4 Days'
-    },
+    typeToLabel: ['month', 'week', 'day', '4 days'],
     start: null,
     end: null,
     selectedEvent: {},
@@ -7637,32 +8264,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -8565,6 +9166,25 @@ __webpack_require__.r(__webpack_exports__);
 /*!**********************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ControlComponent.vue?vue&type=style&index=0&lang=css& ***!
   \**********************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.my-span {\n  \tbackground-color: transparent;\n  \tcolor: white;\n    position: absolute;\n    width: 100%;\n    bottom: 0;\n    text-align: center;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ControlSimpleComponent.vue?vue&type=style&index=0&lang=css&":
+/*!****************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ControlSimpleComponent.vue?vue&type=style&index=0&lang=css& ***!
+  \****************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -38889,6 +39509,36 @@ if(false) {}
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ControlSimpleComponent.vue?vue&type=style&index=0&lang=css&":
+/*!********************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ControlSimpleComponent.vue?vue&type=style&index=0&lang=css& ***!
+  \********************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./ControlSimpleComponent.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ControlSimpleComponent.vue?vue&type=style&index=0&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Loading.vue?vue&type=style&index=0&id=6ca9e6be&scoped=true&lang=css&":
 /*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Loading.vue?vue&type=style&index=0&id=6ca9e6be&scoped=true&lang=css& ***!
@@ -40302,25 +40952,6 @@ var render = function() {
                             [
                               _c("v-select", {
                                 attrs: {
-                                  items: _vm.types,
-                                  label: "Tipo",
-                                  "single-line": "",
-                                  "hide-details": ""
-                                },
-                                on: { input: _vm.filterType },
-                                model: {
-                                  value: _vm.type,
-                                  callback: function($$v) {
-                                    _vm.type = $$v
-                                  },
-                                  expression: "type"
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("v-spacer"),
-                              _vm._v(" "),
-                              _c("v-select", {
-                                attrs: {
                                   items: _vm.Constellations,
                                   "item-text": "latin",
                                   label: "Constelación",
@@ -40328,13 +40959,32 @@ var render = function() {
                                   "single-line": "",
                                   "hide-details": ""
                                 },
-                                on: { input: _vm.filterConstellation },
+                                on: { input: _vm.getAstrnomicObject },
                                 model: {
                                   value: _vm.Constellation,
                                   callback: function($$v) {
                                     _vm.Constellation = $$v
                                   },
                                   expression: "Constellation"
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("v-spacer"),
+                              _vm._v(" "),
+                              _c("v-select", {
+                                attrs: {
+                                  items: _vm.types,
+                                  label: "Tipo",
+                                  "single-line": "",
+                                  "hide-details": ""
+                                },
+                                on: { input: _vm.getAstrnomicObject },
+                                model: {
+                                  value: _vm.type,
+                                  callback: function($$v) {
+                                    _vm.type = $$v
+                                  },
+                                  expression: "type"
                                 }
                               }),
                               _vm._v(" "),
@@ -40365,7 +41015,7 @@ var render = function() {
                                     icon: "",
                                     color: "blue lighten-2"
                                   },
-                                  on: { click: _vm.search_object }
+                                  on: { click: _vm.getAstrnomicObjectName }
                                 },
                                 [_c("v-icon", [_vm._v("search")])],
                                 1
@@ -40421,13 +41071,13 @@ var render = function() {
                                         _vm._v(" "),
                                         _c(
                                           "td",
-                                          { staticClass: "text-xs-right" },
+                                          { staticClass: "text-xs-left" },
                                           [_vm._v(_vm._s(props.item.name))]
                                         ),
                                         _vm._v(" "),
                                         _c(
                                           "td",
-                                          { staticClass: "text-xs-right" },
+                                          { staticClass: "text-xs-left" },
                                           [
                                             _vm._v(
                                               _vm._s(
@@ -40443,7 +41093,7 @@ var render = function() {
                                         _vm._v(" "),
                                         _c(
                                           "td",
-                                          { staticClass: "text-xs-right" },
+                                          { staticClass: "text-xs-left" },
                                           [
                                             _vm._v(
                                               _vm._s(props.item.constellation)
@@ -40453,7 +41103,7 @@ var render = function() {
                                         _vm._v(" "),
                                         _c(
                                           "td",
-                                          { staticClass: "text-xs-right" },
+                                          { staticClass: "text-xs-left" },
                                           [
                                             _vm._v(
                                               _vm._s(props.item.type_object)
@@ -40463,13 +41113,13 @@ var render = function() {
                                         _vm._v(" "),
                                         _c(
                                           "td",
-                                          { staticClass: "text-xs-right" },
+                                          { staticClass: "text-xs-left" },
                                           [_vm._v(_vm._s(props.item.ra))]
                                         ),
                                         _vm._v(" "),
                                         _c(
                                           "td",
-                                          { staticClass: "text-xs-right" },
+                                          { staticClass: "text-xs-left" },
                                           [_vm._v(_vm._s(props.item.dec))]
                                         )
                                       ]
@@ -41833,6 +42483,729 @@ var render = function() {
               )
             ],
             1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-snackbar",
+            {
+              attrs: {
+                bottom: _vm.y === "bottom",
+                left: _vm.x === "left",
+                "multi-line": _vm.mode === "multi-line",
+                right: _vm.x === "right",
+                timeout: _vm.timeout,
+                top: _vm.y === "top",
+                vertical: _vm.mode === "vertical"
+              },
+              model: {
+                value: _vm.snackbar,
+                callback: function($$v) {
+                  _vm.snackbar = $$v
+                },
+                expression: "snackbar"
+              }
+            },
+            [
+              _vm._v("\n      " + _vm._s(_vm.text) + "\n      "),
+              _c(
+                "v-btn",
+                {
+                  attrs: { color: "pink", flat: "" },
+                  on: {
+                    click: function($event) {
+                      _vm.snackbar = false
+                    }
+                  }
+                },
+                [_vm._v("\n        Close\n      ")]
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ControlSimpleComponent.vue?vue&type=template&id=2e9a7179&":
+/*!*************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ControlSimpleComponent.vue?vue&type=template&id=2e9a7179& ***!
+  \*************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "v-layout",
+    [
+      _c("loading", { ref: "Loading" }),
+      _vm._v(" "),
+      _c(
+        "v-dialog",
+        {
+          attrs: {
+            fullscreen: "",
+            "hide-overlay": "",
+            transition: "dialog-bottom-transition"
+          },
+          model: {
+            value: _vm.dialog,
+            callback: function($$v) {
+              _vm.dialog = $$v
+            },
+            expression: "dialog"
+          }
+        },
+        [
+          _c(
+            "v-card",
+            { attrs: { color: "backgraundColor" } },
+            [
+              _c(
+                "v-toolbar",
+                { attrs: { dark: "", color: "rojo" } },
+                [
+                  _c(
+                    "v-btn",
+                    {
+                      attrs: { icon: "", dark: "" },
+                      on: {
+                        click: function($event) {
+                          _vm.dialog = false
+                        }
+                      }
+                    },
+                    [_c("v-icon", [_vm._v("close")])],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c("v-toolbar-title", [_vm._v("Interfaz de Control")]),
+                  _vm._v(" "),
+                  _c("v-spacer")
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-layout",
+                { staticClass: "py-2" },
+                [
+                  _c(
+                    "v-flex",
+                    {
+                      staticClass: "px-2",
+                      staticStyle: { overflow: "auto" },
+                      attrs: { xs8: "" }
+                    },
+                    [
+                      _c(
+                        "v-card",
+                        { staticClass: "py-4 px-2" },
+                        [
+                          _c(
+                            "v-layout",
+                            [
+                              _c(
+                                "v-flex",
+                                { staticClass: "px-2", attrs: { xs4: "" } },
+                                [
+                                  _vm.object.name
+                                    ? _c("span", { staticClass: "headline" }, [
+                                        _vm._v("1.- " + _vm._s(_vm.object.name))
+                                      ])
+                                    : _c("span", { staticClass: "headline" }, [
+                                        _vm._v("1.- Seleccione un Objeto")
+                                      ])
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-flex",
+                                { staticClass: "px-2", attrs: { xs8: "" } },
+                                [
+                                  _c("span", { staticClass: "headline" }, [
+                                    _vm._v(
+                                      " Estado Sistema:" + _vm._s(_vm.state)
+                                    )
+                                  ])
+                                ]
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-card-title",
+                            [
+                              _c("v-select", {
+                                attrs: {
+                                  items: _vm.Constellations,
+                                  "item-text": "latin",
+                                  label: "Constelación",
+                                  "return-object": "",
+                                  "single-line": "",
+                                  "hide-details": ""
+                                },
+                                on: { input: _vm.getAstrnomicObject },
+                                model: {
+                                  value: _vm.Constellation,
+                                  callback: function($$v) {
+                                    _vm.Constellation = $$v
+                                  },
+                                  expression: "Constellation"
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("v-spacer"),
+                              _vm._v(" "),
+                              _c("v-select", {
+                                attrs: {
+                                  items: _vm.types,
+                                  label: "Tipo",
+                                  "single-line": "",
+                                  "hide-details": ""
+                                },
+                                on: { input: _vm.getAstrnomicObject },
+                                model: {
+                                  value: _vm.type,
+                                  callback: function($$v) {
+                                    _vm.type = $$v
+                                  },
+                                  expression: "type"
+                                }
+                              })
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("v-data-table", {
+                            attrs: {
+                              headers: _vm.headers,
+                              items: _vm.FilteredObjects,
+                              "rows-per-page-items": _vm.rowsPerPageItems,
+                              pagination: _vm.pagination
+                            },
+                            on: {
+                              "update:pagination": function($event) {
+                                _vm.pagination = $event
+                              }
+                            },
+                            scopedSlots: _vm._u([
+                              {
+                                key: "items",
+                                fn: function(props) {
+                                  return [
+                                    _c(
+                                      "tr",
+                                      {
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.showAlert(props.item)
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _c(
+                                          "td",
+                                          [
+                                            _c(
+                                              "v-btn",
+                                              {
+                                                attrs: {
+                                                  outline: "",
+                                                  round: "",
+                                                  color: "amarillo"
+                                                }
+                                              },
+                                              [_vm._v("Usar")]
+                                            )
+                                          ],
+                                          1
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "td",
+                                          { staticClass: "text-xs-left" },
+                                          [
+                                            _vm._v(
+                                              _vm._s(
+                                                (props.item.colloquial_name ||
+                                                  "") +
+                                                  " " +
+                                                  (props.item
+                                                    .nombre_coloquial || "")
+                                              )
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "td",
+                                          { staticClass: "text-xs-left" },
+                                          [
+                                            _vm._v(
+                                              _vm._s(props.item.constellation)
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "td",
+                                          { staticClass: "text-xs-left" },
+                                          [
+                                            _vm._v(
+                                              _vm._s(props.item.type_object)
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "td",
+                                          { staticClass: "text-xs-left" },
+                                          [_vm._v(_vm._s(props.item.name))]
+                                        )
+                                      ]
+                                    )
+                                  ]
+                                }
+                              }
+                            ]),
+                            model: {
+                              value: _vm.selected,
+                              callback: function($$v) {
+                                _vm.selected = $$v
+                              },
+                              expression: "selected"
+                            }
+                          })
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-flex",
+                    { staticClass: "px-4", attrs: { xs4: "" } },
+                    [
+                      _c(
+                        "v-layout",
+                        { attrs: { "align-center": "", row: "" } },
+                        [
+                          _c(
+                            "v-flex",
+                            { attrs: { xs12: "" } },
+                            [
+                              _c("v-card", [
+                                _c(
+                                  "a",
+                                  {
+                                    attrs: {
+                                      href: _vm.imageUrl,
+                                      target: "_blank"
+                                    }
+                                  },
+                                  [
+                                    _c(
+                                      "v-img",
+                                      {
+                                        attrs: {
+                                          src: _vm.imageUrl,
+                                          "aspect-ratio": "1"
+                                        }
+                                      },
+                                      [
+                                        _c("span", { staticClass: "my-span" }, [
+                                          _vm._v(_vm._s(this.metadata))
+                                        ])
+                                      ]
+                                    )
+                                  ],
+                                  1
+                                )
+                              ])
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-layout",
+                [
+                  _c(
+                    "v-flex",
+                    { staticClass: "px-2", attrs: { xs6: "" } },
+                    [
+                      _c(
+                        "v-card",
+                        { staticClass: "py-2 px-2" },
+                        [
+                          _c(
+                            "v-layout",
+                            [
+                              _c("v-flex", { attrs: { xs12: "" } }, [
+                                _c("span", { staticClass: "headline" }, [
+                                  _vm._v("2.- Mover Telescopio")
+                                ])
+                              ])
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-layout",
+                            [
+                              _c(
+                                "v-flex",
+                                { staticClass: "px-2", attrs: { xs6: "" } },
+                                [
+                                  _c("v-text-field", {
+                                    attrs: {
+                                      label: "Asención Recta",
+                                      readonly: "true"
+                                    },
+                                    model: {
+                                      value: _vm.Ar_screen,
+                                      callback: function($$v) {
+                                        _vm.Ar_screen = $$v
+                                      },
+                                      expression: "Ar_screen"
+                                    }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-flex",
+                                { staticClass: "px-2", attrs: { xs4: "" } },
+                                [
+                                  _c("v-text-field", {
+                                    attrs: {
+                                      label: "Declinación",
+                                      readonly: "true"
+                                    },
+                                    model: {
+                                      value: _vm.Dec_screen,
+                                      callback: function($$v) {
+                                        _vm.Dec_screen = $$v
+                                      },
+                                      expression: "Dec_screen"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-btn",
+                            {
+                              attrs: { round: "", color: "morado" },
+                              on: {
+                                click: function($event) {
+                                  return _vm.move()
+                                }
+                              }
+                            },
+                            [_vm._v("Mover")]
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-flex",
+                    { staticClass: "px-2", attrs: { xs6: "" } },
+                    [
+                      _c(
+                        "v-card",
+                        { staticClass: "py-2 px-2" },
+                        [
+                          _c(
+                            "v-layout",
+                            [
+                              _c("v-flex", { attrs: { xs12: "" } }, [
+                                _c("span", { staticClass: "headline" }, [
+                                  _vm._v("3.- Sacar Foto")
+                                ])
+                              ])
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-layout",
+                            [
+                              _c(
+                                "v-flex",
+                                { staticClass: "px-2", attrs: { xs4: "" } },
+                                [
+                                  _c("v-select", {
+                                    attrs: {
+                                      items: _vm.Isos,
+                                      "item-text": "iso",
+                                      "return-object": "",
+                                      rules: [
+                                        function(v) {
+                                          return !!v || "Obligatorio"
+                                        }
+                                      ],
+                                      label: "Sensibilidad",
+                                      required: ""
+                                    },
+                                    on: { input: _vm.selectIso },
+                                    model: {
+                                      value: _vm.selectedIso,
+                                      callback: function($$v) {
+                                        _vm.selectedIso = $$v
+                                      },
+                                      expression: "selectedIso"
+                                    }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-flex",
+                                { staticClass: "px-2", attrs: { xs6: "" } },
+                                [
+                                  _c("v-select", {
+                                    attrs: {
+                                      items: _vm.Exps,
+                                      rules: [
+                                        function(v) {
+                                          return !!v || "Obligatorio"
+                                        }
+                                      ],
+                                      label: "Tiempo Exposición(Segundos)",
+                                      required: ""
+                                    },
+                                    on: { input: _vm.selectExp },
+                                    model: {
+                                      value: _vm.SelectedExp,
+                                      callback: function($$v) {
+                                        _vm.SelectedExp = $$v
+                                      },
+                                      expression: "SelectedExp"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-layout",
+                            [
+                              _c(
+                                "v-flex",
+                                { attrs: { xs4: "" } },
+                                [
+                                  _c(
+                                    "v-btn",
+                                    {
+                                      attrs: { round: "", color: "verde" },
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.shoot()
+                                        }
+                                      }
+                                    },
+                                    [_vm._v("Disparar")]
+                                  )
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c("v-flex", { attrs: { xs6: "" } }, [
+                                _c("span", { staticClass: "headline" }, [
+                                  _vm._v(_vm._s(this.camera_state))
+                                ])
+                              ])
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-layout",
+                [
+                  _c(
+                    "v-flex",
+                    {
+                      staticClass: "px-2 py-2",
+                      staticStyle: { overflow: "auto" },
+                      attrs: { xs12: "" }
+                    },
+                    [
+                      _c(
+                        "v-card",
+                        { staticClass: "px-4 py-4" },
+                        [
+                          _c(
+                            "v-card-title",
+                            [
+                              _c("span", { staticClass: "headline" }, [
+                                _vm._v("Mis fotos")
+                              ]),
+                              _vm._v(" "),
+                              _c("v-spacer")
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("v-data-table", {
+                            attrs: {
+                              headers: _vm.myImagesHeaders,
+                              items: _vm.myImages,
+                              search: _vm.search
+                            },
+                            scopedSlots: _vm._u([
+                              {
+                                key: "items",
+                                fn: function(props) {
+                                  return [
+                                    _c("td", [
+                                      _c(
+                                        "a",
+                                        {
+                                          staticClass: "px-2 py-2",
+                                          attrs: {
+                                            href: props.item.path,
+                                            target: "_blank"
+                                          }
+                                        },
+                                        [
+                                          _c("v-img", {
+                                            attrs: {
+                                              src: props.item.path,
+                                              "aspect-ratio": "1"
+                                            }
+                                          })
+                                        ],
+                                        1
+                                      )
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("td", { staticClass: "text-xs-left" }, [
+                                      _vm._v(_vm._s(props.item.object_name))
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("td", { staticClass: "text-xs-left" }, [
+                                      _vm._v(_vm._s(props.item.iso_string))
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("td", { staticClass: "text-xs-left" }, [
+                                      _vm._v(_vm._s(props.item.exptime) + "s")
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("td", { staticClass: "text-xs-left" }, [
+                                      _vm._v(_vm._s(props.item.ar_string))
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("td", { staticClass: "text-xs-left" }, [
+                                      _vm._v(_vm._s(props.item.dec_string))
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("td", { staticClass: "text-xs-left" }, [
+                                      _vm._v(_vm._s(props.item.created_at))
+                                    ])
+                                  ]
+                                }
+                              }
+                            ])
+                          })
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-snackbar",
+            {
+              attrs: {
+                bottom: _vm.y === "bottom",
+                left: _vm.x === "left",
+                "multi-line": _vm.mode === "multi-line",
+                right: _vm.x === "right",
+                timeout: _vm.timeout,
+                top: _vm.y === "top",
+                vertical: _vm.mode === "vertical"
+              },
+              model: {
+                value: _vm.snackbar,
+                callback: function($$v) {
+                  _vm.snackbar = $$v
+                },
+                expression: "snackbar"
+              }
+            },
+            [
+              _vm._v("\n      " + _vm._s(_vm.text) + "\n      "),
+              _c(
+                "v-btn",
+                {
+                  attrs: { color: "pink", flat: "" },
+                  on: {
+                    click: function($event) {
+                      _vm.snackbar = false
+                    }
+                  }
+                },
+                [_vm._v("\n        Close\n      ")]
+              )
+            ],
+            1
           )
         ],
         1
@@ -42007,9 +43380,22 @@ var render = function() {
                                         round: "",
                                         dark: ""
                                       },
+                                      on: { click: _vm.control }
+                                    },
+                                    [_vm._v("Control Principiante")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-btn",
+                                    {
+                                      attrs: {
+                                        color: "morado",
+                                        round: "",
+                                        dark: ""
+                                      },
                                       on: { click: _vm.control_avanzado }
                                     },
-                                    [_vm._v("Interfaz de Control")]
+                                    [_vm._v("Control Avanzado")]
                                   )
                                 ],
                                 1
@@ -42219,688 +43605,6 @@ var render = function() {
                       on: { click: _vm.eqSave }
                     },
                     [_vm._v("\n            Guardar\n          ")]
-                  )
-                ],
-                1
-              )
-            ],
-            1
-          )
-        ],
-        1
-      )
-    ],
-    1
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-
-
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/PointandshootComponent.vue?vue&type=template&id=17d5a960&":
-/*!*************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/PointandshootComponent.vue?vue&type=template&id=17d5a960& ***!
-  \*************************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "v-layout",
-    [
-      _c(
-        "v-dialog",
-        {
-          attrs: {
-            fullscreen: "",
-            "hide-overlay": "",
-            transition: "dialog-bottom-transition"
-          },
-          model: {
-            value: _vm.dialog,
-            callback: function($$v) {
-              _vm.dialog = $$v
-            },
-            expression: "dialog"
-          }
-        },
-        [
-          _c(
-            "v-card",
-            [
-              _c(
-                "v-toolbar",
-                { attrs: { dark: "", color: "green" } },
-                [
-                  _c(
-                    "v-btn",
-                    {
-                      attrs: { icon: "", dark: "" },
-                      on: {
-                        click: function($event) {
-                          _vm.dialog = false
-                        }
-                      }
-                    },
-                    [_c("v-icon", [_vm._v("close")])],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c("v-toolbar-title", [_vm._v("Point and Shoot")]),
-                  _vm._v(" "),
-                  _c("v-spacer")
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "v-container",
-                { attrs: { fluid: "" } },
-                [
-                  _c(
-                    "v-layout",
-                    { attrs: { "align-center": "", row: "" } },
-                    [
-                      _c("v-flex", { attrs: { xs1: "" } }),
-                      _vm._v(" "),
-                      _c(
-                        "v-flex",
-                        { attrs: { xs2: "" } },
-                        [
-                          _c(
-                            "v-layout",
-                            { attrs: { "align-center": "", row: "" } },
-                            [
-                              _c(
-                                "v-flex",
-                                { attrs: { xs12: "" } },
-                                [
-                                  _c(
-                                    "v-card",
-                                    [
-                                      _c("v-img", {
-                                        attrs: {
-                                          src: _vm.imageUrl,
-                                          "aspect-ratio": "1"
-                                        }
-                                      })
-                                    ],
-                                    1
-                                  )
-                                ],
-                                1
-                              )
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "v-layout",
-                            { attrs: { "align-center": "", row: "" } },
-                            [
-                              _c("v-flex", { attrs: { xs12: "" } }, [
-                                _c("p", [_vm._v(_vm._s(_vm.current_shot))])
-                              ])
-                            ],
-                            1
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c("v-flex", { attrs: { xs1: "" } }),
-                      _vm._v(" "),
-                      _c(
-                        "v-flex",
-                        {
-                          staticStyle: { overflow: "auto" },
-                          attrs: { xs7: "" }
-                        },
-                        [
-                          _c(
-                            "v-card",
-                            [
-                              _c(
-                                "v-card-title",
-                                [
-                                  _c("v-select", {
-                                    attrs: {
-                                      items: _vm.types,
-                                      label: "Tipo",
-                                      "single-line": "",
-                                      "hide-details": ""
-                                    },
-                                    on: { input: _vm.filterType },
-                                    model: {
-                                      value: _vm.type,
-                                      callback: function($$v) {
-                                        _vm.type = $$v
-                                      },
-                                      expression: "type"
-                                    }
-                                  }),
-                                  _vm._v(" "),
-                                  _c("v-spacer"),
-                                  _vm._v(" "),
-                                  _c("v-select", {
-                                    attrs: {
-                                      items: _vm.Constellations,
-                                      label: "Constelación",
-                                      "single-line": "",
-                                      "hide-details": ""
-                                    },
-                                    on: { input: _vm.filterConstellation },
-                                    model: {
-                                      value: _vm.Constellation,
-                                      callback: function($$v) {
-                                        _vm.Constellation = $$v
-                                      },
-                                      expression: "Constellation"
-                                    }
-                                  }),
-                                  _vm._v(" "),
-                                  _c("v-spacer"),
-                                  _vm._v(" "),
-                                  _c("v-text-field", {
-                                    attrs: {
-                                      "append-icon": "search",
-                                      label: "Buscar",
-                                      "single-line": "",
-                                      "hide-details": ""
-                                    },
-                                    model: {
-                                      value: _vm.search,
-                                      callback: function($$v) {
-                                        _vm.search = $$v
-                                      },
-                                      expression: "search"
-                                    }
-                                  })
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "v-data-table",
-                                {
-                                  attrs: {
-                                    headers: _vm.headers,
-                                    items: _vm.FilteredObjects,
-                                    search: _vm.search,
-                                    "rows-per-page-items": _vm.rowsPerPageItems,
-                                    pagination: _vm.pagination
-                                  },
-                                  on: {
-                                    "update:pagination": function($event) {
-                                      _vm.pagination = $event
-                                    }
-                                  },
-                                  scopedSlots: _vm._u([
-                                    {
-                                      key: "items",
-                                      fn: function(props) {
-                                        return [
-                                          _c(
-                                            "tr",
-                                            {
-                                              on: {
-                                                click: function($event) {
-                                                  return _vm.showAlert(
-                                                    props.item
-                                                  )
-                                                }
-                                              }
-                                            },
-                                            [
-                                              _c(
-                                                "td",
-                                                {
-                                                  staticClass: "text-xs-right"
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    _vm._s(props.item.name)
-                                                  )
-                                                ]
-                                              ),
-                                              _vm._v(" "),
-                                              _c(
-                                                "td",
-                                                {
-                                                  staticClass: "text-xs-right"
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    _vm._s(props.item.catalog)
-                                                  )
-                                                ]
-                                              ),
-                                              _vm._v(" "),
-                                              _c(
-                                                "td",
-                                                {
-                                                  staticClass: "text-xs-right"
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    _vm._s(
-                                                      props.item.type_object
-                                                    )
-                                                  )
-                                                ]
-                                              ),
-                                              _vm._v(" "),
-                                              _c(
-                                                "td",
-                                                {
-                                                  staticClass: "text-xs-right"
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    _vm._s(
-                                                      props.item.constellation
-                                                    )
-                                                  )
-                                                ]
-                                              ),
-                                              _vm._v(" "),
-                                              _c(
-                                                "td",
-                                                {
-                                                  staticClass: "text-xs-right"
-                                                },
-                                                [_vm._v(_vm._s(props.item.ra))]
-                                              ),
-                                              _vm._v(" "),
-                                              _c(
-                                                "td",
-                                                {
-                                                  staticClass: "text-xs-right"
-                                                },
-                                                [_vm._v(_vm._s(props.item.dec))]
-                                              )
-                                            ]
-                                          )
-                                        ]
-                                      }
-                                    }
-                                  ]),
-                                  model: {
-                                    value: _vm.selected,
-                                    callback: function($$v) {
-                                      _vm.selected = $$v
-                                    },
-                                    expression: "selected"
-                                  }
-                                },
-                                [
-                                  _vm._v(" "),
-                                  _c("v-alert", {
-                                    attrs: {
-                                      value: true,
-                                      color: "error",
-                                      icon: "warning"
-                                    },
-                                    scopedSlots: _vm._u([
-                                      {
-                                        key: "no-results",
-                                        fn: function() {
-                                          return [
-                                            _vm._v(
-                                              '\n\t\t\t\t\t        Your search for "' +
-                                                _vm._s(_vm.search) +
-                                                '" found no results.\n\t\t\t\t\t      '
-                                            )
-                                          ]
-                                        },
-                                        proxy: true
-                                      }
-                                    ])
-                                  })
-                                ],
-                                1
-                              )
-                            ],
-                            1
-                          )
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  )
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "v-container",
-                { attrs: { fluid: "" } },
-                [
-                  _c(
-                    "v-layout",
-                    { attrs: { "align-center": "", row: "" } },
-                    [
-                      _c(
-                        "v-flex",
-                        { attrs: { xs12: "" } },
-                        [
-                          _c(
-                            "v-card",
-                            [
-                              _c(
-                                "v-container",
-                                { attrs: { fluid: "" } },
-                                [
-                                  _c(
-                                    "v-layout",
-                                    [
-                                      _c(
-                                        "v-flex",
-                                        {
-                                          attrs: {
-                                            xs4: "",
-                                            "align-end": "",
-                                            flexbox: ""
-                                          }
-                                        },
-                                        [
-                                          _c(
-                                            "span",
-                                            { staticClass: "display-1" },
-                                            [_vm._v(" " + _vm._s(_vm.object))]
-                                          )
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "v-flex",
-                                        {
-                                          attrs: {
-                                            xs4: "",
-                                            "align-end": "",
-                                            flexbox: ""
-                                          }
-                                        },
-                                        [
-                                          _c(
-                                            "span",
-                                            { staticClass: "headline" },
-                                            [
-                                              _vm._v(
-                                                " Estado:" + _vm._s(_vm.state)
-                                              )
-                                            ]
-                                          )
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "v-flex",
-                                        {
-                                          attrs: {
-                                            xs4: "",
-                                            "align-end": "",
-                                            flexbox: ""
-                                          }
-                                        },
-                                        [
-                                          _c("p", [
-                                            _vm._v(
-                                              "Actual: " + _vm._s(_vm.current)
-                                            )
-                                          ])
-                                        ]
-                                      )
-                                    ],
-                                    1
-                                  )
-                                ],
-                                1
-                              )
-                            ],
-                            1
-                          )
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "v-layout",
-                    { attrs: { "align-center": "", row: "" } },
-                    [
-                      _c(
-                        "v-flex",
-                        { attrs: { xs12: "" } },
-                        [
-                          _c(
-                            "v-card",
-                            [
-                              _c(
-                                "v-container",
-                                { attrs: { fluid: "" } },
-                                [
-                                  _c(
-                                    "v-layout",
-                                    [
-                                      _c(
-                                        "v-flex",
-                                        {
-                                          attrs: {
-                                            xs4: "",
-                                            "align-end": "",
-                                            flexbox: ""
-                                          }
-                                        },
-                                        [
-                                          _c(
-                                            "span",
-                                            { staticClass: "subheading" },
-                                            [
-                                              _vm._v(
-                                                "Montura: AR=" +
-                                                  _vm._s(_vm.Ar_screen) +
-                                                  " DEC=" +
-                                                  _vm._s(_vm.Dec_screen)
-                                              )
-                                            ]
-                                          )
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "v-flex",
-                                        {
-                                          attrs: {
-                                            xs4: "",
-                                            "align-end": "",
-                                            flexbox: ""
-                                          }
-                                        },
-                                        [
-                                          _c(
-                                            "span",
-                                            { staticClass: "subheading" },
-                                            [
-                                              _vm._v(
-                                                "Cámara: Iso=" +
-                                                  _vm._s(_vm.Iso) +
-                                                  " Exp=" +
-                                                  _vm._s(_vm.Exp)
-                                              )
-                                            ]
-                                          )
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "v-flex",
-                                        {
-                                          attrs: {
-                                            xs4: "",
-                                            "align-end": "",
-                                            flexbox: ""
-                                          }
-                                        },
-                                        [
-                                          _c(
-                                            "v-btn",
-                                            {
-                                              attrs: { color: "warning" },
-                                              on: {
-                                                click: function($event) {
-                                                  return _vm.shoot()
-                                                }
-                                              }
-                                            },
-                                            [_vm._v("Obtener Foto")]
-                                          )
-                                        ],
-                                        1
-                                      )
-                                    ],
-                                    1
-                                  )
-                                ],
-                                1
-                              )
-                            ],
-                            1
-                          )
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  )
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "v-container",
-                { attrs: { fluid: "" } },
-                [
-                  _c(
-                    "v-layout",
-                    { attrs: { "align-center": "", row: "" } },
-                    [
-                      _c(
-                        "v-flex",
-                        {
-                          staticStyle: { overflow: "auto" },
-                          attrs: { xs12: "" }
-                        },
-                        [
-                          _c(
-                            "v-card",
-                            [
-                              _c(
-                                "v-card-title",
-                                [
-                                  _c("span", { staticClass: "headline" }, [
-                                    _vm._v("Mis fotos")
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("v-spacer")
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c("v-data-table", {
-                                attrs: {
-                                  headers: _vm.myImagesHeaders,
-                                  items: _vm.myImages,
-                                  search: _vm.search
-                                },
-                                scopedSlots: _vm._u([
-                                  {
-                                    key: "items",
-                                    fn: function(props) {
-                                      return [
-                                        _c("td", [
-                                          _c(
-                                            "a",
-                                            {
-                                              attrs: { href: "props.item.path" }
-                                            },
-                                            [
-                                              _c("v-img", {
-                                                attrs: {
-                                                  src: props.item.path,
-                                                  "aspect-ratio": "1"
-                                                }
-                                              })
-                                            ],
-                                            1
-                                          )
-                                        ]),
-                                        _vm._v(" "),
-                                        _c(
-                                          "td",
-                                          { staticClass: "text-xs-right" },
-                                          [_vm._v(_vm._s(props.item.name))]
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "td",
-                                          { staticClass: "text-xs-right" },
-                                          [_vm._v(_vm._s(props.item.iso))]
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "td",
-                                          { staticClass: "text-xs-right" },
-                                          [_vm._v(_vm._s(props.item.exptime))]
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "td",
-                                          { staticClass: "text-xs-right" },
-                                          [_vm._v(_vm._s(props.item.ar))]
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "td",
-                                          { staticClass: "text-xs-right" },
-                                          [_vm._v(_vm._s(props.item.dec))]
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "td",
-                                          { staticClass: "text-xs-right" },
-                                          [
-                                            _vm._v(
-                                              _vm._s(props.item.created_at)
-                                            )
-                                          ]
-                                        )
-                                      ]
-                                    }
-                                  }
-                                ])
-                              })
-                            ],
-                            1
-                          )
-                        ],
-                        1
-                      )
-                    ],
-                    1
                   )
                 ],
                 1
@@ -43745,6 +44449,24 @@ var render = function() {
                                                             ],
                                                             1
                                                           ),
+                                                          _vm._v(" "),
+                                                          _c("v-select", {
+                                                            attrs: {
+                                                              items:
+                                                                _vm.typeToLabel,
+                                                              label: "Tipo",
+                                                              required: ""
+                                                            },
+                                                            model: {
+                                                              value: _vm.type,
+                                                              callback: function(
+                                                                $$v
+                                                              ) {
+                                                                _vm.type = $$v
+                                                              },
+                                                              expression: "type"
+                                                            }
+                                                          }),
                                                           _vm._v(" "),
                                                           _c(
                                                             "v-toolbar-title",
@@ -46571,39 +47293,45 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "v-layout",
-    { attrs: { row: "" } },
+    "v-container",
     [
       _c(
-        "v-flex",
-        { staticClass: "px-2", attrs: { xs8: "" } },
+        "v-layout",
+        { attrs: { row: "" } },
         [
           _c(
-            "v-card",
-            { staticClass: "py-4" },
+            "v-flex",
+            { staticClass: "px-2", attrs: { xs12: "" } },
             [
-              _c("my-reservations"),
-              _vm._v(" "),
               _c(
-                "v-layout",
+                "v-card",
+                { staticClass: "py-4" },
                 [
-                  _c("v-flex", { attrs: { xs1: "" } }),
-                  _vm._v(" "),
                   _c(
-                    "v-flex",
-                    { attrs: { xs6: "" } },
+                    "v-layout",
                     [
+                      _c("v-flex", { attrs: { xs1: "" } }),
+                      _vm._v(" "),
                       _c(
-                        "v-btn",
-                        {
-                          attrs: { round: "", color: "morado", dark: "" },
-                          on: { click: _vm.reservClick }
-                        },
-                        [_vm._v("Reservar")]
+                        "v-flex",
+                        { attrs: { xs6: "" } },
+                        [
+                          _c(
+                            "v-btn",
+                            {
+                              attrs: { round: "", color: "verde", dark: "" },
+                              on: { click: _vm.reservClick }
+                            },
+                            [_vm._v("Reserva tu hora de telescopio Aquí")]
+                          )
+                        ],
+                        1
                       )
                     ],
                     1
-                  )
+                  ),
+                  _vm._v(" "),
+                  _c("my-reservations")
                 ],
                 1
               )
@@ -46615,135 +47343,99 @@ var render = function() {
       ),
       _vm._v(" "),
       _c(
-        "v-flex",
-        { attrs: { xs4: "" } },
+        "v-layout",
+        { attrs: { row: "" } },
         [
           _c(
-            "v-layout",
-            { staticClass: "px-1" },
+            "v-flex",
+            { staticClass: "px-1 py-4", attrs: { xs6: "" } },
             [
               _c(
-                "v-flex",
-                { staticClass: "px-1", attrs: { xs12: "" } },
+                "v-card",
                 [
                   _c(
-                    "v-card",
+                    "v-layout",
                     [
-                      _c(
-                        "v-layout",
-                        [
-                          _c("v-flex", { attrs: { xs1: "" } }),
-                          _vm._v(" "),
-                          _c(
-                            "v-flex",
-                            { staticClass: "py-2", attrs: { xs8: "" } },
-                            [
-                              _c("span", { staticClass: "subheading" }, [
-                                _vm._v("Clima Actual")
-                              ])
-                            ]
-                          )
-                        ],
-                        1
-                      ),
+                      _c("v-flex", { attrs: { xs1: "" } }),
                       _vm._v(" "),
                       _c(
-                        "v-layout",
+                        "v-flex",
+                        { staticClass: "px-1", attrs: { xs8: "" } },
                         [
-                          _c("v-flex", {
-                            attrs: { xs1: "", "align-end": "", flexbox: "" }
-                          }),
-                          _vm._v(" "),
-                          _c(
-                            "v-flex",
-                            {
-                              attrs: { xs4: "", "align-end": "", flexbox: "" }
-                            },
-                            [
-                              _c("v-img", { attrs: { src: _vm.weather_image } })
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "v-flex",
-                            {
-                              attrs: { xs4: "", "align-end": "", flexbox: "" }
-                            },
-                            [
-                              _c(
-                                "span",
-                                {
-                                  staticClass: "subheading",
-                                  staticStyle: { color: "#0BD8B5" }
-                                },
-                                [
-                                  _vm._v(
-                                    " " +
-                                      _vm._s(_vm.weather["WeatherText"]) +
-                                      " " +
-                                      _vm._s(
-                                        _vm.weather["Temperature"]["Metric"][
-                                          "Value"
-                                        ]
-                                      ) +
-                                      " º" +
-                                      _vm._s(
-                                        _vm.weather["Temperature"]["Metric"][
-                                          "Unit"
-                                        ]
-                                      )
-                                  )
-                                ]
-                              )
-                            ]
-                          )
-                        ],
-                        1
-                      ),
+                          _c("span", { staticClass: "subheading" }, [
+                            _vm._v("Puntos")
+                          ])
+                        ]
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-layout",
+                    { staticClass: "px-1" },
+                    [
+                      _c("v-flex", { attrs: { xs4: "" } }),
                       _vm._v(" "),
                       _c(
-                        "v-layout",
-                        { attrs: { "align-center": "", row: "" } },
+                        "v-flex",
+                        { attrs: { xs4: "", "align-end": "", flexbox: "" } },
                         [
-                          _c("v-flex", {
-                            attrs: { xs5: "", "align-end": "", flexbox: "" }
-                          }),
-                          _vm._v(" "),
                           _c(
-                            "v-flex",
+                            "span",
                             {
-                              attrs: { xs4: "", "align-end": "", flexbox: "" }
+                              staticClass: "display-3",
+                              staticStyle: { color: "#FFCC00" }
                             },
+                            [_vm._v(_vm._s(_vm.$store.getters.current_points))]
+                          )
+                        ]
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-layout",
+                    { staticClass: "px-1" },
+                    [
+                      _c("v-flex", { attrs: { xs5: "" } }),
+                      _vm._v(" "),
+                      _c(
+                        "v-flex",
+                        { attrs: { xs4: "", "align-end": "", flexbox: "" } },
+                        [
+                          _c(
+                            "div",
                             [
                               _c(
                                 "v-btn",
                                 {
                                   attrs: {
                                     round: "",
-                                    color: "verde",
-                                    href:
-                                      "https://www.accuweather.com/es/cl/san-pedro-de-atacama/57225/daily-weather-forecast/57225?day=0",
-                                    target: "_blank"
-                                  }
+                                    color: "amarillo",
+                                    dark: ""
+                                  },
+                                  on: { click: _vm.pointsClick }
                                 },
-                                [
-                                  _vm._v(
-                                    "\n                                    Ver Pronóstico    \n                                "
-                                  )
-                                ]
+                                [_vm._v("Comprar Puntos")]
                               )
                             ],
                             1
                           )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c("br")
+                        ]
+                      )
                     ],
                     1
-                  )
+                  ),
+                  _vm._v(" "),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("br")
                 ],
                 1
               )
@@ -46751,108 +47443,115 @@ var render = function() {
             1
           ),
           _vm._v(" "),
-          _c("br"),
-          _vm._v(" "),
           _c(
-            "v-layout",
-            { staticClass: "px-1" },
+            "v-flex",
+            { staticClass: "px-1 py-4", attrs: { xs6: "" } },
             [
               _c(
-                "v-flex",
-                { staticClass: "px-1", attrs: { xs12: "" } },
+                "v-card",
                 [
                   _c(
-                    "v-card",
-                    { staticClass: "py-1" },
+                    "v-layout",
                     [
-                      _c(
-                        "v-layout",
-                        [
-                          _c("v-flex", { attrs: { xs1: "" } }),
-                          _vm._v(" "),
-                          _c(
-                            "v-flex",
-                            { staticClass: "px-1", attrs: { xs8: "" } },
-                            [
-                              _c("span", { staticClass: "subheading" }, [
-                                _vm._v("Puntos")
-                              ])
-                            ]
-                          )
-                        ],
-                        1
-                      ),
+                      _c("v-flex", { attrs: { xs1: "" } }),
                       _vm._v(" "),
                       _c(
-                        "v-layout",
-                        { staticClass: "px-1" },
+                        "v-flex",
+                        { staticClass: "py-2", attrs: { xs8: "" } },
                         [
-                          _c("v-flex", { attrs: { xs4: "" } }),
-                          _vm._v(" "),
-                          _c(
-                            "v-flex",
-                            {
-                              attrs: { xs4: "", "align-end": "", flexbox: "" }
-                            },
-                            [
-                              _c(
-                                "span",
-                                {
-                                  staticClass: "display-3",
-                                  staticStyle: { color: "#FFCC00" }
-                                },
-                                [
-                                  _vm._v(
-                                    _vm._s(_vm.$store.getters.current_points)
-                                  )
-                                ]
-                              )
-                            ]
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "v-layout",
-                        { staticClass: "px-1" },
-                        [
-                          _c("v-flex", { attrs: { xs5: "" } }),
-                          _vm._v(" "),
-                          _c(
-                            "v-flex",
-                            {
-                              attrs: { xs4: "", "align-end": "", flexbox: "" }
-                            },
-                            [
-                              _c(
-                                "div",
-                                [
-                                  _c(
-                                    "v-btn",
-                                    {
-                                      attrs: {
-                                        round: "",
-                                        color: "amarillo",
-                                        dark: ""
-                                      },
-                                      on: { click: _vm.pointsClick }
-                                    },
-                                    [_vm._v("Comprar Puntos")]
-                                  )
-                                ],
-                                1
-                              )
-                            ]
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c("br")
+                          _c("span", { staticClass: "subheading" }, [
+                            _vm._v("Clima Actual")
+                          ])
+                        ]
+                      )
                     ],
                     1
-                  )
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-layout",
+                    [
+                      _c("v-flex", {
+                        attrs: { xs1: "", "align-end": "", flexbox: "" }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "v-flex",
+                        { attrs: { xs4: "", "align-end": "", flexbox: "" } },
+                        [_c("v-img", { attrs: { src: _vm.weather_image } })],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-flex",
+                        { attrs: { xs4: "", "align-end": "", flexbox: "" } },
+                        [
+                          _c(
+                            "span",
+                            {
+                              staticClass: "subheading",
+                              staticStyle: { color: "#0BD8B5" }
+                            },
+                            [
+                              _vm._v(
+                                " " +
+                                  _vm._s(_vm.weather["WeatherText"]) +
+                                  " " +
+                                  _vm._s(
+                                    _vm.weather["Temperature"]["Metric"][
+                                      "Value"
+                                    ]
+                                  ) +
+                                  " º" +
+                                  _vm._s(
+                                    _vm.weather["Temperature"]["Metric"]["Unit"]
+                                  )
+                              )
+                            ]
+                          )
+                        ]
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-layout",
+                    { attrs: { "align-center": "", row: "" } },
+                    [
+                      _c("v-flex", {
+                        attrs: { xs5: "", "align-end": "", flexbox: "" }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "v-flex",
+                        { attrs: { xs4: "", "align-end": "", flexbox: "" } },
+                        [
+                          _c(
+                            "v-btn",
+                            {
+                              attrs: {
+                                round: "",
+                                color: "verde",
+                                href:
+                                  "https://www.accuweather.com/es/cl/san-pedro-de-atacama/57225/daily-weather-forecast/57225?day=0",
+                                target: "_blank"
+                              }
+                            },
+                            [
+                              _vm._v(
+                                "\n                                    Ver Pronóstico    \n                                "
+                              )
+                            ]
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c("br")
                 ],
                 1
               )
@@ -46864,96 +47563,111 @@ var render = function() {
       ),
       _vm._v(" "),
       _c(
-        "v-flex",
-        { staticClass: "px-2 py-4", attrs: { xs12: "" } },
+        "v-layout",
+        { attrs: { row: "" } },
         [
           _c(
-            "v-card",
+            "v-flex",
+            { staticClass: "px-2 py-4", attrs: { xs12: "" } },
             [
-              _c("v-card-title", [
-                _c("span", { staticClass: "headline" }, [_vm._v("Mis fotos")])
-              ]),
-              _vm._v(" "),
-              _c("v-data-table", {
-                attrs: { headers: _vm.myImagesHeaders, items: _vm.myImages },
-                scopedSlots: _vm._u([
-                  {
-                    key: "items",
-                    fn: function(props) {
-                      return [
-                        _c("td", [
-                          _c(
-                            "a",
-                            {
-                              staticClass: "px-2 py-2",
-                              attrs: { href: props.item.path, target: "_blank" }
-                            },
-                            [
-                              _c("v-img", {
-                                attrs: {
-                                  src: props.item.path,
-                                  "aspect-ratio": "1"
-                                }
-                              })
-                            ],
-                            1
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("td", { staticClass: "text-xs-left" }, [
-                          _vm._v(_vm._s(props.item.object_name))
-                        ]),
-                        _vm._v(" "),
-                        _c("td", { staticClass: "text-xs-left" }, [
-                          _vm._v(_vm._s(props.item.iso_string))
-                        ]),
-                        _vm._v(" "),
-                        _c("td", { staticClass: "text-xs-left" }, [
-                          _vm._v(_vm._s(props.item.exptime) + "s")
-                        ]),
-                        _vm._v(" "),
-                        _c("td", { staticClass: "text-xs-left" }, [
-                          _vm._v(_vm._s(props.item.ar_string))
-                        ]),
-                        _vm._v(" "),
-                        _c("td", { staticClass: "text-xs-left" }, [
-                          _vm._v(_vm._s(props.item.dec_string))
-                        ]),
-                        _vm._v(" "),
-                        _c("td", { staticClass: "text-xs-left" }, [
-                          _vm._v(_vm._s(props.item.created_at))
-                        ]),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          [
-                            _c(
-                              "v-btn",
-                              {
-                                staticClass: "white--text",
-                                attrs: {
-                                  round: "",
-                                  color: "morado",
-                                  small: ""
+              _c(
+                "v-card",
+                [
+                  _c("v-card-title", [
+                    _c("span", { staticClass: "headline" }, [
+                      _vm._v("Mis fotos")
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("v-data-table", {
+                    attrs: {
+                      headers: _vm.myImagesHeaders,
+                      items: _vm.myImages
+                    },
+                    scopedSlots: _vm._u([
+                      {
+                        key: "items",
+                        fn: function(props) {
+                          return [
+                            _c("td", [
+                              _c(
+                                "a",
+                                {
+                                  staticClass: "px-2 py-2",
+                                  attrs: {
+                                    href: props.item.path,
+                                    target: "_blank"
+                                  }
                                 },
-                                on: { click: _vm.download }
-                              },
+                                [
+                                  _c("v-img", {
+                                    attrs: {
+                                      src: props.item.path,
+                                      "aspect-ratio": "1"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("td", { staticClass: "text-xs-left" }, [
+                              _vm._v(_vm._s(props.item.object_name))
+                            ]),
+                            _vm._v(" "),
+                            _c("td", { staticClass: "text-xs-left" }, [
+                              _vm._v(_vm._s(props.item.iso_string))
+                            ]),
+                            _vm._v(" "),
+                            _c("td", { staticClass: "text-xs-left" }, [
+                              _vm._v(_vm._s(props.item.exptime) + "s")
+                            ]),
+                            _vm._v(" "),
+                            _c("td", { staticClass: "text-xs-left" }, [
+                              _vm._v(_vm._s(props.item.ar_string))
+                            ]),
+                            _vm._v(" "),
+                            _c("td", { staticClass: "text-xs-left" }, [
+                              _vm._v(_vm._s(props.item.dec_string))
+                            ]),
+                            _vm._v(" "),
+                            _c("td", { staticClass: "text-xs-left" }, [
+                              _vm._v(_vm._s(props.item.created_at))
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "td",
                               [
-                                _c("v-icon", [_vm._v("cloud_download")]),
-                                _vm._v(
-                                  "\n                                  Imagen Raw\n                                "
+                                _c(
+                                  "v-btn",
+                                  {
+                                    staticClass: "white--text",
+                                    attrs: {
+                                      round: "",
+                                      color: "morado",
+                                      small: ""
+                                    },
+                                    on: { click: _vm.download }
+                                  },
+                                  [
+                                    _c("v-icon", [_vm._v("cloud_download")]),
+                                    _vm._v(
+                                      "\n                                  Imagen Raw\n                                "
+                                    )
+                                  ],
+                                  1
                                 )
                               ],
                               1
                             )
-                          ],
-                          1
-                        )
-                      ]
-                    }
-                  }
-                ])
-              })
+                          ]
+                        }
+                      }
+                    ])
+                  })
+                ],
+                1
+              )
             ],
             1
           )
@@ -90148,6 +90862,93 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/ControlSimpleComponent.vue":
+/*!************************************************************!*\
+  !*** ./resources/js/components/ControlSimpleComponent.vue ***!
+  \************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ControlSimpleComponent_vue_vue_type_template_id_2e9a7179___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ControlSimpleComponent.vue?vue&type=template&id=2e9a7179& */ "./resources/js/components/ControlSimpleComponent.vue?vue&type=template&id=2e9a7179&");
+/* harmony import */ var _ControlSimpleComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ControlSimpleComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/ControlSimpleComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _ControlSimpleComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ControlSimpleComponent.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/ControlSimpleComponent.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _ControlSimpleComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ControlSimpleComponent_vue_vue_type_template_id_2e9a7179___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ControlSimpleComponent_vue_vue_type_template_id_2e9a7179___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/ControlSimpleComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/ControlSimpleComponent.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************!*\
+  !*** ./resources/js/components/ControlSimpleComponent.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ControlSimpleComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./ControlSimpleComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ControlSimpleComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ControlSimpleComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/ControlSimpleComponent.vue?vue&type=style&index=0&lang=css&":
+/*!*********************************************************************************************!*\
+  !*** ./resources/js/components/ControlSimpleComponent.vue?vue&type=style&index=0&lang=css& ***!
+  \*********************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ControlSimpleComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./ControlSimpleComponent.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ControlSimpleComponent.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ControlSimpleComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ControlSimpleComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ControlSimpleComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ControlSimpleComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ControlSimpleComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./resources/js/components/ControlSimpleComponent.vue?vue&type=template&id=2e9a7179&":
+/*!*******************************************************************************************!*\
+  !*** ./resources/js/components/ControlSimpleComponent.vue?vue&type=template&id=2e9a7179& ***!
+  \*******************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ControlSimpleComponent_vue_vue_type_template_id_2e9a7179___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./ControlSimpleComponent.vue?vue&type=template&id=2e9a7179& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ControlSimpleComponent.vue?vue&type=template&id=2e9a7179&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ControlSimpleComponent_vue_vue_type_template_id_2e9a7179___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ControlSimpleComponent_vue_vue_type_template_id_2e9a7179___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/Loading.vue":
 /*!*********************************************!*\
   !*** ./resources/js/components/Loading.vue ***!
@@ -90368,75 +91169,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_NewEquipment_vue_vue_type_template_id_70680cb9___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_NewEquipment_vue_vue_type_template_id_70680cb9___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
-
-/***/ }),
-
-/***/ "./resources/js/components/PointandshootComponent.vue":
-/*!************************************************************!*\
-  !*** ./resources/js/components/PointandshootComponent.vue ***!
-  \************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _PointandshootComponent_vue_vue_type_template_id_17d5a960___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PointandshootComponent.vue?vue&type=template&id=17d5a960& */ "./resources/js/components/PointandshootComponent.vue?vue&type=template&id=17d5a960&");
-/* harmony import */ var _PointandshootComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PointandshootComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/PointandshootComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _PointandshootComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _PointandshootComponent_vue_vue_type_template_id_17d5a960___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _PointandshootComponent_vue_vue_type_template_id_17d5a960___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/components/PointandshootComponent.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/components/PointandshootComponent.vue?vue&type=script&lang=js&":
-/*!*************************************************************************************!*\
-  !*** ./resources/js/components/PointandshootComponent.vue?vue&type=script&lang=js& ***!
-  \*************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PointandshootComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./PointandshootComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/PointandshootComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PointandshootComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/components/PointandshootComponent.vue?vue&type=template&id=17d5a960&":
-/*!*******************************************************************************************!*\
-  !*** ./resources/js/components/PointandshootComponent.vue?vue&type=template&id=17d5a960& ***!
-  \*******************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PointandshootComponent_vue_vue_type_template_id_17d5a960___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./PointandshootComponent.vue?vue&type=template&id=17d5a960& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/PointandshootComponent.vue?vue&type=template&id=17d5a960&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PointandshootComponent_vue_vue_type_template_id_17d5a960___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PointandshootComponent_vue_vue_type_template_id_17d5a960___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

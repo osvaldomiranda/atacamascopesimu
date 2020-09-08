@@ -9,62 +9,21 @@ class AstronomicObjectController extends Controller
 {
     public function index(Request $request)
     {
+         Info($request);
 
-        $astronomicObjects = AstronomicObject::where('catalog','SolarSistem')->get()->toArray();
+        $constellation = $request->constellation;
+        $type = $request->type;
+        $name = $request->name;
 
-        // $catalog = $request->input('catalog');
+        $astronomicObjects = AstronomicObject::where('id','>',0)->type($type)->name($name)->constellation($constellation)->get()->toArray();
 
-        // if($catalog){
-    	   // $astronomicObjects = AstronomicObject::where('catalog',$catalog)->get()->toArray();
-        // }
+       // ->name($name)->constellation($constellation)->get()->toArray();
 
-        $constellation = $request->input('constellation');
-        $type = $request->input('type');
 
-        if($constellation=='undefined'){
-            $constellation=null;
-        }
-
-        Info($constellation);
-        Info($type);
-
-        if($type and !$constellation){
-            // Info("tipo y ! const");
-            $astronomicObjects = AstronomicObject::where('type_object',$type)->get()->toArray();
-        }
-
-        if(!$type and $constellation){
-            // Info("!tipo y const");
-            $astronomicObjects = AstronomicObject::where('constellation',$constellation)->get()->toArray();
-        }
-
-        if($type and $constellation){
-            // Info("tipo y const");
-            $astronomicObjects = AstronomicObject::where('constellation',$constellation)->where('type_object',$type)->get()->toArray();
-        }
-
+        Info($astronomicObjects);
 
     	return response()->json($astronomicObjects);
     }
-
-    public function search(Request $request)
-    {
-        $name = $request->input('name');
-        $astronomicObjects = AstronomicObject::where('name', 'ILIKE', '%'.$name.'%')->get()->toArray();
-
-
-        if(! $astronomicObjects){
-            $astronomicObjects = AstronomicObject::where('colloquial_name','ILIKE', '%'.$name.'%')->get()->toArray();
-        }
-
-        if(! $astronomicObjects){
-            $astronomicObjects = AstronomicObject::where('nombre_coloquial','ILIKE', '%'.$name.'%')->get()->toArray();
-        }
-
-        return response()->json($astronomicObjects);
-    }
-
-
 
 
 
@@ -105,7 +64,16 @@ class AstronomicObjectController extends Controller
 
 
         // python horizon.py -c
-        $coord= shell_exec("python horizon.py -c " . $object );       
+        $coord= shell_exec("python horizon.py -c " . $object );  
+
+        Info("********* horizon ***********") ;
+        Info($coord);
+        Info(preg_split("/\n/",$coord)[1]);
+        Info("********************")     ;
+
+        $alt = preg_split("/\n/",$coord)[1];
+        $alt = preg_split("/d/",$alt)[0];
+        return $alt;
         
         $alt = preg_split("/d/",$coord)[0];
         return $alt;    

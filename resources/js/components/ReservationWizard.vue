@@ -120,6 +120,15 @@
                               <v-btn fab text small @click="next">
                                 <v-icon small>arrow_forward_ios</v-icon>
                               </v-btn>
+
+
+                              <v-select
+                                v-model="type"
+                                :items="typeToLabel"
+                                label="Tipo"
+                                required
+                              ></v-select>
+
                               <v-toolbar-title>Elige tu día de Observación {{ focus }}</v-toolbar-title>
                               <v-spacer></v-spacer>
       
@@ -491,12 +500,12 @@
       
       focus: '2019-01-08',
       type: 'month',
-      typeToLabel: {
-        month: 'Month',
-        week: 'Week',
-        day: 'Day',
-        '4day': '4 Days',
-      },
+      typeToLabel: [
+        'month',
+        'week',
+        'day',
+        '4 days',
+      ],
       start: null,
       end: null,
       selectedEvent: {},

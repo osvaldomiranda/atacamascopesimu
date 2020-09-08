@@ -20,7 +20,7 @@ def main(argv):
       command_id = arg
 
 
-    santiago = EarthLocation(lat= -22.96*u.deg, lon= -68.24*u.deg, height=300*u.m)
+    santiago = EarthLocation(lat= -22.96*u.deg, lon= 68.24*u.deg, height=300*u.m)
 
 	#-22.96, 68.24
 
