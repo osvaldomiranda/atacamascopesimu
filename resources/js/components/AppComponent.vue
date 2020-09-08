@@ -1,9 +1,6 @@
-<template>
-
-<v-app id="inspire" dark >
 
 <template>
-  <v-app id="inspire">
+  <v-app id="inspire" dark >
     <v-navigation-drawer
       v-model="drawer"
       app
@@ -49,7 +46,6 @@
     </v-navigation-drawer>
 
   <v-toolbar app dark color="#0e1820">
-    
     <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
     <v-toolbar-title>
       Atacama Scope
@@ -71,52 +67,10 @@
 
 
 
-<!-- 
-    <v-toolbar
-      :clipped-left="$vuetify.breakpoint.lgAndUp"
-      app
-      fixed
-    >
-      <v-toolbar-title style="width: 600px" class="ml-0 pl-3">
-        <span class="hidden-md-and-down">AtacamaScope</span>
-           <v-spacer></v-spacer>
-      </v-toolbar-title>
-
-      <v-spacer></v-spacer>
-      <v-toolbar-items class="hidden-sm-and-down">
-        <v-btn :to="'/dashboard'" flat>DashBoard</v-btn> 
-        <v-btn :to="'/equipment'" flat>Equipos</v-btn> 
-        <v-btn :to="'/offers'" flat>Ofertas</v-btn> 
-        <v-btn :to="'/publications'" flat>Publicaciones</v-btn>
-        
 
 
 
-        <v-btn v-if="$store.getters.user['role']==1" :to="'/statistics'" flat>Estadísticas</v-btn> 
-        <v-btn v-if="$store.getters.user['role']==1" :to="'/users'" flat>Usuarios</v-btn>  
-
-        <v-btn flat @click="logout">logout</v-btn>
-      
-      <v-spacer></v-spacer>
-      <v-btn icon @click="toRoute('/myself')">
-        <v-avatar  size="34px">
-                <img
-                    :src="$store.getters.user['avatar']"
-                        alt="Avatar"
-                >
-        </v-avatar>
-      </v-btn> 
-
-
-
-      </v-toolbar-items>       
-    </v-toolbar> -->
-
-
-
-  
-  </v-app>
-</template>
+ 
 
 <script>
   export default {

@@ -1946,52 +1946,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -40580,236 +40534,215 @@ var render = function() {
     "v-app",
     { attrs: { id: "inspire", dark: "" } },
     [
-      [
-        _c(
-          "v-app",
-          { attrs: { id: "inspire" } },
-          [
-            _c(
-              "v-navigation-drawer",
-              {
-                attrs: { app: "", width: "110" },
-                model: {
-                  value: _vm.drawer,
-                  callback: function($$v) {
-                    _vm.drawer = $$v
-                  },
-                  expression: "drawer"
-                }
-              },
-              [
-                _c(
-                  "v-list",
-                  { staticClass: "py-4" },
-                  [
-                    _c(
-                      "v-list-tile",
-                      {
-                        staticClass: "py-2",
-                        attrs: { ripple: "" },
-                        on: {
-                          click: function($event) {
-                            return _vm.toRoute("/dashboard")
-                          }
-                        }
-                      },
-                      [
-                        _c(
-                          "v-flex",
-                          {
-                            staticClass: "ma-0 px-0 py-3 text-xs-center",
-                            attrs: { x12: "" }
-                          },
-                          [
-                            _c(
-                              "v-tooltip",
-                              {
-                                attrs: { right: "" },
-                                scopedSlots: _vm._u([
-                                  {
-                                    key: "activator",
-                                    fn: function(ref) {
-                                      var on = ref.on
-                                      return [
-                                        _c(
-                                          "v-icon",
-                                          _vm._g(
-                                            { attrs: { "x-large": "" } },
-                                            on
-                                          ),
-                                          [_vm._v("home")]
-                                        )
-                                      ]
-                                    }
-                                  }
-                                ])
-                              },
-                              [_vm._v(" "), _c("span", [_vm._v("Home")])]
-                            )
-                          ],
-                          1
-                        )
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "v-list-tile",
-                      {
-                        staticClass: "py-2",
-                        attrs: { ripple: "" },
-                        on: {
-                          click: function($event) {
-                            return _vm.toRoute("/equipment")
-                          }
-                        }
-                      },
-                      [
-                        _c(
-                          "v-flex",
-                          {
-                            staticClass: "ma-0 px-0 py-3 text-xs-center",
-                            attrs: { x12: "" }
-                          },
-                          [
-                            _c(
-                              "v-tooltip",
-                              {
-                                attrs: { right: "" },
-                                scopedSlots: _vm._u([
-                                  {
-                                    key: "activator",
-                                    fn: function(ref) {
-                                      var on = ref.on
-                                      return [
-                                        _c(
-                                          "v-icon",
-                                          _vm._g(
-                                            { attrs: { "x-large": "" } },
-                                            on
-                                          ),
-                                          [_vm._v("forum")]
-                                        )
-                                      ]
-                                    }
-                                  }
-                                ])
-                              },
-                              [_vm._v(" "), _c("span", [_vm._v("Equipos")])]
-                            )
-                          ],
-                          1
-                        )
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "v-list-tile",
-                      {
-                        staticClass: "py-2",
-                        attrs: { ripple: "" },
-                        on: {
-                          click: function($event) {
-                            return _vm.toRoute("/publications")
-                          }
-                        }
-                      },
-                      [
-                        _c(
-                          "v-flex",
-                          {
-                            staticClass: "ma-0 px-0 py-3 text-xs-center",
-                            attrs: { x12: "" }
-                          },
-                          [
-                            _c(
-                              "v-tooltip",
-                              {
-                                attrs: { right: "" },
-                                scopedSlots: _vm._u([
-                                  {
-                                    key: "activator",
-                                    fn: function(ref) {
-                                      var on = ref.on
-                                      return [
-                                        _c(
-                                          "v-icon",
-                                          _vm._g(
-                                            { attrs: { "x-large": "" } },
-                                            on
-                                          ),
-                                          [_vm._v("account-box")]
-                                        )
-                                      ]
-                                    }
-                                  }
-                                ])
-                              },
-                              [
-                                _vm._v(" "),
-                                _c("span", [_vm._v("Publicaciones")])
-                              ]
-                            )
-                          ],
-                          1
-                        )
-                      ],
-                      1
-                    )
-                  ],
-                  1
-                )
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "v-toolbar",
-              { attrs: { app: "", dark: "", color: "#0e1820" } },
-              [
-                _c("v-toolbar-side-icon", {
+      _c(
+        "v-navigation-drawer",
+        {
+          attrs: { app: "", width: "110" },
+          model: {
+            value: _vm.drawer,
+            callback: function($$v) {
+              _vm.drawer = $$v
+            },
+            expression: "drawer"
+          }
+        },
+        [
+          _c(
+            "v-list",
+            { staticClass: "py-4" },
+            [
+              _c(
+                "v-list-tile",
+                {
+                  staticClass: "py-2",
+                  attrs: { ripple: "" },
                   on: {
                     click: function($event) {
-                      $event.stopPropagation()
-                      _vm.drawer = !_vm.drawer
+                      return _vm.toRoute("/dashboard")
                     }
                   }
-                }),
-                _vm._v(" "),
-                _c("v-toolbar-title", [_vm._v("\n      Atacama Scope\n    ")]),
-                _vm._v(" "),
-                _c("v-spacer"),
-                _vm._v(" "),
-                _c(
-                  "v-btn",
-                  {
-                    attrs: { icon: "" },
-                    on: {
-                      click: function($event) {
-                        return _vm.toRoute("/myself")
-                      }
+                },
+                [
+                  _c(
+                    "v-flex",
+                    {
+                      staticClass: "ma-0 px-0 py-3 text-xs-center",
+                      attrs: { x12: "" }
+                    },
+                    [
+                      _c(
+                        "v-tooltip",
+                        {
+                          attrs: { right: "" },
+                          scopedSlots: _vm._u([
+                            {
+                              key: "activator",
+                              fn: function(ref) {
+                                var on = ref.on
+                                return [
+                                  _c(
+                                    "v-icon",
+                                    _vm._g({ attrs: { "x-large": "" } }, on),
+                                    [_vm._v("home")]
+                                  )
+                                ]
+                              }
+                            }
+                          ])
+                        },
+                        [_vm._v(" "), _c("span", [_vm._v("Home")])]
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-list-tile",
+                {
+                  staticClass: "py-2",
+                  attrs: { ripple: "" },
+                  on: {
+                    click: function($event) {
+                      return _vm.toRoute("/equipment")
                     }
-                  },
-                  [_c("v-icon", [_vm._v("account")])],
-                  1
-                )
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "v-content",
-              { staticStyle: { background: "#0e1820" } },
-              [_c("router-view")],
-              1
-            )
-          ],
-          1
-        )
-      ]
+                  }
+                },
+                [
+                  _c(
+                    "v-flex",
+                    {
+                      staticClass: "ma-0 px-0 py-3 text-xs-center",
+                      attrs: { x12: "" }
+                    },
+                    [
+                      _c(
+                        "v-tooltip",
+                        {
+                          attrs: { right: "" },
+                          scopedSlots: _vm._u([
+                            {
+                              key: "activator",
+                              fn: function(ref) {
+                                var on = ref.on
+                                return [
+                                  _c(
+                                    "v-icon",
+                                    _vm._g({ attrs: { "x-large": "" } }, on),
+                                    [_vm._v("forum")]
+                                  )
+                                ]
+                              }
+                            }
+                          ])
+                        },
+                        [_vm._v(" "), _c("span", [_vm._v("Equipos")])]
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-list-tile",
+                {
+                  staticClass: "py-2",
+                  attrs: { ripple: "" },
+                  on: {
+                    click: function($event) {
+                      return _vm.toRoute("/publications")
+                    }
+                  }
+                },
+                [
+                  _c(
+                    "v-flex",
+                    {
+                      staticClass: "ma-0 px-0 py-3 text-xs-center",
+                      attrs: { x12: "" }
+                    },
+                    [
+                      _c(
+                        "v-tooltip",
+                        {
+                          attrs: { right: "" },
+                          scopedSlots: _vm._u([
+                            {
+                              key: "activator",
+                              fn: function(ref) {
+                                var on = ref.on
+                                return [
+                                  _c(
+                                    "v-icon",
+                                    _vm._g({ attrs: { "x-large": "" } }, on),
+                                    [_vm._v("account-box")]
+                                  )
+                                ]
+                              }
+                            }
+                          ])
+                        },
+                        [_vm._v(" "), _c("span", [_vm._v("Publicaciones")])]
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-toolbar",
+        { attrs: { app: "", dark: "", color: "#0e1820" } },
+        [
+          _c("v-toolbar-side-icon", {
+            on: {
+              click: function($event) {
+                $event.stopPropagation()
+                _vm.drawer = !_vm.drawer
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c("v-toolbar-title", [_vm._v("\n    Atacama Scope\n  ")]),
+          _vm._v(" "),
+          _c("v-spacer"),
+          _vm._v(" "),
+          _c(
+            "v-btn",
+            {
+              attrs: { icon: "" },
+              on: {
+                click: function($event) {
+                  return _vm.toRoute("/myself")
+                }
+              }
+            },
+            [_c("v-icon", [_vm._v("account")])],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-content",
+        { staticStyle: { background: "#0e1820" } },
+        [_c("router-view")],
+        1
+      )
     ],
-    2
+    1
   )
 }
 var staticRenderFns = []
