@@ -6,28 +6,33 @@ from astropy.coordinates import SkyCoord, EarthLocation, AltAz
 
 
 def main(argv):
-  nombre_objeto = ''
+  command_id = ''
   try:
     opts, args = getopt.getopt(argv,"hc:",["command="])
   except getopt.GetoptError:
-    print('horizon.py -c <command at format 1> ')
+    print('planeta.py -c <command at format 1> ')
     sys.exit(2)
   for opt, arg in opts:
     if opt == '-h':
-      print('horizon.py -c <command at format 1> ')
+      print('planeta.py -c <command at format 1> ')
       sys.exit()
     elif opt in ("-c", "--command"):
-      nombre_objeto = arg
+      command_id = arg
 
-    atacamascope = EarthLocation(lat= -22.47*u.deg, lon= -68.91*u.deg, height=2266*u.m)
 
-    utcoffset = -4*u.hour
-    hoy = Time(datetime.datetime.now()) - utcoffset
+    santiago = EarthLocation(lat= -22.96*u.deg, lon= -68.24*u.deg, height=300*u.m)
 
-    astronomical_object = SkyCoord.from_name(nombre_objeto)
-    alt_az = astronomical_object.transform_to(AltAz(obstime=hoy,location=atacamascope))
+  #-22.96, 68.24
+
+    hoy = Time(datetime.datetime.now()) 
+
+
+    astronomical_object = SkyCoord.from_name(command_id)
+    alt_az = astronomical_object.transform_to(AltAz(obstime=hoy,location=santiago))
+
 
     print(alt_az.alt)
+    
 
 if __name__ == "__main__":
    main(sys.argv[1:])

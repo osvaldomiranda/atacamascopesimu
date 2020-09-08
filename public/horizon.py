@@ -22,10 +22,9 @@ def main(argv):
 
     santiago = EarthLocation(lat= -22.96*u.deg, lon= -68.24*u.deg, height=300*u.m)
 
-	#-22.96, 68.24
+  #-22.96, 68.24
 
-    utcoffset = -4*u.hour
-    hoy = Time(datetime.datetime.now()) - utcoffset
+    hoy = Time(datetime.datetime.now()) 
 
 
     astronomical_object = SkyCoord.from_name(command_id)
@@ -33,6 +32,7 @@ def main(argv):
 
 
     print(alt_az.alt)
+    
 
 if __name__ == "__main__":
    main(sys.argv[1:])

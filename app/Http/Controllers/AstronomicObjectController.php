@@ -59,14 +59,16 @@ class AstronomicObjectController extends Controller
 	    return response()->json($coord);	
     }
 
+
+
     public function horizon(Request $request){
         $object = $request->input('object');
 
+        Info($request);
 
         // python horizon.py -c
-        $coord= shell_exec("python horizon.py -c " . $object );  
-
-        Info("********* horizon ***********") ;
+        $coord= shell_exec("python horizon.py -c " . $object );
+         Info("********* horizon ***********") ;
         Info($coord);
         Info(preg_split("/\n/",$coord)[1]);
         Info("********************")     ;
@@ -74,9 +76,6 @@ class AstronomicObjectController extends Controller
         $alt = preg_split("/\n/",$coord)[1];
         $alt = preg_split("/d/",$alt)[0];
         return $alt;
-        
-        $alt = preg_split("/d/",$coord)[0];
-        return $alt;    
     }
 
 
