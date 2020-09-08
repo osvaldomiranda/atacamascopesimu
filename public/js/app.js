@@ -1937,6 +1937,60 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1994,6 +2048,9 @@ __webpack_require__.r(__webpack_exports__);
         alert("Error Points :" + resp);
       });
       this.$router.push('/dashboard');
+    },
+    toRoute: function toRoute(to) {
+      this.$router.push(to);
     },
     logout: function logout() {
       axios.post('/logout').then(function (resp) {
@@ -40520,114 +40577,238 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "v-app",
-    {
-      staticStyle: { background: "#0e1820" },
-      attrs: { id: "inspire", dark: "" }
-    },
+    { attrs: { id: "inspire", dark: "" } },
     [
-      _c(
-        "v-toolbar",
-        {
-          attrs: {
-            "clipped-left": _vm.$vuetify.breakpoint.lgAndUp,
-            app: "",
-            fixed: ""
-          }
-        },
-        [
-          _c(
-            "v-toolbar-title",
-            { staticClass: "ml-0 pl-3", staticStyle: { width: "600px" } },
-            [
-              _c("span", { staticClass: "hidden-md-and-down" }, [
-                _vm._v("AtacamaScope")
-              ]),
-              _vm._v(" "),
-              _c("v-spacer")
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c("v-spacer"),
-          _vm._v(" "),
-          _c(
-            "v-toolbar-items",
-            { staticClass: "hidden-sm-and-down" },
-            [
-              _c("v-btn", { attrs: { to: "/dashboard", flat: "" } }, [
-                _vm._v("DashBoard")
-              ]),
-              _vm._v(" "),
-              _c("v-btn", { attrs: { to: "/equipment", flat: "" } }, [
-                _vm._v("Equipos")
-              ]),
-              _vm._v(" "),
-              _c("v-btn", { attrs: { to: "/offers", flat: "" } }, [
-                _vm._v("Ofertas")
-              ]),
-              _vm._v(" "),
-              _c("v-btn", { attrs: { to: "/publications", flat: "" } }, [
-                _vm._v("Publicaciones")
-              ]),
-              _vm._v(" "),
-              _vm.$store.getters.user["role"] == 1
-                ? _c("v-btn", { attrs: { to: "/statistics", flat: "" } }, [
-                    _vm._v("Estadísticas")
-                  ])
-                : _vm._e(),
-              _vm._v(" "),
-              _vm.$store.getters.user["role"] == 1
-                ? _c("v-btn", { attrs: { to: "/users", flat: "" } }, [
-                    _vm._v("Usuarios")
-                  ])
-                : _vm._e(),
-              _vm._v(" "),
-              _c("v-btn", { attrs: { flat: "" }, on: { click: _vm.logout } }, [
-                _vm._v("logout")
-              ]),
-              _vm._v(" "),
-              _c("v-spacer"),
-              _vm._v(" "),
-              _c(
-                "v-btn",
-                {
-                  attrs: { icon: "" },
+      [
+        _c(
+          "v-app",
+          { attrs: { id: "inspire" } },
+          [
+            _c(
+              "v-navigation-drawer",
+              {
+                attrs: { app: "", width: "110" },
+                model: {
+                  value: _vm.drawer,
+                  callback: function($$v) {
+                    _vm.drawer = $$v
+                  },
+                  expression: "drawer"
+                }
+              },
+              [
+                _c(
+                  "v-list",
+                  { staticClass: "py-4" },
+                  [
+                    _c(
+                      "v-list-tile",
+                      {
+                        staticClass: "py-2",
+                        attrs: { ripple: "" },
+                        on: {
+                          click: function($event) {
+                            return _vm.toRoute("/dashboard")
+                          }
+                        }
+                      },
+                      [
+                        _c(
+                          "v-flex",
+                          {
+                            staticClass: "ma-0 px-0 py-3 text-xs-center",
+                            attrs: { x12: "" }
+                          },
+                          [
+                            _c(
+                              "v-tooltip",
+                              {
+                                attrs: { right: "" },
+                                scopedSlots: _vm._u([
+                                  {
+                                    key: "activator",
+                                    fn: function(ref) {
+                                      var on = ref.on
+                                      return [
+                                        _c(
+                                          "v-icon",
+                                          _vm._g(
+                                            { attrs: { "x-large": "" } },
+                                            on
+                                          ),
+                                          [_vm._v("home")]
+                                        )
+                                      ]
+                                    }
+                                  }
+                                ])
+                              },
+                              [_vm._v(" "), _c("span", [_vm._v("Home")])]
+                            )
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "v-list-tile",
+                      {
+                        staticClass: "py-2",
+                        attrs: { ripple: "" },
+                        on: {
+                          click: function($event) {
+                            return _vm.toRoute("/equipment")
+                          }
+                        }
+                      },
+                      [
+                        _c(
+                          "v-flex",
+                          {
+                            staticClass: "ma-0 px-0 py-3 text-xs-center",
+                            attrs: { x12: "" }
+                          },
+                          [
+                            _c(
+                              "v-tooltip",
+                              {
+                                attrs: { right: "" },
+                                scopedSlots: _vm._u([
+                                  {
+                                    key: "activator",
+                                    fn: function(ref) {
+                                      var on = ref.on
+                                      return [
+                                        _c(
+                                          "v-icon",
+                                          _vm._g(
+                                            { attrs: { "x-large": "" } },
+                                            on
+                                          ),
+                                          [_vm._v("forum")]
+                                        )
+                                      ]
+                                    }
+                                  }
+                                ])
+                              },
+                              [_vm._v(" "), _c("span", [_vm._v("Equipos")])]
+                            )
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "v-list-tile",
+                      {
+                        staticClass: "py-2",
+                        attrs: { ripple: "" },
+                        on: {
+                          click: function($event) {
+                            return _vm.toRoute("/publications")
+                          }
+                        }
+                      },
+                      [
+                        _c(
+                          "v-flex",
+                          {
+                            staticClass: "ma-0 px-0 py-3 text-xs-center",
+                            attrs: { x12: "" }
+                          },
+                          [
+                            _c(
+                              "v-tooltip",
+                              {
+                                attrs: { right: "" },
+                                scopedSlots: _vm._u([
+                                  {
+                                    key: "activator",
+                                    fn: function(ref) {
+                                      var on = ref.on
+                                      return [
+                                        _c(
+                                          "v-icon",
+                                          _vm._g(
+                                            { attrs: { "x-large": "" } },
+                                            on
+                                          ),
+                                          [_vm._v("account-box")]
+                                        )
+                                      ]
+                                    }
+                                  }
+                                ])
+                              },
+                              [
+                                _vm._v(" "),
+                                _c("span", [_vm._v("Publicaciones")])
+                              ]
+                            )
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                )
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "v-toolbar",
+              { attrs: { app: "", dark: "", color: "#0e1820" } },
+              [
+                _c("v-toolbar-side-icon", {
                   on: {
                     click: function($event) {
-                      return _vm.toRoute("/myself")
+                      $event.stopPropagation()
+                      _vm.drawer = !_vm.drawer
                     }
                   }
-                },
-                [
-                  _c("v-avatar", { attrs: { size: "34px" } }, [
-                    _c("img", {
-                      attrs: {
-                        src: _vm.$store.getters.user["avatar"],
-                        alt: "Avatar"
+                }),
+                _vm._v(" "),
+                _c("v-toolbar-title", [_vm._v("\n      Atacama Scope\n    ")]),
+                _vm._v(" "),
+                _c("v-spacer"),
+                _vm._v(" "),
+                _c(
+                  "v-btn",
+                  {
+                    attrs: { icon: "" },
+                    on: {
+                      click: function($event) {
+                        return _vm.toRoute("/myself")
                       }
-                    })
-                  ])
-                ],
-                1
-              )
-            ],
-            1
-          )
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "v-content",
-        [
-          _c("v-container", { attrs: { fluid: "" } }, [
-            _c("div", { staticClass: "container" }, [_c("router-view")], 1)
-          ])
-        ],
-        1
-      )
+                    }
+                  },
+                  [_c("v-icon", [_vm._v("account")])],
+                  1
+                )
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "v-content",
+              { staticStyle: { background: "#0e1820" } },
+              [_c("router-view")],
+              1
+            )
+          ],
+          1
+        )
+      ]
     ],
-    1
+    2
   )
 }
 var staticRenderFns = []

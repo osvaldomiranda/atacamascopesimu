@@ -1,13 +1,76 @@
 <template>
 
+<v-app id="inspire" dark >
 
-
-
+<template>
+  <v-app id="inspire">
+    <v-navigation-drawer
+      v-model="drawer"
+      app
+      width="110"
+    >
   
-  <v-app id="inspire" dark style="
-    background: #0e1820;
+      <v-list class="py-4">
 
-  ">
+        <v-list-tile ripple @click="toRoute('/dashboard')" class="py-2">
+          <v-flex x12 class="ma-0 px-0 py-3 text-xs-center">
+              <v-tooltip right>
+                <template v-slot:activator="{ on }">
+                  <v-icon x-large v-on="on">home</v-icon>
+                </template>
+                <span>Home</span>
+              </v-tooltip>
+          </v-flex>
+        </v-list-tile>
+
+        <v-list-tile ripple @click="toRoute('/equipment')"  class="py-2">
+          <v-flex x12 class="ma-0 px-0 py-3 text-xs-center">
+              <v-tooltip right>
+                <template v-slot:activator="{ on }">
+                  <v-icon x-large v-on="on">forum</v-icon>
+                </template>
+                <span>Equipos</span>
+              </v-tooltip>
+          </v-flex>
+        </v-list-tile>
+
+        <v-list-tile ripple @click="toRoute('/publications')" class="py-2">
+          <v-flex x12 class="ma-0 px-0 py-3 text-xs-center">
+              <v-tooltip right>
+                <template v-slot:activator="{ on }">
+                  <v-icon x-large v-on="on">account-box</v-icon>
+                </template>
+                <span>Publicaciones</span>
+              </v-tooltip>
+          </v-flex>
+        </v-list-tile>
+
+      </v-list>
+    </v-navigation-drawer>
+
+  <v-toolbar app dark color="#0e1820">
+    <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
+    <v-toolbar-title>
+      Atacama Scope
+    </v-toolbar-title>
+    <v-spacer></v-spacer>
+      <v-btn icon @click="toRoute('/myself')">
+        <v-icon>account</v-icon>
+      </v-btn>
+  </v-toolbar>
+
+    <v-content style="background: #0e1820">
+            <router-view></router-view>
+    </v-content>
+
+  </v-app>
+</template>
+
+
+
+
+
+<!-- 
     <v-toolbar
       :clipped-left="$vuetify.breakpoint.lgAndUp"
       app
@@ -24,7 +87,7 @@
         <v-btn :to="'/equipment'" flat>Equipos</v-btn> 
         <v-btn :to="'/offers'" flat>Ofertas</v-btn> 
         <v-btn :to="'/publications'" flat>Publicaciones</v-btn>
-        <!-- <v-btn :to="'/admincontrol'" flat>Control</v-btn> -->
+        
 
 
 
@@ -46,18 +109,9 @@
 
 
       </v-toolbar-items>       
-    </v-toolbar>
+    </v-toolbar> -->
 
 
-    <v-content>
-      <v-container fluid>
-       <!-- COntenido -->
-        <div class="container">
-            <router-view></router-view>
-        </div>
-
-      </v-container>
-    </v-content>
 
   
   </v-app>
@@ -140,6 +194,10 @@
 
             this.$router.push('/dashboard');
 
+      },
+
+      toRoute(to){
+         this.$router.push(to);
       },
 
       logout(){
