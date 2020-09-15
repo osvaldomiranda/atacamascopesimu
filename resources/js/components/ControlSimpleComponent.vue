@@ -648,7 +648,8 @@
 
         	var constellation = app.Constellation ?  app.Constellation.name : "Cru"
 
-        	//alert("getAstrnomicObject")
+        	//
+        	alert("getAstrnomicObject")
         	axios.get('/api/astronomic_objects?constellation=' + constellation +'&type='+app.type)
             .then(function (resp) {
               	app.FilteredObjects = resp.data;
