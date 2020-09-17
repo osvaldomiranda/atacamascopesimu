@@ -4358,20 +4358,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 app = this;
                 this.object = a;
                 this.$refs.Loading.show("Calculando si el objeto es visible, un momento por favor");
-                _context.next = 5;
+                app.Ar_screen = app.object.ra;
+                app.Dec_screen = app.object.dec;
+                app.coords(app.Ar_screen, app.Dec_screen);
+                _context.next = 8;
                 return axios.get('/api/astronomic_objects/horizon?object=' + a.name).then(function (resp) {
                   if (resp.data <= 5) {
-                    //alert(JSON.stringify(resp.data));
                     app.Ar = 0;
                     app.Dec = 0;
                     app.Ar_screen = '';
                     app.Dec_screen = '';
                     app.text = "Objeto NO VISIBLE,altura Alt/Az BAJO el HORIZONTE: " + JSON.stringify(resp.data) + 'º';
-                    app.snackbar = true; // alert("Objeto no visible,altura Alt/Az bajo el horizonte: " + JSON.stringify(resp.data) +'º');
+                    app.snackbar = true;
                   } else {
-                    // app.text = "Altura Alt/Az sobre el horizonte: " + JSON.stringify(resp.data) +'º';
-                    // app.snackbar = true;
-                    // alert("Altura Alt/Az sobre el horizonte: " + JSON.stringify(resp.data) +'º');
                     app.Ar_screen = app.object.ra;
                     app.Dec_screen = app.object.dec;
                     app.coords(app.Ar_screen, app.Dec_screen);
@@ -4381,10 +4380,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   alert("Error shoot :" + resp);
                 });
 
-              case 5:
+              case 8:
                 this.$refs.Loading.hide();
 
-              case 6:
+              case 9:
               case "end":
                 return _context.stop();
             }
@@ -4468,6 +4467,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }); // End pusher listener
     },
     move: function move() {
+      alert('Enviando Comando');
       this.state = 'Enviando Comando';
 
       if (this.Ar_screen) {
@@ -4908,7 +4908,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     control: function control() {
       var ComponentClass = vue__WEBPACK_IMPORTED_MODULE_0___default.a.extend(_ControlSimpleComponent__WEBPACK_IMPORTED_MODULE_3__["default"]);
-      var instance = new ComponentClass(); // instance.$slots.default = ['Click me!']
+      var instance = new ComponentClass({
+        store: this.$store
+      }); // instance.$slots.default = ['Click me!']
 
       instance.$mount(); // pass nothing
 

@@ -595,12 +595,16 @@
 
       		this.$refs.Loading.show("Calculando si el objeto es visible, un momento por favor") 
 
+      			            		app.Ar_screen = app.object.ra;
+      					app.Dec_screen = app.object.dec;
+      					app.coords(app.Ar_screen, app.Dec_screen); 
+
 	      	await axios.get('/api/astronomic_objects/horizon?object=' + a.name)
 	            .then(function (resp) {    
 
 	            	
 	            	if(resp.data<=5){
-	            		//alert(JSON.stringify(resp.data));
+	            	
         				app.Ar = 0;
 				        app.Dec = 0;
 				        app.Ar_screen = '';
@@ -609,16 +613,9 @@
 				        app.text = "Objeto NO VISIBLE,altura Alt/Az BAJO el HORIZONTE: " + JSON.stringify(resp.data) +'º';
 
 				        app.snackbar = true;
-				        // alert("Objeto no visible,altura Alt/Az bajo el horizonte: " + JSON.stringify(resp.data) +'º');
+	
 
 	            	} else {
-
-				       // app.text = "Altura Alt/Az sobre el horizonte: " + JSON.stringify(resp.data) +'º';
-
-				       // app.snackbar = true;
-
-				        // alert("Altura Alt/Az sobre el horizonte: " + JSON.stringify(resp.data) +'º');
-
 
 	            		app.Ar_screen = app.object.ra;
       					app.Dec_screen = app.object.dec;
@@ -629,6 +626,7 @@
 	                console.log(resp);
 	                alert("Error shoot :" + resp);
 	            }); 
+
 	        this.$refs.Loading.hide()      		 
 
       				
@@ -731,6 +729,7 @@
 
 
         move(){
+        	alert('Enviando Comando');
         	this.state = 'Enviando Comando';
         	if(this.Ar_screen){
 	        	var $command = {'command': 'MONTURA', 'type': 'mount', 'status': 'PENDIENTE',

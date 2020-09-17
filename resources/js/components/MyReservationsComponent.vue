@@ -101,7 +101,7 @@
         },
         control (){
             var ComponentClass = Vue.extend(PointandshootComponent)
-            var instance = new ComponentClass();
+            var instance = new ComponentClass({store: this.$store});
             // instance.$slots.default = ['Click me!']
             instance.$mount() // pass nothing
             this.$refs.container.appendChild(instance.$el)
