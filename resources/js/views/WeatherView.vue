@@ -2,7 +2,7 @@
 
       <v-card>
         <v-toolbar dark color="verde">
-          <v-toolbar-title>Noticias</v-toolbar-title>
+          <v-toolbar-title>Clima</v-toolbar-title>
         </v-toolbar>
 
   
@@ -26,15 +26,7 @@
         initialize (){
             var app = this;
 
-            axios.get('/api/publications')
-            .then(function (resp) {    
 
-                app.messages = resp.data;
-            })
-            .catch(function (resp) {
-                console.log(resp);
-                alert("Error publications :" + resp);
-            });
         }
     }
 

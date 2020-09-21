@@ -46,7 +46,6 @@
 							    label="Constelación"
 							    @input= "getAstrnomicObject"
 							    return-object
-							    single-line
 						        hide-details
 							    ></v-select>
 							<v-spacer></v-spacer>
@@ -54,12 +53,9 @@
 							    v-model="type"
 							    :items="types"
 							    @input= "getAstrnomicObject"
-							    label="Tipo"
-							    single-line
+							    label="Tipo objeto astronómico"
 						        hide-details
 							    ></v-select>
-
-
 					    </v-card-title>
 					    <v-data-table
 					      :headers="headers"

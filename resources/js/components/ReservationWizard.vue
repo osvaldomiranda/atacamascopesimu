@@ -315,7 +315,38 @@
                   </template>
               </v-flex>
               <v-flex xs7>
-                <my-reservations></my-reservations>  
+              
+                              
+
+                    <v-layout>
+                        <v-flex xs2>
+                        </v-flex> 
+                        <v-flex xs2 class="px-4"> 
+                            <v-card flat color="transparent">
+                                <v-img
+                                    v-bind:src= "moonImages(reserv_date)" 
+                                    aspect-ratio="1"
+                                    max-width="45"
+                                    max-height="45"
+                                ></v-img>   
+                            </v-card> 
+                        </v-flex>
+                        <v-flex xs4 class="px-1">                                           
+                            <v-flex xs12>
+                              <p>{{ moonRise(reserv_date) }}</p>
+                            </v-flex>
+                            <v-flex xs12 class="px-1">
+                              <p>{{ moonSet(reserv_date) }}</p>
+                            </v-flex>                            
+                        </v-flex>
+                    </v-layout>    
+
+
+          
+                <v-layout>
+                  <my-reservations></my-reservations>  
+                </v-layout>
+
               </v-flex>
             </v-layout>
 
@@ -499,7 +530,7 @@
 
       
       focus: '2019-01-08',
-      type: 'month',
+      type: 'week',
       typeToLabel: [
         'month',
         'week',

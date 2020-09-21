@@ -1,10 +1,14 @@
 
 <template>
   <v-app id="inspire" dark >
+
+
+    <!-- <v-content v-if="this.$store.getters.token != ''"> -->
     <v-navigation-drawer
       v-model="drawer"
       app
       width="110"
+      
     >
   
       <v-list class="py-4">
@@ -15,18 +19,29 @@
                 <template v-slot:activator="{ on }">
                   <v-icon x-large v-on="on">home</v-icon>
                 </template>
-                <span>Home</span>
+                <span>Dashboard</span>
               </v-tooltip>
           </v-flex>
         </v-list-tile>
 
-        <v-list-tile ripple @click="toRoute('/equipment')"  class="py-2">
+        <v-list-tile ripple @click="toRoute('/reservations')"  class="py-2">
           <v-flex x12 class="ma-0 px-0 py-3 text-xs-center">
               <v-tooltip right>
                 <template v-slot:activator="{ on }">
-                  <v-icon x-large v-on="on">forum</v-icon>
+                  <v-icon x-large v-on="on">alarm</v-icon>
                 </template>
-                <span>Equipos</span>
+                <span>Reservas</span>
+              </v-tooltip>
+          </v-flex>
+        </v-list-tile>
+
+        <v-list-tile ripple @click="toRoute('/points')" class="py-2">
+          <v-flex x12 class="ma-0 px-0 py-3 text-xs-center">
+              <v-tooltip right>
+                <template v-slot:activator="{ on }">
+                  <v-icon x-large v-on="on">local_atm</v-icon>
+                </template>
+                <span>Puntos / Pagos</span>
               </v-tooltip>
           </v-flex>
         </v-list-tile>
@@ -35,12 +50,57 @@
           <v-flex x12 class="ma-0 px-0 py-3 text-xs-center">
               <v-tooltip right>
                 <template v-slot:activator="{ on }">
-                  <v-icon x-large v-on="on">account-box</v-icon>
+                  <v-icon x-large v-on="on">local_library</v-icon>
                 </template>
-                <span>Publicaciones</span>
+                <span>Noticias</span>
               </v-tooltip>
           </v-flex>
         </v-list-tile>
+
+        <v-list-tile ripple @click="toRoute('/gallery')" class="py-2">
+          <v-flex x12 class="ma-0 px-0 py-3 text-xs-center">
+              <v-tooltip right>
+                <template v-slot:activator="{ on }">
+                  <v-icon x-large v-on="on">insert_photo</v-icon>
+                </template>
+                <span>Galería</span>
+              </v-tooltip>
+          </v-flex>
+        </v-list-tile>
+
+        <v-list-tile ripple @click="toRoute('/weather')" class="py-2">
+          <v-flex x12 class="ma-0 px-0 py-3 text-xs-center">
+              <v-tooltip right>
+                <template v-slot:activator="{ on }">
+                  <v-icon x-large v-on="on">cloud</v-icon>
+                </template>
+                <span>Clima</span>
+              </v-tooltip>
+          </v-flex>
+        </v-list-tile>
+
+        <v-list-tile ripple @click="toRoute('/contacts')" class="py-2">
+          <v-flex x12 class="ma-0 px-0 py-3 text-xs-center">
+              <v-tooltip right>
+                <template v-slot:activator="{ on }">
+                  <v-icon x-large v-on="on">contact_mail</v-icon>
+                </template>
+                <span>Contacto</span>
+              </v-tooltip>
+          </v-flex>
+        </v-list-tile> 
+
+        <v-list-tile ripple @click="toRoute('/legal')" class="py-2">
+          <v-flex x12 class="ma-0 px-0 py-3 text-xs-center">
+              <v-tooltip right>
+                <template v-slot:activator="{ on }">
+                  <v-icon x-large v-on="on">gavel</v-icon>
+                </template>
+                <span>Legal</span>
+              </v-tooltip>
+          </v-flex>
+        </v-list-tile>       
+
 
       </v-list>
     </v-navigation-drawer>
@@ -60,14 +120,14 @@
             <router-view></router-view>
     </v-content>
 
+<!--   </v-content>
+  <v-content v-else>
+    <h2>acá el otro componente {{this.$store.getters.token}}</h2>
+  </v-content> -->
+
+
   </v-app>
 </template>
-
-
-
-
-
-
 
 
  

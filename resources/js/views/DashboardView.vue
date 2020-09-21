@@ -215,7 +215,7 @@
                 app.weather =  resp.data[0]; 
                 app.weather_image = "https://developer.accuweather.com/sites/default/files/0"+app.weather["WeatherIcon"]+"-s.png" ;  
 
-                alert(app.weather_image);            
+                // alert(app.weather_image);            
             })
             .catch(function (resp) {
                 console.log(resp);
