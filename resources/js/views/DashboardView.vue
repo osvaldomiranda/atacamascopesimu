@@ -210,10 +210,12 @@
         initialize () {
             var app= this;
 
+            app.weather_image = "https://developer.accuweather.com/sites/default/files/01-s.png"
+
             axios.get('/api/weather')
             .then(function (resp) {    
                 app.weather =  resp.data[0]; 
-                app.weather_image = "https://developer.accuweather.com/sites/default/files/0"+app.weather["WeatherIcon"]+"-s.png" ;  
+                // app.weather_image = "https://developer.accuweather.com/sites/default/files/0"+app.weather["WeatherIcon"]+"-s.png" ;  
 
                 // alert(app.weather_image);            
             })

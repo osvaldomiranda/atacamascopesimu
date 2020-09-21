@@ -8382,9 +8382,10 @@ __webpack_require__.r(__webpack_exports__);
     },
     initialize: function initialize() {
       var app = this;
+      app.weather_image = "https://developer.accuweather.com/sites/default/files/01-s.png";
       axios.get('/api/weather').then(function (resp) {
-        app.weather = resp.data[0];
-        app.weather_image = "https://developer.accuweather.com/sites/default/files/0" + app.weather["WeatherIcon"] + "-s.png"; // alert(app.weather_image);            
+        app.weather = resp.data[0]; // app.weather_image = "https://developer.accuweather.com/sites/default/files/0"+app.weather["WeatherIcon"]+"-s.png" ;  
+        // alert(app.weather_image);            
       })["catch"](function (resp) {
         console.log(resp);
         alert("Error accuweather :" + resp);
