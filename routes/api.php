@@ -42,8 +42,8 @@ Route::get('/currentuser', 'Api\V1\UsersController@currentUser')->middleware('au
 Route::post('messages', 'Api\V1\MessagesController@index');
 Route::post('messages/send', 'Api\V1\MessagesController@store');
 
-Route::get('image/last', 'ImageController@last')->middleware('auth:api');
-Route::get('images', 'ImageController@index')->middleware('auth:api');
+Route::get('image/last', 'ImageController@last');
+Route::get('images', 'ImageController@index');
 
 Route::get('points', 'PointsController@index')->middleware('auth:api');
 Route::post('points/pay', 'PointsController@pay')->middleware('auth:api');
@@ -54,7 +54,7 @@ Route::get('/my_reservations', 'ReservationController@myReservations')->middlewa
 
 Route::post('/reservation/create', 'ReservationController@create')->middleware('auth:api');
 
-Route::post('/my_images', 'ImageController@myImages')->middleware('auth:api');
+Route::post('/my_images', 'ImageController@myImages');
 
 Route::get('/publications', 'PublicationController@publications');
 Route::get('/offers', 'PublicationController@offers');

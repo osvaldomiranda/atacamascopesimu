@@ -20,6 +20,7 @@ import LegalView        from './views/LegalView'
 
 import ChatComponent   from './components/ChatComponent'
 import AppComponent   from './components/AppComponent'
+import ControlSimpleComponent   from './components/ControlSimpleComponent'
 
 
 
@@ -107,6 +108,11 @@ const router = new VueRouter({
             path: '/admincontrol',
             name: 'AdminControl',
             component: AdminControlView,
+        },
+        {
+            path: '/controlsimple',
+            name: 'controlsimple',
+            component: ControlSimpleComponent,
         },
     ],
 });

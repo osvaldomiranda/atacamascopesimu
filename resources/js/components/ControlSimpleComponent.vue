@@ -9,7 +9,10 @@
 	}
 </style>
 <template>
+
+ 	
   <v-layout>
+
   	<loading ref="Loading"></loading> 
     <v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition">
 <!--       <template v-slot:activator="{ on }">
@@ -17,10 +20,10 @@
       </template> -->
       <v-card color="backgraundColor" >
         <v-toolbar dark color="rojo">
-          <v-btn icon dark @click="dialog = false">
+<!--           <v-btn icon dark @click="dialog = false">
             <v-icon>close</v-icon>
-          </v-btn>
-          <v-toolbar-title>Interfaz de Control</v-toolbar-title>
+          </v-btn> -->
+          <v-toolbar-title>Simulador Interfaz de Control</v-toolbar-title>
           <v-spacer></v-spacer>
         </v-toolbar>
 
@@ -289,6 +292,9 @@
   import { mapState } from 'vuex';
   import Vue from 'vue';  
   import Loading from '../components/Loading.vue'
+  import GuiaComponent from '../components/GuiaComponent.vue'
+ 
+
 
   export default {
   	computed: mapState(['astronomc_objects']),
@@ -595,33 +601,7 @@
       					app.Dec_screen = app.object.dec;
       					app.coords(app.Ar_screen, app.Dec_screen); 
 
-	      	await axios.get('/api/astronomic_objects/horizon?object=' + a.name)
-	            .then(function (resp) {    
 
-	            	
-	            	if(resp.data<=5){
-	            	
-        				app.Ar = 0;
-				        app.Dec = 0;
-				        app.Ar_screen = '';
-				        app.Dec_screen = '';
-
-				        app.text = "Objeto NO VISIBLE,altura Alt/Az BAJO el HORIZONTE: " + JSON.stringify(resp.data) +'º';
-
-				        app.snackbar = true;
-	
-
-	            	} else {
-
-	            		app.Ar_screen = app.object.ra;
-      					app.Dec_screen = app.object.dec;
-      					app.coords(app.Ar_screen, app.Dec_screen); 
-	            	}
-	            })
-	            .catch(function (resp) {
-	                console.log(resp);
-	                alert("Error shoot :" + resp);
-	            }); 
 
 	        this.$refs.Loading.hide()      		 
 
@@ -629,11 +609,18 @@
     	},
       	initialize () {
 
-      		//alert('initialize');
+      		
+      		
+
+
       		this.imageRefresh();
             this.openChat();
             this.getMyImages();
             this.getAstrnomicObject();
+
+            this.guiaClick();
+
+            
         },
 
 
@@ -643,13 +630,13 @@
         	var constellation = app.Constellation ?  app.Constellation.name : "Cru"
 
         	//
-        	alert("getAstrnomicObject")
+        	////alert("getAstrnomicObject")
         	axios.get('/api/astronomic_objects?constellation=' + constellation +'&type='+app.type)
             .then(function (resp) {
               	app.FilteredObjects = resp.data;
             })
             .catch(function (resp) {
-                alert("Error astronomic_objects :" + resp);
+                alert("Error astronomic_objects name :" + resp);
             });
         },
 
@@ -661,7 +648,7 @@
               	app.FilteredObjects = resp.data;
             })
             .catch(function (resp) {
-                alert("Error astronomic_objects :" + resp);
+                alert("Error astronomic_objects constellation :" + resp);
             });
         },
 
@@ -729,7 +716,7 @@
         	this.state = 'Enviando Comando';
         	if(this.Ar_screen){
 	        	var $command = {'command': 'MONTURA', 'type': 'mount', 'status': 'PENDIENTE',
-	        	                'ar': this.Ar, 'dec': this.Dec, 'user_id': this.$store.getters.user['id'], 'equipment_id': 1};
+	        	                'ar': this.Ar, 'dec': this.Dec, 'user_id': 1, 'equipment_id': 1};
 
 	        	//alert(JSON.stringify($command));
 	        	axios.post('/api/command/move', $command)
@@ -749,7 +736,7 @@
 
 
         	var command = {'command': 'CAMARA', 'type': 'shoot', 'status': 'PENDIENTE',
-        	                'exptime': this.Exp, 'iso': this.Iso, 'iso_string': this.selectedIso.iso,'ar': this.Ar_screen, 'dec': this.Dec_screen, 'user_id': this.$store.getters.user['id'], 'equipment_id': 1, 'object_id':this.object.id, 'object_name': this.object.name};
+        	                'exptime': this.Exp, 'iso': this.Iso, 'iso_string': this.selectedIso.iso,'ar': this.Ar_screen, 'dec': this.Dec_screen, 'user_id': 1, 'equipment_id': 1, 'object_id':this.object.id, 'object_name': this.object.name};
 
 
 
@@ -814,7 +801,7 @@
             })
             .catch(function (resp) {
                 console.log(resp);
-                alert("Error shoot :" + resp);
+                alert("Error imageRefresh :" + resp);
             });
             app.getMyImages();
         },
@@ -827,7 +814,7 @@
             })
             .catch(function (resp) {
                 console.log(resp);
-                alert("Error shoot :" + resp);
+                alert("Error getMyImages :" + resp);
             });
         },
 
@@ -989,7 +976,15 @@
                 total += this.tiempos[i];
             }
             return total;
-        }
+        },
+	    guiaClick (){
+	    	alert('guiaClick');
+	    	
+	        var ComponentGuia = Vue.extend(GuiaComponent)
+	        var instance = new ComponentGuia({store: this.$store});
+	        instance.$mount();
+	        this.$refs.container.appendChild(instance.$el);
+	    },
 
     },
     filters: {
@@ -1000,7 +995,9 @@
             var s = this.pad(horas, 2) + ':' + this.pad(minutos, 2) + ':' + this.pad(segundos, 2);
             return s;
         }
-    }
+    },
+
+
     
   }
 </script>

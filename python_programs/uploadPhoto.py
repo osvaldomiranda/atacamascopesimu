@@ -10,8 +10,8 @@ def main(argv):
   
   print(cwd)
 
-  ip='34.219.96.49'
-  # ip='localhost:8000'
+  # ip='34.219.96.49'
+  ip='localhost:8000'
   try:
     opts, args = getopt.getopt(argv,"hc:",["command="])
   except getopt.GetoptError:
@@ -41,7 +41,7 @@ def main(argv):
 
   print(r)
 
-  os.rename(cwd +'/capt0000.jpg', cwd + '/jpgimage'+command_id+'.jpeg')
+  # os.rename(cwd +'/capt0000.jpg', cwd + '/jpgimage'+command_id+'.jpeg')
   # os.rename(cwd +'/capt0000.cr2', cwd + '/rwowimage'+command_id+'.cr2')
 if __name__ == "__main__":
    main(sys.argv[1:])

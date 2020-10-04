@@ -76,7 +76,7 @@ class ImageController extends Controller
     }
 
     public function last(request $request){
-        $image = Image::where('user_id',Auth::id())->get();
+        $image = Image::where('user_id', 1)->get();
 
         if($image->count()>0){
              $path =  $image->last()->path;
@@ -89,13 +89,13 @@ class ImageController extends Controller
     }
 
     public function index(request $request){
-        $images = Image::where('user_id',Auth::id())->orderBy('created_at', 'desc')->get();
+        $images = Image::where('user_id', 1)->orderBy('created_at', 'desc')->get();
         return response()->json($images);
     }
 
     public function myImages(request $request){
         
-        $images = Image::where('user_id',Auth::id())->orderBy('created_at', 'desc')->get();
+        $images = Image::where('user_id', 1)->orderBy('created_at', 'desc')->get();
         return response()->json($images);
     }
 

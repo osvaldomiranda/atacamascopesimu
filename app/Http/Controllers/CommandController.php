@@ -10,6 +10,9 @@ use App\Message;
 class CommandController extends Controller
 {
     public function move(request $request){
+
+        Info($request);
+
 	    $this->validate($request, [
 	        'type' => 'required',
 	        'status' => 'required',
@@ -28,6 +31,8 @@ class CommandController extends Controller
         $command->user_id		= $request->input('user_id');
         $command->equipment_id	= $request->input('equipment_id');
         $command->save();
+
+        return response()->json($command);
     }
     public function shoot(request $request){
 
@@ -59,6 +64,8 @@ class CommandController extends Controller
         $command->iso_string	= $request->input('iso_string');
         $command->equipment_id	= $request->input('equipment_id');
         $command->save();
+
+        return response()->json($command);
     }
     public function focus(request $request){
     	Info("*****************");
@@ -84,6 +91,8 @@ class CommandController extends Controller
         $command->user_id		= $request->input('user_id');
         $command->equipment_id	= $request->input('equipment_id');
         $command->save();
+
+        return response()->json($command);
     }
 
     public function pointandshot(request $request){
@@ -109,6 +118,8 @@ class CommandController extends Controller
         $command->user_id		= $request->input('user_id');
         $command->equipment_id	= $request->input('equipment_id');
         $command->save();
+
+        return response()->json($command);
     }
 
 
