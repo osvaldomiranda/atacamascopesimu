@@ -4353,7 +4353,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }); // End pusher listener
     },
     move: function move() {
-      alert('Enviando Comando');
+      // alert('Enviando Comando');
       this.state = 'Enviando Comando';
 
       if (this.Ar_screen) {
@@ -4594,7 +4594,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       return total;
     },
     guiaClick: function guiaClick() {
-      alert('guiaClick');
+      // alert('guiaClick');
       var ComponentGuia = vue__WEBPACK_IMPORTED_MODULE_2___default.a.extend(_components_GuiaComponent_vue__WEBPACK_IMPORTED_MODULE_4__["default"]);
       var instance = new ComponentGuia({
         store: this.$store

@@ -712,7 +712,7 @@
 
 
         move(){
-        	alert('Enviando Comando');
+        	// alert('Enviando Comando');
         	this.state = 'Enviando Comando';
         	if(this.Ar_screen){
 	        	var $command = {'command': 'MONTURA', 'type': 'mount', 'status': 'PENDIENTE',
@@ -978,7 +978,7 @@
             return total;
         },
 	    guiaClick (){
-	    	alert('guiaClick');
+	    	// alert('guiaClick');
 	    	
 	        var ComponentGuia = Vue.extend(GuiaComponent)
 	        var instance = new ComponentGuia({store: this.$store});
