@@ -479,6 +479,7 @@ class ComposerStaticInit23b1b56a63f0e08b69dde22dd46af816
 
     public static $classMap = array (
         'App\\AstronomicObject' => __DIR__ . '/../..' . '/app/AstronomicObject.php',
+        'App\\AstronomicObjectImages' => __DIR__ . '/../..' . '/app/AstronomicObjectImages.php',
         'App\\Command' => __DIR__ . '/../..' . '/app/Command.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Equipment' => __DIR__ . '/../..' . '/app/Equipment.php',
@@ -3296,6 +3297,7 @@ class ComposerStaticInit23b1b56a63f0e08b69dde22dd46af816
         'Monolog\\ResettableInterface' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/ResettableInterface.php',
         'Monolog\\SignalHandler' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/SignalHandler.php',
         'Monolog\\Utils' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Utils.php',
+        'NamesImagesSeeder' => __DIR__ . '/../..' . '/database/seeds/NamesImagesSeeder.php',
         'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider' => __DIR__ . '/..' . '/nunomaduro/collision/src/Adapters/Laravel/CollisionServiceProvider.php',
         'NunoMaduro\\Collision\\Adapters\\Laravel\\ExceptionHandler' => __DIR__ . '/..' . '/nunomaduro/collision/src/Adapters/Laravel/ExceptionHandler.php',
         'NunoMaduro\\Collision\\Adapters\\Laravel\\Inspector' => __DIR__ . '/..' . '/nunomaduro/collision/src/Adapters/Laravel/Inspector.php',

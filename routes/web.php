@@ -21,6 +21,7 @@ Route::get('/es','LocaleController@es');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/update_paths', 'ImageController@updatePaths');
 
 
 Route::get('storage/{filename}', function ($filename)

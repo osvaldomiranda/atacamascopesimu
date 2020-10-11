@@ -10,6 +10,8 @@ use App\Image;
 use App\Events\MessageSent;
 use App\Message;
 use App\Command;
+use App\AstronomicObject;
+use App\AstronomicObjectImages;
 
 
 class ImageController extends Controller
@@ -24,7 +26,6 @@ class ImageController extends Controller
 
 
         $command = Command::where('id', $command_id)->get()->first();
-        $user_id = Auth::id();
     	
         Info($command);
         Info("****** upload *******");
@@ -37,16 +38,10 @@ class ImageController extends Controller
 
             Info($name);
 
-            $filename = 'image-' . $user_id . '-' . time() . '.' . $file->getClientOriginalExtension();
-
-            Info($filename);
-
-            $result=Storage::disk('s3')->put($filename, file_get_contents($file), 'public');
-
 
     		$image = new Image;
     		$image->name = $name;
-    		$image->path = Storage::disk('s3')->url($filename);;
+    		$image->path = $command->path;
 
             $image->ar      = $command->ar;
             $image->dec     = $command->dec;
@@ -98,5 +93,21 @@ class ImageController extends Controller
         $images = Image::where('user_id', 1)->orderBy('created_at', 'desc')->get();
         return response()->json($images);
     }
+
+    public function updatePaths(){
+        $objects = AstronomicObject::all();
+
+        foreach ($objects as $object) {
+            $path = AstronomicObjectImages::where('name', $object->name)->get()->first();
+
+            $object->path = $path->path;
+            $object->save();
+
+            Info('Update');
+        }
+        return response()->json($objects);
+    }
+
+ 
 
 }

@@ -12,16 +12,20 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // $this->call(UsersTableSeeder::class]);
-    	App\Equipment::truncate();
-    	App\Equipment::create(['name'=>'Equipo Principal', 'description'=>'Equipo cielo profundo', 'points'=> 200]);
-
-		App\User::truncate();	
-		App\User::create(['name'=>'sender', 'email'=>'sender@gmail.com', 'password'=>'sender1234']);
-		App\User::create(['name'=>'receiver', 'email'=>'receiver@gmail.com', 'password'=>'receiver1234']);
 
 
-App\AstronomicObject::truncate();  
+        // App\Equipment::truncate();
+        // App\Equipment::create(['name'=>'Equipo Principal', 'description'=>'Equipo cielo profundo', 'points'=> 200]);
 
+		// App\User::truncate();	
+		// App\User::create(['name'=>'sender', 'email'=>'sender@gmail.com', 'password'=>'sender1234']);
+		// App\User::create(['name'=>'receiver', 'email'=>'receiver@gmail.com', 'password'=>'receiver1234']);
+
+
+    App\AstronomicObject::truncate();  
+
+
+  
 
 App\AstronomicObject::create(['name' =>'Adhil', 'type_object'=>'Estrella', 'ra'=>'1h22m20s','dec'=>'45°32m0s' , 'constellation'=>'And', 'bmag'=>4.9]);
 App\AstronomicObject::create(['name' =>'Almach', 'type_object'=>'Estrella', 'ra'=>'2h3m54s','dec'=>'42°20m0s' , 'constellation'=>'And', 'bmag'=>2.3]);
@@ -13699,5 +13703,5 @@ App\AstronomicObject::create(['name' => 'Sun', 'catalog' => 'SolarSistem', 'type
 
 
 
-    }
+}
 }

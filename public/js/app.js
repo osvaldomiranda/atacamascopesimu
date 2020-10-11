@@ -3823,12 +3823,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       s_dec: 0,
       catalog: 'SolarSistem',
       catalogs: ['SolarSistem', 'Messier', 'NGC', 'IC'],
-      type: "Cúmulo abierto",
+      type: "Galaxia",
       name: null,
       types: [' ', 'Cúmulo Globular', 'Cúmulo abierto', 'Galaxia', 'Asterismo o Cúmulo Abierto', 'Estrella', 'Estrella doble', 'Galaxias en Interacción', 'Nebulosa', 'Nebulosa de emisión Hidrógeno', 'Nebulosa de Reflexión', 'Nebulosa Extragaláctica', 'Nebulosa Planetaria', 'Nebulosa y Cúmulo', 'Nova', 'Otro', 'Planet', 'Par de Galaxias', 'Remanente de Supernova', 'Trío de Galaxias'],
       Constellation: {
-        name: 'Cru',
-        latin: 'Crux'
+        name: 'And',
+        latin: 'Andromeda'
       },
       Constellations: [{
         name: '',
@@ -3837,266 +3837,77 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         name: 'And',
         latin: 'Andromeda'
       }, {
-        name: 'Ant',
-        latin: 'Antlia'
-      }, {
-        name: 'Aps',
-        latin: 'Apus'
-      }, {
-        name: 'Aql',
-        latin: 'Aquila'
-      }, {
-        name: 'Aqr',
-        latin: 'Aquarius'
-      }, {
-        name: 'Ara',
-        latin: 'Ara'
-      }, {
-        name: 'Ari',
-        latin: 'Aries'
-      }, {
-        name: 'Aur',
-        latin: 'Auriga'
-      }, {
-        name: 'Boo',
-        latin: 'Bootes'
-      }, {
-        name: 'Cae',
-        latin: 'Caelum'
-      }, {
-        name: 'Cam',
-        latin: 'Camelopardalis'
-      }, {
-        name: 'Cap',
-        latin: 'Capricornus'
-      }, {
-        name: 'Car',
-        latin: 'Carina'
-      }, {
-        name: 'Cas',
-        latin: 'Cassiopeia'
-      }, {
-        name: 'Cen',
-        latin: 'Centaurus'
-      }, {
-        name: 'Cep',
-        latin: 'Cepheus'
-      }, {
         name: 'Cet',
         latin: 'Cetus'
       }, {
         name: 'Cha',
         latin: 'Chamaleon'
       }, {
-        name: 'Cir',
-        latin: 'Circinus'
-      }, {
-        name: 'CMa',
-        latin: 'Canis Major'
-      }, {
-        name: 'CMi',
-        latin: 'Canis Minor'
-      }, {
-        name: 'Cnc',
-        latin: 'Cancer'
-      }, {
-        name: 'Col',
-        latin: 'Columba'
-      }, {
-        name: 'Com',
-        latin: 'Coma Berenices'
-      }, {
-        name: 'CrA',
-        latin: 'Corona Australis'
-      }, {
-        name: 'CrB',
-        latin: 'Corona Borealis'
-      }, {
-        name: 'Crt',
-        latin: 'Crater'
-      }, {
-        name: 'Cru',
-        latin: 'Crux'
-      }, {
-        name: 'Crv',
-        latin: 'Corvus'
-      }, {
-        name: 'CVn',
-        latin: 'Canes Venatici'
-      }, {
-        name: 'Cyg',
-        latin: 'Cygnus'
-      }, {
-        name: 'Del',
-        latin: 'Delphinus'
-      }, {
-        name: 'Dor',
-        latin: 'Dorado'
-      }, {
-        name: 'Dra',
-        latin: 'Draco'
-      }, {
-        name: 'Equ',
-        latin: 'Equuleus'
-      }, {
-        name: 'Eri',
-        latin: 'Eridanus'
-      }, {
-        name: 'For',
-        latin: 'Fornax'
-      }, {
-        name: 'Gem',
-        latin: 'Gemini'
-      }, {
-        name: 'Gru',
-        latin: 'Grus'
-      }, {
-        name: 'Her',
-        latin: 'Hercules'
-      }, {
-        name: 'Hor',
-        latin: 'Horologium'
-      }, {
-        name: 'Hya',
-        latin: 'Hydra'
-      }, {
-        name: 'Hyi',
-        latin: 'Hydrus'
-      }, {
-        name: 'Ind',
-        latin: 'Indus'
-      }, {
-        name: 'Lac',
-        latin: 'Lacerta'
-      }, {
-        name: 'Leo',
-        latin: 'Leo'
-      }, {
-        name: 'Lep',
-        latin: 'Lepus'
-      }, {
-        name: 'Lib',
-        latin: 'Libra'
-      }, {
-        name: 'LMi',
-        latin: 'Leo Minor'
-      }, {
-        name: 'Lup',
-        latin: 'Lupus'
-      }, {
-        name: 'Lyn',
-        latin: 'Lynx'
-      }, {
-        name: 'Lyr',
-        latin: 'Lyra'
-      }, {
-        name: 'Men',
-        latin: 'Mensa'
-      }, {
-        name: 'Mic',
-        latin: 'Microscopium'
-      }, {
-        name: 'Mon',
-        latin: 'Monoceros'
-      }, {
-        name: 'Mus',
-        latin: 'Musca'
-      }, {
-        name: 'Nor',
-        latin: 'Norma'
-      }, {
-        name: 'Oct',
-        latin: 'Octans'
-      }, {
-        name: 'Oph',
-        latin: 'Ophiuchus'
-      }, {
-        name: 'Ori',
-        latin: 'Orion'
-      }, {
-        name: 'Pav',
-        latin: 'Pavo'
-      }, {
-        name: 'Peg',
-        latin: 'Pegasus'
-      }, {
-        name: 'Per',
-        latin: 'Perseus'
-      }, {
-        name: 'Phe',
-        latin: 'Phoenix'
-      }, {
-        name: 'Pic',
-        latin: 'Pictor'
-      }, {
-        name: 'PsA',
-        latin: 'Piscis Austrinus'
-      }, {
-        name: 'Psc',
-        latin: 'Pisces'
-      }, {
-        name: 'Pup',
-        latin: 'Puppis'
-      }, {
-        name: 'Pyx',
-        latin: 'Pyxis'
-      }, {
-        name: 'Ret',
-        latin: 'Reticulum'
-      }, {
-        name: 'Scl',
-        latin: 'Sculptor'
+        name: 'Sgr',
+        latin: 'Sagittarius'
       }, {
         name: 'Sco',
         latin: 'Scorpius'
       }, {
-        name: 'Sct',
-        latin: 'Scutum'
+        name: 'Cyg',
+        latin: 'Cygnus'
       }, {
-        name: 'Ser',
-        latin: 'Serpens'
+        name: 'Hya',
+        latin: 'Hydra'
       }, {
-        name: 'Sex',
-        latin: 'Sextans'
+        name: 'Car',
+        latin: 'Carina'
       }, {
-        name: 'Sge',
-        latin: 'Sagitta'
+        name: 'Dor',
+        latin: 'Dorado'
       }, {
-        name: 'Sgr',
-        latin: 'Sagittarius'
-      }, {
-        name: 'Tau',
-        latin: 'Taurus'
-      }, {
-        name: 'Tel',
-        latin: 'Telescopium'
-      }, {
-        name: 'TrA',
-        latin: 'Triangulum Australe'
-      }, {
-        name: 'Tri',
-        latin: 'Triangulum'
-      }, {
-        name: 'Tuc',
-        latin: 'Tucana'
-      }, {
-        name: 'UMa',
-        latin: 'Ursa Major'
-      }, {
-        name: 'UMi',
-        latin: 'Ursa Minor'
-      }, {
-        name: 'Vel',
-        latin: 'Vela'
+        name: 'Cas',
+        latin: 'Cassiopeia'
       }, {
         name: 'Vir',
         latin: 'Virgo'
       }, {
-        name: 'Vol',
-        latin: 'Volans'
+        name: 'Cap',
+        latin: 'Capricornus'
       }, {
         name: 'Vul',
         latin: 'Vulpecula'
+      }, {
+        name: 'Pav',
+        latin: 'Pavo'
+      }, {
+        name: 'Aqr',
+        latin: 'Aquarius'
+      }, {
+        name: 'Oph',
+        latin: 'Ophiuchus'
+      }, {
+        name: 'Ara',
+        latin: 'Ara'
+      }, {
+        name: 'Cen',
+        latin: 'Centaurus'
+      }, {
+        name: 'Ant',
+        latin: 'Antlia'
+      }, {
+        name: 'TrA',
+        latin: 'Triangulum Australe'
+      }, {
+        name: 'Cru',
+        latin: 'Crux'
+      }, {
+        name: 'Tuc',
+        latin: 'Tucana'
+      }, {
+        name: 'Lyr',
+        latin: 'Lyra'
+      }, {
+        name: 'Scl',
+        latin: 'Sculptor'
+      }, {
+        name: 'Men',
+        latin: 'Mensa'
       }],
       FilteredObjects: [],
       Ar: 0,
@@ -4388,7 +4199,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         'user_id': 1,
         'equipment_id': 1,
         'object_id': this.object.id,
-        'object_name': this.object.name
+        'object_name': this.object.name,
+        'path': this.object.path
       };
       this.imageUrl = '';
       axios.post('/api/command/shoot', command).then(function (resp) {})["catch"](function (resp) {

@@ -19,7 +19,8 @@ class CommandController extends Controller
 	        'ar' => 'required',
 	        'dec' => 'required',
 	        'user_id' => 'required',
-	        'equipment_id' => 'required',
+            'equipment_id' => 'required',
+	        
 	    ]);
 
 	    $command = new Command();
@@ -29,7 +30,7 @@ class CommandController extends Controller
         $command->ar  			= $request->input('ar');
         $command->dec 			= $request->input('dec');	
         $command->user_id		= $request->input('user_id');
-        $command->equipment_id	= $request->input('equipment_id');
+        $command->equipment_id  = $request->input('equipment_id');
         $command->save();
 
         return response()->json($command);
@@ -48,6 +49,7 @@ class CommandController extends Controller
 	        'iso' => 'required',
 	        'user_id' => 'required',
 	        'equipment_id' => 'required',
+
 	    ]);
 
 	    $command = new Command();
@@ -63,6 +65,8 @@ class CommandController extends Controller
         $command->object_id		= $request->input('object_id');
         $command->iso_string	= $request->input('iso_string');
         $command->equipment_id	= $request->input('equipment_id');
+        $command->path          = $request->input('path');
+
         $command->save();
 
         return response()->json($command);
