@@ -25,6 +25,14 @@
         </v-toolbar>
 
 
+    <v-layout>
+      <v-flex xs12 class="px-2 py-4">
+        <h3>Las imagenes de este simulador han sido fotografiadas con los sistemas y equipos de Atacama Scope </h3>
+        <p>Todos los derechos reservados</p>
+      </v-flex>
+
+    </v-layout>
+
 		<v-layout>
 			<v-flex xs4 class="px-2 py-4">
         <v-img

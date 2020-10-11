@@ -4525,6 +4525,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -43149,6 +43157,26 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("v-spacer")
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-layout",
+                [
+                  _c(
+                    "v-flex",
+                    { staticClass: "px-2 py-4", attrs: { xs12: "" } },
+                    [
+                      _c("h3", [
+                        _vm._v(
+                          "Las imagenes de este simulador han sido fotografiadas con los sistemas y equipos de Atacama Scope "
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("p", [_vm._v("Todos los derechos reservados")])
+                    ]
+                  )
                 ],
                 1
               ),
