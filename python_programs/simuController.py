@@ -4,8 +4,8 @@ import subprocess
 import time
 from subprocess import call
 
-# ip = '18.236.139.196'
-ip = 'localhost:8000'
+ip = '34.216.200.165'
+#ip = 'localhost:8000'
 
 url = 'http://'+ip+'/api/command/mountcamera'
 data = '{}'
@@ -50,8 +50,10 @@ if(response.ok):
         url = 'http://'+ip+'/api/messages/send?sender_id=1&receiver_id=2&message=Subiendo Imagen'
         time.sleep( 2 )
         response = requests.post(url, data=data)
-          
-        call(["/usr/bin/python","/Users/macbook/atacamaScopeSimu/python_programs/uploadPhoto.py", "-c", str(jData['id'])])
 
+        url = 'http://'+ip+'/api/upload/'+str(jData['id'])
+        response = requests.post(url, data=data)
+          
+        
 
 

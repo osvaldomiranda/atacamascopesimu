@@ -30,44 +30,30 @@ class ImageController extends Controller
         Info($command);
         Info("****** upload *******");
         
+    	$image = new Image;
+    	$image->name = "imagen_simulada.jpg";
+    	$image->path = $command->path;
+        $image->ar      = $command->ar;
+        $image->dec     = $command->dec;
+        $image->exptime = $command->exptime;
+        $image->iso     = $command->iso;
+        $image->ar_string   = $command->ar_string;
+        $image->dec_string  = $command->dec_string;
+        $image->object_name = $command->object_name;
+        $image->iso_string  = $command->iso_string;
+    	$image->user_id = $command->user_id;
+    	$image->equipment_id = 1;
+    	$image->save();
+        //TODO: cuando se tenga mas de un telescopio, se debe 
+        //TODO: reemplazar el receiver_id, con el id del usuario
+        $message = Message::create([
+            'sender_id'   => 1,
+            'receiver_id' => 2,
+            'message'     => 'Imagen Recibida',
+        ]);
 
-    	if($request->hasFile('photo')){
-
-            $file = $request->file('photo');
-            $name=time().$file->getClientOriginalName();
-
-            Info($name);
-
-
-    		$image = new Image;
-    		$image->name = $name;
-    		$image->path = $command->path;
-
-            $image->ar      = $command->ar;
-            $image->dec     = $command->dec;
-            $image->exptime = $command->exptime;
-            $image->iso     = $command->iso;
-
-            $image->ar_string   = $command->ar_string;
-            $image->dec_string  = $command->dec_string;
-            $image->object_name = $command->object_name;
-            $image->iso_string  = $command->iso_string;
-
-
-    		$image->user_id = $command->user_id;
-    		$image->equipment_id = 1;
-    		$image->save();
-
-            //TODO: cuando se tenga mas de un telescopio, se debe 
-            //TODO: reemplazar el receiver_id, con el id del usuario
-            $message = Message::create([
-                'sender_id'   => 1,
-                'receiver_id' => 2,
-                'message'     => 'Imagen Recibida',
-            ]);
-
-            broadcast(new MessageSent($message));
-    	}
+        broadcast(new MessageSent($message));
+    	
     }
 
     public function last(request $request){
