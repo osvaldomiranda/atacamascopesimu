@@ -3823,12 +3823,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       s_dec: 0,
       catalog: 'SolarSistem',
       catalogs: ['SolarSistem', 'Messier', 'NGC', 'IC'],
-      type: "Galaxia",
+      type: " ",
       name: null,
       types: [' ', 'Cúmulo Globular', 'Cúmulo abierto', 'Galaxia', 'Asterismo o Cúmulo Abierto', 'Estrella', 'Estrella doble', 'Galaxias en Interacción', 'Nebulosa', 'Nebulosa de emisión Hidrógeno', 'Nebulosa de Reflexión', 'Nebulosa Extragaláctica', 'Nebulosa Planetaria', 'Nebulosa y Cúmulo', 'Nova', 'Otro', 'Planet', 'Par de Galaxias', 'Remanente de Supernova', 'Trío de Galaxias'],
       Constellation: {
-        name: 'And',
-        latin: 'Andromeda'
+        name: ' ',
+        latin: ' '
       },
       Constellations: [{
         name: '',

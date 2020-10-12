@@ -352,7 +352,7 @@
 
         catalog:'SolarSistem',
         catalogs: ['SolarSistem','Messier','NGC', 'IC'],
-        type:"Galaxia",
+        type:" ",
         name:null,
         types:[	' ',
         		'Cúmulo Globular',
@@ -376,7 +376,7 @@
 				'Trío de Galaxias',],
 
 
-        Constellation:{name:'And',latin:'Andromeda'},
+        Constellation:{name:' ',latin:' '},
 
         Constellations: [
             {name:'',latin:' '},
