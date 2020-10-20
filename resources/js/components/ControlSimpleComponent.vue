@@ -20,9 +20,9 @@
       </template> -->
       <v-card color="backgraundColor" >
         <v-toolbar dark color="rojo">
-<!--           <v-btn icon dark @click="dialog = false">
+          <v-btn icon dark @click="returnToAtacamaScope()">
             <v-icon>close</v-icon>
-          </v-btn> -->
+          </v-btn>
           <v-toolbar-title>Simulador Interfaz de Control</v-toolbar-title>
           <v-spacer></v-spacer>
         </v-toolbar>
@@ -929,6 +929,10 @@
 	        this.$refs.container.appendChild(instance.$el);
 	    },
 
+	    returnToAtacamaScope(){
+	    	window.location.href = "http://34.219.96.49/";
+	    }
+
     },
     filters: {
         formateaTiempo: function(t) {
@@ -939,6 +943,7 @@
             return s;
         }
     },
+
 
 
     
