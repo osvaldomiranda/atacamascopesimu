@@ -4413,6 +4413,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       });
       instance.$mount();
       this.$refs.container.appendChild(instance.$el);
+    },
+    returnToAtacamaScope: function returnToAtacamaScope() {
+      window.location.href = "http://34.219.96.49/";
     }
   },
   filters: {
@@ -42471,6 +42474,20 @@ var render = function() {
                 "v-toolbar",
                 { attrs: { dark: "", color: "rojo" } },
                 [
+                  _c(
+                    "v-btn",
+                    {
+                      attrs: { icon: "", dark: "" },
+                      on: {
+                        click: function($event) {
+                          return _vm.returnToAtacamaScope()
+                        }
+                      }
+                    },
+                    [_c("v-icon", [_vm._v("close")])],
+                    1
+                  ),
+                  _vm._v(" "),
                   _c("v-toolbar-title", [
                     _vm._v("Simulador Interfaz de Control")
                   ]),
