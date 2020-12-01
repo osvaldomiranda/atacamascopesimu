@@ -35,42 +35,13 @@ const router = new VueRouter({
             name: 'app',
             component: AppComponent,
         },
-        {
-            path: '/dashboard',
-            name: 'dashboard',
-            component: DashboardView,
-        },
 
-        {
-            path: '/reservations',
-            name: 'Reservations',
-            component: ReservationView,
-        },
-        {
-            path: '/points',
-            name: 'Points',
-            component: PointsView,
-        },
-        {
-            path: '/publications',
-            name: 'Publications',
-            component: PublicationsView,
-        },
         {
             path: '/gallery',
             name: 'Gallery',
             component: GalleryView,
         },
-        {
-            path: '/weather',
-            name: 'Weather',
-            component: WeatherView,
-        },
-        {
-            path: '/contacts',
-            name: 'Contacts',
-            component: ContactView,
-        },
+
 
         {
             path: '/legal',
@@ -78,37 +49,13 @@ const router = new VueRouter({
             component: LegalView,
         },
 
-        {
-            path: '/chat',
-            name: 'chat',
-            component: ChatComponent,
-        },
-        {
-            path: '/offers',
-            name: 'offers',
-            component: OffersView,
-        },
 
-        {
-            path: '/users',
-            name: 'Users',
-            component: UsersView,
-        },
-        {
-            path: '/statistics',
-            name: 'Statistics',
-            component: StatisticsView,
-        },
         {
             path: '/equipment',
             name: 'Equipment',
             component: EquipmentView,
         },
-        {
-            path: '/admincontrol',
-            name: 'AdminControl',
-            component: AdminControlView,
-        },
+
         {
             path: '/controlsimple',
             name: 'controlsimple',

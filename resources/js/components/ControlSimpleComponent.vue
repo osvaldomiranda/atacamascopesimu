@@ -930,7 +930,7 @@
 	    },
 
 	    returnToAtacamaScope(){
-	    	window.location.href = "http://34.219.96.49/";
+	    	window.location.href = "http://atacamascope.com/";
 	    }
 
     },

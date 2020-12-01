@@ -4415,7 +4415,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.$refs.container.appendChild(instance.$el);
     },
     returnToAtacamaScope: function returnToAtacamaScope() {
-      window.location.href = "http://34.219.96.49/";
+      window.location.href = "http://atacamascope.com/";
     }
   },
   filters: {
@@ -92512,61 +92512,17 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_2__["default"]({
     name: 'app',
     component: _components_AppComponent__WEBPACK_IMPORTED_MODULE_17__["default"]
   }, {
-    path: '/dashboard',
-    name: 'dashboard',
-    component: _views_DashboardView__WEBPACK_IMPORTED_MODULE_8__["default"]
-  }, {
-    path: '/reservations',
-    name: 'Reservations',
-    component: _views_ReservationView__WEBPACK_IMPORTED_MODULE_9__["default"]
-  }, {
-    path: '/points',
-    name: 'Points',
-    component: _views_PointsView__WEBPACK_IMPORTED_MODULE_10__["default"]
-  }, {
-    path: '/publications',
-    name: 'Publications',
-    component: _views_PublicationsView__WEBPACK_IMPORTED_MODULE_11__["default"]
-  }, {
     path: '/gallery',
     name: 'Gallery',
     component: _views_GalleryView__WEBPACK_IMPORTED_MODULE_12__["default"]
-  }, {
-    path: '/weather',
-    name: 'Weather',
-    component: _views_WeatherView__WEBPACK_IMPORTED_MODULE_13__["default"]
-  }, {
-    path: '/contacts',
-    name: 'Contacts',
-    component: _views_ContactView__WEBPACK_IMPORTED_MODULE_14__["default"]
   }, {
     path: '/legal',
     name: 'Legal',
     component: _views_LegalView__WEBPACK_IMPORTED_MODULE_15__["default"]
   }, {
-    path: '/chat',
-    name: 'chat',
-    component: _components_ChatComponent__WEBPACK_IMPORTED_MODULE_16__["default"]
-  }, {
-    path: '/offers',
-    name: 'offers',
-    component: _views_OffersView__WEBPACK_IMPORTED_MODULE_3__["default"]
-  }, {
-    path: '/users',
-    name: 'Users',
-    component: _views_UsersView__WEBPACK_IMPORTED_MODULE_4__["default"]
-  }, {
-    path: '/statistics',
-    name: 'Statistics',
-    component: _views_StatisticsView__WEBPACK_IMPORTED_MODULE_5__["default"]
-  }, {
     path: '/equipment',
     name: 'Equipment',
     component: _views_EquipmentView__WEBPACK_IMPORTED_MODULE_6__["default"]
-  }, {
-    path: '/admincontrol',
-    name: 'AdminControl',
-    component: _views_AdminControlView__WEBPACK_IMPORTED_MODULE_7__["default"]
   }, {
     path: '/controlsimple',
     name: 'controlsimple',
