@@ -4415,7 +4415,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.$refs.container.appendChild(instance.$el);
     },
     returnToAtacamaScope: function returnToAtacamaScope() {
-      window.location.href = "http://atacamascope.com/";
+      window.location.href = "http://atacamascope.cl";
     }
   },
   filters: {
