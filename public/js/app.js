@@ -3762,14 +3762,22 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
 
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  computed: Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])(['astronomc_objects']),
   data: function data() {
     return {
+      constelacion: this.$vuetify.t('$vuetify.control.Constelación'),
+      tipo: this.$vuetify.t('$vuetify.control.Tipo objeto astronómico'),
+      sensibilidad: this.$vuetify.t('$vuetify.control.Sensibilidad'),
+      tiempo_exp: this.$vuetify.t('$vuetify.control.Tiempo Exposición(Segundos)'),
+      asencionrecta: this.$vuetify.t('$vuetify.control.Ascención Recta'),
+      declinacion: this.$vuetify.t('$vuetify.control.Declinación'),
       snackbar: false,
       y: 'top',
       x: null,
@@ -4060,6 +4068,53 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   components: {
     Loading: _components_Loading_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
+  },
+  computed: {
+    astronomc_objects: function astronomc_objects() {
+      return this.$store.state.astronomc_objects;
+    },
+    headers: function headers() {
+      return [{
+        text: this.$vuetify.t('$vuetify.control.Usar'),
+        value: 'name'
+      }, {
+        text: this.$vuetify.t('$vuetify.control.Descripción'),
+        value: 'colloquial_name'
+      }, {
+        text: this.$vuetify.t('$vuetify.control.Constelación'),
+        value: 'constellation'
+      }, {
+        text: this.$vuetify.t('$vuetify.control.Tipo'),
+        value: 'type_object'
+      }, {
+        text: this.$vuetify.t('$vuetify.control.Nombre'),
+        value: 'name'
+      }];
+    },
+    myImagesHeaders: function myImagesHeaders() {
+      return [{
+        text: this.$vuetify.t('$vuetify.dashboard.Foto'),
+        value: 'img'
+      }, {
+        text: this.$vuetify.t('$vuetify.dashboard.Nombre'),
+        value: 'name'
+      }, {
+        text: this.$vuetify.t('$vuetify.dashboard.ISO'),
+        value: 'iso'
+      }, {
+        text: this.$vuetify.t('$vuetify.dashboard.TiempoExp'),
+        value: 'exptime'
+      }, {
+        text: this.$vuetify.t('$vuetify.control.Coord AR'),
+        value: 'ar'
+      }, {
+        text: this.$vuetify.t('$vuetify.control.Coord DEC'),
+        value: 'dec'
+      }, {
+        text: this.$vuetify.t('$vuetify.control.Fecha'),
+        value: 'created_at'
+      }];
+    }
   },
   methods: {
     showAlert: function () {
@@ -4536,6 +4591,27 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -4546,7 +4622,14 @@ __webpack_require__.r(__webpack_exports__);
   },
   created: function created() {},
   mounted: function mounted() {},
-  methods: {}
+  methods: {
+    changeLocaleEn: function changeLocaleEn() {
+      this.$vuetify.lang.current = 'en';
+    },
+    changeLocaleEs: function changeLocaleEs() {
+      this.$vuetify.lang.current = 'es';
+    }
+  }
 });
 
 /***/ }),
@@ -42489,7 +42572,7 @@ var render = function() {
                   ),
                   _vm._v(" "),
                   _c("v-toolbar-title", [
-                    _vm._v("Simulador Interfaz de Control")
+                    _vm._v(_vm._s(_vm.$vuetify.t("$vuetify.control.title")))
                   ]),
                   _vm._v(" "),
                   _c("v-spacer")
@@ -42525,7 +42608,14 @@ var render = function() {
                                         _vm._v("1.- " + _vm._s(_vm.object.name))
                                       ])
                                     : _c("span", { staticClass: "headline" }, [
-                                        _vm._v("1.- Seleccione un Objeto")
+                                        _vm._v(
+                                          "1.- " +
+                                            _vm._s(
+                                              _vm.$vuetify.t(
+                                                "$vuetify.control.Seleccione un Objeto"
+                                              )
+                                            )
+                                        )
                                       ])
                                 ]
                               ),
@@ -42536,7 +42626,14 @@ var render = function() {
                                 [
                                   _c("span", { staticClass: "headline" }, [
                                     _vm._v(
-                                      " Estado Sistema:" + _vm._s(_vm.state)
+                                      " " +
+                                        _vm._s(
+                                          _vm.$vuetify.t(
+                                            "$vuetify.control.Estado Sistema"
+                                          )
+                                        ) +
+                                        ":" +
+                                        _vm._s(_vm.state)
                                     )
                                   ])
                                 ]
@@ -42552,7 +42649,7 @@ var render = function() {
                                 attrs: {
                                   items: _vm.Constellations,
                                   "item-text": "latin",
-                                  label: "Constelación",
+                                  label: this.constelacion,
                                   "return-object": "",
                                   "hide-details": ""
                                 },
@@ -42571,7 +42668,7 @@ var render = function() {
                               _c("v-select", {
                                 attrs: {
                                   items: _vm.types,
-                                  label: "Tipo objeto astronómico",
+                                  label: this.tipo,
                                   "hide-details": ""
                                 },
                                 on: { input: _vm.getAstrnomicObject },
@@ -42626,7 +42723,15 @@ var render = function() {
                                                   color: "amarillo"
                                                 }
                                               },
-                                              [_vm._v("Usar")]
+                                              [
+                                                _vm._v(
+                                                  _vm._s(
+                                                    _vm.$vuetify.t(
+                                                      "$vuetify.control.Usar"
+                                                    )
+                                                  )
+                                                )
+                                              ]
                                             )
                                           ],
                                           1
@@ -42763,7 +42868,14 @@ var render = function() {
                             [
                               _c("v-flex", { attrs: { xs12: "" } }, [
                                 _c("span", { staticClass: "headline" }, [
-                                  _vm._v("2.- Mover Telescopio")
+                                  _vm._v(
+                                    "2.- " +
+                                      _vm._s(
+                                        _vm.$vuetify.t(
+                                          "$vuetify.control.Mover Telescopio"
+                                        )
+                                      )
+                                  )
                                 ])
                               ])
                             ],
@@ -42779,7 +42891,7 @@ var render = function() {
                                 [
                                   _c("v-text-field", {
                                     attrs: {
-                                      label: "Asención Recta",
+                                      label: this.asencionrecta,
                                       readonly: "true"
                                     },
                                     model: {
@@ -42800,7 +42912,7 @@ var render = function() {
                                 [
                                   _c("v-text-field", {
                                     attrs: {
-                                      label: "Declinación",
+                                      label: this.declinacion,
                                       readonly: "true"
                                     },
                                     model: {
@@ -42828,7 +42940,11 @@ var render = function() {
                                 }
                               }
                             },
-                            [_vm._v("Mover")]
+                            [
+                              _vm._v(
+                                _vm._s(_vm.$vuetify.t("$vuetify.control.Mover"))
+                              )
+                            ]
                           )
                         ],
                         1
@@ -42850,7 +42966,14 @@ var render = function() {
                             [
                               _c("v-flex", { attrs: { xs12: "" } }, [
                                 _c("span", { staticClass: "headline" }, [
-                                  _vm._v("3.- Sacar Foto")
+                                  _vm._v(
+                                    "3.- " +
+                                      _vm._s(
+                                        _vm.$vuetify.t(
+                                          "$vuetify.control.Sacar Foto"
+                                        )
+                                      )
+                                  )
                                 ])
                               ])
                             ],
@@ -42874,7 +42997,7 @@ var render = function() {
                                           return !!v || "Obligatorio"
                                         }
                                       ],
-                                      label: "Sensibilidad",
+                                      label: this.sensibilidad,
                                       required: ""
                                     },
                                     on: { input: _vm.selectIso },
@@ -42902,7 +43025,7 @@ var render = function() {
                                           return !!v || "Obligatorio"
                                         }
                                       ],
-                                      label: "Tiempo Exposición(Segundos)",
+                                      label: this.tiempo_exp,
                                       required: ""
                                     },
                                     on: { input: _vm.selectExp },
@@ -42938,7 +43061,15 @@ var render = function() {
                                         }
                                       }
                                     },
-                                    [_vm._v("Disparar")]
+                                    [
+                                      _vm._v(
+                                        _vm._s(
+                                          _vm.$vuetify.t(
+                                            "$vuetify.control.Disparar"
+                                          )
+                                        )
+                                      )
+                                    ]
                                   )
                                 ],
                                 1
@@ -42981,7 +43112,11 @@ var render = function() {
                             "v-card-title",
                             [
                               _c("span", { staticClass: "headline" }, [
-                                _vm._v("Mis fotos")
+                                _vm._v(
+                                  _vm._s(
+                                    _vm.$vuetify.t("$vuetify.control.Mis fotos")
+                                  )
+                                )
                               ]),
                               _vm._v(" "),
                               _c("v-spacer")
@@ -43179,6 +43314,53 @@ var render = function() {
               ),
               _vm._v(" "),
               _c(
+                "v-card",
+                { staticClass: "py-4 px-2" },
+                [
+                  _c(
+                    "v-layout",
+                    [
+                      _c(
+                        "v-flex",
+                        { staticClass: "px-2", attrs: { xs1: "" } },
+                        [
+                          _c("v-img", {
+                            attrs: {
+                              src: "http://atacamascope.cl/images/english.png",
+                              "aspect-ratio": "1.4",
+                              "max-height": "22",
+                              "max-width": "33"
+                            },
+                            on: { click: _vm.changeLocaleEn }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-flex",
+                        { staticClass: "px-2", attrs: { xs1: "" } },
+                        [
+                          _c("v-img", {
+                            attrs: {
+                              src: "http://atacamascope.cl/images/spanish.png",
+                              "aspect-ratio": "1.4",
+                              "max-height": "22",
+                              "max-width": "33"
+                            },
+                            on: { click: _vm.changeLocaleEs }
+                          })
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
                 "v-layout",
                 [
                   _c(
@@ -43187,11 +43369,17 @@ var render = function() {
                     [
                       _c("h3", [
                         _vm._v(
-                          "Las imagenes de este simulador han sido fotografiadas con los sistemas y equipos de Atacama Scope "
+                          _vm._s(_vm.$vuetify.t("$vuetify.guide.derechos1")) +
+                            " "
                         )
                       ]),
                       _vm._v(" "),
-                      _c("p", [_vm._v("Todos los derechos reservados")])
+                      _c("p", [
+                        _vm._v(
+                          _vm._s(_vm.$vuetify.t("$vuetify.guide.derechos2")) +
+                            " "
+                        )
+                      ])
                     ]
                   )
                 ],
@@ -43225,12 +43413,14 @@ var render = function() {
                     [
                       _c("h2", [_vm._v("1.-")]),
                       _c("h3", [
-                        _vm._v("Busca y elige tu objeto astronómico ")
+                        _vm._v(
+                          _vm._s(_vm.$vuetify.t("$vuetify.guide.busca1")) + "  "
+                        )
                       ]),
                       _vm._v(" "),
                       _c("p", [
                         _vm._v(
-                          "Selecciona la constelación de tu interes y el tipo de objeto astronómico, un algoritmo de validación te indicará si el objeto es visible por nuestro telescopio, y pasará las coordenadas para que puedas mover el telescópio."
+                          _vm._s(_vm.$vuetify.t("$vuetify.guide.busca2")) + " "
                         )
                       ])
                     ]
@@ -43267,13 +43457,13 @@ var render = function() {
                       _c("h2", [_vm._v("2.-")]),
                       _c("h3", [
                         _vm._v(
-                          "Mueve el telescopio hasta las coordenadas del objeto"
+                          _vm._s(_vm.$vuetify.t("$vuetify.guide.mueve1")) + " "
                         )
                       ]),
                       _vm._v(" "),
                       _c("p", [
                         _vm._v(
-                          "Cuando pinches en el botón mover, se enviará el comando de control al telescopio, para que este se mueva a la posición en la que se encuentra el objeto astronómico elejido"
+                          _vm._s(_vm.$vuetify.t("$vuetify.guide.mueve2")) + " "
                         )
                       ])
                     ]
@@ -43308,11 +43498,15 @@ var render = function() {
                     { staticClass: "px-2 py-4", attrs: { xs4: "" } },
                     [
                       _c("h2", [_vm._v("3.-")]),
-                      _c("h3", [_vm._v("Obten tu fotografía")]),
+                      _c("h3", [
+                        _vm._v(
+                          _vm._s(_vm.$vuetify.t("$vuetify.guide.obten1")) + " "
+                        )
+                      ]),
                       _vm._v(" "),
                       _c("p", [
                         _vm._v(
-                          "Selecciona la sensibilidad y el tiempo de exposición que deseas para tu fotografía y dispara."
+                          _vm._s(_vm.$vuetify.t("$vuetify.guide.obten2")) + " "
                         )
                       ])
                     ]
@@ -91474,16 +91668,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./store */ "./resources/js/store/index.js");
 /* harmony import */ var _routes__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./routes */ "./resources/js/routes.js");
-/* harmony import */ var _components_AppComponent__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/AppComponent */ "./resources/js/components/AppComponent.vue");
-/* harmony import */ var _components_MyReservationsComponent__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/MyReservationsComponent */ "./resources/js/components/MyReservationsComponent.vue");
-/* harmony import */ var _components_UploadAvatarComponent__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/UploadAvatarComponent */ "./resources/js/components/UploadAvatarComponent.vue");
-/* harmony import */ var _components_UploadEquipmentImage__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/UploadEquipmentImage */ "./resources/js/components/UploadEquipmentImage.vue");
-/* harmony import */ var _components_NewEquipment__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/NewEquipment */ "./resources/js/components/NewEquipment.vue");
+/* harmony import */ var _i18n_es_ts__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./i18n/es.ts */ "./resources/js/i18n/es.ts");
+/* harmony import */ var _i18n_en_ts__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./i18n/en.ts */ "./resources/js/i18n/en.ts");
+/* harmony import */ var _components_AppComponent__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/AppComponent */ "./resources/js/components/AppComponent.vue");
+/* harmony import */ var _components_MyReservationsComponent__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/MyReservationsComponent */ "./resources/js/components/MyReservationsComponent.vue");
+/* harmony import */ var _components_UploadAvatarComponent__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/UploadAvatarComponent */ "./resources/js/components/UploadAvatarComponent.vue");
+/* harmony import */ var _components_UploadEquipmentImage__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/UploadEquipmentImage */ "./resources/js/components/UploadEquipmentImage.vue");
+/* harmony import */ var _components_NewEquipment__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/NewEquipment */ "./resources/js/components/NewEquipment.vue");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
+
+
 
 
 
@@ -91506,6 +91704,13 @@ window.Popper = __webpack_require__(/*! popper.js */ "./node_modules/popper.js/d
 
 window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/dist/web/pusher.js");
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuetify__WEBPACK_IMPORTED_MODULE_1___default.a, {
+  lang: {
+    locales: {
+      en: _i18n_en_ts__WEBPACK_IMPORTED_MODULE_7__["default"],
+      es: _i18n_es_ts__WEBPACK_IMPORTED_MODULE_6__["default"]
+    },
+    current: 'en'
+  },
   theme: {
     primary: '#1976D2',
     secondary: '#424242',
@@ -91525,15 +91730,15 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('app', __webpack_require__(
 // Vue.component('points-component', PointsComponent);
 // Vue.component('reservation-component', ReservationComponent);
 
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('my-reservations', _components_MyReservationsComponent__WEBPACK_IMPORTED_MODULE_7__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('upload-avatar', _components_UploadAvatarComponent__WEBPACK_IMPORTED_MODULE_8__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('upload-equipment-image', _components_UploadEquipmentImage__WEBPACK_IMPORTED_MODULE_9__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('new-equipment', _components_NewEquipment__WEBPACK_IMPORTED_MODULE_10__["default"]); //AppComponent
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('my-reservations', _components_MyReservationsComponent__WEBPACK_IMPORTED_MODULE_9__["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('upload-avatar', _components_UploadAvatarComponent__WEBPACK_IMPORTED_MODULE_10__["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('upload-equipment-image', _components_UploadEquipmentImage__WEBPACK_IMPORTED_MODULE_11__["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('new-equipment', _components_NewEquipment__WEBPACK_IMPORTED_MODULE_12__["default"]); //AppComponent
 
 var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   el: '#App',
   render: function render(h) {
-    return h(_components_AppComponent__WEBPACK_IMPORTED_MODULE_6__["default"]);
+    return h(_components_AppComponent__WEBPACK_IMPORTED_MODULE_8__["default"]);
   },
   store: _store__WEBPACK_IMPORTED_MODULE_4__["default"],
   router: _routes__WEBPACK_IMPORTED_MODULE_5__["default"],
@@ -92453,6 +92658,348 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UploadEquipmentImage_vue_vue_type_template_id_4c363ab9___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
+
+/***/ }),
+
+/***/ "./resources/js/i18n/en.ts":
+/*!*********************************!*\
+  !*** ./resources/js/i18n/en.ts ***!
+  \*********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  "dataIterator": {
+    "rowsPerPageText": "Items per page:",
+    "rowsPerPageAll": "All",
+    "pageText": "{0}-{1} of {2}",
+    "noResultsText": "No matching records found",
+    "nextPage": "Next page",
+    "prevPage": "Previous page"
+  },
+  "dataTable": {
+    "rowsPerPageText": "Rows per page:"
+  },
+  "noDataText": "No data available",
+  "dashboard": {
+  	 "prueba": "this is a test"
+  },
+  "dashboard": {
+  	 "reservationBtn": "Book your telescope time here",
+  	 "pointsTitle": "Points",
+  	 "buyPointsBtn": "Buy points",
+  	 "currentWeather": "Current Weather",
+  	 "weather": "Weather",
+  	 "mypictures":" My pictures",
+
+     'Foto'       :      'Picture'     ,
+     'Nombre'     :      'Name'   ,
+     'ISO'        :      'ISO'      ,
+     'TiempoExp'  :      'ExpTime',
+     'Coord AR'   :      'AR' ,
+     'Coord DEC'  :      'DEC',  
+     'Fecha'      :      'Date'    ,
+
+  },
+
+  "reservation": {
+  	 "title": "My reservations",
+  	 "history": "History",
+  	 "equipment": "Equipment",
+  	 "date": "Date",
+  	 "hour":"Hour",
+  	 'beginner'  :'Beginner Control',
+  	 'advanced'  :'Advanced Control',
+
+      'Equipment' : 'Equipment',
+      'Date'      : 'Date',
+      'Hour'      : 'Hour',
+
+      'Puntos Comprados'    :'Purchased Points',
+      'Puntos usados': 'Points used',
+      'Puntos disponibles':'Points available',
+      'NroTransacción':'Transaction Number',
+      'NroReserva':'Reservation Number',
+  },
+  "points": {
+  	  "title": "Points",
+  	  "buyBtn": "Buy points",
+  	  "availablePoints": "Available Points",
+   	  "history":"Shopping history",
+  	  "paymentProcess":"Payment Process",
+  },
+  "gallery":{
+       "title": "Picture Gallery",
+  },
+  "contact":{
+    'contact': 'Contact info',
+	'address':"AtacamaScope, Address:. Av circunvalacion 41 San Pedro de atacama, Chile",
+	'email':"Email: contacto@atacamascope.com",
+	'phone':"Phone:+56 941431658",
+	'copyright': "copyright ©  atacamascope.com 2018",
+  },
+  "news":{
+  	"title":"News"
+  },
+    "wizard":{
+  	  'chooseEquipment': 'Choose Equipment',
+  	  'chooseDay': 'Choose Observation Day',
+  	  'chooseHour': 'Reserve your time',
+  	  'returnToday': 'Back to Today',
+  	  'confirmReservation': 'Confirm reservation',
+  	  'equipment': 'Equipment',
+  	  'pointsOfThisReservation': 'Points Of This Reservation',
+  	  'date': 'Date',
+  	  'at': 'At',
+  	  'hours': '',
+  	  'reserve': 'Reserve',
+  	  'reserved': 'Reserved',
+  	  'vacant': 'Vacant',
+  },
+
+    "control" : {
+      "title": "Control interface simulator",
+      "Seleccione un Objeto": "Select an Object",
+      "Estado Sistema": "Sistem Status",
+      "Constelación":"Constellation",
+      "Tipo objeto astronómico":"Astronomical object type",
+      "Usar":"Use",
+      "Mover Telescopio":"Move Telescope",
+      "Mover":"Move",
+      "Sacar Foto":"Take a picture",
+      "Sensibilidad":"Sensitivity",
+      "Tiempo Exposición(Segundos)":"Exposure Time (Seconds)",
+      "Disparar":"Shoot",
+      "Mis fotos":"My pictures",
+      "Ascención Recta":"Right Ascension",
+      "Declinación":"Decline",
+
+      "Descripción": "Description",
+      "Tipo":        "Type",
+      "Nombre":      "name",
+
+
+      "Coord AR"  :"Coord RA"  , 
+      "Coord DEC" :"Coord DEC" ,
+      "Fecha"     :"Date"     ,
+
+      "Elija": "Choose an object or enter its coordinates to position the telescope.",
+      "Coordenadas": "Specific coordinates",
+
+      "AR Horas"       :    "RA Hours"    ,      
+      "AR Minutos"     :    "RA Minutes"  ,     
+      "AR Segundos"    :    "RA Seconds" ,    
+      "DEC Grados"     :    "DEC Degrees "   ,      
+      "DEC Minutos"    :    "DEC Minutes" ,    
+      "DEC Segundos"   :    "DEC Seconds", 
+
+      "Enfocador"     : "Focuser",
+      "Dirección"     : "Direction",
+      "Enfocar"     : "Focus  ",
+      "Posición"     : "Position ",
+
+      "Adentro" : "Inside", 
+      "Afuera"  : "Outside",
+
+      "popup_calculando": "Calculating if the object is visible, one moment please",
+      "popup_obj_no_visible": "NOT VISIBLE object, Alt / Az height UNDER THE HORIZON: ",
+       
+
+
+
+    },
+
+      "guide": {
+      "title": "Atacama Scope Simulator Guide",
+      "derechos1": "The images of this simulator have been photographed with the Atacama Scope systems and equipment",
+      "derechos2": "All rights reserved",
+
+      "busca1":"Search and choose your astronomical object",
+      "busca2":"Select the constellation of your interest and the type of astronomical object, a validation algorithm will tell you if the object is visible through our telescope, and it will pass the coordinates so that you can move the telescope.",
+
+      "mueve1":"Move the telescope to the coordinates of the object",
+      "mueve2":"When you click on the move button, the control command will be sent to the telescope, so that it moves to the position in which the chosen astronomical object is located.",
+
+      "obten1":"Get your picture",
+      "obten2":"Select the sensitivity and exposure time you want for your photo and shoot.",
+
+
+    }
+
+
+
+});
+
+/***/ }),
+
+/***/ "./resources/js/i18n/es.ts":
+/*!*********************************!*\
+  !*** ./resources/js/i18n/es.ts ***!
+  \*********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ({
+
+  "dataIterator": {
+    "rowsPerPageText": "Filas por Página:",
+    "rowsPerPageAll": "Todos",
+    "pageText": "{0}-{1} of {2}",
+    "noResultsText": "No matching records found",
+    "nextPage": "Página Siguiente",
+    "prevPage": "Página Anterior"
+  },
+  "dataTable": {
+    "rowsPerPageText": "Filas por página:"
+  },
+  "noDataText": "Datos no disponibles",
+  "dashboard": {
+  	 "reservationBtn": "Reserva tu hora de telescopio Aquí",
+  	 "pointsTitle": "Puntos",
+  	 "buyPointsBtn": "Comprar puntos",
+  	 "currentWeather": "Clima Actual",
+  	 "weather": "Clima",
+  	 "mypictures":" Mis fotos",
+
+     'Foto'       :      'Foto'     ,
+     'Nombre'     :      'Nombre'   ,
+     'ISO'        :      'ISO'      ,
+     'TiempoExp'  :      'TiempoExp',
+     'Coord AR'   :      'Coord AR' ,
+     'Coord DEC'  :      'Coord DEC',  
+     'Fecha'      :      'Fecha'    ,
+
+
+  },
+  "reservation": {
+  	 "title": "Mis Reservas",
+  	 "history": "Historial de Reservas",
+  	 "equipment": "Equipo",
+  	 "date": "Fecha",
+  	 "hour":"Hora",
+  	 'beginner'  :'Control principiante',
+  	 'advanced'  :'Control avanzado',
+
+      'Equipment' : 'Equipo',
+      'Date'      : 'Fecha',
+      'Hour'      : 'hora',
+
+      'Puntos Comprados'    :'Puntos Comprados',
+      'Puntos usados': 'Puntos usados',
+      'Puntos disponibles':'Puntos disponibles',
+      'NroTransacción':'Nro.Transacción',
+      'NroReserva':'Nro.Reserva',
+
+  },
+
+  "points": {
+  	  "title": "Puntos",
+  	  "buyBtn": "Comprar Puntos",
+  	  "availablePoints": "Puntos Disponibles",
+  	  "history":"Historial de compras",
+  	  "paymentProcess":"Proceso de pago",
+  },
+  "gallery":{
+       "title": "Galería de imagenes",
+  },
+  "contact":{
+    'contact': 'Datos de Contacto',
+	'address':"AtacamaScope, Dirección. Av circunvalacion 41 San Pedro de atacama, Chile",
+	'email':"emailcontacto@atacamascope.com",
+	'phone':"fono:+56 941431658",
+	'copyright': "copyright © Incluye todas las fotos: atacamascope.com 2018",
+  },
+  "news":{
+  	"title":"Noticias"
+  },
+  "wizard":{
+  	  'chooseEquipment': 'Elige tu Equipamiento',
+  	  'chooseDay': 'Elige Día de Observación',
+  	  'chooseHour': 'Reserva tu Hora',
+  	  'returnToday': 'Volver a Hoy',
+  	  'confirmReservation': 'Confirmar Reserva',
+  	  'equipment': 'Equipo',
+  	  'pointsOfThisReservation': 'Puntos de esta reserva',
+  	  'date': 'Fecha',
+  	  'at': 'A las',
+  	  'hours': 'Horas',
+  	  'reserve': 'Reservar',
+  	  'reserved': 'Reservado',
+  	  'vacant': 'Disponible',
+  },
+
+  "control" : {
+      "title": "Simulador Interfaz de control",
+      "Seleccione un Objeto": "Seleccione un Objeto",
+      "Estado Sistema": "Estado Sistema",
+      "Constelación":"Constelación",
+      "Tipo objeto astronómico":"Tipo objeto astronómico",
+      "Usar":"Usar",
+      "Mover Telescopio":"Mover Telescopio",
+      "Mover":"Mover",
+      "Sacar Foto":"Sacar Foto",
+      "Sensibilidad":"Sensibilidad",
+      "Tiempo Exposición(Segundos)":"Tiempo Exposición(Segundos)",
+      "Disparar":"Disparar",
+      "Mis fotos":"Mis fotos",
+      "Ascención Recta":"Ascención Recta",
+      "Declinación":"Declinación",
+
+
+      "Usar":        "Usar",
+      "Descripción": "Descripción",
+      "Constelación":"Constelación",
+      "Tipo":        "Tipo",
+      "Nombre":      "Nombre",
+
+      "Coord AR"  :"Coord AR"  , 
+      "Coord DEC" :"Coord DEC" ,
+      "Fecha"     :"Fecha"     ,
+
+      "Elija": "Elija un opbjeto o ingrese sus coordenadas para posicionar el telescopio.",
+      "Coordenadas": "Coordenadas especificas",
+
+      "AR Horas"       :    "AR Horas"    ,      
+      "AR Minutos"     :    "AR Minutos"  ,     
+      "AR Segundos"    :    "AR Segundos" ,    
+      "DEC Grados"     :    "DEC Grados"   ,      
+      "DEC Minutos"    :    "DEC Minutos" ,    
+      "DEC Segundos"   :    "DEC Segundos",
+
+      "Enfocador"     : "Enfocador",
+      "Dirección"     : "Dirección",
+      "Enfocar"     : "Enfocar",
+      "Posición"     : "Posición",
+
+      "Adentro" : "Adentro", 
+      "Afuera"  : "Afuera",
+
+      "popup_calculando": "Calculando si el objeto es visible, un momento por favor",
+      "popup_obj_no_visible": "Objeto NO VISIBLE,altura Alt/Az BAJO el HORIZONTE: ",
+
+  },
+    "guide": {
+      "title": "Guia Simulador Atacama Scope",
+      "derechos1": "Las imagenes de este simulador han sido fotografiadas con los sistemas y equipos de Atacama Scope ",
+      "derechos2": "Todos los derechos reservados",
+
+      "busca1":"Busca y elige tu objeto astronómico",
+      "busca2":"Selecciona la constelación de tu interes y el tipo de objeto astronómico, un algoritmo de validación te indicará si el objeto es visible por nuestro telescopio, y pasará las coordenadas para que puedas mover el telescópio.",
+
+      "mueve1":"Mueve el telescopio hasta las coordenadas del objeto",
+      "mueve2":"Cuando pinches en el botón mover, se enviará el comando de control al telescopio, para que este se mueva a la posición en la que se encuentra el objeto astronómico elejido",
+
+      "obten1":"Obten tu fotografía",
+      "obten2":"Selecciona la sensibilidad y el tiempo de exposición que deseas para tu fotografía y dispara.",
+
+
+    }
+
+});
 
 /***/ }),
 

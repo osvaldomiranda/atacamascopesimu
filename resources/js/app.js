@@ -11,6 +11,8 @@ import Vuex from 'vuex'
 import VueRouter from 'vue-router'
 import store from './store';
 import router from './routes'
+import es from './i18n/es.ts'
+import en from './i18n/en.ts'
 
 import AppComponent             from './components/AppComponent'
 // import ControlComponent      from './components/ControlComponent'
@@ -38,6 +40,10 @@ window.Pusher = require('pusher-js')
 
 
 Vue.use(Vuetify, {
+    lang: {
+        locales: { en, es },
+        current: 'en'
+    },
     theme: {
         primary: '#1976D2',
         secondary: '#424242',

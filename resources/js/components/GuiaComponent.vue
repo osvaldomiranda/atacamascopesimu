@@ -25,10 +25,31 @@
         </v-toolbar>
 
 
+            <v-card class="py-4 px-2">
+                <v-layout>
+                  <v-flex xs1 class="px-2">
+                  <v-img src="http://atacamascope.cl/images/english.png" 
+                  aspect-ratio="1.4"  
+                  max-height="22"
+                                max-width="33"
+                                v-on:click="changeLocaleEn" 
+                  ></v-img>
+              </v-flex>
+                  <v-flex xs1 class="px-2">
+                 <v-img src="http://atacamascope.cl/images/spanish.png" 
+                 aspect-ratio="1.4"  
+                   max-height="22"
+                                 max-width="33"
+                                 v-on:click="changeLocaleEs" 
+                  ></v-img>
+              </v-flex>
+            </v-layout>
+          </v-card>
+
     <v-layout>
       <v-flex xs12 class="px-2 py-4">
-        <h3>Las imagenes de este simulador han sido fotografiadas con los sistemas y equipos de Atacama Scope </h3>
-        <p>Todos los derechos reservados</p>
+        <h3>{{ $vuetify.t('$vuetify.guide.derechos1') }} </h3>
+        <p>{{ $vuetify.t('$vuetify.guide.derechos2') }} </p>
       </v-flex>
 
     </v-layout>
@@ -43,8 +64,8 @@
         ></v-img>
 			</v-flex>
       <v-flex xs4 class="px-2 py-4">
-        <h2>1.-</h2><h3>Busca y elige tu objeto astronómico </h3>
-        <p>Selecciona la constelación de tu interes y el tipo de objeto astronómico, un algoritmo de validación te indicará si el objeto es visible por nuestro telescopio, y pasará las coordenadas para que puedas mover el telescópio.</p>
+        <h2>1.-</h2><h3>{{ $vuetify.t('$vuetify.guide.busca1') }}  </h3>
+        <p>{{ $vuetify.t('$vuetify.guide.busca2') }} </p>
       </v-flex>
 
 		</v-layout>
@@ -59,8 +80,8 @@
         ></v-img>
       </v-flex>
       <v-flex xs4 class="px-2 py-4">
-        <h2>2.-</h2><h3>Mueve el telescopio hasta las coordenadas del objeto</h3>
-        <p>Cuando pinches en el botón mover, se enviará el comando de control al telescopio, para que este se mueva a la posición en la que se encuentra el objeto astronómico elejido</p>
+        <h2>2.-</h2><h3>{{ $vuetify.t('$vuetify.guide.mueve1') }} </h3>
+        <p>{{ $vuetify.t('$vuetify.guide.mueve2') }} </p>
       </v-flex>
 
     </v-layout>
@@ -76,8 +97,8 @@
         ></v-img>
       </v-flex>
       <v-flex xs4 class="px-2 py-4">
-        <h2>3.-</h2><h3>Obten tu fotografía</h3>
-        <p>Selecciona la sensibilidad y el tiempo de exposición que deseas para tu fotografía y dispara.</p>
+        <h2>3.-</h2><h3>{{ $vuetify.t('$vuetify.guide.obten1') }} </h3>
+        <p>{{ $vuetify.t('$vuetify.guide.obten2') }} </p>
       </v-flex>
 
     </v-layout>
@@ -112,6 +133,13 @@
     },
 
     methods: {
+      changeLocaleEn () {
+            this.$vuetify.lang.current = 'en'         
+      },
+
+      changeLocaleEs () {
+          this.$vuetify.lang.current = 'es'         
+      }
     }
 
     		 

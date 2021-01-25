@@ -23,7 +23,7 @@
           <v-btn icon dark @click="returnToAtacamaScope()">
             <v-icon>close</v-icon>
           </v-btn>
-          <v-toolbar-title>Simulador Interfaz de Control</v-toolbar-title>
+          <v-toolbar-title>{{ $vuetify.t('$vuetify.control.title') }}</v-toolbar-title>
           <v-spacer></v-spacer>
         </v-toolbar>
 
@@ -31,14 +31,17 @@
 		    <v-layout class="py-2">
 				<v-flex xs8 class="px-2" style="overflow: auto">
 
+
+
+
 					  <v-card class="py-4 px-2">
 				        <v-layout>
 				          <v-flex xs4 class="px-2">
 				            <span v-if='object.name' class="headline">1.- {{ object.name }}</span>
-				            <span v-else class="headline">1.- Seleccione un Objeto</span>
+				            <span v-else class="headline">1.- {{ $vuetify.t('$vuetify.control.Seleccione un Objeto') }}</span>
 				          </v-flex>
 				          	<v-flex xs8 class="px-2">
-				            	<span class="headline"> Estado Sistema:{{ state }}</span>
+				            	<span class="headline"> {{ $vuetify.t('$vuetify.control.Estado Sistema') }}:{{ state }}</span>
 				          	</v-flex>
 				        </v-layout>
 					    <v-card-title>
@@ -46,7 +49,7 @@
 							    v-model="Constellation"
 							    :items="Constellations"
 							    item-text='latin'
-							    label="Constelación"
+							    :label= this.constelacion
 							    @input= "getAstrnomicObject"
 							    return-object
 						        hide-details
@@ -56,7 +59,7 @@
 							    v-model="type"
 							    :items="types"
 							    @input= "getAstrnomicObject"
-							    label="Tipo objeto astronómico"
+							    :label= this.tipo
 						        hide-details
 							    ></v-select>
 					    </v-card-title>
@@ -70,7 +73,7 @@
 					      <template v-slot:items="props">
 					      	<tr @click="showAlert(props.item)">
 					      		<td>
-					      			<v-btn outline round color="amarillo">Usar</v-btn>
+					      			<v-btn outline round color="amarillo">{{ $vuetify.t('$vuetify.control.Usar') }}</v-btn>
 					      		</td>
 						  
 						        <td class="text-xs-left">{{ (props.item.colloquial_name || '') + ' ' + (props.item.nombre_coloquial || '')}}</td>
@@ -134,26 +137,26 @@
  
 				        <v-layout>
 				          <v-flex xs12>
-				            <span class="headline">2.- Mover Telescopio</span>
+				            <span class="headline">2.- {{ $vuetify.t('$vuetify.control.Mover Telescopio') }}</span>
 				          </v-flex>
 				        </v-layout>
 						<v-layout>
 							<v-flex xs6 class="px-2">
 								<v-text-field
 								    v-model="Ar_screen"
-								    label="Asención Recta"
+								    :label=this.asencionrecta
 								    readonly=true
 								    ></v-text-field>
 		          			</v-flex>
 							<v-flex xs4 class="px-2">
 								<v-text-field
 								    v-model="Dec_screen"
-								    label="Declinación"
+								    :label= this.declinacion
 								    readonly=true
 								    ></v-text-field>
 		          			</v-flex>	          			
 		          		</v-layout>	
-		          		<v-btn round color="morado" @click="move()">Mover</v-btn>
+		          		<v-btn round color="morado" @click="move()">{{ $vuetify.t('$vuetify.control.Mover') }}</v-btn>
 			 		</v-card> 
 				</v-flex>
 
@@ -164,7 +167,7 @@
 					<v-card class="py-2 px-2">
 				        <v-layout>
 				          <v-flex xs12>
-				            <span class="headline">3.- Sacar Foto</span>
+				            <span class="headline">3.- {{ $vuetify.t('$vuetify.control.Sacar Foto') }}</span>
 				          </v-flex>
 				        </v-layout>
 
@@ -179,7 +182,7 @@
 							      item-text='iso'
 							      return-object
 							      :rules="[v => !!v || 'Obligatorio']"
-							      label="Sensibilidad"
+							      :label= this.sensibilidad
 							      @input= "selectIso"
 							      required
 							    ></v-select>
@@ -192,7 +195,7 @@
 							      v-model="SelectedExp"
 							      :items="Exps"
 							      :rules="[v => !!v || 'Obligatorio']"
-							      label="Tiempo Exposición(Segundos)"
+							      :label= this.tiempo_exp
 							      @input= "selectExp"
 							      required
 							    ></v-select>
@@ -203,7 +206,7 @@
 		          		</v-layout>
 		          		<v-layout>
 		          			<v-flex xs4>
-		          				<v-btn round color="verde" @click="shoot()">Disparar</v-btn>	  
+		          				<v-btn round color="verde" @click="shoot()">{{ $vuetify.t('$vuetify.control.Disparar') }}</v-btn>	  
 		          			</v-flex>
 		          		    <v-flex xs6>
 		          		    	<span class="headline">{{ this.camera_state }}</span>
@@ -224,7 +227,7 @@
 				<v-flex xs12 class="px-2 py-2" style="overflow: auto">
 					  <v-card class="px-4 py-4">
 					    <v-card-title>
-					      <span class="headline">Mis fotos</span>
+					      <span class="headline">{{ $vuetify.t('$vuetify.control.Mis fotos') }}</span>
 					      <v-spacer></v-spacer>
 					    </v-card-title>
 					    <v-data-table
@@ -297,9 +300,15 @@
 
 
   export default {
-  	computed: mapState(['astronomc_objects']),
     data () {
       return {
+
+      	constelacion: this.$vuetify.t('$vuetify.control.Constelación') ,
+      	tipo: this.$vuetify.t('$vuetify.control.Tipo objeto astronómico'),
+      	sensibilidad: this.$vuetify.t('$vuetify.control.Sensibilidad'),
+      	tiempo_exp: this.$vuetify.t('$vuetify.control.Tiempo Exposición(Segundos)'),
+      	asencionrecta: this.$vuetify.t('$vuetify.control.Ascención Recta'),
+      	declinacion: this.$vuetify.t('$vuetify.control.Declinación'),
 
         snackbar: false,
         y: 'top',
@@ -526,6 +535,36 @@
     },
     components: {
           Loading,
+    },
+    computed:{
+        astronomc_objects(){
+          return this.$store.state.astronomc_objects
+        },
+        headers(){
+          return [
+
+          { text: this.$vuetify.t('$vuetify.control.Usar'), value: 'name' },
+          { text: this.$vuetify.t('$vuetify.control.Descripción'), value: 'colloquial_name' },
+          { text: this.$vuetify.t('$vuetify.control.Constelación'), value: 'constellation' },
+          { text: this.$vuetify.t('$vuetify.control.Tipo'), value: 'type_object' },
+          { text: this.$vuetify.t('$vuetify.control.Nombre'), value: 'name' },
+
+          ]
+        },
+
+        myImagesHeaders(){
+        	return[
+        		  { text: this.$vuetify.t('$vuetify.dashboard.Foto'), value: 'img' },
+                  { text: this.$vuetify.t('$vuetify.dashboard.Nombre'), value: 'name' },
+                  { text: this.$vuetify.t('$vuetify.dashboard.ISO'), value: 'iso' },
+                  { text: this.$vuetify.t('$vuetify.dashboard.TiempoExp'), value: 'exptime' },
+
+                  { text: this.$vuetify.t('$vuetify.control.Coord AR'), value: 'ar' },
+		          { text: this.$vuetify.t('$vuetify.control.Coord DEC'), value: 'dec' },
+		          { text: this.$vuetify.t('$vuetify.control.Fecha'), value: 'created_at' }
+        	]
+        }
+
     },
     methods: {
 
@@ -931,7 +970,8 @@
 
 	    returnToAtacamaScope(){
 	    	window.location.href = "http://atacamascope.cl";
-	    }
+	    },
+
 
     },
     filters: {
@@ -943,6 +983,8 @@
             return s;
         }
     },
+
+
 
 
 
