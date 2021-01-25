@@ -20,7 +20,7 @@
           <v-btn icon dark @click="dialog = false">
             <v-icon>close</v-icon>
           </v-btn>
-          <v-toolbar-title>Guia Simulador Interfaz de Control</v-toolbar-title>
+          <v-toolbar-title>{{ $vuetify.t('$vuetify.guide.tittle') }}</v-toolbar-title>
           <v-spacer></v-spacer>
         </v-toolbar>
 

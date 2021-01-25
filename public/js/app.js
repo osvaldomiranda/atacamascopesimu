@@ -43305,7 +43305,7 @@ var render = function() {
                   ),
                   _vm._v(" "),
                   _c("v-toolbar-title", [
-                    _vm._v("Guia Simulador Interfaz de Control")
+                    _vm._v(_vm._s(_vm.$vuetify.t("$vuetify.guide.tittle")))
                   ]),
                   _vm._v(" "),
                   _c("v-spacer")
@@ -92932,56 +92932,56 @@ __webpack_require__.r(__webpack_exports__);
   	  'vacant': 'Disponible',
   },
 
-  "control" : {
-      "title": "Simulador Interfaz de control",
-      "Seleccione un Objeto": "Seleccione un Objeto",
-      "Estado Sistema": "Estado Sistema",
-      "Constelación":"Constelación",
-      "Tipo objeto astronómico":"Tipo objeto astronómico",
-      "Usar":"Usar",
-      "Mover Telescopio":"Mover Telescopio",
-      "Mover":"Mover",
-      "Sacar Foto":"Sacar Foto",
-      "Sensibilidad":"Sensibilidad",
-      "Tiempo Exposición(Segundos)":"Tiempo Exposición(Segundos)",
-      "Disparar":"Disparar",
-      "Mis fotos":"Mis fotos",
-      "Ascención Recta":"Ascención Recta",
-      "Declinación":"Declinación",
+    "control" : {
+      "title": "Control interface",
+      "Seleccione un Objeto": "Select an Object",
+      "Estado Sistema": "Sistem Status",
+      "Constelación":"Constellation",
+      "Tipo objeto astronómico":"Astronomical object type",
+      "Usar":"Use",
+      "Mover Telescopio":"Move Telescope",
+      "Mover":"Move",
+      "Sacar Foto":"Take a picture",
+      "Sensibilidad":"Sensitivity",
+      "Tiempo Exposición(Segundos)":"Exposure Time (Seconds)",
+      "Disparar":"Shoot",
+      "Mis fotos":"My pictures",
+      "Ascención Recta":"Right Ascension",
+      "Declinación":"Decline",
+
+      "Descripción": "Description",
+      "Tipo":        "Type",
+      "Nombre":      "name",
 
 
-      "Usar":        "Usar",
-      "Descripción": "Descripción",
-      "Constelación":"Constelación",
-      "Tipo":        "Tipo",
-      "Nombre":      "Nombre",
-
-      "Coord AR"  :"Coord AR"  , 
+      "Coord AR"  :"Coord RA"  , 
       "Coord DEC" :"Coord DEC" ,
-      "Fecha"     :"Fecha"     ,
+      "Fecha"     :"Date"     ,
 
-      "Elija": "Elija un opbjeto o ingrese sus coordenadas para posicionar el telescopio.",
-      "Coordenadas": "Coordenadas especificas",
+      "Elija": "Choose an object or enter its coordinates to position the telescope.",
+      "Coordenadas": "Specific coordinates",
 
-      "AR Horas"       :    "AR Horas"    ,      
-      "AR Minutos"     :    "AR Minutos"  ,     
-      "AR Segundos"    :    "AR Segundos" ,    
-      "DEC Grados"     :    "DEC Grados"   ,      
-      "DEC Minutos"    :    "DEC Minutos" ,    
-      "DEC Segundos"   :    "DEC Segundos",
+      "AR Horas"       :    "RA Hours"    ,      
+      "AR Minutos"     :    "RA Minutes"  ,     
+      "AR Segundos"    :    "RA Seconds" ,    
+      "DEC Grados"     :    "DEC Degrees "   ,      
+      "DEC Minutos"    :    "DEC Minutes" ,    
+      "DEC Segundos"   :    "DEC Seconds", 
 
-      "Enfocador"     : "Enfocador",
-      "Dirección"     : "Dirección",
-      "Enfocar"     : "Enfocar",
-      "Posición"     : "Posición",
+      "Enfocador"     : "Focuser",
+      "Dirección"     : "Direction",
+      "Enfocar"     : "Focus  ",
+      "Posición"     : "Position ",
 
-      "Adentro" : "Adentro", 
-      "Afuera"  : "Afuera",
+      "Adentro" : "Inside", 
+      "Afuera"  : "Outside",
 
-      "popup_calculando": "Calculando si el objeto es visible, un momento por favor",
-      "popup_obj_no_visible": "Objeto NO VISIBLE,altura Alt/Az BAJO el HORIZONTE: ",
+      "popup_calculando": "Calculating if the object is visible, one moment please",
+      "popup_obj_no_visible": "NOT VISIBLE object, Alt / Az height UNDER THE HORIZON: ",
+       
 
-  },
+
+    },
     "guide": {
       "title": "Guia Simulador Atacama Scope",
       "derechos1": "Las imagenes de este simulador han sido fotografiadas con los sistemas y equipos de Atacama Scope ",
