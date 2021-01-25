@@ -43305,7 +43305,7 @@ var render = function() {
                   ),
                   _vm._v(" "),
                   _c("v-toolbar-title", [
-                    _vm._v(_vm._s(_vm.$vuetify.t("$vuetify.guide.tittle")))
+                    _vm._v(_vm._s(_vm.$vuetify.t("$vuetify.guide.title")))
                   ]),
                   _vm._v(" "),
                   _c("v-spacer")
