@@ -57,7 +57,7 @@
 							<v-spacer></v-spacer>
 					        <v-select
 							    v-model="type"
-							    :items="types"
+							    :items=types
 							    @input= "getAstrnomicObject"
 							    :label= this.tipo
 						        hide-details
@@ -363,26 +363,7 @@
         catalogs: ['SolarSistem','Messier','NGC', 'IC'],
         type:" ",
         name:null,
-        types:[	' ',
-        		'Cúmulo Globular',
-        		'Cúmulo abierto',
-        		'Galaxia',       		
-                'Asterismo o Cúmulo Abierto',
-				'Estrella',
-				'Estrella doble',
-				'Galaxias en Interacción',
-				'Nebulosa',
-				'Nebulosa de emisión Hidrógeno',
-				'Nebulosa de Reflexión',
-				'Nebulosa Extragaláctica',
-				'Nebulosa Planetaria',
-				'Nebulosa y Cúmulo',
-				'Nova',
-				'Otro',
-				'Planet',
-				'Par de Galaxias',
-				'Remanente de Supernova',
-				'Trío de Galaxias',],
+    
 
 
         Constellation:{name:' ',latin:' '},
@@ -506,37 +487,64 @@
 
 	    ],
 
-        headers: [
-          { text: 'Usar', value: 'name' },
-          { text: 'Descripción', value: 'colloquial_name' },
-          { text: 'Constelación', value: 'constellation' },
-          { text: 'Tipo', value: 'type_object' },
-          { text: 'Nombre', value: 'name' },
-
-        ],
         myImages: [],
-        myImagesHeaders: [
-          { text: 'Foto', value: 'img' },
-          { text: 'Nombre', value: 'name' },
-          { text: 'ISO', value: 'iso' },
-          { text: 'TiempoExp', value: 'exptime' },
-          { text: 'Coord AR', value: 'ar' },
-          { text: 'Coord DEC', value: 'dec' },
-          { text: 'Fecha', value: 'created_at' }
-        ],
+
       }
     },
-    created () {
-      	//this.initialize();
-    },
-    mounted (){
-    	this.initialize();
-
-    },
-    components: {
-          Loading,
-    },
     computed:{
+
+    	types(){
+
+    		if(this.$vuetify.lang.current=='es'){
+    		return[
+    		    ' ',
+        		'Cúmulo Globular',
+        		'Cúmulo abierto',
+        		'Galaxia',       		
+                'Asterismo o Cúmulo Abierto',
+				'Estrella',
+				'Estrella doble',
+				'Galaxias en Interacción',
+				'Nebulosa',
+				'Nebulosa de emisión Hidrógeno',
+				'Nebulosa de Reflexión',
+				'Nebulosa Extragaláctica',
+				'Nebulosa Planetaria',
+				'Nebulosa y Cúmulo',
+				'Nova',
+				'Otro',
+				'Planet',
+				'Par de Galaxias',
+				'Remanente de Supernova',
+				'Trío de Galaxias',
+    		]}
+    		else {
+    			return[
+    		    ' ',
+        		'Globular cluster',
+        		'Open Cluster',
+        		'Galaxy',       		
+                'Asterism or Open Cluster',
+				'Star',
+				'Double star',
+				'Galaxies in Interactionn',
+				'Nebula',
+				'Emission Nebula Hydrogen',
+				'Reflection Nebula',
+				'Extragalactic Nebula',
+				'Planetary nebula',
+				'Nebula and Cluster',
+				'Nova',
+				'Other',
+				'Planet',
+				'Pair of Galaxies',
+				'Supernova remnant',
+				'Trio of Galaxies',
+    		]
+    		}
+    	},
+
+
         astronomc_objects(){
           return this.$store.state.astronomc_objects
         },
@@ -566,6 +574,17 @@
         }
 
     },
+    created () {
+      	//this.initialize();
+    },
+    mounted (){
+    	this.initialize();
+
+    },
+    components: {
+          Loading,
+    },
+
     methods: {
 
 

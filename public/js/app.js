@@ -3833,7 +3833,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       catalogs: ['SolarSistem', 'Messier', 'NGC', 'IC'],
       type: " ",
       name: null,
-      types: [' ', 'Cúmulo Globular', 'Cúmulo abierto', 'Galaxia', 'Asterismo o Cúmulo Abierto', 'Estrella', 'Estrella doble', 'Galaxias en Interacción', 'Nebulosa', 'Nebulosa de emisión Hidrógeno', 'Nebulosa de Reflexión', 'Nebulosa Extragaláctica', 'Nebulosa Planetaria', 'Nebulosa y Cúmulo', 'Nova', 'Otro', 'Planet', 'Par de Galaxias', 'Remanente de Supernova', 'Trío de Galaxias'],
       Constellation: {
         name: ' ',
         latin: ' '
@@ -4020,56 +4019,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         iso: 25600
       }],
       Exps: ['1', '2', '4', '6', '8', '10', '20', '30', '40', '60', '120', '240', '300'],
-      headers: [{
-        text: 'Usar',
-        value: 'name'
-      }, {
-        text: 'Descripción',
-        value: 'colloquial_name'
-      }, {
-        text: 'Constelación',
-        value: 'constellation'
-      }, {
-        text: 'Tipo',
-        value: 'type_object'
-      }, {
-        text: 'Nombre',
-        value: 'name'
-      }],
-      myImages: [],
-      myImagesHeaders: [{
-        text: 'Foto',
-        value: 'img'
-      }, {
-        text: 'Nombre',
-        value: 'name'
-      }, {
-        text: 'ISO',
-        value: 'iso'
-      }, {
-        text: 'TiempoExp',
-        value: 'exptime'
-      }, {
-        text: 'Coord AR',
-        value: 'ar'
-      }, {
-        text: 'Coord DEC',
-        value: 'dec'
-      }, {
-        text: 'Fecha',
-        value: 'created_at'
-      }]
+      myImages: []
     };
   },
-  created: function created() {//this.initialize();
-  },
-  mounted: function mounted() {
-    this.initialize();
-  },
-  components: {
-    Loading: _components_Loading_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
-  },
   computed: {
+    types: function types() {
+      if (this.$vuetify.lang.current == 'es') {
+        return [' ', 'Cúmulo Globular', 'Cúmulo abierto', 'Galaxia', 'Asterismo o Cúmulo Abierto', 'Estrella', 'Estrella doble', 'Galaxias en Interacción', 'Nebulosa', 'Nebulosa de emisión Hidrógeno', 'Nebulosa de Reflexión', 'Nebulosa Extragaláctica', 'Nebulosa Planetaria', 'Nebulosa y Cúmulo', 'Nova', 'Otro', 'Planet', 'Par de Galaxias', 'Remanente de Supernova', 'Trío de Galaxias'];
+      } else {
+        return [' ', 'Globular cluster', 'Open Cluster', 'Galaxy', 'Asterism or Open Cluster', 'Star', 'Double star', 'Galaxies in Interactionn', 'Nebula', 'Emission Nebula Hydrogen', 'Reflection Nebula', 'Extragalactic Nebula', 'Planetary nebula', 'Nebula and Cluster', 'Nova', 'Other', 'Planet', 'Pair of Galaxies', 'Supernova remnant', 'Trio of Galaxies'];
+      }
+    },
     astronomc_objects: function astronomc_objects() {
       return this.$store.state.astronomc_objects;
     },
@@ -4115,6 +4075,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         value: 'created_at'
       }];
     }
+  },
+  created: function created() {//this.initialize();
+  },
+  mounted: function mounted() {
+    this.initialize();
+  },
+  components: {
+    Loading: _components_Loading_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
   },
   methods: {
     showAlert: function () {
