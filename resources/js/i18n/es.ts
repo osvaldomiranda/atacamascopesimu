@@ -133,7 +133,10 @@ export default {
 
       "popup_calculando": "Calculating if the object is visible, one moment please",
       "popup_obj_no_visible": "NOT VISIBLE object, Alt / Az height UNDER THE HORIZON: ",
-       
+
+      
+      "Enespera" : "En Espera",
+      "Buscarpornombre":"Buscar por nombre",
 
 
     },

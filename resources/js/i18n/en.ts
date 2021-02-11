@@ -134,7 +134,8 @@ export default {
       "popup_calculando": "Calculating if the object is visible, one moment please",
       "popup_obj_no_visible": "NOT VISIBLE object, Alt / Az height UNDER THE HORIZON: ",
        
-
+      "Enespera" : "On hold",
+      "Buscarpornombre":"Search by name",
 
 
     },

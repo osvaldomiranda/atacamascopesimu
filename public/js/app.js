@@ -3934,7 +3934,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         rowsPerPage: 4
       },
       object: '',
-      state: 'En espera',
+      state: this.$vuetify.t('$vuetify.control.Enespera'),
       selectedTic: '100',
       selectedDir: 'Adentro',
       tic: 100,
@@ -4172,14 +4172,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             app.focuser_state = parseInt(position, 10) - app.$store.getters.current_focus;
             app.state = app.focuser_state;
           } else {
-            app.state = data.message['message'];
+            app.state = messageToEn(data.message['message']);
           }
 
           if (imageMsg >= 0) {
-            app.camera_state = app.state;
+            app.camera_state = messageToEn(app.state);
           }
 
-          if (app.state == "Imagen Recibida") {
+          if (app.state == messageToEn("Imagen Recibida")) {
             //	app.pulsa();
             app.imageRefresh();
           }
@@ -4439,6 +4439,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     returnToAtacamaScope: function returnToAtacamaScope() {
       window.location.href = "http://atacamascope.cl";
+    },
+    messageToEn: function messageToEn(message) {
+      var es = ['Imagen Recibida', 'En espera', 'Enviando comando', 'Comando Recibido', 'Moviendo Telescopio', 'Telescopio en posicion', 'Imagen Recibida', 'Comando Imagen recibido', 'Obteniendo Imagen', 'Subiendo Imagen'];
+      var en = ['Image Received', 'On hold', 'Sending command', 'Command Received', 'Moving Telescope', 'Telescope in position', 'Image Received', 'Image command received', 'Getting Image', 'Uploading Image'];
+      var i = es.indexOf(message);
+      return en[i];
     }
   },
   filters: {
@@ -43043,11 +43049,7 @@ var render = function() {
                                 1
                               ),
                               _vm._v(" "),
-                              _c("v-flex", { attrs: { xs6: "" } }, [
-                                _c("span", { staticClass: "headline" }, [
-                                  _vm._v(_vm._s(this.camera_state))
-                                ])
-                              ])
+                              _c("v-flex", { attrs: { xs6: "" } })
                             ],
                             1
                           )
@@ -92774,7 +92776,8 @@ __webpack_require__.r(__webpack_exports__);
       "popup_calculando": "Calculating if the object is visible, one moment please",
       "popup_obj_no_visible": "NOT VISIBLE object, Alt / Az height UNDER THE HORIZON: ",
        
-
+      "Enespera" : "On hold",
+      "Buscarpornombre":"Search by name",
 
 
     },
@@ -92946,7 +92949,10 @@ __webpack_require__.r(__webpack_exports__);
 
       "popup_calculando": "Calculating if the object is visible, one moment please",
       "popup_obj_no_visible": "NOT VISIBLE object, Alt / Az height UNDER THE HORIZON: ",
-       
+
+      
+      "Enespera" : "En Espera",
+      "Buscarpornombre":"Buscar por nombre",
 
 
     },

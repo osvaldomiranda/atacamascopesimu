@@ -209,7 +209,7 @@
 		          				<v-btn round color="verde" @click="shoot()">{{ $vuetify.t('$vuetify.control.Disparar') }}</v-btn>	  
 		          			</v-flex>
 		          		    <v-flex xs6>
-		          		    	<span class="headline">{{ this.camera_state }}</span>
+		          		    	
 		          		    	
 		          		    </v-flex>
 		          		</v-layout>
@@ -419,7 +419,7 @@
 		},	
 
 		object:'',
-		state:'En espera',
+		state: this.$vuetify.t('$vuetify.control.Enespera'),
 		selectedTic:'100',
 		selectedDir:'Adentro',
 		tic:100,
@@ -687,16 +687,16 @@
 	               		app.focuser_state = parseInt(position,10) - app.$store.getters.current_focus;
 	               		app.state = app.focuser_state;
 	           		} else {
-	           			app.state = data.message['message'];
+	           			app.state = messageToEn(data.message['message']);
 	           		}
 
 
 
 		            if (imageMsg>=0){
-		            	app.camera_state = app.state;	
+		            	app.camera_state = messageToEn(app.state);	
 		            }
 
-		            if (app.state=="Imagen Recibida"){
+		            if (app.state==messageToEn("Imagen Recibida")){
 		            //	app.pulsa();
 		            	app.imageRefresh();
 		            }
@@ -991,6 +991,39 @@
 	    	window.location.href = "http://atacamascope.cl";
 	    },
 
+	    messageToEn(message){
+
+	    	var es = [
+		    	'Imagen Recibida',
+		    	'En espera',
+		    	'Enviando comando',
+		    	'Comando Recibido',
+		    	'Moviendo Telescopio',
+		    	'Telescopio en posicion',
+		    	'Imagen Recibida',
+		    	'Comando Imagen recibido',
+		    	'Obteniendo Imagen',
+		    	'Subiendo Imagen',
+	    	]
+
+	    	var en = [
+				'Image Received',
+				'On hold',
+				'Sending command',
+				'Command Received',
+				'Moving Telescope',
+				'Telescope in position',
+				'Image Received',
+				'Image command received',
+				'Getting Image',
+				'Uploading Image',
+	    	]
+
+	    	var i = es.indexOf(message)
+
+	    	return en[i]
+	    }
+
 
     },
     filters: {
@@ -1002,6 +1035,8 @@
             return s;
         }
     },
+
+
 
 
 
