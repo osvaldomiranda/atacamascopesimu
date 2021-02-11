@@ -22,29 +22,23 @@
           </v-btn>
           <v-toolbar-title>{{ $vuetify.t('$vuetify.guide.title') }}</v-toolbar-title>
           <v-spacer></v-spacer>
+          <v-spacer></v-spacer>
+            <v-btn flat @click="changeLocaleEn()">
+              <v-img src="http://atacamascope.cl/images/english.png" 
+                    aspect-ratio="1.4"  
+                    max-height="22"
+                    max-width="33"
+                  ></v-img>
+            </v-btn>
+            <v-btn flat @click="changeLocaleEs()">
+              <v-img src="http://atacamascope.cl/images/spanish.png" 
+                    aspect-ratio="1.4"  
+                    max-height="22"
+                    max-width="33"
+                  ></v-img>
+            </v-btn>
         </v-toolbar>
 
-
-            <v-card class="py-4 px-2">
-                <v-layout>
-                  <v-flex xs1 class="px-2">
-                  <v-img src="http://atacamascope.cl/images/english.png" 
-                  aspect-ratio="1.4"  
-                  max-height="22"
-                                max-width="33"
-                                v-on:click="changeLocaleEn" 
-                  ></v-img>
-              </v-flex>
-                  <v-flex xs1 class="px-2">
-                 <v-img src="http://atacamascope.cl/images/spanish.png" 
-                 aspect-ratio="1.4"  
-                   max-height="22"
-                                 max-width="33"
-                                 v-on:click="changeLocaleEs" 
-                  ></v-img>
-              </v-flex>
-            </v-layout>
-          </v-card>
 
     <v-layout>
       <v-flex xs12 class="px-2 py-4">

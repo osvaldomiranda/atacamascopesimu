@@ -89,7 +89,7 @@ export default {
 
     "control" : {
       "title": "Control interface simulator",
-      "Seleccione un Objeto": "Select an Object",
+      "SeleccioneunObjeto": "Select an Object",
       "Estado Sistema": "Sistem Status",
       "Constelación":"Constellation",
       "Tipo objeto astronómico":"Astronomical object type",

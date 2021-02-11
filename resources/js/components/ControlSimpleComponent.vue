@@ -25,6 +25,20 @@
           </v-btn>
           <v-toolbar-title>{{ $vuetify.t('$vuetify.control.title') }}</v-toolbar-title>
           <v-spacer></v-spacer>
+            <v-btn flat @click="changeLocaleEn()">
+            	<v-img src="http://atacamascope.cl/images/english.png" 
+                  	aspect-ratio="1.4"  
+                  	max-height="22"
+                    max-width="33"
+                  ></v-img>
+          	</v-btn>
+            <v-btn flat @click="changeLocaleEs()">
+            	<v-img src="http://atacamascope.cl/images/spanish.png" 
+                  	aspect-ratio="1.4"  
+                  	max-height="22"
+                    max-width="33"
+                  ></v-img>
+          	</v-btn>
         </v-toolbar>
 
 
@@ -38,7 +52,7 @@
 				        <v-layout>
 				          <v-flex xs4 class="px-2">
 				            <span v-if='object.name' class="headline">1.- {{ object.name }}</span>
-				            <span v-else class="headline">1.- {{ $vuetify.t('$vuetify.control.Seleccione un Objeto') }}</span>
+				            <span v-else class="headline">1.- {{ $vuetify.t('$vuetify.control.SeleccioneunObjeto') }}</span>
 				          </v-flex>
 				          	<v-flex xs8 class="px-2">
 				            	<span class="headline"> {{ $vuetify.t('$vuetify.control.Estado Sistema') }}:{{ state }}</span>
@@ -145,14 +159,14 @@
 								<v-text-field
 								    v-model="Ar_screen"
 								    :label=this.asencionrecta
-								    readonly=true
+								    readonly
 								    ></v-text-field>
 		          			</v-flex>
 							<v-flex xs4 class="px-2">
 								<v-text-field
 								    v-model="Dec_screen"
 								    :label= this.declinacion
-								    readonly=true
+								    readonly
 								    ></v-text-field>
 		          			</v-flex>	          			
 		          		</v-layout>	
@@ -358,6 +372,7 @@
         h_dec:0,
         m_dec:0,
         s_dec:0,
+        SelectedExp:'',
 
         catalog:'SolarSistem',
         catalogs: ['SolarSistem','Messier','NGC', 'IC'],
@@ -687,16 +702,16 @@
 	               		app.focuser_state = parseInt(position,10) - app.$store.getters.current_focus;
 	               		app.state = app.focuser_state;
 	           		} else {
-	           			app.state = messageToEn(data.message['message']);
+	           			app.state = this.messageToEn(data.message['message']);
 	           		}
 
 
 
 		            if (imageMsg>=0){
-		            	app.camera_state = messageToEn(app.state);	
+		            	app.camera_state = this.messageToEn(app.state);	
 		            }
 
-		            if (app.state==messageToEn("Imagen Recibida")){
+		            if (app.state==this.messageToEn("Imagen Recibida")){
 		            //	app.pulsa();
 		            	app.imageRefresh();
 		            }
@@ -712,7 +727,7 @@
 
         move(){
         	// alert('Enviando Comando');
-        	this.state = 'Enviando Comando';
+        	this.state = this.messageToEn('Enviando Comando');
         	if(this.Ar_screen){
 	        	var $command = {'command': 'MONTURA', 'type': 'mount', 'status': 'PENDIENTE',
 	        	                'ar': this.Ar, 'dec': this.Dec, 'user_id': 1, 'equipment_id': 1};
@@ -731,7 +746,7 @@
         	}
         },
         shoot(){
-        	this.state = 'Enviando Comando';
+        	this.state = this.messageToEn('Enviando Comando');
 
         	
 
@@ -773,7 +788,7 @@
         		this.Dir = 0;
         	}
 
-        	this.state = 'Enviando Comando';
+        	this.state = this.messageToEn('Enviando Comando');
         	var $command = {'command': 'ENFOCADOR', 'type': 'focuser', 'status': 'PENDIENTE',
         	                'steps': this.Tic, 'direction': this.Dir, 'user_id': this.$store.getters.user['id'], 'equipment_id': 1};
 
@@ -997,6 +1012,7 @@
 		    	'Imagen Recibida',
 		    	'En espera',
 		    	'Enviando comando',
+		    	'Enviando Comando',
 		    	'Comando Recibido',
 		    	'Moviendo Telescopio',
 		    	'Telescopio en posicion',
@@ -1010,6 +1026,7 @@
 				'Image Received',
 				'On hold',
 				'Sending command',
+				'Sending command',
 				'Command Received',
 				'Moving Telescope',
 				'Telescope in position',
@@ -1021,9 +1038,35 @@
 
 	    	var i = es.indexOf(message)
 
-	    	return en[i]
-	    }
+	    	if(this.$vuetify.lang.current=='es'){
+	    		return message
+	    	} else {
+	    		return en[i]
+	    	}
+	    },
+      	changeLocaleEn () {
+      	      this.$vuetify.lang.current = 'en'  
+      	    this.constelacion = this.$vuetify.t('$vuetify.control.Constelación') 
+      		this.tipo = this.$vuetify.t('$vuetify.control.Tipo objeto astronómico')
+      		this.sensibilidad = this.$vuetify.t('$vuetify.control.Sensibilidad')
+      		this.tiempo_exp = this.$vuetify.t('$vuetify.control.Tiempo Exposición(Segundos)')
+      		this.asencionrecta = this.$vuetify.t('$vuetify.control.Ascención Recta')
+      		this.declinacion = this.$vuetify.t('$vuetify.control.Declinación') 
+      		this.state = this.$vuetify.t('$vuetify.control.Enespera')  
 
+      	},
+
+      	changeLocaleEs () {
+      	    this.$vuetify.lang.current = 'es'  
+      	    this.constelacion = this.$vuetify.t('$vuetify.control.Constelación') 
+      		this.tipo = this.$vuetify.t('$vuetify.control.Tipo objeto astronómico')
+      		this.sensibilidad = this.$vuetify.t('$vuetify.control.Sensibilidad')
+      		this.tiempo_exp = this.$vuetify.t('$vuetify.control.Tiempo Exposición(Segundos)')
+      		this.asencionrecta = this.$vuetify.t('$vuetify.control.Ascención Recta')
+      		this.declinacion = this.$vuetify.t('$vuetify.control.Declinación')   
+      		this.state = this.$vuetify.t('$vuetify.control.Enespera')  
+
+      	}
 
     },
     filters: {

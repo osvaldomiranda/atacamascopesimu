@@ -3765,6 +3765,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -3829,6 +3843,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       h_dec: 0,
       m_dec: 0,
       s_dec: 0,
+      SelectedExp: '',
       catalog: 'SolarSistem',
       catalogs: ['SolarSistem', 'Messier', 'NGC', 'IC'],
       type: " ",
@@ -4172,14 +4187,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             app.focuser_state = parseInt(position, 10) - app.$store.getters.current_focus;
             app.state = app.focuser_state;
           } else {
-            app.state = messageToEn(data.message['message']);
+            app.state = this.messageToEn(data.message['message']);
           }
 
           if (imageMsg >= 0) {
-            app.camera_state = messageToEn(app.state);
+            app.camera_state = this.messageToEn(app.state);
           }
 
-          if (app.state == messageToEn("Imagen Recibida")) {
+          if (app.state == this.messageToEn("Imagen Recibida")) {
             //	app.pulsa();
             app.imageRefresh();
           }
@@ -4188,7 +4203,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     move: function move() {
       // alert('Enviando Comando');
-      this.state = 'Enviando Comando';
+      this.state = this.messageToEn('Enviando Comando');
 
       if (this.Ar_screen) {
         var $command = {
@@ -4209,7 +4224,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
     },
     shoot: function shoot() {
-      this.state = 'Enviando Comando';
+      this.state = this.messageToEn('Enviando Comando');
       var command = {
         'command': 'CAMARA',
         'type': 'shoot',
@@ -4249,7 +4264,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         this.Dir = 0;
       }
 
-      this.state = 'Enviando Comando';
+      this.state = this.messageToEn('Enviando Comando');
       var $command = {
         'command': 'ENFOCADOR',
         'type': 'focuser',
@@ -4441,10 +4456,35 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       window.location.href = "http://atacamascope.cl";
     },
     messageToEn: function messageToEn(message) {
-      var es = ['Imagen Recibida', 'En espera', 'Enviando comando', 'Comando Recibido', 'Moviendo Telescopio', 'Telescopio en posicion', 'Imagen Recibida', 'Comando Imagen recibido', 'Obteniendo Imagen', 'Subiendo Imagen'];
-      var en = ['Image Received', 'On hold', 'Sending command', 'Command Received', 'Moving Telescope', 'Telescope in position', 'Image Received', 'Image command received', 'Getting Image', 'Uploading Image'];
+      var es = ['Imagen Recibida', 'En espera', 'Enviando comando', 'Enviando Comando', 'Comando Recibido', 'Moviendo Telescopio', 'Telescopio en posicion', 'Imagen Recibida', 'Comando Imagen recibido', 'Obteniendo Imagen', 'Subiendo Imagen'];
+      var en = ['Image Received', 'On hold', 'Sending command', 'Sending command', 'Command Received', 'Moving Telescope', 'Telescope in position', 'Image Received', 'Image command received', 'Getting Image', 'Uploading Image'];
       var i = es.indexOf(message);
-      return en[i];
+
+      if (this.$vuetify.lang.current == 'es') {
+        return message;
+      } else {
+        return en[i];
+      }
+    },
+    changeLocaleEn: function changeLocaleEn() {
+      this.$vuetify.lang.current = 'en';
+      this.constelacion = this.$vuetify.t('$vuetify.control.Constelación');
+      this.tipo = this.$vuetify.t('$vuetify.control.Tipo objeto astronómico');
+      this.sensibilidad = this.$vuetify.t('$vuetify.control.Sensibilidad');
+      this.tiempo_exp = this.$vuetify.t('$vuetify.control.Tiempo Exposición(Segundos)');
+      this.asencionrecta = this.$vuetify.t('$vuetify.control.Ascención Recta');
+      this.declinacion = this.$vuetify.t('$vuetify.control.Declinación');
+      this.state = this.$vuetify.t('$vuetify.control.Enespera');
+    },
+    changeLocaleEs: function changeLocaleEs() {
+      this.$vuetify.lang.current = 'es';
+      this.constelacion = this.$vuetify.t('$vuetify.control.Constelación');
+      this.tipo = this.$vuetify.t('$vuetify.control.Tipo objeto astronómico');
+      this.sensibilidad = this.$vuetify.t('$vuetify.control.Sensibilidad');
+      this.tiempo_exp = this.$vuetify.t('$vuetify.control.Tiempo Exposición(Segundos)');
+      this.asencionrecta = this.$vuetify.t('$vuetify.control.Ascención Recta');
+      this.declinacion = this.$vuetify.t('$vuetify.control.Declinación');
+      this.state = this.$vuetify.t('$vuetify.control.Enespera');
     }
   },
   filters: {
@@ -4472,12 +4512,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_1__);
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -42549,7 +42583,53 @@ var render = function() {
                     _vm._v(_vm._s(_vm.$vuetify.t("$vuetify.control.title")))
                   ]),
                   _vm._v(" "),
-                  _c("v-spacer")
+                  _c("v-spacer"),
+                  _vm._v(" "),
+                  _c(
+                    "v-btn",
+                    {
+                      attrs: { flat: "" },
+                      on: {
+                        click: function($event) {
+                          return _vm.changeLocaleEn()
+                        }
+                      }
+                    },
+                    [
+                      _c("v-img", {
+                        attrs: {
+                          src: "http://atacamascope.cl/images/english.png",
+                          "aspect-ratio": "1.4",
+                          "max-height": "22",
+                          "max-width": "33"
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-btn",
+                    {
+                      attrs: { flat: "" },
+                      on: {
+                        click: function($event) {
+                          return _vm.changeLocaleEs()
+                        }
+                      }
+                    },
+                    [
+                      _c("v-img", {
+                        attrs: {
+                          src: "http://atacamascope.cl/images/spanish.png",
+                          "aspect-ratio": "1.4",
+                          "max-height": "22",
+                          "max-width": "33"
+                        }
+                      })
+                    ],
+                    1
+                  )
                 ],
                 1
               ),
@@ -42586,7 +42666,7 @@ var render = function() {
                                           "1.- " +
                                             _vm._s(
                                               _vm.$vuetify.t(
-                                                "$vuetify.control.Seleccione un Objeto"
+                                                "$vuetify.control.SeleccioneunObjeto"
                                               )
                                             )
                                         )
@@ -42866,7 +42946,7 @@ var render = function() {
                                   _c("v-text-field", {
                                     attrs: {
                                       label: this.asencionrecta,
-                                      readonly: "true"
+                                      readonly: ""
                                     },
                                     model: {
                                       value: _vm.Ar_screen,
@@ -42887,7 +42967,7 @@ var render = function() {
                                   _c("v-text-field", {
                                     attrs: {
                                       label: this.declinacion,
-                                      readonly: "true"
+                                      readonly: ""
                                     },
                                     model: {
                                       value: _vm.Dec_screen,
@@ -43278,51 +43358,52 @@ var render = function() {
                     _vm._v(_vm._s(_vm.$vuetify.t("$vuetify.guide.title")))
                   ]),
                   _vm._v(" "),
-                  _c("v-spacer")
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "v-card",
-                { staticClass: "py-4 px-2" },
-                [
+                  _c("v-spacer"),
+                  _vm._v(" "),
+                  _c("v-spacer"),
+                  _vm._v(" "),
                   _c(
-                    "v-layout",
+                    "v-btn",
+                    {
+                      attrs: { flat: "" },
+                      on: {
+                        click: function($event) {
+                          return _vm.changeLocaleEn()
+                        }
+                      }
+                    },
                     [
-                      _c(
-                        "v-flex",
-                        { staticClass: "px-2", attrs: { xs1: "" } },
-                        [
-                          _c("v-img", {
-                            attrs: {
-                              src: "http://atacamascope.cl/images/english.png",
-                              "aspect-ratio": "1.4",
-                              "max-height": "22",
-                              "max-width": "33"
-                            },
-                            on: { click: _vm.changeLocaleEn }
-                          })
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "v-flex",
-                        { staticClass: "px-2", attrs: { xs1: "" } },
-                        [
-                          _c("v-img", {
-                            attrs: {
-                              src: "http://atacamascope.cl/images/spanish.png",
-                              "aspect-ratio": "1.4",
-                              "max-height": "22",
-                              "max-width": "33"
-                            },
-                            on: { click: _vm.changeLocaleEs }
-                          })
-                        ],
-                        1
-                      )
+                      _c("v-img", {
+                        attrs: {
+                          src: "http://atacamascope.cl/images/english.png",
+                          "aspect-ratio": "1.4",
+                          "max-height": "22",
+                          "max-width": "33"
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-btn",
+                    {
+                      attrs: { flat: "" },
+                      on: {
+                        click: function($event) {
+                          return _vm.changeLocaleEs()
+                        }
+                      }
+                    },
+                    [
+                      _c("v-img", {
+                        attrs: {
+                          src: "http://atacamascope.cl/images/spanish.png",
+                          "aspect-ratio": "1.4",
+                          "max-height": "22",
+                          "max-width": "33"
+                        }
+                      })
                     ],
                     1
                   )
@@ -92731,7 +92812,7 @@ __webpack_require__.r(__webpack_exports__);
 
     "control" : {
       "title": "Control interface simulator",
-      "Seleccione un Objeto": "Select an Object",
+      "SeleccioneunObjeto": "Select an Object",
       "Estado Sistema": "Sistem Status",
       "Constelación":"Constellation",
       "Tipo objeto astronómico":"Astronomical object type",
@@ -92828,52 +92909,10 @@ __webpack_require__.r(__webpack_exports__);
     "rowsPerPageText": "Filas por página:"
   },
   "noDataText": "Datos no disponibles",
-  "dashboard": {
-  	 "reservationBtn": "Reserva tu hora de telescopio Aquí",
-  	 "pointsTitle": "Puntos",
-  	 "buyPointsBtn": "Comprar puntos",
-  	 "currentWeather": "Clima Actual",
-  	 "weather": "Clima",
-  	 "mypictures":" Mis fotos",
-
-     'Foto'       :      'Foto'     ,
-     'Nombre'     :      'Nombre'   ,
-     'ISO'        :      'ISO'      ,
-     'TiempoExp'  :      'TiempoExp',
-     'Coord AR'   :      'Coord AR' ,
-     'Coord DEC'  :      'Coord DEC',  
-     'Fecha'      :      'Fecha'    ,
 
 
-  },
-  "reservation": {
-  	 "title": "Mis Reservas",
-  	 "history": "Historial de Reservas",
-  	 "equipment": "Equipo",
-  	 "date": "Fecha",
-  	 "hour":"Hora",
-  	 'beginner'  :'Control principiante',
-  	 'advanced'  :'Control avanzado',
 
-      'Equipment' : 'Equipo',
-      'Date'      : 'Fecha',
-      'Hour'      : 'hora',
 
-      'Puntos Comprados'    :'Puntos Comprados',
-      'Puntos usados': 'Puntos usados',
-      'Puntos disponibles':'Puntos disponibles',
-      'NroTransacción':'Nro.Transacción',
-      'NroReserva':'Nro.Reserva',
-
-  },
-
-  "points": {
-  	  "title": "Puntos",
-  	  "buyBtn": "Comprar Puntos",
-  	  "availablePoints": "Puntos Disponibles",
-  	  "history":"Historial de compras",
-  	  "paymentProcess":"Proceso de pago",
-  },
   "gallery":{
        "title": "Galería de imagenes",
   },
@@ -92884,78 +92923,63 @@ __webpack_require__.r(__webpack_exports__);
 	'phone':"fono:+56 941431658",
 	'copyright': "copyright © Incluye todas las fotos: atacamascope.com 2018",
   },
-  "news":{
-  	"title":"Noticias"
-  },
-  "wizard":{
-  	  'chooseEquipment': 'Elige tu Equipamiento',
-  	  'chooseDay': 'Elige Día de Observación',
-  	  'chooseHour': 'Reserva tu Hora',
-  	  'returnToday': 'Volver a Hoy',
-  	  'confirmReservation': 'Confirmar Reserva',
-  	  'equipment': 'Equipo',
-  	  'pointsOfThisReservation': 'Puntos de esta reserva',
-  	  'date': 'Fecha',
-  	  'at': 'A las',
-  	  'hours': 'Horas',
-  	  'reserve': 'Reservar',
-  	  'reserved': 'Reservado',
-  	  'vacant': 'Disponible',
-  },
-
-    "control" : {
-      "title": "Control interface",
-      "Seleccione un Objeto": "Select an Object",
-      "Estado Sistema": "Sistem Status",
-      "Constelación":"Constellation",
-      "Tipo objeto astronómico":"Astronomical object type",
-      "Usar":"Use",
-      "Mover Telescopio":"Move Telescope",
-      "Mover":"Move",
-      "Sacar Foto":"Take a picture",
-      "Sensibilidad":"Sensitivity",
-      "Tiempo Exposición(Segundos)":"Exposure Time (Seconds)",
-      "Disparar":"Shoot",
-      "Mis fotos":"My pictures",
-      "Ascención Recta":"Right Ascension",
-      "Declinación":"Decline",
-
-      "Descripción": "Description",
-      "Tipo":        "Type",
-      "Nombre":      "name",
 
 
-      "Coord AR"  :"Coord RA"  , 
+
+  "control" : {
+      "title": "Interfaz de control",
+      "SeleccioneunObjeto": "Seleccione un Objeto",
+      "Estado Sistema": "Estado Sistema",
+      "Constelación":"Constelación",
+      "Tipo objeto astronómico":"Tipo objeto astronómico",
+      "Usar":"Usar",
+      "Mover Telescopio":"Mover Telescopio",
+      "Mover":"Mover",
+      "Sacar Foto":"Sacar Foto",
+      "Sensibilidad":"Sensibilidad",
+      "Tiempo Exposición(Segundos)":"Tiempo Exposición(Segundos)",
+      "Disparar":"Disparar",
+      "Mis fotos":"Mis fotos",
+      "Ascención Recta":"Ascención Recta",
+      "Declinación":"Declinación",
+
+
+      "Usar":        "Usar",
+      "Descripción": "Descripción",
+      "Constelación":"Constelación",
+      "Tipo":        "Tipo",
+      "Nombre":      "Nombre",
+
+      "Coord AR"  :"Coord AR"  , 
       "Coord DEC" :"Coord DEC" ,
-      "Fecha"     :"Date"     ,
+      "Fecha"     :"Fecha"     ,
 
-      "Elija": "Choose an object or enter its coordinates to position the telescope.",
-      "Coordenadas": "Specific coordinates",
+      "Elija": "Elija un opbjeto o ingrese sus coordenadas para posicionar el telescopio.",
+      "Coordenadas": "Coordenadas especificas",
 
-      "AR Horas"       :    "RA Hours"    ,      
-      "AR Minutos"     :    "RA Minutes"  ,     
-      "AR Segundos"    :    "RA Seconds" ,    
-      "DEC Grados"     :    "DEC Degrees "   ,      
-      "DEC Minutos"    :    "DEC Minutes" ,    
-      "DEC Segundos"   :    "DEC Seconds", 
+      "AR Horas"       :    "AR Horas"    ,      
+      "AR Minutos"     :    "AR Minutos"  ,     
+      "AR Segundos"    :    "AR Segundos" ,    
+      "DEC Grados"     :    "DEC Grados"   ,      
+      "DEC Minutos"    :    "DEC Minutos" ,    
+      "DEC Segundos"   :    "DEC Segundos",
 
-      "Enfocador"     : "Focuser",
-      "Dirección"     : "Direction",
-      "Enfocar"     : "Focus  ",
-      "Posición"     : "Position ",
+      "Enfocador"     : "Enfocador",
+      "Dirección"     : "Dirección",
+      "Enfocar"     : "Enfocar",
+      "Posición"     : "Posición",
 
-      "Adentro" : "Inside", 
-      "Afuera"  : "Outside",
+      "Adentro" : "Adentro", 
+      "Afuera"  : "Afuera",
 
-      "popup_calculando": "Calculating if the object is visible, one moment please",
-      "popup_obj_no_visible": "NOT VISIBLE object, Alt / Az height UNDER THE HORIZON: ",
+      "popup_calculando": "Calculando si el objeto es visible, un momento por favor",
+      "popup_obj_no_visible": "Objeto NO VISIBLE,altura Alt/Az BAJO el HORIZONTE: ",
 
-      
       "Enespera" : "En Espera",
       "Buscarpornombre":"Buscar por nombre",
 
 
-    },
+  },
     "guide": {
       "title": "Guia Simulador Atacama Scope",
       "derechos1": "Las imagenes de este simulador han sido fotografiadas con los sistemas y equipos de Atacama Scope ",

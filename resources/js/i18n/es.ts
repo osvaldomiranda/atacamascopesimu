@@ -12,52 +12,10 @@ export default {
     "rowsPerPageText": "Filas por página:"
   },
   "noDataText": "Datos no disponibles",
-  "dashboard": {
-  	 "reservationBtn": "Reserva tu hora de telescopio Aquí",
-  	 "pointsTitle": "Puntos",
-  	 "buyPointsBtn": "Comprar puntos",
-  	 "currentWeather": "Clima Actual",
-  	 "weather": "Clima",
-  	 "mypictures":" Mis fotos",
-
-     'Foto'       :      'Foto'     ,
-     'Nombre'     :      'Nombre'   ,
-     'ISO'        :      'ISO'      ,
-     'TiempoExp'  :      'TiempoExp',
-     'Coord AR'   :      'Coord AR' ,
-     'Coord DEC'  :      'Coord DEC',  
-     'Fecha'      :      'Fecha'    ,
 
 
-  },
-  "reservation": {
-  	 "title": "Mis Reservas",
-  	 "history": "Historial de Reservas",
-  	 "equipment": "Equipo",
-  	 "date": "Fecha",
-  	 "hour":"Hora",
-  	 'beginner'  :'Control principiante',
-  	 'advanced'  :'Control avanzado',
 
-      'Equipment' : 'Equipo',
-      'Date'      : 'Fecha',
-      'Hour'      : 'hora',
 
-      'Puntos Comprados'    :'Puntos Comprados',
-      'Puntos usados': 'Puntos usados',
-      'Puntos disponibles':'Puntos disponibles',
-      'NroTransacción':'Nro.Transacción',
-      'NroReserva':'Nro.Reserva',
-
-  },
-
-  "points": {
-  	  "title": "Puntos",
-  	  "buyBtn": "Comprar Puntos",
-  	  "availablePoints": "Puntos Disponibles",
-  	  "history":"Historial de compras",
-  	  "paymentProcess":"Proceso de pago",
-  },
   "gallery":{
        "title": "Galería de imagenes",
   },
@@ -68,78 +26,63 @@ export default {
 	'phone':"fono:+56 941431658",
 	'copyright': "copyright © Incluye todas las fotos: atacamascope.com 2018",
   },
-  "news":{
-  	"title":"Noticias"
-  },
-  "wizard":{
-  	  'chooseEquipment': 'Elige tu Equipamiento',
-  	  'chooseDay': 'Elige Día de Observación',
-  	  'chooseHour': 'Reserva tu Hora',
-  	  'returnToday': 'Volver a Hoy',
-  	  'confirmReservation': 'Confirmar Reserva',
-  	  'equipment': 'Equipo',
-  	  'pointsOfThisReservation': 'Puntos de esta reserva',
-  	  'date': 'Fecha',
-  	  'at': 'A las',
-  	  'hours': 'Horas',
-  	  'reserve': 'Reservar',
-  	  'reserved': 'Reservado',
-  	  'vacant': 'Disponible',
-  },
-
-    "control" : {
-      "title": "Control interface",
-      "Seleccione un Objeto": "Select an Object",
-      "Estado Sistema": "Sistem Status",
-      "Constelación":"Constellation",
-      "Tipo objeto astronómico":"Astronomical object type",
-      "Usar":"Use",
-      "Mover Telescopio":"Move Telescope",
-      "Mover":"Move",
-      "Sacar Foto":"Take a picture",
-      "Sensibilidad":"Sensitivity",
-      "Tiempo Exposición(Segundos)":"Exposure Time (Seconds)",
-      "Disparar":"Shoot",
-      "Mis fotos":"My pictures",
-      "Ascención Recta":"Right Ascension",
-      "Declinación":"Decline",
-
-      "Descripción": "Description",
-      "Tipo":        "Type",
-      "Nombre":      "name",
 
 
-      "Coord AR"  :"Coord RA"  , 
+
+  "control" : {
+      "title": "Interfaz de control",
+      "SeleccioneunObjeto": "Seleccione un Objeto",
+      "Estado Sistema": "Estado Sistema",
+      "Constelación":"Constelación",
+      "Tipo objeto astronómico":"Tipo objeto astronómico",
+      "Usar":"Usar",
+      "Mover Telescopio":"Mover Telescopio",
+      "Mover":"Mover",
+      "Sacar Foto":"Sacar Foto",
+      "Sensibilidad":"Sensibilidad",
+      "Tiempo Exposición(Segundos)":"Tiempo Exposición(Segundos)",
+      "Disparar":"Disparar",
+      "Mis fotos":"Mis fotos",
+      "Ascención Recta":"Ascención Recta",
+      "Declinación":"Declinación",
+
+
+      "Usar":        "Usar",
+      "Descripción": "Descripción",
+      "Constelación":"Constelación",
+      "Tipo":        "Tipo",
+      "Nombre":      "Nombre",
+
+      "Coord AR"  :"Coord AR"  , 
       "Coord DEC" :"Coord DEC" ,
-      "Fecha"     :"Date"     ,
+      "Fecha"     :"Fecha"     ,
 
-      "Elija": "Choose an object or enter its coordinates to position the telescope.",
-      "Coordenadas": "Specific coordinates",
+      "Elija": "Elija un opbjeto o ingrese sus coordenadas para posicionar el telescopio.",
+      "Coordenadas": "Coordenadas especificas",
 
-      "AR Horas"       :    "RA Hours"    ,      
-      "AR Minutos"     :    "RA Minutes"  ,     
-      "AR Segundos"    :    "RA Seconds" ,    
-      "DEC Grados"     :    "DEC Degrees "   ,      
-      "DEC Minutos"    :    "DEC Minutes" ,    
-      "DEC Segundos"   :    "DEC Seconds", 
+      "AR Horas"       :    "AR Horas"    ,      
+      "AR Minutos"     :    "AR Minutos"  ,     
+      "AR Segundos"    :    "AR Segundos" ,    
+      "DEC Grados"     :    "DEC Grados"   ,      
+      "DEC Minutos"    :    "DEC Minutos" ,    
+      "DEC Segundos"   :    "DEC Segundos",
 
-      "Enfocador"     : "Focuser",
-      "Dirección"     : "Direction",
-      "Enfocar"     : "Focus  ",
-      "Posición"     : "Position ",
+      "Enfocador"     : "Enfocador",
+      "Dirección"     : "Dirección",
+      "Enfocar"     : "Enfocar",
+      "Posición"     : "Posición",
 
-      "Adentro" : "Inside", 
-      "Afuera"  : "Outside",
+      "Adentro" : "Adentro", 
+      "Afuera"  : "Afuera",
 
-      "popup_calculando": "Calculating if the object is visible, one moment please",
-      "popup_obj_no_visible": "NOT VISIBLE object, Alt / Az height UNDER THE HORIZON: ",
+      "popup_calculando": "Calculando si el objeto es visible, un momento por favor",
+      "popup_obj_no_visible": "Objeto NO VISIBLE,altura Alt/Az BAJO el HORIZONTE: ",
 
-      
       "Enespera" : "En Espera",
       "Buscarpornombre":"Buscar por nombre",
 
 
-    },
+  },
     "guide": {
       "title": "Guia Simulador Atacama Scope",
       "derechos1": "Las imagenes de este simulador han sido fotografiadas con los sistemas y equipos de Atacama Scope ",
