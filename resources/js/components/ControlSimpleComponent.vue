@@ -611,7 +611,7 @@
 
       		this.$refs.Loading.show("Calculando si el objeto es visible, un momento por favor") 
 
-      			            		app.Ar_screen = app.object.ra;
+      			         app.Ar_screen = app.object.ra;
       					app.Dec_screen = app.object.dec;
       					app.coords(app.Ar_screen, app.Dec_screen); 
 
@@ -622,9 +622,6 @@
       				
     	},
       	initialize () {
-
-      		
-      		
 
 
       		this.imageRefresh();
@@ -702,16 +699,16 @@
 	               		app.focuser_state = parseInt(position,10) - app.$store.getters.current_focus;
 	               		app.state = app.focuser_state;
 	           		} else {
-	           			app.state = this.messageToEn(data.message['message']);
+	           			app.state = app.messageToEn(data.message['message']);
 	           		}
 
 
 
 		            if (imageMsg>=0){
-		            	app.camera_state = this.messageToEn(app.state);	
+		            	app.camera_state = app.messageToEn(app.state);	
 		            }
 
-		            if (app.state==this.messageToEn("Imagen Recibida")){
+		            if (app.state==app.messageToEn("Imagen Recibida")){
 		            //	app.pulsa();
 		            	app.imageRefresh();
 		            }
@@ -1008,6 +1005,7 @@
 
 	    messageToEn(message){
 
+        
 	    	var es = [
 		    	'Imagen Recibida',
 		    	'En espera',
@@ -1041,11 +1039,15 @@
 	    	if(this.$vuetify.lang.current=='es'){
 	    		return message
 	    	} else {
-	    		return en[i]
+	    		if(i>=0){
+	    			return en[i]
+	    		}else {
+	    			return "Moving Telescope AR=16.49Dec=-26.43"
+	    		}
 	    	}
 	    },
       	changeLocaleEn () {
-      	      this.$vuetify.lang.current = 'en'  
+      	     this.$vuetify.lang.current = 'en'  
       	    this.constelacion = this.$vuetify.t('$vuetify.control.Constelación') 
       		this.tipo = this.$vuetify.t('$vuetify.control.Tipo objeto astronómico')
       		this.sensibilidad = this.$vuetify.t('$vuetify.control.Sensibilidad')

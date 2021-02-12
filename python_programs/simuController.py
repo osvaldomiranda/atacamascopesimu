@@ -5,7 +5,7 @@ import time
 from subprocess import call
 
 ip = '34.216.200.165'
-#ip = 'localhost:8000'
+# ip = 'localhost:8000'
 
 url = 'http://'+ip+'/api/command/mountcamera'
 data = '{}'

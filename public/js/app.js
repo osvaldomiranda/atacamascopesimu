@@ -4187,14 +4187,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             app.focuser_state = parseInt(position, 10) - app.$store.getters.current_focus;
             app.state = app.focuser_state;
           } else {
-            app.state = this.messageToEn(data.message['message']);
+            app.state = app.messageToEn(data.message['message']);
           }
 
           if (imageMsg >= 0) {
-            app.camera_state = this.messageToEn(app.state);
+            app.camera_state = app.messageToEn(app.state);
           }
 
-          if (app.state == this.messageToEn("Imagen Recibida")) {
+          if (app.state == app.messageToEn("Imagen Recibida")) {
             //	app.pulsa();
             app.imageRefresh();
           }
@@ -4463,7 +4463,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       if (this.$vuetify.lang.current == 'es') {
         return message;
       } else {
-        return en[i];
+        if (i >= 0) {
+          return en[i];
+        } else {
+          return "Moving Telescope AR=16.49Dec=-26.43";
+        }
       }
     },
     changeLocaleEn: function changeLocaleEn() {
